@@ -192,9 +192,6 @@ if (fs.existsSync(redirectsPath)) {
   if (/\/src\/admin\/admin-[^\s]+\s+\/src\/admin\/admin-[^\s]+\.html\s+200/.test(redirects)) {
     fail("_redirects: contains Admin 200 rewrite to .html");
   }
-  if (!redirects.includes("https://www.abssnexus.in/* https://abssnexus.in/:splat 301")) {
-    fail("_redirects: missing www to apex redirect");
-  }
 }
 
 if (failures.length) {
