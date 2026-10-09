@@ -5,6 +5,7 @@
   "description": "ABSS Nexus Technologies corporate IT services website and admin backend.",
   "scripts": {
     "build": "node scripts/build.js",
+    "deploy": "node scripts/build.js && wrangler pages deploy dist",
     "start": "node backend/server.js",
     "dev": "node backend/server.js",
     "validate": "scripts/validate.sh"
