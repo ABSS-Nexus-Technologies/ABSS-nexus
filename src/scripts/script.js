@@ -1433,3 +1433,88 @@ if (adminApp) {
 
   showAdmin();
 }
+
+/* ==========================================================================
+   HOMEPAGE STATS COUNTER ANIMATION
+   ========================================================================== */
+(function initCounterObserver() {
+  const statElements = document.querySelectorAll(".stat-num[data-count]");
+  if (!statElements.length) return;
+
+  const prefersReduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  const animateNumber = (element) => {
+    const rawTarget = element.getAttribute("data-count");
+    const targetValue = parseFloat(rawTarget);
+    if (Number.isNaN(targetValue)) return;
+    const prefix = element.getAttribute("data-prefix") || "";
+    const suffix = element.getAttribute("data-suffix") || "";
+
+    if (prefersReduced) {
+      element.textContent = `${prefix}${rawTarget}${suffix}`;
+      return;
+    }
+
+    const duration = 1500;
+    const startTime = performance.now();
+    const hasDecimal = rawTarget.includes(".");
+    const decimalPlaces = hasDecimal ? (rawTarget.split(".")[1] || "").length : 0;
+
+    const step = (currentTime) => {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const ease = 1 - Math.pow(1 - progress, 4);
+      const current = ease * targetValue;
+
+      element.textContent = `${prefix}${current.toFixed(decimalPlaces)}${suffix}`;
+
+      if (progress < 1) {
+        requestAnimationFrame(step);
+      } else {
+        element.textContent = `${prefix}${rawTarget}${suffix}`;
+      }
+    };
+
+    requestAnimationFrame(step);
+  };
+
+  if (typeof IntersectionObserver !== "undefined") {
+    const observer = new IntersectionObserver(
+      (entries, obs) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            animateNumber(entry.target);
+            obs.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.25 }
+    );
+    statElements.forEach((el) => observer.observe(el));
+  } else {
+    statElements.forEach(animateNumber);
+  }
+})();
+
+/* ==========================================================================
+   INTERACTIVE HERO TERMINAL TAB SWITCHER
+   ========================================================================== */
+(function initTerminalSwitcher() {
+  const tabs = document.querySelectorAll(".terminal-tab[data-tab]");
+  const views = document.querySelectorAll(".terminal-code-view[data-view]");
+  if (!tabs.length || !views.length) return;
+
+  tabs.forEach((tab) => {
+    tab.addEventListener("click", () => {
+      const selected = tab.getAttribute("data-tab");
+      tabs.forEach((t) => t.classList.remove("active"));
+      tab.classList.add("active");
+
+      views.forEach((view) => {
+        const matches = view.getAttribute("data-view") === selected;
+        view.classList.toggle("active", matches);
+        view.hidden = !matches;
+      });
+    });
+  });
+})();
