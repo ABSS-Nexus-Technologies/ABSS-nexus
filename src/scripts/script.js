@@ -1515,6 +1515,10 @@ if (adminApp) {
         view.classList.toggle("active", matches);
         view.hidden = !matches;
       });
+
+      if (selected === "nexus3d") {
+        setTimeout(() => window.dispatchEvent(new Event("resize")), 30);
+      }
     });
   });
 })();
