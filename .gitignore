@@ -24,6 +24,7 @@ firebase-adminsdk*.json
 # Logs, System & IDE Files
 *.log
 .DS_Store
+**/.DS_Store
 .wrangler/
 .vscode/
 .idea/

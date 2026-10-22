@@ -1,6 +1,14 @@
 {
   "leads": [
     {
+      "id": "lead-1792707851262",
+      "client": "Regression Test Client",
+      "service": "Website Development",
+      "budget": 15000,
+      "status": "New",
+      "contact": ""
+    },
+    {
       "id": "lead-1792707404388",
       "client": "Regression Test Client",
       "service": "Website Development",
@@ -404,6 +412,7 @@
     "Regression Test Client submitted website inquiry",
     "Regression Test Client submitted website inquiry",
     "Regression Test Client submitted website inquiry",
+    "Regression Test Client submitted website inquiry",
     "admin revoked certificate ABSS-CERT-TEST-1792688060992",
     "admin issued certificate ABSS-CERT-TEST-1792688060992 to Test Audit Learner",
     "Regression Test Client submitted website inquiry",
@@ -411,7 +420,6 @@
     "Regression Test Client submitted website inquiry",
     "admin revoked certificate ABSS-CERT-TEST-1792685283343",
     "admin issued certificate ABSS-CERT-TEST-1792685283343 to Test Audit Learner",
-    "Regression Test Client submitted website inquiry",
     "Regression Test Client submitted website inquiry",
     "Regression Test Client submitted website inquiry",
     "Regression Test Client submitted website inquiry",
@@ -1046,6 +1054,19 @@
       "emailVerified": 1,
       "createdAt": "2026-10-22T22:16:44.319Z",
       "updatedAt": "2026-10-22T22:16:44.361Z"
+    },
+    {
+      "id": "student-a51316e9-6911-481f-8661-9877e9d5c70c",
+      "name": "Test Student",
+      "email": "test.student.1792707851182@example.com",
+      "phone": "",
+      "passwordHash": "pbkdf2$1773796a05703e0342557d7778fa3ad2$f3c73b2f78b22185ca05b766064dc000f493f7f35a89a3c1276f3bc47bcd7e06",
+      "track": "",
+      "duration": "",
+      "status": "active",
+      "emailVerified": 1,
+      "createdAt": "2026-10-22T22:24:11.194Z",
+      "updatedAt": "2026-10-22T22:24:11.236Z"
     }
   ],
   "studentTokens": [
@@ -1912,6 +1933,24 @@
       "expiresAt": "2026-10-22T23:16:44.348Z",
       "usedAt": "2026-10-22T22:16:44.350Z",
       "createdAt": "2026-10-22T22:16:44.348Z"
+    },
+    {
+      "id": "token-c604ee5f-4fda-4034-8d7e-bf5803ed3218",
+      "studentId": "student-a51316e9-6911-481f-8661-9877e9d5c70c",
+      "tokenHash": "2a520251153b3ee45d5ea65e54649d5bf8fa3a5adaa88ab2749b3498837b042f",
+      "tokenType": "email_verification",
+      "expiresAt": "2026-10-23T22:24:11.194Z",
+      "usedAt": "2026-10-22T22:24:11.208Z",
+      "createdAt": "2026-10-22T22:24:11.194Z"
+    },
+    {
+      "id": "token-0cc0255a-e862-4541-8355-eacba963fcad",
+      "studentId": "student-a51316e9-6911-481f-8661-9877e9d5c70c",
+      "tokenHash": "32a59660004137aae0797f86ea30835419b5171061db1bd717e8d805fedf14c0",
+      "tokenType": "password_reset",
+      "expiresAt": "2026-10-22T23:24:11.224Z",
+      "usedAt": "2026-10-22T22:24:11.225Z",
+      "createdAt": "2026-10-22T22:24:11.224Z"
     }
   ],
   "studentSessions": [
