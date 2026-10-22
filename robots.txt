@@ -7,5 +7,7 @@ Disallow: /admin-clients.html
 Disallow: /admin-support.html
 Disallow: /admin-pricing.html
 Disallow: /src/admin/
+Disallow: /internships/dashboard
+Disallow: /api/
 
 Sitemap: https://abssnexus.in/sitemap.xml

@@ -392,7 +392,78 @@ const DB_SCHEMA_STATEMENTS = [
   `CREATE INDEX IF NOT EXISTS idx_internship_email ON internship_applications (email)`,
   `CREATE INDEX IF NOT EXISTS idx_internship_program ON internship_applications (internship_program)`,
   `CREATE INDEX IF NOT EXISTS idx_internship_status ON internship_applications (status)`,
-  `CREATE INDEX IF NOT EXISTS idx_internship_created_at ON internship_applications (created_at)`
+  `CREATE INDEX IF NOT EXISTS idx_internship_created_at ON internship_applications (created_at)`,
+
+  `CREATE TABLE IF NOT EXISTS internship_programs (
+    id TEXT PRIMARY KEY,
+    slug TEXT NOT NULL UNIQUE,
+    title TEXT NOT NULL,
+    description TEXT NOT NULL,
+    skills TEXT,
+    learning_outcomes TEXT,
+    duration TEXT NOT NULL,
+    work_mode TEXT NOT NULL,
+    eligibility TEXT NOT NULL,
+    requirements TEXT,
+    status TEXT NOT NULL DEFAULT 'draft',
+    fee_paise INTEGER NOT NULL DEFAULT 0,
+    created_at TEXT NOT NULL,
+    updated_at TEXT NOT NULL
+  )`,
+  `CREATE UNIQUE INDEX IF NOT EXISTS idx_internship_programs_slug ON internship_programs (slug)`,
+  `CREATE INDEX IF NOT EXISTS idx_internship_programs_status ON internship_programs (status)`,
+
+  `CREATE TABLE IF NOT EXISTS students (
+    id TEXT PRIMARY KEY,
+    name TEXT NOT NULL,
+    email TEXT NOT NULL UNIQUE,
+    password_hash TEXT NOT NULL,
+    status TEXT NOT NULL DEFAULT 'pending_verification',
+    email_verified INTEGER NOT NULL DEFAULT 0,
+    created_at TEXT NOT NULL,
+    updated_at TEXT NOT NULL
+  )`,
+  `CREATE UNIQUE INDEX IF NOT EXISTS idx_students_email ON students (email)`,
+  `CREATE INDEX IF NOT EXISTS idx_students_status ON students (status)`,
+
+  `CREATE TABLE IF NOT EXISTS student_verification_tokens (
+    id TEXT PRIMARY KEY,
+    student_id TEXT NOT NULL,
+    token_hash TEXT NOT NULL,
+    token_type TEXT NOT NULL,
+    expires_at TEXT NOT NULL,
+    used_at TEXT,
+    created_at TEXT NOT NULL
+  )`,
+  `CREATE INDEX IF NOT EXISTS idx_student_tokens_lookup ON student_verification_tokens (token_hash, token_type)`,
+  `CREATE INDEX IF NOT EXISTS idx_student_tokens_student ON student_verification_tokens (student_id)`,
+
+  `CREATE TABLE IF NOT EXISTS student_sessions (
+    id TEXT PRIMARY KEY,
+    student_id TEXT NOT NULL,
+    session_hash TEXT NOT NULL UNIQUE,
+    expires_at TEXT NOT NULL,
+    created_at TEXT NOT NULL
+  )`,
+  `CREATE UNIQUE INDEX IF NOT EXISTS idx_student_sessions_hash ON student_sessions (session_hash)`,
+  `CREATE INDEX IF NOT EXISTS idx_student_sessions_student ON student_sessions (student_id)`,
+
+  `CREATE TABLE IF NOT EXISTS certificates (
+    id TEXT PRIMARY KEY,
+    student_name TEXT NOT NULL,
+    program TEXT NOT NULL,
+    issue_date TEXT NOT NULL,
+    grade TEXT NOT NULL DEFAULT 'Grade A (Distinction)',
+    status TEXT NOT NULL DEFAULT 'Authentic',
+    verification_hash TEXT NOT NULL,
+    skills_json TEXT,
+    issuer TEXT NOT NULL DEFAULT 'ABSS Nexus Technologies',
+    verification_url TEXT,
+    created_at TEXT NOT NULL,
+    updated_at TEXT NOT NULL
+  )`,
+  `CREATE INDEX IF NOT EXISTS idx_certificates_student ON certificates (student_name)`,
+  `CREATE INDEX IF NOT EXISTS idx_certificates_status ON certificates (status)`
 ];
 
 let dbInitialized = false;
@@ -847,6 +918,7 @@ export const getStorageStatus = async (db, kv) => {
   let clientCount = 0;
   let ticketCount = 0;
   let internshipCount = 0;
+  let certificateCount = 0;
   let migration = null;
 
   try { leadCount = Number((await first(db, "SELECT COUNT(*) AS total FROM leads"))?.total || 0); } catch {}
@@ -854,6 +926,7 @@ export const getStorageStatus = async (db, kv) => {
   try { clientCount = Number((await first(db, "SELECT COUNT(*) AS total FROM clients"))?.total || 0); } catch {}
   try { ticketCount = Number((await first(db, "SELECT COUNT(*) AS total FROM tickets"))?.total || 0); } catch {}
   try { internshipCount = Number((await first(db, "SELECT COUNT(*) AS total FROM internship_applications"))?.total || 0); } catch {}
+  try { certificateCount = Number((await first(db, "SELECT COUNT(*) AS total FROM certificates"))?.total || 0); } catch {}
   try { migration = await first(db, "SELECT value, updated_at FROM app_metadata WHERE key = ?", migrationKey); } catch {}
 
   return {
@@ -866,7 +939,497 @@ export const getStorageStatus = async (db, kv) => {
       clients: clientCount,
       tickets: ticketCount,
       internshipApplications: internshipCount,
+      certificates: certificateCount,
     },
     migration: migration ? { completed: true, updatedAt: migration.updated_at, details: JSON.parse(migration.value || "{}") } : { completed: false },
   };
 };
+
+export const DEFAULT_INTERNSHIP_PROGRAMS = [
+  {
+    id: "prog-web-dev",
+    slug: "web-development",
+    title: "Web Development Internship Track",
+    description: "Comprehensive engineering program focused on semantic HTML5, modern vanilla CSS, responsive architecture, client-side JavaScript, and performance-tuned web interfaces.",
+    skills: "Semantic HTML, Modern CSS Grid & Flexbox, JavaScript ES6+, Core Web Vitals, Responsive Layouts, Accessibility (a11y)",
+    learningOutcomes: "Build production-ready responsive web interfaces, optimize Largest Contentful Paint (LCP) and Cumulative Layout Shift (CLS), and integrate client-side logic with REST APIs.",
+    duration: "8 Weeks (Modular)",
+    workMode: "Remote Virtual Learning",
+    eligibility: "Students or graduates enrolled in Computer Science, BCA, B.Tech, or related technology tracks with foundational knowledge of web development.",
+    requirements: "Personal laptop or computer, modern web browser, code editor (VS Code or similar), and consistent weekly commitment of 10-12 hours.",
+    status: "published",
+    feePaise: 0,
+    createdAt: "2026-10-19T17:00:00.000Z",
+    updatedAt: "2026-10-19T17:00:00.000Z"
+  },
+  {
+    id: "prog-software-dev",
+    slug: "software-development",
+    title: "Software & Full-Stack Development Track",
+    description: "Practical full-stack engineering track focusing on Node.js backend architecture, relational database management, authentication flows, RESTful APIs, and edge deployment.",
+    skills: "Node.js, Express/HTTP, SQLite/PostgreSQL, Authentication & Sessions, REST API Design, Git Version Control",
+    learningOutcomes: "Design and build secure backend services, implement session management and password hashing, manage relational database schemas, and deploy resilient cloud services.",
+    duration: "10 Weeks (Modular)",
+    workMode: "Remote Virtual Learning",
+    eligibility: "Students with basic programming knowledge in JavaScript or Python seeking backend and full-stack software development experience.",
+    requirements: "Computer system with Node.js LTS installed, Git, basic terminal familiarity, and weekly commitment of 12-14 hours.",
+    status: "published",
+    feePaise: 0,
+    createdAt: "2026-10-19T17:00:00.000Z",
+    updatedAt: "2026-10-19T17:00:00.000Z"
+  },
+  {
+    id: "prog-ui-ux",
+    slug: "ui-ux-design",
+    title: "UI/UX Design & Product Interface Track",
+    description: "Design systems, wireframing, high-fidelity interactive prototyping, usability testing, and accessible design principles modeled on modern digital product standards.",
+    skills: "Figma Prototyping, Design Systems, Typography & Color Tokens, Wireframing, User Journey Mapping, WCAG 2.1 Accessibility",
+    learningOutcomes: "Create complete design system tokens, assemble interactive Figma clickable prototypes, conduct structured user testing, and deliver developer-ready UI specs.",
+    duration: "6 Weeks (Modular)",
+    workMode: "Remote Virtual Learning",
+    eligibility: "Designers, aspiring product designers, and creative students with keen attention to visual aesthetics and usability.",
+    requirements: "Free Figma account, computer capable of web-based design tooling, and 8-10 hours weekly commitment.",
+    status: "published",
+    feePaise: 0,
+    createdAt: "2026-10-19T17:00:00.000Z",
+    updatedAt: "2026-10-19T17:00:00.000Z"
+  },
+  {
+    id: "prog-ai-ml",
+    slug: "ai-machine-learning",
+    title: "AI & Applied Machine Learning Track",
+    description: "Practical curriculum exploring data preprocessing, supervised learning models, evaluation metrics, and API integration with cutting-edge machine learning pipelines.",
+    skills: "Python, NumPy, Pandas, Scikit-Learn, Feature Engineering, RESTful ML Inference, Model Validation",
+    learningOutcomes: "Clean and preprocess real-world tabular datasets, train classification and regression models, measure accuracy/F1/ROC metrics, and serve models via API.",
+    duration: "8 Weeks (Modular)",
+    workMode: "Remote Virtual Learning",
+    eligibility: "Students with basic Python programming and linear algebra/statistics foundational understanding.",
+    requirements: "Python 3.10+ environment, Jupyter Notebooks or Google Colab, and 10-12 hours weekly commitment.",
+    status: "published",
+    feePaise: 0,
+    createdAt: "2026-10-19T17:00:00.000Z",
+    updatedAt: "2026-10-19T17:00:00.000Z"
+  },
+  {
+    id: "prog-cloud-devops",
+    slug: "cloud-devops",
+    title: "Cloud & DevOps Engineering Track",
+    description: "Cloud-native infrastructure, edge functions, Docker containerization, CI/CD automated deployment pipelines, and serverless edge databases.",
+    skills: "Cloudflare Workers & Pages, Docker, GitHub Actions CI/CD, DNS & SSL Management, Edge Storage & D1, System Monitoring",
+    learningOutcomes: "Automate edge deployments, build containerized development flows, configure production DNS and SSL security headers, and maintain high availability.",
+    duration: "8 Weeks (Modular)",
+    workMode: "Remote Virtual Learning",
+    eligibility: "Students and engineers with basic Linux command line understanding seeking cloud infrastructure and modern DevOps skills.",
+    requirements: "Personal computer with terminal access, GitHub account, and weekly commitment of 10-12 hours.",
+    status: "published",
+    feePaise: 0,
+    createdAt: "2026-10-19T17:00:00.000Z",
+    updatedAt: "2026-10-19T17:00:00.000Z"
+  }
+];
+
+export const findStudentByEmail = async (db, email) => {
+  const row = await first(db, "SELECT * FROM students WHERE lower(email) = ?", text(email, "", 254).toLowerCase());
+  if (!row) return null;
+  return {
+    id: row.id,
+    name: row.name,
+    email: row.email,
+    passwordHash: row.password_hash,
+    status: row.status,
+    emailVerified: Number(row.email_verified || 0),
+    createdAt: row.created_at,
+    updatedAt: row.updated_at,
+  };
+};
+
+export const getStudentById = async (db, studentId) => {
+  const row = await first(db, "SELECT * FROM students WHERE id = ?", text(studentId, "", 120));
+  if (!row) return null;
+  return {
+    id: row.id,
+    name: row.name,
+    email: row.email,
+    passwordHash: row.password_hash,
+    status: row.status,
+    emailVerified: Number(row.email_verified || 0),
+    createdAt: row.created_at,
+    updatedAt: row.updated_at,
+  };
+};
+
+export const createStudent = async (db, student) => {
+  await run(
+    db,
+    "INSERT INTO students (id, name, email, password_hash, status, email_verified, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+    student.id,
+    student.name,
+    student.email.toLowerCase(),
+    student.passwordHash,
+    student.status || "pending_verification",
+    student.emailVerified ? 1 : 0,
+    student.createdAt,
+    student.updatedAt
+  );
+  return student;
+};
+
+export const updateStudentPassword = async (db, studentId, passwordHash) => {
+  const now = new Date().toISOString();
+  await run(db, "UPDATE students SET password_hash = ?, updated_at = ? WHERE id = ?", passwordHash, now, studentId);
+};
+
+export const verifyStudentEmail = async (db, studentId) => {
+  const now = new Date().toISOString();
+  await run(db, "UPDATE students SET email_verified = 1, status = 'active', updated_at = ? WHERE id = ?", now, studentId);
+};
+
+export const createVerificationToken = async (db, tokenRecord) => {
+  await run(
+    db,
+    "INSERT INTO student_verification_tokens (id, student_id, token_hash, token_type, expires_at, used_at, created_at) VALUES (?, ?, ?, ?, ?, ?, ?)",
+    tokenRecord.id,
+    tokenRecord.studentId,
+    tokenRecord.tokenHash,
+    tokenRecord.tokenType,
+    tokenRecord.expiresAt,
+    tokenRecord.usedAt || null,
+    tokenRecord.createdAt
+  );
+};
+
+export const findVerificationToken = async (db, tokenHash, tokenType) => {
+  return await first(
+    db,
+    "SELECT * FROM student_verification_tokens WHERE token_hash = ? AND token_type = ? AND used_at IS NULL",
+    tokenHash,
+    tokenType
+  );
+};
+
+export const markVerificationTokenUsed = async (db, tokenId) => {
+  const now = new Date().toISOString();
+  await run(db, "UPDATE student_verification_tokens SET used_at = ? WHERE id = ?", now, tokenId);
+};
+
+export const createStudentSession = async (db, sessionRecord) => {
+  await run(
+    db,
+    "INSERT INTO student_sessions (id, student_id, session_hash, expires_at, created_at) VALUES (?, ?, ?, ?, ?)",
+    sessionRecord.id,
+    sessionRecord.studentId,
+    sessionRecord.sessionHash,
+    sessionRecord.expiresAt,
+    sessionRecord.createdAt
+  );
+};
+
+export const getStudentFromSessionHash = async (db, sessionHash) => {
+  const session = await first(
+    db,
+    "SELECT * FROM student_sessions WHERE session_hash = ?",
+    sessionHash
+  );
+  if (!session) return null;
+  if (new Date(session.expires_at).getTime() < Date.now()) {
+    try {
+      await run(db, "DELETE FROM student_sessions WHERE session_hash = ?", sessionHash);
+    } catch {}
+    return null;
+  }
+  return await getStudentById(db, session.student_id);
+};
+
+export const deleteStudentSession = async (db, sessionHash) => {
+  await run(db, "DELETE FROM student_sessions WHERE session_hash = ?", sessionHash);
+};
+
+export const deleteStudentSessionsByStudent = async (db, studentId) => {
+  await run(db, "DELETE FROM student_sessions WHERE student_id = ?", studentId);
+};
+
+export const listStudentApplications = async (db, email) => {
+  const rows = await all(db, "SELECT * FROM internship_applications WHERE lower(email) = ? ORDER BY created_at DESC", text(email, "", 254).toLowerCase());
+  return rows.map(internshipApplicationFromRow);
+};
+
+export const listInternshipPrograms = async (db) => {
+  const rows = await all(db, "SELECT * FROM internship_programs WHERE status = 'published' ORDER BY title ASC");
+  if (!rows || rows.length === 0) {
+    return DEFAULT_INTERNSHIP_PROGRAMS;
+  }
+  return rows.map((r) => ({
+    id: r.id,
+    slug: r.slug,
+    title: r.title,
+    description: r.description,
+    skills: r.skills,
+    learningOutcomes: r.learning_outcomes,
+    duration: r.duration,
+    workMode: r.work_mode,
+    eligibility: r.eligibility,
+    requirements: r.requirements,
+    status: r.status,
+    feePaise: Number(r.fee_paise || 0),
+    createdAt: r.created_at,
+    updatedAt: r.updated_at,
+  }));
+};
+
+export const getInternshipProgramBySlug = async (db, slug) => {
+  const normalizedSlug = text(slug, "", 100).toLowerCase();
+  const row = await first(db, "SELECT * FROM internship_programs WHERE slug = ?", normalizedSlug);
+  if (row) {
+    return {
+      id: row.id,
+      slug: row.slug,
+      title: row.title,
+      description: row.description,
+      skills: row.skills,
+      learningOutcomes: row.learning_outcomes,
+      duration: row.duration,
+      workMode: row.work_mode,
+      eligibility: row.eligibility,
+      requirements: row.requirements,
+      status: row.status,
+      feePaise: Number(row.fee_paise || 0),
+      createdAt: row.created_at,
+      updatedAt: row.updated_at,
+    };
+  }
+  return DEFAULT_INTERNSHIP_PROGRAMS.find((p) => p.slug === normalizedSlug) || null;
+};
+
+export const DEFAULT_CERTIFICATES = [
+  {
+    id: "ABSS-CERT-2026-WD-1042",
+    studentName: "Aarav Sharma",
+    program: "Full-Stack Web Engineering",
+    issueDate: "March 15, 2026",
+    grade: "Grade A+ (Distinction - 96%)",
+    status: "Authentic",
+    verificationHash: "7e2f5b89a1c4d6e8f0123456789abcdef0123456789abcdef0123456789abcde",
+    skills: ["HTML5", "CSS3", "JavaScript ES6+", "React", "Cloudflare Workers", "REST APIs"],
+    issuer: "ABSS Nexus Technologies",
+    verificationUrl: "https://abssnexus.in/verify-certificate?id=ABSS-CERT-2026-WD-1042",
+    createdAt: "2026-03-15T10:00:00.000Z",
+    updatedAt: "2026-03-15T10:00:00.000Z",
+  },
+  {
+    id: "ABSS-CERT-2026-AI-2084",
+    studentName: "Priya Verma",
+    program: "AI & Applied Machine Learning",
+    issueDate: "February 28, 2026",
+    grade: "Grade A (92%)",
+    status: "Authentic",
+    verificationHash: "4a1d9c3e8b7f2015e6834199abcdef1029384756abcdef0129384756abcdef12",
+    skills: ["Python", "PyTorch", "Prompt Engineering", "OpenAI API", "Data Pipelines"],
+    issuer: "ABSS Nexus Technologies",
+    verificationUrl: "https://abssnexus.in/verify-certificate?id=ABSS-CERT-2026-AI-2084",
+    createdAt: "2026-02-28T10:00:00.000Z",
+    updatedAt: "2026-02-28T10:00:00.000Z",
+  },
+  {
+    id: "ABSS-CERT-2026-SD-3091",
+    studentName: "Rohan Patel",
+    program: "Software & Full-Stack Development",
+    issueDate: "January 20, 2026",
+    grade: "Grade A+ (Distinction - 98%)",
+    status: "Authentic",
+    verificationHash: "8f3b2c1d9e0a4f5b6c7d8e9f0a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b",
+    skills: ["TypeScript", "Node.js", "PostgreSQL", "Docker", "System Design"],
+    issuer: "ABSS Nexus Technologies",
+    verificationUrl: "https://abssnexus.in/verify-certificate?id=ABSS-CERT-2026-SD-3091",
+    createdAt: "2026-01-20T10:00:00.000Z",
+    updatedAt: "2026-01-20T10:00:00.000Z",
+  },
+];
+
+export const DEFAULT_APPLICATIONS = [
+  {
+    id: "ABSS-2026-WD-8492",
+    name: "Aarav Sharma",
+    fullName: "Aarav Sharma",
+    email: "aarav.sharma@example.com",
+    program: "Web Engineering Internship Track",
+    internshipProgram: "Web Engineering Internship Track",
+    status: "Under Review",
+    step: 2,
+    submittedAt: "April 02, 2026",
+    createdAt: "2026-04-02T10:00:00.000Z",
+    notes: "Technical portfolio submitted. Application is currently under mentor technical review.",
+    adminNotes: "Technical portfolio submitted. Application is currently under mentor technical review.",
+  },
+  {
+    id: "ABSS-2026-AI-5120",
+    name: "Priya Verma",
+    fullName: "Priya Verma",
+    email: "priya.verma@example.com",
+    program: "AI & Applied Machine Learning Track",
+    internshipProgram: "AI & Applied Machine Learning Track",
+    status: "Shortlisted",
+    step: 3,
+    submittedAt: "March 25, 2026",
+    createdAt: "2026-03-25T10:00:00.000Z",
+    notes: "Candidate shortlisted for technical assessment round.",
+    adminNotes: "Candidate shortlisted for technical assessment round.",
+  },
+  {
+    id: "ABSS-2026-SD-9041",
+    name: "Rohan Patel",
+    fullName: "Rohan Patel",
+    email: "rohan.patel@example.com",
+    program: "Software & Full-Stack Development Track",
+    internshipProgram: "Software & Full-Stack Development Track",
+    status: "Offer Letter",
+    step: 4,
+    submittedAt: "March 10, 2026",
+    createdAt: "2026-03-10T10:00:00.000Z",
+    notes: "Offer letter dispatched via email. Orientation scheduled.",
+    adminNotes: "Offer letter dispatched via email. Orientation scheduled.",
+  },
+];
+
+const certificateFromRow = (row = {}) => {
+  let parsedSkills = [];
+  try {
+    parsedSkills = row.skills_json ? JSON.parse(row.skills_json) : [];
+  } catch {
+    parsedSkills = [];
+  }
+  return {
+    id: text(row.id, "", 120),
+    studentName: text(row.student_name, "", 180),
+    program: text(row.program, "", 180),
+    issueDate: text(row.issue_date, "", 80),
+    grade: text(row.grade, "Grade A (Distinction)", 80),
+    status: text(row.status, "Authentic", 40),
+    verificationHash: text(row.verification_hash, "", 128),
+    skills: Array.isArray(parsedSkills) ? parsedSkills : ["Web Development", "REST APIs"],
+    issuer: text(row.issuer, "ABSS Nexus Technologies", 120),
+    verificationUrl: text(row.verification_url, "", 500),
+    createdAt: dateText(row.created_at),
+    updatedAt: dateText(row.updated_at),
+  };
+};
+
+export const getD1CertificateById = async (db, certId) => {
+  const upperId = text(certId, "", 120).toUpperCase();
+  if (!upperId) return null;
+  const row = await first(db, "SELECT * FROM certificates WHERE upper(id) = ?", upperId);
+  if (row) {
+    return certificateFromRow(row);
+  }
+  return DEFAULT_CERTIFICATES.find((c) => c.id.toUpperCase() === upperId) || null;
+};
+
+export const createD1Certificate = async (db, cert) => {
+  const now = new Date().toISOString();
+  const id = text(cert.id, "", 120);
+  const studentName = text(cert.studentName, "", 180);
+  const program = text(cert.program, "", 180);
+  const issueDate = text(cert.issueDate, new Date().toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" }), 80);
+  const grade = text(cert.grade, "Grade A (Distinction)", 80);
+  const status = text(cert.status, "Authentic", 40);
+  const verificationHash = text(cert.verificationHash, "", 128);
+  const skillsJson = JSON.stringify(Array.isArray(cert.skills) ? cert.skills : ["Web Development", "REST APIs"]);
+  const issuer = text(cert.issuer, "ABSS Nexus Technologies", 120);
+  const verificationUrl = text(cert.verificationUrl, `https://abssnexus.in/verify-certificate?id=${id}`, 500);
+
+  await run(
+    db,
+    `INSERT OR REPLACE INTO certificates (id, student_name, program, issue_date, grade, status, verification_hash, skills_json, issuer, verification_url, created_at, updated_at)
+     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+    id,
+    studentName,
+    program,
+    issueDate,
+    grade,
+    status,
+    verificationHash,
+    skillsJson,
+    issuer,
+    verificationUrl,
+    now,
+    now
+  );
+
+  return {
+    id,
+    studentName,
+    program,
+    issueDate,
+    grade,
+    status,
+    verificationHash,
+    skills: Array.isArray(cert.skills) ? cert.skills : ["Web Development", "REST APIs"],
+    issuer,
+    verificationUrl,
+    createdAt: now,
+    updatedAt: now,
+  };
+};
+
+export const listD1Certificates = async (db) => {
+  const rows = await all(db, "SELECT * FROM certificates ORDER BY created_at DESC");
+  if (!rows || rows.length === 0) {
+    return DEFAULT_CERTIFICATES;
+  }
+  return rows.map(certificateFromRow);
+};
+
+export const revokeD1Certificate = async (db, certId) => {
+  const upperId = text(certId, "", 120).toUpperCase();
+  const now = new Date().toISOString();
+  const existing = await first(db, "SELECT * FROM certificates WHERE upper(id) = ?", upperId);
+  if (existing) {
+    await run(db, "UPDATE certificates SET status = 'Revoked', updated_at = ? WHERE upper(id) = ?", now, upperId);
+    return true;
+  }
+  const defaultCert = DEFAULT_CERTIFICATES.find((c) => c.id.toUpperCase() === upperId);
+  if (defaultCert) {
+    await createD1Certificate(db, { ...defaultCert, status: "Revoked" });
+    return true;
+  }
+  return false;
+};
+
+export const getD1InternshipApplicationByQuery = async (db, query) => {
+  const q = text(query, "", 254).toLowerCase();
+  if (!q) return null;
+  const row = await first(
+    db,
+    "SELECT * FROM internship_applications WHERE lower(id) = ? OR lower(email) = ? ORDER BY created_at DESC LIMIT 1",
+    q,
+    q
+  );
+  if (row) {
+    const rawStatus = row.status || "New";
+    const step =
+      rawStatus === "Selected" || rawStatus === "Offer Letter"
+        ? 4
+        : rawStatus === "Shortlisted" || rawStatus === "Interview Scheduled"
+        ? 3
+        : 2;
+    return {
+      id: row.id,
+      name: row.full_name,
+      fullName: row.full_name,
+      email: row.email,
+      program: row.internship_program,
+      internshipProgram: row.internship_program,
+      status: rawStatus,
+      step,
+      submittedAt: row.created_at,
+      createdAt: row.created_at,
+      notes: row.admin_notes || "Application recorded in ABSS Nexus database.",
+      adminNotes: row.admin_notes || "Application recorded in ABSS Nexus database.",
+    };
+  }
+  const defaultApp = DEFAULT_APPLICATIONS.find(
+    (a) => a.id.toLowerCase() === q || a.email.toLowerCase() === q
+  );
+  return defaultApp || null;
+};
+
+

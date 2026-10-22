@@ -6,17 +6,100 @@ const localPageRoutes = {
   "/about": "/src/pages/about.html",
   "/services": "/src/pages/services.html",
   "/services/website-development": "/src/pages/service-website-development.html",
+  "/services/software-development": "/src/pages/service-software-development.html",
+  "/services/mobile-app-development": "/src/pages/service-mobile-app-development.html",
   "/services/ui-ux-design": "/src/pages/service-ui-ux-design.html",
+  "/services/ai-machine-learning": "/src/pages/service-ai-machine-learning.html",
+  "/services/cloud-computing": "/src/pages/service-cloud-computing.html",
+  "/services/cybersecurity": "/src/pages/service-cybersecurity.html",
+  "/services/data-analytics": "/src/pages/service-data-analytics-bi.html",
+  "/services/data-analytics-bi": "/src/pages/service-data-analytics-bi.html",
+  "/services/digital-marketing-seo": "/src/pages/service-digital-marketing-seo.html",
+  "/services/ecommerce-development": "/src/pages/service-ecommerce-development.html",
+  "/services/saas-development": "/src/pages/service-saas-development.html",
+  "/services/api-integration": "/src/pages/service-api-integration.html",
+  "/services/software-testing": "/src/pages/service-software-testing-qa.html",
+  "/services/software-testing-qa": "/src/pages/service-software-testing-qa.html",
+  "/services/it-consulting": "/src/pages/service-it-consulting.html",
   "/services/website-maintenance": "/src/pages/service-website-maintenance.html",
+  "/services/managed-it-support": "/src/pages/service-managed-it-support.html",
+  "/solutions": "/src/pages/solutions.html",
+  "/industries": "/src/pages/industries.html",
+  "/work": "/src/pages/work.html",
   "/projects": "/src/pages/projects.html",
-  "/contact": "/src/pages/contact.html",
+  "/work/fintech-payment-gateway": "/src/pages/work-fintech-payment-gateway.html",
+  "/work/healthcare-telemedicine-platform": "/src/pages/work-healthcare-telemedicine.html",
+  "/work/ecommerce-headless-storefront": "/src/pages/work-ecommerce-headless.html",
   "/pricing": "/src/pages/pricing.html",
+  "/careers": "/src/pages/careers.html",
+  "/careers/senior-fullstack-engineer": "/src/pages/career-senior-fullstack-engineer.html",
+  "/careers/lead-ui-ux-designer": "/src/pages/career-lead-ui-ux-designer.html",
+  "/careers/cloud-devops-architect": "/src/pages/career-cloud-devops-architect.html",
+  "/blog": "/src/pages/blog.html",
+  "/blog/modern-web-performance-core-web-vitals": "/src/pages/blog-modern-web-performance.html",
+  "/blog/resilient-cloud-architecture-edge-computing": "/src/pages/blog-resilient-cloud-architecture.html",
+  "/blog/minimalist-design-systems-conversion": "/src/pages/blog-minimalist-design-systems.html",
+  "/faq": "/src/pages/faq.html",
+  "/contact": "/src/pages/contact.html",
   "/privacy-policy": "/src/pages/privacy-policy.html",
   "/terms-and-conditions": "/src/pages/terms-conditions.html",
+  "/cookie-policy": "/src/pages/cookie-policy.html",
   "/disclaimer": "/src/pages/disclaimer.html",
   "/refund-policy": "/src/pages/refund-policy.html",
   "/support-policy": "/src/pages/support-policy.html",
   "/sitemap": "/src/pages/sitemap.html",
+  "/internships": "/src/pages/internships.html",
+  "/internships/programs": "/src/pages/internships-programs.html",
+  "/internships/programs/web-development": "/src/pages/internships-program-web-development.html",
+  "/internships/programs/software-development": "/src/pages/internships-program-software-development.html",
+  "/internships/programs/ui-ux-design": "/src/pages/internships-program-ui-ux-design.html",
+  "/internships/programs/ai-machine-learning": "/src/pages/internships-program-ai-machine-learning.html",
+  "/internships/programs/cloud-devops": "/src/pages/internships-program-cloud-devops.html",
+  "/internships/how-it-works": "/src/pages/internships-how-it-works.html",
+  "/internships/faq": "/src/pages/internships-faq.html",
+  "/internships/support": "/src/pages/internships-support.html",
+  "/internships/register": "/src/pages/internships-register.html",
+  "/internships/login": "/src/pages/internships-login.html",
+  "/internships/verify-email": "/src/pages/internships-verify-email.html",
+  "/internships/forgot-password": "/src/pages/internships-forgot-password.html",
+  "/internships/reset-password": "/src/pages/internships-reset-password.html",
+  "/internships/dashboard": "/src/pages/internships-dashboard.html",
+  "/internships/application-status": "/src/pages/internships-application-status.html",
+  "/internships/payment-status": "/src/pages/internships-payment-status.html",
+  "/verify-certificate": "/src/pages/verify-certificate.html",
+  "/register": "/src/pages/register.html",
+  "/login": "/src/pages/login.html",
+  "/verify-email": "/src/pages/verify-email.html",
+  "/forgot-password": "/src/pages/forgot-password.html",
+  "/reset-password": "/src/pages/reset-password.html",
+  "/student/dashboard": "/src/pages/student-dashboard.html",
+  "/student/profile": "/src/pages/student-profile.html",
+  "/student/applications": "/src/pages/student-applications.html",
+  "/student/internship": "/src/pages/student-internship.html",
+  "/student/tasks": "/src/pages/student-tasks.html",
+  "/student/tasks/task-1": "/src/pages/student-task-detail.html",
+  "/student/submissions": "/src/pages/student-submissions.html",
+  "/student/submit-work": "/src/pages/student-submit-work.html",
+  "/student/certificates": "/src/pages/student-certificates.html",
+  "/student/settings": "/src/pages/student-settings.html",
+  "/admin/dashboard": "/src/admin/admin-dashboard.html",
+  "/admin/programs": "/src/admin/admin-programs.html",
+  "/admin/applications": "/src/admin/admin-applications.html",
+  "/admin/students": "/src/admin/admin-students.html",
+  "/admin/tasks": "/src/admin/admin-tasks.html",
+  "/admin/submissions": "/src/admin/admin-submissions.html",
+  "/admin/reviews": "/src/admin/admin-reviews.html",
+  "/admin/payments": "/src/admin/admin-payments.html",
+  "/admin/certificates": "/src/admin/admin-certificates.html",
+  "/admin/users": "/src/admin/admin-users.html",
+  "/admin/audit-logs": "/src/admin/admin-audit-logs.html",
+  "/admin/settings": "/src/admin/admin-settings.html",
+  "/admin/login": "/src/admin/admin-login.html",
+  "/admin/leads": "/src/admin/admin-leads.html",
+  "/admin/projects": "/src/admin/admin-projects.html",
+  "/admin/clients": "/src/admin/admin-clients.html",
+  "/admin/support": "/src/admin/admin-support.html",
+  "/admin/pricing": "/src/admin/admin-pricing.html"
 };
 
 const isLocalStaticServer =
@@ -44,14 +127,19 @@ const queryParams = new URLSearchParams(window.location.search);
 
 if (serviceSelect) {
   const selectedService = queryParams.get("service")?.trim();
-  if (selectedService) {
+  const selectedInterest = queryParams.get("interest")?.trim();
+  const targetVal = selectedService || (selectedInterest === "internship" ? "Internship Application" : selectedInterest);
+  if (targetVal) {
     const serviceAliases = {
       "Landing Page": "Business Landing Page",
+      "internship": "Internship Application",
     };
-    const normalizedService = serviceAliases[selectedService] || selectedService;
-    const matchingOption = [...serviceSelect.options].find((option) => option.value === normalizedService);
+    const normalizedService = serviceAliases[targetVal] || targetVal;
+    const matchingOption = [...serviceSelect.options].find(
+      (option) => option.value.toLowerCase() === normalizedService.toLowerCase()
+    );
     if (matchingOption) {
-      serviceSelect.value = normalizedService;
+      serviceSelect.value = matchingOption.value;
     }
   }
 }
@@ -78,21 +166,127 @@ if (navToggle && navLinks) {
   navToggle.addEventListener("click", () => {
     const isOpen = navLinks.classList.toggle("open");
     navToggle.setAttribute("aria-expanded", String(isOpen));
+    if (window.innerWidth <= 1140) {
+      document.body.classList.toggle("nav-drawer-open", isOpen);
+    }
   });
 
   navLinks.querySelectorAll("a").forEach((link) => {
     link.addEventListener("click", () => {
       navLinks.classList.remove("open");
       navToggle.setAttribute("aria-expanded", "false");
+      document.body.classList.remove("nav-drawer-open");
     });
   });
 
   document.addEventListener("keydown", (event) => {
-    if (event.key !== "Escape" || !navLinks.classList.contains("open")) return;
-    navLinks.classList.remove("open");
-    navToggle.setAttribute("aria-expanded", "false");
-    navToggle.focus();
+    if (event.key === "Escape") {
+      let closedDropdown = false;
+      document.querySelectorAll(".nav-item-dropdown.open").forEach((el) => {
+        el.classList.remove("open");
+        const btn = el.querySelector(".nav-dropdown-trigger");
+        if (btn) {
+          btn.setAttribute("aria-expanded", "false");
+          btn.focus();
+          closedDropdown = true;
+        }
+      });
+      if (!closedDropdown && navLinks.classList.contains("open")) {
+        navLinks.classList.remove("open");
+        navToggle.setAttribute("aria-expanded", "false");
+        document.body.classList.remove("nav-drawer-open");
+        navToggle.focus();
+      }
+    }
   });
+
+  // Mobile & keyboard accessibility for mega-menu dropdowns
+  const dropdownTriggers = document.querySelectorAll(".nav-dropdown-trigger");
+  dropdownTriggers.forEach((btn) => {
+    const parent = btn.closest(".nav-item-dropdown");
+    if (!parent) return;
+
+    btn.addEventListener("click", (e) => {
+      e.preventDefault();
+      const willOpen = !parent.classList.contains("open");
+      document.querySelectorAll(".nav-item-dropdown.open").forEach((el) => {
+        if (el !== parent) {
+          el.classList.remove("open");
+          const otherBtn = el.querySelector(".nav-dropdown-trigger");
+          if (otherBtn) otherBtn.setAttribute("aria-expanded", "false");
+        }
+      });
+      parent.classList.toggle("open", willOpen);
+      btn.setAttribute("aria-expanded", String(willOpen));
+    });
+
+    btn.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowDown") {
+        e.preventDefault();
+        if (!parent.classList.contains("open")) {
+          parent.classList.add("open");
+          btn.setAttribute("aria-expanded", "true");
+        }
+        const firstLink = parent.querySelector(".mega-menu a");
+        if (firstLink) firstLink.focus();
+      }
+    });
+
+    // Synchronize hover state aria-expanded for screen readers
+    parent.addEventListener("mouseenter", () => {
+      if (window.innerWidth > 1140) {
+        btn.setAttribute("aria-expanded", "true");
+      }
+    });
+    parent.addEventListener("mouseleave", () => {
+      if (window.innerWidth > 1140 && !parent.classList.contains("open")) {
+        btn.setAttribute("aria-expanded", "false");
+      }
+    });
+  });
+
+  document.addEventListener("click", (e) => {
+    if (!e.target.closest(".nav-item-dropdown")) {
+      document.querySelectorAll(".nav-item-dropdown.open").forEach((el) => {
+        el.classList.remove("open");
+        const btn = el.querySelector(".nav-dropdown-trigger");
+        if (btn) btn.setAttribute("aria-expanded", "false");
+      });
+    }
+    if (!e.target.closest(".site-header") && navLinks.classList.contains("open") && window.innerWidth <= 1140) {
+      navLinks.classList.remove("open");
+      navToggle.setAttribute("aria-expanded", "false");
+      document.body.classList.remove("nav-drawer-open");
+    }
+  });
+
+  // Sticky Compact Header on Scroll (throttled with requestAnimationFrame)
+  const siteHeader = document.querySelector(".site-header");
+  if (siteHeader) {
+    let scrollTicking = false;
+    const scrollThreshold = 36;
+
+    const handleHeaderScroll = () => {
+      const isScrolled = window.scrollY > scrollThreshold;
+      if (siteHeader.classList.contains("is-scrolled") !== isScrolled) {
+        siteHeader.classList.toggle("is-scrolled", isScrolled);
+      }
+      scrollTicking = false;
+    };
+
+    window.addEventListener(
+      "scroll",
+      () => {
+        if (!scrollTicking) {
+          window.requestAnimationFrame(handleHeaderScroll);
+          scrollTicking = true;
+        }
+      },
+      { passive: true }
+    );
+
+    handleHeaderScroll();
+  }
 }
 
 const faqToggles = document.querySelectorAll("[data-faq-toggle]");
@@ -508,8 +702,8 @@ const adminApp = document.querySelector("[data-admin-app]");
 
 if (adminLoginPage) {
   const loginForm = document.querySelector("[data-login-form]");
-  const nextPage = new URLSearchParams(window.location.search).get("next") || "admin-dashboard.html";
-  const safeNextPage = window.AbssAdminAuthGuard?.getSafeNextPage(nextPage) || "admin-dashboard.html";
+  const nextPage = new URLSearchParams(window.location.search).get("next") || "/admin/";
+  const safeNextPage = window.AbssAdminAuthGuard?.getSafeNextPage(nextPage) || "/admin/";
 
   window.AbssAdminAuthGuard?.redirectAuthenticatedLogin(safeNextPage);
 
@@ -522,7 +716,7 @@ if (adminLoginPage) {
 
     try {
       await window.AbssAdminApi?.login(username, password);
-      const targetPath = safeNextPage.startsWith("/") ? safeNextPage : `/src/admin/${safeNextPage}`;
+      const targetPath = safeNextPage.startsWith("/") ? safeNextPage : `/admin/${safeNextPage.replace(/^admin-/, "").replace(/\.html$/, "")}`;
       window.location.href = targetPath;
       return;
     } catch (error) {
@@ -1518,3 +1712,256 @@ if (adminApp) {
     });
   });
 })();
+
+/* ==========================================================================
+   GLOBAL TOAST NOTIFICATION SYSTEM
+   ========================================================================== */
+window.showToast = function showToast(message, type = "info", duration = 3500) {
+  let toastContainer = document.getElementById("site-toast-container");
+  if (!toastContainer) {
+    toastContainer = document.createElement("div");
+    toastContainer.id = "site-toast-container";
+    toastContainer.className = "site-toast-container";
+    toastContainer.setAttribute("aria-live", "polite");
+    document.body.appendChild(toastContainer);
+  }
+
+  const toast = document.createElement("div");
+  toast.className = `site-toast site-toast--${type}`;
+  
+  const icon = type === "success" ? "✓" : type === "error" ? "✕" : "ℹ";
+  toast.innerHTML = `
+    <span class="site-toast__icon" aria-hidden="true">${icon}</span>
+    <span class="site-toast__message">${message}</span>
+  `;
+
+  toastContainer.appendChild(toast);
+
+  requestAnimationFrame(() => {
+    toast.classList.add("is-visible");
+  });
+
+  setTimeout(() => {
+    toast.classList.remove("is-visible");
+    setTimeout(() => {
+      toast.remove();
+      if (!toastContainer.children.length) {
+        toastContainer.remove();
+      }
+    }, 300);
+  }, duration);
+};
+
+/* ==========================================================================
+   GLOBAL FLOATING BACK-TO-TOP BUTTON
+   ========================================================================== */
+(function initBackToTop() {
+  if (typeof window === "undefined" || typeof document === "undefined") return;
+
+  const btt = document.createElement("button");
+  btt.type = "button";
+  btt.className = "site-back-to-top";
+  btt.setAttribute("aria-label", "Scroll back to top");
+  btt.innerHTML = `
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <polyline points="18 15 12 9 6 15"></polyline>
+    </svg>
+  `;
+  document.body.appendChild(btt);
+
+  let isVisible = false;
+  window.addEventListener("scroll", () => {
+    const shouldShow = window.scrollY > 350;
+    if (shouldShow !== isVisible) {
+      isVisible = shouldShow;
+      btt.classList.toggle("is-visible", isVisible);
+    }
+  }, { passive: true });
+
+  btt.addEventListener("click", () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  });
+})();
+
+/* ==========================================================================
+   INTERACTIVE COPY-TO-CLIPBOARD FOR CONTACT DETAILS
+   ========================================================================== */
+(function initContactCopy() {
+  document.addEventListener("click", (e) => {
+    const copyTarget = e.target.closest("[data-copy-text]");
+    if (!copyTarget) return;
+
+    e.preventDefault();
+    const textToCopy = copyTarget.getAttribute("data-copy-text");
+    if (!textToCopy) return;
+
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(textToCopy).then(() => {
+        if (window.showToast) {
+          window.showToast(`Copied to clipboard: ${textToCopy}`, "success");
+        }
+      }).catch(() => {
+        if (window.showToast) {
+          window.showToast("Could not copy to clipboard", "error");
+        }
+      });
+    }
+  });
+})();
+
+/* ==========================================================================
+   SERVICES CATALOG INTERACTIVE CATEGORY FILTER
+   ========================================================================== */
+(function initServicesCatalogFilter() {
+  const filterBar = document.querySelector("[data-service-filter-bar]");
+  const serviceCards = document.querySelectorAll(".cinematic-service-card");
+  if (!filterBar || !serviceCards.length) return;
+
+  const buttons = filterBar.querySelectorAll("button[data-filter]");
+  buttons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const filter = btn.getAttribute("data-filter");
+      buttons.forEach((b) => b.classList.remove("active"));
+      btn.classList.add("active");
+
+      serviceCards.forEach((card) => {
+        const category = card.getAttribute("data-category") || "all";
+        const matches = filter === "all" || category.includes(filter);
+        card.style.display = matches ? "flex" : "none";
+      });
+    });
+  });
+})();
+
+/* ==========================================================================
+   GLOBAL SCROLL REVEAL & STAGGERED PAGE ANIMATION CONTROLLER (ALL PAGES)
+   ========================================================================== */
+(function initGlobalScrollReveal() {
+  if (window.__abssScrollRevealInitialized) return;
+  window.__abssScrollRevealInitialized = true;
+
+  function setupPageAnimations() {
+    if (typeof IntersectionObserver === "undefined") return;
+    if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    // Universal selectors for cards, headers, grids, metrics, testimonials, and CTAs across all pages
+    const animSelector = [
+      ".reveal-on-scroll",
+      ".section-heading",
+      ".section-header",
+      ".cinematic-service-card",
+      ".service-card",
+      ".project-card",
+      ".work-card",
+      ".case-study-card",
+      ".industry-showcase-card",
+      ".solution-showcase-card",
+      ".testimonial-card",
+      ".package-card",
+      ".pricing-card",
+      ".package-grid article",
+      ".bento-service-card",
+      ".agency-stat-card",
+      ".metric-card",
+      ".stat-card",
+      ".process-card",
+      ".process-step",
+      ".step-card",
+      ".faq-item",
+      ".career-card",
+      ".blog-card",
+      ".contact-method-card",
+      ".contact-form-wrapper",
+      ".contact-card",
+      ".program-card",
+      ".portal-card",
+      ".feature-card",
+      ".radiant-cta-box",
+      ".cta-box"
+    ].join(", ");
+
+    const animTargets = Array.from(document.querySelectorAll(animSelector));
+    if (!animTargets.length) return;
+
+    // Exclude elements inside hero sections that already have dedicated CSS keyframe entrances
+    const heroEl = document.querySelector(".site-hero, .page-hero, .portal-hero");
+    const activeTargets = animTargets.filter((el) => {
+      if (heroEl && heroEl.contains(el) && !el.classList.contains("reveal-on-scroll")) {
+        return false;
+      }
+      return true;
+    });
+
+    if (!activeTargets.length) return;
+
+    // Assign staggered cascading delays for sibling elements in multi-item containers
+    activeTargets.forEach((el) => {
+      if (!el.classList.contains("reveal-on-scroll")) {
+        el.classList.add("reveal-on-scroll");
+      }
+
+      const parent = el.parentElement;
+      if (parent) {
+        const siblings = Array.from(parent.children).filter((c) => c.classList.contains("reveal-on-scroll"));
+        if (siblings.length > 1) {
+          const index = siblings.indexOf(el);
+          const delayClass = `reveal-delay-${Math.min((index % 6) + 1, 6)}`;
+          if (!el.className.includes("reveal-delay-")) {
+            el.classList.add(delayClass);
+          }
+        }
+      }
+    });
+
+    // Signal CSS that JS animation system is active
+    document.documentElement.classList.add("reveal-animations-ready");
+    document.documentElement.classList.add("has-scroll-reveal");
+
+    const observer = new IntersectionObserver(
+      (entries, obs) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-revealed");
+            obs.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        root: null,
+        rootMargin: "0px 0px -40px 0px",
+        threshold: 0.08
+      }
+    );
+
+    // Differentiate elements above the fold vs offscreen
+    const inViewport = [];
+    const outOfViewport = [];
+
+    activeTargets.forEach((el) => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight && rect.bottom > 0) {
+        inViewport.push(el);
+      } else {
+        outOfViewport.push(el);
+        observer.observe(el);
+      }
+    });
+
+    // Stagger elements visible on page load for a silky smooth entrance
+    inViewport.forEach((el, idx) => {
+      setTimeout(() => {
+        el.classList.add("is-revealed");
+      }, 50 + idx * 45);
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", setupPageAnimations);
+  } else {
+    setupPageAnimations();
+  }
+})();
+

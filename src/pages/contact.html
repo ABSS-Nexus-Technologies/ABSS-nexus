@@ -23,58 +23,267 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700;800&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="/src/styles/styles.css" />
   </head>
-  <body class="agency-dark-theme">
-    <header class="site-header">
+  <body>
+    <header class="site-header" role="banner">
       <div class="announcement-bar">
-        <div class="container">
-          <span class="announcement-badge"><span class="live-pulse-dot" aria-hidden="true"></span> Free consultation available for website &amp; digital projects.</span>
-          <a href="/contact#project-inquiry">Start your business website</a>
+        <div class="announcement-bar__container container">
+          <span class="announcement-bar__badge">
+            <span class="live-pulse-dot" aria-hidden="true"></span>
+            <span>Applications open for 2026 Technical Internship Cohort.</span>
+          </span>
+          <a class="announcement-bar__link" href="/internships">Apply for Internship &rarr;</a>
         </div>
       </div>
-      <nav class="nav">
+      <nav class="nav" aria-label="Main Navigation">
         <a class="brand" href="/" aria-label="ABSS Nexus Technologies home">
-          <img src="/public/assets/images/LogoGenerated.png" alt="ABSS Nexus Technologies logo" />
-          <span>ABSS Nexus</span>
+          <img src="/public/assets/images/favicon.png" alt="ABSS Nexus Technologies logo" width="38" height="38" />
+          <span class="brand-name">ABSS Nexus Technologies</span>
         </a>
-        <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
-          <span></span>
-          <span></span>
-          <span></span>
+        <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav-links">
+          <span class="hamburger-bar"></span>
+          <span class="hamburger-bar"></span>
+          <span class="hamburger-bar"></span>
         </button>
-        <div class="nav-links">
-          <a href="/">Home</a>
-          <a href="/about">About</a>
-          <a href="/services">Services</a>
-          <a href="/projects">Projects</a>
-          <a href="/contact" aria-current="page">Contact</a>
-          <a class="nav-cta" href="/pricing">Our Pricing Packages</a>
+        <div class="nav-links" id="main-nav-links">
+          <a href="/" class="nav-link">Home</a>
+
+          <!-- Services Mega Menu Dropdown -->
+          <div class="nav-item-dropdown">
+            <button class="nav-dropdown-trigger" type="button" aria-expanded="false" aria-haspopup="true">
+              <span>Services</span>
+              <svg class="dropdown-arrow" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <div class="mega-menu mega-menu-services" role="menu">
+              <div class="mega-menu-grid">
+                <div class="mega-col">
+                  <div class="mega-col-title">Web Engineering</div>
+                  <ul class="mega-link-list">
+                    <li>
+                      <a class="mega-link" href="/services/website-development">
+                        <span class="mega-link-title">Website Development</span>
+                        <span class="mega-link-desc">High-speed business &amp; corporate platforms</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="mega-link" href="/services/ecommerce-development">
+                        <span class="mega-link-title">E-Commerce Development</span>
+                        <span class="mega-link-desc">Online storefronts &amp; fast checkout paths</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="mega-link" href="/services/digital-marketing-seo">
+                        <span class="mega-link-title">Digital Marketing &amp; SEO</span>
+                        <span class="mega-link-desc">Search rankings &amp; lead growth</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="mega-link" href="/services/ui-ux-design">
+                        <span class="mega-link-title">UI/UX Design</span>
+                        <span class="mega-link-desc">Figma wireframes &amp; design systems</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="mega-link" href="/services/website-maintenance">
+                        <span class="mega-link-title">Website Maintenance</span>
+                        <span class="mega-link-desc">Proactive updates, security &amp; backups</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+                <div class="mega-col">
+                  <div class="mega-col-title">Software &amp; Cloud</div>
+                  <ul class="mega-link-list">
+                    <li>
+                      <a class="mega-link" href="/services/software-development">
+                        <span class="mega-link-title">Software Development</span>
+                        <span class="mega-link-desc">Custom web apps &amp; workflow software</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="mega-link" href="/services/mobile-app-development">
+                        <span class="mega-link-title">Mobile App Development</span>
+                        <span class="mega-link-desc">iOS &amp; Android cross-platform solutions</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="mega-link" href="/services/saas-development">
+                        <span class="mega-link-title">SaaS Development</span>
+                        <span class="mega-link-desc">Scalable cloud platforms &amp; client portals</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="mega-link" href="/services/cloud-computing">
+                        <span class="mega-link-title">Cloud Computing &amp; DevOps</span>
+                        <span class="mega-link-desc">Edge servers, CI/CD pipelines &amp; scaling</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="mega-link" href="/services/api-integration">
+                        <span class="mega-link-title">API Integration</span>
+                        <span class="mega-link-desc">Clean RESTful &amp; edge database APIs</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+                <div class="mega-col">
+                  <div class="mega-col-title">Data, QA &amp; Support</div>
+                  <ul class="mega-link-list">
+                    <li>
+                      <a class="mega-link" href="/services/ai-machine-learning">
+                        <span class="mega-link-title">AI &amp; Machine Learning</span>
+                        <span class="mega-link-desc">Intelligent automation &amp; predictive models</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="mega-link" href="/services/data-analytics-bi">
+                        <span class="mega-link-title">Data Analytics &amp; BI</span>
+                        <span class="mega-link-desc">Real-time dashboards &amp; telemetry hubs</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="mega-link" href="/services/cybersecurity">
+                        <span class="mega-link-title">Cybersecurity</span>
+                        <span class="mega-link-desc">Vulnerability audits &amp; edge hardening</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="mega-link" href="/services/software-testing-qa">
+                        <span class="mega-link-title">Software Testing &amp; QA</span>
+                        <span class="mega-link-desc">End-to-end verification &amp; audits</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="mega-link" href="/services/it-consulting">
+                        <span class="mega-link-title">IT Consulting &amp; Strategy</span>
+                        <span class="mega-link-desc">Technology audits &amp; roadmap planning</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="mega-link" href="/services/managed-it-support">
+                        <span class="mega-link-title">Managed IT Support</span>
+                        <span class="mega-link-desc">24/7 technical monitoring &amp; maintenance</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="mega-menu-footer-bar">
+                <span>16 Comprehensive IT Disciplines Available</span>
+                <a href="/services">View Complete Service Catalog &rarr;</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Solutions Mega Menu Dropdown -->
+          <div class="nav-item-dropdown">
+            <button class="nav-dropdown-trigger" type="button" aria-expanded="false" aria-haspopup="true">
+              <span>Solutions</span>
+              <svg class="dropdown-arrow" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <div class="mega-menu mega-menu-solutions" role="menu">
+              <div class="mega-menu-grid mega-menu-grid--solutions">
+                <div class="mega-col">
+                  <div class="mega-col-title">Enterprise Architecture</div>
+                  <ul class="mega-link-list">
+                    <li>
+                      <a class="mega-link" href="/solutions#automation">
+                        <span class="mega-link-title">Business Process Automation</span>
+                        <span class="mega-link-desc">Custom workflow engines &amp; queue automation</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="mega-link" href="/solutions#platforms">
+                        <span class="mega-link-title">Custom Software Platforms</span>
+                        <span class="mega-link-desc">Tailored relational databases &amp; admin controls</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="mega-link" href="/solutions#cloud">
+                        <span class="mega-link-title">Cloud Adoption &amp; Modernization</span>
+                        <span class="mega-link-desc">Serverless edge networks &amp; zero downtime</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+                <div class="mega-col">
+                  <div class="mega-col-title">Integration &amp; Growth</div>
+                  <ul class="mega-link-list">
+                    <li>
+                      <a class="mega-link" href="/solutions#api">
+                        <span class="mega-link-title">Connected Systems &amp; APIs</span>
+                        <span class="mega-link-desc">Secure REST bridges &amp; CRM synchronization</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="mega-link" href="/solutions#conversion">
+                        <span class="mega-link-title">High-Conversion Experiences</span>
+                        <span class="mega-link-desc">Sub-second performance &amp; instant inquiries</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="mega-link" href="/solutions#strategy">
+                        <span class="mega-link-title">Strategic Digital Transformation</span>
+                        <span class="mega-link-desc">Architecture audits &amp; phased delivery roadmaps</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="mega-menu-footer-bar">
+                <span>Outcome-Driven Technical Frameworks</span>
+                <a href="/solutions">Explore All Solutions &rarr;</a>
+              </div>
+            </div>
+          </div>
+
+          <a href="/industries" class="nav-link">Industries</a>
+          <a href="/work" class="nav-link">Work</a>
+          <a href="/pricing" class="nav-link">Pricing</a>
+          <a href="/blog" class="nav-link">Blog</a>
+          <a href="/about" class="nav-link">About</a>
+          <a href="/contact" aria-current="page" class="nav-link">Contact</a>
+          <a class="nav-cta" href="/contact#project-inquiry">Start Project</a>
         </div>
       </nav>
     </header>
 
     <main>
-      <section class="page-hero section">
-        <div class="container">
-          <p class="eyebrow">Contact ABSS Nexus Technologies</p>
-          <h1>Let’s Discuss Your Website or Digital Project</h1>
-          <p>
+      <section class="site-hero site-hero--centered page-hero section">
+        <div class="site-hero__container container">
+          <nav class="site-hero__breadcrumb breadcrumb-trail" aria-label="Breadcrumb">
+            <a href="/">Home</a>
+            <span class="separator" aria-hidden="true">/</span>
+            <span class="current">Contact</span>
+          </nav>
+          <div class="site-hero__pill hero-pill-badge">
+            <span class="live-pulse-dot" aria-hidden="true"></span>
+            Direct Founder Consultation
+          </div>
+          <p class="site-hero__eyebrow eyebrow">Contact ABSS Nexus Technologies</p>
+          <h1 class="site-hero__title hero-headline-gradient">Let’s Discuss Your <span class="site-hero__title-accent text-gradient-cyan">Website or Digital Project</span></h1>
+          <p class="site-hero__description">
             Share your requirements and receive practical guidance on the right service, project
             scope, estimated timeline and starting budget.
           </p>
-          <div class="hero-actions">
-            <a class="btn btn-glow-cyan" href="#project-inquiry">Start Your Project</a>
+          <div class="site-hero__actions hero-actions">
+            <a class="site-hero__btn site-hero__btn--primary btn btn-glow-cyan" href="#project-inquiry">Start Your Project</a>
             <a
-              class="btn secondary"
+              class="site-hero__btn site-hero__btn--secondary btn btn-whatsapp-outline"
               href="https://wa.me/918757928673?text=Hello%20ABSS%20Nexus%20Technologies%2C%20I%20would%20like%20to%20discuss%20a%20project."
               target="_blank"
               rel="noopener noreferrer"
             >Quick WhatsApp Chat</a>
-            <a class="btn btn-glass" href="/pricing">View Pricing</a>
+            <a class="site-hero__btn site-hero__btn--secondary btn btn-glass" href="/pricing">View Pricing</a>
+          </div>
+          <div class="site-hero__trust trust-row" aria-label="Contact highlights">
+            <span class="site-hero__chip">Direct Founder Review</span>
+            <span class="site-hero__chip">2–4 Hr Initial Response</span>
+            <span class="site-hero__chip">No Obligation Discussion</span>
           </div>
         </div>
       </section>
@@ -83,71 +292,59 @@
         <div class="container">
           <div class="section-heading">
             <p class="eyebrow">Contact Methods</p>
-            <h2>Choose the most convenient way to start the discussion.</h2>
+            <h2>Choose the most convenient way to connect with us.</h2>
           </div>
           <div class="contact-card-grid">
-            <article>
-              <div class="contact-card-header">
-                <div class="contact-card-icon" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-                  </svg>
-                </div>
-                <span class="status-pill"><span class="status-dot"></span> Mon – Sat</span>
+            <article class="contact-method-card">
+              <div class="contact-method-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                </svg>
               </div>
               <h3>Direct Call</h3>
-              <p>Speak directly with Shubham Kumar to discuss your project requirements.</p>
-              <a class="contact-card-action" href="tel:+918757928673">Call +91 87579 28673</a>
+              <p>Speak directly with our founder to discuss your project requirements.</p>
+              <a class="contact-method-link" href="tel:+918757928673">+91 87579 28673</a>
             </article>
 
-            <article>
-              <div class="contact-card-header">
-                <div class="contact-card-icon whatsapp" aria-hidden="true">
-                  <svg viewBox="0 0 32 32" fill="currentColor">
-                    <path d="M16 3.2A12.7 12.7 0 0 0 5.1 22.4L3.4 28.8l6.6-1.7A12.7 12.7 0 1 0 16 3.2Zm0 22.9c-2 0-3.9-.6-5.6-1.6l-.4-.2-3.9 1 1-3.8-.3-.4a10.3 10.3 0 1 1 9.2 5Z" />
-                    <path d="M21.7 18.6c-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.2-1.3-.5-2.5-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.6 0-.2-.7-1.7-1-2.3-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.2-1.2 2.9s1.2 3.3 1.4 3.6c.2.2 2.4 3.7 5.9 5.1.8.4 1.5.6 2 .7.8.3 1.6.2 2.2.1.7-.1 1.9-.8 2.2-1.5.3-.7.3-1.4.2-1.5-.1-.1-.3-.2-.6-.4Z" />
-                  </svg>
-                </div>
-                <span class="status-pill green"><span class="status-dot"></span> ~15 Min Reply</span>
+            <article class="contact-method-card">
+              <div class="contact-method-icon whatsapp" aria-hidden="true">
+                <svg viewBox="0 0 32 32" fill="currentColor">
+                  <path d="M16 3.2A12.7 12.7 0 0 0 5.1 22.4L3.4 28.8l6.6-1.7A12.7 12.7 0 1 0 16 3.2Zm0 22.9c-2 0-3.9-.6-5.6-1.6l-.4-.2-3.9 1 1-3.8-.3-.4a10.3 10.3 0 1 1 9.2 5Z" />
+                  <path d="M21.7 18.6c-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.2-1.3-.5-2.5-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.6 0-.2-.7-1.7-1-2.3-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.2-1.2 2.9s1.2 3.3 1.4 3.6c.2.2 2.4 3.7 5.9 5.1.8.4 1.5.6 2 .7.8.3 1.6.2 2.2.1.7-.1 1.9-.8 2.2-1.5.3-.7.3-1.4.2-1.5-.1-.1-.3-.2-.6-.4Z" />
+                </svg>
               </div>
               <h3>WhatsApp Chat</h3>
               <p>Quick message or voice note for instant clarification and initial consultation.</p>
               <a
-                class="contact-card-action whatsapp"
+                class="contact-method-link"
                 href="https://wa.me/918757928673?text=Hello%20ABSS%20Nexus%20Technologies%2C%20I%20would%20like%20to%20discuss%20a%20project."
                 target="_blank"
                 rel="noopener noreferrer"
-               aria-label="Chat on WhatsApp">Chat on WhatsApp</a>
+               aria-label="Chat on WhatsApp">Chat on WhatsApp &rarr;</a>
             </article>
 
-            <article>
-              <div class="contact-card-header">
-                <div class="contact-card-icon" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                    <polyline points="22,6 12,13 2,6"></polyline>
-                  </svg>
-                </div>
-                <span class="status-pill">2–4 Hr Review</span>
+            <article class="contact-method-card">
+              <div class="contact-method-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                  <polyline points="22,6 12,13 2,6"></polyline>
+                </svg>
               </div>
               <h3>Official Email</h3>
               <p>Send project briefs, RFPs, design documents, or detailed requirements.</p>
-              <a class="contact-card-action" href="mailto:abssnexus@gmail.com">abssnexus@gmail.com</a>
+              <a class="contact-method-link" href="mailto:abssnexus@gmail.com">abssnexus@gmail.com</a>
             </article>
 
-            <article>
-              <div class="contact-card-header">
-                <div class="contact-card-icon" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                    <circle cx="12" cy="10" r="3"></circle>
-                  </svg>
-                </div>
-                <span class="status-pill">Remote & India</span>
+            <article class="contact-method-card">
+              <div class="contact-method-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                  <circle cx="12" cy="10" r="3"></circle>
+                </svg>
               </div>
-              <h3>Office & Delivery</h3>
+              <h3>Office &amp; Location</h3>
               <p>Based in Jaipur, Rajasthan — Delivering high quality projects across India.</p>
-              <span class="contact-card-action" style="cursor: default; background: rgba(13, 27, 42, 0.05); color: var(--navy); border-color: rgba(13, 27, 42, 0.1);">Pan-India & Global Delivery</span>
+              <span class="contact-method-text">Jaipur, Rajasthan, India</span>
             </article>
           </div>
         </div>
@@ -208,7 +405,7 @@
 
           <form class="contact-form" name="contact" method="POST" novalidate data-inquiry-form>
             <input type="hidden" name="form-name" value="contact" />
-            <div class="honeypot-field" aria-hidden="true">
+            <div class="honeypot-field" aria-hidden="true" style="display: none;">
               <label>
                 Leave this field empty
                 <input type="text" name="website" tabindex="-1" autocomplete="off" />
@@ -216,18 +413,14 @@
             </div>
             <div class="form-error-summary" data-error-summary role="alert" hidden></div>
 
-            <!-- Step 1: Contact Information -->
-            <div class="form-section-header">
-              <span class="form-step-number">1</span>
-              <div>
-                <h3>Your Contact Information</h3>
-                <p>How we can reach you to discuss your project.</p>
-              </div>
+            <div class="form-header">
+              <h3>Send Us a Message</h3>
+              <p>Tell us about your project requirements — we respond within 2–4 hours.</p>
             </div>
 
             <div class="form-row-2">
               <label for="contact-name">
-                Full Name
+                Full Name *
                 <input
                   id="contact-name"
                   type="text"
@@ -242,26 +435,8 @@
                 <span class="field-error" id="contact-name-error" data-field-error="name"></span>
               </label>
 
-              <label for="contact-phone">
-                Phone Number
-                <input
-                  id="contact-phone"
-                  type="tel"
-                  name="phone"
-                  placeholder="+91 98765 43210"
-                  autocomplete="tel"
-                  inputmode="tel"
-                  maxlength="24"
-                  required
-                  aria-describedby="contact-phone-error"
-                />
-                <span class="field-error" id="contact-phone-error" data-field-error="phone"></span>
-              </label>
-            </div>
-
-            <div class="form-row-2">
               <label for="contact-email">
-                Email Address
+                Email Address *
                 <input
                   id="contact-email"
                   type="email"
@@ -275,9 +450,91 @@
                 />
                 <span class="field-error" id="contact-email-error" data-field-error="email"></span>
               </label>
+            </div>
 
+            <div class="form-row-2">
+              <label for="contact-phone">
+                Phone / WhatsApp Number *
+                <input
+                  id="contact-phone"
+                  type="tel"
+                  name="phone"
+                  placeholder="+91 98765 43210"
+                  autocomplete="tel"
+                  inputmode="tel"
+                  maxlength="24"
+                  required
+                  aria-describedby="contact-phone-error"
+                />
+                <span class="field-error" id="contact-phone-error" data-field-error="phone"></span>
+              </label>
+
+              <label for="contact-service">
+                Service Required *
+                <select id="contact-service" name="service" required aria-describedby="contact-service-error">
+                  <option value="">Select a Service</option>
+                  <option value="Website Development">Website Development</option>
+                  <option value="Software Development">Software Development</option>
+                  <option value="Mobile App Development">Mobile App Development</option>
+                  <option value="UI/UX Design">UI/UX Design</option>
+                  <option value="AI & Machine Learning">AI &amp; Machine Learning</option>
+                  <option value="Cloud Computing">Cloud Computing</option>
+                  <option value="Cybersecurity">Cybersecurity</option>
+                  <option value="Data Analytics & BI">Data Analytics &amp; BI</option>
+                  <option value="Digital Marketing & SEO">Digital Marketing &amp; SEO</option>
+                  <option value="E-Commerce Development">E-Commerce Development</option>
+                  <option value="SaaS Development">SaaS Development</option>
+                  <option value="API Integration">API Integration</option>
+                  <option value="Software Testing & QA">Software Testing &amp; QA</option>
+                  <option value="IT Consulting">IT Consulting</option>
+                  <option value="Website Maintenance">Website Maintenance</option>
+                  <option value="Managed IT Support">Managed IT Support</option>
+                  <option value="Business Website">Business Website</option>
+                  <option value="Portfolio Website">Portfolio Website</option>
+                  <option value="Landing Page Development">Landing Page Development</option>
+                  <option value="School / Institute Website">School / Institute Website</option>
+                  <option value="Custom Requirement">Custom Requirement</option>
+                  <option value="Internship Application">Internship Application</option>
+                  <option value="Other">Other</option>
+                </select>
+                <span class="field-error" id="contact-service-error" data-field-error="service"></span>
+              </label>
+            </div>
+
+            <div class="form-row-2">
+              <label for="contact-budget">
+                Estimated Budget (Optional)
+                <select id="contact-budget" name="budget" aria-describedby="contact-budget-error">
+                  <option value="">Select Budget (Optional)</option>
+                  <option value="Not decided yet">Not decided yet</option>
+                  <option value="Below ₹5,000">Below ₹5,000</option>
+                  <option value="₹5,000 - ₹10,000">₹5,000 - ₹10,000</option>
+                  <option value="₹10,000 - ₹25,000">₹10,000 - ₹25,000</option>
+                  <option value="₹25,000 - ₹50,000">₹25,000 - ₹50,000</option>
+                  <option value="Above ₹50,000">Above ₹50,000</option>
+                  <option value="Need a custom quotation">Need a custom quotation</option>
+                </select>
+                <span class="field-error" id="contact-budget-error" data-field-error="budget"></span>
+              </label>
+
+              <label for="contact-timeline">
+                Preferred Timeline (Optional)
+                <select id="contact-timeline" name="timeline" aria-describedby="contact-timeline-error">
+                  <option value="">Select Timeline (Optional)</option>
+                  <option value="Flexible">Flexible</option>
+                  <option value="Within 1 week">Within 1 week</option>
+                  <option value="Within 2-4 weeks">Within 2-4 weeks</option>
+                  <option value="Within 1-2 months">Within 1-2 months</option>
+                  <option value="Specific deadline">Specific deadline</option>
+                  <option value="Need guidance">Need guidance</option>
+                </select>
+                <span class="field-error" id="contact-timeline-error" data-field-error="timeline"></span>
+              </label>
+            </div>
+
+            <div class="form-row-2">
               <label for="contact-company">
-                Business / Organization
+                Company / Organization (Optional)
                 <input
                   id="contact-company"
                   type="text"
@@ -288,148 +545,40 @@
                 />
                 <span class="field-error" id="contact-company-error" data-field-error="company"></span>
               </label>
-            </div>
 
-            <!-- Step 2: Project Specifications -->
-            <div class="form-section-header">
-              <span class="form-step-number">2</span>
-              <div>
-                <h3>Project Specifications</h3>
-                <p>Choose the services or package you are looking for.</p>
-              </div>
-            </div>
-
-            <div class="form-row-2">
-              <label for="contact-service">
-                Service Required
-                <select id="contact-service" name="service" required aria-describedby="contact-service-error">
-                  <option value="">Select Service</option>
-                  <option value="Website Development">Website Development</option>
-                  <option value="UI/UX Design">UI/UX Design</option>
-                  <option value="Website Maintenance">Website Maintenance</option>
-                  <option value="Business Website">Business Website</option>
-                  <option value="Portfolio Website">Portfolio Website</option>
-                  <option value="Landing Page Development">Landing Page Development</option>
-                  <option value="School / Institute Website">School / Institute Website</option>
-                  <option value="E-commerce Website">E-commerce Website</option>
-                  <option value="Application Development">Application Development</option>
-                  <option value="Business Landing Page">Business Landing Page</option>
-                  <option value="Custom Requirement">Custom Requirement</option>
-                  <option value="Other">Other</option>
-                </select>
-                <span class="field-error" id="contact-service-error" data-field-error="service"></span>
+              <label for="contact-website-url">
+                Existing Website (Optional)
+                <input
+                  id="contact-website-url"
+                  type="url"
+                  name="website-url"
+                  placeholder="https://example.com"
+                  inputmode="url"
+                  maxlength="500"
+                  aria-describedby="contact-website-url-error"
+                />
+                <span class="field-error" id="contact-website-url-error" data-field-error="website-url"></span>
               </label>
-
-              <label for="contact-plan">
-                Package / Plan
-                <select id="contact-plan" name="package">
-                  <option value="">Select Package</option>
-                  <option value="Starter Website">Starter Website</option>
-                  <option value="Business Website">Business Website</option>
-                  <option value="Custom Website">Custom Website</option>
-                  <option value="Basic UI Design">Basic UI Design</option>
-                  <option value="Standard UI/UX Design">Standard UI/UX Design</option>
-                  <option value="Custom Product Design">Custom Product Design</option>
-                  <option value="Basic Maintenance">Basic Maintenance</option>
-                  <option value="Business Maintenance">Business Maintenance</option>
-                  <option value="Custom Maintenance">Custom Maintenance</option>
-                  <option value="Starter Package">Starter Package</option>
-                  <option value="Business Package">Business Package</option>
-                  <option value="Premium / Custom Package">Premium / Custom Package</option>
-                  <option value="Maintenance Package">Maintenance Package</option>
-                </select>
-                <span class="field-error" id="contact-plan-error" data-field-error="package"></span>
-              </label>
-            </div>
-
-            <label for="contact-website-url">
-              Existing Website URL
-              <input
-                id="contact-website-url"
-                type="url"
-                name="website-url"
-                placeholder="https://example.com"
-                inputmode="url"
-                maxlength="500"
-                aria-describedby="contact-website-url-error"
-              />
-              <span class="field-error" id="contact-website-url-error" data-field-error="website-url"></span>
-            </label>
-
-            <!-- Step 3: Budget & Timeline -->
-            <div class="form-section-header">
-              <span class="form-step-number">3</span>
-              <div>
-                <h3>Budget & Delivery Timeline</h3>
-                <p>Helps us suggest the most effective scope and timeline.</p>
-              </div>
-            </div>
-
-            <div class="form-row-2">
-              <label for="contact-budget">
-                Estimated Budget
-                <select id="contact-budget" name="budget" aria-describedby="contact-budget-help">
-                  <option value="">Select Budget</option>
-                  <option value="Not decided yet">Not decided yet</option>
-                  <option value="Below ₹5,000">Below ₹5,000</option>
-                  <option value="₹5,000 - ₹10,000">₹5,000 - ₹10,000</option>
-                  <option value="₹10,000 - ₹25,000">₹10,000 - ₹25,000</option>
-                  <option value="₹25,000 - ₹50,000">₹25,000 - ₹50,000</option>
-                  <option value="Above ₹50,000">Above ₹50,000</option>
-                  <option value="Need a custom quotation">Need a custom quotation</option>
-                </select>
-                <span class="field-help" id="contact-budget-help">Final quote depends on project scope.</span>
-                <span class="field-error" id="contact-budget-error" data-field-error="budget"></span>
-              </label>
-
-              <label for="contact-timeline">
-                Preferred Timeline
-                <select id="contact-timeline" name="timeline" aria-describedby="contact-timeline-help">
-                  <option value="">Select Timeline</option>
-                  <option value="Flexible">Flexible</option>
-                  <option value="Within 1 week">Within 1 week</option>
-                  <option value="Within 2-4 weeks">Within 2-4 weeks</option>
-                  <option value="Within 1-2 months">Within 1-2 months</option>
-                  <option value="Specific deadline">Specific deadline</option>
-                  <option value="Need guidance">Need guidance</option>
-                </select>
-                <span class="field-help" id="contact-timeline-help">Timeline is confirmed after scope review.</span>
-                <span class="field-error" id="contact-timeline-error" data-field-error="timeline"></span>
-              </label>
-            </div>
-
-            <!-- Step 4: Project Requirements -->
-            <div class="form-section-header">
-              <span class="form-step-number">4</span>
-              <div>
-                <h3>Project Requirements</h3>
-                <p>Provide details on what you want to build or improve.</p>
-              </div>
             </div>
 
             <label for="contact-message">
-              Tell Us About Your Project
+              Tell Us About Your Project *
               <textarea
                 id="contact-message"
                 name="message"
-                rows="5"
-                placeholder="Share your requirements: What does your business do? What pages, screens, or features are needed? Do you have reference websites you like? What is your primary objective?"
+                rows="4"
+                placeholder="Share your requirements: What kind of website or software do you need? What key features or reference websites do you like?"
                 minlength="20"
                 maxlength="3000"
                 required
                 aria-describedby="contact-message-help contact-message-error"
               ></textarea>
               <div class="textarea-footer">
-                <span class="field-hint">💡 Tip: The more details you share, the faster we can provide a detailed quotation.</span>
+                <span class="field-hint">Minimum 20 characters</span>
                 <span class="field-counter" id="contact-message-help"><span data-character-count>0</span> / 3000</span>
               </div>
               <span class="field-error" id="contact-message-error" data-field-error="message"></span>
             </label>
-
-            <p class="privacy-note">
-              Do not submit passwords, payment information or private access credentials through this
-              form.
-            </p>
 
             <label class="checkbox-label" for="contact-consent">
               <input
@@ -441,24 +590,23 @@
                 aria-describedby="contact-consent-error"
               />
               <span>
-                I agree that ABSS Nexus Technologies may use the submitted information to review and
-                respond to my inquiry. I have read the <a href="/privacy-policy">Privacy Policy</a>
-                and <a href="/terms-and-conditions">Terms and Conditions</a>.
+                I agree to allow ABSS Nexus Technologies to contact me regarding this inquiry.
+                We value your privacy &mdash; read our <a href="/privacy-policy">Privacy Policy</a>.
               </span>
             </label>
             <span class="field-error" id="contact-consent-error" data-field-error="consent"></span>
 
-            <button class="btn primary" type="submit" style="width: 100%; min-height: 48px; font-size: 1rem;">
-              Submit Project Inquiry
+            <button class="btn primary submit-inquiry-btn" type="submit">
+              Submit Project Inquiry &rarr;
             </button>
 
             <div class="form-whatsapp-fallback">
-              <span>Short on time?</span>
+              <span>Prefer immediate chat?</span>
               <a
                 href="https://wa.me/918757928673?text=Hello%20ABSS%20Nexus%20Technologies%2C%20I%20would%20like%20to%20discuss%20a%20project."
                 target="_blank"
                 rel="noopener noreferrer"
-              >Chat directly on WhatsApp instead →</a>
+              >Chat directly on WhatsApp &rarr;</a>
             </div>
 
             <div class="form-result-actions" data-success-actions hidden>
@@ -570,78 +718,106 @@
       </section>
     </main>
 
-    <footer class="footer">
-      <div class="container footer-grid">
-        <div class="footer-brand">
-          <img src="/public/assets/images/LogoGenerated.png" alt="ABSS Nexus Technologies logo" />
-          <p class="footer-brand-title">ABSS Nexus Technologies</p>
-          <p>
-            Building modern digital solutions for businesses, startups, institutions, and
-            individuals.
-          </p>
-                    <strong>Innovate • Solve • Elevate</strong>
-          <div>
-            <span class="footer-system-status">
-              <span class="live-pulse-dot" aria-hidden="true"></span>
-              All Systems Operational &bull; Edge Active
-            </span>
+    <footer class="site-footer" role="contentinfo">
+      <div class="site-footer__container container">
+        <div class="site-footer__grid footer-grid">
+          <!-- Column 1: Brand -->
+          <div class="site-footer__brand footer-brand">
+            <a class="site-footer__logo-link" href="/" aria-label="ABSS Nexus Technologies home">
+              <img class="site-footer__logo" src="/public/assets/images/LogoGenerated.png" alt="ABSS Nexus Technologies logo" width="160" height="38" />
+            </a>
+            <p class="site-footer__brand-title footer-brand-title">ABSS Nexus Technologies</p>
+            <p class="site-footer__brand-desc">Building high-performance digital solutions for businesses, startups, institutions, and growing brands.</p>
+            <strong class="site-footer__tagline">Innovate &bull; Solve &bull; Elevate</strong>
+            <div>
+              <span class="site-footer__status footer-system-status">
+                <span class="site-footer__status-pulse live-pulse-dot" aria-hidden="true"></span>
+                <span>All Systems Operational &bull; Edge Active</span>
+              </span>
+            </div>
+          </div>
+
+          <!-- Column 2: Quick Links -->
+          <div class="site-footer__col footer-column">
+            <h3 class="site-footer__col-title">Quick Links</h3>
+            <a class="site-footer__link" href="/">Home</a>
+            <a class="site-footer__link" href="/about">About</a>
+            <a class="site-footer__link" href="/services">Services</a>
+            <a class="site-footer__link" href="/solutions">Solutions</a>
+            <a class="site-footer__link" href="/industries">Industries</a>
+            <a class="site-footer__link" href="/work">Work</a>
+            <a class="site-footer__link" href="/careers">Careers</a>
+            <a class="site-footer__link" href="/blog">Blog</a>
+            <a class="site-footer__link" href="/faq">FAQ</a>
+            <a class="site-footer__link" href="/pricing">Pricing</a>
+            <a class="site-footer__link" href="/internships">Internships</a>
+            <a class="site-footer__link" href="/contact">Contact</a>
+          </div>
+
+          <!-- Column 3: Our Services -->
+          <div class="site-footer__col footer-column">
+            <h3 class="site-footer__col-title">Our Services</h3>
+            <a class="site-footer__link" href="/services/website-development">Website Development</a>
+            <a class="site-footer__link" href="/services/software-development">Software Development</a>
+            <a class="site-footer__link" href="/services/mobile-app-development">Mobile App Development</a>
+            <a class="site-footer__link" href="/services/ui-ux-design">UI/UX Design</a>
+            <a class="site-footer__link" href="/services/ai-machine-learning">AI &amp; Machine Learning</a>
+            <a class="site-footer__link" href="/services/cloud-computing">Cloud Computing</a>
+            <a class="site-footer__link" href="/services/cybersecurity">Cybersecurity</a>
+            <a class="site-footer__link" href="/services/data-analytics-bi">Data Analytics</a>
+            <a class="site-footer__link" href="/services/ecommerce-development">E-Commerce Development</a>
+            <a class="site-footer__link" href="/services/saas-development">SaaS Development</a>
+            <a class="site-footer__link" href="/services">All 16 Services &rarr;</a>
+          </div>
+
+          <!-- Column 4: Contact Info -->
+          <div class="site-footer__col site-footer__contact footer-column footer-contact">
+            <h3 class="site-footer__col-title">Contact Info</h3>
+            <a class="site-footer__link" href="tel:+918757928673">Phone: +91 87579 28673</a>
+            <a class="site-footer__link" href="mailto:abssnexus@gmail.com">Email: abssnexus@gmail.com</a>
+            <span class="site-footer__contact-item">Location: Jaipur, Rajasthan, India</span>
+            <span class="site-footer__contact-item">Shubham Kumar &mdash; Founder</span>
+            <span class="site-footer__contact-item">Consultation &amp; Advisory: Open 2026</span>
           </div>
         </div>
-        <div class="footer-column">
-          <h3>Quick Links</h3>
-          <a href="/">Home</a>
-          <a href="/about">About Us</a>
-          <a href="/services">Services</a>
-          <a href="/projects">Projects</a>
-          <a href="/pricing">Pricing</a>
-          <a href="/contact">Contact</a>
+
+        <!-- Divider & Lower Footer Bar (Inside Container) -->
+        <div class="site-footer__bottom footer-lower">
+          <div class="site-footer__socials footer-socials" aria-label="Social media profiles">
+            <a class="site-footer__social-link" href="https://www.instagram.com/abssnexus/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">Instagram</a>
+            <a class="site-footer__social-link" href="https://www.facebook.com/profile.php?id=61592563923350" target="_blank" rel="noopener noreferrer" aria-label="Facebook">Facebook</a>
+            <a class="site-footer__social-link" href="https://x.com/abssnexus" target="_blank" rel="noopener noreferrer" aria-label="X">X / Twitter</a>
+          </div>
+          <nav class="site-footer__legal footer-legal" aria-label="Legal documents">
+            <a href="/privacy-policy">Privacy Policy</a>
+            <a href="/terms-and-conditions">Terms &amp; Conditions</a>
+            <a href="/cookie-policy">Cookie Policy</a>
+            <a href="/disclaimer">Disclaimer</a>
+            <a href="/refund-policy">Refund Policy</a>
+            <a href="/support-policy">Support Policy</a>
+            <a href="/sitemap">Sitemap</a>
+          </nav>
         </div>
-        <div class="footer-column">
-          <h3>Our Services</h3>
-          <a href="/services/website-development">Website Development</a>
-          <a href="/services">Application Development</a>
-          <a href="/services/ui-ux-design">UI/UX Design</a>
-          <a href="/services">Business Landing Pages</a>
-          <a href="/services">Portfolio Websites</a>
-          <a href="/services/website-maintenance">Website Maintenance</a>
+
+        <!-- Copyright Row (Inside Container) -->
+        <div class="site-footer__copy footer-copy">
+          <p>&copy; <span class="site-footer__year">2026</span> ABSS Nexus Technologies. All Rights Reserved.</p>
         </div>
-        <div class="footer-column footer-contact">
-          <h3>Contact Info</h3>
-          <a href="tel:+918757928673">Phone: +91 87579 28673</a>
-          <a href="mailto:abssnexus@gmail.com">Email: abssnexus@gmail.com</a>
-          <span>Location: Jaipur, Rajasthan</span>
-          <span>Shubham Kumar — Founder, ABSS Nexus Technologies</span>
-        </div>
-      </div>
-      <div class="container footer-lower">
-        <div class="footer-socials" aria-label="Social links">
-          <a href="https://www.instagram.com/abssnexus/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">Instagram</a>
-          <a href="https://www.facebook.com/profile.php?id=61592563923350" target="_blank" rel="noopener noreferrer" aria-label="Facebook">Facebook</a>
-          <a href="https://x.com/abssnexus" target="_blank" rel="noopener noreferrer" aria-label="X">X / Twitter</a>
-        </div>
-        <div class="footer-legal">
-          <a href="/privacy-policy">Privacy Policy</a>
-          <a href="/terms-and-conditions">Terms & Conditions</a>
-          <a href="/disclaimer">Disclaimer</a>
-          <a href="/refund-policy">Refund Policy</a>
-          <a href="/support-policy">Support Policy</a>
-          <a href="/sitemap">Sitemap</a>
-        </div>
-      </div>
-      <div class="container footer-copy">
-        <p>© 2026 ABSS Nexus Technologies. All Rights Reserved.</p>
       </div>
     </footer>
-    <a class="floating-whatsapp" href="https://wa.me/918757928673" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
+
+    <a class="floating-whatsapp" href="https://wa.me/918757928673" target="_blank" rel="noopener noreferrer" aria-label="Contact us on WhatsApp">
       <svg viewBox="0 0 32 32" aria-hidden="true" focusable="false">
         <path d="M16 3.2A12.7 12.7 0 0 0 5.1 22.4L3.4 28.8l6.6-1.7A12.7 12.7 0 1 0 16 3.2Zm0 22.9c-2 0-3.9-.6-5.6-1.6l-.4-.2-3.9 1 1-3.8-.3-.4a10.3 10.3 0 1 1 9.2 5Z" />
         <path d="M21.7 18.6c-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.2-1.3-.5-2.5-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.6 0-.2-.7-1.7-1-2.3-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.2-1.2 2.9s1.2 3.3 1.4 3.6c.2.2 2.4 3.7 5.9 5.1.8.4 1.5.6 2 .7.8.3 1.6.2 2.2.1.7-.1 1.9-.8 2.2-1.5.3-.7.3-1.4.2-1.5-.1-.1-.3-.2-.6-.4Z" />
       </svg>
       <span>WhatsApp</span>
     </a>
-    <script src="/src/config/admin-config.js"></script>
-    <script src="/src/services/admin-api.js"></script>
+
+    <script src="/src/scripts/config/contact.js"></script>
     <script src="/src/scripts/seo-schema.js"></script>
+    <script src="/src/scripts/components/scroll-reveal.js"></script>
+    <script src="/src/scripts/components/footer.js" defer></script>
     <script src="/src/scripts/script.js"></script>
   </body>
 </html>

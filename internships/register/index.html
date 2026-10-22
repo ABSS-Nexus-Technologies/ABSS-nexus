@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Register for your free student account on the ABSS Nexus Internship Portal. Access modular engineering curriculum tracks and milestone projects." />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Student Registration | ABSS Nexus Internship Portal" />
+    <meta property="og:description" content="Register for your free student account on the ABSS Nexus Internship Portal. Access modular engineering curriculum tracks and milestone projects." />
+    <meta property="og:image" content="https://abssnexus.in/public/assets/images/LogoGenerated.png" />
+    <meta property="og:url" content="https://abssnexus.in/internships/register" />
+    <link rel="canonical" href="https://abssnexus.in/internships/register" />
+    <title>Student Registration | ABSS Nexus Internship Portal</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="/public/assets/images/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="512x512" href="/public/assets/images/favicon.png" />
+    <link rel="apple-touch-icon" href="/public/assets/images/apple-touch-icon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/src/styles/styles.css" />
+
+  </head>
+  <body class="agency-dark-theme">
+    <header class="site-header site-header--academy" role="banner">
+      <div class="announcement-bar announcement-bar--academy">
+        <div class="announcement-bar__container container">
+          <span class="announcement-bar__badge">
+            <span class="live-pulse-dot" aria-hidden="true"></span>
+            <span>Admissions Open: 2026 Virtual Internship Cohorts &bull; ISO-Verified Credentials</span>
+          </span>
+          <a class="announcement-bar__link" href="/internships/register" aria-current="page">Apply for Cohort &rarr;</a>
+        </div>
+      </div>
+      <nav class="nav" aria-label="Internship Academy Navigation">
+        <a class="brand" href="/internships" aria-label="ABSS Nexus Academy home">
+          <img src="/public/assets/images/favicon.png" alt="ABSS Nexus Academy logo" width="38" height="38" />
+          <div class="brand-text-group" style="display: flex; flex-direction: column; text-align: left;">
+            <span class="brand-name">ABSS Nexus Academy</span>
+            <span class="brand-subtext" style="font-size: 0.72rem; color: #6E6E73; font-weight: 500; letter-spacing: 0.02em;">Internship &amp; Engineering Portal</span>
+          </div>
+        </a>
+        <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav-links">
+          <span class="hamburger-bar"></span>
+          <span class="hamburger-bar"></span>
+          <span class="hamburger-bar"></span>
+        </button>
+        <div class="nav-links" id="main-nav-links">
+          <a href="/internships" class="nav-link">Home</a>
+          <a href="/internships/about" class="nav-link">About Us</a>
+          <a href="/internships/programs" class="nav-link">Services / Programs</a>
+          <a href="/internships/details" class="nav-link">Internship Details</a>
+          <a href="/internships/contact" class="nav-link">Contact Us</a>
+          <a href="/internships/login" class="nav-link" style="font-weight: 600; color: #0066CC;">Student Login</a>
+          <a class="nav-cta" href="/internships/register" style="background: linear-gradient(135deg, #0066cc 0%, #00c2ff 100%);">Apply Now</a>
+          <a href="/" class="nav-link" style="font-size: 0.8rem; color: #86868B; margin-left: 6px;" title="Switch to Corporate Services Platform">Corporate Site &rarr;</a>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <div class="auth-wrapper">
+        <div class="auth-card">
+          <div class="auth-header">
+            <span class="portal-badge">Student Access</span>
+            <h1>Create Student Account</h1>
+            <p>Register to access curriculum tracks, milestone tasks, and technical reviews.</p>
+          </div>
+
+          <div id="auth-alert" class="auth-alert"></div>
+
+          <button type="button" class="btn-google-auth" id="btn-google-auth">
+            <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true">
+              <path fill="#4285F4" d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.874 2.684-6.616z"/>
+              <path fill="#34A853" d="M9 18c2.43 0 4.467-.806 5.956-2.184l-2.908-2.258c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 0 0 9 18z"/>
+              <path fill="#FBBC05" d="M3.964 10.707c-.18-.54-.282-1.117-.282-1.707s.102-1.167.282-1.707V4.961H.957A8.996 8.996 0 0 0 0 9c0 1.452.348 2.827.957 4.039l3.007-2.332z"/>
+              <path fill="#EA4335" d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 0 0 .957 4.961L3.964 7.293C4.672 5.166 6.656 3.58 9 3.58z"/>
+            </svg>
+            <span>Sign Up with Google</span>
+          </button>
+
+          <div class="auth-divider">
+            <span>or register with email</span>
+          </div>
+
+          <form id="register-form" novalidate>
+            <div class="auth-form-group">
+              <label for="reg-name">Full Name *</label>
+              <input class="auth-input" type="text" id="reg-name" name="name" required placeholder="e.g. Priya Sharma" autocomplete="name" />
+            </div>
+
+            <div class="auth-form-group">
+              <label for="reg-email">Email Address *</label>
+              <input class="auth-input" type="email" id="reg-email" name="email" required placeholder="e.g. priya@example.com" autocomplete="email" />
+            </div>
+
+            <div class="auth-form-group">
+              <label for="reg-phone">WhatsApp / Mobile Number *</label>
+              <input class="auth-input" type="tel" id="reg-phone" name="phone" required pattern="[6-9][0-9]{9}" placeholder="10-digit mobile number (e.g. 9876543210)" autocomplete="tel" />
+              <small style="color: #6E6E73; font-size: 0.8rem; margin-top: 4px; display: block;">Mandatory for certificate verification &amp; mentor evaluation.</small>
+            </div>
+
+            <div class="auth-form-group">
+              <label for="reg-password">Password *</label>
+              <input class="auth-input" type="password" id="reg-password" name="password" required minlength="8" placeholder="Minimum 8 characters (letters &amp; numbers)" autocomplete="new-password" />
+            </div>
+
+            <div class="auth-form-group">
+              <label for="reg-confirm">Confirm Password *</label>
+              <input class="auth-input" type="password" id="reg-confirm" name="confirmPassword" required minlength="8" placeholder="Repeat your password" autocomplete="new-password" />
+            </div>
+
+            <div class="auth-form-group">
+              <label for="reg-track">Preferred Track (Optional)</label>
+              <select class="auth-input" id="reg-track" name="track">
+                <option value="">Select an interest track...</option>
+                <option value="web-development">Web Development Track</option>
+                <option value="software-development">Software &amp; Full-Stack Track</option>
+                <option value="ui-ux-design">UI/UX Design Track</option>
+                <option value="ai-machine-learning">AI &amp; Machine Learning Track</option>
+                <option value="cloud-devops">Cloud Architecture &amp; DevOps Track</option>
+              </select>
+            </div>
+
+            <div class="auth-form-group">
+              <label for="reg-duration">Internship Duration *</label>
+              <select class="auth-input" id="reg-duration" name="duration" required>
+                <option value="">Select duration...</option>
+                <option value="1 week">1 Week</option>
+                <option value="2 week">2 Weeks</option>
+                <option value="3 week">3 Weeks</option>
+                <option value="4 week">4 Weeks</option>
+                <option value="2 months">2 Months</option>
+              </select>
+            </div>
+
+            <button type="submit" class="auth-btn-primary" id="reg-submit-btn">Create Account</button>
+          </form>
+
+          <div class="auth-links">
+            Already have an account? <a href="/internships/login">Log in here</a>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="site-footer site-footer--academy" role="contentinfo">
+      <div class="site-footer__container container">
+        <div class="site-footer__grid footer-grid">
+          <!-- Column 1: Brand & Academy Vision -->
+          <div class="site-footer__brand footer-brand">
+            <a class="site-footer__logo-link" href="/internships" aria-label="ABSS Nexus Academy home">
+              <img class="site-footer__logo" src="/public/assets/images/LogoGenerated.png" alt="ABSS Nexus Academy logo" width="160" height="38" />
+            </a>
+            <p class="site-footer__brand-title footer-brand-title">ABSS Nexus Academy</p>
+            <p class="site-footer__brand-desc">Industry-standard virtual technical internships, hands-on production code reviews, and verifiable credentials for ambitious software engineers.</p>
+            <strong class="site-footer__tagline" style="color: #00c2ff;">Learn &bull; Build &bull; Get Certified</strong>
+            <div>
+              <span class="site-footer__status footer-system-status">
+                <span class="site-footer__status-pulse live-pulse-dot" aria-hidden="true"></span>
+                <span>Verification Registry Active &bull; Admissions Open</span>
+              </span>
+            </div>
+          </div>
+
+          <!-- Column 2: Navigation -->
+          <div class="site-footer__col footer-column">
+            <h3 class="site-footer__col-title">Navigation</h3>
+            <a class="site-footer__link" href="/internships">Home</a>
+            <a class="site-footer__link" href="/internships/about">About Us</a>
+            <a class="site-footer__link" href="/internships/programs">Services / Programs</a>
+            <a class="site-footer__link" href="/internships/details">Internship Details</a>
+            <a class="site-footer__link" href="/internships/contact">Contact Us</a>
+          </div>
+
+          <!-- Column 3: Student Tools & Registry -->
+          <div class="site-footer__col footer-column">
+            <h3 class="site-footer__col-title">Student Portal</h3>
+            <a class="site-footer__link" href="/internships/login">Student Login</a>
+            <a class="site-footer__link" href="/internships/register">Apply for Internship</a>
+            <a class="site-footer__link" href="/verify-certificate">Verify Certificate Registry</a>
+            <a class="site-footer__link" href="/internships/application-status">Check Application Status</a>
+          </div>
+
+          <!-- Column 4: Admissions & Mentor Desk -->
+          <div class="site-footer__col site-footer__contact footer-column footer-contact">
+            <h3 class="site-footer__col-title">Admissions Desk</h3>
+            <a class="site-footer__link" href="tel:+918757928673">Direct: +91 87579 28673</a>
+            <a class="site-footer__link" href="mailto:admissions@abssnexus.in">Email: admissions@abssnexus.in</a>
+            <span class="site-footer__contact-item">Location: Jaipur, Rajasthan, India</span>
+            <span class="site-footer__contact-item">MSME Registered &bull; ISO-Aligned Portal</span>
+            <div style="margin-top: 14px;">
+              <a href="/" class="site-footer__link" style="color: #0066CC; font-weight: 600;">ABSS Nexus Corporate Website &rarr;</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Lower Footer Bar -->
+        <div class="site-footer__bottom footer-lower">
+          <div class="site-footer__socials footer-socials" aria-label="Social media profiles">
+            <a class="site-footer__social-link" href="https://www.instagram.com/abssnexus/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">Instagram</a>
+            <a class="site-footer__social-link" href="https://www.facebook.com/profile.php?id=61592563923350" target="_blank" rel="noopener noreferrer" aria-label="Facebook">Facebook</a>
+            <a class="site-footer__social-link" href="https://x.com/abssnexus" target="_blank" rel="noopener noreferrer" aria-label="X">X / Twitter</a>
+          </div>
+          <nav class="site-footer__legal footer-legal" aria-label="Academy legal documents">
+            <a href="/internships/privacy-policy">Privacy Policy</a>
+            <a href="/internships/terms-and-conditions">Terms &amp; Conditions</a>
+            <a href="/verify-certificate">Credential Verification</a>
+            <a href="/sitemap">Sitemap</a>
+          </nav>
+        </div>
+
+        <!-- Copyright -->
+        <div class="site-footer__copy footer-copy">
+          <p>&copy; <span class="site-footer__year">2026</span> ABSS Nexus Academy. Division of ABSS Nexus Technologies. All Rights Reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <a class="floating-whatsapp" href="https://wa.me/918757928673" target="_blank" rel="noopener noreferrer" aria-label="Contact us on WhatsApp">
+      <svg viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+        <path d="M16 3.2A12.7 12.7 0 0 0 5.1 22.4L3.4 28.8l6.6-1.7A12.7 12.7 0 1 0 16 3.2Zm0 22.9c-2 0-3.9-.6-5.6-1.6l-.4-.2-3.9 1 1-3.8-.3-.4a10.3 10.3 0 1 1 9.2 5Z" />
+        <path d="M21.7 18.6c-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.2-1.3-.5-2.5-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.6 0-.2-.7-1.7-1-2.3-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.2-1.2 2.9s1.2 3.3 1.4 3.6c.2.2 2.4 3.7 5.9 5.1.8.4 1.5.6 2 .7.8.3 1.6.2 2.2.1.7-.1 1.9-.8 2.2-1.5.3-.7.3-1.4.2-1.5-.1-.1-.3-.2-.6-.4Z" />
+      </svg>
+      <span>WhatsApp</span>
+    </a>
+
+    <script src="/src/scripts/seo-schema.js"></script>
+    <script src="/src/scripts/components/footer.js" defer></script>
+    <script src="/src/scripts/script.js"></script>
+
+    <script src="/src/config/admin-config.js"></script>
+    <script src="/src/services/admin-api.js"></script>
+    <script src="/src/scripts/script.js"></script>
+    <script>
+      (function() {
+        const form = document.getElementById("register-form");
+        const alertBox = document.getElementById("auth-alert");
+        const submitBtn = document.getElementById("reg-submit-btn");
+
+        function showAlert(type, message, htmlContent = "") {
+          alertBox.className = "auth-alert visible auth-alert-" + type;
+          if (htmlContent) {
+            alertBox.innerHTML = htmlContent;
+          } else {
+            alertBox.textContent = message;
+          }
+        }
+
+        form.addEventListener("submit", async function(e) {
+          e.preventDefault();
+          alertBox.className = "auth-alert";
+
+          const name = document.getElementById("reg-name").value.trim();
+          const email = document.getElementById("reg-email").value.trim().toLowerCase();
+          const password = document.getElementById("reg-password").value;
+          const confirmPassword = document.getElementById("reg-confirm").value;
+          const phoneInput = document.getElementById("reg-phone");
+          const phone = phoneInput ? phoneInput.value.trim() : "";
+          const cleanPhone = phone.replace(/\D/g, "").slice(-10);
+
+          const track = document.getElementById("reg-track").value;
+          const duration = document.getElementById("reg-duration").value;
+
+          if (!name || name.length < 2) {
+            showAlert("error", "Please provide your full name (minimum 2 characters).");
+            return;
+          }
+          if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            showAlert("error", "Please provide a valid email address.");
+            return;
+          }
+          if (!cleanPhone || cleanPhone.length !== 10) {
+            showAlert("error", "Please enter a valid 10-digit WhatsApp / Mobile number.");
+            if (phoneInput) phoneInput.focus();
+            return;
+          }
+          if (!password || password.length < 8) {
+            showAlert("error", "Password must be at least 8 characters long.");
+            return;
+          }
+          if (password !== confirmPassword) {
+            showAlert("error", "Passwords do not match.");
+            return;
+          }
+          if (!duration) {
+            showAlert("error", "Please select an internship duration.");
+            return;
+          }
+
+          submitBtn.disabled = true;
+          submitBtn.textContent = "Creating Account...";
+
+          try {
+            const res = await fetch("/api/internships/auth/register", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ name, email, phone: cleanPhone, password, track, duration })
+            });
+            const data = await res.json();
+
+            if (!res.ok) {
+              showAlert("error", data.error || "Registration failed. Please review your information.");
+              submitBtn.disabled = false;
+              submitBtn.textContent = "Create Account";
+              return;
+            }
+
+            form.reset();
+            let successHtml = "<strong>" + (data.message || "Account registered successfully!") + "</strong>";
+            if (data.devVerificationUrl) {
+              successHtml += "<div style='margin-top: 12px; font-size: 0.88rem; padding: 10px; background: #FFFFFF; border-radius: 8px; border: 1px solid #86EFAC;'><strong>Direct Verification Link:</strong><br><a href='" + data.devVerificationUrl + "' style='color: #0066CC; word-break: break-all; font-weight: 600; text-decoration: underline;'>Verify your email address now &rarr;</a></div>";
+            }
+            showAlert("success", "", successHtml);
+            submitBtn.textContent = "Account Created";
+          } catch (err) {
+            showAlert("error", "Network connection error. Please try again.");
+            submitBtn.disabled = false;
+            submitBtn.textContent = "Create Account";
+          }
+        });
+      })();
+    </script>
+    <script type="module">
+      import { handleGoogleSignInFlow } from "/src/scripts/firebase-auth.js";
+
+      const googleBtn = document.getElementById("btn-google-auth");
+      const alertBox = document.getElementById("auth-alert");
+
+      function showAlert(type, message) {
+        alertBox.className = "auth-alert visible auth-alert-" + type;
+        alertBox.textContent = message;
+      }
+
+      if (googleBtn) {
+        googleBtn.addEventListener("click", async () => {
+          alertBox.className = "auth-alert";
+          const originalHtml = googleBtn.innerHTML;
+          googleBtn.disabled = true;
+          googleBtn.innerHTML = `<span>Connecting to Google...</span>`;
+
+          try {
+            const result = await handleGoogleSignInFlow(async (googleUser) => {
+              const entered = window.prompt(`Welcome, ${googleUser.displayName || 'Student'}!\n\nPlease enter your 10-digit WhatsApp / Mobile number to complete your registration:`);
+              return entered;
+            });
+
+            showAlert("success", "Account created with Google! Redirecting to dashboard...");
+            const urlParams = new URLSearchParams(window.location.search);
+            const redirectTarget = urlParams.get("redirect") || result.redirect || "/internships/dashboard";
+            setTimeout(() => {
+              window.location.href = redirectTarget;
+            }, 600);
+          } catch (err) {
+            showAlert("error", err.message || "Google sign-in could not be completed.");
+            googleBtn.disabled = false;
+            googleBtn.innerHTML = originalHtml;
+          }
+        });
+      }
+    </script>
+  </body>
+</html>

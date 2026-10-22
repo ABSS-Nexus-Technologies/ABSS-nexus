@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow, noarchive" />
+    <title>Enrolled Interns | ABSS Nexus Admin Console</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="/public/assets/images/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="512x512" href="/public/assets/images/favicon.png" />
+    <link rel="apple-touch-icon" href="/public/assets/images/apple-touch-icon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/src/styles/styles.css" />
+    <link rel="stylesheet" href="/src/styles/components/admin.css" />
+  </head>
+  <body class="admin-body">
+    <div class="admin-wrapper" data-admin-app>
+      
+    <header class="admin-top-header">
+      <div class="admin-top-header-inner">
+        <div class="admin-brand-group">
+          <a href="/admin/" class="admin-brand-link" title="Admin Console Home">
+            <img src="/public/assets/images/favicon.png" alt="ABSS Nexus Logo" width="32" height="32" style="border-radius: 6px;" />
+            <span class="admin-brand-title">ABSS Nexus Operations Console</span>
+          </a>
+          <span class="admin-module-indicator module-indicator-internship">🎓 Internship Admin</span>
+          <span style="background: rgba(16, 185, 129, 0.12); color: #10b981; padding: 4px 10px; border-radius: 999px; font-size: 0.74rem; font-weight: 700;">● D1 Storage Active</span>
+        </div>
+        <div class="admin-header-actions">
+          <div class="admin-user-badge">
+            <span>Role:</span>
+            <span class="admin-role-pill" id="adminUserRoleBadge">Superadmin</span>
+          </div>
+          <a href="/admin/company/" class="btn-module-switch" title="Switch to Company Administration">🏢 Switch to Company Admin</a>
+          <a href="/admin/" class="btn-module-switch" style="font-size: 0.78rem;">Modules Hub</a>
+          <a href="/admin/login" onclick="sessionStorage.removeItem('abss-admin-token'); sessionStorage.removeItem('abss-admin-role');" class="btn-signout">Sign Out</a>
+        </div>
+      </div>
+    </header>
+  
+
+      <main class="admin-shell">
+        <div class="admin-layout">
+          
+    <aside class="admin-sidebar" aria-label="Internship Admin Navigation">
+      <div class="sidebar-module-title">
+        <span style="font-size: 1.25rem;">🎓</span>
+        <h2 class="sidebar-module-name">Internship Admin</h2>
+      </div>
+      <a href="/admin/company/" class="sidebar-module-switch-btn">⇄ Switch to Company Admin</a>
+      <nav class="admin-sidebar-nav">
+        
+          <a href="/admin/internships/" class="sidebar-nav-item ">
+            <span style="display: flex; align-items: center; gap: 8px;">
+              <span>📊</span>
+              <span>Overview</span>
+            </span>
+            
+          </a>
+        
+          <a href="/admin/internships/programs" class="sidebar-nav-item ">
+            <span style="display: flex; align-items: center; gap: 8px;">
+              <span>📚</span>
+              <span>Internship Programs</span>
+            </span>
+            <span class="sidebar-badge">5</span>
+          </a>
+        
+          <a href="/admin/internships/applications" class="sidebar-nav-item ">
+            <span style="display: flex; align-items: center; gap: 8px;">
+              <span>📝</span>
+              <span>Applications</span>
+            </span>
+            <span class="sidebar-badge">3</span>
+          </a>
+        
+          <a href="/admin/internships/students" class="sidebar-nav-item active">
+            <span style="display: flex; align-items: center; gap: 8px;">
+              <span>🎓</span>
+              <span>Enrolled Interns</span>
+            </span>
+            <span class="sidebar-badge">19</span>
+          </a>
+        
+          <a href="/admin/internships/tasks" class="sidebar-nav-item ">
+            <span style="display: flex; align-items: center; gap: 8px;">
+              <span>📋</span>
+              <span>Tasks & Assignments</span>
+            </span>
+            
+          </a>
+        
+          <a href="/admin/internships/submissions" class="sidebar-nav-item ">
+            <span style="display: flex; align-items: center; gap: 8px;">
+              <span>📥</span>
+              <span>Work Submissions</span>
+            </span>
+            
+          </a>
+        
+          <a href="/admin/internships/reviews" class="sidebar-nav-item ">
+            <span style="display: flex; align-items: center; gap: 8px;">
+              <span>⭐</span>
+              <span>Evaluations & Reviews</span>
+            </span>
+            
+          </a>
+        
+          <a href="/admin/internships/payments" class="sidebar-nav-item ">
+            <span style="display: flex; align-items: center; gap: 8px;">
+              <span>💳</span>
+              <span>Fee Payments</span>
+            </span>
+            <span class="sidebar-badge">2</span>
+          </a>
+        
+          <a href="/admin/internships/certificates" class="sidebar-nav-item ">
+            <span style="display: flex; align-items: center; gap: 8px;">
+              <span>📜</span>
+              <span>Certificate Registry</span>
+            </span>
+            <span class="sidebar-badge">3</span>
+          </a>
+        
+          <a href="/admin/internships/reports" class="sidebar-nav-item ">
+            <span style="display: flex; align-items: center; gap: 8px;">
+              <span>📈</span>
+              <span>Internship Reports</span>
+            </span>
+            
+          </a>
+        
+          <a href="/admin/internships/settings" class="sidebar-nav-item ">
+            <span style="display: flex; align-items: center; gap: 8px;">
+              <span>⚙️</span>
+              <span>Internship Settings</span>
+            </span>
+            
+          </a>
+        
+      </nav>
+      <div style="margin-top: 24px; padding-top: 14px; border-top: 1px solid var(--admin-border-light); font-size: 0.72rem; color: var(--admin-text-secondary); text-align: center;">
+        ABSS Nexus Operations v2.4<br/>
+        <span style="color: #10b981;">● Server Verified</span>
+      </div>
+    </aside>
+  
+
+          <div class="admin-main">
+            
+    <nav class="admin-breadcrumbs" aria-label="Breadcrumb">
+      <a href="/admin/">Admin Hub</a>
+      <span class="separator">/</span>
+      <a href="/admin/internships/">Internship Administration</a>
+      <span class="separator">/</span>
+      <span class="current">Enrolled Interns</span>
+    </nav>
+  
+
+            <div class="admin-page-header">
+              <div>
+                <div class="admin-page-eyebrow">Learner Directory</div>
+                <h1 class="admin-page-title">Manage Enrolled Interns</h1>
+                <p class="admin-page-subtitle">Active students, progress milestones, cohort attendance, and mentoring status.</p>
+              </div>
+              <div class="admin-actions-bar">
+                
+                  <button type="button" class="btn-admin btn-admin-secondary" onclick="alert('Exporting module data to CSV...');">Export CSV</button>
+                  <button type="button" class="btn-admin btn-admin-primary" onclick="alert('Record creation modal opened.');">+ New Record</button>
+                
+              </div>
+            </div>
+
+            
+    <div class="admin-kpi-grid">
+      <div class="admin-kpi-card">
+        <span class="kpi-label">TOTAL ENROLLED</span>
+        <div class="kpi-value">19</div>
+        <div class="kpi-sub">Across 5 tracks</div>
+      </div>
+      <div class="admin-kpi-card">
+        <span class="kpi-label">ACTIVE TODAY</span>
+        <div class="kpi-value">17</div>
+        <div class="kpi-sub" style="color: #10b981;">89.4% engagement rate</div>
+      </div>
+      <div class="admin-kpi-card">
+        <span class="kpi-label">AVERAGE PROGRESS</span>
+        <div class="kpi-value">68%</div>
+        <div class="kpi-sub">Cohort milestone #3</div>
+      </div>
+    </div>
+
+    <div class="admin-table-container">
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>Student Name &amp; Email</th>
+            <th>Assigned Track</th>
+            <th>Account Status</th>
+            <th>Verification</th>
+            <th>Enrolled Date</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Aarav Sharma</strong><br/><small style="color: #6e6e73;">aarav.sharma@example.com</small></td>
+            <td>Web Engineering</td>
+            <td><span class="status-pill status-success">Active</span></td>
+            <td><span style="color: #10b981; font-weight: 600; font-size: 0.8rem;">✓ Email Verified</span></td>
+            <td>2026-03-01</td>
+            <td><button class="btn-admin btn-admin-secondary" style="padding: 4px 10px; font-size: 0.76rem;">View Profile</button></td>
+          </tr>
+          <tr>
+            <td><strong>Priya Verma</strong><br/><small style="color: #6e6e73;">priya.verma@example.com</small></td>
+            <td>AI &amp; Machine Learning</td>
+            <td><span class="status-pill status-success">Active</span></td>
+            <td><span style="color: #10b981; font-weight: 600; font-size: 0.8rem;">✓ Email Verified</span></td>
+            <td>2026-02-15</td>
+            <td><button class="btn-admin btn-admin-secondary" style="padding: 4px 10px; font-size: 0.76rem;">View Profile</button></td>
+          </tr>
+          <tr>
+            <td><strong>Rohan Patel</strong><br/><small style="color: #6e6e73;">rohan.patel@example.com</small></td>
+            <td>Software Engineering</td>
+            <td><span class="status-pill status-success">Graduated</span></td>
+            <td><span style="color: #10b981; font-weight: 600; font-size: 0.8rem;">✓ Email Verified</span></td>
+            <td>2026-01-10</td>
+            <td><button class="btn-admin btn-admin-secondary" style="padding: 4px 10px; font-size: 0.76rem;">View Profile</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script src="/src/config/admin-config.js"></script>
+    <script src="/src/services/admin-api.js"></script>
+    <script src="/src/scripts/admin-auth-guard.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", async () => {
+        const session = await window.AbssAdminAuthGuard.requireAdminSession(null, "internships");
+        if (session && session.admin) {
+          const roleBadge = document.getElementById("adminUserRoleBadge");
+          if (roleBadge) {
+            roleBadge.textContent = session.admin.role || "super_admin";
+          }
+        }
+      });
+    </script>
+  </body>
+</html>

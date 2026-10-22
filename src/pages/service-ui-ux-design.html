@@ -3,45 +3,33 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="Plan cleaner digital experiences with ABSS Nexus Technologies UI/UX design services for websites, forms, landing pages and business interfaces."
-    />
+    <meta name="description" content="Human-centered UI/UX design and design systems by ABSS Nexus Technologies. High-fidelity Figma prototypes, intuitive user journeys, and clean typography guidelines." />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="UI/UX Design Services | ABSS Nexus Technologies" />
-    <meta
-      property="og:description"
-      content="Plan cleaner digital experiences with ABSS Nexus Technologies UI/UX design services for websites, forms, landing pages and business interfaces."
-    />
+    <meta property="og:title" content="UI/UX Design & Prototyping | ABSS Nexus Technologies" />
+    <meta property="og:description" content="Human-centered UI/UX design and design systems by ABSS Nexus Technologies. High-fidelity Figma prototypes, intuitive user journeys, and clean typography guidelines." />
     <meta property="og:image" content="https://abssnexus.in/public/assets/images/LogoGenerated.png" />
     <meta property="og:url" content="https://abssnexus.in/services/ui-ux-design" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="UI/UX Design Services | ABSS Nexus Technologies" />
-    <meta
-      name="twitter:description"
-      content="Plan cleaner digital experiences with ABSS Nexus Technologies UI/UX design services for websites, forms, landing pages and business interfaces."
-    />
+    <meta name="twitter:title" content="UI/UX Design & Prototyping | ABSS Nexus Technologies" />
+    <meta name="twitter:description" content="Human-centered UI/UX design and design systems by ABSS Nexus Technologies. High-fidelity Figma prototypes, intuitive user journeys, and clean typography guidelines." />
     <meta name="twitter:image" content="https://abssnexus.in/public/assets/images/LogoGenerated.png" />
     <link rel="canonical" href="https://abssnexus.in/services/ui-ux-design" />
-    <title>UI/UX Design Services | ABSS Nexus Technologies</title>
+    <title>UI/UX Design & Prototyping | ABSS Nexus Technologies</title>
     <link rel="icon" type="image/png" sizes="32x32" href="/public/assets/images/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="512x512" href="/public/assets/images/favicon.png" />
     <link rel="apple-touch-icon" href="/public/assets/images/apple-touch-icon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="/src/styles/styles.css" />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "Service",
-        "name": "UI/UX Design Services",
+        "name": "UI/UX Design",
         "serviceType": "UI/UX Design",
         "url": "https://abssnexus.in/services/ui-ux-design",
-        "description": "Professional UI/UX design services for websites, mobile applications, dashboards and digital products with clear user flows, responsive interfaces and practical design support.",
+        "description": "Human-centered UI/UX design and design systems by ABSS Nexus Technologies. High-fidelity Figma prototypes, intuitive user journeys, and clean typography guidelines.",
         "provider": {
           "@type": "Organization",
           "name": "ABSS Nexus Technologies",
@@ -56,606 +44,665 @@
     </script>
   </head>
   <body class="agency-dark-theme">
-    <header class="site-header">
+    <header class="site-header" role="banner">
       <div class="announcement-bar">
-        <div class="container">
-          <span class="announcement-badge"><span class="live-pulse-dot" aria-hidden="true"></span> Free consultation available for website &amp; digital projects.</span>
-          <a href="/contact?service=UI%2FUX%20Design">Start your design project</a>
+        <div class="announcement-bar__container container">
+          <span class="announcement-bar__badge">
+            <span class="live-pulse-dot" aria-hidden="true"></span>
+            <span>Applications open for 2026 Technical Internship Cohort.</span>
+          </span>
+          <a class="announcement-bar__link" href="/internships">Apply for Internship &rarr;</a>
         </div>
       </div>
-      <nav class="nav">
+      <nav class="nav" aria-label="Main Navigation">
         <a class="brand" href="/" aria-label="ABSS Nexus Technologies home">
-          <img src="/public/assets/images/LogoGenerated.png" alt="ABSS Nexus Technologies logo" />
-          <span>ABSS Nexus</span>
+          <img src="/public/assets/images/favicon.png" alt="ABSS Nexus Technologies logo" width="38" height="38" />
+          <span class="brand-name">ABSS Nexus Technologies</span>
         </a>
-        <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
-          <span></span>
-          <span></span>
-          <span></span>
+        <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav-links">
+          <span class="hamburger-bar"></span>
+          <span class="hamburger-bar"></span>
+          <span class="hamburger-bar"></span>
         </button>
-        <div class="nav-links">
-          <a href="/">Home</a>
-          <a href="/about">About</a>
-          <a href="/services" aria-current="page">Services</a>
-          <a href="/projects">Projects</a>
-          <a href="/contact">Contact</a>
-          <a class="nav-cta" href="/pricing">Our Pricing Packages</a>
+        <div class="nav-links" id="main-nav-links">
+          <a href="/" class="nav-link">Home</a>
+
+          <!-- Services Mega Menu Dropdown -->
+          <div class="nav-item-dropdown">
+            <button class="nav-dropdown-trigger" type="button" aria-expanded="false" aria-haspopup="true">
+              <span>Services</span>
+              <svg class="dropdown-arrow" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <div class="mega-menu mega-menu-services" role="menu">
+              <div class="mega-menu-grid">
+                <div class="mega-col">
+                  <div class="mega-col-title">Web Engineering</div>
+                  <ul class="mega-link-list">
+                    <li>
+                      <a class="mega-link" href="/services/website-development">
+                        <span class="mega-link-title">Website Development</span>
+                        <span class="mega-link-desc">High-speed business &amp; corporate platforms</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="mega-link" href="/services/ecommerce-development">
+                        <span class="mega-link-title">E-Commerce Development</span>
+                        <span class="mega-link-desc">Online storefronts &amp; fast checkout paths</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="mega-link" href="/services/digital-marketing-seo">
+                        <span class="mega-link-title">Digital Marketing &amp; SEO</span>
+                        <span class="mega-link-desc">Search rankings &amp; lead growth</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="mega-link" href="/services/ui-ux-design" aria-current="page">
+                        <span class="mega-link-title">UI/UX Design</span>
+                        <span class="mega-link-desc">Figma wireframes &amp; design systems</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="mega-link" href="/services/website-maintenance">
+                        <span class="mega-link-title">Website Maintenance</span>
+                        <span class="mega-link-desc">Proactive updates, security &amp; backups</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+                <div class="mega-col">
+                  <div class="mega-col-title">Software &amp; Cloud</div>
+                  <ul class="mega-link-list">
+                    <li>
+                      <a class="mega-link" href="/services/software-development">
+                        <span class="mega-link-title">Software Development</span>
+                        <span class="mega-link-desc">Custom web apps &amp; workflow software</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="mega-link" href="/services/mobile-app-development">
+                        <span class="mega-link-title">Mobile App Development</span>
+                        <span class="mega-link-desc">iOS &amp; Android cross-platform solutions</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="mega-link" href="/services/saas-development">
+                        <span class="mega-link-title">SaaS Development</span>
+                        <span class="mega-link-desc">Scalable cloud platforms &amp; client portals</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="mega-link" href="/services/cloud-computing">
+                        <span class="mega-link-title">Cloud Computing &amp; DevOps</span>
+                        <span class="mega-link-desc">Edge servers, CI/CD pipelines &amp; scaling</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="mega-link" href="/services/api-integration">
+                        <span class="mega-link-title">API Integration</span>
+                        <span class="mega-link-desc">Clean RESTful &amp; edge database APIs</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+                <div class="mega-col">
+                  <div class="mega-col-title">Data, QA &amp; Support</div>
+                  <ul class="mega-link-list">
+                    <li>
+                      <a class="mega-link" href="/services/ai-machine-learning">
+                        <span class="mega-link-title">AI &amp; Machine Learning</span>
+                        <span class="mega-link-desc">Intelligent automation &amp; predictive models</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="mega-link" href="/services/data-analytics-bi">
+                        <span class="mega-link-title">Data Analytics &amp; BI</span>
+                        <span class="mega-link-desc">Real-time dashboards &amp; telemetry hubs</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="mega-link" href="/services/cybersecurity">
+                        <span class="mega-link-title">Cybersecurity</span>
+                        <span class="mega-link-desc">Vulnerability audits &amp; edge hardening</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="mega-link" href="/services/software-testing-qa">
+                        <span class="mega-link-title">Software Testing &amp; QA</span>
+                        <span class="mega-link-desc">End-to-end verification &amp; audits</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="mega-link" href="/services/it-consulting">
+                        <span class="mega-link-title">IT Consulting &amp; Strategy</span>
+                        <span class="mega-link-desc">Technology audits &amp; roadmap planning</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="mega-link" href="/services/managed-it-support">
+                        <span class="mega-link-title">Managed IT Support</span>
+                        <span class="mega-link-desc">24/7 technical monitoring &amp; maintenance</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="mega-menu-footer-bar">
+                <span>16 Comprehensive IT Disciplines Available</span>
+                <a href="/services">View Complete Service Catalog &rarr;</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Solutions Mega Menu Dropdown -->
+          <div class="nav-item-dropdown">
+            <button class="nav-dropdown-trigger" type="button" aria-expanded="false" aria-haspopup="true">
+              <span>Solutions</span>
+              <svg class="dropdown-arrow" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <div class="mega-menu mega-menu-solutions" role="menu">
+              <div class="mega-menu-grid mega-menu-grid--solutions">
+                <div class="mega-col">
+                  <div class="mega-col-title">Enterprise Architecture</div>
+                  <ul class="mega-link-list">
+                    <li>
+                      <a class="mega-link" href="/solutions#automation">
+                        <span class="mega-link-title">Business Process Automation</span>
+                        <span class="mega-link-desc">Custom workflow engines &amp; queue automation</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="mega-link" href="/solutions#platforms">
+                        <span class="mega-link-title">Custom Software Platforms</span>
+                        <span class="mega-link-desc">Tailored relational databases &amp; admin controls</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="mega-link" href="/solutions#cloud">
+                        <span class="mega-link-title">Cloud Adoption &amp; Modernization</span>
+                        <span class="mega-link-desc">Serverless edge networks &amp; zero downtime</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+                <div class="mega-col">
+                  <div class="mega-col-title">Integration &amp; Growth</div>
+                  <ul class="mega-link-list">
+                    <li>
+                      <a class="mega-link" href="/solutions#api">
+                        <span class="mega-link-title">Connected Systems &amp; APIs</span>
+                        <span class="mega-link-desc">Secure REST bridges &amp; CRM synchronization</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="mega-link" href="/solutions#conversion">
+                        <span class="mega-link-title">High-Conversion Experiences</span>
+                        <span class="mega-link-desc">Sub-second performance &amp; instant inquiries</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="mega-link" href="/solutions#strategy">
+                        <span class="mega-link-title">Strategic Digital Transformation</span>
+                        <span class="mega-link-desc">Architecture audits &amp; phased delivery roadmaps</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="mega-menu-footer-bar">
+                <span>Outcome-Driven Technical Frameworks</span>
+                <a href="/solutions">Explore All Solutions &rarr;</a>
+              </div>
+            </div>
+          </div>
+
+          <a href="/industries" class="nav-link">Industries</a>
+          <a href="/work" class="nav-link">Work</a>
+          <a href="/pricing" class="nav-link">Pricing</a>
+          <a href="/blog" class="nav-link">Blog</a>
+          <a href="/about" class="nav-link">About</a>
+          <a href="/contact" class="nav-link">Contact</a>
+          <a class="nav-cta" href="/contact#project-inquiry">Start Project</a>
         </div>
       </nav>
     </header>
 
     <main>
-      <section class="page-hero section">
-        <div class="container">
-          <p class="eyebrow">UI/UX Design</p>
-          <h1>User-Friendly Digital Experiences Designed Around Real Goals</h1>
-          <p>
-            ABSS Nexus Technologies creates clear, responsive and practical interfaces for websites,
-            mobile applications and digital products.
-          </p>
-          <div class="hero-actions">
-            <a class="btn btn-glow-cyan" href="/contact?service=UI%2FUX%20Design">Discuss Your Design Project</a>
-            <a class="btn btn-glass" href="/projects">View Our Projects</a>
-          </div>
-          <div class="trust-row" aria-label="UI/UX design highlights">
-            <span>Responsive Interfaces</span>
-            <span>Clear User Flows</span>
-            <span>Practical Design Decisions</span>
+      <!-- 1. Hero Section -->
+      <section class="site-hero site-hero--page page-hero section" id="hero">
+        <div class="site-hero__container container">
+          <nav class="site-hero__breadcrumb breadcrumb-trail" aria-label="Breadcrumb">
+            <a href="/">Home</a>
+            <span class="separator" aria-hidden="true">/</span>
+            <a href="/services">Services</a>
+            <span class="separator" aria-hidden="true">/</span>
+            <span class="current">UI/UX Design</span>
+          </nav>
+          
+          <div class="site-hero__grid service-hero-grid">
+            <div class="site-hero__content service-hero-content">
+              <span class="site-hero__eyebrow section-badge-apple">User Experience &bull; Design Systems</span>
+              <h1 class="site-hero__title">Minimalist, Human-Centered UI/UX Design & Design Systems</h1>
+              <p class="site-hero__description">Transform complex digital workflows into clean, intuitive interfaces. Inspired by Apple's design philosophy, ABSS Nexus Technologies designs coherent design systems, frictionless user journeys, and interactive Figma prototypes.</p>
+              
+              <div class="site-hero__actions hero-actions">
+                <a class="site-hero__btn site-hero__btn--primary btn btn-apple-primary" href="/contact?service=UI%2FUX%20Design#project-inquiry">
+                  <span>Discuss Your Project</span>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </a>
+                <a class="site-hero__btn site-hero__btn--secondary btn btn-apple-secondary" href="/services">
+                  <span>Explore Our Services</span>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                </a>
+              </div>
+
+              <div class="site-hero__tech-stack tech-pills-row" aria-label="Key Technologies">
+                <span class="site-hero__tech-tag tech-pill">Figma</span>
+                <span class="site-hero__tech-tag tech-pill">Design Systems</span>
+                <span class="site-hero__tech-tag tech-pill">Space Grotesk & Inter</span>
+                <span class="site-hero__tech-tag tech-pill">Wireframing</span>
+                <span class="site-hero__tech-tag tech-pill">WCAG AAA</span>
+                <span class="site-hero__tech-tag tech-pill">Design Tokens</span>
+              </div>
+            </div>
+
+            <div class="site-hero__visual service-visual-box" aria-label="UI/UX Design architectural preview">
+              
+      <div style="background: var(--color-light-gray); border: 1px solid var(--color-border); border-radius: 12px; padding: 18px;">
+        <div style="font-size: 11px; font-weight: 700; color: var(--color-secondary-text); margin-bottom: 10px; text-transform: uppercase;">Design Token System</div>
+        <div style="display: flex; gap: 8px; margin-bottom: 14px;">
+          <div style="flex: 1; height: 32px; background: #0066CC; border-radius: 6px; display: flex; align-items: center; justify-content: center; color: white; font-size: 9px; font-weight: 600;">Action Blue</div>
+          <div style="flex: 1; height: 32px; background: #F5F5F7; border: 1px solid #D2D2D7; border-radius: 6px; display: flex; align-items: center; justify-content: center; color: #1D1D1F; font-size: 9px; font-weight: 600;">Light Grey</div>
+          <div style="flex: 1; height: 32px; background: #1D1D1F; border-radius: 6px; display: flex; align-items: center; justify-content: center; color: white; font-size: 9px; font-weight: 600;">Near Black</div>
+        </div>
+        <div style="background: #ffffff; border: 1px solid var(--color-border); border-radius: 8px; padding: 12px;">
+          <span style="font-family: 'Space Grotesk', sans-serif; font-size: 14px; font-weight: 700; color: #1D1D1F; display: block;">Space Grotesk (Headings)</span>
+          <span style="font-family: 'Inter', sans-serif; font-size: 11px; color: #6E6E73; margin-top: 4px; display: block;">Inter 400/500/600 (Clean body &amp; UI typography)</span>
+        </div>
+      </div>
+            </div>
           </div>
         </div>
       </section>
 
-      <section class="section about-company">
-        <div class="container two-column">
-          <div>
-            <p class="eyebrow">What UI/UX Design Means</p>
-            <h2>What Is UI/UX Design?</h2>
-          </div>
-          <div class="rich-text">
-            <p>
-              UI Design focuses on how a website or application looks, including layout, colors,
-              typography, buttons and visual consistency.
-            </p>
-            <p>
-              UX Design focuses on how easily users can understand, navigate and complete actions
-              within the digital product.
-            </p>
-            <p>Good UI/UX design makes a digital product clear, usable and visually consistent.</p>
-          </div>
-        </div>
-      </section>
-
-      <section class="section split-band">
+      <!-- 2. Customer Problems Addressed -->
+      <section class="section">
         <div class="container">
           <div class="section-heading">
-            <p class="eyebrow">Who This Service Is For</p>
-            <h2>Useful for new products, redesigns and clearer digital journeys.</h2>
+            <p class="eyebrow">Client Challenges</p>
+            <h2>Challenges We Solve for Growing Businesses</h2>
+            <p>We eliminate technical bottlenecks, poor performance, and complex maintenance so you can focus on scale.</p>
           </div>
-          <div class="tag-grid service-deliverables">
-            <span>Startups planning a digital product</span>
-            <span>Businesses creating or redesigning a website</span>
-            <span>Mobile application projects</span>
-            <span>Dashboard and admin-panel projects</span>
-            <span>E-commerce businesses</span>
-            <span>Schools and institutions</span>
-            <span>Personal brands</span>
-            <span>Existing websites with usability problems</span>
+          
+          <div class="problem-solution-grid">
+            
+            <article class="problem-card">
+              <div class="problem-icon-pill" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              </div>
+              <h3>High User Drop-off & Confusion</h3>
+              <p>Cluttered interfaces with inconsistent buttons and confusing menus frustrate visitors and drive them away.</p>
+            </article>
+            <article class="problem-card">
+              <div class="problem-icon-pill" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              </div>
+              <h3>Fragmented Brand Identity</h3>
+              <p>Different pages and components using conflicting colors, fonts, and card styles dilute company credibility.</p>
+            </article>
+            <article class="problem-card">
+              <div class="problem-icon-pill" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              </div>
+              <h3>Friction in Developer Handoff</h3>
+              <p>Design mockups without standardized spacing, tokens, and responsive states lead to broken frontend code.</p>
+            </article>
           </div>
         </div>
       </section>
 
-      <section class="section services">
+      <!-- 3. Capabilities and Deliverables -->
+      <section class="section" style="background: var(--color-light-gray); border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border);">
         <div class="container">
           <div class="section-heading">
-            <p class="eyebrow">Design Services Offered</p>
-            <h2>Interface design support for practical digital products.</h2>
+            <p class="eyebrow">Core Capabilities</p>
+            <h2>Concrete Deliverables &amp; Engineering Scope</h2>
+            <p>Every milestone produces clean, verifiable code, thorough documentation, and measurable performance.</p>
           </div>
-          <div class="home-service-grid">
-            <article class="service-card">
-              <span>Website</span>
-              <h3>Website UI Design</h3>
-              <p>Clean page layouts for business websites, portfolios, institutions and service pages.</p>
-            </article>
-            <article class="service-card">
-              <span>Mobile</span>
-              <h3>Mobile App UI Design</h3>
-              <p>Mobile screen designs planned around simple navigation and clear user actions.</p>
-            </article>
-            <article class="service-card">
-              <span>Landing</span>
-              <h3>Landing Page Design</h3>
-              <p>Focused page designs for one product, service, campaign or inquiry goal.</p>
-            </article>
-            <article class="service-card">
-              <span>Dashboard</span>
-              <h3>Dashboard UI Design</h3>
-              <p>Organized interfaces for admin panels, data views, tables, filters and actions.</p>
-            </article>
-            <article class="service-card">
-              <span>Commerce</span>
-              <h3>E-commerce Interface Design</h3>
-              <p>Product, category and checkout-focused screens planned for easier browsing.</p>
-            </article>
-            <article class="service-card">
-              <span>Wireframe</span>
-              <h3>Wireframing</h3>
-              <p>Simple layouts that define structure before detailed visual design begins.</p>
-            </article>
-            <article class="service-card">
-              <span>Prototype</span>
+
+          <div class="capabilities-matrix-grid">
+            
+            <div class="capability-tile">
+              <h4>Comprehensive Design Systems</h4>
+              <p>Reusable token libraries establishing typography, harmonious palettes, spacing, and button variants.</p>
+            </div>
+            <div class="capability-tile">
+              <h4>Interactive Figma Prototyping</h4>
+              <p>Clickable prototypes simulating real user journeys, modal transitions, and state changes.</p>
+            </div>
+            <div class="capability-tile">
+              <h4>User Flow & Information Architecture</h4>
+              <p>Hierarchical sitemaps and wireframes structuring content for intuitive comprehension.</p>
+            </div>
+            <div class="capability-tile">
+              <h4>Accessible Contrast Auditing</h4>
+              <p>Color combinations and font sizes adhering strictly to WCAG AAA/AA readability standards.</p>
+            </div>
+            <div class="capability-tile">
+              <h4>Component Library Preparation</h4>
+              <p>Complete UI kits prepared for pixel-perfect implementation by frontend engineering teams.</p>
+            </div>
+            <div class="capability-tile">
+              <h4>Mobile & Responsive Breakpoints</h4>
+              <p>Every component explicitly documented across desktop, tablet, and mobile dimensions.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. Step-by-Step Delivery Process -->
+      <section class="section">
+        <div class="container">
+          <div class="section-heading">
+            <p class="eyebrow">Systematic Execution</p>
+            <h2>Structured Delivery Process from Concept to Launch</h2>
+            <p>Transparent milestones and direct communication ensure your project stays on schedule and on scope.</p>
+          </div>
+
+          <div class="delivery-process-apple">
+            <div class="process-step-apple">
+              <span class="step-num-apple">01</span>
+              <h3>Discovery &amp; Scope</h3>
+              <p>We discuss your operational objectives, user requirements, technical constraints, and milestone timelines.</p>
+            </div>
+            <div class="process-step-apple">
+              <span class="step-num-apple">02</span>
+              <h3>Architecture Blueprint</h3>
+              <p>We plan database models, API contracts, interface wireframes, and performance budgets before writing code.</p>
+            </div>
+            <div class="process-step-apple">
+              <span class="step-num-apple">03</span>
               <h3>Interactive Prototyping</h3>
-              <p>Clickable flows can be prepared where interaction review is included in scope.</p>
-            </article>
-            <article class="service-card">
-              <span>Redesign</span>
-              <h3>Website Redesign</h3>
-              <p>Existing interfaces can be improved for clarity, consistency and responsiveness.</p>
-            </article>
-            <article class="service-card">
-              <span>System</span>
-              <h3>Design System Basics</h3>
-              <p>Reusable colors, typography, buttons and components for consistent screens.</p>
-            </article>
-            <article class="service-card">
-              <span>Responsive</span>
-              <h3>Responsive Layout Design</h3>
-              <p>Layouts are planned so important content remains readable across screen sizes.</p>
-            </article>
+              <p>We craft high-fidelity interface layouts and component states in Figma with accessible contrast and clean typography.</p>
+            </div>
+            <div class="process-step-apple">
+              <span class="step-num-apple">04</span>
+              <h3>Agile Engineering</h3>
+              <p>Clean, modular code development with responsive styling, security checks, and high-performance edge bindings.</p>
+            </div>
+            <div class="process-step-apple">
+              <span class="step-num-apple">05</span>
+              <h3>Quality Assurance</h3>
+              <p>Rigorous automated link validation, form health audits, mobile device testing, and Core Web Vitals profiling.</p>
+            </div>
+            <div class="process-step-apple">
+              <span class="step-num-apple">06</span>
+              <h3>Production Release</h3>
+              <p>Zero-downtime deployment, DNS configuration, search engine indexing verification, and post-delivery SLA support.</p>
+            </div>
           </div>
         </div>
       </section>
 
-      <section class="section split-band">
+      <!-- 5. Relevant Project Examples -->
+      <section class="section" style="background: var(--color-light-gray); border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border);">
         <div class="container">
           <div class="section-heading">
-            <p class="eyebrow">What You Receive</p>
-            <h2>Clear design deliverables based on the agreed scope.</h2>
+            <p class="eyebrow">Demonstrated Experience</p>
+            <h2>Practical Project Implementations</h2>
+            <p>Review real implementations and concept showcases built with high performance and clean architecture.</p>
           </div>
-          <div class="tag-grid service-deliverables">
-            <span>Requirement discussion</span>
-            <span>Target-user understanding</span>
-            <span>Page or screen planning</span>
-            <span>User-flow planning</span>
-            <span>Basic wireframes</span>
-            <span>Visual design direction</span>
-            <span>Desktop design</span>
-            <span>Mobile-responsive design</span>
-            <span>Reusable components</span>
-            <span>Button, form and navigation states</span>
-            <span>Design consistency review</span>
-            <span>Clickable prototype where included</span>
-            <span>Developer-ready design handoff</span>
-            <span>Basic revision rounds according to quotation</span>
-          </div>
-        </div>
-      </section>
 
-      <section class="section services">
-        <div class="container">
-          <div class="section-heading">
-            <p class="eyebrow">Key Design Principles</p>
-            <h2>Design choices that support usability and clarity.</h2>
-          </div>
-          <div class="detailed-service-grid">
-            <article class="service-card">
-              <span>Clarity</span>
-              <h3>Clarity</h3>
-              <p>Users should quickly understand what the page or screen is asking them to do.</p>
+          <div class="projects-modern-grid">
+            <article class="project-modern-card">
+              <div class="project-preview-wrap">
+                <div class="browser-mockup-bar" aria-hidden="true">
+                  <div class="browser-mockup-dots"><span></span><span></span><span></span></div>
+                  <span class="browser-mockup-url">shubham-portfolio-abss.netlify.app</span>
+                </div>
+                <img src="/public/assets/images/personal-portfolio.png" alt="Personal Developer Portfolio preview" loading="lazy" />
+                <span class="project-badge-tag">Portfolio &bull; Live</span>
+              </div>
+              <div class="project-card-content">
+                <h3>Personal Developer Portfolio</h3>
+                <p>High-speed responsive portfolio built with modern typography, interactive project showcases, and accessible layout design.</p>
+                <div class="project-action-row">
+                  <a class="project-live-btn" href="https://shubham-portfolio-abss.netlify.app/" target="_blank" rel="noopener noreferrer">Live Demo &rarr;</a>
+                  <span class="project-status-label">Production</span>
+                </div>
+              </div>
             </article>
-            <article class="service-card">
-              <span>Consistency</span>
-              <h3>Consistency</h3>
-              <p>Repeated elements use a predictable visual pattern across the interface.</p>
-            </article>
-            <article class="service-card">
-              <span>Access</span>
-              <h3>Accessibility</h3>
-              <p>Text, contrast, spacing and controls are planned for easier reading and use.</p>
-            </article>
-            <article class="service-card">
-              <span>Responsive</span>
-              <h3>Responsive Behavior</h3>
-              <p>Layouts adapt so core actions remain usable on smaller and larger screens.</p>
-            </article>
-            <article class="service-card">
-              <span>Hierarchy</span>
-              <h3>Visual Hierarchy</h3>
-              <p>Important information is given proper priority through size, spacing and grouping.</p>
-            </article>
-            <article class="service-card">
-              <span>Navigation</span>
-              <h3>Easy Navigation</h3>
-              <p>Menus, links and sections are arranged so users can find the next step.</p>
-            </article>
-            <article class="service-card">
-              <span>CTA</span>
-              <h3>Clear Calls to Action</h3>
-              <p>Buttons and contact actions are placed where they support natural decision-making.</p>
-            </article>
-            <article class="service-card">
-              <span>Flow</span>
-              <h3>Practical User Flows</h3>
-              <p>Screens are planned around the actions users need to complete.</p>
+
+            <article class="project-modern-card">
+              <div class="project-preview-wrap">
+                <div class="browser-mockup-bar" aria-hidden="true">
+                  <div class="browser-mockup-dots"><span></span><span></span><span></span></div>
+                  <span class="browser-mockup-url">abssnexus.in/analytics/dashboard</span>
+                </div>
+                <img src="/public/assets/images/project-dashboard-ui.png" alt="Cloud Analytics & Admin Dashboard preview" loading="lazy" />
+                <span class="project-badge-tag">Web App &bull; Demonstration</span>
+              </div>
+              <div class="project-card-content">
+                <h3>Cloud Analytics &amp; Telemetry Hub</h3>
+                <p>Enterprise administration panel featuring metrics telemetry, user management, interactive chart widgets, and real-time status.</p>
+                <div class="project-action-row">
+                  <a class="project-live-btn" href="/projects">View Details &rarr;</a>
+                  <span class="project-status-label">Demo Showcase</span>
+                </div>
+              </div>
             </article>
           </div>
         </div>
       </section>
 
-      <section class="section process">
-        <div class="container">
-          <div class="section-heading">
-            <p class="eyebrow">Design Process</p>
-            <h2>A practical six-step path from discussion to handoff.</h2>
-          </div>
-          <div class="process-grid service-process-grid">
-            <article>
-              <span>01</span>
-              <h3>Requirement Discussion</h3>
-              <p>We discuss the product, required pages or screens and expected user actions.</p>
-            </article>
-            <article>
-              <span>02</span>
-              <h3>User and Goal Understanding</h3>
-              <p>We identify the target users and the main problems the interface should solve.</p>
-            </article>
-            <article>
-              <span>03</span>
-              <h3>Structure and User Flow</h3>
-              <p>We plan how users will move between pages, screens and important actions.</p>
-            </article>
-            <article>
-              <span>04</span>
-              <h3>Wireframe Design</h3>
-              <p>Basic layouts are prepared to establish content and navigation structure.</p>
-            </article>
-            <article>
-              <span>05</span>
-              <h3>Visual Interface Design</h3>
-              <p>Colors, typography, components and responsive layouts are developed.</p>
-            </article>
-            <article>
-              <span>06</span>
-              <h3>Review and Handoff</h3>
-              <p>Designs are reviewed, approved and prepared for development.</p>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section class="section tech-stack">
-        <div class="container">
-          <div class="section-heading">
-            <p class="eyebrow">Tools and Deliverables</p>
-            <h2>Design assets prepared for review and development.</h2>
-          </div>
-          <div class="stack-grid">
-            <article><span>Tool</span><p>Figma</p></article>
-            <article><span>Testing</span><p>Browser-based responsive testing</p></article>
-            <article><span>Resources</span><p>Existing icon and design resources</p></article>
-            <article><span>Layouts</span><p>Mobile and desktop layouts</p></article>
-            <article><span>Handoff</span><p>Developer handoff notes</p></article>
-            <article><span>Assets</span><p>Exported image assets where required</p></article>
-          </div>
-          <p class="service-note">
-            Deliverables can include wireframes, high-fidelity screen designs, reusable components,
-            clickable prototypes, style guide basics and handoff notes based on the agreed scope.
-          </p>
-        </div>
-      </section>
-
-      <section class="section split-band">
-        <div class="container">
-          <div class="section-heading">
-            <p class="eyebrow">Estimated Timeline</p>
-            <h2>Typical working-day ranges for UI/UX design work.</h2>
-          </div>
-          <div class="stack-grid">
-            <article><span>Landing Page UI</span><p>Approximately 2-5 working days</p></article>
-            <article><span>Small Website UI</span><p>Approximately 5-10 working days</p></article>
-            <article><span>Mobile App Basic Screens</span><p>Approximately 7-15 working days</p></article>
-            <article><span>Dashboard UI</span><p>Approximately 7-15 working days</p></article>
-            <article><span>Large Product</span><p>Timeline depends on screens, flows and complexity.</p></article>
-            <article><span>Custom Product</span><p>Timeline is confirmed after understanding scope.</p></article>
-          </div>
-          <p class="service-note">
-            The final timeline depends on screen count, requirement clarity, feedback time and
-            revision scope.
-          </p>
-        </div>
-      </section>
-
-      <section class="section packages" id="pricing">
-        <div class="container">
-          <div class="section-heading">
-            <p class="eyebrow">Pricing</p>
-            <h2>Pricing based on screens, flows and project scope.</h2>
-            <p>
-              A clear quotation is provided after reviewing the required screens, user flows and
-              deliverables.
-            </p>
-          </div>
-          <div class="package-grid">
-            <article>
-              <span>Basic</span>
-              <h3>Basic UI Design</h3>
-              <p class="package-price">Pricing based on screens and project scope</p>
-              <p class="package-best">Suitable for landing pages and small website interfaces.</p>
-              <ul>
-                <li>Requirement discussion</li>
-                <li>Basic screen planning</li>
-                <li>Desktop and mobile layout scope</li>
-                <li>Developer-ready handoff</li>
-              </ul>
-              <a class="card-link" href="/contact?service=UI%2FUX%20Design">Get a Design Quote</a>
-            </article>
-            <article class="featured-package">
-              <span>Standard</span>
-              <h3>Standard UI/UX Design</h3>
-              <p class="package-price">Pricing based on screens and project scope</p>
-              <p class="package-best">Suitable for business websites, mobile-app concepts and multi-page interfaces.</p>
-              <ul>
-                <li>User-flow planning</li>
-                <li>Wireframes where needed</li>
-                <li>Responsive interface design</li>
-                <li>Clickable prototype where included</li>
-              </ul>
-              <a class="card-link" href="/contact?service=UI%2FUX%20Design">Get a Design Quote</a>
-            </article>
-            <article>
-              <span>Custom</span>
-              <h3>Custom Product Design</h3>
-              <p class="package-price">Pricing based on screens and project scope</p>
-              <p class="package-best">Suitable for dashboards, e-commerce interfaces and custom digital products.</p>
-              <ul>
-                <li>Custom flow planning</li>
-                <li>Component direction</li>
-                <li>Review-ready interface screens</li>
-                <li>Organized handoff notes</li>
-              </ul>
-              <a class="card-link" href="/contact?service=UI%2FUX%20Design">Get a Design Quote</a>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section class="section split-band">
-        <div class="container two-column">
-          <div>
-            <p class="eyebrow">What We Need From the Client</p>
-            <h2>Project details that help shape the right interface.</h2>
-          </div>
-          <div class="rich-text">
-            <ul>
-              <li>Business or product name</li>
-              <li>Product purpose</li>
-              <li>Required pages or screens</li>
-              <li>Target audience</li>
-              <li>Brand colors or logo, if available</li>
-              <li>Content, if available</li>
-              <li>Preferred design references</li>
-              <li>Existing website or application link</li>
-              <li>Required features and actions</li>
-            </ul>
-            <p>
-              ABSS Nexus Technologies can guide clients who are not yet sure about the complete
-              screen structure.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <section class="section why">
-        <div class="container why-grid">
-          <div>
-            <p class="eyebrow">Why Choose ABSS Nexus Technologies</p>
-            <h2>Why Work With ABSS Nexus Technologies?</h2>
-            <p>
-              The design process remains clear and practical, with direct communication from
-              requirement discussion through final handoff.
-            </p>
-          </div>
-          <div class="why-list">
-            <div><strong>Founder-led</strong><span>Direct founder communication</span></div>
-            <div><strong>Milestones</strong><span>Clear design milestones</span></div>
-            <div><strong>Practical</strong><span>Practical design recommendations</span></div>
-            <div><strong>Responsive</strong><span>Responsive layouts</span></div>
-            <div><strong>Development</strong><span>Development-aware design decisions</span></div>
-            <div><strong>Scope</strong><span>Transparent scope</span></div>
-            <div><strong>Handoff</strong><span>Organized handoff</span></div>
-            <div><strong>Simple</strong><span>No unnecessary design complexity</span></div>
-          </div>
-        </div>
-      </section>
-
-      <section class="section services">
-        <div class="container two-column">
-          <div>
-            <p class="eyebrow">Design to Development</p>
-            <h2>Need the final website built after design?</h2>
-          </div>
-          <div class="rich-text">
-            <p>
-              UI/UX design can be planned as a separate service or combined with
-              <a href="/services/website-development">Website Development</a> when you want the
-              final website created after the design is approved.
-            </p>
-            <p>
-              You can also browse the <a href="/services">Services</a> page to compare related
-              development and support options.
-            </p>
-          </div>
-        </div>
-      </section>
-
+      <!-- 6. Frequently Asked Questions -->
       <section class="section faq">
         <div class="container">
           <div class="section-heading">
-            <p class="eyebrow">Frequently Asked Questions</p>
-            <h2>Common questions about UI/UX design.</h2>
+            <p class="eyebrow">Common Inquiries</p>
+            <h2>Frequently Asked Questions About UI/UX Design</h2>
+            <p>Direct answers regarding timelines, deliverables, technology selection, and maintenance.</p>
           </div>
-          <div class="faq-list" data-faq-list>
-            <article class="faq-item">
-              <button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-ui-ux-difference" data-faq-toggle>
-                What is the difference between UI and UX?
+
+          <div class="agency-faq-wrapper" id="faq">
+            
+            <div class="agency-faq-card">
+              <button class="faq-agency-btn" type="button" aria-expanded="false" aria-controls="faq-ans-1" data-faq-toggle>
+                <span>What design tools do you use for UI/UX?</span>
+                <svg class="faq-chevron-icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
               </button>
-              <div class="faq-answer" id="faq-ui-ux-difference" hidden>
-                <p>
-                  UI focuses on visual appearance, while UX focuses on usability, structure and the
-                  overall user journey.
-                </p>
+              <div class="faq-agency-answer" id="faq-ans-1" hidden>
+                We work primarily in Figma, delivering organized vector component libraries, interactive prototypes, and inspectable code tokens.
               </div>
-            </article>
-            <article class="faq-item">
-              <button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-ui-ux-cost" data-faq-toggle>
-                How much does UI/UX design cost?
+            </div>
+            <div class="agency-faq-card">
+              <button class="faq-agency-btn" type="button" aria-expanded="false" aria-controls="faq-ans-2" data-faq-toggle>
+                <span>Can we use your designs with our own developers?</span>
+                <svg class="faq-chevron-icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
               </button>
-              <div class="faq-answer" id="faq-ui-ux-cost" hidden>
-                <p>
-                  Cost depends on screen count, complexity, prototype requirements and revision
-                  scope. A quotation is shared after requirement discussion.
-                </p>
+              <div class="faq-agency-answer" id="faq-ans-2" hidden>
+                Absolutely. Our Figma files are organized with clear auto-layouts, tokens, and developer notes ready for any engineering team.
               </div>
-            </article>
-            <article class="faq-item">
-              <button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-ui-ux-time" data-faq-toggle>
-                How long does the design process take?
+            </div>
+            <div class="agency-faq-card">
+              <button class="faq-agency-btn" type="button" aria-expanded="false" aria-controls="faq-ans-3" data-faq-toggle>
+                <span>Do you follow accessibility guidelines?</span>
+                <svg class="faq-chevron-icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
               </button>
-              <div class="faq-answer" id="faq-ui-ux-time" hidden>
-                <p>Small interfaces may take a few working days, while larger products require more time.</p>
+              <div class="faq-agency-answer" id="faq-ans-3" hidden>
+                Yes. Every interface design is audited for WCAG AA/AAA contrast ratios, minimum touch target dimensions, and visible keyboard focus states.
               </div>
-            </article>
-            <article class="faq-item">
-              <button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-ui-ux-responsive" data-faq-toggle>
-                Will I receive mobile and desktop designs?
+            </div>
+            <div class="agency-faq-card">
+              <button class="faq-agency-btn" type="button" aria-expanded="false" aria-controls="faq-ans-4" data-faq-toggle>
+                <span>How many design revisions are included?</span>
+                <svg class="faq-chevron-icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
               </button>
-              <div class="faq-answer" id="faq-ui-ux-responsive" hidden>
-                <p>Responsive layouts can be included according to the agreed scope.</p>
+              <div class="faq-agency-answer" id="faq-ans-4" hidden>
+                Our milestone process includes collaborative feedback rounds during wireframing, high-fidelity mockups, and final handoff.
               </div>
-            </article>
-            <article class="faq-item">
-              <button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-ui-ux-prototype" data-faq-toggle>
-                Do you create clickable prototypes?
-              </button>
-              <div class="faq-answer" id="faq-ui-ux-prototype" hidden>
-                <p>Clickable prototypes can be created where required and included in the quotation.</p>
-              </div>
-            </article>
-            <article class="faq-item">
-              <button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-ui-ux-redesign" data-faq-toggle>
-                Can you redesign my existing website or application?
-              </button>
-              <div class="faq-answer" id="faq-ui-ux-redesign" hidden>
-                <p>
-                  Yes. Existing interfaces can be reviewed and redesigned for clarity, consistency
-                  and responsiveness.
-                </p>
-              </div>
-            </article>
-            <article class="faq-item">
-              <button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-ui-ux-revisions" data-faq-toggle>
-                How many revisions are included?
-              </button>
-              <div class="faq-answer" id="faq-ui-ux-revisions" hidden>
-                <p>The number of revisions depends on the agreed package or project quotation.</p>
-              </div>
-            </article>
-            <article class="faq-item">
-              <button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-ui-ux-development" data-faq-toggle>
-                Can you also develop the final website?
-              </button>
-              <div class="faq-answer" id="faq-ui-ux-development" hidden>
-                <p>Yes. Website development can be provided as a separate or combined service.</p>
-              </div>
-            </article>
+            </div>
           </div>
         </div>
       </section>
 
-      <section class="section cta-band">
-        <div class="container cta-box">
-          <p class="eyebrow">Start Your UI/UX Project</p>
-          <h2>Ready to Improve Your Digital Product Experience?</h2>
-          <p>
-            Share your website, application or product requirements and receive practical guidance
-            on the right screens, user flow, timeline and design scope.
-          </p>
-          <div class="hero-actions">
-            <a class="btn btn-glow-cyan" href="/contact?service=UI%2FUX%20Design">Discuss Your UI/UX Project</a>
-            <a class="btn btn-glass" href="https://wa.me/918757928673" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">Chat on WhatsApp</a>
+      <!-- 7. Final Project Enquiry CTA -->
+      <section class="section cta-band" id="project-inquiry">
+        <div class="container">
+          <div class="radiant-cta-box">
+            <p class="eyebrow">Start Your Project</p>
+            <h2>Ready to Elevate Your Digital Systems?</h2>
+            <p>Schedule a focused technical consultation to review your requirements, architecture, and timeline with our engineering team.</p>
+            
+            <div class="radiant-cta-actions">
+              <a class="btn btn-apple-primary" href="/contact?service=UI%2FUX%20Design#project-inquiry">
+                <span>Discuss Your Project Now</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </a>
+              <a class="btn btn-apple-whatsapp" href="https://wa.me/918757928673" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.301-.15-1.78-.878-2.056-.979-.276-.1-.477-.15-.678.15-.2.3-.778.979-.954 1.18-.176.2-.352.226-.653.075s-1.272-.469-2.423-1.496c-.896-.799-1.501-1.786-1.677-2.088-.176-.301-.019-.464.132-.614.136-.135.301-.351.452-.527.15-.176.201-.301.301-.502.1-.2.05-.376-.025-.527-.075-.15-.678-1.632-.929-2.235-.245-.588-.494-.509-.678-.518l-.578-.01c-.2 0-.527.075-.803.376s-1.054 1.029-1.054 2.509 1.079 2.91 1.23 3.111c.15.2 2.122 3.24 5.141 4.544.718.31 1.279.495 1.716.634.722.23 1.378.197 1.9.12.58-.088 1.78-.727 2.03-1.43.25-.704.25-1.307.175-1.431-.075-.125-.276-.2-.577-.35zM12.04 2C6.51 2 2.03 6.48 2.03 12.01c0 1.97.57 3.81 1.57 5.37L2 22l4.78-1.54c1.51.92 3.27 1.45 5.26 1.45 5.53 0 10.01-4.48 10.01-10.01S17.57 2 12.04 2zm0 18.25c-1.74 0-3.36-.5-4.74-1.38l-.34-.22-2.83.91.93-2.76-.24-.37c-.98-1.5-1.53-3.27-1.53-5.12 0-4.56 3.71-8.27 8.27-8.27s8.27 3.71 8.27 8.27-3.71 8.27-8.27 8.27z"/></svg>
+                <span>WhatsApp Directly</span>
+              </a>
+            </div>
+            
+            <div class="cta-trust-meta">
+              <span>&#9742; Direct Line: +91 87579 28673</span>
+              <span>&#9993; Email: abssnexus@gmail.com</span>
+              <span>&#128205; Location: Jaipur, Rajasthan</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 8. Related Services -->
+      <section class="section">
+        <div class="container">
+          <div class="section-heading">
+            <p class="eyebrow">Complementary Solutions</p>
+            <h2>Related Services &amp; Extensions</h2>
+            <p>Explore other specialized engineering disciplines that work hand-in-hand with UI/UX Design.</p>
+          </div>
+
+          <div class="related-services-grid">
+            
+            <a class="related-service-card" href="/services/website-development">
+              <h4>Website Development</h4>
+              <p>Turn Figma prototypes into lightning-fast production websites.</p>
+              <span class="explore-arrow">Explore Discipline &rarr;</span>
+            </a>
+            <a class="related-service-card" href="/services/mobile-app-development">
+              <h4>Mobile App Development</h4>
+              <p>Touch-optimized interface design for mobile applications.</p>
+              <span class="explore-arrow">Explore Discipline &rarr;</span>
+            </a>
+            <a class="related-service-card" href="/services/saas-development">
+              <h4>SaaS Development</h4>
+              <p>Multi-tenant dashboard design for complex software platforms.</p>
+              <span class="explore-arrow">Explore Discipline &rarr;</span>
+            </a>
           </div>
         </div>
       </section>
     </main>
 
-    <footer class="footer">
-      <div class="container footer-grid">
-        <div class="footer-brand">
-          <img src="/public/assets/images/LogoGenerated.png" alt="ABSS Nexus Technologies logo" />
-          <p class="footer-brand-title">ABSS Nexus Technologies</p>
-          <p>
-            Building modern digital solutions for businesses, startups, institutions, and
-            individuals.
-          </p>
-                    <strong>Innovate • Solve • Elevate</strong>
-          <div>
-            <span class="footer-system-status">
-              <span class="live-pulse-dot" aria-hidden="true"></span>
-              All Systems Operational &bull; Edge Active
-            </span>
+    <footer class="site-footer" role="contentinfo">
+      <div class="site-footer__container container">
+        <div class="site-footer__grid footer-grid">
+          <!-- Column 1: Brand -->
+          <div class="site-footer__brand footer-brand">
+            <a class="site-footer__logo-link" href="/" aria-label="ABSS Nexus Technologies home">
+              <img class="site-footer__logo" src="/public/assets/images/LogoGenerated.png" alt="ABSS Nexus Technologies logo" width="160" height="38" />
+            </a>
+            <p class="site-footer__brand-title footer-brand-title">ABSS Nexus Technologies</p>
+            <p class="site-footer__brand-desc">Building high-performance digital solutions for businesses, startups, institutions, and growing brands.</p>
+            <strong class="site-footer__tagline">Innovate &bull; Solve &bull; Elevate</strong>
+            <div>
+              <span class="site-footer__status footer-system-status">
+                <span class="site-footer__status-pulse live-pulse-dot" aria-hidden="true"></span>
+                <span>All Systems Operational &bull; Edge Active</span>
+              </span>
+            </div>
+          </div>
+
+          <!-- Column 2: Quick Links -->
+          <div class="site-footer__col footer-column">
+            <h3 class="site-footer__col-title">Quick Links</h3>
+            <a class="site-footer__link" href="/">Home</a>
+            <a class="site-footer__link" href="/about">About</a>
+            <a class="site-footer__link" href="/services">Services</a>
+            <a class="site-footer__link" href="/solutions">Solutions</a>
+            <a class="site-footer__link" href="/industries">Industries</a>
+            <a class="site-footer__link" href="/work">Work</a>
+            <a class="site-footer__link" href="/careers">Careers</a>
+            <a class="site-footer__link" href="/blog">Blog</a>
+            <a class="site-footer__link" href="/faq">FAQ</a>
+            <a class="site-footer__link" href="/pricing">Pricing</a>
+            <a class="site-footer__link" href="/internships">Internships</a>
+            <a class="site-footer__link" href="/contact">Contact</a>
+          </div>
+
+          <!-- Column 3: Our Services -->
+          <div class="site-footer__col footer-column">
+            <h3 class="site-footer__col-title">Our Services</h3>
+            <a class="site-footer__link" href="/services/website-development">Website Development</a>
+            <a class="site-footer__link" href="/services/software-development">Software Development</a>
+            <a class="site-footer__link" href="/services/mobile-app-development">Mobile App Development</a>
+            <a class="site-footer__link" href="/services/ui-ux-design">UI/UX Design</a>
+            <a class="site-footer__link" href="/services/ai-machine-learning">AI &amp; Machine Learning</a>
+            <a class="site-footer__link" href="/services/cloud-computing">Cloud Computing</a>
+            <a class="site-footer__link" href="/services/cybersecurity">Cybersecurity</a>
+            <a class="site-footer__link" href="/services/data-analytics-bi">Data Analytics</a>
+            <a class="site-footer__link" href="/services/ecommerce-development">E-Commerce Development</a>
+            <a class="site-footer__link" href="/services/saas-development">SaaS Development</a>
+            <a class="site-footer__link" href="/services">All 16 Services &rarr;</a>
+          </div>
+
+          <!-- Column 4: Contact Info -->
+          <div class="site-footer__col site-footer__contact footer-column footer-contact">
+            <h3 class="site-footer__col-title">Contact Info</h3>
+            <a class="site-footer__link" href="tel:+918757928673">Phone: +91 87579 28673</a>
+            <a class="site-footer__link" href="mailto:abssnexus@gmail.com">Email: abssnexus@gmail.com</a>
+            <span class="site-footer__contact-item">Location: Jaipur, Rajasthan, India</span>
+            <span class="site-footer__contact-item">Shubham Kumar &mdash; Founder</span>
+            <span class="site-footer__contact-item">Consultation &amp; Advisory: Open 2026</span>
           </div>
         </div>
-        <div class="footer-column">
-          <h3>Quick Links</h3>
-          <a href="/">Home</a>
-          <a href="/about">About Us</a>
-          <a href="/services">Services</a>
-          <a href="/projects">Projects</a>
-          <a href="/contact">Contact</a>
+
+        <!-- Divider & Lower Footer Bar (Inside Container) -->
+        <div class="site-footer__bottom footer-lower">
+          <div class="site-footer__socials footer-socials" aria-label="Social media profiles">
+            <a class="site-footer__social-link" href="https://www.instagram.com/abssnexus/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">Instagram</a>
+            <a class="site-footer__social-link" href="https://www.facebook.com/profile.php?id=61592563923350" target="_blank" rel="noopener noreferrer" aria-label="Facebook">Facebook</a>
+            <a class="site-footer__social-link" href="https://x.com/abssnexus" target="_blank" rel="noopener noreferrer" aria-label="X">X / Twitter</a>
+          </div>
+          <nav class="site-footer__legal footer-legal" aria-label="Legal documents">
+            <a href="/privacy-policy">Privacy Policy</a>
+            <a href="/terms-and-conditions">Terms &amp; Conditions</a>
+            <a href="/cookie-policy">Cookie Policy</a>
+            <a href="/disclaimer">Disclaimer</a>
+            <a href="/refund-policy">Refund Policy</a>
+            <a href="/support-policy">Support Policy</a>
+            <a href="/sitemap">Sitemap</a>
+          </nav>
         </div>
-        <div class="footer-column">
-          <h3>Our Services</h3>
-          <a href="/services/website-development">Website Development</a>
-          <a href="/services">Application Development</a>
-          <a href="/services/ui-ux-design">UI/UX Design</a>
-          <a href="/services">Business Landing Pages</a>
-          <a href="/services">Portfolio Websites</a>
-          <a href="/services">Website Maintenance</a>
+
+        <!-- Copyright Row (Inside Container) -->
+        <div class="site-footer__copy footer-copy">
+          <p>&copy; <span class="site-footer__year">2026</span> ABSS Nexus Technologies. All Rights Reserved.</p>
         </div>
-        <div class="footer-column footer-contact">
-          <h3>Contact Info</h3>
-          <a href="tel:+918757928673">Phone: +91 87579 28673</a>
-          <a href="mailto:abssnexus@gmail.com">Email: abssnexus@gmail.com</a>
-          <span>Location: Jaipur, Rajasthan</span>
-          <span>Shubham Kumar — Founder, ABSS Nexus Technologies</span>
-        </div>
-      </div>
-      <div class="container footer-lower">
-        <div class="footer-socials" aria-label="Social links">
-          <a href="https://www.instagram.com/abssnexus/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">Instagram</a>
-          <a href="https://www.facebook.com/profile.php?id=61592563923350" target="_blank" rel="noopener noreferrer" aria-label="Facebook">Facebook</a>
-          <a href="https://x.com/abssnexus" target="_blank" rel="noopener noreferrer" aria-label="X">X / Twitter</a>
-        </div>
-        <div class="footer-legal">
-          <a href="/privacy-policy">Privacy Policy</a>
-          <a href="/terms-and-conditions">Terms & Conditions</a>
-          <a href="/disclaimer">Disclaimer</a>
-          <a href="/refund-policy">Refund Policy</a>
-          <a href="/support-policy">Support Policy</a>
-          <a href="/sitemap">Sitemap</a>
-        </div>
-      </div>
-      <div class="container footer-copy">
-        <p>© 2026 ABSS Nexus Technologies. All Rights Reserved.</p>
       </div>
     </footer>
-    <a class="floating-whatsapp" href="https://wa.me/918757928673" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
+
+    <a class="floating-whatsapp" href="https://wa.me/918757928673" target="_blank" rel="noopener noreferrer" aria-label="Contact us on WhatsApp">
       <svg viewBox="0 0 32 32" aria-hidden="true" focusable="false">
         <path d="M16 3.2A12.7 12.7 0 0 0 5.1 22.4L3.4 28.8l6.6-1.7A12.7 12.7 0 1 0 16 3.2Zm0 22.9c-2 0-3.9-.6-5.6-1.6l-.4-.2-3.9 1 1-3.8-.3-.4a10.3 10.3 0 1 1 9.2 5Z" />
         <path d="M21.7 18.6c-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.2-1.3-.5-2.5-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.6 0-.2-.7-1.7-1-2.3-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.2-1.2 2.9s1.2 3.3 1.4 3.6c.2.2 2.4 3.7 5.9 5.1.8.4 1.5.6 2 .7.8.3 1.6.2 2.2.1.7-.1 1.9-.8 2.2-1.5.3-.7.3-1.4.2-1.5-.1-.1-.3-.2-.6-.4Z" />
       </svg>
       <span>WhatsApp</span>
     </a>
+
     <script src="/src/scripts/seo-schema.js"></script>
+    <script src="/src/scripts/components/footer.js" defer></script>
     <script src="/src/scripts/script.js"></script>
   </body>
 </html>

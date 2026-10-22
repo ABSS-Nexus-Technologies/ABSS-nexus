@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow, noarchive" />
+    <title>Internship Reports | ABSS Nexus Admin Console</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="/public/assets/images/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="512x512" href="/public/assets/images/favicon.png" />
+    <link rel="apple-touch-icon" href="/public/assets/images/apple-touch-icon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/src/styles/styles.css" />
+    <link rel="stylesheet" href="/src/styles/components/admin.css" />
+  </head>
+  <body class="admin-body">
+    <div class="admin-wrapper" data-admin-app>
+      
+    <header class="admin-top-header">
+      <div class="admin-top-header-inner">
+        <div class="admin-brand-group">
+          <a href="/admin/" class="admin-brand-link" title="Admin Console Home">
+            <img src="/public/assets/images/favicon.png" alt="ABSS Nexus Logo" width="32" height="32" style="border-radius: 6px;" />
+            <span class="admin-brand-title">ABSS Nexus Operations Console</span>
+          </a>
+          <span class="admin-module-indicator module-indicator-internship">🎓 Internship Admin</span>
+          <span style="background: rgba(16, 185, 129, 0.12); color: #10b981; padding: 4px 10px; border-radius: 999px; font-size: 0.74rem; font-weight: 700;">● D1 Storage Active</span>
+        </div>
+        <div class="admin-header-actions">
+          <div class="admin-user-badge">
+            <span>Role:</span>
+            <span class="admin-role-pill" id="adminUserRoleBadge">Superadmin</span>
+          </div>
+          <a href="/admin/company/" class="btn-module-switch" title="Switch to Company Administration">🏢 Switch to Company Admin</a>
+          <a href="/admin/" class="btn-module-switch" style="font-size: 0.78rem;">Modules Hub</a>
+          <a href="/admin/login" onclick="sessionStorage.removeItem('abss-admin-token'); sessionStorage.removeItem('abss-admin-role');" class="btn-signout">Sign Out</a>
+        </div>
+      </div>
+    </header>
+  
+
+      <main class="admin-shell">
+        <div class="admin-layout">
+          
+    <aside class="admin-sidebar" aria-label="Internship Admin Navigation">
+      <div class="sidebar-module-title">
+        <span style="font-size: 1.25rem;">🎓</span>
+        <h2 class="sidebar-module-name">Internship Admin</h2>
+      </div>
+      <a href="/admin/company/" class="sidebar-module-switch-btn">⇄ Switch to Company Admin</a>
+      <nav class="admin-sidebar-nav">
+        
+          <a href="/admin/internships/" class="sidebar-nav-item ">
+            <span style="display: flex; align-items: center; gap: 8px;">
+              <span>📊</span>
+              <span>Overview</span>
+            </span>
+            
+          </a>
+        
+          <a href="/admin/internships/programs" class="sidebar-nav-item ">
+            <span style="display: flex; align-items: center; gap: 8px;">
+              <span>📚</span>
+              <span>Internship Programs</span>
+            </span>
+            <span class="sidebar-badge">5</span>
+          </a>
+        
+          <a href="/admin/internships/applications" class="sidebar-nav-item ">
+            <span style="display: flex; align-items: center; gap: 8px;">
+              <span>📝</span>
+              <span>Applications</span>
+            </span>
+            <span class="sidebar-badge">3</span>
+          </a>
+        
+          <a href="/admin/internships/students" class="sidebar-nav-item ">
+            <span style="display: flex; align-items: center; gap: 8px;">
+              <span>🎓</span>
+              <span>Enrolled Interns</span>
+            </span>
+            <span class="sidebar-badge">19</span>
+          </a>
+        
+          <a href="/admin/internships/tasks" class="sidebar-nav-item ">
+            <span style="display: flex; align-items: center; gap: 8px;">
+              <span>📋</span>
+              <span>Tasks & Assignments</span>
+            </span>
+            
+          </a>
+        
+          <a href="/admin/internships/submissions" class="sidebar-nav-item ">
+            <span style="display: flex; align-items: center; gap: 8px;">
+              <span>📥</span>
+              <span>Work Submissions</span>
+            </span>
+            
+          </a>
+        
+          <a href="/admin/internships/reviews" class="sidebar-nav-item ">
+            <span style="display: flex; align-items: center; gap: 8px;">
+              <span>⭐</span>
+              <span>Evaluations & Reviews</span>
+            </span>
+            
+          </a>
+        
+          <a href="/admin/internships/payments" class="sidebar-nav-item ">
+            <span style="display: flex; align-items: center; gap: 8px;">
+              <span>💳</span>
+              <span>Fee Payments</span>
+            </span>
+            <span class="sidebar-badge">2</span>
+          </a>
+        
+          <a href="/admin/internships/certificates" class="sidebar-nav-item ">
+            <span style="display: flex; align-items: center; gap: 8px;">
+              <span>📜</span>
+              <span>Certificate Registry</span>
+            </span>
+            <span class="sidebar-badge">3</span>
+          </a>
+        
+          <a href="/admin/internships/reports" class="sidebar-nav-item active">
+            <span style="display: flex; align-items: center; gap: 8px;">
+              <span>📈</span>
+              <span>Internship Reports</span>
+            </span>
+            
+          </a>
+        
+          <a href="/admin/internships/settings" class="sidebar-nav-item ">
+            <span style="display: flex; align-items: center; gap: 8px;">
+              <span>⚙️</span>
+              <span>Internship Settings</span>
+            </span>
+            
+          </a>
+        
+      </nav>
+      <div style="margin-top: 24px; padding-top: 14px; border-top: 1px solid var(--admin-border-light); font-size: 0.72rem; color: var(--admin-text-secondary); text-align: center;">
+        ABSS Nexus Operations v2.4<br/>
+        <span style="color: #10b981;">● Server Verified</span>
+      </div>
+    </aside>
+  
+
+          <div class="admin-main">
+            
+    <nav class="admin-breadcrumbs" aria-label="Breadcrumb">
+      <a href="/admin/">Admin Hub</a>
+      <span class="separator">/</span>
+      <a href="/admin/internships/">Internship Administration</a>
+      <span class="separator">/</span>
+      <span class="current">Internship Reports</span>
+    </nav>
+  
+
+            <div class="admin-page-header">
+              <div>
+                <div class="admin-page-eyebrow">Academic Analytics</div>
+                <h1 class="admin-page-title">Internship Reporting &amp; Telemetry</h1>
+                <p class="admin-page-subtitle">Cohort retention statistics, track distributions, milestone completion SLA, and performance analytics.</p>
+              </div>
+              <div class="admin-actions-bar">
+                
+                  <button type="button" class="btn-admin btn-admin-secondary" onclick="alert('Exporting module data to CSV...');">Export CSV</button>
+                  <button type="button" class="btn-admin btn-admin-primary" onclick="alert('Record creation modal opened.');">+ New Record</button>
+                
+              </div>
+            </div>
+
+            
+    <div class="admin-kpi-grid">
+      <div class="admin-kpi-card">
+        <span class="kpi-label">COHORT COMPLETION RATE</span>
+        <div class="kpi-value">94.2%</div>
+        <div class="kpi-sub" style="color: #10b981;">Industry benchmark: 76%</div>
+      </div>
+      <div class="admin-kpi-card">
+        <span class="kpi-label">AVERAGE REVIEW TURNAROUND</span>
+        <div class="kpi-value">14.8h</div>
+        <div class="kpi-sub" style="color: #10b981;">Within 24h SLA target</div>
+      </div>
+      <div class="admin-kpi-card">
+        <span class="kpi-label">DISTINCTION RATE</span>
+        <div class="kpi-value">72%</div>
+        <div class="kpi-sub">Grade A or higher</div>
+      </div>
+    </div>
+
+    <div style="background: #FFFFFF; border: 1px solid var(--admin-border); border-radius: var(--admin-radius-md); padding: 24px; margin-bottom: 24px;">
+      <h3 style="margin: 0 0 12px; font-size: 1.1rem; font-family: var(--font-display);">Track Distribution Summary</h3>
+      <div style="display: flex; flex-direction: column; gap: 12px;">
+        <div>
+          <div style="display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 4px;">
+            <span>Web Development Engineering</span>
+            <strong>43.2% (64 interns)</strong>
+          </div>
+          <div style="height: 8px; background: #E5E5EA; border-radius: 4px; overflow: hidden;">
+            <div style="width: 43.2%; height: 100%; background: #0066CC;"></div>
+          </div>
+        </div>
+        <div>
+          <div style="display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 4px;">
+            <span>Software Development &amp; Architecture</span>
+            <strong>25.6% (38 interns)</strong>
+          </div>
+          <div style="height: 8px; background: #E5E5EA; border-radius: 4px; overflow: hidden;">
+            <div style="width: 25.6%; height: 100%; background: #10B981;"></div>
+          </div>
+        </div>
+        <div>
+          <div style="display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 4px;">
+            <span>UI/UX Product Design</span>
+            <strong>12.1% (18 interns)</strong>
+          </div>
+          <div style="height: 8px; background: #E5E5EA; border-radius: 4px; overflow: hidden;">
+            <div style="width: 12.1%; height: 100%; background: #F59E0B;"></div>
+          </div>
+        </div>
+        <div>
+          <div style="display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 4px;">
+            <span>AI &amp; Machine Learning</span>
+            <strong>10.8% (16 interns)</strong>
+          </div>
+          <div style="height: 8px; background: #E5E5EA; border-radius: 4px; overflow: hidden;">
+            <div style="width: 10.8%; height: 100%; background: #8B5CF6;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script src="/src/config/admin-config.js"></script>
+    <script src="/src/services/admin-api.js"></script>
+    <script src="/src/scripts/admin-auth-guard.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", async () => {
+        const session = await window.AbssAdminAuthGuard.requireAdminSession(null, "internships");
+        if (session && session.admin) {
+          const roleBadge = document.getElementById("adminUserRoleBadge");
+          if (roleBadge) {
+            roleBadge.textContent = session.admin.role || "super_admin";
+          }
+        }
+      });
+    </script>
+  </body>
+</html>

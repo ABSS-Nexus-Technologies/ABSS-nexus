@@ -1,0 +1,790 @@
+/**
+ * ABSS Nexus Technologies - Global Hero Component Styles
+ * Design System: Apple-Inspired Minimalist Technology Aesthetic
+ * Colors: #FFFFFF, #F5F5F7, #1D1D1F, #6E6E73, #0066CC, #004FAD, #D2D2D7
+ */
+
+/* -------------------------------------------------------------------------
+   1. Base Hero System (.site-hero)
+   ------------------------------------------------------------------------- */
+.site-hero {
+  position: relative;
+  background-color: #FFFFFF;
+  color: #1D1D1F;
+  padding: clamp(32px, 4vw, 56px) 0 clamp(32px, 4vw, 64px);
+  overflow: hidden;
+  border-bottom: 1px solid #E5E5EA;
+}
+
+.site-hero__container {
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* Two-column responsive hero grid */
+.site-hero__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(32px, 5vw, 64px);
+  align-items: center;
+}
+
+@media (min-width: 992px) {
+  .site-hero__grid {
+    grid-template-columns: 1.15fr 0.85fr;
+  }
+}
+
+/* Hero Content Column */
+.site-hero__content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+
+/* Breadcrumb Navigation */
+.site-hero__breadcrumb {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #6E6E73;
+  margin-bottom: 18px;
+}
+
+.site-hero__breadcrumb a {
+  color: #6E6E73;
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.site-hero__breadcrumb a:hover,
+.site-hero__breadcrumb a:focus-visible {
+  color: #0066CC;
+}
+
+.site-hero__breadcrumb .separator {
+  color: #D2D2D7;
+  user-select: none;
+}
+
+.site-hero__breadcrumb .current {
+  color: #1D1D1F;
+  font-weight: 600;
+}
+
+/* Eyebrow & Badges */
+.site-hero__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(0, 102, 204, 0.08);
+  color: #0066CC;
+  border: 1px solid rgba(0, 102, 204, 0.2);
+  border-radius: 980px;
+  padding: 5px 14px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  margin-bottom: 14px;
+  text-transform: none;
+}
+
+.site-hero__eyebrow--subtle {
+  background: #F5F5F7;
+  color: #6E6E73;
+  border-color: #D2D2D7;
+}
+
+.site-hero__pulse-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #10B981;
+  box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.5);
+  animation: siteHeroPulse 2s infinite ease-in-out;
+}
+
+@keyframes siteHeroPulse {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.6); }
+  70% { transform: scale(1); box-shadow: 0 0 0 7px rgba(16, 185, 129, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+}
+
+/* H1 Typography */
+.site-hero__title {
+  font-family: "Space Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: clamp(2.1rem, 4.4vw, 3.8rem);
+  font-weight: 700;
+  line-height: 1.12;
+  letter-spacing: -0.025em;
+  color: #1D1D1F;
+  margin: 0 0 16px 0;
+  max-width: 720px;
+}
+
+.site-hero__title-accent {
+  background: linear-gradient(135deg, #0066CC 0%, #0099FF 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+/* Supporting Description */
+.site-hero__description {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: clamp(1rem, 1.35vw, 1.15rem);
+  line-height: 1.62;
+  color: #6E6E73;
+  margin: 0 0 22px 0;
+  max-width: 640px;
+}
+
+/* Hero Action CTAs */
+.site-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+.site-hero__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border-radius: 980px;
+  font-family: "Inter", -apple-system, sans-serif;
+  font-size: 0.94rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.site-hero__btn:focus-visible {
+  outline: 2px solid #0066CC;
+  outline-offset: 3px;
+}
+
+.site-hero__btn--primary {
+  background: #0066CC;
+  color: #FFFFFF;
+  border: 1px solid #0066CC;
+  box-shadow: 0 4px 14px rgba(0, 102, 204, 0.24);
+}
+
+.site-hero__btn--primary:hover {
+  background: #004FAD;
+  border-color: #004FAD;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(0, 102, 204, 0.32);
+}
+
+.site-hero__btn--secondary {
+  background: #F5F5F7;
+  color: #1D1D1F;
+  border: 1px solid #D2D2D7;
+}
+
+.site-hero__btn--secondary:hover {
+  background: #E8E8ED;
+  border-color: #C7C7CC;
+  color: #0066CC;
+  transform: translateY(-1px);
+}
+
+.site-hero__btn--whatsapp {
+  background: #25D366;
+  color: #FFFFFF;
+  border: 1px solid #25D366;
+  box-shadow: 0 4px 12px rgba(37, 211, 102, 0.2);
+}
+
+.site-hero__btn--whatsapp:hover {
+  background: #1EBE5D;
+  border-color: #1EBE5D;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(37, 211, 102, 0.3);
+}
+
+/* Direct Portal Destinations Strip */
+.site-hero__destinations {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.site-hero__destinations-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #6E6E73;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-right: 4px;
+}
+
+.site-hero__pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #F5F5F7;
+  color: #1D1D1F;
+  border: 1px solid #D2D2D7;
+  border-radius: 980px;
+  padding: 6px 14px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.15s ease;
+}
+
+.site-hero__pill:hover,
+.site-hero__pill:focus-visible {
+  background: #0066CC;
+  color: #FFFFFF;
+  border-color: #0066CC;
+  transform: translateY(-1px);
+}
+
+/* Trust Chips */
+.site-hero__trust-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.site-hero__chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #FFFFFF;
+  border: 1px solid #D2D2D7;
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: #1D1D1F;
+  text-decoration: none;
+  transition: all 0.15s ease;
+}
+
+.site-hero__chip:hover,
+.site-hero__chip:focus-visible {
+  border-color: #0066CC;
+  color: #0066CC;
+  background: rgba(0, 102, 204, 0.04);
+}
+
+/* Social Proof / Trust Metadata */
+.site-hero__social-proof {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding-top: 18px;
+  border-top: 1px solid #E5E5EA;
+  width: 100%;
+}
+
+.site-hero__avatars {
+  display: flex;
+}
+
+.site-hero__avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #0066CC;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.72rem;
+  font-weight: 700;
+  border: 2px solid #FFFFFF;
+  margin-left: -8px;
+}
+
+.site-hero__avatar:first-child {
+  margin-left: 0;
+}
+
+.site-hero__avatar:nth-child(2) { background: #0099FF; }
+.site-hero__avatar:nth-child(3) { background: #10B981; }
+
+.site-hero__proof-text {
+  font-size: 0.82rem;
+  color: #6E6E73;
+  line-height: 1.4;
+}
+
+.site-hero__proof-text strong {
+  color: #1D1D1F;
+  display: block;
+}
+
+/* -------------------------------------------------------------------------
+   2. Visual Column Variations
+   ------------------------------------------------------------------------- */
+.site-hero__visual {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Apple-like Workspace Device Mockup / Card */
+.site-hero__mockup-card {
+  width: 100%;
+  background: #FFFFFF;
+  border: 1px solid #D2D2D7;
+  border-radius: 20px;
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.06), 0 2px 8px rgba(0, 0, 0, 0.04);
+  overflow: hidden;
+  position: relative;
+}
+
+.site-hero__mockup-header {
+  background: #F5F5F7;
+  border-bottom: 1px solid #E5E5EA;
+  padding: 12px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.site-hero__window-controls {
+  display: flex;
+  gap: 6px;
+}
+
+.site-hero__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.site-hero__dot--close { background: #FF5F56; }
+.site-hero__dot--min { background: #FFBD2E; }
+.site-hero__dot--zoom { background: #27C93F; }
+
+.site-hero__mockup-title {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #6E6E73;
+  letter-spacing: 0.02em;
+}
+
+.site-hero__mockup-body {
+  padding: 24px;
+}
+
+/* Tech Pills Row in Hero */
+.site-hero__tech-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 18px;
+}
+
+.site-hero__tech-tag {
+  background: #F5F5F7;
+  border: 1px solid #D2D2D7;
+  border-radius: 6px;
+  padding: 4px 10px;
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: #1D1D1F;
+}
+
+/* -------------------------------------------------------------------------
+   3. Hero Layout Variants
+   ------------------------------------------------------------------------- */
+/* A. Marketing Hero (.site-hero--marketing) */
+.site-hero--marketing {
+  padding: clamp(28px, 3.5vw, 48px) 0 clamp(32px, 4vw, 56px) !important;
+  background: radial-gradient(circle at 80% 20%, rgba(0, 102, 204, 0.04) 0%, transparent 60%), #FFFFFF;
+}
+
+/* B. Centered / Page Hero (.site-hero--page) */
+.site-hero--page {
+  padding: clamp(40px, 5vw, 72px) 0;
+  background: #F5F5F7;
+}
+
+.site-hero--page.site-hero--centered {
+  text-align: center;
+}
+
+.site-hero--page.site-hero--centered .site-hero__content {
+  align-items: center;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.site-hero--page.site-hero--centered .site-hero__actions {
+  justify-content: center;
+}
+
+/* C. Article / Detail Hero (.site-hero--article) */
+.site-hero--article {
+  background: #FFFFFF;
+  padding: clamp(48px, 6vw, 80px) 0 clamp(32px, 4vw, 48px);
+}
+
+.site-hero__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+  font-size: 0.88rem;
+  color: #6E6E73;
+  margin-top: 12px;
+}
+
+.site-hero__meta-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* D. Compact / Dashboard / Auth Hero (.site-hero--compact) */
+.site-hero--compact {
+  padding: clamp(32px, 4vw, 56px) 0;
+  background: #FFFFFF;
+  border-bottom: 1px solid #E5E5EA;
+}
+
+.site-hero--compact .site-hero__title {
+  font-size: clamp(1.75rem, 3.2vw, 2.5rem);
+  margin-bottom: 12px;
+}
+
+.site-hero--compact .site-hero__description {
+  font-size: 1rem;
+  margin-bottom: 16px;
+}
+
+/* -------------------------------------------------------------------------
+   4. Motion & Accessibility
+   ------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .site-hero__pulse-dot {
+    animation: none !important;
+  }
+  .site-hero__btn,
+  .site-hero__pill,
+  .site-hero__chip {
+    transition: none !important;
+    transform: none !important;
+  }
+}
+
+/* Mobile & Tablet Refinements */
+@media (max-width: 768px) {
+  .site-hero {
+    padding: 36px 0 32px;
+  }
+  .site-hero__actions {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .site-hero__btn {
+    width: 100%;
+    justify-content: center;
+  }
+  .site-hero__destinations {
+    overflow-x: auto;
+    padding-bottom: 6px;
+    width: 100%;
+    flex-wrap: nowrap;
+    -webkit-overflow-scrolling: touch;
+  }
+  .site-hero__destinations-label {
+    white-space: nowrap;
+  }
+  .site-hero__pill {
+    flex-shrink: 0;
+  }
+  .site-hero__trust-chips {
+    overflow-x: auto;
+    width: 100%;
+    flex-wrap: nowrap;
+    padding-bottom: 4px;
+    -webkit-overflow-scrolling: touch;
+  }
+  .site-hero__chip {
+    flex-shrink: 0;
+  }
+}
+
+/* -------------------------------------------------------------------------
+   5. Realistic Laptop & Smartphone Workspace Visual (.hero-device-workspace)
+   ------------------------------------------------------------------------- */
+.hero-device-workspace {
+  position: relative;
+  width: 100%;
+  max-width: 580px;
+  margin: 0 auto;
+  perspective: 1200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Ambient workspace backdrop glow */
+.hero-device-workspace::before {
+  content: "";
+  position: absolute;
+  width: 120%;
+  height: 120%;
+  top: -10%;
+  left: -10%;
+  background: radial-gradient(circle at 60% 40%, rgba(0, 102, 204, 0.08) 0%, rgba(0, 102, 204, 0.02) 40%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* --- Laptop Mockup --- */
+.hero-laptop {
+  position: relative;
+  width: 100%;
+  max-width: 520px;
+  z-index: 1;
+  transform: rotateY(-3deg) rotateX(2deg);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-device-workspace:hover .hero-laptop {
+  transform: rotateY(0deg) rotateX(0deg) translateY(-4px);
+}
+
+.hero-laptop__screen-frame {
+  background: #1D1D1F;
+  border-radius: 14px 14px 0 0;
+  padding: 10px 10px 0 10px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.04);
+  border: 1px solid #333336;
+  position: relative;
+}
+
+/* Laptop top camera notch */
+.hero-laptop__camera {
+  position: absolute;
+  top: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 4px;
+  background: #000000;
+  border: 1px solid #444448;
+  border-radius: 50%;
+  z-index: 3;
+}
+
+.hero-laptop__screen-content {
+  background: #0C111A;
+  border-radius: 6px 6px 0 0;
+  overflow: hidden;
+  aspect-ratio: 16 / 10;
+  position: relative;
+  display: block;
+}
+
+.hero-laptop__screen-content img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+}
+
+/* Laptop bottom deck & hinge */
+.hero-laptop__base {
+  height: 14px;
+  background: linear-gradient(180deg, #E5E5EA 0%, #D2D2D7 50%, #B8B8BD 100%);
+  border-radius: 0 0 14px 14px;
+  position: relative;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+}
+
+.hero-laptop__base-notch {
+  width: 60px;
+  height: 4px;
+  background: #8E8E93;
+  border-radius: 0 0 4px 4px;
+}
+
+/* --- Smartphone Mockup --- */
+.hero-phone {
+  position: absolute;
+  right: -12px;
+  bottom: -20px;
+  width: 140px;
+  z-index: 4;
+  transform: rotate(2deg);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-device-workspace:hover .hero-phone {
+  transform: rotate(0deg) translateY(-8px);
+}
+
+.hero-phone__frame {
+  background: #1D1D1F;
+  border: 2.5px solid #3A3A3C;
+  border-radius: 24px;
+  padding: 6px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.22), 0 1px 3px rgba(0, 0, 0, 0.08);
+  position: relative;
+}
+
+.hero-phone__notch {
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 32px;
+  height: 5px;
+  background: #000000;
+  border-radius: 980px;
+  z-index: 5;
+}
+
+.hero-phone__screen {
+  background: #070A10;
+  border-radius: 18px;
+  overflow: hidden;
+  aspect-ratio: 9 / 19.5;
+  display: block;
+}
+
+.hero-phone__screen img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+}
+
+/* --- Floating Badges for Depth --- */
+.hero-badge-float {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid #D2D2D7;
+  border-radius: 12px;
+  padding: 8px 14px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #1D1D1F;
+  z-index: 5;
+  white-space: nowrap;
+}
+
+.hero-badge-float--top-right {
+  top: -12px;
+  right: 18px;
+}
+
+.hero-badge-float--bottom-left {
+  bottom: 12px;
+  left: -12px;
+}
+
+.hero-badge-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #0066CC;
+}
+
+.hero-badge-dot--green {
+  background: #27C93F;
+}
+
+@media (max-width: 768px) {
+  .hero-device-workspace {
+    max-width: 100%;
+    margin-top: 24px;
+  }
+  .hero-laptop {
+    transform: none !important;
+  }
+  .hero-phone {
+    width: 110px;
+    right: 4px;
+    bottom: -12px;
+    transform: none !important;
+  }
+  .hero-badge-float {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .site-hero__actions {
+    flex-direction: column;
+    width: 100%;
+    align-items: stretch;
+  }
+  .site-hero__btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* -------------------------------------------------------------------------
+   4. Progressive Enhancement Scroll Reveal Animations
+   ------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: no-preference) {
+  html.has-scroll-reveal .reveal-on-scroll {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+  }
+
+  html.has-scroll-reveal .reveal-on-scroll.is-revealed {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  html.has-scroll-reveal .reveal-delay-1 { transition-delay: 0.08s; }
+  html.has-scroll-reveal .reveal-delay-2 { transition-delay: 0.16s; }
+  html.has-scroll-reveal .reveal-delay-3 { transition-delay: 0.24s; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-on-scroll {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .hero-laptop,
+  .hero-phone,
+  .hero-badge-float {
+    transition: none !important;
+  }
+}

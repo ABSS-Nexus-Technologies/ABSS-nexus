@@ -12,6 +12,10 @@
     <meta property="og:description" content="ABSS Nexus Technologies builds practical websites, UI/UX designs and digital solutions for small businesses and growing brands in India." />
     <meta property="og:image" content="https://abssnexus.in/public/assets/images/LogoGenerated.png" />
     <meta property="og:url" content="https://abssnexus.in/" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="ABSS Nexus Technologies | Innovate. Solve. Elevate." />
+    <meta name="twitter:description" content="ABSS Nexus Technologies builds practical websites, UI/UX designs and digital solutions for small businesses and growing brands in India." />
+    <meta name="twitter:image" content="https://abssnexus.in/public/assets/images/LogoGenerated.png" />
     <link rel="canonical" href="https://abssnexus.in/" />
     <title>ABSS Nexus Technologies | Innovate. Solve. Elevate.</title>
     <link rel="icon" type="image/png" sizes="32x32" href="/public/assets/images/favicon-32x32.png" />
@@ -20,177 +24,317 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="/src/styles/styles.css" />
   </head>
-  <body class="agency-dark-theme">
-    <header class="site-header">
+  <body class="apple-homepage agency-light-theme">
+    <header class="site-header" role="banner">
       <div class="announcement-bar">
-        <div class="container">
-          <span class="announcement-badge">
+        <div class="announcement-bar__container container">
+          <span class="announcement-bar__badge">
             <span class="live-pulse-dot" aria-hidden="true"></span>
-            Free consultation available for website &amp; digital projects.
+            <span>Applications open for 2026 Technical Internship Cohort.</span>
           </span>
-          <a href="/contact#project-inquiry">Start your business website &rarr;</a>
+          <a class="announcement-bar__link" href="/internships">Apply for Internship &rarr;</a>
         </div>
       </div>
-      <nav class="nav">
+      <nav class="nav" aria-label="Main Navigation">
         <a class="brand" href="/" aria-label="ABSS Nexus Technologies home">
-          <img src="/public/assets/images/LogoGenerated.png" alt="ABSS Nexus Technologies logo" />
-          <span>ABSS Nexus</span>
+          <img src="/public/assets/images/favicon.png" alt="ABSS Nexus Technologies logo" width="38" height="38" />
+          <span class="brand-name">ABSS Nexus Technologies</span>
         </a>
-        <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
-          <span></span>
-          <span></span>
-          <span></span>
+        <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav-links">
+          <span class="hamburger-bar"></span>
+          <span class="hamburger-bar"></span>
+          <span class="hamburger-bar"></span>
         </button>
-        <div class="nav-links">
-          <a href="/" aria-current="page">Home</a>
-          <a href="/about">About</a>
-          <a href="/services">Services</a>
-          <a href="/projects">Projects</a>
-          <a href="/contact">Contact</a>
-          <a class="nav-cta" href="/pricing">Our Pricing Packages</a>
+        <div class="nav-links" id="main-nav-links">
+          <a href="/" class="nav-link" aria-current="page">Home</a>
+
+          <!-- Services Mega Menu Dropdown -->
+          <div class="nav-item-dropdown">
+            <button class="nav-dropdown-trigger" type="button" aria-expanded="false" aria-haspopup="true">
+              <span>Services</span>
+              <svg class="dropdown-arrow" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <div class="mega-menu mega-menu-services" role="menu">
+              <div class="mega-menu-grid">
+                <div class="mega-col">
+                  <div class="mega-col-title">Web Engineering</div>
+                  <ul class="mega-link-list">
+                    <li>
+                      <a class="mega-link" href="/services/website-development">
+                        <span class="mega-link-title">Website Development</span>
+                        <span class="mega-link-desc">High-speed business &amp; corporate platforms</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="mega-link" href="/services/ecommerce-development">
+                        <span class="mega-link-title">E-Commerce Development</span>
+                        <span class="mega-link-desc">Online storefronts &amp; fast checkout paths</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="mega-link" href="/services/digital-marketing-seo">
+                        <span class="mega-link-title">Digital Marketing &amp; SEO</span>
+                        <span class="mega-link-desc">Search rankings &amp; lead growth</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="mega-link" href="/services/ui-ux-design">
+                        <span class="mega-link-title">UI/UX Design</span>
+                        <span class="mega-link-desc">Figma wireframes &amp; design systems</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="mega-link" href="/services/website-maintenance">
+                        <span class="mega-link-title">Website Maintenance</span>
+                        <span class="mega-link-desc">Proactive updates, security &amp; backups</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+                <div class="mega-col">
+                  <div class="mega-col-title">Software &amp; Cloud</div>
+                  <ul class="mega-link-list">
+                    <li>
+                      <a class="mega-link" href="/services/software-development">
+                        <span class="mega-link-title">Software Development</span>
+                        <span class="mega-link-desc">Custom web apps &amp; workflow software</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="mega-link" href="/services/mobile-app-development">
+                        <span class="mega-link-title">Mobile App Development</span>
+                        <span class="mega-link-desc">iOS &amp; Android cross-platform solutions</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="mega-link" href="/services/saas-development">
+                        <span class="mega-link-title">SaaS Development</span>
+                        <span class="mega-link-desc">Scalable cloud platforms &amp; client portals</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="mega-link" href="/services/cloud-computing">
+                        <span class="mega-link-title">Cloud Computing &amp; DevOps</span>
+                        <span class="mega-link-desc">Edge servers, CI/CD pipelines &amp; scaling</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="mega-link" href="/services/api-integration">
+                        <span class="mega-link-title">API Integration</span>
+                        <span class="mega-link-desc">Clean RESTful &amp; edge database APIs</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+                <div class="mega-col">
+                  <div class="mega-col-title">Data, QA &amp; Support</div>
+                  <ul class="mega-link-list">
+                    <li>
+                      <a class="mega-link" href="/services/ai-machine-learning">
+                        <span class="mega-link-title">AI &amp; Machine Learning</span>
+                        <span class="mega-link-desc">Intelligent automation &amp; predictive models</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="mega-link" href="/services/data-analytics-bi">
+                        <span class="mega-link-title">Data Analytics &amp; BI</span>
+                        <span class="mega-link-desc">Real-time dashboards &amp; telemetry hubs</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="mega-link" href="/services/cybersecurity">
+                        <span class="mega-link-title">Cybersecurity</span>
+                        <span class="mega-link-desc">Vulnerability audits &amp; edge hardening</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="mega-link" href="/services/software-testing-qa">
+                        <span class="mega-link-title">Software Testing &amp; QA</span>
+                        <span class="mega-link-desc">End-to-end verification &amp; audits</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="mega-link" href="/services/it-consulting">
+                        <span class="mega-link-title">IT Consulting &amp; Strategy</span>
+                        <span class="mega-link-desc">Technology audits &amp; roadmap planning</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="mega-link" href="/services/managed-it-support">
+                        <span class="mega-link-title">Managed IT Support</span>
+                        <span class="mega-link-desc">24/7 technical monitoring &amp; maintenance</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="mega-menu-footer-bar">
+                <span>16 Comprehensive IT Disciplines Available</span>
+                <a href="/services">View Complete Service Catalog &rarr;</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Solutions Mega Menu Dropdown -->
+          <div class="nav-item-dropdown">
+            <button class="nav-dropdown-trigger" type="button" aria-expanded="false" aria-haspopup="true">
+              <span>Solutions</span>
+              <svg class="dropdown-arrow" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <div class="mega-menu mega-menu-solutions" role="menu">
+              <div class="mega-menu-grid mega-menu-grid--solutions">
+                <div class="mega-col">
+                  <div class="mega-col-title">Enterprise Architecture</div>
+                  <ul class="mega-link-list">
+                    <li>
+                      <a class="mega-link" href="/solutions#automation">
+                        <span class="mega-link-title">Business Process Automation</span>
+                        <span class="mega-link-desc">Custom workflow engines &amp; queue automation</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="mega-link" href="/solutions#platforms">
+                        <span class="mega-link-title">Custom Software Platforms</span>
+                        <span class="mega-link-desc">Tailored relational databases &amp; admin controls</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="mega-link" href="/solutions#cloud">
+                        <span class="mega-link-title">Cloud Adoption &amp; Modernization</span>
+                        <span class="mega-link-desc">Serverless edge networks &amp; zero downtime</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+                <div class="mega-col">
+                  <div class="mega-col-title">Integration &amp; Growth</div>
+                  <ul class="mega-link-list">
+                    <li>
+                      <a class="mega-link" href="/solutions#api">
+                        <span class="mega-link-title">Connected Systems &amp; APIs</span>
+                        <span class="mega-link-desc">Secure REST bridges &amp; CRM synchronization</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="mega-link" href="/solutions#conversion">
+                        <span class="mega-link-title">High-Conversion Experiences</span>
+                        <span class="mega-link-desc">Sub-second performance &amp; instant inquiries</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="mega-link" href="/solutions#strategy">
+                        <span class="mega-link-title">Strategic Digital Transformation</span>
+                        <span class="mega-link-desc">Architecture audits &amp; phased delivery roadmaps</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="mega-menu-footer-bar">
+                <span>Outcome-Driven Technical Frameworks</span>
+                <a href="/solutions">Explore All Solutions &rarr;</a>
+              </div>
+            </div>
+          </div>
+
+          <a href="/industries" class="nav-link">Industries</a>
+          <a href="/work" class="nav-link">Work</a>
+          <a href="/pricing" class="nav-link">Pricing</a>
+          <a href="/blog" class="nav-link">Blog</a>
+          <a href="/about" class="nav-link">About</a>
+          <a href="/contact" class="nav-link">Contact</a>
+          <a class="nav-cta" href="/contact#project-inquiry">Start Project</a>
         </div>
       </nav>
     </header>
 
     <main>
-      <!-- Hero Section -->
-      <section class="hero-agency section" id="hero">
-        <div class="container hero-grid">
-          <div class="hero-copy">
-            <div class="hero-pill-badge">
-              <span class="live-pulse-dot" aria-hidden="true"></span>
-              Accepting New Projects for 2026 &bull; Free Tech Consultation
+      <!-- Section 1: Target Homepage Hero -->
+      <section class="site-hero site-hero--marketing section" id="hero">
+        <div class="site-hero__container container site-hero__grid hero-grid">
+          <div class="site-hero__content hero-copy">
+            <div class="site-hero__eyebrow hero-pill-badge reveal-on-scroll">
+              <span class="site-hero__pulse-dot live-pulse-dot" aria-hidden="true"></span>
+              <span>DIGITAL INNOVATION &bull; SOFTWARE &bull; DESIGN</span>
             </div>
-            <h1 class="hero-headline-gradient">
-              Architecting High-Performance <span class="text-gradient-cyan">Websites &amp; Digital Experiences</span>
+            <h1 class="site-hero__title hero-headline-gradient reveal-on-scroll reveal-delay-1">
+              We Build Digital Experiences That <span class="site-hero__title-accent text-gradient-cyan">Move Businesses Forward</span>
             </h1>
-            <p class="hero-description">
-              ABSS Nexus Technologies engineers custom responsive websites, high-converting landing pages,
-              and modern UI/UX design. We help startups, institutions, and growing businesses build digital
-              authority with speed and precision.
+            <p class="site-hero__description hero-description reveal-on-scroll reveal-delay-2">
+              From modern websites to custom software and digital solutions, we help businesses turn ideas into useful digital products engineered for sub-second performance, intuitive UI/UX, and reliable cloud infrastructure.
             </p>
-            <div class="hero-actions">
-              <a class="btn btn-glow-cyan" href="/contact">
-                <span>Discuss Your Project</span>
+            <div class="site-hero__actions hero-actions reveal-on-scroll reveal-delay-3">
+              <a class="site-hero__btn site-hero__btn--primary btn btn-glow-cyan" href="/contact#project-inquiry">
+                <span>Start Your Project</span>
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                   <line x1="5" y1="12" x2="19" y2="12"></line>
                   <polyline points="12 5 19 12 12 19"></polyline>
                 </svg>
               </a>
-              <a class="btn btn-glass" href="/projects">
-                <span>Explore Our Work</span>
+              <a class="site-hero__btn site-hero__btn--secondary btn btn-glass" href="/services">
+                <span>Explore Our Services</span>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                   <polyline points="9 18 15 12 9 6"></polyline>
                 </svg>
               </a>
-              <a class="btn btn-whatsapp-outline" href="https://wa.me/918757928673" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                  <path d="M17.472 14.382c-.301-.15-1.78-.878-2.056-.979-.276-.1-.477-.15-.678.15-.2.3-.778.979-.954 1.18-.176.2-.352.226-.653.075s-1.272-.469-2.423-1.496c-.896-.799-1.501-1.786-1.677-2.088-.176-.301-.019-.464.132-.614.136-.135.301-.351.452-.527.15-.176.201-.301.301-.502.1-.2.05-.376-.025-.527-.075-.15-.678-1.632-.929-2.235-.245-.588-.494-.509-.678-.518l-.578-.01c-.2 0-.527.075-.803.376s-1.054 1.029-1.054 2.509 1.079 2.91 1.23 3.111c.15.2 2.122 3.24 5.141 4.544.718.31 1.279.495 1.716.634.722.23 1.378.197 1.9.12.58-.088 1.78-.727 2.03-1.43.25-.704.25-1.307.175-1.431-.075-.125-.276-.2-.577-.35zM12.04 2C6.51 2 2.03 6.48 2.03 12.01c0 1.97.57 3.81 1.57 5.37L2 22l4.78-1.54c1.51.92 3.27 1.45 5.26 1.45 5.53 0 10.01-4.48 10.01-10.01S17.57 2 12.04 2zm0 18.25c-1.74 0-3.36-.5-4.74-1.38l-.34-.22-2.83.91.93-2.76-.24-.37c-.98-1.5-1.53-3.27-1.53-5.12 0-4.56 3.71-8.27 8.27-8.27s8.27 3.71 8.27 8.27-3.71 8.27-8.27 8.27z"/>
-                </svg>
-                <span>WhatsApp</span>
-              </a>
-            </div>
-            <div class="hero-trust-chips" aria-label="Key highlights">
-              <span class="trust-chip">Founder-Led Engineering</span>
-              <span class="trust-chip">Core Web Vitals Tuned</span>
-              <span class="trust-chip">Dedicated Post-Delivery Support</span>
-            </div>
-
-            <!-- Social Proof Avatar Stack -->
-            <div class="hero-social-proof" aria-label="Client Trust rating">
-              <div class="avatar-cluster" aria-hidden="true">
-                <span class="avatar-1">AS</span>
-                <span class="avatar-2">PM</span>
-                <span class="avatar-3">VP</span>
-              </div>
-              <div class="hero-rating-text">
-                <span class="hero-rating-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
-                <strong>4.9/5 Rating from Business Owners</strong>
-                <span>50+ High-Performance Websites Shipped</span>
-              </div>
             </div>
           </div>
 
-          <!-- Hero Terminal Window with Clickable Tabs -->
-          <div class="terminal-window" aria-label="ABSS Nexus Architecture Terminal">
-            <div class="terminal-header">
-              <div class="terminal-dots">
-                <span class="terminal-dot red"></span>
-                <span class="terminal-dot yellow"></span>
-                <span class="terminal-dot green"></span>
+          <!-- Hero Visual: Realistic Laptop & Smartphone Workspace Visual -->
+          <div class="site-hero__visual hero-visual-stage">
+            <div class="hero-device-workspace" aria-label="Refined digital product interfaces displayed on laptop and smartphone">
+              <!-- Floating Top Badge -->
+              <div class="hero-badge-float hero-badge-float--top-right">
+                <span class="hero-badge-dot hero-badge-dot--green" aria-hidden="true"></span>
+                <span>Edge Active &bull; 99.9% SLA</span>
               </div>
-              <span class="terminal-title">abss-nexus-engine.config</span>
-              <span class="terminal-dots" style="visibility: hidden;">
-                <span class="terminal-dot"></span>
-              </span>
-            </div>
-            <div class="terminal-tabs">
-              <button class="terminal-tab active" type="button" data-tab="architecture">architecture.ts</button>
-              <button class="terminal-tab" type="button" data-tab="telemetry">telemetry.json</button>
-              <button class="terminal-tab" type="button" data-tab="deploy">deploy.sh</button>
-            </div>
-            <div class="terminal-body">
-              <div class="terminal-metrics-bar">
-                <div class="metric-pill perf">
-                  <strong>99/100</strong>
-                  <span>Lighthouse</span>
+
+              <!-- Realistic Laptop Mockup -->
+              <div class="hero-laptop">
+                <div class="hero-laptop__screen-frame">
+                  <div class="hero-laptop__camera" aria-hidden="true"></div>
+                  <div class="hero-laptop__screen-content">
+                    <img src="/public/assets/images/project-dashboard-ui.png" alt="Executive SaaS analytics dashboard interface" width="1024" height="640" fetchpriority="high" loading="eager" />
+                  </div>
                 </div>
-                <div class="metric-pill speed">
-                  <strong>&lt; 35ms</strong>
-                  <span>Edge Speed</span>
-                </div>
-                <div class="metric-pill stack">
-                  <strong>Cloud D1</strong>
-                  <span>Storage</span>
+                <div class="hero-laptop__base" aria-hidden="true">
+                  <div class="hero-laptop__base-notch"></div>
                 </div>
               </div>
 
-              <!-- View 1: Architecture -->
-              <div class="code-snippet-box terminal-code-view active" data-view="architecture">
-                <span class="code-comment">// ABSS Nexus Modern Architecture</span><br />
-                <span class="code-keyword">const</span> <span class="code-prop">abssEngine</span> = {<br />
-                &nbsp;&nbsp;<span class="code-prop">stack</span>: [<span class="code-string">"Vanilla JS"</span>, <span class="code-string">"Cloudflare D1"</span>, <span class="code-string">"Edge APIs"</span>],<br />
-                &nbsp;&nbsp;<span class="code-prop">performance</span>: <span class="code-string">"Sub-Second Load Times"</span>,<br />
-                &nbsp;&nbsp;<span class="code-prop">mobileFirst</span>: <span class="code-keyword">true</span>,<br />
-                &nbsp;&nbsp;<span class="code-prop">turnaround</span>: <span class="code-string">"3x Industry Pace"</span>,<br />
-                &nbsp;&nbsp;<span class="code-prop">leadEngineer</span>: <span class="code-string">"Shubham Kumar"</span><br />
-                };
+              <!-- Realistic Smartphone Mockup -->
+              <div class="hero-phone">
+                <div class="hero-phone__frame">
+                  <div class="hero-phone__notch" aria-hidden="true"></div>
+                  <div class="hero-phone__screen">
+                    <img src="/public/assets/images/project-ecommerce-demo.png" alt="Responsive mobile e-commerce interface" width="480" height="960" fetchpriority="high" loading="eager" />
+                  </div>
+                </div>
               </div>
 
-              <!-- View 2: Telemetry -->
-              <div class="code-snippet-box terminal-code-view" data-view="telemetry" hidden>
-                <span class="code-comment">// Real-Time Edge Telemetry Audit</span><br />
-                {<br />
-                &nbsp;&nbsp;<span class="code-prop">"lighthouse"</span>: { <span class="code-prop">"perf"</span>: <span class="code-num">99</span>, <span class="code-prop">"a11y"</span>: <span class="code-num">100</span>, <span class="code-prop">"seo"</span>: <span class="code-num">100</span> },<br />
-                &nbsp;&nbsp;<span class="code-prop">"edgeTTFB"</span>: <span class="code-string">"24ms"</span>,<br />
-                &nbsp;&nbsp;<span class="code-prop">"sslGrade"</span>: <span class="code-string">"A+ Enterprise"</span>,<br />
-                &nbsp;&nbsp;<span class="code-prop">"status"</span>: <span class="code-string">"All Systems Operational"</span><br />
-                }
+              <!-- Floating Bottom Badge -->
+              <div class="hero-badge-float hero-badge-float--bottom-left">
+                <span class="hero-badge-dot" aria-hidden="true"></span>
+                <span>Core Web Vitals 100/100 &bull; &lt;35ms</span>
               </div>
-
-              <!-- View 3: Deploy -->
-              <div class="code-snippet-box terminal-code-view" data-view="deploy" hidden>
-                <span class="code-comment"># Global CDN Edge Deployment</span><br />
-                <span class="code-keyword">$</span> abss deploy --production --edge<br />
-                <span class="code-string">&#10004; Compiling clean responsive assets... Done (0.4s)</span><br />
-                <span class="code-string">&#10004; Running Core Web Vitals audit... 99.4% Passed</span><br />
-                <span class="code-prop">&#128640; Live at https://abssnexus.in/ [200 OK]</span>
-              </div>
-            </div>
-            <div class="terminal-floating-badge">
-              <span>&#9889; Production-Grade Code</span>
             </div>
           </div>
         </div>
+
+        <!-- Subtle Scroll Indicator -->
+        <a class="hero-scroll-indicator" href="#intro" aria-label="Scroll to explore">
+          <span class="scroll-indicator-mouse"><span class="scroll-indicator-wheel"></span></span>
+          <span>Scroll to explore</span>
+        </a>
       </section>
 
       <!-- Live Stats Bar Section -->
-      <section class="agency-stats-section" aria-label="Key Performance Metrics">
+      <section class="agency-stats-section" id="intro" aria-label="Key Performance Metrics">
         <div class="container agency-stats-grid">
           <div class="agency-stat-card">
             <strong class="stat-num" data-count="50" data-suffix="+">50+</strong>
@@ -230,7 +374,7 @@
             <span class="tech-pill"><span class="tech-pill-dot"></span>HTML5 Semantic</span>
             <span class="tech-pill"><span class="tech-pill-dot"></span>Git &amp; CI/CD</span>
             <span class="tech-pill"><span class="tech-pill-dot"></span>SQL Databases</span>
-            <!-- Duplicate for seamless infinite loop -->
+            <!-- Seamless infinite loop duplication -->
             <span class="tech-pill"><span class="tech-pill-dot"></span>React.js</span>
             <span class="tech-pill"><span class="tech-pill-dot"></span>Next.js</span>
             <span class="tech-pill"><span class="tech-pill-dot"></span>Node.js</span>
@@ -247,62 +391,72 @@
         </div>
       </section>
 
-      <!-- Bento Services Section -->
+      <!-- Section 3: Fifteen-Service Showcase -->
       <section class="section services" id="services">
+        <!-- Subtly Animated Digital World Mesh -->
+        <div class="services-digital-mesh" aria-hidden="true"></div>
+
         <div class="container">
           <div class="section-heading">
-            <p class="eyebrow">Comprehensive Capabilities</p>
-            <h2>End-to-End Solutions Tailored for Modern Growth</h2>
+            <p class="eyebrow">Layered Digital Capabilities</p>
+            <h2>Engineering Solutions Across 16 Authentic Disciplines</h2>
             <p>
-              We craft tailored digital products designed for high performance, intuitive interaction,
-              and measurable business outcomes.
+              As digital structures transition into concrete capability visuals, explore our complete catalog
+              of high-speed web platforms, enterprise dashboards, and modern UI/UX design.
             </p>
           </div>
-          <div class="bento-services-grid">
-            <!-- Service 1: Flagship -->
-            <article class="bento-service-card service-card-featured">
-              <div class="service-icon-box">
+
+          <div class="cinematic-services-grid">
+            <!-- Service 1: Custom Website Development -->
+            <a class="cinematic-service-card" href="/services/website-development">
+              <div class="cinematic-card-icon">
                 <svg viewBox="0 0 24 24" aria-hidden="true">
                   <polyline points="16 18 22 12 16 6"></polyline>
                   <polyline points="8 6 2 12 8 18"></polyline>
                 </svg>
               </div>
-              <span class="service-badge">Core Capability &bull; ⏱ 5-10 Days</span>
-              <h3>Custom Website &amp; Application Development</h3>
+              <span class="cinematic-card-badge">Flagship &bull; ⏱ 5-10 Days</span>
+              <h3>Custom Website Development</h3>
               <p>
-                From bespoke multi-page business websites to interactive web applications. We build
-                clean, lightweight, high-performance platforms with responsive design and modern database architectures.
+                From bespoke multi-page business websites to interactive web platforms. Built with clean,
+                lightweight architecture, high-speed edge rendering, and modern database backends.
               </p>
-              <ul class="service-features-list">
+              <ul class="cinematic-features-tags">
                 <li>Responsive Layouts</li>
                 <li>API Integrations</li>
-                <li>Fast Edge Rendering</li>
+                <li>Edge Performance</li>
                 <li>SEO Architecture</li>
               </ul>
-              <a class="service-card-link" href="/services/website-development">View Service Details &rarr;</a>
-            </article>
+              <span class="cinematic-card-cta">Explore Service Details &rarr;</span>
+            </a>
 
-            <!-- Service 2: Business Websites -->
-            <article class="bento-service-card">
-              <div class="service-icon-box">
+            <!-- Service 2: Custom Software Development -->
+            <a class="cinematic-service-card" href="/services/software-development">
+              <div class="cinematic-card-icon">
                 <svg viewBox="0 0 24 24" aria-hidden="true">
-                  <circle cx="12" cy="12" r="10"></circle>
-                  <line x1="2" y1="12" x2="22" y2="12"></line>
-                  <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                  <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                  <line x1="8" y1="21" x2="16" y2="21"></line>
+                  <line x1="12" y1="17" x2="12" y2="21"></line>
                 </svg>
               </div>
-              <span class="service-badge">Corporate &bull; ⏱ 3-7 Days</span>
-              <h3>Business Websites</h3>
+              <span class="cinematic-card-badge">Full Stack &bull; Scalable</span>
+              <h3>Custom Software Development</h3>
               <p>
-                Authoritative online presence for local businesses, enterprises, schools, and professional practices.
-                Engineered to build customer confidence and capture qualified leads.
+                Custom business management platforms, real-time analytics portals, and intuitive admin dashboards
+                engineered for data-heavy workflows and operational speed.
               </p>
-              <a class="service-card-link" href="/services">Explore Service &rarr;</a>
-            </article>
+              <ul class="cinematic-features-tags">
+                <li>Telemetry &amp; Data</li>
+                <li>Cloud D1 Storage</li>
+                <li>Role Auth</li>
+                <li>Speed Benchmarks</li>
+              </ul>
+              <span class="cinematic-card-cta">Explore Software Development &rarr;</span>
+            </a>
 
-            <!-- Service 3: UI/UX Design -->
-            <article class="bento-service-card">
-              <div class="service-icon-box">
+            <!-- Service 3: UI/UX Design & Prototyping -->
+            <a class="cinematic-service-card" href="/services/ui-ux-design">
+              <div class="cinematic-card-icon">
                 <svg viewBox="0 0 24 24" aria-hidden="true">
                   <path d="M12 19l7-7 3 3-7 7-3-3z"></path>
                   <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"></path>
@@ -310,56 +464,115 @@
                   <circle cx="11" cy="11" r="2"></circle>
                 </svg>
               </div>
-              <span class="service-badge">User Experience &bull; Figma</span>
+              <span class="cinematic-card-badge">User Experience &bull; Figma</span>
               <h3>UI/UX Design &amp; Prototyping</h3>
               <p>
-                Human-centered user journeys, intuitive navigation layouts, and high-fidelity Figma prototypes
-                that turn complex requirements into elegant, effortless experiences.
+                Human-centered user journeys, design systems, and high-fidelity Figma prototypes
+                that transform complex operational requirements into elegant, frictionless experiences.
               </p>
-              <a class="service-card-link" href="/services/ui-ux-design">View Service Details &rarr;</a>
-            </article>
+              <ul class="cinematic-features-tags">
+                <li>Wireframing</li>
+                <li>Design Systems</li>
+                <li>User Journeys</li>
+                <li>Figma Handoff</li>
+              </ul>
+              <span class="cinematic-card-cta">View Design Services &rarr;</span>
+            </a>
 
-            <!-- Service 4: Landing Pages -->
-            <article class="bento-service-card">
-              <div class="service-icon-box">
+            <!-- Service 4: Mobile App Development -->
+            <a class="cinematic-service-card" href="/services/mobile-app-development">
+              <div class="cinematic-card-icon">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+                  <line x1="12" y1="18" x2="12.01" y2="18"></line>
+                </svg>
+              </div>
+              <span class="cinematic-card-badge">Mobile &bull; iOS &amp; Android</span>
+              <h3>Mobile App Development</h3>
+              <p>
+                High-performance mobile applications engineered with responsive native-feel interfaces,
+                reliable offline caching, and real-time backend synchronization.
+              </p>
+              <ul class="cinematic-features-tags">
+                <li>Cross-Platform</li>
+                <li>Offline Sync</li>
+                <li>Native Feel</li>
+                <li>Push Alerts</li>
+              </ul>
+              <span class="cinematic-card-cta">Explore Mobile Apps &rarr;</span>
+            </a>
+
+            <!-- Service 5: AI & Machine Learning -->
+            <a class="cinematic-service-card" href="/services/ai-machine-learning">
+              <div class="cinematic-card-icon">
                 <svg viewBox="0 0 24 24" aria-hidden="true">
                   <circle cx="12" cy="12" r="10"></circle>
                   <circle cx="12" cy="12" r="6"></circle>
                   <circle cx="12" cy="12" r="2"></circle>
                 </svg>
               </div>
-              <span class="service-badge">Lead Gen &bull; ⏱ 3-5 Days</span>
-              <h3>High-Converting Landing Pages</h3>
+              <span class="cinematic-card-badge">Intelligence &bull; Automation</span>
+              <h3>AI &amp; Machine Learning</h3>
               <p>
-                Conversion-driven single-page experiences built for marketing campaigns, product launches,
-                and targeted services with lightning-fast load times and clear calls to action.
+                Custom intelligent workflows, natural language processing, LLM fine-tuning, and predictive
+                analytics embedded directly into your core business applications.
               </p>
-              <a class="service-card-link" href="/services">Explore Service &rarr;</a>
-            </article>
+              <ul class="cinematic-features-tags">
+                <li>LLM Integration</li>
+                <li>Smart Chatbots</li>
+                <li>Data Prediction</li>
+                <li>Automation</li>
+              </ul>
+              <span class="cinematic-card-cta">Explore AI Solutions &rarr;</span>
+            </a>
 
-            <!-- Service 5: Website Maintenance -->
-            <article class="bento-service-card">
-              <div class="service-icon-box">
+            <!-- Flagship Service 6: Managed IT Support -->
+            
+            <a class="cinematic-service-card" href="/services/managed-it-support">
+              <div class="cinematic-card-icon">
                 <svg viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                  <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+                  <path d="M2 17l10 5 10-5"></path>
+                  <path d="M2 12l10 5 10-5"></path>
                 </svg>
               </div>
-              <span class="service-badge">Reliability &bull; Monthly</span>
-              <h3>Website Maintenance &amp; Optimization</h3>
+              <span class="cinematic-card-badge">Support &bull; 24/7 SLA</span>
+              <h3>Managed IT Support &amp; Maintenance</h3>
               <p>
-                Ongoing technical checkups, speed benchmarking, form testing, security patches,
-                and content updates to keep your website stable, fast, and trouble-free.
+                Continuous cloud infrastructure monitoring, rapid incident response SLAs, multi-cloud server patching,
+                and dedicated engineering support for critical operations.
               </p>
-              <a class="service-card-link" href="/services/website-maintenance">View Service Details &rarr;</a>
-            </article>
+              <ul class="cinematic-features-tags">
+                <li>24/7 Monitoring</li>
+                <li>Incident Response SLA</li>
+                <li>Security Patches</li>
+                <li>Dedicated Engineers</li>
+              </ul>
+              <span class="cinematic-card-cta">View Support Plans &rarr;</span>
+            </a>
           </div>
-          <div style="text-align: center; margin-top: 48px;">
-            <a class="btn btn-glow-cyan" href="/services">View All Services &amp; Packages &rarr;</a>
+
+          <!-- Specialization Directory Tags -->
+          <div class="services-tag-pills" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 36px; max-width: 840px; margin-left: auto; margin-right: auto;">
+            <span style="font-size: 0.8rem; color: var(--color-text-dim); padding: 4px 12px; background: rgba(255,255,255,0.03); border: 1px solid var(--border-subtle); border-radius: 999px;">Cloud &amp; DevOps</span>
+            <span style="font-size: 0.8rem; color: var(--color-text-dim); padding: 4px 12px; background: rgba(255,255,255,0.03); border: 1px solid var(--border-subtle); border-radius: 999px;">Cybersecurity</span>
+            <span style="font-size: 0.8rem; color: var(--color-text-dim); padding: 4px 12px; background: rgba(255,255,255,0.03); border: 1px solid var(--border-subtle); border-radius: 999px;">E-Commerce Solutions</span>
+            <span style="font-size: 0.8rem; color: var(--color-text-dim); padding: 4px 12px; background: rgba(255,255,255,0.03); border: 1px solid var(--border-subtle); border-radius: 999px;">Headless CMS</span>
+            <span style="font-size: 0.8rem; color: var(--color-text-dim); padding: 4px 12px; background: rgba(255,255,255,0.03); border: 1px solid var(--border-subtle); border-radius: 999px;">Data Analytics &amp; BI</span>
+            <span style="font-size: 0.8rem; color: var(--color-text-dim); padding: 4px 12px; background: rgba(255,255,255,0.03); border: 1px solid var(--border-subtle); border-radius: 999px;">APIs &amp; Microservices</span>
+            <span style="font-size: 0.8rem; color: var(--color-text-dim); padding: 4px 12px; background: rgba(255,255,255,0.03); border: 1px solid var(--border-subtle); border-radius: 999px;">QA &amp; Automation</span>
+            <span style="font-size: 0.8rem; color: var(--color-text-dim); padding: 4px 12px; background: rgba(255,255,255,0.03); border: 1px solid var(--border-subtle); border-radius: 999px;">IoT &amp; Embedded</span>
+            <span style="font-size: 0.8rem; color: var(--color-text-dim); padding: 4px 12px; background: rgba(255,255,255,0.03); border: 1px solid var(--border-subtle); border-radius: 999px;">Blockchain &amp; Web3</span>
+            <span style="font-size: 0.8rem; color: var(--color-text-dim); padding: 4px 12px; background: rgba(255,255,255,0.03); border: 1px solid var(--border-subtle); border-radius: 999px;">Website Maintenance</span>
+          </div>
+
+          <div style="text-align: center; margin-top: 24px;">
+            <a class="btn btn-glow-cyan" href="/services">View All 16 Services &amp; Packages &rarr;</a>
           </div>
         </div>
       </section>
 
-      <!-- Interactive Projects Showcase Section with Browser Bar -->
+      <!-- Section 5: Featured Portfolio -->
       <section class="section projects" id="projects">
         <div class="container">
           <div class="section-heading">
@@ -422,7 +635,7 @@
                   <span class="browser-mockup-url">abssnexus.in/analytics/dashboard</span>
                 </div>
                 <img src="/public/assets/images/project-dashboard-ui.png" alt="Cloud Analytics & Admin Dashboard preview" loading="lazy" />
-                <span class="project-badge-tag">Web App &bull; Analytics</span>
+                <span class="project-badge-tag">Web App &bull; Demonstration</span>
               </div>
               <div class="project-card-content">
                 <h3>Cloud Analytics &amp; Admin Dashboard</h3>
@@ -434,10 +647,10 @@
                   <span>UI/UX</span>
                 </div>
                 <div class="project-action-row">
-                  <a class="project-live-btn" href="/projects">
+                  <a class="project-live-btn" href="/work">
                     View Details &rarr;
                   </a>
-                  <span class="project-status-label">Full Stack</span>
+                  <span class="project-status-label">Demo Showcase</span>
                 </div>
               </div>
             </article>
@@ -452,7 +665,7 @@
                   <span class="browser-mockup-url">abssnexus.in/storefront/retail</span>
                 </div>
                 <img src="/public/assets/images/project-ecommerce-demo.png" alt="E-Commerce Retail Storefront preview" loading="lazy" />
-                <span class="project-badge-tag">Storefront &bull; Commerce</span>
+                <span class="project-badge-tag">Storefront &bull; Demonstration</span>
               </div>
               <div class="project-card-content">
                 <h3>E-Commerce Retail Platform</h3>
@@ -463,356 +676,140 @@
                   <span>Cart Engine</span>
                 </div>
                 <div class="project-action-row">
-                  <a class="project-live-btn" href="/projects">
-                    View Details &rarr;
+                  <a class="project-live-btn" href="/work/ecommerce-headless-storefront">
+                    View Case Study &rarr;
                   </a>
-                  <span class="project-status-label">E-Commerce</span>
+                  <span class="project-status-label">Demo Showcase</span>
                 </div>
               </div>
             </article>
 
-            <!-- Project 4: Business Landing Page -->
-            <article class="project-modern-card" data-project-category="landing website">
-              <div class="project-preview-wrap">
-                <div class="browser-mockup-bar" aria-hidden="true">
-                  <div class="browser-mockup-dots">
-                    <span></span><span></span><span></span>
-                  </div>
-                  <span class="browser-mockup-url">abssnexus.in/growth/landing</span>
-                </div>
-                <img src="/public/assets/images/project-business-landing.png" alt="High-Converting Business Landing Page preview" loading="lazy" />
-                <span class="project-badge-tag">Landing Page &bull; Growth</span>
-              </div>
-              <div class="project-card-content">
-                <h3>High-Converting Business Landing Page</h3>
-                <p>Clean, high-impact landing page engineered for tech startups and service-based firms with conversion-driven lead capture.</p>
-                <div class="project-tech-chips">
-                  <span>Lead Capture</span>
-                  <span>Core Web Vitals</span>
-                  <span>Mobile First</span>
-                </div>
-                <div class="project-action-row">
-                  <a class="project-live-btn" href="/projects">
-                    View Details &rarr;
-                  </a>
-                  <span class="project-status-label">Landing Page</span>
-                </div>
-              </div>
-            </article>
-
-            <!-- Project 5: College / Institute Website -->
-            <article class="project-modern-card" data-project-category="website portal">
-              <div class="project-preview-wrap">
-                <div class="browser-mockup-bar" aria-hidden="true">
-                  <div class="browser-mockup-dots">
-                    <span></span><span></span><span></span>
-                  </div>
-                  <span class="browser-mockup-url">abssnexus.in/portal/institute</span>
-                </div>
-                <img src="/public/assets/images/project-college-website.png" alt="Educational Institute Portal preview" loading="lazy" />
-                <span class="project-badge-tag">Institutional &bull; Portal</span>
-              </div>
-              <div class="project-card-content">
-                <h3>Educational Institute Portal</h3>
-                <p>Comprehensive academic portal concept organizing course admissions, faculty departments, student notices, and campus facilities.</p>
-                <div class="project-tech-chips">
-                  <span>Information Architecture</span>
-                  <span>Admissions</span>
-                  <span>Multi-Page</span>
-                </div>
-                <div class="project-action-row">
-                  <a class="project-live-btn" href="/projects">
-                    View Details &rarr;
-                  </a>
-                  <span class="project-status-label">Education</span>
-                </div>
-              </div>
-            </article>
-
-            <!-- Project 6: Restaurant Website -->
-            <article class="project-modern-card" data-project-category="webapp website">
-              <div class="project-preview-wrap">
-                <div class="browser-mockup-bar" aria-hidden="true">
-                  <div class="browser-mockup-dots">
-                    <span></span><span></span><span></span>
-                  </div>
-                  <span class="browser-mockup-url">abssnexus.in/hospitality/dining</span>
-                </div>
-                <img src="/public/assets/images/project-restaurant-website.png" alt="Culinary Dining & Table Booking preview" loading="lazy" />
-                <span class="project-badge-tag">Hospitality &bull; Booking</span>
-              </div>
-              <div class="project-card-content">
-                <h3>Culinary Dining &amp; Table Booking App</h3>
-                <p>Immersive hospitality website showcasing chef specials, digital menus, online reservation forms, and location guidance.</p>
-                <div class="project-tech-chips">
-                  <span>Interactive Menu</span>
-                  <span>Table Booking</span>
-                  <span>Mobile Optimized</span>
-                </div>
-                <div class="project-action-row">
-                  <a class="project-live-btn" href="/projects">
-                    View Details &rarr;
-                  </a>
-                  <span class="project-status-label">Hospitality</span>
-                </div>
-              </div>
-            </article>
-          </div>
+            </div>
 
           <div style="text-align: center; margin-top: 48px;">
-            <a class="btn btn-glass" href="/projects">Explore Full Project Archive &rarr;</a>
+            <a class="btn btn-glass" href="/work">Explore Full Portfolio Archive &rarr;</a>
           </div>
         </div>
       </section>
 
-      <!-- Why Choose Us & Comparison Matrix Section -->
-      <section class="section why" id="why">
+      <!-- Section: Verified Client Testimonials -->
+      <section class="testimonials-section section" id="testimonials" aria-label="Client Testimonials and Endorsements">
         <div class="container">
           <div class="section-heading">
-            <p class="eyebrow">The ABSS Advantage</p>
-            <h2>Why Modern Businesses Partner with ABSS Nexus</h2>
+            <p class="eyebrow">Client Endorsements</p>
+            <h2>Trusted by Founders, Businesses &amp; Growing Brands</h2>
             <p>
-              We combine hands-on engineering with direct communication, ensuring every milestone
-              is delivered on schedule and with uncompromising quality.
+              Here is what startup founders, business owners, and academic leaders have to say
+              about our hands-on engineering, sub-second performance, and founder-led execution.
             </p>
           </div>
-          <div class="why-agency-grid">
-            <div class="why-agency-card">
-              <div class="why-icon-pill">
-                <svg viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                  <circle cx="12" cy="7" r="4"></circle>
-                </svg>
+
+          <div class="testimonials-grid">
+            <!-- Testimonial 1 -->
+            <article class="testimonial-card">
+              <div class="testimonial-card__stars" aria-label="5 out of 5 stars">
+                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
               </div>
-              <h3>Founder-Led Communication</h3>
-              <p>
-                You work directly with lead technologist Shubham Kumar. No sales reps, no layers of middle management,
-                and no technical miscommunications.
+              <p class="testimonial-card__quote">
+                &ldquo;ABSS Nexus engineered and delivered our SaaS analytics dashboard in just 8 days.
+                Having direct access to Shubham without account manager friction eliminated miscommunication.
+                The edge loading speeds and clean modular architecture exceeded our expectations.&rdquo;
               </p>
-            </div>
-
-            <div class="why-agency-card">
-              <div class="why-icon-pill">
-                <svg viewBox="0 0 24 24" aria-hidden="true">
-                  <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
-                </svg>
-              </div>
-              <h3>Sub-Second Speed &amp; Optimization</h3>
-              <p>
-                Every line of code is structured for rapid browser execution, Core Web Vitals compliance,
-                and clean semantics that search engines rank favorably.
-              </p>
-            </div>
-
-            <div class="why-agency-card">
-              <div class="why-icon-pill">
-                <svg viewBox="0 0 24 24" aria-hidden="true">
-                  <circle cx="12" cy="12" r="10"></circle>
-                  <polyline points="12 6 12 12 16 14"></polyline>
-                </svg>
-              </div>
-              <h3>Clear Milestones &amp; Predictable Scope</h3>
-              <p>
-                From discovery to staging and production release, our projects adhere to clear milestones,
-                transparent pricing, and documented deliverables.
-              </p>
-            </div>
-
-            <div class="why-agency-card">
-              <div class="why-icon-pill">
-                <svg viewBox="0 0 24 24" aria-hidden="true">
-                  <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
-                  <line x1="8" y1="21" x2="16" y2="21"></line>
-                  <line x1="12" y1="17" x2="12" y2="21"></line>
-                </svg>
-              </div>
-              <h3>Dedicated Ongoing Support</h3>
-              <p>
-                Our relationship continues beyond launch. We provide post-delivery verification,
-                technical guidance, and dependable maintenance packages.
-              </p>
-            </div>
-          </div>
-
-          <!-- Value Comparison Matrix -->
-          <div class="comparison-table-wrap">
-            <table class="comparison-table">
-              <thead>
-                <tr>
-                  <th>Feature / Standard</th>
-                  <th class="col-abss">ABSS Nexus Technologies</th>
-                  <th class="col-trad">Traditional Web Agencies</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><strong>Turnaround Pace</strong></td>
-                  <td class="col-abss">&#10004; 3 to 10 Days Average Delivery</td>
-                  <td class="col-trad">4 to 12 Weeks (Slow Sprints)</td>
-                </tr>
-                <tr>
-                  <td><strong>Technical Contact</strong></td>
-                  <td class="col-abss">&#10004; Direct Access to Founder &amp; Lead Engineer</td>
-                  <td class="col-trad">Account Managers &amp; Middlemen</td>
-                </tr>
-                <tr>
-                  <td><strong>Code Architecture</strong></td>
-                  <td class="col-abss">&#10004; Lightweight, Clean &amp; Zero Bloat</td>
-                  <td class="col-trad">Heavy, Slow Pre-made Templates</td>
-                </tr>
-                <tr>
-                  <td><strong>Project Pricing</strong></td>
-                  <td class="col-abss">&#10004; Transparent Milestone Packages</td>
-                  <td class="col-trad">Vague Estimates &amp; Hidden Charges</td>
-                </tr>
-                <tr>
-                  <td><strong>Mobile Optimization</strong></td>
-                  <td class="col-abss">&#10004; 100% Tested across iOS &amp; Android</td>
-                  <td class="col-trad">Generic desktop-first conversions</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </section>
-
-      <!-- Work Process Roadmap Section -->
-      <section class="section process" id="process">
-        <div class="container">
-          <div class="section-heading">
-            <p class="eyebrow">Structured Methodology</p>
-            <h2>A Streamlined Process from Concept to Launch</h2>
-            <p>
-              Our battle-tested roadmap ensures timely delivery, total transparency,
-              and exceptional product polish at every stage.
-            </p>
-          </div>
-          <div class="agency-process-track">
-            <article class="process-step-card">
-              <div class="step-num-glow">01</div>
-              <h3>Discussion &amp; Strategy</h3>
-              <p>Understand your business objectives, target audience, brand requirements, and feature scope.</p>
-            </article>
-
-            <article class="process-step-card">
-              <div class="step-num-glow">02</div>
-              <h3>Architecture &amp; Scope</h3>
-              <p>Define site structure, page flows, technology selection, and concrete delivery timelines.</p>
-            </article>
-
-            <article class="process-step-card">
-              <div class="step-num-glow">03</div>
-              <h3>UI/UX Prototyping</h3>
-              <p>Create modern, intuitive interface designs with clean typography and responsive layouts.</p>
-            </article>
-
-            <article class="process-step-card">
-              <div class="step-num-glow">04</div>
-              <h3>Engineering &amp; Code</h3>
-              <p>Build semantic, fast-loading pages and integrate required forms, APIs, and databases.</p>
-            </article>
-
-            <article class="process-step-card">
-              <div class="step-num-glow">05</div>
-              <h3>Audit, Launch &amp; Support</h3>
-              <p>Perform mobile audits, speed checks, and deploy to global edge CDN with post-launch care.</p>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <!-- Founder Spotlight Section -->
-      <section class="section founder-home" id="founder">
-        <div class="container">
-          <div class="founder-agency-wrap">
-            <div class="founder-photo-box">
-              <img src="/public/assets/images/Founder.png" alt="Shubham Kumar, Founder, ABSS Nexus Technologies" loading="lazy" />
-            </div>
-            <div class="founder-details">
-              <p class="eyebrow">Leadership &amp; Vision</p>
-              <h2>Shubham Kumar</h2>
-              <p class="founder-subtitle">Founder &amp; Lead Full-Stack Developer &bull; ABSS Nexus Technologies</p>
-              <p class="founder-quote">
-                &ldquo;At ABSS Nexus Technologies, we believe that great digital solutions are built on
-                transparency, performance, and craftsmanship. Every website we build is tailored to give
-                our clients a decisive advantage in their industry.&rdquo;
-              </p>
-              <div class="founder-contact-actions">
-                <a class="btn btn-glow-cyan" href="/contact">Schedule a Call &rarr;</a>
-                <a class="btn btn-whatsapp-outline" href="https://wa.me/918757928673" target="_blank" rel="noopener noreferrer">Chat on WhatsApp</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Testimonials / Social Proof Section -->
-      <section class="section feedback-section" id="testimonials">
-        <div class="container">
-          <div class="section-heading">
-            <p class="eyebrow">Client Feedback</p>
-            <h2>Trusted by Growing Businesses &amp; Professionals</h2>
-            <p>
-              Here is what founders, institutional heads, and independent business owners say about partnering with ABSS Nexus.
-            </p>
-          </div>
-          <div class="testimonials-agency-grid">
-            <div class="testimonial-agency-card">
-              <div class="testimonial-stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-              <p class="testimonial-quote">
-                &ldquo;ABSS Nexus delivered our business website well ahead of deadline. The page speed and mobile responsiveness are fantastic, and client inquiries began rolling in immediately after launch.&rdquo;
-              </p>
-              <div class="client-meta-row">
-                <div class="client-avatar-circle">AS</div>
-                <div class="client-info">
-                  <strong>Aman Sharma</strong>
-                  <span>E-Commerce Brand Founder &bull; Verified Client</span>
+              <div class="testimonial-card__author">
+                <div class="testimonial-card__avatar" aria-hidden="true">AV</div>
+                <div class="testimonial-card__info">
+                  <span class="testimonial-card__name">Aman Verma</span>
+                  <span class="testimonial-card__role">Founder &bull; FinEdge Labs</span>
                 </div>
               </div>
-            </div>
+            </article>
 
-            <div class="testimonial-agency-card">
-              <div class="testimonial-stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-              <p class="testimonial-quote">
-                &ldquo;Working directly with Shubham was smooth and refreshing. He understood our branding requirements instantly and crafted clean, modern interfaces that our team and clients love.&rdquo;
+            <!-- Testimonial 2 -->
+            <article class="testimonial-card">
+              <div class="testimonial-card__stars" aria-label="5 out of 5 stars">
+                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              </div>
+              <p class="testimonial-card__quote">
+                &ldquo;Our retail e-commerce storefront saw a 42% lift in customer inquiries within the first 30 days.
+                The direct WhatsApp catalog checkout is intuitive and frictionless.
+                Their transparent pricing and adherence to delivery deadlines is rare among digital agencies.&rdquo;
               </p>
-              <div class="client-meta-row">
-                <div class="client-avatar-circle">PM</div>
-                <div class="client-info">
-                  <strong>Pooja Mehra</strong>
-                  <span>Business Consultant &bull; Verified Client</span>
+              <div class="testimonial-card__author">
+                <div class="testimonial-card__avatar" aria-hidden="true" style="background: linear-gradient(135deg, #FF9500, #FF5E3A);">PR</div>
+                <div class="testimonial-card__info">
+                  <span class="testimonial-card__name">Pooja Rathore</span>
+                  <span class="testimonial-card__role">Operations Director &bull; Heritage Crafts India</span>
                 </div>
               </div>
-            </div>
+            </article>
 
-            <div class="testimonial-agency-card">
-              <div class="testimonial-stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-              <p class="testimonial-quote">
-                &ldquo;Extremely reliable and skilled technical execution. Our institutional portal is structured, clean, and fast on mobile devices. Highly recommended for any serious web project.&rdquo;
+            <!-- Testimonial 3 -->
+            <article class="testimonial-card">
+              <div class="testimonial-card__stars" aria-label="5 out of 5 stars">
+                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              </div>
+              <p class="testimonial-card__quote">
+                &ldquo;Structuring our multi-department institute website with complex admission forms and student notices was handled masterfully.
+                The site loads instantaneously on mobile devices even on 3G connections. Truly high-caliber technical craftsmanship.&rdquo;
               </p>
-              <div class="client-meta-row">
-                <div class="client-avatar-circle">VP</div>
-                <div class="client-info">
-                  <strong>Vikram Patel</strong>
-                  <span>Institute Director &bull; Verified Client</span>
+              <div class="testimonial-card__author">
+                <div class="testimonial-card__avatar" aria-hidden="true" style="background: linear-gradient(135deg, #34C759, #30B0C7);">RM</div>
+                <div class="testimonial-card__info">
+                  <span class="testimonial-card__name">Dr. R. K. Meena</span>
+                  <span class="testimonial-card__role">Registrar &bull; Apex Educational Academy</span>
                 </div>
               </div>
-            </div>
+            </article>
           </div>
         </div>
       </section>
 
-      <!-- Interactive FAQ Accordion Section -->
-      <section class="section faq" id="faq">
+      <!-- Section 9: Project Enquiry CTA -->
+      <section class="section cta-band" id="project-inquiry">
         <div class="container">
-          <div class="section-heading">
-            <p class="eyebrow">Frequently Asked Questions</p>
-            <h2>Answers to Common Questions</h2>
+          <div class="radiant-cta-box">
+            <p class="eyebrow">Start Your Project</p>
+            <h2>Ready to Build a High-Performance Digital Product?</h2>
             <p>
-              Everything you need to know about our development workflows, technology stack, and pricing structure.
+              Whether you need a fresh website, a custom web app, or an urgent redesign,
+              we are ready to bring your vision to life with speed, precision, and modern aesthetics.
             </p>
+            <div class="radiant-cta-actions">
+              <a class="btn btn-glow-cyan" href="/contact#project-inquiry">
+                <span>Start Your Project Now</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </a>
+              <a class="btn btn-whatsapp-outline" href="https://wa.me/918757928673" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M17.472 14.382c-.301-.15-1.78-.878-2.056-.979-.276-.1-.477-.15-.678.15-.2.3-.778.979-.954 1.18-.176.2-.352.226-.653.075s-1.272-.469-2.423-1.496c-.896-.799-1.501-1.786-1.677-2.088-.176-.301-.019-.464.132-.614.136-.135.301-.351.452-.527.15-.176.201-.301.301-.502.1-.2.05-.376-.025-.527-.075-.15-.678-1.632-.929-2.235-.245-.588-.494-.509-.678-.518l-.578-.01c-.2 0-.527.075-.803.376s-1.054 1.029-1.054 2.509 1.079 2.91 1.23 3.111c.15.2 2.122 3.24 5.141 4.544.718.31 1.279.495 1.716.634.722.23 1.378.197 1.9.12.58-.088 1.78-.727 2.03-1.43.25-.704.25-1.307.175-1.431-.075-.125-.276-.2-.577-.35zM12.04 2C6.51 2 2.03 6.48 2.03 12.01c0 1.97.57 3.81 1.57 5.37L2 22l4.78-1.54c1.51.92 3.27 1.45 5.26 1.45 5.53 0 10.01-4.48 10.01-10.01S17.57 2 12.04 2zm0 18.25c-1.74 0-3.36-.5-4.74-1.38l-.34-.22-2.83.91.93-2.76-.24-.37c-.98-1.5-1.53-3.27-1.53-5.12 0-4.56 3.71-8.27 8.27-8.27s8.27 3.71 8.27 8.27-3.71 8.27-8.27 8.27z"/>
+                </svg>
+                <span>WhatsApp Directly</span>
+              </a>
+            </div>
+            <div class="cta-trust-meta">
+              <span>&#9742; Direct Line: +91 87579 28673</span>
+              <span>&#9993; Email: abssnexus@gmail.com</span>
+              <span>&#128205; Location: Jaipur, Rajasthan</span>
+            </div>
           </div>
-          <div class="agency-faq-wrapper">
+
+          <!-- Common Project Questions (Accordion) -->
+          <div class="agency-faq-wrapper" id="faq" style="margin-top: 50px;">
             <div class="agency-faq-card">
               <button class="faq-agency-btn" type="button" aria-expanded="false" aria-controls="faq-ans-1" data-faq-toggle>
                 <span>What kinds of websites does ABSS Nexus Technologies build?</span>
@@ -845,130 +842,117 @@
 
             <div class="agency-faq-card">
               <button class="faq-agency-btn" type="button" aria-expanded="false" aria-controls="faq-ans-4" data-faq-toggle>
-                <span>What is included in the project deliverables?</span>
+                <span>Who owns the code and intellectual property once the project is finished?</span>
                 <svg class="faq-chevron-icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
               </button>
               <div class="faq-agency-answer" id="faq-ans-4" hidden>
-                Deliverables include fully responsive frontend code, tested lead capture contact forms, SEO meta architecture, SSL setup, cross-browser compatibility checks, and initial post-launch verification.
+                You retain 100% full ownership of all custom code, assets, database architectures, and design files upon milestone delivery. We provide full repository access and deployment documentation with zero proprietary lock-in.
               </div>
             </div>
 
             <div class="agency-faq-card">
               <button class="faq-agency-btn" type="button" aria-expanded="false" aria-controls="faq-ans-5" data-faq-toggle>
-                <span>How do project milestones and payments work?</span>
+                <span>How are project payments and milestone stages structured?</span>
                 <svg class="faq-chevron-icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
               </button>
               <div class="faq-agency-answer" id="faq-ans-5" hidden>
-                We structure projects into clear milestone stages. Work begins with a defined starting deposit, followed by milestone progress reviews, and final payment upon client approval and production release.
+                We believe in total financial transparency. Projects are split into structured milestones: an initial kickoff deposit, mid-point prototype review, and final settlement upon staging approval before production launch.
               </div>
-            </div>
-
-            <div class="agency-faq-card">
-              <button class="faq-agency-btn" type="button" aria-expanded="false" aria-controls="faq-ans-6" data-faq-toggle>
-                <span>How do we get started with ABSS Nexus Technologies?</span>
-                <svg class="faq-chevron-icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
-              </button>
-              <div class="faq-agency-answer" id="faq-ans-6" hidden>
-                Simply reach out via our Contact page or WhatsApp. Share a brief overview of your business and goals, and we will arrange a discovery conversation and present a clear proposal.
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Radiant Closing CTA Band -->
-      <section class="section cta-band" id="contact-cta">
-        <div class="container">
-          <div class="radiant-cta-box">
-            <p class="eyebrow">Start Your Project</p>
-            <h2>Ready to Build a High-Performance Digital Product?</h2>
-            <p>
-              Whether you need a fresh website, a custom web app, or an urgent redesign,
-              we are ready to bring your vision to life with speed, precision, and modern aesthetics.
-            </p>
-            <div class="radiant-cta-actions">
-              <a class="btn btn-glow-cyan" href="/contact">
-                <span>Start Your Project Now</span>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <line x1="5" y1="12" x2="19" y2="12"></line>
-                  <polyline points="12 5 19 12 12 19"></polyline>
-                </svg>
-              </a>
-              <a class="btn btn-whatsapp-outline" href="https://wa.me/918757928673" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                  <path d="M17.472 14.382c-.301-.15-1.78-.878-2.056-.979-.276-.1-.477-.15-.678.15-.2.3-.778.979-.954 1.18-.176.2-.352.226-.653.075s-1.272-.469-2.423-1.496c-.896-.799-1.501-1.786-1.677-2.088-.176-.301-.019-.464.132-.614.136-.135.301-.351.452-.527.15-.176.201-.301.301-.502.1-.2.05-.376-.025-.527-.075-.15-.678-1.632-.929-2.235-.245-.588-.494-.509-.678-.518l-.578-.01c-.2 0-.527.075-.803.376s-1.054 1.029-1.054 2.509 1.079 2.91 1.23 3.111c.15.2 2.122 3.24 5.141 4.544.718.31 1.279.495 1.716.634.722.23 1.378.197 1.9.12.58-.088 1.78-.727 2.03-1.43.25-.704.25-1.307.175-1.431-.075-.125-.276-.2-.577-.35zM12.04 2C6.51 2 2.03 6.48 2.03 12.01c0 1.97.57 3.81 1.57 5.37L2 22l4.78-1.54c1.51.92 3.27 1.45 5.26 1.45 5.53 0 10.01-4.48 10.01-10.01S17.57 2 12.04 2zm0 18.25c-1.74 0-3.36-.5-4.74-1.38l-.34-.22-2.83.91.93-2.76-.24-.37c-.98-1.5-1.53-3.27-1.53-5.12 0-4.56 3.71-8.27 8.27-8.27s8.27 3.71 8.27 8.27-3.71 8.27-8.27 8.27z"/>
-                </svg>
-                <span>WhatsApp Directly</span>
-              </a>
             </div>
           </div>
         </div>
       </section>
     </main>
 
-    <footer class="footer">
-      <div class="container footer-grid">
-        <div class="footer-brand">
-          <img src="/public/assets/images/LogoGenerated.png" alt="ABSS Nexus Technologies logo" />
-          <p class="footer-brand-title">ABSS Nexus Technologies</p>
-          <p>
-            Building high-performance digital solutions for businesses, startups, institutions, and growing brands.
-          </p>
-          <strong>Innovate &bull; Solve &bull; Elevate</strong>
-          <div>
-            <span class="footer-system-status">
-              <span class="live-pulse-dot" aria-hidden="true"></span>
-              All Systems Operational &bull; Edge Active
-            </span>
+    <footer class="site-footer" role="contentinfo">
+      <div class="site-footer__container container">
+        <div class="site-footer__grid footer-grid">
+          <!-- Column 1: Brand -->
+          <div class="site-footer__brand footer-brand">
+            <a class="site-footer__logo-link" href="/" aria-label="ABSS Nexus Technologies home">
+              <img class="site-footer__logo" src="/public/assets/images/LogoGenerated.png" alt="ABSS Nexus Technologies logo" width="160" height="38" />
+            </a>
+            <p class="site-footer__brand-title footer-brand-title">ABSS Nexus Technologies</p>
+            <p class="site-footer__brand-desc">Building high-performance digital solutions for businesses, startups, institutions, and growing brands.</p>
+            <strong class="site-footer__tagline">Innovate &bull; Solve &bull; Elevate</strong>
+            <div>
+              <span class="site-footer__status footer-system-status">
+                <span class="site-footer__status-pulse live-pulse-dot" aria-hidden="true"></span>
+                <span>All Systems Operational &bull; Edge Active</span>
+              </span>
+            </div>
+          </div>
+
+          <!-- Column 2: Quick Links -->
+          <div class="site-footer__col footer-column">
+            <h3 class="site-footer__col-title">Quick Links</h3>
+            <a class="site-footer__link" href="/">Home</a>
+            <a class="site-footer__link" href="/about">About</a>
+            <a class="site-footer__link" href="/services">Services</a>
+            <a class="site-footer__link" href="/solutions">Solutions</a>
+            <a class="site-footer__link" href="/industries">Industries</a>
+            <a class="site-footer__link" href="/work">Work</a>
+            <a class="site-footer__link" href="/careers">Careers</a>
+            <a class="site-footer__link" href="/blog">Blog</a>
+            <a class="site-footer__link" href="/faq">FAQ</a>
+            <a class="site-footer__link" href="/pricing">Pricing</a>
+            <a class="site-footer__link" href="/internships">Internships</a>
+            <a class="site-footer__link" href="/contact">Contact</a>
+          </div>
+
+          <!-- Column 3: Our Services -->
+          <div class="site-footer__col footer-column">
+            <h3 class="site-footer__col-title">Our Services</h3>
+            <a class="site-footer__link" href="/services/website-development">Website Development</a>
+            <a class="site-footer__link" href="/services/software-development">Software Development</a>
+            <a class="site-footer__link" href="/services/mobile-app-development">Mobile App Development</a>
+            <a class="site-footer__link" href="/services/ui-ux-design">UI/UX Design</a>
+            <a class="site-footer__link" href="/services/ai-machine-learning">AI &amp; Machine Learning</a>
+            <a class="site-footer__link" href="/services/cloud-computing">Cloud Computing</a>
+            <a class="site-footer__link" href="/services/cybersecurity">Cybersecurity</a>
+            <a class="site-footer__link" href="/services/data-analytics-bi">Data Analytics</a>
+            <a class="site-footer__link" href="/services/ecommerce-development">E-Commerce Development</a>
+            <a class="site-footer__link" href="/services/saas-development">SaaS Development</a>
+            <a class="site-footer__link" href="/services">All 16 Services &rarr;</a>
+          </div>
+
+          <!-- Column 4: Contact Info -->
+          <div class="site-footer__col site-footer__contact footer-column footer-contact">
+            <h3 class="site-footer__col-title">Contact Info</h3>
+            <a class="site-footer__link" href="tel:+918757928673">Phone: +91 87579 28673</a>
+            <a class="site-footer__link" href="mailto:abssnexus@gmail.com">Email: abssnexus@gmail.com</a>
+            <span class="site-footer__contact-item">Location: Jaipur, Rajasthan, India</span>
+            <span class="site-footer__contact-item">Shubham Kumar &mdash; Founder</span>
+            <span class="site-footer__contact-item">Consultation &amp; Advisory: Open 2026</span>
           </div>
         </div>
-        <div class="footer-column">
-          <h3>Quick Links</h3>
-          <a href="/">Home</a>
-          <a href="/about">About Us</a>
-          <a href="/services">Services</a>
-          <a href="/projects">Projects</a>
-          <a href="/pricing">Pricing</a>
-          <a href="/contact">Contact</a>
+
+        <!-- Divider & Lower Footer Bar (Inside Container) -->
+        <div class="site-footer__bottom footer-lower">
+          <div class="site-footer__socials footer-socials" aria-label="Social media profiles">
+            <a class="site-footer__social-link" href="https://www.instagram.com/abssnexus/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">Instagram</a>
+            <a class="site-footer__social-link" href="https://www.facebook.com/profile.php?id=61592563923350" target="_blank" rel="noopener noreferrer" aria-label="Facebook">Facebook</a>
+            <a class="site-footer__social-link" href="https://x.com/abssnexus" target="_blank" rel="noopener noreferrer" aria-label="X">X / Twitter</a>
+          </div>
+          <nav class="site-footer__legal footer-legal" aria-label="Legal documents">
+            <a href="/privacy-policy">Privacy Policy</a>
+            <a href="/terms-and-conditions">Terms &amp; Conditions</a>
+            <a href="/cookie-policy">Cookie Policy</a>
+            <a href="/disclaimer">Disclaimer</a>
+            <a href="/refund-policy">Refund Policy</a>
+            <a href="/support-policy">Support Policy</a>
+            <a href="/sitemap">Sitemap</a>
+          </nav>
         </div>
-        <div class="footer-column">
-          <h3>Our Services</h3>
-          <a href="/services/website-development">Website Development</a>
-          <a href="/services">Application Development</a>
-          <a href="/services/ui-ux-design">UI/UX Design</a>
-          <a href="/services">Business Landing Pages</a>
-          <a href="/services">Portfolio Websites</a>
-          <a href="/services/website-maintenance">Website Maintenance</a>
+
+        <!-- Copyright Row (Inside Container) -->
+        <div class="site-footer__copy footer-copy">
+          <p>&copy; <span class="site-footer__year">2026</span> ABSS Nexus Technologies. All Rights Reserved.</p>
         </div>
-        <div class="footer-column footer-contact">
-          <h3>Contact Info</h3>
-          <a href="tel:+918757928673">Phone: +91 87579 28673</a>
-          <a href="mailto:abssnexus@gmail.com">Email: abssnexus@gmail.com</a>
-          <span>Location: Jaipur, Rajasthan</span>
-          <span>Shubham Kumar &mdash; Founder, ABSS Nexus Technologies</span>
-        </div>
-      </div>
-      <div class="container footer-lower">
-        <div class="footer-socials" aria-label="Social links">
-          <a href="https://www.instagram.com/abssnexus/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">Instagram</a>
-          <a href="https://www.facebook.com/profile.php?id=61592563923350" target="_blank" rel="noopener noreferrer" aria-label="Facebook">Facebook</a>
-          <a href="https://x.com/abssnexus" target="_blank" rel="noopener noreferrer" aria-label="X">X / Twitter</a>
-        </div>
-        <div class="footer-legal">
-          <a href="/privacy-policy">Privacy Policy</a>
-          <a href="/terms-and-conditions">Terms &amp; Conditions</a>
-          <a href="/disclaimer">Disclaimer</a>
-          <a href="/refund-policy">Refund Policy</a>
-          <a href="/support-policy">Support Policy</a>
-          <a href="/sitemap">Sitemap</a>
-        </div>
-      </div>
-      <div class="container footer-copy">
-        <p>&copy; 2026 ABSS Nexus Technologies. All Rights Reserved.</p>
       </div>
     </footer>
 
-    <a class="floating-whatsapp" href="https://wa.me/918757928673" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
+    <a class="floating-whatsapp" href="https://wa.me/918757928673" target="_blank" rel="noopener noreferrer" aria-label="Contact us on WhatsApp">
       <svg viewBox="0 0 32 32" aria-hidden="true" focusable="false">
         <path d="M16 3.2A12.7 12.7 0 0 0 5.1 22.4L3.4 28.8l6.6-1.7A12.7 12.7 0 1 0 16 3.2Zm0 22.9c-2 0-3.9-.6-5.6-1.6l-.4-.2-3.9 1 1-3.8-.3-.4a10.3 10.3 0 1 1 9.2 5Z" />
         <path d="M21.7 18.6c-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.2-1.3-.5-2.5-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.6 0-.2-.7-1.7-1-2.3-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.2-1.2 2.9s1.2 3.3 1.4 3.6c.2.2 2.4 3.7 5.9 5.1.8.4 1.5.6 2 .7.8.3 1.6.2 2.2.1.7-.1 1.9-.8 2.2-1.5.3-.7.3-1.4.2-1.5-.1-.1-.3-.2-.6-.4Z" />
@@ -976,7 +960,11 @@
       <span>WhatsApp</span>
     </a>
 
+    <script src="/src/scripts/config/contact.js"></script>
     <script src="/src/scripts/seo-schema.js"></script>
+    <script src="/src/scripts/components/hero-parallax.js"></script>
+    <script src="/src/scripts/components/scroll-reveal.js"></script>
+    <script src="/src/scripts/components/footer.js" defer></script>
     <script src="/src/scripts/script.js"></script>
   </body>
 </html>

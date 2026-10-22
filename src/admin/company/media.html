@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow, noarchive" />
+    <title>Media Assets | ABSS Nexus Admin Console</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="/public/assets/images/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="512x512" href="/public/assets/images/favicon.png" />
+    <link rel="apple-touch-icon" href="/public/assets/images/apple-touch-icon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/src/styles/styles.css" />
+    <link rel="stylesheet" href="/src/styles/components/admin.css" />
+  </head>
+  <body class="admin-body">
+    <div class="admin-wrapper" data-admin-app>
+      
+    <header class="admin-top-header">
+      <div class="admin-top-header-inner">
+        <div class="admin-brand-group">
+          <a href="/admin/" class="admin-brand-link" title="Admin Console Home">
+            <img src="/public/assets/images/favicon.png" alt="ABSS Nexus Logo" width="32" height="32" style="border-radius: 6px;" />
+            <span class="admin-brand-title">ABSS Nexus Operations Console</span>
+          </a>
+          <span class="admin-module-indicator module-indicator-company">🏢 Company Admin</span>
+          <span style="background: rgba(16, 185, 129, 0.12); color: #10b981; padding: 4px 10px; border-radius: 999px; font-size: 0.74rem; font-weight: 700;">● D1 Storage Active</span>
+        </div>
+        <div class="admin-header-actions">
+          <div class="admin-user-badge">
+            <span>Role:</span>
+            <span class="admin-role-pill" id="adminUserRoleBadge">Superadmin</span>
+          </div>
+          <a href="/admin/internships/" class="btn-module-switch" title="Switch to Internship Administration">🎓 Switch to Internship Admin</a>
+          <a href="/admin/" class="btn-module-switch" style="font-size: 0.78rem;">Modules Hub</a>
+          <a href="/admin/login" onclick="sessionStorage.removeItem('abss-admin-token'); sessionStorage.removeItem('abss-admin-role');" class="btn-signout">Sign Out</a>
+        </div>
+      </div>
+    </header>
+  
+
+      <main class="admin-shell">
+        <div class="admin-layout">
+          
+    <aside class="admin-sidebar" aria-label="Company Admin Navigation">
+      <div class="sidebar-module-title">
+        <span style="font-size: 1.25rem;">🏢</span>
+        <h2 class="sidebar-module-name">Company Admin</h2>
+      </div>
+      <a href="/admin/internships/" class="sidebar-module-switch-btn">⇄ Switch to Internship Admin</a>
+      <nav class="admin-sidebar-nav">
+        
+          <a href="/admin/company/" class="sidebar-nav-item ">
+            <span style="display: flex; align-items: center; gap: 8px;">
+              <span>🏢</span>
+              <span>Company Overview</span>
+            </span>
+            
+          </a>
+        
+          <a href="/admin/company/pages" class="sidebar-nav-item ">
+            <span style="display: flex; align-items: center; gap: 8px;">
+              <span>📄</span>
+              <span>Website Pages</span>
+            </span>
+            <span class="sidebar-badge">68+</span>
+          </a>
+        
+          <a href="/admin/company/navigation" class="sidebar-nav-item ">
+            <span style="display: flex; align-items: center; gap: 8px;">
+              <span>🧭</span>
+              <span>Navigation Links</span>
+            </span>
+            
+          </a>
+        
+          <a href="/admin/company/services" class="sidebar-nav-item ">
+            <span style="display: flex; align-items: center; gap: 8px;">
+              <span>🛠️</span>
+              <span>Service Listings</span>
+            </span>
+            <span class="sidebar-badge">17</span>
+          </a>
+        
+          <a href="/admin/company/solutions" class="sidebar-nav-item ">
+            <span style="display: flex; align-items: center; gap: 8px;">
+              <span>💡</span>
+              <span>Solutions</span>
+            </span>
+            
+          </a>
+        
+          <a href="/admin/company/industries" class="sidebar-nav-item ">
+            <span style="display: flex; align-items: center; gap: 8px;">
+              <span>🏭</span>
+              <span>Industries</span>
+            </span>
+            
+          </a>
+        
+          <a href="/admin/company/projects" class="sidebar-nav-item ">
+            <span style="display: flex; align-items: center; gap: 8px;">
+              <span>💼</span>
+              <span>Portfolio & Projects</span>
+            </span>
+            <span class="sidebar-badge">3</span>
+          </a>
+        
+          <a href="/admin/company/leads" class="sidebar-nav-item ">
+            <span style="display: flex; align-items: center; gap: 8px;">
+              <span>📬</span>
+              <span>Inquiries & Leads</span>
+            </span>
+            <span class="sidebar-badge">20</span>
+          </a>
+        
+          <a href="/admin/company/careers" class="sidebar-nav-item ">
+            <span style="display: flex; align-items: center; gap: 8px;">
+              <span>👥</span>
+              <span>Job Listings</span>
+            </span>
+            <span class="sidebar-badge">3</span>
+          </a>
+        
+          <a href="/admin/company/candidates" class="sidebar-nav-item ">
+            <span style="display: flex; align-items: center; gap: 8px;">
+              <span>📋</span>
+              <span>Job Applicants</span>
+            </span>
+            
+          </a>
+        
+          <a href="/admin/company/blog" class="sidebar-nav-item ">
+            <span style="display: flex; align-items: center; gap: 8px;">
+              <span>📰</span>
+              <span>Articles & Blog</span>
+            </span>
+            <span class="sidebar-badge">3</span>
+          </a>
+        
+          <a href="/admin/company/media" class="sidebar-nav-item active">
+            <span style="display: flex; align-items: center; gap: 8px;">
+              <span>🖼️</span>
+              <span>Media Assets</span>
+            </span>
+            
+          </a>
+        
+          <a href="/admin/company/seo" class="sidebar-nav-item ">
+            <span style="display: flex; align-items: center; gap: 8px;">
+              <span>🔍</span>
+              <span>SEO Metadata</span>
+            </span>
+            
+          </a>
+        
+          <a href="/admin/company/analytics" class="sidebar-nav-item ">
+            <span style="display: flex; align-items: center; gap: 8px;">
+              <span>📊</span>
+              <span>Analytics & Telemetry</span>
+            </span>
+            
+          </a>
+        
+          <a href="/admin/company/settings" class="sidebar-nav-item ">
+            <span style="display: flex; align-items: center; gap: 8px;">
+              <span>⚙️</span>
+              <span>Company Settings</span>
+            </span>
+            
+          </a>
+        
+      </nav>
+      <div style="margin-top: 24px; padding-top: 14px; border-top: 1px solid var(--admin-border-light); font-size: 0.72rem; color: var(--admin-text-secondary); text-align: center;">
+        ABSS Nexus Operations v2.4<br/>
+        <span style="color: #10b981;">● Server Verified</span>
+      </div>
+    </aside>
+  
+
+          <div class="admin-main">
+            
+    <nav class="admin-breadcrumbs" aria-label="Breadcrumb">
+      <a href="/admin/">Admin Hub</a>
+      <span class="separator">/</span>
+      <a href="/admin/company/">Company Administration</a>
+      <span class="separator">/</span>
+      <span class="current">Media Assets</span>
+    </nav>
+  
+
+            <div class="admin-page-header">
+              <div>
+                <div class="admin-page-eyebrow">Brand &amp; Creative</div>
+                <h1 class="admin-page-title">Manage Approved Media Assets</h1>
+                <p class="admin-page-subtitle">Vector brand marks, favicons, hero device mockups, and client logos.</p>
+              </div>
+              <div class="admin-actions-bar">
+                
+                  <button type="button" class="btn-admin btn-admin-secondary" onclick="alert('Exporting module data to CSV...');">Export CSV</button>
+                  <button type="button" class="btn-admin btn-admin-primary" onclick="alert('Record creation modal opened.');">+ New Record</button>
+                
+              </div>
+            </div>
+
+            
+    <div class="admin-table-container">
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>Asset Name</th>
+            <th>File Path</th>
+            <th>Dimensions</th>
+            <th>File Format</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Primary Company Logo</strong></td>
+            <td><code>/public/assets/images/LogoGenerated.png</code></td>
+            <td>Original Master</td>
+            <td>PNG</td>
+            <td><span class="status-pill status-success">Active</span></td>
+          </tr>
+          <tr>
+            <td><strong>Brand Icon / Mark</strong></td>
+            <td><code>/public/assets/images/favicon.png</code></td>
+            <td>512 &times; 512</td>
+            <td>PNG</td>
+            <td><span class="status-pill status-success">Active</span></td>
+          </tr>
+          <tr>
+            <td><strong>Hero Laptop Mockup UI</strong></td>
+            <td><code>/public/assets/images/project-dashboard-ui.png</code></td>
+            <td>1200 &times; 800</td>
+            <td>PNG</td>
+            <td><span class="status-pill status-success">Active</span></td>
+          </tr>
+          <tr>
+            <td><strong>Hero Phone Mockup UI</strong></td>
+            <td><code>/public/assets/images/project-ecommerce-demo.png</code></td>
+            <td>600 &times; 1200</td>
+            <td>PNG</td>
+            <td><span class="status-pill status-success">Active</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script src="/src/config/admin-config.js"></script>
+    <script src="/src/services/admin-api.js"></script>
+    <script src="/src/scripts/admin-auth-guard.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", async () => {
+        const session = await window.AbssAdminAuthGuard.requireAdminSession(null, "company");
+        if (session && session.admin) {
+          const roleBadge = document.getElementById("adminUserRoleBadge");
+          if (roleBadge) {
+            roleBadge.textContent = session.admin.role || "super_admin";
+          }
+        }
+      });
+    </script>
+  </body>
+</html>

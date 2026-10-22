@@ -22,6 +22,9 @@
 /src/pages/privacy-policy /privacy-policy 301
 /src/pages/privacy-policy.html /privacy-policy 301
 
+/terms /terms-and-conditions 301
+/terms/ /terms-and-conditions 301
+/terms.html /terms-and-conditions 301
 /terms-conditions /terms-and-conditions 301
 /terms-conditions.html /terms-and-conditions 301
 /terms-and-conditions.html /terms-and-conditions 301
@@ -49,17 +52,134 @@
 /src/pages/pricing.html /pricing 301
 /pricing/ /pricing 301
 
+/solutions.html /solutions 301
+/src/pages/solutions /solutions 301
+/src/pages/solutions.html /solutions 301
+/solutions/ /solutions 301
+
+/industries.html /industries 301
+/src/pages/industries /industries 301
+/src/pages/industries.html /industries 301
+/industries/ /industries 301
+
+/careers.html /careers 301
+/src/pages/careers /careers 301
+/src/pages/careers.html /careers 301
+/careers/ /careers 301
+
+/blog.html /blog 301
+/src/pages/blog /blog 301
+/src/pages/blog.html /blog 301
+/blog/ /blog 301
+
+/blog/modern-web-performance-core-web-vitals.html /blog/modern-web-performance-core-web-vitals 301
+/src/pages/blog-modern-web-performance /blog/modern-web-performance-core-web-vitals 301
+/src/pages/blog-modern-web-performance.html /blog/modern-web-performance-core-web-vitals 301
+/blog/modern-web-performance-core-web-vitals/ /blog/modern-web-performance-core-web-vitals 301
+
+/blog/resilient-cloud-architecture-edge-computing.html /blog/resilient-cloud-architecture-edge-computing 301
+/src/pages/blog-resilient-cloud-architecture /blog/resilient-cloud-architecture-edge-computing 301
+/src/pages/blog-resilient-cloud-architecture.html /blog/resilient-cloud-architecture-edge-computing 301
+/blog/resilient-cloud-architecture-edge-computing/ /blog/resilient-cloud-architecture-edge-computing 301
+
+/blog/minimalist-design-systems-conversion.html /blog/minimalist-design-systems-conversion 301
+/src/pages/blog-minimalist-design-systems /blog/minimalist-design-systems-conversion 301
+/src/pages/blog-minimalist-design-systems.html /blog/minimalist-design-systems-conversion 301
+/blog/minimalist-design-systems-conversion/ /blog/minimalist-design-systems-conversion 301
+
+/faq.html /faq 301
+/src/pages/faq /faq 301
+/src/pages/faq.html /faq 301
+/faq/ /faq 301
+
+/cookie-policy.html /cookie-policy 301
+/src/pages/cookie-policy /cookie-policy 301
+/src/pages/cookie-policy.html /cookie-policy 301
+/cookie-policy/ /cookie-policy 301
+
 /service-website-development /services/website-development 301
 /service-website-development.html /services/website-development 301
 /src/pages/service-website-development /services/website-development 301
 /src/pages/service-website-development.html /services/website-development 301
 /services/website-development/ /services/website-development 301
 
+/service-software-development /services/software-development 301
+/service-software-development.html /services/software-development 301
+/src/pages/service-software-development /services/software-development 301
+/src/pages/service-software-development.html /services/software-development 301
+/services/software-development/ /services/software-development 301
+
+/service-mobile-app-development /services/mobile-app-development 301
+/service-mobile-app-development.html /services/mobile-app-development 301
+/src/pages/service-mobile-app-development /services/mobile-app-development 301
+/src/pages/service-mobile-app-development.html /services/mobile-app-development 301
+/services/mobile-app-development/ /services/mobile-app-development 301
+
 /service-ui-ux-design /services/ui-ux-design 301
 /service-ui-ux-design.html /services/ui-ux-design 301
 /src/pages/service-ui-ux-design /services/ui-ux-design 301
 /src/pages/service-ui-ux-design.html /services/ui-ux-design 301
 /services/ui-ux-design/ /services/ui-ux-design 301
+
+/service-ai-machine-learning /services/ai-machine-learning 301
+/service-ai-machine-learning.html /services/ai-machine-learning 301
+/src/pages/service-ai-machine-learning /services/ai-machine-learning 301
+/src/pages/service-ai-machine-learning.html /services/ai-machine-learning 301
+/services/ai-machine-learning/ /services/ai-machine-learning 301
+
+/service-cloud-computing /services/cloud-computing 301
+/service-cloud-computing.html /services/cloud-computing 301
+/src/pages/service-cloud-computing /services/cloud-computing 301
+/src/pages/service-cloud-computing.html /services/cloud-computing 301
+/services/cloud-computing/ /services/cloud-computing 301
+
+/service-cybersecurity /services/cybersecurity 301
+/service-cybersecurity.html /services/cybersecurity 301
+/src/pages/service-cybersecurity /services/cybersecurity 301
+/src/pages/service-cybersecurity.html /services/cybersecurity 301
+/services/cybersecurity/ /services/cybersecurity 301
+
+/service-data-analytics-bi /services/data-analytics-bi 301
+/service-data-analytics-bi.html /services/data-analytics-bi 301
+/src/pages/service-data-analytics-bi /services/data-analytics-bi 301
+/src/pages/service-data-analytics-bi.html /services/data-analytics-bi 301
+/services/data-analytics-bi/ /services/data-analytics-bi 301
+
+/service-digital-marketing-seo /services/digital-marketing-seo 301
+/service-digital-marketing-seo.html /services/digital-marketing-seo 301
+/src/pages/service-digital-marketing-seo /services/digital-marketing-seo 301
+/src/pages/service-digital-marketing-seo.html /services/digital-marketing-seo 301
+/services/digital-marketing-seo/ /services/digital-marketing-seo 301
+
+/service-ecommerce-development /services/ecommerce-development 301
+/service-ecommerce-development.html /services/ecommerce-development 301
+/src/pages/service-ecommerce-development /services/ecommerce-development 301
+/src/pages/service-ecommerce-development.html /services/ecommerce-development 301
+/services/ecommerce-development/ /services/ecommerce-development 301
+
+/service-saas-development /services/saas-development 301
+/service-saas-development.html /services/saas-development 301
+/src/pages/service-saas-development /services/saas-development 301
+/src/pages/service-saas-development.html /services/saas-development 301
+/services/saas-development/ /services/saas-development 301
+
+/service-api-integration /services/api-integration 301
+/service-api-integration.html /services/api-integration 301
+/src/pages/service-api-integration /services/api-integration 301
+/src/pages/service-api-integration.html /services/api-integration 301
+/services/api-integration/ /services/api-integration 301
+
+/service-software-testing-qa /services/software-testing-qa 301
+/service-software-testing-qa.html /services/software-testing-qa 301
+/src/pages/service-software-testing-qa /services/software-testing-qa 301
+/src/pages/service-software-testing-qa.html /services/software-testing-qa 301
+/services/software-testing-qa/ /services/software-testing-qa 301
+
+/service-it-consulting /services/it-consulting 301
+/service-it-consulting.html /services/it-consulting 301
+/src/pages/service-it-consulting /services/it-consulting 301
+/src/pages/service-it-consulting.html /services/it-consulting 301
+/services/it-consulting/ /services/it-consulting 301
 
 /service-website-maintenance /services/website-maintenance 301
 /service-website-maintenance.html /services/website-maintenance 301
@@ -82,26 +202,311 @@
 /support-policy/ /support-policy 301
 /sitemap/ /sitemap 301
 
-/admin /src/admin/admin-login 301
-/admin/ /src/admin/admin-login 301
+/admin /admin/ 301
 
-/admin-login /src/admin/admin-login 301
-/admin-login.html /src/admin/admin-login 301
+/admin-login /admin/login 301
+/admin-login.html /admin/login 301
 
-/admin-dashboard /src/admin/admin-dashboard 301
-/admin-dashboard.html /src/admin/admin-dashboard 301
+/admin-dashboard /admin/ 301
+/admin-dashboard.html /admin/ 301
 
-/admin-leads /src/admin/admin-leads 301
-/admin-leads.html /src/admin/admin-leads 301
+/admin-leads /admin/leads 301
+/admin-leads.html /admin/leads 301
 
-/admin-projects /src/admin/admin-projects 301
-/admin-projects.html /src/admin/admin-projects 301
+/admin-projects /admin/projects 301
+/admin-projects.html /admin/projects 301
 
-/admin-clients /src/admin/admin-clients 301
-/admin-clients.html /src/admin/admin-clients 301
+/admin-clients /admin/clients 301
+/admin-clients.html /admin/clients 301
 
-/admin-support /src/admin/admin-support 301
-/admin-support.html /src/admin/admin-support 301
+/admin-support /admin/support 301
+/admin-support.html /admin/support 301
 
-/admin-pricing /src/admin/admin-pricing 301
-/admin-pricing.html /src/admin/admin-pricing 301
+/admin-pricing /admin/pricing 301
+/admin-pricing.html /admin/pricing 301
+
+/internships.html /internships 301
+/src/pages/internships /internships 301
+/src/pages/internships.html /internships 301
+/internships/ /internships 301
+
+/internships-about.html /internships/about 301
+/src/pages/internships-about /internships/about 301
+/src/pages/internships-about.html /internships/about 301
+/internships/about/ /internships/about 301
+
+/internships-details.html /internships/details 301
+/src/pages/internships-details /internships/details 301
+/src/pages/internships-details.html /internships/details 301
+/internships/details/ /internships/details 301
+
+/internships-contact.html /internships/contact 301
+/src/pages/internships-contact /internships/contact 301
+/src/pages/internships-contact.html /internships/contact 301
+/internships/contact/ /internships/contact 301
+
+/internships-privacy-policy.html /internships/privacy-policy 301
+/src/pages/internships-privacy-policy /internships/privacy-policy 301
+/src/pages/internships-privacy-policy.html /internships/privacy-policy 301
+/internships/privacy-policy/ /internships/privacy-policy 301
+
+/internships-terms-conditions.html /internships/terms-and-conditions 301
+/src/pages/internships-terms-conditions /internships/terms-and-conditions 301
+/src/pages/internships-terms-conditions.html /internships/terms-and-conditions 301
+/internships/terms-and-conditions/ /internships/terms-and-conditions 301
+/internships/terms /internships/terms-and-conditions 301
+/internships/terms/ /internships/terms-and-conditions 301
+
+/internships-programs.html /internships/programs 301
+/src/pages/internships-programs /internships/programs 301
+/src/pages/internships-programs.html /internships/programs 301
+/internships/programs/ /internships/programs 301
+
+/internships/programs/web-development/ /internships/programs/web-development 301
+/internships/programs/software-development/ /internships/programs/software-development 301
+/internships/programs/ui-ux-design/ /internships/programs/ui-ux-design 301
+/internships/programs/ai-machine-learning/ /internships/programs/ai-machine-learning 301
+/internships/programs/cloud-devops/ /internships/programs/cloud-devops 301
+
+/internships-how-it-works.html /internships/how-it-works 301
+/src/pages/internships-how-it-works /internships/how-it-works 301
+/src/pages/internships-how-it-works.html /internships/how-it-works 301
+/internships/how-it-works/ /internships/how-it-works 301
+
+/internships-faq.html /internships/faq 301
+/src/pages/internships-faq /internships/faq 301
+/src/pages/internships-faq.html /internships/faq 301
+/internships/faq/ /internships/faq 301
+
+/internships-support.html /internships/support 301
+/src/pages/internships-support /internships/support 301
+/src/pages/internships-support.html /internships/support 301
+/internships/support/ /internships/support 301
+
+/internships-register.html /internships/register 301
+/src/pages/internships-register /internships/register 301
+/src/pages/internships-register.html /internships/register 301
+/internships/register/ /internships/register 301
+
+/internships-login.html /internships/login 301
+/src/pages/internships-login /internships/login 301
+/src/pages/internships-login.html /internships/login 301
+/internships/login/ /internships/login 301
+
+/internships-verify-email.html /internships/verify-email 301
+/src/pages/internships-verify-email /internships/verify-email 301
+/src/pages/internships-verify-email.html /internships/verify-email 301
+/internships/verify-email/ /internships/verify-email 301
+
+/internships-forgot-password.html /internships/forgot-password 301
+/src/pages/internships-forgot-password /internships/forgot-password 301
+/src/pages/internships-forgot-password.html /internships/forgot-password 301
+/internships/forgot-password/ /internships/forgot-password 301
+
+/internships-reset-password.html /internships/reset-password 301
+/src/pages/internships-reset-password /internships/reset-password 301
+/src/pages/internships-reset-password.html /internships/reset-password 301
+/internships/reset-password/ /internships/reset-password 301
+
+/internships-dashboard.html /internships/dashboard 301
+/src/pages/internships-dashboard /internships/dashboard 301
+/src/pages/internships-dashboard.html /internships/dashboard 301
+/internships/dashboard/ /internships/dashboard 301
+
+/work.html /work 301
+/src/pages/work /work 301
+/src/pages/work.html /work 301
+/work/ /work 301
+
+/work/fintech-payment-gateway/ /work/fintech-payment-gateway 301
+/src/pages/work-fintech-payment-gateway /work/fintech-payment-gateway 301
+/src/pages/work-fintech-payment-gateway.html /work/fintech-payment-gateway 301
+
+/work/healthcare-telemedicine-platform/ /work/healthcare-telemedicine-platform 301
+/src/pages/work-healthcare-telemedicine /work/healthcare-telemedicine-platform 301
+/src/pages/work-healthcare-telemedicine.html /work/healthcare-telemedicine-platform 301
+
+/work/ecommerce-headless-storefront/ /work/ecommerce-headless-storefront 301
+/src/pages/work-ecommerce-headless /work/ecommerce-headless-storefront 301
+/src/pages/work-ecommerce-headless.html /work/ecommerce-headless-storefront 301
+
+/careers/senior-fullstack-engineer/ /careers/senior-fullstack-engineer 301
+/src/pages/career-senior-fullstack-engineer /careers/senior-fullstack-engineer 301
+/src/pages/career-senior-fullstack-engineer.html /careers/senior-fullstack-engineer 301
+
+/careers/lead-ui-ux-designer/ /careers/lead-ui-ux-designer 301
+/src/pages/career-lead-ui-ux-designer /careers/lead-ui-ux-designer 301
+/src/pages/career-lead-ui-ux-designer.html /careers/lead-ui-ux-designer 301
+
+/careers/cloud-devops-architect/ /careers/cloud-devops-architect 301
+/src/pages/career-cloud-devops-architect /careers/cloud-devops-architect 301
+/src/pages/career-cloud-devops-architect.html /careers/cloud-devops-architect 301
+
+/services/managed-it-support/ /services/managed-it-support 301
+/src/pages/service-managed-it-support /services/managed-it-support 301
+/src/pages/service-managed-it-support.html /services/managed-it-support 301
+
+/services/data-analytics/ /services/data-analytics 301
+/services/software-testing/ /services/software-testing 301
+
+/internships/application-status/ /internships/application-status 301
+/src/pages/internships-application-status /internships/application-status 301
+/src/pages/internships-application-status.html /internships/application-status 301
+
+/internships/payment-status/ /internships/payment-status 301
+/src/pages/internships-payment-status /internships/payment-status 301
+/src/pages/internships-payment-status.html /internships/payment-status 301
+
+/verify-certificate.html /verify-certificate 301
+/src/pages/verify-certificate /verify-certificate 301
+/src/pages/verify-certificate.html /verify-certificate 301
+/verify-certificate/ /verify-certificate 301
+
+/register.html /register 301
+/src/pages/register /register 301
+/src/pages/register.html /register 301
+/register/ /register 301
+
+/login.html /login 301
+/src/pages/login /login 301
+/src/pages/login.html /login 301
+/login/ /login 301
+
+/verify-email.html /verify-email 301
+/src/pages/verify-email /verify-email 301
+/src/pages/verify-email.html /verify-email 301
+/verify-email/ /verify-email 301
+
+/forgot-password.html /forgot-password 301
+/src/pages/forgot-password /forgot-password 301
+/src/pages/forgot-password.html /forgot-password 301
+/forgot-password/ /forgot-password 301
+
+/reset-password.html /reset-password 301
+/src/pages/reset-password /reset-password 301
+/src/pages/reset-password.html /reset-password 301
+/reset-password/ /reset-password 301
+
+/student /student/dashboard 301
+/student/ /student/dashboard 301
+/student/dashboard/ /student/dashboard 301
+/student/profile/ /student/profile 301
+/student/applications/ /student/applications 301
+/student/internship/ /student/internship 301
+/student/tasks/ /student/tasks 301
+/student/submissions/ /student/submissions 301
+/student/submit-work/ /student/submit-work 301
+/student/certificates/ /student/certificates 301
+/student/settings/ /student/settings 301
+
+/admin/dashboard/ /admin/dashboard 301
+/admin/programs/ /admin/programs 301
+/admin/applications/ /admin/applications 301
+/admin/students/ /admin/students 301
+/admin/tasks/ /admin/tasks 301
+/admin/submissions/ /admin/submissions 301
+/admin/reviews/ /admin/reviews 301
+/admin/payments/ /admin/payments 301
+/admin/certificates/ /admin/certificates 301
+/admin/users/ /admin/users 301
+/admin/audit-logs/ /admin/audit-logs 301
+/admin/settings/ /admin/settings 301
+
+/internships /src/pages/internships.html 200
+/internships/programs /src/pages/internships-programs.html 200
+/internships/programs/web-development /src/pages/internships-program-web-development.html 200
+/internships/programs/software-development /src/pages/internships-program-software-development.html 200
+/internships/programs/ui-ux-design /src/pages/internships-program-ui-ux-design.html 200
+/internships/programs/ai-machine-learning /src/pages/internships-program-ai-machine-learning.html 200
+/internships/programs/cloud-devops /src/pages/internships-program-cloud-devops.html 200
+/internships/how-it-works /src/pages/internships-how-it-works.html 200
+/internships/faq /src/pages/internships-faq.html 200
+/internships/support /src/pages/internships-support.html 200
+/internships/register /src/pages/internships-register.html 200
+/internships/login /src/pages/internships-login.html 200
+/internships/verify-email /src/pages/internships-verify-email.html 200
+/internships/forgot-password /src/pages/internships-forgot-password.html 200
+/internships/reset-password /src/pages/internships-reset-password.html 200
+/internships/dashboard /src/pages/internships-dashboard.html 200
+/internships/application-status /src/pages/internships-application-status.html 200
+/internships/payment-status /src/pages/internships-payment-status.html 200
+
+/work /src/pages/work.html 200
+/work/fintech-payment-gateway /src/pages/work-fintech-payment-gateway.html 200
+/work/healthcare-telemedicine-platform /src/pages/work-healthcare-telemedicine.html 200
+/work/ecommerce-headless-storefront /src/pages/work-ecommerce-headless.html 200
+/services/managed-it-support /src/pages/service-managed-it-support.html 200
+/services/data-analytics /src/pages/service-data-analytics-bi.html 200
+/services/software-testing /src/pages/service-software-testing-qa.html 200
+/careers/senior-fullstack-engineer /src/pages/career-senior-fullstack-engineer.html 200
+/careers/lead-ui-ux-designer /src/pages/career-lead-ui-ux-designer.html 200
+/careers/cloud-devops-architect /src/pages/career-cloud-devops-architect.html 200
+/verify-certificate /src/pages/verify-certificate.html 200
+/register /src/pages/register.html 200
+/login /src/pages/login.html 200
+/verify-email /src/pages/verify-email.html 200
+/forgot-password /src/pages/forgot-password.html 200
+/reset-password /src/pages/reset-password.html 200
+
+/student/dashboard /src/pages/student-dashboard.html 200
+/student/profile /src/pages/student-profile.html 200
+/student/applications /src/pages/student-applications.html 200
+/student/internship /src/pages/student-internship.html 200
+/student/tasks /src/pages/student-tasks.html 200
+/student/tasks/task-1 /src/pages/student-task-detail.html 200
+/student/submissions /src/pages/student-submissions.html 200
+/student/submit-work /src/pages/student-submit-work.html 200
+/student/certificates /src/pages/student-certificates.html 200
+/student/settings /src/pages/student-settings.html 200
+
+/admin/dashboard /src/admin/admin-dashboard.html 200
+/admin/programs /src/admin/admin-programs.html 200
+/admin/applications /src/admin/admin-applications.html 200
+/admin/students /src/admin/admin-students.html 200
+/admin/tasks /src/admin/admin-tasks.html 200
+/admin/submissions /src/admin/admin-submissions.html 200
+/admin/reviews /src/admin/admin-reviews.html 200
+/admin/payments /src/admin/admin-payments.html 200
+/admin/certificates /src/admin/admin-certificates.html 200
+/admin/users /src/admin/admin-users.html 200
+/admin/audit-logs /src/admin/admin-audit-logs.html 200
+/admin/settings /src/admin/admin-settings.html 200
+/admin/login /src/admin/admin-login.html 200
+/admin/leads /src/admin/admin-leads.html 200
+/admin/projects /src/admin/admin-projects.html 200
+/admin/clients /src/admin/admin-clients.html 200
+/admin/support /src/admin/admin-support.html 200
+/admin/pricing /src/admin/admin-pricing.html 200
+
+/admin /src/admin/index.html 200
+/admin/ /src/admin/index.html 200
+
+/admin/internships /src/admin/internships/index.html 200
+/admin/internships/ /src/admin/internships/index.html 200
+/admin/internships/programs /src/admin/internships/programs.html 200
+/admin/internships/applications /src/admin/internships/applications.html 200
+/admin/internships/students /src/admin/internships/students.html 200
+/admin/internships/tasks /src/admin/internships/tasks.html 200
+/admin/internships/submissions /src/admin/internships/submissions.html 200
+/admin/internships/reviews /src/admin/internships/reviews.html 200
+/admin/internships/payments /src/admin/internships/payments.html 200
+/admin/internships/certificates /src/admin/internships/certificates.html 200
+/admin/internships/reports /src/admin/internships/reports.html 200
+/admin/internships/settings /src/admin/internships/settings.html 200
+
+/admin/company /src/admin/company/index.html 200
+/admin/company/ /src/admin/company/index.html 200
+/admin/company/pages /src/admin/company/pages.html 200
+/admin/company/navigation /src/admin/company/navigation.html 200
+/admin/company/services /src/admin/company/services.html 200
+/admin/company/solutions /src/admin/company/solutions.html 200
+/admin/company/industries /src/admin/company/industries.html 200
+/admin/company/projects /src/admin/company/projects.html 200
+/admin/company/leads /src/admin/company/leads.html 200
+/admin/company/careers /src/admin/company/careers.html 200
+/admin/company/candidates /src/admin/company/candidates.html 200
+/admin/company/blog /src/admin/company/blog.html 200
+/admin/company/media /src/admin/company/media.html 200
+/admin/company/seo /src/admin/company/seo.html 200
+/admin/company/analytics /src/admin/company/analytics.html 200
+/admin/company/settings /src/admin/company/settings.html 200

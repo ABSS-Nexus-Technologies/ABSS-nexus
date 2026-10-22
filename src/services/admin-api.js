@@ -229,6 +229,8 @@
       if (isApiMode()) {
         const result = await requestJson("POST", "/api/auth/login", { username, password });
         sessionStorage.setItem(tokenKey, result.token);
+        if (result.role) sessionStorage.setItem("abss-admin-role", result.role);
+        if (result.username) sessionStorage.setItem("abss-admin-username", result.username);
         return result;
       }
 
@@ -237,32 +239,58 @@
 
     logout() {
       sessionStorage.removeItem(tokenKey);
+      sessionStorage.removeItem("abss-admin-role");
+      sessionStorage.removeItem("abss-admin-username");
     },
 
     async validateSession(defaultState) {
       if (!isApiMode()) {
-        return { authenticated: false, state: null };
+        return { authenticated: false, state: null, admin: null };
       }
 
       const token = getToken();
       if (!token) {
-        return { authenticated: false, state: null };
+        return { authenticated: false, state: null, admin: null };
       }
 
       try {
+        let adminInfo = null;
+        try {
+          const meRes = await requestJson("GET", "/api/admin/auth/me");
+          if (meRes && meRes.admin) {
+            adminInfo = meRes.admin;
+            sessionStorage.setItem("abss-admin-role", adminInfo.role);
+            sessionStorage.setItem("abss-admin-username", adminInfo.username);
+          }
+        } catch {}
+
         const state = await requestJson("GET", "/api/admin/state");
         if (state) {
           writeJson(stateKey, state);
         }
-        return { authenticated: true, state: mergeContactLeads(state || defaultState || {}) };
+        return {
+          authenticated: true,
+          admin: adminInfo || {
+            username: sessionStorage.getItem("abss-admin-username") || "admin",
+            role: sessionStorage.getItem("abss-admin-role") || "super_admin"
+          },
+          state: mergeContactLeads(state || defaultState || {})
+        };
       } catch (error) {
         if (error.status === 401 || (error.message && error.message.toLowerCase().includes("unauthorized"))) {
-          sessionStorage.removeItem(tokenKey);
-          return { authenticated: false, state: null };
+          this.logout();
+          return { authenticated: false, state: null, admin: null };
         }
         console.warn("Session validation warning, keeping session with local state", error);
         const cachedState = readJson(stateKey, defaultState);
-        return { authenticated: true, state: mergeContactLeads(cachedState || {}) };
+        return {
+          authenticated: true,
+          admin: {
+            username: sessionStorage.getItem("abss-admin-username") || "admin",
+            role: sessionStorage.getItem("abss-admin-role") || "super_admin"
+          },
+          state: mergeContactLeads(cachedState || {})
+        };
       }
     },
 

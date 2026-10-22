@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Verify official certificates and credentials issued by ABSS Nexus Technologies. Authenticate student credentials, program completion, and award records." />
+    <meta name="robots" content="index, follow" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Verify Student Certificate Authenticity | ABSS Nexus Technologies" />
+    <meta property="og:description" content="Verify official certificates and credentials issued by ABSS Nexus Technologies. Authenticate student credentials, program completion, and award records." />
+    <meta property="og:image" content="https://abssnexus.in/public/assets/images/LogoGenerated.png" />
+    <meta property="og:url" content="https://abssnexus.in/verify-certificate" />
+    <link rel="canonical" href="https://abssnexus.in/verify-certificate" />
+    <title>Verify Student Certificate Authenticity | ABSS Nexus Technologies</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="/public/assets/images/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="512x512" href="/public/assets/images/favicon.png" />
+    <link rel="apple-touch-icon" href="/public/assets/images/apple-touch-icon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/src/styles/styles.css" />
+
+
+  </head>
+  <body>
+    <header class="site-header site-header--academy" role="banner">
+      <div class="announcement-bar announcement-bar--academy">
+        <div class="announcement-bar__container container">
+          <span class="announcement-bar__badge">
+            <span class="live-pulse-dot" aria-hidden="true"></span>
+            <span>Admissions Open: 2026 Virtual Internship Cohorts &bull; ISO-Verified Credentials</span>
+          </span>
+          <a class="announcement-bar__link" href="/internships/register">Apply for Cohort &rarr;</a>
+        </div>
+      </div>
+      <nav class="nav" aria-label="Internship Academy Navigation">
+        <a class="brand" href="/internships" aria-label="ABSS Nexus Academy home">
+          <img src="/public/assets/images/favicon.png" alt="ABSS Nexus Academy logo" width="38" height="38" />
+          <div class="brand-text-group" style="display: flex; flex-direction: column; text-align: left;">
+            <span class="brand-name">ABSS Nexus Academy</span>
+            <span class="brand-subtext" style="font-size: 0.72rem; color: #6E6E73; font-weight: 500; letter-spacing: 0.02em;">Internship &amp; Engineering Portal</span>
+          </div>
+        </a>
+        <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav-links">
+          <span class="hamburger-bar"></span>
+          <span class="hamburger-bar"></span>
+          <span class="hamburger-bar"></span>
+        </button>
+        <div class="nav-links" id="main-nav-links">
+          <a href="/internships" class="nav-link">Home</a>
+          <a href="/internships/about" class="nav-link">About Us</a>
+          <a href="/internships/programs" class="nav-link">Services / Programs</a>
+          <a href="/internships/details" class="nav-link">Internship Details</a>
+          <a href="/internships/contact" class="nav-link">Contact Us</a>
+          <a href="/internships/login" class="nav-link" style="font-weight: 600; color: #0066CC;">Student Login</a>
+          <a class="nav-cta" href="/internships/register" style="background: linear-gradient(135deg, #0066cc 0%, #00c2ff 100%);">Apply Now</a>
+          <a href="/" class="nav-link" style="font-size: 0.8rem; color: #86868B; margin-left: 6px;" title="Switch to Corporate Services Platform">Corporate Site &rarr;</a>
+        </div>
+      </nav>
+    </header>
+    <main id="main-content">
+
+    <section class="site-hero site-hero--compact site-hero--centered page-hero" id="hero">
+      <div class="site-hero__container container text-center" style="max-width: 760px;">
+        <span class="site-hero__eyebrow badge">
+          <span class="site-hero__pulse-dot" aria-hidden="true"></span>
+          <span>Official Credential Registry &bull; Tamper-Proof</span>
+        </span>
+        <h1 class="site-hero__title page-title">Verify Certificate Authenticity</h1>
+        <p class="site-hero__description page-subtitle">Instantly validate completion certificates issued by ABSS Nexus Technologies. Enter the unique Certificate Credential ID below.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container" style="max-width: 720px;">
+        <div class="card" style="padding: 36px; border-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.04);">
+          <form id="cert-form" onsubmit="event.preventDefault(); verifyCert();">
+            <div class="form-group" style="margin-bottom: 20px;">
+              <label for="cert-id" style="display: block; font-weight: 600; margin-bottom: 8px;">Certificate Credential Identifier</label>
+              <input type="text" id="cert-id" placeholder="e.g. ABSS-CERT-2026-WD-1042" required style="width: 100%; padding: 14px 16px; border: 1px solid #d2d2d7; border-radius: 12px; font-size: 1rem; text-transform: uppercase;" />
+            </div>
+            <button type="submit" id="cert-submit-btn" class="btn btn-primary" style="width: 100%; padding: 14px; font-size: 1rem;">Validate Certificate &rarr;</button>
+          </form>
+
+          <!-- Loading State -->
+          <div id="cert-loading" style="display: none; text-align: center; margin-top: 28px; padding: 20px; color: #0066cc;">
+            <div style="display: inline-block; width: 28px; height: 28px; border: 3px solid rgba(0,102,204,0.2); border-top-color: #0066cc; border-radius: 50%; animation: certSpin 0.8s linear infinite; margin-bottom: 10px;"></div>
+            <p style="margin: 0; font-size: 0.9rem; font-weight: 600;">Verifying cryptographic seal in Cloudflare D1 Registry...</p>
+          </div>
+
+          <!-- Error / Not Found Alert -->
+          <div id="cert-error" style="display: none; margin-top: 28px; padding: 20px; background: #fef2f2; border: 1px solid #f87171; border-radius: 14px; color: #991b1b;">
+            <div style="display: flex; align-items: flex-start; gap: 12px;">
+              <span style="font-size: 20px;">⚠️</span>
+              <div>
+                <strong style="display: block; margin-bottom: 4px; font-size: 0.95rem;">Certificate Record Not Found</strong>
+                <p id="cert-error-msg" style="margin: 0; font-size: 0.88rem; line-height: 1.5;">No certificate found matching the entered ID. Please check for typos or contact the ABSS Nexus administration office.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Verified Result Card -->
+          <div id="cert-result" style="display: none; margin-top: 36px; padding: 28px; background: #ffffff; border: 2px solid #10b981; border-radius: 16px;">
+            <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #e5e5ea; padding-bottom: 16px; margin-bottom: 20px;">
+              <div style="display: flex; align-items: center; gap: 12px;">
+                <span id="cert-badge-icon" style="width: 40px; height: 40px; border-radius: 50%; background: #10b981; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 20px;">✔</span>
+                <div>
+                  <strong id="cert-status-heading" style="color: #065f46; font-size: 1.15rem; display: block;">Official Verified Certificate</strong>
+                  <span id="cert-status-sub" style="font-size: 0.8rem; color: #047857;">Digital Cryptographic Seal Valid &bull; ABSS Nexus Technologies</span>
+                </div>
+              </div>
+              <span id="cert-badge-pill" class="badge" style="background: rgba(16, 185, 129, 0.12); color: #10b981; border-color: rgba(16, 185, 129, 0.3);">AUTHENTIC</span>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; font-size: 0.9rem; margin-bottom: 24px;">
+              <div>
+                <span style="color: #6e6e73; font-size: 0.78rem; display: block;">Recipient Student</span>
+                <strong id="cert-student">-</strong>
+              </div>
+              <div>
+                <span style="color: #6e6e73; font-size: 0.78rem; display: block;">Program Track</span>
+                <strong id="cert-track">-</strong>
+              </div>
+              <div>
+                <span style="color: #6e6e73; font-size: 0.78rem; display: block;">Credential ID</span>
+                <strong id="cert-res-id" style="font-family: monospace;">-</strong>
+              </div>
+              <div>
+                <span style="color: #6e6e73; font-size: 0.78rem; display: block;">Issue Date &bull; Performance Grade</span>
+                <strong id="cert-date-grade">-</strong>
+              </div>
+            </div>
+
+            <div id="cert-skills-wrap" style="display: none; margin-bottom: 20px;">
+              <span style="color: #6e6e73; font-size: 0.78rem; display: block; margin-bottom: 6px;">Validated Competencies:</span>
+              <div id="cert-skills-list" style="display: flex; flex-wrap: wrap; gap: 6px;"></div>
+            </div>
+
+            <div id="cert-hash-box" style="background: #f5f5f7; padding: 14px; border-radius: 10px; font-size: 0.78rem; color: #6e6e73; font-family: monospace; word-break: break-all; margin-bottom: 20px;">
+              SHA256 Hash: <span id="cert-hash">-</span>
+            </div>
+
+            <div style="display: flex; gap: 12px;">
+              <button type="button" class="btn btn-secondary" onclick="window.print();" style="flex: 1;">Print / Save Record</button>
+              <a href="/internships" class="btn btn-secondary" style="flex: 1; text-align: center;">Internship Hub</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <style>
+      @keyframes certSpin { to { transform: rotate(360deg); } }
+    </style>
+
+    <script>
+      async function verifyCert(presetId) {
+        var inputEl = document.getElementById("cert-id");
+        var val = (presetId || inputEl.value || "").trim().toUpperCase();
+        if (!val) return;
+        inputEl.value = val;
+
+        var btn = document.getElementById("cert-submit-btn");
+        var loading = document.getElementById("cert-loading");
+        var errorBox = document.getElementById("cert-error");
+        var errorMsg = document.getElementById("cert-error-msg");
+        var resultBox = document.getElementById("cert-result");
+
+        if (btn) btn.disabled = true;
+        if (loading) loading.style.display = "block";
+        if (errorBox) errorBox.style.display = "none";
+        if (resultBox) resultBox.style.display = "none";
+
+        try {
+          var res = await fetch("/api/certificates/verify?id=" + encodeURIComponent(val));
+          var data = await res.json();
+
+          if (loading) loading.style.display = "none";
+          if (btn) btn.disabled = false;
+
+          if (res.ok && data.ok && data.certificate) {
+            var cert = data.certificate;
+            var isRevoked = !data.valid || cert.status === "Revoked";
+
+            var badgeIcon = document.getElementById("cert-badge-icon");
+            var badgePill = document.getElementById("cert-badge-pill");
+            var heading = document.getElementById("cert-status-heading");
+            var sub = document.getElementById("cert-status-sub");
+
+            if (isRevoked) {
+              resultBox.style.borderColor = "#dc2626";
+              if (badgeIcon) {
+                badgeIcon.style.background = "#dc2626";
+                badgeIcon.textContent = "✕";
+              }
+              if (badgePill) {
+                badgePill.style.background = "rgba(220, 38, 38, 0.12)";
+                badgePill.style.color = "#dc2626";
+                badgePill.style.borderColor = "rgba(220, 38, 38, 0.3)";
+                badgePill.textContent = "REVOKED";
+              }
+              if (heading) {
+                heading.style.color = "#991b1b";
+                heading.textContent = "Revoked Certificate Credential";
+              }
+              if (sub) {
+                sub.style.color = "#dc2626";
+                sub.textContent = "This credential was officially revoked by ABSS Nexus Administration.";
+              }
+            } else {
+              resultBox.style.borderColor = "#10b981";
+              if (badgeIcon) {
+                badgeIcon.style.background = "#10b981";
+                badgeIcon.textContent = "✔";
+              }
+              if (badgePill) {
+                badgePill.style.background = "rgba(16, 185, 129, 0.12)";
+                badgePill.style.color = "#10b981";
+                badgePill.style.borderColor = "rgba(16, 185, 129, 0.3)";
+                badgePill.textContent = "AUTHENTIC";
+              }
+              if (heading) {
+                heading.style.color = "#065f46";
+                heading.textContent = "Official Verified Certificate";
+              }
+              if (sub) {
+                sub.style.color = "#047857";
+                sub.textContent = "Digital Cryptographic Seal Valid • ABSS Nexus Technologies";
+              }
+            }
+
+            document.getElementById("cert-student").textContent = cert.studentName || "Candidate";
+            document.getElementById("cert-track").textContent = cert.program || "Specialized Program";
+            document.getElementById("cert-res-id").textContent = cert.id || val;
+            document.getElementById("cert-date-grade").textContent = (cert.issueDate || "") + (cert.grade ? " • " + cert.grade : "");
+            document.getElementById("cert-hash").textContent = cert.verificationHash || "Verified Authentic";
+
+            var skillsWrap = document.getElementById("cert-skills-wrap");
+            var skillsList = document.getElementById("cert-skills-list");
+            if (skillsWrap && skillsList) {
+              if (Array.isArray(cert.skills) && cert.skills.length) {
+                skillsList.innerHTML = cert.skills.map(function(s) {
+                  return '<span style="background: #eef2ff; color: #4338ca; padding: 4px 10px; border-radius: 999px; font-size: 0.76rem; font-weight: 600;">' + s + '</span>';
+                }).join("");
+                skillsWrap.style.display = "block";
+              } else {
+                skillsWrap.style.display = "none";
+              }
+            }
+
+            resultBox.style.display = "block";
+          } else {
+            if (errorMsg) errorMsg.textContent = data.error || "No certificate found matching ID '" + val + "'. Please check for typos or contact the ABSS Nexus administration office.";
+            if (errorBox) errorBox.style.display = "block";
+          }
+        } catch (err) {
+          if (loading) loading.style.display = "none";
+          if (btn) btn.disabled = false;
+          if (errorMsg) errorMsg.textContent = "Unable to connect to the verification registry. Please check your network connection and try again.";
+          if (errorBox) errorBox.style.display = "block";
+        }
+      }
+
+      document.addEventListener("DOMContentLoaded", function() {
+        var params = new URLSearchParams(window.location.search);
+        var qId = params.get("id");
+        if (qId) {
+          verifyCert(qId);
+        }
+      });
+    </script>
+  
+    </main>
+    <footer class="site-footer site-footer--academy" role="contentinfo">
+      <div class="site-footer__container container">
+        <div class="site-footer__grid footer-grid">
+          <!-- Column 1: Brand & Academy Vision -->
+          <div class="site-footer__brand footer-brand">
+            <a class="site-footer__logo-link" href="/internships" aria-label="ABSS Nexus Academy home">
+              <img class="site-footer__logo" src="/public/assets/images/LogoGenerated.png" alt="ABSS Nexus Academy logo" width="160" height="38" />
+            </a>
+            <p class="site-footer__brand-title footer-brand-title">ABSS Nexus Academy</p>
+            <p class="site-footer__brand-desc">Industry-standard virtual technical internships, hands-on production code reviews, and verifiable credentials for ambitious software engineers.</p>
+            <strong class="site-footer__tagline" style="color: #00c2ff;">Learn &bull; Build &bull; Get Certified</strong>
+            <div>
+              <span class="site-footer__status footer-system-status">
+                <span class="site-footer__status-pulse live-pulse-dot" aria-hidden="true"></span>
+                <span>Verification Registry Active &bull; Admissions Open</span>
+              </span>
+            </div>
+          </div>
+
+          <!-- Column 2: Navigation -->
+          <div class="site-footer__col footer-column">
+            <h3 class="site-footer__col-title">Navigation</h3>
+            <a class="site-footer__link" href="/internships">Home</a>
+            <a class="site-footer__link" href="/internships/about">About Us</a>
+            <a class="site-footer__link" href="/internships/programs">Services / Programs</a>
+            <a class="site-footer__link" href="/internships/details">Internship Details</a>
+            <a class="site-footer__link" href="/internships/contact">Contact Us</a>
+          </div>
+
+          <!-- Column 3: Student Tools & Registry -->
+          <div class="site-footer__col footer-column">
+            <h3 class="site-footer__col-title">Student Portal</h3>
+            <a class="site-footer__link" href="/internships/login">Student Login</a>
+            <a class="site-footer__link" href="/internships/register">Apply for Internship</a>
+            <a class="site-footer__link" href="/verify-certificate">Verify Certificate Registry</a>
+            <a class="site-footer__link" href="/internships/application-status">Check Application Status</a>
+          </div>
+
+          <!-- Column 4: Admissions & Mentor Desk -->
+          <div class="site-footer__col site-footer__contact footer-column footer-contact">
+            <h3 class="site-footer__col-title">Admissions Desk</h3>
+            <a class="site-footer__link" href="tel:+918757928673">Direct: +91 87579 28673</a>
+            <a class="site-footer__link" href="mailto:admissions@abssnexus.in">Email: admissions@abssnexus.in</a>
+            <span class="site-footer__contact-item">Location: Jaipur, Rajasthan, India</span>
+            <span class="site-footer__contact-item">MSME Registered &bull; ISO-Aligned Portal</span>
+            <div style="margin-top: 14px;">
+              <a href="/" class="site-footer__link" style="color: #0066CC; font-weight: 600;">ABSS Nexus Corporate Website &rarr;</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Lower Footer Bar -->
+        <div class="site-footer__bottom footer-lower">
+          <div class="site-footer__socials footer-socials" aria-label="Social media profiles">
+            <a class="site-footer__social-link" href="https://www.instagram.com/abssnexus/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">Instagram</a>
+            <a class="site-footer__social-link" href="https://www.facebook.com/profile.php?id=61592563923350" target="_blank" rel="noopener noreferrer" aria-label="Facebook">Facebook</a>
+            <a class="site-footer__social-link" href="https://x.com/abssnexus" target="_blank" rel="noopener noreferrer" aria-label="X">X / Twitter</a>
+          </div>
+          <nav class="site-footer__legal footer-legal" aria-label="Academy legal documents">
+            <a href="/internships/privacy-policy">Privacy Policy</a>
+            <a href="/internships/terms-and-conditions">Terms &amp; Conditions</a>
+            <a href="/verify-certificate">Credential Verification</a>
+            <a href="/sitemap">Sitemap</a>
+          </nav>
+        </div>
+
+        <!-- Copyright -->
+        <div class="site-footer__copy footer-copy">
+          <p>&copy; <span class="site-footer__year">2026</span> ABSS Nexus Academy. Division of ABSS Nexus Technologies. All Rights Reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <a class="floating-whatsapp" href="https://wa.me/918757928673" target="_blank" rel="noopener noreferrer" aria-label="Contact us on WhatsApp">
+      <svg viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+        <path d="M16 3.2A12.7 12.7 0 0 0 5.1 22.4L3.4 28.8l6.6-1.7A12.7 12.7 0 1 0 16 3.2Zm0 22.9c-2 0-3.9-.6-5.6-1.6l-.4-.2-3.9 1 1-3.8-.3-.4a10.3 10.3 0 1 1 9.2 5Z" />
+        <path d="M21.7 18.6c-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.2-1.3-.5-2.5-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.6 0-.2-.7-1.7-1-2.3-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.2-1.2 2.9s1.2 3.3 1.4 3.6c.2.2 2.4 3.7 5.9 5.1.8.4 1.5.6 2 .7.8.3 1.6.2 2.2.1.7-.1 1.9-.8 2.2-1.5.3-.7.3-1.4.2-1.5-.1-.1-.3-.2-.6-.4Z" />
+      </svg>
+      <span>WhatsApp</span>
+    </a>
+
+    <script src="/src/scripts/seo-schema.js"></script>
+    <script src="/src/scripts/components/footer.js" defer></script>
+    <script src="/src/scripts/script.js"></script>
+    <script src="/src/scripts/script.js" defer></script>
+
+  </body>
+</html>

@@ -1,0 +1,689 @@
+/**
+ * ABSS Nexus Technologies - Global Navigation Header & Announcement Bar
+ * Design System: Clean, Premium, Minimalist Apple-Inspired Aesthetic
+ * Colors:
+ *   - Background: #FFFFFF (header), #F5F5F7 (announcement bar)
+ *   - Borders: #D2D2D7, #E5E5EA
+ *   - Primary text: #1D1D1F
+ *   - Secondary text: #6E6E73
+ *   - Accent blue: #0066CC (hover: #004FAD)
+ *   - Status green: #27C93F (or #10B981)
+ */
+
+/* -------------------------------------------------------------------------
+   1. Site Header Base & Announcement Bar
+   ------------------------------------------------------------------------- */
+.site-header {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 1000 !important;
+  width: 100% !important;
+  background: rgba(255, 255, 255, 0.96) !important;
+  border-bottom: 1px solid #D2D2D7 !important;
+  backdrop-filter: saturate(180%) blur(20px) !important;
+  -webkit-backdrop-filter: saturate(180%) blur(20px) !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03) !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  transition: box-shadow 0.25s ease, border-color 0.25s ease, background-color 0.25s ease !important;
+}
+
+/* Announcement Bar */
+.announcement-bar {
+  background: #F5F5F7 !important;
+  border-bottom: 1px solid #E5E5EA !important;
+  color: #1D1D1F !important;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+  font-size: 0.8125rem !important;
+  font-weight: 500 !important;
+  line-height: 1.35 !important;
+  padding: 6px 0 !important;
+  width: 100% !important;
+}
+
+.announcement-bar .container,
+.announcement-bar__container {
+  width: 100% !important;
+  max-width: 1240px !important;
+  margin: 0 auto !important;
+  padding: 0 24px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex-wrap: wrap !important;
+  gap: 8px 16px !important;
+  text-align: center !important;
+  box-sizing: border-box !important;
+}
+
+.announcement-badge,
+.announcement-bar__badge {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  color: #1D1D1F !important;
+  font-weight: 500 !important;
+}
+
+.live-pulse-dot {
+  width: 8px !important;
+  height: 8px !important;
+  border-radius: 50% !important;
+  background: #27C93F !important;
+  box-shadow: 0 0 6px rgba(39, 201, 63, 0.6) !important;
+  flex-shrink: 0 !important;
+  display: inline-block !important;
+  animation: announcementPulse 2s infinite ease-in-out !important;
+}
+
+@keyframes announcementPulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(0.85); opacity: 0.45; }
+}
+
+.announcement-bar a,
+.announcement-bar__link {
+  color: #0066CC !important;
+  font-weight: 600 !important;
+  text-decoration: none !important;
+  transition: color 0.15s ease !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 4px !important;
+}
+
+.announcement-bar a:hover,
+.announcement-bar__link:hover {
+  text-decoration: underline !important;
+  color: #004FAD !important;
+}
+
+/* -------------------------------------------------------------------------
+   2. Main Navigation Bar (.nav) & Compact Sticky Scroll State
+   ------------------------------------------------------------------------- */
+.nav {
+  width: 100% !important;
+  max-width: 1240px !important;
+  min-height: 64px !important;
+  margin: 0 auto !important;
+  padding: 0 24px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 12px !important;
+  box-sizing: border-box !important;
+  position: relative !important;
+  transition: min-height 0.25s cubic-bezier(0.16, 1, 0.3, 1), padding 0.25s ease !important;
+}
+
+/* Scrolled Compact Header State */
+.site-header.is-scrolled {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.04) !important;
+  border-bottom-color: #C7C7CC !important;
+}
+
+.site-header.is-scrolled .nav {
+  min-height: 54px !important;
+}
+
+.site-header.is-scrolled .brand img {
+  height: 32px !important;
+  width: 32px !important;
+}
+
+.site-header.is-scrolled .brand-name {
+  font-size: 17.5px !important;
+}
+
+.site-header.is-scrolled .nav-links a,
+.site-header.is-scrolled .nav-links .nav-link,
+.site-header.is-scrolled .nav-dropdown-trigger {
+  padding: 5px 9px !important;
+}
+
+.site-header.is-scrolled .nav-cta {
+  padding: 7px 16px !important;
+  font-size: 0.8125rem !important;
+}
+
+/* Brand Area */
+.brand {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  text-decoration: none !important;
+  color: #1D1D1F !important;
+  flex-shrink: 0 !important;
+  padding: 4px 0 !important;
+}
+
+.brand img {
+  height: 38px !important;
+  width: 38px !important;
+  max-width: 38px !important;
+  object-fit: contain !important;
+  background: transparent !important;
+  padding: 0 !important;
+  border: none !important;
+  border-radius: 6px !important;
+  flex-shrink: 0 !important;
+  display: block !important;
+  transition: height 0.25s ease, width 0.25s ease !important;
+}
+
+.brand span,
+.brand-name {
+  display: inline-block !important;
+  font-family: "Space Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+  font-size: 19px !important;
+  font-weight: 700 !important;
+  line-height: 1.2 !important;
+  color: #1D1D1F !important;
+  letter-spacing: -0.015em !important;
+  white-space: nowrap !important;
+  transition: font-size 0.25s ease !important;
+}
+
+/* -------------------------------------------------------------------------
+   3. Desktop Navigation Links (>= 1140px)
+   ------------------------------------------------------------------------- */
+.nav-links {
+  display: flex !important;
+  align-items: center !important;
+  gap: clamp(4px, 0.7vw, 10px) !important;
+  list-style: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.nav-links a,
+.nav-links .nav-link {
+  color: #1D1D1F !important;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+  font-size: 0.92rem !important; /* ~14.7px */
+  font-weight: 500 !important;
+  text-decoration: none !important;
+  padding: 7px 10px !important;
+  border-radius: 980px !important;
+  transition: all 0.15s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  white-space: nowrap !important;
+  background: transparent !important;
+  display: inline-flex !important;
+  align-items: center !important;
+}
+
+.nav-links a:hover,
+.nav-links .nav-link:hover,
+.nav-dropdown-trigger:hover {
+  color: #0066CC !important;
+  background: rgba(0, 102, 204, 0.06) !important;
+}
+
+.nav-links a:focus-visible,
+.nav-links .nav-link:focus-visible,
+.nav-dropdown-trigger:focus-visible,
+.nav-cta:focus-visible {
+  outline: 2px solid #0066CC !important;
+  outline-offset: 2px !important;
+}
+
+.nav-links a[aria-current="page"],
+.nav-links .nav-link[aria-current="page"] {
+  color: #0066CC !important;
+  font-weight: 600 !important;
+}
+
+/* Dropdown Container */
+.nav-item-dropdown {
+  position: relative !important;
+  display: inline-flex !important;
+  align-items: center !important;
+}
+
+.nav-dropdown-trigger {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 5px !important;
+  color: #1D1D1F !important;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+  font-size: 0.92rem !important;
+  font-weight: 500 !important;
+  padding: 7px 10px !important;
+  border-radius: 980px !important;
+  background: transparent !important;
+  border: none !important;
+  cursor: pointer !important;
+  transition: all 0.15s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  white-space: nowrap !important;
+}
+
+.nav-dropdown-trigger .dropdown-arrow {
+  width: 14px !important;
+  height: 14px !important;
+  stroke: #6E6E73 !important;
+  stroke-width: 2 !important;
+  fill: none !important;
+  transition: transform 0.2s ease, stroke 0.15s ease !important;
+  flex-shrink: 0 !important;
+}
+
+.nav-item-dropdown:hover .dropdown-arrow,
+.nav-item-dropdown.open .dropdown-arrow {
+  transform: rotate(180deg) !important;
+  stroke: #0066CC !important;
+}
+
+/* -------------------------------------------------------------------------
+   4. Mega Menu Dropdown Container & Layouts
+   ------------------------------------------------------------------------- */
+.mega-menu {
+  display: none;
+  position: absolute !important;
+  top: calc(100% + 10px) !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  background: rgba(255, 255, 255, 0.98) !important;
+  border: 1px solid #D2D2D7 !important;
+  border-radius: 18px !important;
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.09), 0 1px 3px rgba(0, 0, 0, 0.04) !important;
+  backdrop-filter: saturate(180%) blur(24px) !important;
+  -webkit-backdrop-filter: saturate(180%) blur(24px) !important;
+  padding: 24px !important;
+  z-index: 1100 !important;
+  box-sizing: border-box !important;
+}
+
+/* Services Mega Menu */
+.mega-menu-services {
+  width: min(880px, calc(100vw - 48px)) !important;
+}
+
+/* Solutions Mega Menu */
+.mega-menu-solutions {
+  width: min(680px, calc(100vw - 48px)) !important;
+}
+
+.nav-item-dropdown:hover .mega-menu,
+.nav-item-dropdown.open .mega-menu {
+  display: block !important;
+  animation: megaMenuFade 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+@keyframes megaMenuFade {
+  from { opacity: 0; transform: translate(-50%, -6px); }
+  to { opacity: 1; transform: translate(-50%, 0); }
+}
+
+.mega-menu-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 20px !important;
+}
+
+.mega-menu-grid--solutions {
+  grid-template-columns: repeat(2, 1fr) !important;
+  gap: 24px !important;
+}
+
+.mega-col-title {
+  color: #0066CC !important;
+  font-family: "Space Grotesk", sans-serif !important;
+  font-size: 0.75rem !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.06em !important;
+  padding-bottom: 8px !important;
+  margin-bottom: 10px !important;
+  border-bottom: 1px solid #E5E5EA !important;
+}
+
+.mega-link-list {
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 4px !important;
+}
+
+.mega-link {
+  display: flex !important;
+  flex-direction: column !important;
+  padding: 6px 10px !important;
+  border-radius: 8px !important;
+  text-decoration: none !important;
+  transition: background 0.15s ease !important;
+}
+
+.mega-link:hover,
+.mega-link:focus-visible {
+  background: rgba(0, 102, 204, 0.05) !important;
+  outline: none !important;
+}
+
+.mega-link-title {
+  color: #1D1D1F !important;
+  font-size: 0.875rem !important;
+  font-weight: 600 !important;
+  line-height: 1.3 !important;
+}
+
+.mega-link:hover .mega-link-title,
+.mega-link:focus-visible .mega-link-title {
+  color: #0066CC !important;
+}
+
+.mega-link-desc {
+  color: #6E6E73 !important;
+  font-size: 0.75rem !important;
+  line-height: 1.3 !important;
+  margin-top: 2px !important;
+}
+
+.mega-menu-footer-bar {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding-top: 16px !important;
+  margin-top: 18px !important;
+  border-top: 1px solid #E5E5EA !important;
+  font-size: 0.8125rem !important;
+  color: #6E6E73 !important;
+}
+
+.mega-menu-footer-bar a {
+  color: #0066CC !important;
+  font-weight: 600 !important;
+  text-decoration: none !important;
+  transition: color 0.15s ease !important;
+}
+
+.mega-menu-footer-bar a:hover {
+  text-decoration: underline !important;
+  color: #004FAD !important;
+}
+
+/* -------------------------------------------------------------------------
+   5. Start Project Button (.nav-cta)
+   ------------------------------------------------------------------------- */
+.nav-cta {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: #FFFFFF !important;
+  color: #0066CC !important;
+  border: 1.5px solid #0066CC !important;
+  border-radius: 980px !important;
+  padding: 8px 18px !important;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+  font-size: 0.875rem !important; /* 14px */
+  font-weight: 600 !important;
+  line-height: 1 !important;
+  white-space: nowrap !important;
+  text-decoration: none !important;
+  box-shadow: 0 2px 8px rgba(0, 102, 204, 0.12) !important;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  flex-shrink: 0 !important;
+  margin-left: 4px !important;
+}
+
+.nav-cta:hover {
+  background: #0066CC !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 4px 14px rgba(0, 102, 204, 0.25) !important;
+  transform: translateY(-1px) !important;
+}
+
+/* -------------------------------------------------------------------------
+   6. Mobile & Tablet Navigation Toggle & Drawer (<= 1140px)
+   ------------------------------------------------------------------------- */
+.nav-toggle {
+  display: none !important;
+}
+
+@media (max-width: 1140px) {
+  .nav {
+    min-height: 58px !important;
+    padding: 0 16px !important;
+  }
+
+  .nav-toggle {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 5px !important;
+    width: 42px !important;
+    height: 42px !important;
+    padding: 0 !important;
+    border: 1px solid #D2D2D7 !important;
+    background: #FFFFFF !important;
+    border-radius: 10px !important;
+    cursor: pointer !important;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04) !important;
+    flex-shrink: 0 !important;
+    margin-left: auto !important;
+  }
+
+  .nav-toggle span,
+  .nav-toggle .hamburger-bar {
+    background: #1D1D1F !important;
+    width: 20px !important;
+    height: 2px !important;
+    border-radius: 2px !important;
+    transition: transform 0.25s ease, opacity 0.25s ease !important;
+    display: block !important;
+  }
+
+  /* Hamburger transform when open */
+  .nav-toggle[aria-expanded="true"] span:nth-child(1),
+  .nav-toggle[aria-expanded="true"] .hamburger-bar:nth-child(1) {
+    transform: translateY(7px) rotate(45deg) !important;
+  }
+
+  .nav-toggle[aria-expanded="true"] span:nth-child(2),
+  .nav-toggle[aria-expanded="true"] .hamburger-bar:nth-child(2) {
+    opacity: 0 !important;
+  }
+
+  .nav-toggle[aria-expanded="true"] span:nth-child(3),
+  .nav-toggle[aria-expanded="true"] .hamburger-bar:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg) !important;
+  }
+
+  /* Mobile Nav Links Panel */
+  .nav-links {
+    display: none !important;
+    position: absolute !important;
+    top: calc(100% + 8px) !important;
+    left: 16px !important;
+    right: 16px !important;
+    width: auto !important;
+    max-height: calc(100vh - 100px) !important;
+    overflow-y: auto !important;
+    background: rgba(255, 255, 255, 0.98) !important;
+    border: 1px solid #D2D2D7 !important;
+    border-radius: 16px !important;
+    box-shadow: 0 20px 48px rgba(0, 0, 0, 0.12) !important;
+    padding: 16px !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 4px !important;
+    backdrop-filter: saturate(180%) blur(24px) !important;
+    -webkit-backdrop-filter: saturate(180%) blur(24px) !important;
+    z-index: 1000 !important;
+  }
+
+  .nav-links.open {
+    display: flex !important;
+    animation: drawerFadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  }
+
+  @keyframes drawerFadeIn {
+    from { opacity: 0; transform: translateY(-6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .nav-links a,
+  .nav-links .nav-link {
+    color: #1D1D1F !important;
+    padding: 11px 14px !important;
+    font-size: 0.95rem !important;
+    font-weight: 500 !important;
+    border-radius: 8px !important;
+    text-decoration: none !important;
+    background: transparent !important;
+    display: block !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .nav-item-dropdown {
+    display: block !important;
+    width: 100% !important;
+  }
+
+  .nav-dropdown-trigger {
+    width: 100% !important;
+    justify-content: space-between !important;
+    padding: 11px 14px !important;
+    font-size: 0.95rem !important;
+    border-radius: 8px !important;
+  }
+
+  .nav-item-dropdown .mega-menu {
+    position: static !important;
+    transform: none !important;
+    width: 100% !important;
+    background: #F5F5F7 !important;
+    border: 1px solid #E5E5EA !important;
+    border-radius: 12px !important;
+    padding: 14px !important;
+    margin: 6px 0 !important;
+    box-shadow: none !important;
+  }
+
+  .nav-item-dropdown.open .mega-menu {
+    display: block !important;
+  }
+
+  .mega-menu-grid,
+  .mega-menu-grid--solutions {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+
+  .nav-cta {
+    margin: 12px 0 0 0 !important;
+    width: 100% !important;
+    text-align: center !important;
+    padding: 12px 18px !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Responsive Brand scaling */
+  .brand {
+    max-width: calc(100% - 56px) !important;
+  }
+
+  .brand span,
+  .brand-name {
+    font-size: 17px !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .brand span,
+  .brand-name {
+    font-size: 16px !important;
+  }
+
+  .announcement-bar {
+    font-size: 0.75rem !important;
+  }
+
+  .announcement-bar .container,
+  .announcement-bar__container {
+    padding: 0 16px !important;
+    gap: 4px !important;
+  }
+}
+
+/* -------------------------------------------------------------------------
+   7. Reduced Motion Accessibility
+   ------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .site-header,
+  .site-header .nav,
+  .site-header .brand img,
+  .site-header .brand-name,
+  .site-header .nav-links a,
+  .site-header .nav-cta,
+  .nav-dropdown-trigger .dropdown-arrow,
+  .mega-menu,
+  .live-pulse-dot {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* -------------------------------------------------------------------------
+   8. Dedicated ABSS Nexus Academy Portal Header & Aesthetic
+   ------------------------------------------------------------------------- */
+.site-header--academy {
+  background: rgba(255, 255, 255, 0.98) !important;
+  border-bottom: 1px solid rgba(0, 102, 204, 0.16) !important;
+  box-shadow: 0 4px 24px rgba(0, 102, 204, 0.05) !important;
+}
+
+.announcement-bar--academy {
+  background: linear-gradient(90deg, #f0f7ff 0%, #f4f6fa 100%) !important;
+  border-bottom: 1px solid rgba(0, 102, 204, 0.12) !important;
+  color: #0b2545 !important;
+}
+
+.announcement-bar--academy .announcement-bar__link {
+  color: #0066cc !important;
+  font-weight: 700 !important;
+}
+
+.site-header--academy .brand-name {
+  color: #004f9e !important;
+  font-weight: 700 !important;
+}
+
+.site-header--academy .nav-cta {
+  background: linear-gradient(135deg, #0066cc 0%, #00b4d8 100%) !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 14px rgba(0, 102, 204, 0.25) !important;
+  border: none !important;
+}
+
+.site-header--academy .nav-cta:hover {
+  background: linear-gradient(135deg, #0052a3 0%, #0096c7 100%) !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 6px 18px rgba(0, 102, 204, 0.35) !important;
+}
+
+/* Academy Dedicated Footer Theme */
+.site-footer--academy {
+  background: #090e17 !important;
+  color: #cbd5e1 !important;
+  border-top: 2px solid rgba(0, 180, 216, 0.3) !important;
+}
+
+.site-footer--academy .footer-brand-title {
+  color: #ffffff !important;
+}
+
+.site-footer--academy .site-footer__col-title {
+  color: #38bdf8 !important;
+  letter-spacing: 0.02em !important;
+}
+
+.site-footer--academy .site-footer__link:hover {
+  color: #38bdf8 !important;
+}
+

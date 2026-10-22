@@ -1,10 +1,30 @@
+# Dependencies & Builds
 node_modules/
 dist/
+
+# Environment Variables & Secrets (STRICTLY NEVER COMMIT)
 .env
 .env.*
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+**/.env
+**/.env.*
 !.env.example
+!**/.env.example
+
+# Cryptographic Keys & Private Credentials
+*.pem
+*.key
+*.cert
+serviceAccountKey.json
+firebase-adminsdk*.json
+
+# Logs, System & IDE Files
 *.log
 .DS_Store
 .wrangler/
 .vscode/
-
+.idea/
+scratch/

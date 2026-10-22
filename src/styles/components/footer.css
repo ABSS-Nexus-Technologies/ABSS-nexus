@@ -1,0 +1,392 @@
+/**
+ * ABSS Nexus Technologies - Global Shared Footer Component Styles
+ * Design System: Apple-Inspired Minimalist Technology Aesthetic
+ * Colors: #FFFFFF, #F5F5F7, #1D1D1F, #6E6E73, #0066CC, #004FAD, #D2D2D7
+ */
+
+/* -------------------------------------------------------------------------
+   1. Base Footer Container (.site-footer / .footer)
+   ------------------------------------------------------------------------- */
+.site-footer,
+.footer {
+  background-color: #F5F5F7 !important;
+  color: #6E6E73 !important;
+  border-top: 1px solid #D2D2D7 !important;
+  padding: clamp(52px, 6vw, 76px) 0 clamp(40px, 5vw, 60px);
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.site-footer__container,
+.footer .container,
+.footer .site-footer__container {
+  width: 100%;
+  max-width: 1240px;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding-left: 24px !important;
+  padding-right: 24px !important;
+  box-sizing: border-box;
+}
+
+/* -------------------------------------------------------------------------
+   2. Main Link Grid (.site-footer__grid / .footer-grid)
+   ------------------------------------------------------------------------- */
+.site-footer__grid,
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 36px;
+  align-items: start;
+  margin-bottom: 48px;
+}
+
+@media (min-width: 640px) {
+  .site-footer__grid,
+  .footer-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px 32px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .site-footer__grid,
+  .footer-grid {
+    grid-template-columns: 1.5fr 1fr 1.15fr 1.15fr;
+    gap: 44px;
+  }
+}
+
+/* Brand Column */
+.site-footer__brand,
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.site-footer__logo-link,
+.footer-brand a {
+  display: inline-block;
+  text-decoration: none;
+  margin-bottom: 2px;
+}
+
+.site-footer__logo,
+.footer-brand img,
+.footer img {
+  height: 38px;
+  width: auto;
+  max-width: 180px;
+  object-fit: contain;
+  background: transparent !important;
+  padding: 0 !important;
+  border: none !important;
+  border-radius: 0 !important;
+  margin-bottom: 4px;
+  display: block;
+}
+
+.site-footer__brand-title,
+.footer-brand-title {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #1D1D1F !important;
+  margin: 0;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+}
+
+.site-footer__brand-desc,
+.footer-brand p {
+  color: #6E6E73 !important;
+  font-size: 0.88rem;
+  line-height: 1.55;
+  margin: 0;
+  max-width: 320px;
+}
+
+.site-footer__tagline,
+.footer-brand strong {
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: #0066CC !important;
+  text-transform: uppercase;
+  margin-top: 2px;
+  display: inline-block;
+}
+
+/* Live Operational Status Badge */
+.site-footer__status,
+.footer-system-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #FFFFFF;
+  border: 1px solid #D2D2D7;
+  color: #059669;
+  border-radius: 980px;
+  padding: 6px 14px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  margin-top: 6px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.site-footer__status-pulse,
+.footer-system-status .live-pulse-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #10B981;
+  box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.6);
+  animation: footerPulse 2s infinite ease-in-out;
+}
+
+@keyframes footerPulse {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.6); }
+  70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+}
+
+/* Link Columns */
+.site-footer__col,
+.footer-column {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.site-footer__col-title,
+.footer-column h3 {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #1D1D1F !important;
+  margin: 0 0 4px 0;
+  letter-spacing: -0.01em;
+}
+
+.site-footer__link,
+.footer-column a,
+.footer a {
+  color: #6E6E73 !important;
+  text-decoration: none;
+  font-size: 0.88rem;
+  transition: color 0.15s ease, transform 0.15s ease;
+  display: inline-block;
+  line-height: 1.45;
+}
+
+.site-footer__link:hover,
+.footer-column a:hover,
+.footer a:hover {
+  color: #0066CC !important;
+  text-decoration: underline;
+}
+
+.site-footer__link:focus-visible,
+.footer a:focus-visible {
+  outline: 2px solid #0066CC;
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Contact Column */
+.site-footer__contact,
+.footer-contact {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.site-footer__contact-item,
+.footer-contact span,
+.footer-contact a {
+  font-size: 0.88rem;
+  color: #6E6E73 !important;
+  line-height: 1.5;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+/* -------------------------------------------------------------------------
+   3. Lower Bar & Legal Row (.site-footer__bottom / .footer-lower)
+   ------------------------------------------------------------------------- */
+.site-footer__bottom,
+.footer-lower {
+  border-top: 1px solid #D2D2D7 !important;
+  padding-top: 24px;
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+@media (min-width: 768px) {
+  .site-footer__bottom,
+  .footer-lower {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    text-align: left;
+  }
+}
+
+/* Social Links */
+.site-footer__socials,
+.footer-socials {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.site-footer__social-link,
+.footer-socials a {
+  color: #6E6E73 !important;
+  font-size: 0.84rem;
+  font-weight: 600;
+  text-decoration: none;
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  transition: color 0.15s ease;
+}
+
+.site-footer__social-link:hover,
+.footer-socials a:hover {
+  color: #0066CC !important;
+}
+
+/* Legal Links Suite */
+.site-footer__legal,
+.footer-legal {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px 18px;
+  font-size: 0.82rem;
+}
+
+.site-footer__legal a,
+.footer-legal a {
+  color: #6E6E73 !important;
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.site-footer__legal a:hover,
+.footer-legal a:hover {
+  color: #0066CC !important;
+  text-decoration: underline;
+}
+
+/* Copyright Row */
+.site-footer__copy,
+.footer-copy {
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid #E5E5EA !important;
+  font-size: 0.82rem;
+  color: #8E8E93 !important;
+  text-align: center;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.site-footer__copy p,
+.footer-copy p {
+  margin: 0;
+  color: #8E8E93 !important;
+}
+
+/* -------------------------------------------------------------------------
+   4. Floating WhatsApp Action Button
+   ------------------------------------------------------------------------- */
+.floating-whatsapp {
+  position: fixed;
+  bottom: max(22px, env(safe-area-inset-bottom, 22px));
+  right: max(22px, env(safe-area-inset-right, 22px));
+  z-index: 900;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #25D366;
+  color: #FFFFFF !important;
+  border-radius: 980px;
+  padding: 11px 18px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: 0 4px 16px rgba(37, 211, 102, 0.35);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.floating-whatsapp svg {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+}
+
+.floating-whatsapp:hover {
+  background: #1EBE5D;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.45);
+  color: #FFFFFF !important;
+}
+
+.floating-whatsapp:focus-visible {
+  outline: 2px solid #0066CC;
+  outline-offset: 3px;
+}
+
+/* Prevent floating WhatsApp overlap */
+@media (max-width: 991px) {
+  .site-footer__legal,
+  .footer-legal {
+    padding-right: 76px;
+  }
+}
+
+@media (max-width: 640px) {
+  .site-footer,
+  .footer {
+    padding-bottom: 96px; /* Extra bottom clearance so WhatsApp button never covers content */
+  }
+  .site-footer__legal,
+  .footer-legal {
+    padding-right: 0;
+    justify-content: center;
+  }
+  .site-footer__socials,
+  .footer-socials {
+    justify-content: center;
+  }
+}
+
+/* -------------------------------------------------------------------------
+   5. Motion Accessibility
+   ------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .site-footer__status-pulse,
+  .footer-system-status .live-pulse-dot {
+    animation: none !important;
+  }
+  .floating-whatsapp {
+    transition: none !important;
+    transform: none !important;
+  }
+}

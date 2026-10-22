@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>My Applications | ABSS Nexus Student Portal</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="/public/assets/images/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="512x512" href="/public/assets/images/favicon.png" />
+    <link rel="apple-touch-icon" href="/public/assets/images/apple-touch-icon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/src/styles/styles.css" />
+  </head>
+  <body style="background: #F5F5F7; min-height: 100vh; display: flex; flex-direction: column;">
+    <!-- Top Student Header Bar -->
+    <header style="background: #FFFFFF; border-bottom: 1px solid #D2D2D7; padding: 14px 0; position: sticky; top: 0; z-index: 100;">
+      <div class="container" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+        <div style="display: flex; align-items: center; gap: 14px;">
+          <a href="/" style="display: flex; align-items: center; gap: 10px; text-decoration: none;">
+            <img src="/public/assets/images/favicon.png" alt="ABSS Nexus Logo" width="32" height="32" style="height: 32px; width: 32px;" />
+            <strong style="font-size: 1.05rem; color: #1D1D1F; font-family: 'Space Grotesk', sans-serif;">ABSS Nexus Student Portal</strong>
+          </a>
+          <span style="background: rgba(0, 102, 204, 0.08); color: #0066CC; padding: 4px 10px; border-radius: 999px; font-size: 0.76rem; font-weight: 700;">Full-Stack Web Engineering</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 16px;">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <div style="width: 32px; height: 32px; border-radius: 50%; background: #0066cc; color: #ffffff; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.85rem;">AS</div>
+            <span style="font-size: 0.88rem; font-weight: 600; color: #1d1d1f;">Aarav Sharma</span>
+          </div>
+          <form action="/api/internships/auth/logout" method="POST" style="margin: 0;">
+            <button type="submit" style="background: transparent; border: 1px solid #d2d2d7; border-radius: 999px; padding: 6px 14px; font-size: 0.8rem; font-weight: 600; color: #6e6e73; cursor: pointer; transition: all 0.2s ease;">Sign Out</button>
+          </form>
+        </div>
+      </div>
+    </header>
+
+    <main class="container" style="flex: 1; padding: 32px 16px 60px;">
+      <div style="margin-bottom: 24px;">
+        <span style="font-size: 0.82rem; font-weight: 700; letter-spacing: 0.06em; color: #0066cc; text-transform: uppercase;">Admissions & Enrollment</span>
+        <h1 style="font-size: 1.85rem; font-weight: 800; color: #1d1d1f; margin: 4px 0 0;">Internship Program Applications</h1>
+      </div>
+
+      
+    <nav class="student-tabs-nav" style="display: flex; gap: 8px; overflow-x: auto; padding: 12px 0; border-bottom: 1px solid #d2d2d7; margin-bottom: 28px;">
+      
+        <a href="/student/dashboard" style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 999px; font-size: 0.88rem; font-weight: 600; text-decoration: none; white-space: nowrap; transition: all 0.2s ease; background: #ffffff; color: #1d1d1f; border: 1px solid #d2d2d7;">
+          <span>📊</span>
+          <span>Dashboard</span>
+        </a>
+      
+        <a href="/student/profile" style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 999px; font-size: 0.88rem; font-weight: 600; text-decoration: none; white-space: nowrap; transition: all 0.2s ease; background: #ffffff; color: #1d1d1f; border: 1px solid #d2d2d7;">
+          <span>👤</span>
+          <span>Profile</span>
+        </a>
+      
+        <a href="/student/applications" style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 999px; font-size: 0.88rem; font-weight: 600; text-decoration: none; white-space: nowrap; transition: all 0.2s ease; background: #0066cc; color: #ffffff;">
+          <span>📝</span>
+          <span>My Applications</span>
+        </a>
+      
+        <a href="/student/internship" style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 999px; font-size: 0.88rem; font-weight: 600; text-decoration: none; white-space: nowrap; transition: all 0.2s ease; background: #ffffff; color: #1d1d1f; border: 1px solid #d2d2d7;">
+          <span>🎓</span>
+          <span>My Track</span>
+        </a>
+      
+        <a href="/student/tasks" style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 999px; font-size: 0.88rem; font-weight: 600; text-decoration: none; white-space: nowrap; transition: all 0.2s ease; background: #ffffff; color: #1d1d1f; border: 1px solid #d2d2d7;">
+          <span>📋</span>
+          <span>Task List</span>
+        </a>
+      
+        <a href="/student/submissions" style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 999px; font-size: 0.88rem; font-weight: 600; text-decoration: none; white-space: nowrap; transition: all 0.2s ease; background: #ffffff; color: #1d1d1f; border: 1px solid #d2d2d7;">
+          <span>📤</span>
+          <span>Work Submissions</span>
+        </a>
+      
+        <a href="/student/submit-work" style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 999px; font-size: 0.88rem; font-weight: 600; text-decoration: none; white-space: nowrap; transition: all 0.2s ease; background: #ffffff; color: #1d1d1f; border: 1px solid #d2d2d7;">
+          <span>🚀</span>
+          <span>Submit Work</span>
+        </a>
+      
+        <a href="/student/certificates" style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 999px; font-size: 0.88rem; font-weight: 600; text-decoration: none; white-space: nowrap; transition: all 0.2s ease; background: #ffffff; color: #1d1d1f; border: 1px solid #d2d2d7;">
+          <span>🏆</span>
+          <span>Certificates</span>
+        </a>
+      
+        <a href="/student/settings" style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 999px; font-size: 0.88rem; font-weight: 600; text-decoration: none; white-space: nowrap; transition: all 0.2s ease; background: #ffffff; color: #1d1d1f; border: 1px solid #d2d2d7;">
+          <span>⚙️</span>
+          <span>Settings</span>
+        </a>
+      
+    </nav>
+  
+
+      
+    <div class="card" style="padding: 32px; border-radius: 18px;">
+      <h2 style="font-size: 1.25rem; margin: 0 0 20px;">Submitted Applications</h2>
+      <div style="overflow-x: auto;">
+        <table style="width: 100%; border-collapse: collapse; font-size: 0.9rem;">
+          <thead>
+            <tr style="background: #f5f5f7; border-bottom: 2px solid #d2d2d7; text-align: left;">
+              <th style="padding: 12px 16px;">App ID</th>
+              <th style="padding: 12px 16px;">Program Track</th>
+              <th style="padding: 12px 16px;">Applied Date</th>
+              <th style="padding: 12px 16px;">Status</th>
+              <th style="padding: 12px 16px;">Offer Letter</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom: 1px solid #e5e5ea;">
+              <td style="padding: 16px; font-family: monospace;">ABSS-2026-WD-1042</td>
+              <td style="padding: 16px;"><strong>Full-Stack Web Engineering</strong></td>
+              <td style="padding: 16px;">Feb 15, 2026</td>
+              <td style="padding: 16px;"><span class="badge" style="background: rgba(16, 185, 129, 0.15); color: #10b981;">Accepted &bull; Active</span></td>
+              <td style="padding: 16px;"><button class="btn btn-secondary" onclick="alert('Downloading verified Offer Letter PDF...');" style="padding: 6px 14px; font-size: 0.8rem;">Download PDF</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div style="margin-top: 28px; padding-top: 20px; border-top: 1px solid #e5e5ea;">
+        <a href="/internships/programs" class="btn btn-secondary">Explore Other Programs &rarr;</a>
+      </div>
+    </div>
+  
+    </main>
+
+    <footer style="background: #ffffff; border-top: 1px solid #d2d2d7; padding: 24px 0; text-align: center; font-size: 0.85rem; color: #6e6e73;">
+      <div class="container">
+        &copy; 2026 ABSS Nexus Technologies. All rights reserved. &bull; <a href="/internships/support" style="color: #0066cc;">Technical Support</a> &bull; <a href="/privacy-policy" style="color: #0066cc;">Privacy</a>
+      </div>
+    </footer>
+    <script src="/src/scripts/script.js" defer></script>
+  </body>
+</html>

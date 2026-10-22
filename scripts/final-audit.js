@@ -9,18 +9,49 @@ const publicPages = [
   ["index.html", `${officialDomain}/`],
   ["about.html", `${officialDomain}/about`],
   ["services.html", `${officialDomain}/services`],
+  ["solutions.html", `${officialDomain}/solutions`],
+  ["industries.html", `${officialDomain}/industries`],
   ["services/website-development.html", `${officialDomain}/services/website-development`],
+  ["services/software-development.html", `${officialDomain}/services/software-development`],
+  ["services/mobile-app-development.html", `${officialDomain}/services/mobile-app-development`],
   ["services/ui-ux-design.html", `${officialDomain}/services/ui-ux-design`],
+  ["services/ai-machine-learning.html", `${officialDomain}/services/ai-machine-learning`],
+  ["services/cloud-computing.html", `${officialDomain}/services/cloud-computing`],
+  ["services/cybersecurity.html", `${officialDomain}/services/cybersecurity`],
+  ["services/data-analytics-bi.html", `${officialDomain}/services/data-analytics-bi`],
+  ["services/digital-marketing-seo.html", `${officialDomain}/services/digital-marketing-seo`],
+  ["services/ecommerce-development.html", `${officialDomain}/services/ecommerce-development`],
+  ["services/saas-development.html", `${officialDomain}/services/saas-development`],
+  ["services/api-integration.html", `${officialDomain}/services/api-integration`],
+  ["services/software-testing-qa.html", `${officialDomain}/services/software-testing-qa`],
+  ["services/it-consulting.html", `${officialDomain}/services/it-consulting`],
   ["services/website-maintenance.html", `${officialDomain}/services/website-maintenance`],
   ["projects.html", `${officialDomain}/projects`],
   ["contact.html", `${officialDomain}/contact`],
   ["pricing.html", `${officialDomain}/pricing`],
+  ["careers.html", `${officialDomain}/careers`],
+  ["blog.html", `${officialDomain}/blog`],
+  ["blog/modern-web-performance-core-web-vitals.html", `${officialDomain}/blog/modern-web-performance-core-web-vitals`],
+  ["blog/resilient-cloud-architecture-edge-computing.html", `${officialDomain}/blog/resilient-cloud-architecture-edge-computing`],
+  ["blog/minimalist-design-systems-conversion.html", `${officialDomain}/blog/minimalist-design-systems-conversion`],
+  ["faq.html", `${officialDomain}/faq`],
+  ["cookie-policy.html", `${officialDomain}/cookie-policy`],
   ["privacy-policy.html", `${officialDomain}/privacy-policy`],
   ["terms-and-conditions.html", `${officialDomain}/terms-and-conditions`],
   ["disclaimer.html", `${officialDomain}/disclaimer`],
   ["refund-policy.html", `${officialDomain}/refund-policy`],
   ["support-policy.html", `${officialDomain}/support-policy`],
   ["sitemap.html", `${officialDomain}/sitemap`],
+  ["internships.html", `${officialDomain}/internships`],
+  ["internships/programs.html", `${officialDomain}/internships/programs`],
+  ["internships/programs/web-development.html", `${officialDomain}/internships/programs/web-development`],
+  ["internships/programs/software-development.html", `${officialDomain}/internships/programs/software-development`],
+  ["internships/programs/ui-ux-design.html", `${officialDomain}/internships/programs/ui-ux-design`],
+  ["internships/programs/ai-machine-learning.html", `${officialDomain}/internships/programs/ai-machine-learning`],
+  ["internships/programs/cloud-devops.html", `${officialDomain}/internships/programs/cloud-devops`],
+  ["internships/how-it-works.html", `${officialDomain}/internships/how-it-works`],
+  ["internships/faq.html", `${officialDomain}/internships/faq`],
+  ["internships/support.html", `${officialDomain}/internships/support`],
 ];
 
 const requiredFiles = [
@@ -31,6 +62,7 @@ const requiredFiles = [
   "robots.txt",
   "sitemap.xml",
   "src/pages/index.html",
+  "internships.html",
 ];
 
 const adminFiles = [
@@ -175,7 +207,7 @@ if (fs.existsSync(sitemapPath)) {
   });
   urls.forEach((url) => {
     if (!url.startsWith(`${officialDomain}/`)) fail(`sitemap.xml: non-official URL ${url}`);
-    if (/\/admin|\/api|\/src\/|\.html|404|new-abss|shubhambca/i.test(url)) fail(`sitemap.xml: forbidden URL ${url}`);
+    if (/\/admin|\/api(?:[\/?#]|$)|src\/|\.html|404|new-abss|shubhambca/i.test(url)) fail(`sitemap.xml: forbidden URL ${url}`);
   });
 }
 

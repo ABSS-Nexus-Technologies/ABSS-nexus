@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow, noarchive" />
+    <title>Submission Reviews Studio | ABSS Nexus Admin Console</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="/public/assets/images/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="512x512" href="/public/assets/images/favicon.png" />
+    <link rel="apple-touch-icon" href="/public/assets/images/apple-touch-icon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/src/styles/styles.css" />
+  </head>
+  <body style="background: #F5F5F7; min-height: 100vh;">
+    <main class="admin-page" data-admin-app>
+      <section class="admin-shell" style="max-width: 1400px; margin: 0 auto; padding: 24px 20px 60px;">
+        <!-- Admin Brand Header -->
+        <div style="background: #FFFFFF; border: 1px solid #D2D2D7; border-radius: 16px; padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 14px;">
+          <div style="display: flex; align-items: center; gap: 14px;">
+            <a href="/" style="display: flex; align-items: center; gap: 10px; text-decoration: none;">
+              <img src="/public/assets/images/favicon.png" alt="ABSS Nexus Logo" width="32" height="32" style="height: 32px; width: 32px;" />
+              <strong style="font-size: 1.1rem; color: #1D1D1F; font-family: 'Space Grotesk', sans-serif;">ABSS Nexus Operations Console</strong>
+            </a>
+            <span style="background: rgba(16, 185, 129, 0.12); color: #10b981; padding: 4px 10px; border-radius: 999px; font-size: 0.76rem; font-weight: 700;">● Cloudflare D1 Active</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 16px;">
+            <span style="font-size: 0.85rem; color: #6e6e73;">Admin: <strong>Operations Superadmin</strong></span>
+            <button type="button" onclick="alert('Exporting system records to CSV...');" style="background: #ffffff; border: 1px solid #d2d2d7; padding: 6px 14px; border-radius: 8px; font-size: 0.8rem; font-weight: 600; cursor: pointer;">Export CSV</button>
+            <a href="/admin/login" onclick="sessionStorage.removeItem('abss-admin-token');" style="background: #dc2626; color: #ffffff; padding: 6px 14px; border-radius: 8px; font-size: 0.8rem; font-weight: 600; text-decoration: none;">Sign Out</a>
+          </div>
+        </div>
+
+        <!-- Top Title Bar -->
+        <div style="margin-bottom: 20px;">
+          <span style="font-size: 0.8rem; font-weight: 700; color: #0066cc; text-transform: uppercase; letter-spacing: 0.06em;">Evaluation & Scoring</span>
+          <h1 style="font-size: 1.85rem; font-weight: 800; color: #1d1d1f; margin: 4px 0 0;">Technical Code Review &amp; Rubric Evaluation</h1>
+        </div>
+
+        
+    <nav class="admin-tabs" aria-label="Admin console navigation" style="display: flex; gap: 6px; overflow-x: auto; padding: 10px 0; border-bottom: 2px solid #d2d2d7; margin-bottom: 24px;">
+      
+        <a href="/admin/dashboard" style="padding: 8px 16px; border-radius: 999px; font-size: 0.84rem; font-weight: 600; text-decoration: none; white-space: nowrap; transition: all 0.2s ease; background: #ffffff; color: #1d1d1f; border: 1px solid #d2d2d7;">
+          Overview
+        </a>
+      
+        <a href="/admin/leads" style="padding: 8px 16px; border-radius: 999px; font-size: 0.84rem; font-weight: 600; text-decoration: none; white-space: nowrap; transition: all 0.2s ease; background: #ffffff; color: #1d1d1f; border: 1px solid #d2d2d7;">
+          Client Inquiries
+        </a>
+      
+        <a href="/admin/clients" style="padding: 8px 16px; border-radius: 999px; font-size: 0.84rem; font-weight: 600; text-decoration: none; white-space: nowrap; transition: all 0.2s ease; background: #ffffff; color: #1d1d1f; border: 1px solid #d2d2d7;">
+          Clients
+        </a>
+      
+        <a href="/admin/projects" style="padding: 8px 16px; border-radius: 999px; font-size: 0.84rem; font-weight: 600; text-decoration: none; white-space: nowrap; transition: all 0.2s ease; background: #ffffff; color: #1d1d1f; border: 1px solid #d2d2d7;">
+          Projects
+        </a>
+      
+        <a href="/admin/pricing" style="padding: 8px 16px; border-radius: 999px; font-size: 0.84rem; font-weight: 600; text-decoration: none; white-space: nowrap; transition: all 0.2s ease; background: #ffffff; color: #1d1d1f; border: 1px solid #d2d2d7;">
+          Pricing Packages
+        </a>
+      
+        <a href="/admin/support" style="padding: 8px 16px; border-radius: 999px; font-size: 0.84rem; font-weight: 600; text-decoration: none; white-space: nowrap; transition: all 0.2s ease; background: #ffffff; color: #1d1d1f; border: 1px solid #d2d2d7;">
+          Support Tickets
+        </a>
+      
+        <a href="/admin/programs" style="padding: 8px 16px; border-radius: 999px; font-size: 0.84rem; font-weight: 600; text-decoration: none; white-space: nowrap; transition: all 0.2s ease; background: #ffffff; color: #1d1d1f; border: 1px solid #d2d2d7;">
+          Programs
+        </a>
+      
+        <a href="/admin/applications" style="padding: 8px 16px; border-radius: 999px; font-size: 0.84rem; font-weight: 600; text-decoration: none; white-space: nowrap; transition: all 0.2s ease; background: #ffffff; color: #1d1d1f; border: 1px solid #d2d2d7;">
+          Applications
+        </a>
+      
+        <a href="/admin/students" style="padding: 8px 16px; border-radius: 999px; font-size: 0.84rem; font-weight: 600; text-decoration: none; white-space: nowrap; transition: all 0.2s ease; background: #ffffff; color: #1d1d1f; border: 1px solid #d2d2d7;">
+          Students
+        </a>
+      
+        <a href="/admin/tasks" style="padding: 8px 16px; border-radius: 999px; font-size: 0.84rem; font-weight: 600; text-decoration: none; white-space: nowrap; transition: all 0.2s ease; background: #ffffff; color: #1d1d1f; border: 1px solid #d2d2d7;">
+          Tasks
+        </a>
+      
+        <a href="/admin/submissions" style="padding: 8px 16px; border-radius: 999px; font-size: 0.84rem; font-weight: 600; text-decoration: none; white-space: nowrap; transition: all 0.2s ease; background: #ffffff; color: #1d1d1f; border: 1px solid #d2d2d7;">
+          Submissions
+        </a>
+      
+        <a href="/admin/reviews" style="padding: 8px 16px; border-radius: 999px; font-size: 0.84rem; font-weight: 600; text-decoration: none; white-space: nowrap; transition: all 0.2s ease; background: #0066cc; color: #ffffff;">
+          Reviews
+        </a>
+      
+        <a href="/admin/payments" style="padding: 8px 16px; border-radius: 999px; font-size: 0.84rem; font-weight: 600; text-decoration: none; white-space: nowrap; transition: all 0.2s ease; background: #ffffff; color: #1d1d1f; border: 1px solid #d2d2d7;">
+          Payments
+        </a>
+      
+        <a href="/admin/certificates" style="padding: 8px 16px; border-radius: 999px; font-size: 0.84rem; font-weight: 600; text-decoration: none; white-space: nowrap; transition: all 0.2s ease; background: #ffffff; color: #1d1d1f; border: 1px solid #d2d2d7;">
+          Certificates
+        </a>
+      
+        <a href="/admin/users" style="padding: 8px 16px; border-radius: 999px; font-size: 0.84rem; font-weight: 600; text-decoration: none; white-space: nowrap; transition: all 0.2s ease; background: #ffffff; color: #1d1d1f; border: 1px solid #d2d2d7;">
+          Users & Roles
+        </a>
+      
+        <a href="/admin/audit-logs" style="padding: 8px 16px; border-radius: 999px; font-size: 0.84rem; font-weight: 600; text-decoration: none; white-space: nowrap; transition: all 0.2s ease; background: #ffffff; color: #1d1d1f; border: 1px solid #d2d2d7;">
+          Audit Logs
+        </a>
+      
+        <a href="/admin/settings" style="padding: 8px 16px; border-radius: 999px; font-size: 0.84rem; font-weight: 600; text-decoration: none; white-space: nowrap; transition: all 0.2s ease; background: #ffffff; color: #1d1d1f; border: 1px solid #d2d2d7;">
+          Settings
+        </a>
+      
+    </nav>
+  
+
+        
+    <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 24px;">
+      <div class="card" style="padding: 28px; border-radius: 16px; background: #ffffff;">
+        <h2 style="font-size: 1.25rem; margin: 0 0 16px;">Evaluation Rubric: TASK-10</h2>
+        <form onsubmit="event.preventDefault(); alert('Review evaluation submitted successfully! Student has been notified.');">
+          <div style="margin-bottom: 16px;">
+            <label style="display: block; font-weight: 600; margin-bottom: 6px;">Code Architecture &amp; Cleanliness (Max 40)</label>
+            <input type="number" min="0" max="40" value="38" required style="width: 100%; padding: 10px; border: 1px solid #d2d2d7; border-radius: 8px;" />
+          </div>
+          <div style="margin-bottom: 16px;">
+            <label style="display: block; font-weight: 600; margin-bottom: 6px;">Security &amp; Edge Token Handling (Max 30)</label>
+            <input type="number" min="0" max="30" value="29" required style="width: 100%; padding: 10px; border: 1px solid #d2d2d7; border-radius: 8px;" />
+          </div>
+          <div style="margin-bottom: 16px;">
+            <label style="display: block; font-weight: 600; margin-bottom: 6px;">Documentation &amp; Test Coverage (Max 30)</label>
+            <input type="number" min="0" max="30" value="28" required style="width: 100%; padding: 10px; border: 1px solid #d2d2d7; border-radius: 8px;" />
+          </div>
+          <div style="margin-bottom: 20px;">
+            <label style="display: block; font-weight: 600; margin-bottom: 6px;">Mentor Feedback &amp; Suggestions</label>
+            <textarea rows="4" style="width: 100%; padding: 10px; border: 1px solid #d2d2d7; border-radius: 8px;">Strong implementation of timing-safe token verification. Recommended adding automated curl examples to README.</textarea>
+          </div>
+          <div style="display: flex; gap: 12px;">
+            <button type="submit" class="btn btn-primary" style="flex: 1;">Approve Milestone (Score: 95/100) &rarr;</button>
+            <button type="button" class="btn btn-secondary" onclick="alert('Revision requested from student.');">Request Revision</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="card" style="padding: 28px; border-radius: 16px; background: #ffffff;">
+        <h2 style="font-size: 1.2rem; margin: 0 0 16px;">Submission Metadata</h2>
+        <p style="font-size: 0.88rem; color: #6e6e73; line-height: 1.6;">
+          <strong>Student:</strong> Aarav Sharma<br />
+          <strong>Email:</strong> student@college.edu<br />
+          <strong>Repository:</strong> <a href="https://github.com" target="_blank" rel="noopener noreferrer" style="color: #0066cc;">abss-internship/pr/45</a><br />
+          <strong>Commit:</strong> <code style="background: #f5f5f7; padding: 2px 6px; border-radius: 4px;">7e2f5b8</code><br />
+          <strong>Live Preview:</strong> <a href="/" target="_blank" rel="noopener noreferrer" style="color: #0066cc;">View Preview</a>
+        </p>
+      </div>
+    </div>
+  
+      </section>
+    </main>
+    <script src="/src/config/admin-config.js"></script>
+    <script src="/src/services/admin-api.js"></script>
+    <script src="/src/scripts/admin-auth-guard.js"></script>
+    <script src="/src/scripts/script.js"></script>
+  </body>
+</html>

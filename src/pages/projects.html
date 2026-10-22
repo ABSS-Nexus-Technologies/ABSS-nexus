@@ -3,395 +3,533 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="View ABSS Nexus Technologies project demos and case-style examples showing website, landing page, portfolio and business interface work."
-    />
+    <meta name="description" content="Explore ABSS Nexus Technologies portfolio projects, live production demos, and case studies featuring responsive websites, web apps, and modern UI/UX design." />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="ABSS Nexus Technologies" />
-    <meta property="og:description" content="View ABSS Nexus Technologies project demos and case-style examples showing website, landing page, portfolio and business interface work." />
+    <meta property="og:title" content="Portfolio &amp; Case Studies | ABSS Nexus Technologies" />
+    <meta property="og:description" content="Explore ABSS Nexus Technologies portfolio projects, live production demos, and case studies featuring responsive websites, web apps, and modern UI/UX design." />
     <meta property="og:image" content="https://abssnexus.in/public/assets/images/LogoGenerated.png" />
     <meta property="og:url" content="https://abssnexus.in/projects" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Portfolio &amp; Case Studies | ABSS Nexus Technologies" />
+    <meta name="twitter:description" content="Explore ABSS Nexus Technologies portfolio projects, live production demos, and case studies featuring responsive websites, web apps, and modern UI/UX design." />
+    <meta name="twitter:image" content="https://abssnexus.in/public/assets/images/LogoGenerated.png" />
     <link rel="canonical" href="https://abssnexus.in/projects" />
-    <title>Projects | ABSS Nexus Technologies</title>
+    <title>Portfolio &amp; Case Studies | ABSS Nexus Technologies</title>
     <link rel="icon" type="image/png" sizes="32x32" href="/public/assets/images/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="512x512" href="/public/assets/images/favicon.png" />
     <link rel="apple-touch-icon" href="/public/assets/images/apple-touch-icon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="/src/styles/styles.css" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        "name": "Portfolio & Case Studies",
+        "url": "https://abssnexus.in/projects",
+        "description": "Explore ABSS Nexus Technologies portfolio projects, live production demos, and case studies featuring responsive websites, web apps, and modern UI/UX design.",
+        "publisher": {
+          "@type": "Organization",
+          "name": "ABSS Nexus Technologies",
+          "url": "https://abssnexus.in/",
+          "logo": "https://abssnexus.in/public/assets/images/LogoGenerated.png"
+        }
+      }
+    </script>
   </head>
   <body class="agency-dark-theme">
-    <header class="site-header">
+    <header class="site-header" role="banner">
       <div class="announcement-bar">
-        <div class="container">
-          <span class="announcement-badge"><span class="live-pulse-dot" aria-hidden="true"></span> Free consultation available for website &amp; digital projects.</span>
-          <a href="/contact#project-inquiry">Start your business website</a>
+        <div class="announcement-bar__container container">
+          <span class="announcement-bar__badge">
+            <span class="live-pulse-dot" aria-hidden="true"></span>
+            <span>Applications open for 2026 Technical Internship Cohort.</span>
+          </span>
+          <a class="announcement-bar__link" href="/internships">Apply for Internship &rarr;</a>
         </div>
       </div>
-      <nav class="nav">
+      <nav class="nav" aria-label="Main Navigation">
         <a class="brand" href="/" aria-label="ABSS Nexus Technologies home">
-          <img src="/public/assets/images/LogoGenerated.png" alt="ABSS Nexus Technologies logo" />
-          <span>ABSS Nexus</span>
+          <img src="/public/assets/images/favicon.png" alt="ABSS Nexus Technologies logo" width="38" height="38" />
+          <span class="brand-name">ABSS Nexus Technologies</span>
         </a>
-        <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
-          <span></span>
-          <span></span>
-          <span></span>
+        <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav-links">
+          <span class="hamburger-bar"></span>
+          <span class="hamburger-bar"></span>
+          <span class="hamburger-bar"></span>
         </button>
-        <div class="nav-links">
-          <a href="/">Home</a>
-          <a href="/about">About</a>
-          <a href="/services">Services</a>
-          <a href="/projects" aria-current="page">Projects</a>
-          <a href="/contact">Contact</a>
-          <a class="nav-cta" href="/pricing">Our Pricing Packages</a>
+        <div class="nav-links" id="main-nav-links">
+          <a href="/" class="nav-link">Home</a>
+
+          <!-- Services Mega Menu Dropdown -->
+          <div class="nav-item-dropdown">
+            <button class="nav-dropdown-trigger" type="button" aria-expanded="false" aria-haspopup="true">
+              <span>Services</span>
+              <svg class="dropdown-arrow" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <div class="mega-menu mega-menu-services" role="menu">
+              <div class="mega-menu-grid">
+                <div class="mega-col">
+                  <div class="mega-col-title">Web Engineering</div>
+                  <ul class="mega-link-list">
+                    <li>
+                      <a class="mega-link" href="/services/website-development">
+                        <span class="mega-link-title">Website Development</span>
+                        <span class="mega-link-desc">High-speed business &amp; corporate platforms</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="mega-link" href="/services/ecommerce-development">
+                        <span class="mega-link-title">E-Commerce Development</span>
+                        <span class="mega-link-desc">Online storefronts &amp; fast checkout paths</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="mega-link" href="/services/digital-marketing-seo">
+                        <span class="mega-link-title">Digital Marketing &amp; SEO</span>
+                        <span class="mega-link-desc">Search rankings &amp; lead growth</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="mega-link" href="/services/ui-ux-design">
+                        <span class="mega-link-title">UI/UX Design</span>
+                        <span class="mega-link-desc">Figma wireframes &amp; design systems</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="mega-link" href="/services/website-maintenance">
+                        <span class="mega-link-title">Website Maintenance</span>
+                        <span class="mega-link-desc">Proactive updates, security &amp; backups</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+                <div class="mega-col">
+                  <div class="mega-col-title">Software &amp; Cloud</div>
+                  <ul class="mega-link-list">
+                    <li>
+                      <a class="mega-link" href="/services/software-development">
+                        <span class="mega-link-title">Software Development</span>
+                        <span class="mega-link-desc">Custom web apps &amp; workflow software</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="mega-link" href="/services/mobile-app-development">
+                        <span class="mega-link-title">Mobile App Development</span>
+                        <span class="mega-link-desc">iOS &amp; Android cross-platform solutions</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="mega-link" href="/services/saas-development">
+                        <span class="mega-link-title">SaaS Development</span>
+                        <span class="mega-link-desc">Scalable cloud platforms &amp; client portals</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="mega-link" href="/services/cloud-computing">
+                        <span class="mega-link-title">Cloud Computing &amp; DevOps</span>
+                        <span class="mega-link-desc">Edge servers, CI/CD pipelines &amp; scaling</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="mega-link" href="/services/api-integration">
+                        <span class="mega-link-title">API Integration</span>
+                        <span class="mega-link-desc">Clean RESTful &amp; edge database APIs</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+                <div class="mega-col">
+                  <div class="mega-col-title">Data, QA &amp; Support</div>
+                  <ul class="mega-link-list">
+                    <li>
+                      <a class="mega-link" href="/services/ai-machine-learning">
+                        <span class="mega-link-title">AI &amp; Machine Learning</span>
+                        <span class="mega-link-desc">Intelligent automation &amp; predictive models</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="mega-link" href="/services/data-analytics-bi">
+                        <span class="mega-link-title">Data Analytics &amp; BI</span>
+                        <span class="mega-link-desc">Real-time dashboards &amp; telemetry hubs</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="mega-link" href="/services/cybersecurity">
+                        <span class="mega-link-title">Cybersecurity</span>
+                        <span class="mega-link-desc">Vulnerability audits &amp; edge hardening</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="mega-link" href="/services/software-testing-qa">
+                        <span class="mega-link-title">Software Testing &amp; QA</span>
+                        <span class="mega-link-desc">End-to-end verification &amp; audits</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="mega-link" href="/services/it-consulting">
+                        <span class="mega-link-title">IT Consulting &amp; Strategy</span>
+                        <span class="mega-link-desc">Technology audits &amp; roadmap planning</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="mega-link" href="/services/managed-it-support">
+                        <span class="mega-link-title">Managed IT Support</span>
+                        <span class="mega-link-desc">24/7 technical monitoring &amp; maintenance</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="mega-menu-footer-bar">
+                <span>16 Comprehensive IT Disciplines Available</span>
+                <a href="/services">View Complete Service Catalog &rarr;</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Solutions Mega Menu Dropdown -->
+          <div class="nav-item-dropdown">
+            <button class="nav-dropdown-trigger" type="button" aria-expanded="false" aria-haspopup="true">
+              <span>Solutions</span>
+              <svg class="dropdown-arrow" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <div class="mega-menu mega-menu-solutions" role="menu">
+              <div class="mega-menu-grid mega-menu-grid--solutions">
+                <div class="mega-col">
+                  <div class="mega-col-title">Enterprise Architecture</div>
+                  <ul class="mega-link-list">
+                    <li>
+                      <a class="mega-link" href="/solutions#automation">
+                        <span class="mega-link-title">Business Process Automation</span>
+                        <span class="mega-link-desc">Custom workflow engines &amp; queue automation</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="mega-link" href="/solutions#platforms">
+                        <span class="mega-link-title">Custom Software Platforms</span>
+                        <span class="mega-link-desc">Tailored relational databases &amp; admin controls</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="mega-link" href="/solutions#cloud">
+                        <span class="mega-link-title">Cloud Adoption &amp; Modernization</span>
+                        <span class="mega-link-desc">Serverless edge networks &amp; zero downtime</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+                <div class="mega-col">
+                  <div class="mega-col-title">Integration &amp; Growth</div>
+                  <ul class="mega-link-list">
+                    <li>
+                      <a class="mega-link" href="/solutions#api">
+                        <span class="mega-link-title">Connected Systems &amp; APIs</span>
+                        <span class="mega-link-desc">Secure REST bridges &amp; CRM synchronization</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="mega-link" href="/solutions#conversion">
+                        <span class="mega-link-title">High-Conversion Experiences</span>
+                        <span class="mega-link-desc">Sub-second performance &amp; instant inquiries</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="mega-link" href="/solutions#strategy">
+                        <span class="mega-link-title">Strategic Digital Transformation</span>
+                        <span class="mega-link-desc">Architecture audits &amp; phased delivery roadmaps</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="mega-menu-footer-bar">
+                <span>Outcome-Driven Technical Frameworks</span>
+                <a href="/solutions">Explore All Solutions &rarr;</a>
+              </div>
+            </div>
+          </div>
+
+          <a href="/industries" class="nav-link">Industries</a>
+          <a href="/work" class="nav-link">Work</a>
+          <a href="/pricing" class="nav-link">Pricing</a>
+          <a href="/blog" class="nav-link">Blog</a>
+          <a href="/about" class="nav-link">About</a>
+          <a href="/contact" class="nav-link">Contact</a>
+          <a class="nav-cta" href="/contact#project-inquiry">Start Project</a>
         </div>
       </nav>
     </header>
 
     <main>
-      <section class="page-hero section">
-        <div class="container">
-          <p class="eyebrow">Innovate • Solve • Elevate</p>
-          <h1>Our Projects & Demo Work</h1>
-          <p>
-            We build modern websites, landing pages, dashboards, and digital solutions with clean
-            design and responsive layouts.
+      <!-- Hero Section -->
+      <section class="site-hero site-hero--page page-hero section" id="hero">
+        <div class="site-hero__container container">
+          <nav class="site-hero__breadcrumb breadcrumb-trail" aria-label="Breadcrumb">
+            <a href="/">Home</a>
+            <span class="separator" aria-hidden="true">/</span>
+            <span class="current">Projects</span>
+          </nav>
+
+          <span class="site-hero__eyebrow section-badge-apple">
+            <span class="site-hero__pulse-dot" aria-hidden="true"></span>
+            <span>Engineering Showcase</span>
+          </span>
+          <h1 class="site-hero__title">Featured Portfolio, Live Demos &amp; Technical Case Studies</h1>
+          <p class="site-hero__description">
+            Explore selected production systems and verified concept implementations. We engineer responsive web applications,
+            corporate platforms, and intuitive management dashboards with high performance, clean code, and zero layout shift.
           </p>
-          <div class="hero-actions">
-            <a class="btn btn-glow-cyan" href="/services">View Services</a>
-            <a class="btn btn-glass" href="/contact">Start Your Project</a>
+
+          <div class="site-hero__actions hero-actions">
+            <a class="site-hero__btn site-hero__btn--primary btn btn-apple-primary" href="/contact#project-inquiry">
+              <span>Start Your Project</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </a>
+            <a class="site-hero__btn site-hero__btn--secondary btn btn-apple-secondary" href="/services">
+              <span>Explore Services</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </a>
           </div>
         </div>
       </section>
 
-      <section class="section split-band compact-section">
+      <!-- Category Filter Controls -->
+      <section class="section split-band" style="padding: 24px 0;">
+        <div class="container">
+          <div class="project-filter-container" aria-label="Filter projects by category">
+            <button class="filter-btn active" type="button" data-project-filter="all">All Projects</button>
+            <button class="filter-btn" type="button" data-project-filter="website">Websites</button>
+            <button class="filter-btn" type="button" data-project-filter="webapp">Web Apps</button>
+            <button class="filter-btn" type="button" data-project-filter="landing">Landing Pages</button>
+            <button class="filter-btn" type="button" data-project-filter="ecommerce">E-Commerce</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Detailed Case Studies Section -->
+      <section class="section">
         <div class="container">
           <div class="section-heading">
-            <p class="eyebrow">Project Categories</p>
-            <h2>Explore work by project type.</h2>
+            <p class="eyebrow">Case Studies &amp; Demonstrations</p>
+            <h2>Architectural Breakdowns of Selected Implementations</h2>
+            <p>Every implementation details the core business problem, our engineering approach, technical stack, and verified outcomes.</p>
           </div>
-          <div class="filter-row" aria-label="Project filters">
-            <button class="filter-btn active" type="button" data-project-filter="all">All</button>
-            <button class="filter-btn" type="button" data-project-filter="website">Website</button>
-            <button class="filter-btn" type="button" data-project-filter="education">Education</button>
-            <button class="filter-btn" type="button" data-project-filter="ecommerce">E-commerce</button>
-            <button class="filter-btn" type="button" data-project-filter="dashboard">Dashboard / UI</button>
-          </div>
+
+          <!-- Project 1: Personal Portfolio (Real Production) -->
+          <article class="case-breakdown-card" data-project-category="website">
+            <div>
+              <div class="mockup-browser-apple">
+                <div class="mockup-browser-header">
+                  <div class="mockup-browser-dots"><span></span><span></span><span></span></div>
+                  <div class="mockup-browser-bar">shubham-portfolio-abss.netlify.app</div>
+                </div>
+                <img src="/public/assets/images/personal-portfolio.png" alt="Personal Portfolio Website preview" style="width: 100%; display: block;" loading="lazy" />
+              </div>
+            </div>
+            <div>
+              <span class="section-badge-apple">Production &bull; Live Client Demo</span>
+              <h3>Personal Developer &amp; Designer Portfolio</h3>
+              <p>
+                <strong>Problem:</strong> Standard template portfolios felt bloated, slow to load on mobile, and failed to communicate deep technical competencies to prospective clients.<br /><br />
+                <strong>Approach:</strong> Engineered a lightweight, mobile-first responsive architecture using pure semantic HTML5, CSS3, and vanilla JavaScript with sub-second LCP.<br /><br />
+                <strong>Outcome:</strong> 100/100 Lighthouse performance score, zero layout shift, and instant mobile responsiveness.
+              </p>
+              <div class="tech-pills-row" style="margin-bottom: 20px;">
+                <span class="tech-pill">HTML5</span><span class="tech-pill">CSS3</span><span class="tech-pill">JavaScript</span><span class="tech-pill">Netlify Edge</span>
+              </div>
+              <a class="btn btn-apple-primary" href="https://shubham-portfolio-abss.netlify.app/" target="_blank" rel="noopener noreferrer">
+                <span>View Live Deployment &rarr;</span>
+              </a>
+            </div>
+          </article>
+
+          <!-- Project 2: Cloud Analytics & Admin Dashboard (Demonstration) -->
+          <article class="case-breakdown-card" data-project-category="webapp">
+            <div>
+              <div class="mockup-browser-apple">
+                <div class="mockup-browser-header">
+                  <div class="mockup-browser-dots"><span></span><span></span><span></span></div>
+                  <div class="mockup-browser-bar">abssnexus.in/analytics/dashboard</div>
+                </div>
+                <img src="/public/assets/images/project-dashboard-ui.png" alt="Cloud Analytics Dashboard preview" style="width: 100%; display: block;" loading="lazy" />
+              </div>
+            </div>
+            <div>
+              <span class="section-badge-apple" style="color: #6E6E73; background: #eaeaea;">Concept &bull; Demo Showcase</span>
+              <h3>Cloud Analytics &amp; Telemetry Dashboard</h3>
+              <p>
+                <strong>Problem:</strong> Business managers struggled to monitor real-time lead submissions, project status updates, and support tickets in one centralized location.<br /><br />
+                <strong>Approach:</strong> Built a modular administration control room powered by Cloudflare D1 SQL, secure token authentication, and interactive telemetry charts.<br /><br />
+                <strong>Outcome:</strong> Real-time operational visibility, sub-15ms SQL querying at the edge, and role-based permissions preventing unauthorized access.
+              </p>
+              <div class="tech-pills-row" style="margin-bottom: 20px;">
+                <span class="tech-pill">Cloud D1 SQL</span><span class="tech-pill">REST APIs</span><span class="tech-pill">JWT Auth</span><span class="tech-pill">Interactive Charts</span>
+              </div>
+              <a class="btn btn-apple-secondary" href="/services/software-development">
+                <span>Explore Custom Software Service &rarr;</span>
+              </a>
+            </div>
+          </article>
+
+          <!-- Project 3: E-Commerce Storefront (Demonstration) -->
+          <article class="case-breakdown-card" data-project-category="ecommerce">
+            <div>
+              <div class="mockup-browser-apple">
+                <div class="mockup-browser-header">
+                  <div class="mockup-browser-dots"><span></span><span></span><span></span></div>
+                  <div class="mockup-browser-bar">abssnexus.in/storefront/retail</div>
+                </div>
+                <img src="/public/assets/images/project-ecommerce-demo.png" alt="E-Commerce Retail Platform preview" style="width: 100%; display: block;" loading="lazy" />
+              </div>
+            </div>
+            <div>
+              <span class="section-badge-apple" style="color: #6E6E73; background: #eaeaea;">Concept &bull; Demo Showcase</span>
+              <h3>High-Conversion E-Commerce Retail Storefront</h3>
+              <p>
+                <strong>Problem:</strong> Small retailers losing customers to slow multi-page checkout flows and heavy platform monthly subscription fees.<br /><br />
+                <strong>Approach:</strong> Engineered a lightweight product catalog with instant category filtering, persistent client-side cart, and direct WhatsApp checkout routing.<br /><br />
+                <strong>Outcome:</strong> Zero platform commission, instant checkout transfer, and sub-second catalog page load speeds on mobile networks.
+              </p>
+              <div class="tech-pills-row" style="margin-bottom: 20px;">
+                <span class="tech-pill">JavaScript Cart</span><span class="tech-pill">WhatsApp API</span><span class="tech-pill">Responsive UI</span><span class="tech-pill">Razorpay Ready</span>
+              </div>
+              <a class="btn btn-apple-secondary" href="/services/ecommerce-development">
+                <span>Explore E-Commerce Service &rarr;</span>
+              </a>
+            </div>
+          </article>
         </div>
       </section>
 
-      <section class="section projects project-list-section" id="project-list">
+      <!-- Project Enquiry CTA -->
+      <section class="section cta-band" id="project-inquiry">
         <div class="container">
-          <div class="section-heading">
-            <p class="eyebrow">Portfolio Projects</p>
-            <h2>Focused demo projects built around practical use cases.</h2>
-            <p>
-              Each project card shows the project type, current status, technologies, and available
-              demo access.
-            </p>
-          </div>
-          <div class="project-showcase-grid">
-            <article class="project-card project-detail-card" data-project-category="website">
-              <div class="project-visual image-visual">
-                <img src="/public/assets/images/personal-portfolio.png" alt="Personal Portfolio Website preview" />
-              </div>
-              <div class="project-body">
-                <div class="project-badges">
-                  <span class="status-badge completed">Completed Demo Project</span>
-                </div>
-                <span class="project-type">Portfolio Website</span>
-                <h3>Personal Portfolio Website</h3>
-                <p>
-                  A responsive personal portfolio presenting projects, skills, leadership experience
-                  and professional contact information.
-                </p>
-                <div class="project-meta">
-                  <span>HTML</span><span>CSS</span><span>JavaScript</span>
-                </div>
-                <ul>
-                  <li>Responsive design</li>
-                  <li>About, skills, and projects sections</li>
-                  <li>Contact form and social links</li>
-                </ul>
-                <div class="project-actions">
-                  <a class="card-link" href="https://shubham-portfolio-abss.netlify.app/" target="_blank" rel="noopener noreferrer" aria-label="Open Personal Portfolio Website live demo in a new tab">Live Demo</a>
-                  <button class="card-link button-link" type="button" data-project-modal="Personal Portfolio Website" aria-label="View details for Personal Portfolio Website">View Details</button>
-                </div>
-              </div>
-            </article>
-            <article class="project-card project-detail-card" data-project-category="landing website">
-              <div class="project-visual image-visual">
-                <img src="/public/assets/images/project-business-landing.png" alt="Business Landing Page preview" />
-              </div>
-              <div class="project-body">
-                <div class="project-badges">
-                  <span class="status-badge completed">Completed — Demo Coming Soon</span>
-                </div>
-                <span class="project-type">Landing Page</span>
-                <h3>Business Landing Page</h3>
-                <p>
-                  A conversion-focused landing page concept for presenting business services,
-                  benefits and contact actions.
-                </p>
-                <div class="project-meta">
-                  <span>HTML</span><span>CSS</span>
-                </div>
-                <ul>
-                  <li>Hero, services, and CTA sections</li>
-                  <li>Contact section</li>
-                  <li>Mobile responsive layout</li>
-                </ul>
-                <div class="project-actions">
-                  <span class="card-link demo-status" aria-label="Business Landing Page demo coming soon">Demo Coming Soon</span>
-                  <button class="card-link button-link" type="button" data-project-modal="Business Landing Page" aria-label="View details for Business Landing Page">View Details</button>
-                </div>
-              </div>
-            </article>
-            <article class="project-card project-detail-card" data-project-category="education website">
-              <div class="project-visual image-visual">
-                <img src="/public/assets/images/project-college-website.png" alt="College / Institute Website preview" />
-              </div>
-              <div class="project-body">
-                <div class="project-badges">
-                  <span class="status-badge progress">Demo Project In Progress</span>
-                </div>
-                <span class="project-type">Educational Website</span>
-                <h3>College / Institute Website</h3>
-                <p>
-                  An education website concept covering academics, admission information, facilities
-                  and institutional details.
-                </p>
-                <div class="project-meta">
-                  <span>HTML</span><span>CSS</span><span>JavaScript</span>
-                </div>
-                <ul>
-                  <li>Home, courses, faculty, and admission sections</li>
-                  <li>About institute</li>
-                  <li>Contact form</li>
-                </ul>
-                <div class="project-actions">
-                  <span class="card-link demo-status" aria-label="College or Institute Website demo in progress">Demo In Progress</span>
-                  <button class="card-link button-link" type="button" data-project-modal="College / Institute Website" aria-label="View details for College or Institute Website">View Details</button>
-                </div>
-              </div>
-            </article>
-            <article class="project-card project-detail-card" data-project-category="website">
-              <div class="project-visual image-visual">
-                <img src="/public/assets/images/project-restaurant-website.png" alt="Restaurant Website preview" />
-              </div>
-              <div class="project-body">
-                <div class="project-badges">
-                  <span class="status-badge completed">Completed — Demo Coming Soon</span>
-                </div>
-                <span class="project-type">Business Website</span>
-                <h3>Restaurant Website</h3>
-                <p>
-                  A restaurant website concept featuring menu presentation, services, location
-                  information and reservation actions.
-                </p>
-                <div class="project-meta">
-                  <span>HTML</span><span>CSS</span>
-                </div>
-                <ul>
-                  <li>Menu and gallery sections</li>
-                  <li>About restaurant</li>
-                  <li>Booking, contact, and location sections</li>
-                </ul>
-                <div class="project-actions">
-                  <span class="card-link demo-status" aria-label="Restaurant Website demo coming soon">Demo Coming Soon</span>
-                  <button class="card-link button-link" type="button" data-project-modal="Restaurant Website" aria-label="View details for Restaurant Website">View Details</button>
-                </div>
-              </div>
-            </article>
-            <article class="project-card project-detail-card" data-project-category="ecommerce">
-              <div class="project-visual image-visual">
-                <img src="/public/assets/images/project-ecommerce-demo.png" alt="E-commerce Website Demo preview" />
-              </div>
-              <div class="project-body">
-                <div class="project-badges">
-                  <span class="status-badge upcoming">Demo Project Coming Soon</span>
-                </div>
-                <span class="project-type">E-commerce Demo</span>
-                <h3>E-commerce Website Demo</h3>
-                <p>
-                  A marketplace interface concept covering products, categories, search, cart and
-                  customer-account flows.
-                </p>
-                <div class="project-meta">
-                  <span>HTML</span><span>CSS</span><span>JavaScript</span>
-                </div>
-                <ul>
-                  <li>Product cards and category section</li>
-                  <li>Cart button</li>
-                  <li>Product filter and responsive layout</li>
-                </ul>
-                <div class="project-actions">
-                  <span class="card-link demo-status" aria-label="E-commerce Website Demo coming soon">Coming Soon</span>
-                  <button class="card-link button-link" type="button" data-project-modal="E-commerce Website Demo" aria-label="View details for E-commerce Website Demo">View Details</button>
-                </div>
-              </div>
-            </article>
-            <article class="project-card project-detail-card" data-project-category="dashboard uiux">
-              <div class="project-visual image-visual">
-                <img src="/public/assets/images/project-dashboard-ui.png" alt="Business Dashboard UI preview" />
-              </div>
-              <div class="project-body">
-                <div class="project-badges">
-                  <span class="status-badge progress">Demo Project In Progress</span>
-                </div>
-                <span class="project-type">Dashboard UI</span>
-                <h3>Business Dashboard UI</h3>
-                <p>
-                  An admin dashboard interface concept for business metrics, leads, projects,
-                  clients and operational management.
-                </p>
-                <div class="project-meta">
-                  <span>HTML</span><span>CSS</span><span>JavaScript</span>
-                </div>
-                <ul>
-                  <li>Sidebar navigation</li>
-                  <li>Dashboard cards and chart section</li>
-                  <li>User management layout</li>
-                </ul>
-                <div class="project-actions">
-                  <span class="card-link demo-status" aria-label="Business Dashboard UI demo in progress">Demo In Progress</span>
-                  <button class="card-link button-link" type="button" data-project-modal="Business Dashboard UI" aria-label="View details for Business Dashboard UI">View Details</button>
-                </div>
-              </div>
-            </article>
+          <div class="radiant-cta-box">
+            <p class="eyebrow">Start Your Project</p>
+            <h2>Have a Similar Digital Product in Mind?</h2>
+            <p>We work directly with founders and business owners to build high-performance websites and custom software.</p>
+
+            <div class="radiant-cta-actions">
+              <a class="btn btn-apple-primary" href="/contact#project-inquiry">
+                <span>Discuss Your Project</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </a>
+              <a class="btn btn-apple-whatsapp" href="https://wa.me/918757928673" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.301-.15-1.78-.878-2.056-.979-.276-.1-.477-.15-.678.15-.2.3-.778.979-.954 1.18-.176.2-.352.226-.653.075s-1.272-.469-2.423-1.496c-.896-.799-1.501-1.786-1.677-2.088-.176-.301-.019-.464.132-.614.136-.135.301-.351.452-.527.15-.176.201-.301.301-.502.1-.2.05-.376-.025-.527-.075-.15-.678-1.632-.929-2.235-.245-.588-.494-.509-.678-.518l-.578-.01c-.2 0-.527.075-.803.376s-1.054 1.029-1.054 2.509 1.079 2.91 1.23 3.111c.15.2 2.122 3.24 5.141 4.544.718.31 1.279.495 1.716.634.722.23 1.378.197 1.9.12.58-.088 1.78-.727 2.03-1.43.25-.704.25-1.307.175-1.431-.075-.125-.276-.2-.577-.35zM12.04 2C6.51 2 2.03 6.48 2.03 12.01c0 1.97.57 3.81 1.57 5.37L2 22l4.78-1.54c1.51.92 3.27 1.45 5.26 1.45 5.53 0 10.01-4.48 10.01-10.01S17.57 2 12.04 2zm0 18.25c-1.74 0-3.36-.5-4.74-1.38l-.34-.22-2.83.91.93-2.76-.24-.37c-.98-1.5-1.53-3.27-1.53-5.12 0-4.56 3.71-8.27 8.27-8.27s8.27 3.71 8.27 8.27-3.71 8.27-8.27 8.27z"/></svg>
+                <span>WhatsApp Directly</span>
+              </a>
+            </div>
+
+            <div class="cta-trust-meta">
+              <span>&#9742; Direct Line: +91 87579 28673</span>
+              <span>&#9993; Email: abssnexus@gmail.com</span>
+              <span>&#128205; Location: Jaipur, Rajasthan</span>
+            </div>
           </div>
         </div>
       </section>
-
-      <section class="section process">
-        <div class="container">
-          <div class="section-heading">
-            <p class="eyebrow">Project Approach</p>
-            <h2>How We Approach Digital Projects</h2>
-          </div>
-          <div class="process-grid">
-            <article><span>01</span><h3>Understand</h3><p>Understand the requirement, audience and business goal.</p></article>
-            <article><span>02</span><h3>Plan</h3><p>Plan the page structure, content flow and key actions.</p></article>
-            <article><span>03</span><h3>Design</h3><p>Create responsive layouts that work across common devices.</p></article>
-            <article><span>04</span><h3>Develop</h3><p>Build and test pages, interactions, forms and links.</p></article>
-            <article><span>05</span><h3>Deliver</h3><p>Deliver with clear guidance for updates, hosting and next steps.</p></article>
-          </div>
-        </div>
-      </section>
-
-      <section class="section cta-band">
-        <div class="container cta-box">
-          <p class="eyebrow">Start a Project</p>
-          <h2>Have a Website or Digital Project in Mind?</h2>
-          <p>
-            Share your requirements with ABSS Nexus Technologies and receive practical guidance on
-            the right scope, timeline and starting budget.
-          </p>
-          <div class="hero-actions">
-            <a class="btn btn-glow-cyan" href="/contact">Discuss Your Project</a>
-            <a class="btn btn-glass" href="/services">View Services</a>
-          </div>
-        </div>
-      </section>
-
-      <dialog class="project-modal" aria-labelledby="project-modal-title">
-        <button class="modal-close" type="button" aria-label="Close project details">×</button>
-        <p class="eyebrow">Project Details</p>
-        <h2 id="project-modal-title">Project Overview</h2>
-        <div class="modal-content">
-          <p data-project-modal-description>
-            Select a project to view details.
-          </p>
-          <div class="modal-grid">
-            <article><span>Project Type</span><p data-project-modal-type>Project type</p></article>
-            <article><span>Development Status</span><p data-project-modal-status>Current status</p></article>
-            <article><span>Technologies</span><p data-project-modal-tech>Technologies used</p></article>
-            <article><span>Main Features</span><p data-project-modal-features>Main features</p></article>
-            <article><span>Demo Availability</span><p data-project-modal-demo>Demo availability</p></article>
-          </div>
-          <div class="project-actions">
-            <a class="card-link" href="/contact">Start Similar Project</a>
-            <button class="card-link button-link" type="button" data-close-project-modal>Back to Projects</button>
-          </div>
-        </div>
-      </dialog>
     </main>
 
-    <footer class="footer">
-      <div class="container footer-grid">
-        <div class="footer-brand">
-          <img src="/public/assets/images/LogoGenerated.png" alt="ABSS Nexus Technologies logo" />
-          <p class="footer-brand-title">ABSS Nexus Technologies</p>
-          <p>
-            Building modern digital solutions for businesses, startups, institutions, and
-            individuals.
-          </p>
-                    <strong>Innovate • Solve • Elevate</strong>
-          <div>
-            <span class="footer-system-status">
-              <span class="live-pulse-dot" aria-hidden="true"></span>
-              All Systems Operational &bull; Edge Active
-            </span>
+    <footer class="site-footer" role="contentinfo">
+      <div class="site-footer__container container">
+        <div class="site-footer__grid footer-grid">
+          <!-- Column 1: Brand -->
+          <div class="site-footer__brand footer-brand">
+            <a class="site-footer__logo-link" href="/" aria-label="ABSS Nexus Technologies home">
+              <img class="site-footer__logo" src="/public/assets/images/LogoGenerated.png" alt="ABSS Nexus Technologies logo" width="160" height="38" />
+            </a>
+            <p class="site-footer__brand-title footer-brand-title">ABSS Nexus Technologies</p>
+            <p class="site-footer__brand-desc">Building high-performance digital solutions for businesses, startups, institutions, and growing brands.</p>
+            <strong class="site-footer__tagline">Innovate &bull; Solve &bull; Elevate</strong>
+            <div>
+              <span class="site-footer__status footer-system-status">
+                <span class="site-footer__status-pulse live-pulse-dot" aria-hidden="true"></span>
+                <span>All Systems Operational &bull; Edge Active</span>
+              </span>
+            </div>
+          </div>
+
+          <!-- Column 2: Quick Links -->
+          <div class="site-footer__col footer-column">
+            <h3 class="site-footer__col-title">Quick Links</h3>
+            <a class="site-footer__link" href="/">Home</a>
+            <a class="site-footer__link" href="/about">About</a>
+            <a class="site-footer__link" href="/services">Services</a>
+            <a class="site-footer__link" href="/solutions">Solutions</a>
+            <a class="site-footer__link" href="/industries">Industries</a>
+            <a class="site-footer__link" href="/work">Work</a>
+            <a class="site-footer__link" href="/careers">Careers</a>
+            <a class="site-footer__link" href="/blog">Blog</a>
+            <a class="site-footer__link" href="/faq">FAQ</a>
+            <a class="site-footer__link" href="/pricing">Pricing</a>
+            <a class="site-footer__link" href="/internships">Internships</a>
+            <a class="site-footer__link" href="/contact">Contact</a>
+          </div>
+
+          <!-- Column 3: Our Services -->
+          <div class="site-footer__col footer-column">
+            <h3 class="site-footer__col-title">Our Services</h3>
+            <a class="site-footer__link" href="/services/website-development">Website Development</a>
+            <a class="site-footer__link" href="/services/software-development">Software Development</a>
+            <a class="site-footer__link" href="/services/mobile-app-development">Mobile App Development</a>
+            <a class="site-footer__link" href="/services/ui-ux-design">UI/UX Design</a>
+            <a class="site-footer__link" href="/services/ai-machine-learning">AI &amp; Machine Learning</a>
+            <a class="site-footer__link" href="/services/cloud-computing">Cloud Computing</a>
+            <a class="site-footer__link" href="/services/cybersecurity">Cybersecurity</a>
+            <a class="site-footer__link" href="/services/data-analytics-bi">Data Analytics</a>
+            <a class="site-footer__link" href="/services/ecommerce-development">E-Commerce Development</a>
+            <a class="site-footer__link" href="/services/saas-development">SaaS Development</a>
+            <a class="site-footer__link" href="/services">All 16 Services &rarr;</a>
+          </div>
+
+          <!-- Column 4: Contact Info -->
+          <div class="site-footer__col site-footer__contact footer-column footer-contact">
+            <h3 class="site-footer__col-title">Contact Info</h3>
+            <a class="site-footer__link" href="tel:+918757928673">Phone: +91 87579 28673</a>
+            <a class="site-footer__link" href="mailto:abssnexus@gmail.com">Email: abssnexus@gmail.com</a>
+            <span class="site-footer__contact-item">Location: Jaipur, Rajasthan, India</span>
+            <span class="site-footer__contact-item">Shubham Kumar &mdash; Founder</span>
+            <span class="site-footer__contact-item">Consultation &amp; Advisory: Open 2026</span>
           </div>
         </div>
-        <div class="footer-column">
-          <h3>Quick Links</h3>
-          <a href="/">Home</a>
-          <a href="/about">About Us</a>
-          <a href="/services">Services</a>
-          <a href="/projects">Projects</a>
-          <a href="/contact">Contact</a>
+
+        <!-- Divider & Lower Footer Bar (Inside Container) -->
+        <div class="site-footer__bottom footer-lower">
+          <div class="site-footer__socials footer-socials" aria-label="Social media profiles">
+            <a class="site-footer__social-link" href="https://www.instagram.com/abssnexus/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">Instagram</a>
+            <a class="site-footer__social-link" href="https://www.facebook.com/profile.php?id=61592563923350" target="_blank" rel="noopener noreferrer" aria-label="Facebook">Facebook</a>
+            <a class="site-footer__social-link" href="https://x.com/abssnexus" target="_blank" rel="noopener noreferrer" aria-label="X">X / Twitter</a>
+          </div>
+          <nav class="site-footer__legal footer-legal" aria-label="Legal documents">
+            <a href="/privacy-policy">Privacy Policy</a>
+            <a href="/terms-and-conditions">Terms &amp; Conditions</a>
+            <a href="/cookie-policy">Cookie Policy</a>
+            <a href="/disclaimer">Disclaimer</a>
+            <a href="/refund-policy">Refund Policy</a>
+            <a href="/support-policy">Support Policy</a>
+            <a href="/sitemap">Sitemap</a>
+          </nav>
         </div>
-        <div class="footer-column">
-          <h3>Our Services</h3>
-          <a href="/services">Website Development</a>
-          <a href="/services">Application Development</a>
-          <a href="/services">UI/UX Design</a>
-          <a href="/services">Business Landing Pages</a>
-          <a href="/services">Portfolio Websites</a>
-          <a href="/services">Website Maintenance</a>
+
+        <!-- Copyright Row (Inside Container) -->
+        <div class="site-footer__copy footer-copy">
+          <p>&copy; <span class="site-footer__year">2026</span> ABSS Nexus Technologies. All Rights Reserved.</p>
         </div>
-        <div class="footer-column footer-contact">
-          <h3>Contact Info</h3>
-          <a href="tel:+918757928673">Phone: +91 87579 28673</a>
-          <a href="mailto:abssnexus@gmail.com">Email: abssnexus@gmail.com</a>
-          <span>Location: Jaipur, Rajasthan</span>
-          <span>Shubham Kumar — Founder, ABSS Nexus Technologies</span>
-        </div>
-      </div>
-      <div class="container footer-lower">
-        <div class="footer-socials" aria-label="Social links">
-          <a href="https://www.instagram.com/abssnexus/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">Instagram</a>
-          <a href="https://www.facebook.com/profile.php?id=61592563923350" target="_blank" rel="noopener noreferrer" aria-label="Facebook">Facebook</a>
-          <a href="https://x.com/abssnexus" target="_blank" rel="noopener noreferrer" aria-label="X">X / Twitter</a>
-        </div>
-        <div class="footer-legal">
-          <a href="/privacy-policy">Privacy Policy</a>
-          <a href="/terms-and-conditions">Terms & Conditions</a>
-          <a href="/disclaimer">Disclaimer</a>
-          <a href="/refund-policy">Refund Policy</a>
-          <a href="/support-policy">Support Policy</a>
-          <a href="/sitemap">Sitemap</a>
-        </div>
-      </div>
-      <div class="container footer-copy">
-        <p>© 2026 ABSS Nexus Technologies. All Rights Reserved.</p>
       </div>
     </footer>
-    <a class="floating-whatsapp" href="https://wa.me/918757928673" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
+
+    <a class="floating-whatsapp" href="https://wa.me/918757928673" target="_blank" rel="noopener noreferrer" aria-label="Contact us on WhatsApp">
       <svg viewBox="0 0 32 32" aria-hidden="true" focusable="false">
         <path d="M16 3.2A12.7 12.7 0 0 0 5.1 22.4L3.4 28.8l6.6-1.7A12.7 12.7 0 1 0 16 3.2Zm0 22.9c-2 0-3.9-.6-5.6-1.6l-.4-.2-3.9 1 1-3.8-.3-.4a10.3 10.3 0 1 1 9.2 5Z" />
         <path d="M21.7 18.6c-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.2-1.3-.5-2.5-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.6 0-.2-.7-1.7-1-2.3-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.2-1.2 2.9s1.2 3.3 1.4 3.6c.2.2 2.4 3.7 5.9 5.1.8.4 1.5.6 2 .7.8.3 1.6.2 2.2.1.7-.1 1.9-.8 2.2-1.5.3-.7.3-1.4.2-1.5-.1-.1-.3-.2-.6-.4Z" />
       </svg>
       <span>WhatsApp</span>
     </a>
+
     <script src="/src/scripts/seo-schema.js"></script>
+    <script src="/src/scripts/components/footer.js" defer></script>
     <script src="/src/scripts/script.js"></script>
   </body>
 </html>

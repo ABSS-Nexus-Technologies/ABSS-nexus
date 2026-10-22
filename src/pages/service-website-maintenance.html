@@ -3,45 +3,33 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="Keep your website updated with ABSS Nexus Technologies maintenance support for content updates, checks, fixes and practical improvement work."
-    />
+    <meta name="description" content="Proactive website maintenance and managed IT support by ABSS Nexus Technologies. Routine health checks, uptime monitoring, security patching, and fast content updates." />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Website Maintenance Services | ABSS Nexus Technologies" />
-    <meta
-      property="og:description"
-      content="Keep your website updated with ABSS Nexus Technologies maintenance support for content updates, checks, fixes and practical improvement work."
-    />
+    <meta property="og:title" content="Managed IT Support & Maintenance | ABSS Nexus Technologies" />
+    <meta property="og:description" content="Proactive website maintenance and managed IT support by ABSS Nexus Technologies. Routine health checks, uptime monitoring, security patching, and fast content updates." />
     <meta property="og:image" content="https://abssnexus.in/public/assets/images/LogoGenerated.png" />
     <meta property="og:url" content="https://abssnexus.in/services/website-maintenance" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Website Maintenance Services | ABSS Nexus Technologies" />
-    <meta
-      name="twitter:description"
-      content="Keep your website updated with ABSS Nexus Technologies maintenance support for content updates, checks, fixes and practical improvement work."
-    />
+    <meta name="twitter:title" content="Managed IT Support & Maintenance | ABSS Nexus Technologies" />
+    <meta name="twitter:description" content="Proactive website maintenance and managed IT support by ABSS Nexus Technologies. Routine health checks, uptime monitoring, security patching, and fast content updates." />
     <meta name="twitter:image" content="https://abssnexus.in/public/assets/images/LogoGenerated.png" />
     <link rel="canonical" href="https://abssnexus.in/services/website-maintenance" />
-    <title>Website Maintenance Services | ABSS Nexus Technologies</title>
+    <title>Managed IT Support & Maintenance | ABSS Nexus Technologies</title>
     <link rel="icon" type="image/png" sizes="32x32" href="/public/assets/images/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="512x512" href="/public/assets/images/favicon.png" />
     <link rel="apple-touch-icon" href="/public/assets/images/apple-touch-icon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="/src/styles/styles.css" />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "Service",
-        "name": "Website Maintenance Services",
+        "name": "Website Maintenance",
         "serviceType": "Website Maintenance",
         "url": "https://abssnexus.in/services/website-maintenance",
-        "description": "Professional website maintenance services for businesses, institutions and personal brands with content updates, technical checks, issue fixes and practical ongoing support.",
+        "description": "Proactive website maintenance and managed IT support by ABSS Nexus Technologies. Routine health checks, uptime monitoring, security patching, and fast content updates.",
         "provider": {
           "@type": "Organization",
           "name": "ABSS Nexus Technologies",
@@ -56,593 +44,672 @@
     </script>
   </head>
   <body class="agency-dark-theme">
-    <header class="site-header">
+    <header class="site-header" role="banner">
       <div class="announcement-bar">
-        <div class="container">
-          <span class="announcement-badge"><span class="live-pulse-dot" aria-hidden="true"></span> Free consultation available for website &amp; digital projects.</span>
-          <a href="/contact?service=Website%20Maintenance">Request maintenance support</a>
+        <div class="announcement-bar__container container">
+          <span class="announcement-bar__badge">
+            <span class="live-pulse-dot" aria-hidden="true"></span>
+            <span>Applications open for 2026 Technical Internship Cohort.</span>
+          </span>
+          <a class="announcement-bar__link" href="/internships">Apply for Internship &rarr;</a>
         </div>
       </div>
-      <nav class="nav">
+      <nav class="nav" aria-label="Main Navigation">
         <a class="brand" href="/" aria-label="ABSS Nexus Technologies home">
-          <img src="/public/assets/images/LogoGenerated.png" alt="ABSS Nexus Technologies logo" />
-          <span>ABSS Nexus</span>
+          <img src="/public/assets/images/favicon.png" alt="ABSS Nexus Technologies logo" width="38" height="38" />
+          <span class="brand-name">ABSS Nexus Technologies</span>
         </a>
-        <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
-          <span></span>
-          <span></span>
-          <span></span>
+        <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav-links">
+          <span class="hamburger-bar"></span>
+          <span class="hamburger-bar"></span>
+          <span class="hamburger-bar"></span>
         </button>
-        <div class="nav-links">
-          <a href="/">Home</a>
-          <a href="/about">About</a>
-          <a href="/services" aria-current="page">Services</a>
-          <a href="/projects">Projects</a>
-          <a href="/contact">Contact</a>
-          <a class="nav-cta" href="/pricing">Our Pricing Packages</a>
+        <div class="nav-links" id="main-nav-links">
+          <a href="/" class="nav-link">Home</a>
+
+          <!-- Services Mega Menu Dropdown -->
+          <div class="nav-item-dropdown">
+            <button class="nav-dropdown-trigger" type="button" aria-expanded="false" aria-haspopup="true">
+              <span>Services</span>
+              <svg class="dropdown-arrow" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <div class="mega-menu mega-menu-services" role="menu">
+              <div class="mega-menu-grid">
+                <div class="mega-col">
+                  <div class="mega-col-title">Web Engineering</div>
+                  <ul class="mega-link-list">
+                    <li>
+                      <a class="mega-link" href="/services/website-development">
+                        <span class="mega-link-title">Website Development</span>
+                        <span class="mega-link-desc">High-speed business &amp; corporate platforms</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="mega-link" href="/services/ecommerce-development">
+                        <span class="mega-link-title">E-Commerce Development</span>
+                        <span class="mega-link-desc">Online storefronts &amp; fast checkout paths</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="mega-link" href="/services/digital-marketing-seo">
+                        <span class="mega-link-title">Digital Marketing &amp; SEO</span>
+                        <span class="mega-link-desc">Search rankings &amp; lead growth</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="mega-link" href="/services/ui-ux-design">
+                        <span class="mega-link-title">UI/UX Design</span>
+                        <span class="mega-link-desc">Figma wireframes &amp; design systems</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="mega-link" href="/services/website-maintenance" aria-current="page">
+                        <span class="mega-link-title">Website Maintenance</span>
+                        <span class="mega-link-desc">Proactive updates, security &amp; backups</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+                <div class="mega-col">
+                  <div class="mega-col-title">Software &amp; Cloud</div>
+                  <ul class="mega-link-list">
+                    <li>
+                      <a class="mega-link" href="/services/software-development">
+                        <span class="mega-link-title">Software Development</span>
+                        <span class="mega-link-desc">Custom web apps &amp; workflow software</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="mega-link" href="/services/mobile-app-development">
+                        <span class="mega-link-title">Mobile App Development</span>
+                        <span class="mega-link-desc">iOS &amp; Android cross-platform solutions</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="mega-link" href="/services/saas-development">
+                        <span class="mega-link-title">SaaS Development</span>
+                        <span class="mega-link-desc">Scalable cloud platforms &amp; client portals</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="mega-link" href="/services/cloud-computing">
+                        <span class="mega-link-title">Cloud Computing &amp; DevOps</span>
+                        <span class="mega-link-desc">Edge servers, CI/CD pipelines &amp; scaling</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="mega-link" href="/services/api-integration">
+                        <span class="mega-link-title">API Integration</span>
+                        <span class="mega-link-desc">Clean RESTful &amp; edge database APIs</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+                <div class="mega-col">
+                  <div class="mega-col-title">Data, QA &amp; Support</div>
+                  <ul class="mega-link-list">
+                    <li>
+                      <a class="mega-link" href="/services/ai-machine-learning">
+                        <span class="mega-link-title">AI &amp; Machine Learning</span>
+                        <span class="mega-link-desc">Intelligent automation &amp; predictive models</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="mega-link" href="/services/data-analytics-bi">
+                        <span class="mega-link-title">Data Analytics &amp; BI</span>
+                        <span class="mega-link-desc">Real-time dashboards &amp; telemetry hubs</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="mega-link" href="/services/cybersecurity">
+                        <span class="mega-link-title">Cybersecurity</span>
+                        <span class="mega-link-desc">Vulnerability audits &amp; edge hardening</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="mega-link" href="/services/software-testing-qa">
+                        <span class="mega-link-title">Software Testing &amp; QA</span>
+                        <span class="mega-link-desc">End-to-end verification &amp; audits</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="mega-link" href="/services/it-consulting">
+                        <span class="mega-link-title">IT Consulting &amp; Strategy</span>
+                        <span class="mega-link-desc">Technology audits &amp; roadmap planning</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="mega-link" href="/services/managed-it-support">
+                        <span class="mega-link-title">Managed IT Support</span>
+                        <span class="mega-link-desc">24/7 technical monitoring &amp; maintenance</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="mega-menu-footer-bar">
+                <span>16 Comprehensive IT Disciplines Available</span>
+                <a href="/services">View Complete Service Catalog &rarr;</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Solutions Mega Menu Dropdown -->
+          <div class="nav-item-dropdown">
+            <button class="nav-dropdown-trigger" type="button" aria-expanded="false" aria-haspopup="true">
+              <span>Solutions</span>
+              <svg class="dropdown-arrow" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <div class="mega-menu mega-menu-solutions" role="menu">
+              <div class="mega-menu-grid mega-menu-grid--solutions">
+                <div class="mega-col">
+                  <div class="mega-col-title">Enterprise Architecture</div>
+                  <ul class="mega-link-list">
+                    <li>
+                      <a class="mega-link" href="/solutions#automation">
+                        <span class="mega-link-title">Business Process Automation</span>
+                        <span class="mega-link-desc">Custom workflow engines &amp; queue automation</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="mega-link" href="/solutions#platforms">
+                        <span class="mega-link-title">Custom Software Platforms</span>
+                        <span class="mega-link-desc">Tailored relational databases &amp; admin controls</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="mega-link" href="/solutions#cloud">
+                        <span class="mega-link-title">Cloud Adoption &amp; Modernization</span>
+                        <span class="mega-link-desc">Serverless edge networks &amp; zero downtime</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+                <div class="mega-col">
+                  <div class="mega-col-title">Integration &amp; Growth</div>
+                  <ul class="mega-link-list">
+                    <li>
+                      <a class="mega-link" href="/solutions#api">
+                        <span class="mega-link-title">Connected Systems &amp; APIs</span>
+                        <span class="mega-link-desc">Secure REST bridges &amp; CRM synchronization</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="mega-link" href="/solutions#conversion">
+                        <span class="mega-link-title">High-Conversion Experiences</span>
+                        <span class="mega-link-desc">Sub-second performance &amp; instant inquiries</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="mega-link" href="/solutions#strategy">
+                        <span class="mega-link-title">Strategic Digital Transformation</span>
+                        <span class="mega-link-desc">Architecture audits &amp; phased delivery roadmaps</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="mega-menu-footer-bar">
+                <span>Outcome-Driven Technical Frameworks</span>
+                <a href="/solutions">Explore All Solutions &rarr;</a>
+              </div>
+            </div>
+          </div>
+
+          <a href="/industries" class="nav-link">Industries</a>
+          <a href="/work" class="nav-link">Work</a>
+          <a href="/pricing" class="nav-link">Pricing</a>
+          <a href="/blog" class="nav-link">Blog</a>
+          <a href="/about" class="nav-link">About</a>
+          <a href="/contact" class="nav-link">Contact</a>
+          <a class="nav-cta" href="/contact#project-inquiry">Start Project</a>
         </div>
       </nav>
     </header>
 
     <main>
-      <section class="page-hero section">
-        <div class="container">
-          <p class="eyebrow">Website Maintenance</p>
-          <h1>Reliable Website Maintenance and Ongoing Support</h1>
-          <p>
-            ABSS Nexus Technologies helps businesses, institutions and personal brands keep their
-            websites updated, functional, secure and user-friendly.
-          </p>
-          <div class="hero-actions">
-            <a class="btn btn-glow-cyan" href="/contact?service=Website%20Maintenance">Request Website Maintenance</a>
-            <a class="btn btn-glass" href="#maintenance-plans">View Maintenance Plans</a>
-          </div>
-          <div class="trust-row" aria-label="Website maintenance highlights">
-            <span>Regular Updates</span>
-            <span>Technical Support</span>
-            <span>Clear Communication</span>
-          </div>
-        </div>
-      </section>
+      <!-- 1. Hero Section -->
+      <section class="site-hero site-hero--page page-hero section" id="hero">
+        <div class="site-hero__container container">
+          <nav class="site-hero__breadcrumb breadcrumb-trail" aria-label="Breadcrumb">
+            <a href="/">Home</a>
+            <span class="separator" aria-hidden="true">/</span>
+            <a href="/services">Services</a>
+            <span class="separator" aria-hidden="true">/</span>
+            <span class="current">Website Maintenance</span>
+          </nav>
+          
+          <div class="site-hero__grid service-hero-grid">
+            <div class="site-hero__content service-hero-content">
+              <span class="site-hero__eyebrow section-badge-apple">Proactive Care &bull; Managed IT Support</span>
+              <h1 class="site-hero__title">Proactive Website Maintenance & Managed Technical Support</h1>
+              <p class="site-hero__description">Keep your digital presence fast, secure, and always operational. ABSS Nexus Technologies delivers dedicated monthly maintenance: automated uptime monitoring, link health validation, security patches, and swift content updates.</p>
+              
+              <div class="site-hero__actions hero-actions">
+                <a class="site-hero__btn site-hero__btn--primary btn btn-apple-primary" href="/contact?service=Website%20Maintenance#project-inquiry">
+                  <span>Discuss Your Project</span>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </a>
+                <a class="site-hero__btn site-hero__btn--secondary btn btn-apple-secondary" href="/services">
+                  <span>Explore Our Services</span>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                </a>
+              </div>
 
-      <section class="section about-company">
-        <div class="container two-column">
+              <div class="site-hero__tech-stack tech-pills-row" aria-label="Key Technologies">
+                <span class="site-hero__tech-tag tech-pill">Uptime Monitoring</span>
+                <span class="site-hero__tech-tag tech-pill">Automated Link Checks</span>
+                <span class="site-hero__tech-tag tech-pill">Security Patching</span>
+                <span class="site-hero__tech-tag tech-pill">SSL Verification</span>
+                <span class="site-hero__tech-tag tech-pill">Content Updates</span>
+                <span class="site-hero__tech-tag tech-pill">Priority Support</span>
+              </div>
+            </div>
+
+            <div class="site-hero__visual service-visual-box" aria-label="Website Maintenance architectural preview">
+              
+      <div style="background: var(--color-white); border: 1px solid var(--color-border); border-radius: 12px; padding: 18px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+          <span style="font-size: 11px; font-weight: 700; color: var(--color-near-black);">Managed Support Telemetry</span>
+          <span style="font-size: 10px; color: #34c759; font-weight: 600;">&bull; Active SLA</span>
+        </div>
+        <div style="background: var(--color-light-gray); border-radius: 8px; padding: 10px; margin-bottom: 8px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
           <div>
-            <p class="eyebrow">Why Website Maintenance Matters</p>
-            <h2>Why Does a Website Need Regular Maintenance?</h2>
+            <div style="font-size: 9px; color: var(--color-secondary-text);">Monthly Uptime</div>
+            <div style="font-size: 14px; font-weight: 700; color: #34c759;">99.98%</div>
           </div>
-          <div class="rich-text">
-            <p>
-              A website may require regular content updates, technical checks, form testing, link
-              corrections, compatibility improvements and performance review. Regular maintenance
-              helps reduce avoidable issues and keeps website information accurate.
-            </p>
-            <ul>
-              <li>Updated business information</li>
-              <li>Working contact forms and links</li>
-              <li>Improved user experience</li>
-              <li>Better mobile compatibility</li>
-              <li>Reduced risk of outdated components</li>
-              <li>Consistent website presentation</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      <section class="section split-band">
-        <div class="container">
-          <div class="section-heading">
-            <p class="eyebrow">Who This Service Is For</p>
-            <h2>Support for website owners who need practical ongoing help.</h2>
-            <p>Existing websites can be reviewed before a maintenance plan is recommended.</p>
-          </div>
-          <div class="tag-grid service-deliverables">
-            <span>Small businesses</span>
-            <span>Schools and institutes</span>
-            <span>Service providers</span>
-            <span>Portfolio owners</span>
-            <span>Startups</span>
-            <span>Restaurants</span>
-            <span>Organizations</span>
-            <span>Website owners without technical staff</span>
-            <span>Clients with an existing website</span>
-            <span>Websites developed by another provider</span>
-          </div>
-        </div>
-      </section>
-
-      <section class="section services">
-        <div class="container">
-          <div class="section-heading">
-            <p class="eyebrow">Maintenance Services Included</p>
-            <h2>Common maintenance tasks handled within an agreed scope.</h2>
-          </div>
-          <div class="home-service-grid">
-            <article class="service-card">
-              <span>Content</span>
-              <h3>Content Updates</h3>
-              <p>Updating approved text, images, contact details and service information.</p>
-            </article>
-            <article class="service-card">
-              <span>Links</span>
-              <h3>Link and Button Checks</h3>
-              <p>Identifying and correcting broken internal links, buttons and navigation issues.</p>
-            </article>
-            <article class="service-card">
-              <span>Forms</span>
-              <h3>Contact Form Testing</h3>
-              <p>Checking whether website forms and submission flows work correctly.</p>
-            </article>
-            <article class="service-card">
-              <span>Mobile</span>
-              <h3>Mobile Responsiveness Checks</h3>
-              <p>Reviewing common layout issues across mobile, tablet and desktop screens.</p>
-            </article>
-            <article class="service-card">
-              <span>Speed</span>
-              <h3>Basic Performance Review</h3>
-              <p>Reviewing image sizes, unnecessary assets and basic loading issues.</p>
-            </article>
-            <article class="service-card">
-              <span>SEO</span>
-              <h3>Basic SEO Maintenance</h3>
-              <p>Updating metadata, headings and page information where included in the plan.</p>
-            </article>
-            <article class="service-card">
-              <span>Backup</span>
-              <h3>Website Backup Guidance</h3>
-              <p>Helping review or configure available backup options based on the hosting provider.</p>
-            </article>
-            <article class="service-card">
-              <span>Fixes</span>
-              <h3>Technical Issue Fixes</h3>
-              <p>Fixing small website errors covered by the selected maintenance plan.</p>
-            </article>
-            <article class="service-card">
-              <span>Browser</span>
-              <h3>Browser Compatibility Review</h3>
-              <p>Checking important pages in commonly used modern browsers.</p>
-            </article>
-            <article class="service-card">
-              <span>Review</span>
-              <h3>Security and Dependency Review</h3>
-              <p>Reviewing outdated components or dependencies where applicable.</p>
-            </article>
-            <article class="service-card">
-              <span>Sections</span>
-              <h3>New Section Updates</h3>
-              <p>Adding small approved sections when included within the agreed monthly scope.</p>
-            </article>
-            <article class="service-card">
-              <span>Deploy</span>
-              <h3>Deployment Support</h3>
-              <p>Assisting with approved website updates and deployment.</p>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section class="section packages" id="maintenance-plans">
-        <div class="container">
-          <div class="section-heading">
-            <p class="eyebrow">Maintenance Plans</p>
-            <h2>Choose a support level after your website is reviewed.</h2>
-            <p>
-              A clear quotation is shared after reviewing the website and expected monthly work.
-            </p>
-          </div>
-          <div class="package-grid">
-            <article>
-              <span>Basic</span>
-              <h3>Basic Maintenance</h3>
-              <p class="package-price">Starting from ₹999 / month</p>
-              <p class="package-best">Suitable for portfolio websites, landing pages and small websites.</p>
-              <ul>
-                <li>Limited monthly content updates</li>
-                <li>Link and form checks</li>
-                <li>Basic mobile review</li>
-                <li>Small issue fixes</li>
-                <li>Monthly maintenance summary where practical</li>
-              </ul>
-              <a class="card-link" href="/contact?service=Website%20Maintenance">Choose This Plan</a>
-            </article>
-            <article class="featured-package">
-              <span>Business</span>
-              <h3>Business Maintenance</h3>
-              <p class="package-price">Pricing based on website size and monthly support requirements</p>
-              <p class="package-best">Suitable for business websites, schools, institutes and service websites.</p>
-              <ul>
-                <li>Higher monthly update allowance</li>
-                <li>Content and image changes</li>
-                <li>Form and navigation checks</li>
-                <li>Basic SEO maintenance</li>
-                <li>Performance review</li>
-                <li>Priority over basic-plan requests where genuinely supported</li>
-              </ul>
-              <a class="card-link" href="/contact?service=Website%20Maintenance">Choose This Plan</a>
-            </article>
-            <article>
-              <span>Custom</span>
-              <h3>Custom Maintenance</h3>
-              <p class="package-price">Custom quotation</p>
-              <p class="package-best">Suitable for e-commerce websites, dashboards, large websites and custom systems.</p>
-              <ul>
-                <li>Custom update scope</li>
-                <li>Feature-specific maintenance</li>
-                <li>Scheduled technical review</li>
-                <li>Custom support arrangement</li>
-              </ul>
-              <a class="card-link" href="/contact?service=Website%20Maintenance">Choose This Plan</a>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section class="section process">
-        <div class="container">
-          <div class="section-heading">
-            <p class="eyebrow">How Maintenance Support Works</p>
-            <h2>A simple five-step support workflow.</h2>
-          </div>
-          <div class="process-grid service-process-grid">
-            <article>
-              <span>01</span>
-              <h3>Website Review</h3>
-              <p>The website structure, technology and existing issues are reviewed.</p>
-            </article>
-            <article>
-              <span>02</span>
-              <h3>Requirement and Issue Discussion</h3>
-              <p>The required updates, recurring tasks and priorities are discussed.</p>
-            </article>
-            <article>
-              <span>03</span>
-              <h3>Maintenance Scope Confirmation</h3>
-              <p>The included work, timeline and plan limitations are confirmed.</p>
-            </article>
-            <article>
-              <span>04</span>
-              <h3>Approved Updates and Fixes</h3>
-              <p>Agreed content changes and technical fixes are completed.</p>
-            </article>
-            <article>
-              <span>05</span>
-              <h3>Testing and Delivery Summary</h3>
-              <p>Important pages and updates are checked before completion is reported.</p>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section class="section split-band">
-        <div class="container">
-          <div class="section-heading">
-            <p class="eyebrow">Estimated Response Times</p>
-            <h2>Estimated Support Response Times</h2>
-          </div>
-          <div class="stack-grid">
-            <article><span>Content Update</span><p>General content updates are usually reviewed within 1-2 working days.</p></article>
-            <article><span>Minor Issue</span><p>Minor website issues are usually reviewed within 1-2 working days.</p></article>
-            <article><span>Important Issue</span><p>Important form or navigation issues are prioritized based on impact and current availability.</p></article>
-            <article><span>Large Change</span><p>Large changes or new features receive a timeline after scope review.</p></article>
-            <article><span>Emergency</span><p>Emergency requests are reviewed as early as practical during available support hours.</p></article>
-            <article><span>Resolution</span><p>Resolution time depends on the issue, website technology, access availability and required work.</p></article>
-          </div>
-          <p class="service-note">
-            Response time means the time required to review and acknowledge a request. Resolution
-            time depends on the issue, website technology, access availability and required work.
-          </p>
-        </div>
-      </section>
-
-      <section class="section services">
-        <div class="container two-column">
           <div>
-            <p class="eyebrow">Emergency Fix Support</p>
-            <h2>Need Help With an Urgent Website Issue?</h2>
+            <div style="font-size: 9px; color: var(--color-secondary-text);">Link Health</div>
+            <div style="font-size: 14px; font-weight: 700; color: var(--color-blue);">100% OK</div>
           </div>
-          <div class="rich-text">
-            <p>
-              Urgent requests may include a contact form not working, an important page not opening,
-              broken navigation, incorrect business information requiring immediate correction, a
-              layout issue affecting important customer actions, or a deployment-related website
-              problem.
-            </p>
-            <p>
-              Emergency support is subject to availability, website access and technical review.
-              Additional charges may apply depending on the issue and urgency.
-            </p>
-            <a class="btn btn-glow-cyan" href="/contact?service=Website%20Maintenance">Report an Urgent Website Issue</a>
+        </div>
+        <div style="font-size: 10px; color: var(--color-secondary-text); text-align: center; margin-top: 6px;">
+          Automated hourly health pings &bull; SSL Active
+        </div>
+      </div>
+            </div>
           </div>
         </div>
       </section>
 
-      <section class="section split-band">
+      <!-- 2. Customer Problems Addressed -->
+      <section class="section">
         <div class="container">
           <div class="section-heading">
-            <p class="eyebrow">Support Boundaries</p>
-            <h2>What Is Not Included in Standard Maintenance?</h2>
-            <p>Additional work can be quoted separately after reviewing the requirement.</p>
+            <p class="eyebrow">Client Challenges</p>
+            <h2>Challenges We Solve for Growing Businesses</h2>
+            <p>We eliminate technical bottlenecks, poor performance, and complex maintenance so you can focus on scale.</p>
           </div>
-          <div class="tag-grid service-deliverables">
-            <span>Complete website redesign</span>
-            <span>Large new pages or custom features</span>
-            <span>Full e-commerce development</span>
-            <span>Custom dashboard development</span>
-            <span>Major platform migration</span>
-            <span>Paid plugin, domain or hosting charges</span>
-            <span>Professional copywriting</span>
-            <span>Professional photography</span>
-            <span>Third-party service fees</span>
-            <span>Recovery from every type of security incident</span>
-            <span>Unlimited content or design changes</span>
-            <span>Work outside the agreed monthly scope</span>
-          </div>
-        </div>
-      </section>
-
-      <section class="section about-company">
-        <div class="container two-column">
-          <div>
-            <p class="eyebrow">What We Need From the Client</p>
-            <h2>Useful details for reviewing your maintenance request.</h2>
-          </div>
-          <div class="rich-text">
-            <ul>
-              <li>Website URL</li>
-              <li>Hosting or deployment platform details</li>
-              <li>Required access, when necessary</li>
-              <li>List of requested updates</li>
-              <li>Correct replacement text or images</li>
-              <li>Priority of each issue</li>
-              <li>Screenshots or screen recordings where helpful</li>
-              <li>Existing domain and hosting information</li>
-              <li>Details of recent website changes</li>
-              <li>Contact person for approvals</li>
-            </ul>
-            <p>
-              Do not submit passwords through the public form. ABSS Nexus Technologies will guide
-              the client on safely sharing the minimum required access after confirming the
-              maintenance scope.
-            </p>
+          
+          <div class="problem-solution-grid">
+            
+            <article class="problem-card">
+              <div class="problem-icon-pill" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              </div>
+              <h3>Websites Abandoned After Launch</h3>
+              <p>Websites launched and forgotten until sudden broken forms, expired domains, or broken links lose revenue.</p>
+            </article>
+            <article class="problem-card">
+              <div class="problem-icon-pill" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              </div>
+              <h3>Slow Turnaround for Simple Edits</h3>
+              <p>Waiting weeks for old freelancers to update phone numbers, pricing packages, or team photos.</p>
+            </article>
+            <article class="problem-card">
+              <div class="problem-icon-pill" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              </div>
+              <h3>Security Vulnerabilities from Neglect</h3>
+              <p>Unpatched dependencies and expired SSL certificates triggering browser security warnings to visitors.</p>
+            </article>
           </div>
         </div>
       </section>
 
-      <section class="section why">
-        <div class="container why-grid">
-          <div>
-            <p class="eyebrow">Why Choose ABSS Nexus Technologies</p>
-            <h2>Why Choose ABSS Nexus Technologies for Website Maintenance?</h2>
-            <p>
-              Maintenance requests are reviewed directly and handled according to an agreed scope,
-              helping keep communication clear and updates organized.
-            </p>
+      <!-- 3. Capabilities and Deliverables -->
+      <section class="section" style="background: var(--color-light-gray); border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border);">
+        <div class="container">
+          <div class="section-heading">
+            <p class="eyebrow">Core Capabilities</p>
+            <h2>Concrete Deliverables &amp; Engineering Scope</h2>
+            <p>Every milestone produces clean, verifiable code, thorough documentation, and measurable performance.</p>
           </div>
-          <div class="why-list">
-            <div><strong>Founder-led</strong><span>Direct founder communication</span></div>
-            <div><strong>Scope</strong><span>Clear maintenance scope</span></div>
-            <div><strong>Priority</strong><span>Practical issue prioritization</span></div>
-            <div><strong>Pricing</strong><span>Transparent pricing</span></div>
-            <div><strong>Usability</strong><span>Mobile and usability awareness</span></div>
-            <div><strong>Reporting</strong><span>Clear update reporting</span></div>
-            <div><strong>Fit</strong><span>Support based on actual requirements</span></div>
-            <div><strong>Simple</strong><span>No unnecessary technical complexity</span></div>
+
+          <div class="capabilities-matrix-grid">
+            
+            <div class="capability-tile">
+              <h4>Automated Uptime Monitoring</h4>
+              <p>Automated pings checking site availability around the clock with instant emergency notifications.</p>
+            </div>
+            <div class="capability-tile">
+              <h4>Routine Link Health Audits</h4>
+              <p>Regular scans detecting broken internal links, missing images, and dead anchor targets.</p>
+            </div>
+            <div class="capability-tile">
+              <h4>Swift Content & Price Updates</h4>
+              <p>Fast execution of copy adjustments, team changes, pricing updates, and new blog posts.</p>
+            </div>
+            <div class="capability-tile">
+              <h4>Form Submission Verification</h4>
+              <p>Periodic test submissions ensuring contact forms and WhatsApp paths receive leads cleanly.</p>
+            </div>
+            <div class="capability-tile">
+              <h4>SSL & Domain Expiry Protection</h4>
+              <p>Proactive tracking of security certificate renewals and domain name expiration dates.</p>
+            </div>
+            <div class="capability-tile">
+              <h4>Priority Technical Support</h4>
+              <p>Direct founder contact via WhatsApp and email for urgent troubleshooting requests.</p>
+            </div>
           </div>
         </div>
       </section>
 
-      <section class="section services">
-        <div class="container two-column">
-          <div>
-            <p class="eyebrow">Related Service</p>
-            <h2>Need bigger changes than maintenance?</h2>
+      <!-- 4. Step-by-Step Delivery Process -->
+      <section class="section">
+        <div class="container">
+          <div class="section-heading">
+            <p class="eyebrow">Systematic Execution</p>
+            <h2>Structured Delivery Process from Concept to Launch</h2>
+            <p>Transparent milestones and direct communication ensure your project stays on schedule and on scope.</p>
           </div>
-          <div class="rich-text">
-            <p>
-              If your website needs a complete redesign, new page structure or a fresh launch,
-              review the <a href="/services/website-development">Website Development</a> service.
-            </p>
-            <p>You can also compare all service options on the <a href="/services">Services</a> page.</p>
+
+          <div class="delivery-process-apple">
+            <div class="process-step-apple">
+              <span class="step-num-apple">01</span>
+              <h3>Discovery &amp; Scope</h3>
+              <p>We discuss your operational objectives, user requirements, technical constraints, and milestone timelines.</p>
+            </div>
+            <div class="process-step-apple">
+              <span class="step-num-apple">02</span>
+              <h3>Architecture Blueprint</h3>
+              <p>We plan database models, API contracts, interface wireframes, and performance budgets before writing code.</p>
+            </div>
+            <div class="process-step-apple">
+              <span class="step-num-apple">03</span>
+              <h3>Interactive Prototyping</h3>
+              <p>We craft high-fidelity interface layouts and component states in Figma with accessible contrast and clean typography.</p>
+            </div>
+            <div class="process-step-apple">
+              <span class="step-num-apple">04</span>
+              <h3>Agile Engineering</h3>
+              <p>Clean, modular code development with responsive styling, security checks, and high-performance edge bindings.</p>
+            </div>
+            <div class="process-step-apple">
+              <span class="step-num-apple">05</span>
+              <h3>Quality Assurance</h3>
+              <p>Rigorous automated link validation, form health audits, mobile device testing, and Core Web Vitals profiling.</p>
+            </div>
+            <div class="process-step-apple">
+              <span class="step-num-apple">06</span>
+              <h3>Production Release</h3>
+              <p>Zero-downtime deployment, DNS configuration, search engine indexing verification, and post-delivery SLA support.</p>
+            </div>
           </div>
         </div>
       </section>
 
+      <!-- 5. Relevant Project Examples -->
+      <section class="section" style="background: var(--color-light-gray); border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border);">
+        <div class="container">
+          <div class="section-heading">
+            <p class="eyebrow">Demonstrated Experience</p>
+            <h2>Practical Project Implementations</h2>
+            <p>Review real implementations and concept showcases built with high performance and clean architecture.</p>
+          </div>
+
+          <div class="projects-modern-grid">
+            <article class="project-modern-card">
+              <div class="project-preview-wrap">
+                <div class="browser-mockup-bar" aria-hidden="true">
+                  <div class="browser-mockup-dots"><span></span><span></span><span></span></div>
+                  <span class="browser-mockup-url">shubham-portfolio-abss.netlify.app</span>
+                </div>
+                <img src="/public/assets/images/personal-portfolio.png" alt="Personal Developer Portfolio preview" loading="lazy" />
+                <span class="project-badge-tag">Portfolio &bull; Live</span>
+              </div>
+              <div class="project-card-content">
+                <h3>Personal Developer Portfolio</h3>
+                <p>High-speed responsive portfolio built with modern typography, interactive project showcases, and accessible layout design.</p>
+                <div class="project-action-row">
+                  <a class="project-live-btn" href="https://shubham-portfolio-abss.netlify.app/" target="_blank" rel="noopener noreferrer">Live Demo &rarr;</a>
+                  <span class="project-status-label">Production</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="project-modern-card">
+              <div class="project-preview-wrap">
+                <div class="browser-mockup-bar" aria-hidden="true">
+                  <div class="browser-mockup-dots"><span></span><span></span><span></span></div>
+                  <span class="browser-mockup-url">abssnexus.in/analytics/dashboard</span>
+                </div>
+                <img src="/public/assets/images/project-dashboard-ui.png" alt="Cloud Analytics & Admin Dashboard preview" loading="lazy" />
+                <span class="project-badge-tag">Web App &bull; Demonstration</span>
+              </div>
+              <div class="project-card-content">
+                <h3>Cloud Analytics &amp; Telemetry Hub</h3>
+                <p>Enterprise administration panel featuring metrics telemetry, user management, interactive chart widgets, and real-time status.</p>
+                <div class="project-action-row">
+                  <a class="project-live-btn" href="/projects">View Details &rarr;</a>
+                  <span class="project-status-label">Demo Showcase</span>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- 6. Frequently Asked Questions -->
       <section class="section faq">
         <div class="container">
           <div class="section-heading">
-            <p class="eyebrow">Frequently Asked Questions</p>
-            <h2>Common questions about website maintenance.</h2>
+            <p class="eyebrow">Common Inquiries</p>
+            <h2>Frequently Asked Questions About Website Maintenance</h2>
+            <p>Direct answers regarding timelines, deliverables, technology selection, and maintenance.</p>
           </div>
-          <div class="faq-list" data-faq-list>
-            <article class="faq-item">
-              <button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-maintenance-meaning" data-faq-toggle>
-                What is website maintenance?
+
+          <div class="agency-faq-wrapper" id="faq">
+            
+            <div class="agency-faq-card">
+              <button class="faq-agency-btn" type="button" aria-expanded="false" aria-controls="faq-ans-1" data-faq-toggle>
+                <span>What is included in a monthly website maintenance package?</span>
+                <svg class="faq-chevron-icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
               </button>
-              <div class="faq-answer" id="faq-maintenance-meaning" hidden>
-                <p>
-                  Website maintenance includes approved updates, checks and minor fixes that help
-                  keep a website accurate, functional and user-friendly.
-                </p>
+              <div class="faq-agency-answer" id="faq-ans-1" hidden>
+                Monthly maintenance covers regular link health checks, form validation testing, uptime monitoring, security updates, and priority content updates.
               </div>
-            </article>
-            <article class="faq-item">
-              <button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-maintenance-frequency" data-faq-toggle>
-                How often should my website be maintained?
+            </div>
+            <div class="agency-faq-card">
+              <button class="faq-agency-btn" type="button" aria-expanded="false" aria-controls="faq-ans-2" data-faq-toggle>
+                <span>How quickly do you complete content updates?</span>
+                <svg class="faq-chevron-icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
               </button>
-              <div class="faq-answer" id="faq-maintenance-frequency" hidden>
-                <p>
-                  The frequency depends on how often content changes, the website technology and how
-                  important the website is to daily business operations.
-                </p>
+              <div class="faq-agency-answer" id="faq-ans-2" hidden>
+                Routine text, image, or pricing adjustments are typically completed within 24 to 48 business hours upon request.
               </div>
-            </article>
-            <article class="faq-item">
-              <button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-maintenance-other-provider" data-faq-toggle>
-                Can you maintain a website developed by someone else?
+            </div>
+            <div class="agency-faq-card">
+              <button class="faq-agency-btn" type="button" aria-expanded="false" aria-controls="faq-ans-3" data-faq-toggle>
+                <span>Can you maintain a website built by another company?</span>
+                <svg class="faq-chevron-icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
               </button>
-              <div class="faq-answer" id="faq-maintenance-other-provider" hidden>
-                <p>
-                  Yes, subject to an initial technical review and availability of the required
-                  website access.
-                </p>
+              <div class="faq-agency-answer" id="faq-ans-3" hidden>
+                Yes. We perform an initial code audit to resolve existing bugs, optimize loading speeds, and onboard the site to our proactive monitoring system.
               </div>
-            </article>
-            <article class="faq-item">
-              <button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-maintenance-cost" data-faq-toggle>
-                How much does website maintenance cost?
+            </div>
+            <div class="agency-faq-card">
+              <button class="faq-agency-btn" type="button" aria-expanded="false" aria-controls="faq-ans-4" data-faq-toggle>
+                <span>Is there a long-term contract lock-in?</span>
+                <svg class="faq-chevron-icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
               </button>
-              <div class="faq-answer" id="faq-maintenance-cost" hidden>
-                <p>
-                  Cost depends on website size, technology, update frequency and expected monthly
-                  work. A quotation is shared after review.
-                </p>
+              <div class="faq-agency-answer" id="faq-ans-4" hidden>
+                No. Our maintenance agreements operate on transparent monthly milestones with no punitive cancellation penalties.
               </div>
-            </article>
-            <article class="faq-item">
-              <button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-maintenance-hosting" data-faq-toggle>
-                Are domain and hosting charges included?
-              </button>
-              <div class="faq-answer" id="faq-maintenance-hosting" hidden>
-                <p>
-                  Third-party domain, hosting, plugin or platform charges are separate unless
-                  specifically included in the quotation.
-                </p>
-              </div>
-            </article>
-            <article class="faq-item">
-              <button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-maintenance-emergency" data-faq-toggle>
-                Do you provide emergency website support?
-              </button>
-              <div class="faq-answer" id="faq-maintenance-emergency" hidden>
-                <p>
-                  Urgent issues can be reviewed based on availability. Resolution time and charges
-                  depend on the problem.
-                </p>
-              </div>
-            </article>
-            <article class="faq-item">
-              <button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-maintenance-features" data-faq-toggle>
-                Can I request new features under a maintenance plan?
-              </button>
-              <div class="faq-answer" id="faq-maintenance-features" hidden>
-                <p>
-                  Small changes may be included within the agreed scope. Larger features require a
-                  separate quotation.
-                </p>
-              </div>
-            </article>
-            <article class="faq-item">
-              <button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-maintenance-access" data-faq-toggle>
-                How should website access be shared?
-              </button>
-              <div class="faq-answer" id="faq-maintenance-access" hidden>
-                <p>
-                  Do not send passwords through the public contact form. Secure access-sharing steps
-                  will be provided after the project is confirmed.
-                </p>
-              </div>
-            </article>
-            <article class="faq-item">
-              <button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-maintenance-security" data-faq-toggle>
-                Is website security guaranteed?
-              </button>
-              <div class="faq-answer" id="faq-maintenance-security" hidden>
-                <p>
-                  No provider can guarantee complete protection. Maintenance can include practical
-                  checks and updates, but risks cannot be completely eliminated.
-                </p>
-              </div>
-            </article>
+            </div>
           </div>
         </div>
       </section>
 
-      <section class="section cta-band">
-        <div class="container cta-box">
-          <p class="eyebrow">Start Maintenance Support</p>
-          <h2>Keep Your Website Updated and Working Properly</h2>
-          <p>
-            Share your website URL and maintenance requirements to receive practical guidance on the
-            right support plan, scope and estimated monthly cost.
-          </p>
-          <div class="hero-actions">
-            <a class="btn btn-glow-cyan" href="/contact?service=Website%20Maintenance">Request Website Maintenance</a>
-            <a class="btn btn-glass" href="https://wa.me/918757928673" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">Chat on WhatsApp</a>
+      <!-- 7. Final Project Enquiry CTA -->
+      <section class="section cta-band" id="project-inquiry">
+        <div class="container">
+          <div class="radiant-cta-box">
+            <p class="eyebrow">Start Your Project</p>
+            <h2>Ready to Elevate Your Digital Systems?</h2>
+            <p>Schedule a focused technical consultation to review your requirements, architecture, and timeline with our engineering team.</p>
+            
+            <div class="radiant-cta-actions">
+              <a class="btn btn-apple-primary" href="/contact?service=Website%20Maintenance#project-inquiry">
+                <span>Discuss Your Project Now</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </a>
+              <a class="btn btn-apple-whatsapp" href="https://wa.me/918757928673" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.301-.15-1.78-.878-2.056-.979-.276-.1-.477-.15-.678.15-.2.3-.778.979-.954 1.18-.176.2-.352.226-.653.075s-1.272-.469-2.423-1.496c-.896-.799-1.501-1.786-1.677-2.088-.176-.301-.019-.464.132-.614.136-.135.301-.351.452-.527.15-.176.201-.301.301-.502.1-.2.05-.376-.025-.527-.075-.15-.678-1.632-.929-2.235-.245-.588-.494-.509-.678-.518l-.578-.01c-.2 0-.527.075-.803.376s-1.054 1.029-1.054 2.509 1.079 2.91 1.23 3.111c.15.2 2.122 3.24 5.141 4.544.718.31 1.279.495 1.716.634.722.23 1.378.197 1.9.12.58-.088 1.78-.727 2.03-1.43.25-.704.25-1.307.175-1.431-.075-.125-.276-.2-.577-.35zM12.04 2C6.51 2 2.03 6.48 2.03 12.01c0 1.97.57 3.81 1.57 5.37L2 22l4.78-1.54c1.51.92 3.27 1.45 5.26 1.45 5.53 0 10.01-4.48 10.01-10.01S17.57 2 12.04 2zm0 18.25c-1.74 0-3.36-.5-4.74-1.38l-.34-.22-2.83.91.93-2.76-.24-.37c-.98-1.5-1.53-3.27-1.53-5.12 0-4.56 3.71-8.27 8.27-8.27s8.27 3.71 8.27 8.27-3.71 8.27-8.27 8.27z"/></svg>
+                <span>WhatsApp Directly</span>
+              </a>
+            </div>
+            
+            <div class="cta-trust-meta">
+              <span>&#9742; Direct Line: +91 87579 28673</span>
+              <span>&#9993; Email: abssnexus@gmail.com</span>
+              <span>&#128205; Location: Jaipur, Rajasthan</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 8. Related Services -->
+      <section class="section">
+        <div class="container">
+          <div class="section-heading">
+            <p class="eyebrow">Complementary Solutions</p>
+            <h2>Related Services &amp; Extensions</h2>
+            <p>Explore other specialized engineering disciplines that work hand-in-hand with Website Maintenance.</p>
+          </div>
+
+          <div class="related-services-grid">
+            
+            <a class="related-service-card" href="/services/website-development">
+              <h4>Website Development</h4>
+              <p>Bespoke high-performance web engineering.</p>
+              <span class="explore-arrow">Explore Discipline &rarr;</span>
+            </a>
+            <a class="related-service-card" href="/services/cybersecurity">
+              <h4>Cybersecurity & Hardening</h4>
+              <p>Proactive defense against malware and brute force attacks.</p>
+              <span class="explore-arrow">Explore Discipline &rarr;</span>
+            </a>
+            <a class="related-service-card" href="/services/software-testing-qa">
+              <h4>Software Testing & QA</h4>
+              <p>Automated regression testing and link integrity audits.</p>
+              <span class="explore-arrow">Explore Discipline &rarr;</span>
+            </a>
           </div>
         </div>
       </section>
     </main>
 
-    <footer class="footer">
-      <div class="container footer-grid">
-        <div class="footer-brand">
-          <img src="/public/assets/images/LogoGenerated.png" alt="ABSS Nexus Technologies logo" />
-          <p class="footer-brand-title">ABSS Nexus Technologies</p>
-          <p>
-            Building modern digital solutions for businesses, startups, institutions, and
-            individuals.
-          </p>
-                    <strong>Innovate • Solve • Elevate</strong>
-          <div>
-            <span class="footer-system-status">
-              <span class="live-pulse-dot" aria-hidden="true"></span>
-              All Systems Operational &bull; Edge Active
-            </span>
+    <footer class="site-footer" role="contentinfo">
+      <div class="site-footer__container container">
+        <div class="site-footer__grid footer-grid">
+          <!-- Column 1: Brand -->
+          <div class="site-footer__brand footer-brand">
+            <a class="site-footer__logo-link" href="/" aria-label="ABSS Nexus Technologies home">
+              <img class="site-footer__logo" src="/public/assets/images/LogoGenerated.png" alt="ABSS Nexus Technologies logo" width="160" height="38" />
+            </a>
+            <p class="site-footer__brand-title footer-brand-title">ABSS Nexus Technologies</p>
+            <p class="site-footer__brand-desc">Building high-performance digital solutions for businesses, startups, institutions, and growing brands.</p>
+            <strong class="site-footer__tagline">Innovate &bull; Solve &bull; Elevate</strong>
+            <div>
+              <span class="site-footer__status footer-system-status">
+                <span class="site-footer__status-pulse live-pulse-dot" aria-hidden="true"></span>
+                <span>All Systems Operational &bull; Edge Active</span>
+              </span>
+            </div>
+          </div>
+
+          <!-- Column 2: Quick Links -->
+          <div class="site-footer__col footer-column">
+            <h3 class="site-footer__col-title">Quick Links</h3>
+            <a class="site-footer__link" href="/">Home</a>
+            <a class="site-footer__link" href="/about">About</a>
+            <a class="site-footer__link" href="/services">Services</a>
+            <a class="site-footer__link" href="/solutions">Solutions</a>
+            <a class="site-footer__link" href="/industries">Industries</a>
+            <a class="site-footer__link" href="/work">Work</a>
+            <a class="site-footer__link" href="/careers">Careers</a>
+            <a class="site-footer__link" href="/blog">Blog</a>
+            <a class="site-footer__link" href="/faq">FAQ</a>
+            <a class="site-footer__link" href="/pricing">Pricing</a>
+            <a class="site-footer__link" href="/internships">Internships</a>
+            <a class="site-footer__link" href="/contact">Contact</a>
+          </div>
+
+          <!-- Column 3: Our Services -->
+          <div class="site-footer__col footer-column">
+            <h3 class="site-footer__col-title">Our Services</h3>
+            <a class="site-footer__link" href="/services/website-development">Website Development</a>
+            <a class="site-footer__link" href="/services/software-development">Software Development</a>
+            <a class="site-footer__link" href="/services/mobile-app-development">Mobile App Development</a>
+            <a class="site-footer__link" href="/services/ui-ux-design">UI/UX Design</a>
+            <a class="site-footer__link" href="/services/ai-machine-learning">AI &amp; Machine Learning</a>
+            <a class="site-footer__link" href="/services/cloud-computing">Cloud Computing</a>
+            <a class="site-footer__link" href="/services/cybersecurity">Cybersecurity</a>
+            <a class="site-footer__link" href="/services/data-analytics-bi">Data Analytics</a>
+            <a class="site-footer__link" href="/services/ecommerce-development">E-Commerce Development</a>
+            <a class="site-footer__link" href="/services/saas-development">SaaS Development</a>
+            <a class="site-footer__link" href="/services">All 16 Services &rarr;</a>
+          </div>
+
+          <!-- Column 4: Contact Info -->
+          <div class="site-footer__col site-footer__contact footer-column footer-contact">
+            <h3 class="site-footer__col-title">Contact Info</h3>
+            <a class="site-footer__link" href="tel:+918757928673">Phone: +91 87579 28673</a>
+            <a class="site-footer__link" href="mailto:abssnexus@gmail.com">Email: abssnexus@gmail.com</a>
+            <span class="site-footer__contact-item">Location: Jaipur, Rajasthan, India</span>
+            <span class="site-footer__contact-item">Shubham Kumar &mdash; Founder</span>
+            <span class="site-footer__contact-item">Consultation &amp; Advisory: Open 2026</span>
           </div>
         </div>
-        <div class="footer-column">
-          <h3>Quick Links</h3>
-          <a href="/">Home</a>
-          <a href="/about">About Us</a>
-          <a href="/services">Services</a>
-          <a href="/projects">Projects</a>
-          <a href="/contact">Contact</a>
+
+        <!-- Divider & Lower Footer Bar (Inside Container) -->
+        <div class="site-footer__bottom footer-lower">
+          <div class="site-footer__socials footer-socials" aria-label="Social media profiles">
+            <a class="site-footer__social-link" href="https://www.instagram.com/abssnexus/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">Instagram</a>
+            <a class="site-footer__social-link" href="https://www.facebook.com/profile.php?id=61592563923350" target="_blank" rel="noopener noreferrer" aria-label="Facebook">Facebook</a>
+            <a class="site-footer__social-link" href="https://x.com/abssnexus" target="_blank" rel="noopener noreferrer" aria-label="X">X / Twitter</a>
+          </div>
+          <nav class="site-footer__legal footer-legal" aria-label="Legal documents">
+            <a href="/privacy-policy">Privacy Policy</a>
+            <a href="/terms-and-conditions">Terms &amp; Conditions</a>
+            <a href="/cookie-policy">Cookie Policy</a>
+            <a href="/disclaimer">Disclaimer</a>
+            <a href="/refund-policy">Refund Policy</a>
+            <a href="/support-policy">Support Policy</a>
+            <a href="/sitemap">Sitemap</a>
+          </nav>
         </div>
-        <div class="footer-column">
-          <h3>Our Services</h3>
-          <a href="/services/website-development">Website Development</a>
-          <a href="/services">Application Development</a>
-          <a href="/services/ui-ux-design">UI/UX Design</a>
-          <a href="/services">Business Landing Pages</a>
-          <a href="/services">Portfolio Websites</a>
-          <a href="/services/website-maintenance">Website Maintenance</a>
+
+        <!-- Copyright Row (Inside Container) -->
+        <div class="site-footer__copy footer-copy">
+          <p>&copy; <span class="site-footer__year">2026</span> ABSS Nexus Technologies. All Rights Reserved.</p>
         </div>
-        <div class="footer-column footer-contact">
-          <h3>Contact Info</h3>
-          <a href="tel:+918757928673">Phone: +91 87579 28673</a>
-          <a href="mailto:abssnexus@gmail.com">Email: abssnexus@gmail.com</a>
-          <span>Location: Jaipur, Rajasthan</span>
-          <span>Shubham Kumar — Founder, ABSS Nexus Technologies</span>
-        </div>
-      </div>
-      <div class="container footer-lower">
-        <div class="footer-socials" aria-label="Social links">
-          <a href="https://www.instagram.com/abssnexus/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">Instagram</a>
-          <a href="https://www.facebook.com/profile.php?id=61592563923350" target="_blank" rel="noopener noreferrer" aria-label="Facebook">Facebook</a>
-          <a href="https://x.com/abssnexus" target="_blank" rel="noopener noreferrer" aria-label="X">X / Twitter</a>
-        </div>
-        <div class="footer-legal">
-          <a href="/privacy-policy">Privacy Policy</a>
-          <a href="/terms-and-conditions">Terms & Conditions</a>
-          <a href="/disclaimer">Disclaimer</a>
-          <a href="/refund-policy">Refund Policy</a>
-          <a href="/support-policy">Support Policy</a>
-          <a href="/sitemap">Sitemap</a>
-        </div>
-      </div>
-      <div class="container footer-copy">
-        <p>© 2026 ABSS Nexus Technologies. All Rights Reserved.</p>
       </div>
     </footer>
-    <a class="floating-whatsapp" href="https://wa.me/918757928673" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
+
+    <a class="floating-whatsapp" href="https://wa.me/918757928673" target="_blank" rel="noopener noreferrer" aria-label="Contact us on WhatsApp">
       <svg viewBox="0 0 32 32" aria-hidden="true" focusable="false">
         <path d="M16 3.2A12.7 12.7 0 0 0 5.1 22.4L3.4 28.8l6.6-1.7A12.7 12.7 0 1 0 16 3.2Zm0 22.9c-2 0-3.9-.6-5.6-1.6l-.4-.2-3.9 1 1-3.8-.3-.4a10.3 10.3 0 1 1 9.2 5Z" />
         <path d="M21.7 18.6c-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.2-1.3-.5-2.5-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.6 0-.2-.7-1.7-1-2.3-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.2-1.2 2.9s1.2 3.3 1.4 3.6c.2.2 2.4 3.7 5.9 5.1.8.4 1.5.6 2 .7.8.3 1.6.2 2.2.1.7-.1 1.9-.8 2.2-1.5.3-.7.3-1.4.2-1.5-.1-.1-.3-.2-.6-.4Z" />
       </svg>
       <span>WhatsApp</span>
     </a>
+
     <script src="/src/scripts/seo-schema.js"></script>
+    <script src="/src/scripts/components/footer.js" defer></script>
     <script src="/src/scripts/script.js"></script>
   </body>
 </html>
