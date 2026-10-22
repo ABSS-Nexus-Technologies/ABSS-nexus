@@ -232,13 +232,24 @@ copyTextFile("_redirects", (content) => (includeAdmin ? content : content.replac
 // CSS Optimization, @import Inlining & Minification Pipeline
 // =========================================================================
 const minifyCssString = (css) => {
-  return css
+  let min = css
     .replace(/\/\*[\s\S]*?\*\//g, "")
     .replace(/\r?\n/g, " ")
     .replace(/\s+/g, " ")
-    .replace(/\s*([\{\}:;,>~+])\s*/g, "$1")
+    .replace(/\s*([\{\};,>~])\s*/g, "$1")
+    .replace(/:\s+/g, ":")
     .replace(/;}/g, "}")
     .trim();
+
+  // Ensure CSS spec compliance: operators + and - inside calc() must always have surrounding whitespace
+  min = min.replace(/calc\(([^)]+)\)/g, (m, expr) => {
+    const fixed = expr
+      .replace(/([0-9%a-z]+)\+([0-9%a-z]+)/gi, "$1 + $2")
+      .replace(/([0-9%a-z]+)\-([0-9%a-z]+)/gi, "$1 - $2");
+    return `calc(${fixed})`;
+  });
+
+  return min;
 };
 
 const inlineCssImports = (entryFilePath) => {

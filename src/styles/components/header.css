@@ -277,7 +277,7 @@
    4. Mega Menu Dropdown Container & Layouts
    ------------------------------------------------------------------------- */
 .mega-menu {
-  display: none;
+  display: none !important;
   position: absolute !important;
   top: calc(100% + 10px) !important;
   left: 50% !important;
@@ -304,6 +304,7 @@
 }
 
 .nav-item-dropdown:hover .mega-menu,
+.nav-item-dropdown:focus-within .mega-menu,
 .nav-item-dropdown.open .mega-menu {
   display: block !important;
   animation: megaMenuFade 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
