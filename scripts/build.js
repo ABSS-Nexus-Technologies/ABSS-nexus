@@ -37,7 +37,7 @@ const copyTextFile = (fileName, transform = (value) => value) => {
 
 fs.rmSync(distDir, { recursive: true, force: true });
 
-for (const entry of ["src", "public", "internships"]) {
+for (const entry of ["src", "public"]) {
   if (fs.existsSync(path.join(rootDir, entry))) {
     copyRecursive(path.join(rootDir, entry), path.join(distDir, entry));
   }

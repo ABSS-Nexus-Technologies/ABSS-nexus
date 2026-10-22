@@ -22,6 +22,20 @@ resolve_existing_target() {
     target_path="${target_path}.html"
   fi
 
+  # Check in dist directory
+  local rel_target="${target_path#./}"
+  if [ ! -e "$target_path" ] && [ -e "dist/$rel_target" ]; then
+    target_path="dist/$rel_target"
+  fi
+
+  if [ ! -e "$target_path" ] && [ -f "dist/${rel_target}.html" ]; then
+    target_path="dist/${rel_target}.html"
+  fi
+
+  if [ ! -e "$target_path" ] && [ -f "dist/${rel_target}/index.html" ]; then
+    target_path="dist/${rel_target}/index.html"
+  fi
+
   printf '%s\n' "$target_path"
 }
 
@@ -50,7 +64,7 @@ while IFS= read -r file; do
       exit 1
     fi
   done < <(if command -v rg >/dev/null 2>&1; then rg -o '(href|src)="[^"]+"' "$file"; else grep -oE '(href|src)="[^"]+"' "$file" || true; fi | sed 's/^[^=]*="//;s/"$//')
-done < <(find . -path './node_modules' -prune -o -name '*.html' -type f -print)
+done < <(find . -path './node_modules' -prune -o -path './dist' -prune -o -name '*.html' -type f -print)
 
 if [ -f "_redirects" ]; then
   while read -r source target status; do

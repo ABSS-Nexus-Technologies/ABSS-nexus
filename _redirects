@@ -346,8 +346,10 @@
 /src/pages/service-managed-it-support /services/managed-it-support 301
 /src/pages/service-managed-it-support.html /services/managed-it-support 301
 
-/services/data-analytics/ /services/data-analytics 301
-/services/software-testing/ /services/software-testing 301
+/services/data-analytics /services/data-analytics-bi 301
+/services/data-analytics/ /services/data-analytics-bi 301
+/services/software-testing /services/software-testing-qa 301
+/services/software-testing/ /services/software-testing-qa 301
 
 /internships/application-status/ /internships/application-status 301
 /src/pages/internships-application-status /internships/application-status 301
@@ -411,102 +413,3 @@
 /admin/users/ /admin/users 301
 /admin/audit-logs/ /admin/audit-logs 301
 /admin/settings/ /admin/settings 301
-
-/internships /src/pages/internships.html 200
-/internships/programs /src/pages/internships-programs.html 200
-/internships/programs/web-development /src/pages/internships-program-web-development.html 200
-/internships/programs/software-development /src/pages/internships-program-software-development.html 200
-/internships/programs/ui-ux-design /src/pages/internships-program-ui-ux-design.html 200
-/internships/programs/ai-machine-learning /src/pages/internships-program-ai-machine-learning.html 200
-/internships/programs/cloud-devops /src/pages/internships-program-cloud-devops.html 200
-/internships/how-it-works /src/pages/internships-how-it-works.html 200
-/internships/faq /src/pages/internships-faq.html 200
-/internships/support /src/pages/internships-support.html 200
-/internships/register /src/pages/internships-register.html 200
-/internships/login /src/pages/internships-login.html 200
-/internships/verify-email /src/pages/internships-verify-email.html 200
-/internships/forgot-password /src/pages/internships-forgot-password.html 200
-/internships/reset-password /src/pages/internships-reset-password.html 200
-/internships/dashboard /src/pages/internships-dashboard.html 200
-/internships/application-status /src/pages/internships-application-status.html 200
-/internships/payment-status /src/pages/internships-payment-status.html 200
-
-/work /src/pages/work.html 200
-/work/fintech-payment-gateway /src/pages/work-fintech-payment-gateway.html 200
-/work/healthcare-telemedicine-platform /src/pages/work-healthcare-telemedicine.html 200
-/work/ecommerce-headless-storefront /src/pages/work-ecommerce-headless.html 200
-/services/managed-it-support /src/pages/service-managed-it-support.html 200
-/services/data-analytics /src/pages/service-data-analytics-bi.html 200
-/services/software-testing /src/pages/service-software-testing-qa.html 200
-/careers/senior-fullstack-engineer /src/pages/career-senior-fullstack-engineer.html 200
-/careers/lead-ui-ux-designer /src/pages/career-lead-ui-ux-designer.html 200
-/careers/cloud-devops-architect /src/pages/career-cloud-devops-architect.html 200
-/verify-certificate /src/pages/verify-certificate.html 200
-/register /src/pages/register.html 200
-/login /src/pages/login.html 200
-/verify-email /src/pages/verify-email.html 200
-/forgot-password /src/pages/forgot-password.html 200
-/reset-password /src/pages/reset-password.html 200
-
-/student/dashboard /src/pages/student-dashboard.html 200
-/student/profile /src/pages/student-profile.html 200
-/student/applications /src/pages/student-applications.html 200
-/student/internship /src/pages/student-internship.html 200
-/student/tasks /src/pages/student-tasks.html 200
-/student/tasks/task-1 /src/pages/student-task-detail.html 200
-/student/submissions /src/pages/student-submissions.html 200
-/student/submit-work /src/pages/student-submit-work.html 200
-/student/certificates /src/pages/student-certificates.html 200
-/student/settings /src/pages/student-settings.html 200
-
-/admin/dashboard /src/admin/admin-dashboard.html 200
-/admin/programs /src/admin/admin-programs.html 200
-/admin/applications /src/admin/admin-applications.html 200
-/admin/students /src/admin/admin-students.html 200
-/admin/tasks /src/admin/admin-tasks.html 200
-/admin/submissions /src/admin/admin-submissions.html 200
-/admin/reviews /src/admin/admin-reviews.html 200
-/admin/payments /src/admin/admin-payments.html 200
-/admin/certificates /src/admin/admin-certificates.html 200
-/admin/users /src/admin/admin-users.html 200
-/admin/audit-logs /src/admin/admin-audit-logs.html 200
-/admin/settings /src/admin/admin-settings.html 200
-/admin/login /src/admin/admin-login.html 200
-/admin/leads /src/admin/admin-leads.html 200
-/admin/projects /src/admin/admin-projects.html 200
-/admin/clients /src/admin/admin-clients.html 200
-/admin/support /src/admin/admin-support.html 200
-/admin/pricing /src/admin/admin-pricing.html 200
-
-/admin /src/admin/index.html 200
-/admin/ /src/admin/index.html 200
-
-/admin/internships /src/admin/internships/index.html 200
-/admin/internships/ /src/admin/internships/index.html 200
-/admin/internships/programs /src/admin/internships/programs.html 200
-/admin/internships/applications /src/admin/internships/applications.html 200
-/admin/internships/students /src/admin/internships/students.html 200
-/admin/internships/tasks /src/admin/internships/tasks.html 200
-/admin/internships/submissions /src/admin/internships/submissions.html 200
-/admin/internships/reviews /src/admin/internships/reviews.html 200
-/admin/internships/payments /src/admin/internships/payments.html 200
-/admin/internships/certificates /src/admin/internships/certificates.html 200
-/admin/internships/reports /src/admin/internships/reports.html 200
-/admin/internships/settings /src/admin/internships/settings.html 200
-
-/admin/company /src/admin/company/index.html 200
-/admin/company/ /src/admin/company/index.html 200
-/admin/company/pages /src/admin/company/pages.html 200
-/admin/company/navigation /src/admin/company/navigation.html 200
-/admin/company/services /src/admin/company/services.html 200
-/admin/company/solutions /src/admin/company/solutions.html 200
-/admin/company/industries /src/admin/company/industries.html 200
-/admin/company/projects /src/admin/company/projects.html 200
-/admin/company/leads /src/admin/company/leads.html 200
-/admin/company/careers /src/admin/company/careers.html 200
-/admin/company/candidates /src/admin/company/candidates.html 200
-/admin/company/blog /src/admin/company/blog.html 200
-/admin/company/media /src/admin/company/media.html 200
-/admin/company/seo /src/admin/company/seo.html 200
-/admin/company/analytics /src/admin/company/analytics.html 200
-/admin/company/settings /src/admin/company/settings.html 200
