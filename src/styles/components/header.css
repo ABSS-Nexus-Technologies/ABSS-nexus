@@ -552,7 +552,13 @@
     border-radius: 8px !important;
   }
 
+  .nav-item-dropdown:hover .mega-menu,
+  .nav-item-dropdown:focus-within .mega-menu {
+    display: none !important;
+  }
+
   .nav-item-dropdown .mega-menu {
+    display: none !important;
     position: static !important;
     transform: none !important;
     width: 100% !important;

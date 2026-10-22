@@ -139,7 +139,12 @@ for (const [sourceRelative, destinationRelative] of publicPages) {
   }
 
   fs.mkdirSync(path.dirname(destination), { recursive: true });
-  fs.copyFileSync(source, destination);
+  let html = fs.readFileSync(source, "utf8");
+  html = html.replace(
+    /(href=["']\/src\/styles\/styles(?:\.min)?\.css)(?:\?[^"']*)?(["'])/g,
+    "$1?v=20261023v2$2"
+  );
+  fs.writeFileSync(destination, html, "utf8");
 }
 
 if (includeAdmin) {
@@ -215,7 +220,12 @@ if (includeAdmin) {
     const d = path.join(distDir, dstRel);
     if (fs.existsSync(s)) {
       fs.mkdirSync(path.dirname(d), { recursive: true });
-      fs.copyFileSync(s, d);
+      let html = fs.readFileSync(s, "utf8");
+      html = html.replace(
+        /(href=["']\/src\/styles\/styles(?:\.min)?\.css)(?:\?[^"']*)?(["'])/g,
+        "$1?v=20261023v2$2"
+      );
+      fs.writeFileSync(d, html, "utf8");
     }
   }
 }
