@@ -419,11 +419,101 @@
 
       const googleBtn = document.getElementById("btn-google-auth");
       const alertBox = document.getElementById("auth-alert");
+      const regForm = document.getElementById("reg-form");
+      const regSubmitBtn = regForm ? regForm.querySelector("button[type='submit']") : null;
 
-      function showAlert(type, message) {
+      function showAlert(type, message, htmlContent = "") {
         if (!alertBox) return;
         alertBox.className = "auth-alert visible auth-alert-" + type;
-        alertBox.textContent = message;
+        if (htmlContent) {
+          alertBox.innerHTML = htmlContent;
+        } else {
+          alertBox.textContent = message;
+        }
+      }
+
+      if (regForm) {
+        regForm.addEventListener("submit", async (e) => {
+          e.preventDefault();
+          if (alertBox) alertBox.className = "auth-alert";
+
+          const name = (document.getElementById("name")?.value || "").trim();
+          const email = (document.getElementById("email")?.value || "").trim().toLowerCase();
+          const phoneInput = document.getElementById("phone");
+          const phone = phoneInput ? phoneInput.value.trim() : "";
+          const cleanPhone = phone.replace(/\D/g, "").slice(-10);
+          const password = document.getElementById("password")?.value || "";
+          const duration = document.getElementById("duration")?.value || "";
+
+          if (!name || name.length < 2) {
+            showAlert("error", "Please provide your full legal name (minimum 2 characters).");
+            return;
+          }
+          if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            showAlert("error", "Please provide a valid email address.");
+            return;
+          }
+          if (!cleanPhone || cleanPhone.length !== 10) {
+            showAlert("error", "Please provide a valid 10-digit WhatsApp / Mobile number.");
+            if (phoneInput) phoneInput.focus();
+            return;
+          }
+          if (!password || password.length < 8) {
+            showAlert("error", "Password must be at least 8 characters long.");
+            return;
+          }
+          if (!duration) {
+            showAlert("error", "Please select your internship duration.");
+            return;
+          }
+
+          const originalText = regSubmitBtn ? regSubmitBtn.textContent : "Register Account \u2192";
+          if (regSubmitBtn) {
+            regSubmitBtn.disabled = true;
+            regSubmitBtn.textContent = "Creating Account...";
+          }
+
+          try {
+            const res = await fetch("/api/internships/auth/register", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ name, email, phone: cleanPhone, password, duration })
+            });
+            const data = await res.json();
+
+            if (!res.ok) {
+              showAlert("error", data.error || "Registration could not be completed.");
+              if (regSubmitBtn) {
+                regSubmitBtn.disabled = false;
+                regSubmitBtn.textContent = originalText;
+              }
+              return;
+            }
+
+            regForm.reset();
+            let successHtml = "<strong>" + (data.message || "Account registered successfully!") + "</strong>";
+            if (data.devVerificationUrl) {
+              successHtml += `<div style="margin-top: 14px; padding: 12px; background: #f0fdf4; border: 1px solid #86efac; border-radius: 8px; text-align: left;"><p style="margin: 0 0 8px; font-weight: 600; color: #166534;">Instant Account Activation:</p><a href="${data.devVerificationUrl}" class="btn btn-primary" style="display: inline-block; padding: 8px 16px; font-size: 0.88rem; background: #0066cc; color: #fff; border-radius: 8px; text-decoration: none; font-weight: 600;">Activate &amp; Verify Email Now &rarr;</a><p style="margin: 8px 0 0; font-size: 0.78rem; color: #166534;">Auto-redirecting in 2 seconds...</p></div>`;
+              showAlert("success", "", successHtml);
+              setTimeout(() => {
+                window.location.href = data.devVerificationUrl;
+              }, 1800);
+            } else {
+              successHtml += `<div style="margin-top: 12px;"><a href="/login" class="btn btn-primary" style="display: inline-block; padding: 8px 16px; font-size: 0.88rem; background: #0066cc; color: #fff; border-radius: 8px; text-decoration: none;">Proceed to Login &rarr;</a></div>`;
+              showAlert("success", "", successHtml);
+            }
+
+            if (regSubmitBtn) {
+              regSubmitBtn.textContent = "Account Registered!";
+            }
+          } catch (err) {
+            showAlert("error", "Network connection error. Please try again.");
+            if (regSubmitBtn) {
+              regSubmitBtn.disabled = false;
+              regSubmitBtn.textContent = originalText;
+            }
+          }
+        });
       }
 
       if (googleBtn) {

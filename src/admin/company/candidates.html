@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="/src/styles/styles.css?v=20261023v2" />
+    <link rel="stylesheet" href="/src/styles/styles.css" />
     <link rel="stylesheet" href="/src/styles/components/admin.css" />
   </head>
   <body class="admin-body">
@@ -104,7 +104,7 @@
               <span>💼</span>
               <span>Portfolio & Projects</span>
             </span>
-            <span class="sidebar-badge">3</span>
+            <span class="sidebar-badge">0</span>
           </a>
         
           <a href="/admin/company/leads" class="sidebar-nav-item ">
@@ -112,7 +112,7 @@
               <span>📬</span>
               <span>Inquiries & Leads</span>
             </span>
-            <span class="sidebar-badge">20</span>
+            <span class="sidebar-badge">46</span>
           </a>
         
           <a href="/admin/company/careers" class="sidebar-nav-item ">
@@ -219,20 +219,11 @@
         </thead>
         <tbody>
           <tr>
-            <td><strong>Vikram Malhotra</strong><br/><small style="color: #6E6E73;">vikram.m@example.com</small></td>
-            <td>Senior Full-Stack Engineer</td>
-            <td><a href="#" style="color: var(--admin-accent);">Resume_Vikram_2026.pdf</a></td>
-            <td>Yesterday</td>
-            <td><span class="status-pill status-warning">Technical Round 1</span></td>
-            <td><button class="btn-admin btn-admin-secondary" style="padding: 4px 8px; font-size: 0.76rem;">Schedule Call</button></td>
-          </tr>
-          <tr>
-            <td><strong>Neha Singhania</strong><br/><small style="color: #6E6E73;">neha.s@example.com</small></td>
-            <td>Lead UI/UX Designer</td>
-            <td><a href="#" style="color: var(--admin-accent);">portfolio.neha.design</a></td>
-            <td>3 Days ago</td>
-            <td><span class="status-pill status-info">Design Challenge Review</span></td>
-            <td><button class="btn-admin btn-admin-secondary" style="padding: 4px 8px; font-size: 0.76rem;">Evaluate Work</button></td>
+            <td colspan="6" style="text-align: center; padding: 48px 16px; color: #6e6e73;">
+              <div style="font-size: 2rem; margin-bottom: 8px;">💼</div>
+              <strong style="display: block; font-size: 1rem; color: #1d1d1f; margin-bottom: 4px;">No Candidate Applications Yet</strong>
+              <p style="margin: 0; font-size: 0.85rem; color: #6e6e73;">Resumes submitted through public career openings will appear here for review.</p>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -246,16 +237,6 @@
     <script src="/src/config/admin-config.js"></script>
     <script src="/src/services/admin-api.js"></script>
     <script src="/src/scripts/admin-auth-guard.js"></script>
-    <script>
-      document.addEventListener("DOMContentLoaded", async () => {
-        const session = await window.AbssAdminAuthGuard.requireAdminSession(null, "company");
-        if (session && session.admin) {
-          const roleBadge = document.getElementById("adminUserRoleBadge");
-          if (roleBadge) {
-            roleBadge.textContent = session.admin.role || "super_admin";
-          }
-        }
-      });
-    </script>
+    <script src="/src/scripts/admin-app.js"></script>
   </body>
 </html>

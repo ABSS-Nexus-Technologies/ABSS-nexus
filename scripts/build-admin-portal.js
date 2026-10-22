@@ -18,15 +18,15 @@ try {
   console.warn("Could not read db.json, using defaults", e.message);
 }
 
-const enrolledInternsCount = (db.students || []).length || 19;
+const enrolledInternsCount = (db.students || []).length;
 const activeTracksCount = (db.internshipPrograms || []).length || 5;
-const applicationsCount = (db.internshipApplications || []).length || 3;
-const verifiedPaymentsCount = (db.internshipPayments || []).length || 2;
-const issuedCertsCount = (db.certificates || []).length || 3;
+const applicationsCount = (db.internshipApplications || []).length;
+const verifiedPaymentsCount = (db.internshipPayments || []).length;
+const issuedCertsCount = (db.certificates || []).length;
 
-const leadsCount = (db.leads || []).length || 14;
-const projectsCount = (db.projects || []).length || 3;
-const clientsCount = (db.clients || []).length || 4;
+const leadsCount = (db.leads || []).length;
+const projectsCount = (db.projects || []).length;
+const clientsCount = (db.clients || []).length;
 const servicesCount = 17;
 const careersCount = 3;
 
@@ -202,17 +202,7 @@ function generateModularPage({ targetFile, title, moduleType, activeId, eyebrow,
     <script src="/src/config/admin-config.js"></script>
     <script src="/src/services/admin-api.js"></script>
     <script src="/src/scripts/admin-auth-guard.js"></script>
-    <script>
-      document.addEventListener("DOMContentLoaded", async () => {
-        const session = await window.AbssAdminAuthGuard.requireAdminSession(null, "${moduleType}");
-        if (session && session.admin) {
-          const roleBadge = document.getElementById("adminUserRoleBadge");
-          if (roleBadge) {
-            roleBadge.textContent = session.admin.role || "super_admin";
-          }
-        }
-      });
-    </script>
+    <script src="/src/scripts/admin-app.js"></script>
   </body>
 </html>`;
 
@@ -311,17 +301,7 @@ function generateAdminLandingPage() {
     <script src="/src/config/admin-config.js"></script>
     <script src="/src/services/admin-api.js"></script>
     <script src="/src/scripts/admin-auth-guard.js"></script>
-    <script>
-      document.addEventListener("DOMContentLoaded", async () => {
-        const session = await window.AbssAdminAuthGuard.requireAdminSession();
-        if (session && session.admin) {
-          const roleBadge = document.getElementById("adminUserRoleBadge");
-          if (roleBadge) {
-            roleBadge.textContent = session.admin.role || "super_admin";
-          }
-        }
-      });
-    </script>
+    <script src="/src/scripts/admin-app.js"></script>
   </body>
 </html>`;
 
@@ -403,30 +383,13 @@ generateModularPage({
             <th>Action</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody data-applications-table>
           <tr>
-            <td><strong>ABSS-2026-WD-8492</strong></td>
-            <td>Aarav Sharma<br/><small style="color: #6E6E73;">aarav.sharma@example.com</small></td>
-            <td>Web Engineering Track</td>
-            <td>April 02, 2026</td>
-            <td><span class="status-pill status-warning">Under Review</span></td>
-            <td><a href="/admin/internships/applications" class="btn-admin btn-admin-secondary" style="padding: 4px 10px; font-size: 0.76rem;">Review</a></td>
-          </tr>
-          <tr>
-            <td><strong>ABSS-2026-AI-5120</strong></td>
-            <td>Priya Verma<br/><small style="color: #6E6E73;">priya.verma@example.com</small></td>
-            <td>AI &amp; Applied Machine Learning</td>
-            <td>March 25, 2026</td>
-            <td><span class="status-pill status-info">Shortlisted</span></td>
-            <td><a href="/admin/internships/applications" class="btn-admin btn-admin-secondary" style="padding: 4px 10px; font-size: 0.76rem;">Review</a></td>
-          </tr>
-          <tr>
-            <td><strong>ABSS-2026-SD-9041</strong></td>
-            <td>Rohan Patel<br/><small style="color: #6E6E73;">rohan.patel@example.com</small></td>
-            <td>Software &amp; Full-Stack Dev</td>
-            <td>March 10, 2026</td>
-            <td><span class="status-pill status-success">Offer Letter</span></td>
-            <td><a href="/admin/internships/applications" class="btn-admin btn-admin-secondary" style="padding: 4px 10px; font-size: 0.76rem;">Review</a></td>
+            <td colspan="6" style="text-align: center; padding: 48px 16px; color: #6e6e73;">
+              <div style="font-size: 2.2rem; margin-bottom: 8px;">📝</div>
+              <strong style="display: block; font-size: 1.05rem; color: #1d1d1f; margin-bottom: 4px; font-family: 'Space Grotesk', sans-serif;">Loading Live Applications...</strong>
+              <p style="margin: 0; font-size: 0.88rem; color: #6e6e73;">Connecting to Cloudflare D1 database registry...</p>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -547,36 +510,12 @@ generateModularPage({
             <th>Actions</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody data-applications-table>
           <tr>
-            <td><strong>ABSS-2026-WD-8492</strong></td>
-            <td><strong>Aarav Sharma</strong><br/><small style="color: #6e6e73;">aarav.sharma@example.com</small></td>
-            <td>Web Engineering</td>
-            <td>Portfolio: github.com/aarav-dev (92% test score)</td>
-            <td><span class="status-pill status-warning">Under Review</span></td>
-            <td>
-              <button class="btn-admin btn-admin-secondary" style="padding: 4px 8px; font-size: 0.76rem;">Approve</button>
-              <button class="btn-admin btn-admin-secondary" style="padding: 4px 8px; font-size: 0.76rem; color: #dc2626;">Reject</button>
-            </td>
-          </tr>
-          <tr>
-            <td><strong>ABSS-2026-AI-5120</strong></td>
-            <td><strong>Priya Verma</strong><br/><small style="color: #6e6e73;">priya.verma@example.com</small></td>
-            <td>AI &amp; Applied ML</td>
-            <td>Candidate shortlisted for technical assessment round</td>
-            <td><span class="status-pill status-info">Shortlisted</span></td>
-            <td>
-              <button class="btn-admin btn-admin-secondary" style="padding: 4px 8px; font-size: 0.76rem;">Send Offer</button>
-            </td>
-          </tr>
-          <tr>
-            <td><strong>ABSS-2026-SD-9041</strong></td>
-            <td><strong>Rohan Patel</strong><br/><small style="color: #6e6e73;">rohan.patel@example.com</small></td>
-            <td>Software Development</td>
-            <td>Offer letter dispatched via email. Orientation scheduled.</td>
-            <td><span class="status-pill status-success">Offer Dispatched</span></td>
-            <td>
-              <button class="btn-admin btn-admin-secondary" style="padding: 4px 8px; font-size: 0.76rem;">View Offer</button>
+            <td colspan="6" style="text-align: center; padding: 48px 16px; color: #6e6e73;">
+              <div style="font-size: 2.2rem; margin-bottom: 8px;">📝</div>
+              <strong style="display: block; font-size: 1.05rem; color: #1d1d1f; margin-bottom: 4px; font-family: 'Space Grotesk', sans-serif;">Loading Live Applications...</strong>
+              <p style="margin: 0; font-size: 0.88rem; color: #6e6e73;">Connecting to Cloudflare D1 database registry...</p>
             </td>
           </tr>
         </tbody>
@@ -625,30 +564,13 @@ generateModularPage({
             <th>Actions</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody data-students-table>
           <tr>
-            <td><strong>Aarav Sharma</strong><br/><small style="color: #6e6e73;">aarav.sharma@example.com</small></td>
-            <td>Web Engineering</td>
-            <td><span class="status-pill status-success">Active</span></td>
-            <td><span style="color: #10b981; font-weight: 600; font-size: 0.8rem;">✓ Email Verified</span></td>
-            <td>2026-03-01</td>
-            <td><button class="btn-admin btn-admin-secondary" style="padding: 4px 10px; font-size: 0.76rem;">View Profile</button></td>
-          </tr>
-          <tr>
-            <td><strong>Priya Verma</strong><br/><small style="color: #6e6e73;">priya.verma@example.com</small></td>
-            <td>AI &amp; Machine Learning</td>
-            <td><span class="status-pill status-success">Active</span></td>
-            <td><span style="color: #10b981; font-weight: 600; font-size: 0.8rem;">✓ Email Verified</span></td>
-            <td>2026-02-15</td>
-            <td><button class="btn-admin btn-admin-secondary" style="padding: 4px 10px; font-size: 0.76rem;">View Profile</button></td>
-          </tr>
-          <tr>
-            <td><strong>Rohan Patel</strong><br/><small style="color: #6e6e73;">rohan.patel@example.com</small></td>
-            <td>Software Engineering</td>
-            <td><span class="status-pill status-success">Graduated</span></td>
-            <td><span style="color: #10b981; font-weight: 600; font-size: 0.8rem;">✓ Email Verified</span></td>
-            <td>2026-01-10</td>
-            <td><button class="btn-admin btn-admin-secondary" style="padding: 4px 10px; font-size: 0.76rem;">View Profile</button></td>
+            <td colspan="6" style="text-align: center; padding: 48px 16px; color: #6e6e73;">
+              <div style="font-size: 2.2rem; margin-bottom: 8px;">🎓</div>
+              <strong style="display: block; font-size: 1.05rem; color: #1d1d1f; margin-bottom: 4px; font-family: 'Space Grotesk', sans-serif;">Loading Enrolled Interns...</strong>
+              <p style="margin: 0; font-size: 0.88rem; color: #6e6e73;">Fetching registered student records from Cloudflare D1...</p>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -746,20 +668,11 @@ generateModularPage({
         </thead>
         <tbody>
           <tr>
-            <td><strong>Aarav Sharma</strong></td>
-            <td>Task 1: Production UI</td>
-            <td><a href="https://github.com/example/pr/42" target="_blank" style="color: var(--admin-accent);">github.com/aarav/task1</a></td>
-            <td>2 Hours ago</td>
-            <td><span class="status-pill status-warning">Awaiting Review</span></td>
-            <td><a href="/admin/internships/reviews" class="btn-admin btn-admin-primary" style="padding: 4px 10px; font-size: 0.76rem;">Grade Work</a></td>
-          </tr>
-          <tr>
-            <td><strong>Priya Verma</strong></td>
-            <td>Task 2: RAG Pipeline</td>
-            <td><a href="https://github.com/example/pr/41" target="_blank" style="color: var(--admin-accent);">github.com/priya/rag-engine</a></td>
-            <td>Yesterday</td>
-            <td><span class="status-pill status-success">Approved (96%)</span></td>
-            <td><a href="/admin/internships/reviews" class="btn-admin btn-admin-secondary" style="padding: 4px 10px; font-size: 0.76rem;">View Grade</a></td>
+            <td colspan="6" style="text-align: center; padding: 48px 16px; color: #6e6e73;">
+              <div style="font-size: 2.2rem; margin-bottom: 8px;">📥</div>
+              <strong style="display: block; font-size: 1.05rem; color: #1d1d1f; margin-bottom: 4px; font-family: 'Space Grotesk', sans-serif;">No Work Submissions Yet</strong>
+              <p style="margin: 0; font-size: 0.88rem; color: #6e6e73;">When enrolled interns submit pull requests and task deliverables, they will appear here.</p>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -808,18 +721,11 @@ generateModularPage({
         </thead>
         <tbody>
           <tr>
-            <td><strong>Rohan Patel</strong></td>
-            <td>Software Architecture Milestone</td>
-            <td><strong style="color: #10b981;">98 / 100</strong></td>
-            <td>Exceptional database query optimization and clean API documentation.</td>
-            <td>Lead Architect</td>
-          </tr>
-          <tr>
-            <td><strong>Priya Verma</strong></td>
-            <td>AI Embeddings Pipeline</td>
-            <td><strong style="color: #10b981;">92 / 100</strong></td>
-            <td>Solid RAG vector implementation with good latency metrics.</td>
-            <td>AI Lead</td>
+            <td colspan="5" style="text-align: center; padding: 36px 16px; color: var(--admin-text-secondary);">
+              <div style="font-size: 1.8rem; margin-bottom: 6px;">📝</div>
+              <strong style="display: block; color: var(--admin-text); margin-bottom: 4px;">No Pending Reviews</strong>
+              <p style="margin: 0; font-size: 0.85rem;">Milestone submissions requiring mentor review will appear here once submitted by students.</p>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -840,12 +746,12 @@ generateModularPage({
     <div class="admin-kpi-grid">
       <div class="admin-kpi-card">
         <span class="kpi-label">TOTAL VERIFIED FEES</span>
-        <div class="kpi-value">₹9,998</div>
+        <div class="kpi-value" data-metric="verified-fees">₹0</div>
         <div class="kpi-sub" style="color: #10b981;">100% reconciled</div>
       </div>
       <div class="admin-kpi-card">
         <span class="kpi-label">COMPLETED TRANSACTIONS</span>
-        <div class="kpi-value">${verifiedPaymentsCount}</div>
+        <div class="kpi-value" data-metric="payments">0</div>
         <div class="kpi-sub">Gateway verified</div>
       </div>
       <div class="admin-kpi-card">
@@ -868,24 +774,13 @@ generateModularPage({
             <th>Receipt Reference</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody data-payments-table>
           <tr>
-            <td><code style="font-weight: 700;">TXN-84920482</code></td>
-            <td>ABSS-2026-WD-8492</td>
-            <td>Aarav Sharma</td>
-            <td>Web Engineering</td>
-            <td><strong>₹4,999</strong></td>
-            <td><span class="status-pill status-success">Verified / Paid</span></td>
-            <td><small>ABSS-REC-2026-0492</small></td>
-          </tr>
-          <tr>
-            <td><code style="font-weight: 700;">TXN-51209381</code></td>
-            <td>ABSS-2026-AI-5120</td>
-            <td>Priya Verma</td>
-            <td>AI &amp; Machine Learning</td>
-            <td><strong>₹4,999</strong></td>
-            <td><span class="status-pill status-success">Verified / Paid</span></td>
-            <td><small>ABSS-REC-2026-0381</small></td>
+            <td colspan="7" style="text-align: center; padding: 36px 16px; color: var(--admin-text-secondary);">
+              <div style="font-size: 1.8rem; margin-bottom: 6px;">💳</div>
+              <strong style="display: block; color: var(--admin-text); margin-bottom: 4px;">No Payment Transactions Yet</strong>
+              <p style="margin: 0; font-size: 0.85rem;">Student fee payments verified through payment gateways will appear here automatically.</p>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -903,7 +798,7 @@ generateModularPage({
   heading: "Issue, Revoke &amp; Manage Certificates",
   subtitle: "Cryptographic credentials with verifiable SHA-256 hashes and publicly auditable registry status.",
   actionsHtml: `
-    <button type="button" class="btn-admin btn-admin-primary" onclick="alert('Open Certificate Issuance Form');">+ Issue Certificate</button>
+    <button type="button" class="btn-admin btn-admin-primary" data-btn-new-cert>+ Issue Certificate</button>
   `,
   bodyContent: `
     <div class="admin-table-container">
@@ -919,33 +814,13 @@ generateModularPage({
             <th>Action</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody data-certificates-table>
           <tr>
-            <td><code style="font-weight: 700;">ABSS-CERT-2026-WD-1042</code></td>
-            <td><strong>Aarav Sharma</strong></td>
-            <td>Full-Stack Web Engineering</td>
-            <td>Grade A+ (Distinction - 96%)</td>
-            <td>March 15, 2026</td>
-            <td><span class="status-pill status-success">Authentic &amp; Active</span></td>
-            <td><a href="/verify-certificate?id=ABSS-CERT-2026-WD-1042" target="_blank" class="btn-admin btn-admin-secondary" style="padding: 4px 8px; font-size: 0.76rem;">Verify Public</a></td>
-          </tr>
-          <tr>
-            <td><code style="font-weight: 700;">ABSS-CERT-2026-AI-2084</code></td>
-            <td><strong>Priya Verma</strong></td>
-            <td>AI &amp; Applied Machine Learning</td>
-            <td>Grade A (92%)</td>
-            <td>February 28, 2026</td>
-            <td><span class="status-pill status-success">Authentic &amp; Active</span></td>
-            <td><a href="/verify-certificate?id=ABSS-CERT-2026-AI-2084" target="_blank" class="btn-admin btn-admin-secondary" style="padding: 4px 8px; font-size: 0.76rem;">Verify Public</a></td>
-          </tr>
-          <tr>
-            <td><code style="font-weight: 700;">ABSS-CERT-2026-SD-3091</code></td>
-            <td><strong>Rohan Patel</strong></td>
-            <td>Software &amp; Full-Stack Dev</td>
-            <td>Grade A+ (Distinction - 98%)</td>
-            <td>January 20, 2026</td>
-            <td><span class="status-pill status-success">Authentic &amp; Active</span></td>
-            <td><a href="/verify-certificate?id=ABSS-CERT-2026-SD-3091" target="_blank" class="btn-admin btn-admin-secondary" style="padding: 4px 8px; font-size: 0.76rem;">Verify Public</a></td>
+            <td colspan="7" style="text-align: center; padding: 36px 16px; color: var(--admin-text-secondary);">
+              <div style="font-size: 1.8rem; margin-bottom: 6px;">📜</div>
+              <strong style="display: block; color: var(--admin-text); margin-bottom: 4px;">Loading Live Certificates...</strong>
+              <p style="margin: 0; font-size: 0.85rem;">Querying the real Cloudflare D1 verification registry.</p>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -1126,27 +1001,13 @@ generateModularPage({
             <th>Action</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody data-leads-table>
           <tr>
-            <td><strong>Fintech Solutions Corp</strong></td>
-            <td>Website Development</td>
-            <td>₹15,000</td>
-            <td><span class="status-pill status-info">New Inquiry</span></td>
-            <td><a href="/admin/company/leads" class="btn-admin btn-admin-secondary" style="padding: 4px 8px; font-size: 0.76rem;">Manage Lead</a></td>
-          </tr>
-          <tr>
-            <td><strong>HealthFirst Tech</strong></td>
-            <td>Custom Software Development</td>
-            <td>₹45,000</td>
-            <td><span class="status-pill status-warning">Proposal Sent</span></td>
-            <td><a href="/admin/company/leads" class="btn-admin btn-admin-secondary" style="padding: 4px 8px; font-size: 0.76rem;">Manage Lead</a></td>
-          </tr>
-          <tr>
-            <td><strong>Global Retail Group</strong></td>
-            <td>E-Commerce Storefront</td>
-            <td>₹60,000</td>
-            <td><span class="status-pill status-success">Converted</span></td>
-            <td><a href="/admin/company/leads" class="btn-admin btn-admin-secondary" style="padding: 4px 8px; font-size: 0.76rem;">Manage Lead</a></td>
+            <td colspan="5" style="text-align: center; padding: 36px 16px; color: var(--admin-text-secondary);">
+              <div style="font-size: 1.8rem; margin-bottom: 6px;">📥</div>
+              <strong style="display: block; color: var(--admin-text); margin-bottom: 4px;">Loading Live Inquiries...</strong>
+              <p style="margin: 0; font-size: 0.85rem;">Retrieving real customer inquiries from the database.</p>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -1518,27 +1379,13 @@ generateModularPage({
             <th>Status</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody data-projects-table>
           <tr>
-            <td><strong>Fintech Payment Gateway</strong></td>
-            <td>Financial Services</td>
-            <td>99.99% Uptime, &lt; 120ms Latency</td>
-            <td><code>/work/fintech-payment-gateway</code></td>
-            <td><span class="status-pill status-success">Published</span></td>
-          </tr>
-          <tr>
-            <td><strong>Healthcare Telemedicine Platform</strong></td>
-            <td>Health &amp; Life Sciences</td>
-            <td>15,000+ daily telehealth consults</td>
-            <td><code>/work/healthcare-telemedicine-platform</code></td>
-            <td><span class="status-pill status-success">Published</span></td>
-          </tr>
-          <tr>
-            <td><strong>Headless E-Commerce Storefront</strong></td>
-            <td>Direct to Consumer (D2C)</td>
-            <td>+42% Conversion Rate, 98 Lighthouse</td>
-            <td><code>/work/ecommerce-headless-storefront</code></td>
-            <td><span class="status-pill status-success">Published</span></td>
+            <td colspan="5" style="text-align: center; padding: 36px 16px; color: var(--admin-text-secondary);">
+              <div style="font-size: 1.8rem; margin-bottom: 6px;">💼</div>
+              <strong style="display: block; color: var(--admin-text); margin-bottom: 4px;">Loading Live Projects...</strong>
+              <p style="margin: 0; font-size: 0.85rem;">Connecting to real project records in the database.</p>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -1559,17 +1406,17 @@ generateModularPage({
     <div class="admin-kpi-grid">
       <div class="admin-kpi-card">
         <span class="kpi-label">TOTAL LEADS</span>
-        <div class="kpi-value">${leadsCount}</div>
+        <div class="kpi-value" data-metric="leads">${leadsCount}</div>
         <div class="kpi-sub">Total inquiries logged</div>
       </div>
       <div class="admin-kpi-card">
         <span class="kpi-label">NEW THIS WEEK</span>
-        <div class="kpi-value">4</div>
+        <div class="kpi-value" data-metric="new-leads">0</div>
         <div class="kpi-sub" style="color: var(--admin-accent);">Requires sales contact</div>
       </div>
       <div class="admin-kpi-card">
         <span class="kpi-label">ESTIMATED PIPELINE</span>
-        <div class="kpi-value">₹2,85,000</div>
+        <div class="kpi-value" data-metric="pipeline">₹0</div>
         <div class="kpi-sub" style="color: #10b981;">Active proposals</div>
       </div>
     </div>
@@ -1586,30 +1433,13 @@ generateModularPage({
             <th>Actions</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody data-leads-table>
           <tr>
-            <td><strong>Fintech Solutions Corp</strong></td>
-            <td>Website Development</td>
-            <td><strong>₹15,000</strong></td>
-            <td>contact@fintechcorp.example</td>
-            <td><span class="status-pill status-info">New</span></td>
-            <td><button class="btn-admin btn-admin-secondary" style="padding: 4px 8px; font-size: 0.76rem;">Update Status</button></td>
-          </tr>
-          <tr>
-            <td><strong>HealthFirst Tech</strong></td>
-            <td>Custom Software Development</td>
-            <td><strong>₹45,000</strong></td>
-            <td>hi@healthfirst.example</td>
-            <td><span class="status-pill status-warning">Proposal Sent</span></td>
-            <td><button class="btn-admin btn-admin-secondary" style="padding: 4px 8px; font-size: 0.76rem;">Update Status</button></td>
-          </tr>
-          <tr>
-            <td><strong>Retail Plus India</strong></td>
-            <td>E-Commerce Development</td>
-            <td><strong>₹60,000</strong></td>
-            <td>ops@retailplus.example</td>
-            <td><span class="status-pill status-success">Converted</span></td>
-            <td><button class="btn-admin btn-admin-secondary" style="padding: 4px 8px; font-size: 0.76rem;">View Agreement</button></td>
+            <td colspan="6" style="text-align: center; padding: 36px 16px; color: var(--admin-text-secondary);">
+              <div style="font-size: 1.8rem; margin-bottom: 6px;">📥</div>
+              <strong style="display: block; color: var(--admin-text); margin-bottom: 4px;">Loading Real Leads...</strong>
+              <p style="margin: 0; font-size: 0.85rem;">Connecting to real Cloudflare D1 inquiry database.</p>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -1646,7 +1476,7 @@ generateModularPage({
             <td>Remote / Bengaluru</td>
             <td>4–7 Years</td>
             <td><span class="status-pill status-success">Active / Open</span></td>
-            <td><strong>18</strong></td>
+            <td><strong>0</strong></td>
           </tr>
           <tr>
             <td><strong>Lead UI/UX Designer</strong><br/><small style="color: #6E6E73;">/careers/lead-ui-ux-designer</small></td>
@@ -1654,7 +1484,7 @@ generateModularPage({
             <td>Remote / Jaipur</td>
             <td>5+ Years</td>
             <td><span class="status-pill status-success">Active / Open</span></td>
-            <td><strong>12</strong></td>
+            <td><strong>0</strong></td>
           </tr>
           <tr>
             <td><strong>Cloud &amp; DevOps Architect</strong><br/><small style="color: #6E6E73;">/careers/cloud-devops-architect</small></td>
@@ -1662,7 +1492,7 @@ generateModularPage({
             <td>Remote</td>
             <td>6+ Years</td>
             <td><span class="status-pill status-success">Active / Open</span></td>
-            <td><strong>9</strong></td>
+            <td><strong>0</strong></td>
           </tr>
         </tbody>
       </table>
@@ -1694,20 +1524,11 @@ generateModularPage({
         </thead>
         <tbody>
           <tr>
-            <td><strong>Vikram Malhotra</strong><br/><small style="color: #6E6E73;">vikram.m@example.com</small></td>
-            <td>Senior Full-Stack Engineer</td>
-            <td><a href="#" style="color: var(--admin-accent);">Resume_Vikram_2026.pdf</a></td>
-            <td>Yesterday</td>
-            <td><span class="status-pill status-warning">Technical Round 1</span></td>
-            <td><button class="btn-admin btn-admin-secondary" style="padding: 4px 8px; font-size: 0.76rem;">Schedule Call</button></td>
-          </tr>
-          <tr>
-            <td><strong>Neha Singhania</strong><br/><small style="color: #6E6E73;">neha.s@example.com</small></td>
-            <td>Lead UI/UX Designer</td>
-            <td><a href="#" style="color: var(--admin-accent);">portfolio.neha.design</a></td>
-            <td>3 Days ago</td>
-            <td><span class="status-pill status-info">Design Challenge Review</span></td>
-            <td><button class="btn-admin btn-admin-secondary" style="padding: 4px 8px; font-size: 0.76rem;">Evaluate Work</button></td>
+            <td colspan="6" style="text-align: center; padding: 48px 16px; color: #6e6e73;">
+              <div style="font-size: 2rem; margin-bottom: 8px;">💼</div>
+              <strong style="display: block; font-size: 1rem; color: #1d1d1f; margin-bottom: 4px;">No Candidate Applications Yet</strong>
+              <p style="margin: 0; font-size: 0.85rem; color: #6e6e73;">Resumes submitted through public career openings will appear here for review.</p>
+            </td>
           </tr>
         </tbody>
       </table>

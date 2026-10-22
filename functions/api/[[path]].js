@@ -32,6 +32,8 @@ import {
   listD1Certificates,
   revokeD1Certificate,
   getD1InternshipApplicationByQuery,
+  listInternshipApplications,
+  updateInternshipApplication,
 } from "../_lib/d1-storage.js";
 import {
   isEmailServiceConfigured,
@@ -74,6 +76,40 @@ const respond = (status, body, headers = {}) =>
     status,
     headers: { ...jsonHeaders, ...headers },
   });
+
+const parseRequestBody = async (request) => {
+  const contentType = (request.headers.get("content-type") || "").toLowerCase();
+  if (contentType.includes("application/x-www-form-urlencoded") || contentType.includes("multipart/form-data")) {
+    try {
+      const formData = await request.formData();
+      const obj = {};
+      for (const [key, value] of formData.entries()) {
+        obj[key] = value;
+      }
+      return obj;
+    } catch {
+      // Fallback below
+    }
+  }
+
+  try {
+    return await request.json();
+  } catch {
+    try {
+      const text = await request.text();
+      if (!text) return {};
+      if (text.startsWith("{") || text.startsWith("[")) {
+        return JSON.parse(text);
+      }
+      const params = new URLSearchParams(text);
+      const entries = Object.fromEntries(params.entries());
+      if (Object.keys(entries).length > 0) return entries;
+      return {};
+    } catch {
+      return null;
+    }
+  }
+};
 
 // In-memory sliding-window rate limiter for Edge Runtime
 const edgeRateLimitMap = new Map();
@@ -606,7 +642,8 @@ export async function onRequest(context) {
 
       let body;
       try {
-        body = await request.json();
+        body = await parseRequestBody(request);
+        if (!body) throw new Error();
       } catch {
         return respond(400, { error: "Invalid JSON payload." });
       }
@@ -947,7 +984,8 @@ export async function onRequest(context) {
     if (request.method === "POST" && pathname === "/api/internships/auth/register") {
       let body;
       try {
-        body = await request.json();
+        body = await parseRequestBody(request);
+        if (!body) throw new Error();
       } catch {
         return respond(400, { error: "Invalid JSON payload." });
       }
@@ -1035,6 +1073,15 @@ export async function onRequest(context) {
             } catch (notifyErr) {
               safeLogError("Registration email error", notifyErr);
             }
+          }
+
+          const acceptsHtml = (request.headers.get("accept") || "").includes("text/html");
+          const isAjax = request.headers.get("x-requested-with") || (request.headers.get("content-type") || "").includes("application/json");
+          if (acceptsHtml && !isAjax) {
+            return new Response(null, {
+              status: 302,
+              headers: { Location: `/internships/verify-email?token=${rawToken}` },
+            });
           }
 
           return respond(201, {
@@ -1129,7 +1176,8 @@ export async function onRequest(context) {
     if (request.method === "POST" && pathname === "/api/internships/auth/verify-email") {
       let body;
       try {
-        body = await request.json();
+        body = await parseRequestBody(request);
+        if (!body) throw new Error();
       } catch {
         return respond(400, { error: "Invalid JSON payload." });
       }
@@ -1155,6 +1203,15 @@ export async function onRequest(context) {
 
           await markD1VerificationTokenUsed(env.ABSS_DB, tokenRecord.id);
           await verifyD1StudentEmail(env.ABSS_DB, tokenRecord.student_id);
+
+          const acceptsHtml = (request.headers.get("accept") || "").includes("text/html");
+          const isAjax = request.headers.get("x-requested-with") || (request.headers.get("content-type") || "").includes("application/json");
+          if (acceptsHtml && !isAjax) {
+            return new Response(null, {
+              status: 302,
+              headers: { Location: "/login?verified=1" },
+            });
+          }
 
           return respond(200, { ok: true, message: "Email address verified successfully. You can now log in." });
         } catch (err) {
@@ -1186,6 +1243,15 @@ export async function onRequest(context) {
         }
         await writeState(env, state);
 
+        const acceptsHtml = (request.headers.get("accept") || "").includes("text/html");
+        const isAjax = request.headers.get("x-requested-with") || (request.headers.get("content-type") || "").includes("application/json");
+        if (acceptsHtml && !isAjax) {
+          return new Response(null, {
+            status: 302,
+            headers: { Location: "/login?verified=1" },
+          });
+        }
+
         return respond(200, { ok: true, message: "Email address verified successfully. You can now log in." });
       }
 
@@ -1200,7 +1266,8 @@ export async function onRequest(context) {
 
       let body;
       try {
-        body = await request.json();
+        body = await parseRequestBody(request);
+        if (!body) throw new Error();
       } catch {
         return respond(400, { error: "Invalid JSON payload." });
       }
@@ -1226,7 +1293,27 @@ export async function onRequest(context) {
           }
 
           if (!student.emailVerified) {
-            return respond(403, { error: "Please verify your email address before logging in.", emailVerified: false });
+            let devVerificationUrl = null;
+            if (!isEmailServiceConfigured(env)) {
+              const rawToken = generateRandomHex(32);
+              const tokenHash = await hashToken(rawToken);
+              const tokenRecord = {
+                id: `token-${crypto.randomUUID()}`,
+                studentId: student.id,
+                tokenHash,
+                tokenType: "email_verification",
+                expiresAt: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString(),
+                usedAt: null,
+                createdAt: now,
+              };
+              await createD1VerificationToken(env.ABSS_DB, tokenRecord);
+              devVerificationUrl = `/internships/verify-email?token=${rawToken}`;
+            }
+            return respond(403, {
+              error: "Please verify your email address before logging in.",
+              emailVerified: false,
+              devVerificationUrl,
+            });
           }
 
           const sessionRecord = {
@@ -1238,6 +1325,18 @@ export async function onRequest(context) {
           };
 
           await createD1StudentSession(env.ABSS_DB, sessionRecord);
+
+          const acceptsHtml = (request.headers.get("accept") || "").includes("text/html");
+          const isAjax = request.headers.get("x-requested-with") || (request.headers.get("content-type") || "").includes("application/json");
+          if (acceptsHtml && !isAjax) {
+            return new Response(null, {
+              status: 302,
+              headers: {
+                Location: "/internships/dashboard",
+                "Set-Cookie": buildSessionCookie(rawSessionToken),
+              },
+            });
+          }
 
           return respond(
             200,
@@ -1268,7 +1367,29 @@ export async function onRequest(context) {
         }
 
         if (!student.emailVerified) {
-          return respond(403, { error: "Please verify your email address before logging in.", emailVerified: false });
+          let devVerificationUrl = null;
+          if (!isEmailServiceConfigured(env)) {
+            const rawToken = generateRandomHex(32);
+            const tokenHash = await hashToken(rawToken);
+            const tokenRecord = {
+              id: `token-${crypto.randomUUID()}`,
+              studentId: student.id,
+              tokenHash,
+              tokenType: "email_verification",
+              expiresAt: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString(),
+              usedAt: null,
+              createdAt: now,
+            };
+            state.studentTokens = state.studentTokens || [];
+            state.studentTokens.push(tokenRecord);
+            await writeState(env, state);
+            devVerificationUrl = `/internships/verify-email?token=${rawToken}`;
+          }
+          return respond(403, {
+            error: "Please verify your email address before logging in.",
+            emailVerified: false,
+            devVerificationUrl,
+          });
         }
 
         state.studentSessions = state.studentSessions || [];
@@ -1280,6 +1401,18 @@ export async function onRequest(context) {
           createdAt: now,
         });
         await writeState(env, state);
+
+        const acceptsHtml = (request.headers.get("accept") || "").includes("text/html");
+        const isAjax = request.headers.get("x-requested-with") || (request.headers.get("content-type") || "").includes("application/json");
+        if (acceptsHtml && !isAjax) {
+          return new Response(null, {
+            status: 302,
+            headers: {
+              Location: "/internships/dashboard",
+              "Set-Cookie": buildSessionCookie(rawSessionToken),
+            },
+          });
+        }
 
         return respond(
           200,
@@ -1521,7 +1654,8 @@ export async function onRequest(context) {
     if (request.method === "POST" && pathname === "/api/internships/auth/forgot-password") {
       let body;
       try {
-        body = await request.json();
+        body = await parseRequestBody(request);
+        if (!body) throw new Error();
       } catch {
         return respond(400, { error: "Invalid JSON payload." });
       }
@@ -1629,7 +1763,8 @@ export async function onRequest(context) {
     if (request.method === "POST" && pathname === "/api/internships/auth/reset-password") {
       let body;
       try {
-        body = await request.json();
+        body = await parseRequestBody(request);
+        if (!body) throw new Error();
       } catch {
         return respond(400, { error: "Invalid JSON payload." });
       }
@@ -1771,6 +1906,153 @@ export async function onRequest(context) {
     }
 
     // =========================================================================
+    // Modular Admin Operations: Applications, Students & Overviews
+    // =========================================================================
+
+    if (request.method === "GET" && pathname === "/api/admin/internships/applications") {
+      if (!(await verifyToken(request, env))) return respond(401, { error: "Unauthorized" });
+      if (hasD1(env)) {
+        try {
+          await initializeDatabase(env.ABSS_DB);
+          const result = await listInternshipApplications(env.ABSS_DB, { pageSize: 100 });
+          return respond(200, { ok: true, applications: result.items || [] });
+        } catch (dbErr) {
+          safeLogError("D1 list applications error", dbErr);
+          return respond(500, { error: "Database error" });
+        }
+      }
+      const state = env.ABSS_ADMIN ? await readState(env) : defaultState;
+      return respond(200, { ok: true, applications: state.internshipApplications || [] });
+    }
+
+    if (request.method === "PUT" && pathname.startsWith("/api/admin/internships/applications/")) {
+      if (!(await verifyToken(request, env))) return respond(401, { error: "Unauthorized" });
+      const appId = decodeURIComponent(pathname.slice("/api/admin/internships/applications/".length));
+      let body;
+      try {
+        body = await request.json();
+      } catch {
+        return respond(400, { error: "Invalid JSON" });
+      }
+      if (hasD1(env)) {
+        try {
+          await initializeDatabase(env.ABSS_DB);
+          const updated = await updateInternshipApplication(env.ABSS_DB, appId, body);
+          return updated ? respond(200, { ok: true, application: updated }) : respond(404, { error: "Application not found" });
+        } catch (dbErr) {
+          safeLogError("D1 update application error", dbErr);
+          return respond(500, { error: "Database error" });
+        }
+      }
+      const state = env.ABSS_ADMIN ? await readState(env) : defaultState;
+      const app = (state.internshipApplications || []).find((a) => a.id === appId);
+      if (!app) return respond(404, { error: "Application not found" });
+      if (body.status) app.status = body.status;
+      if (body.adminNotes || body.notes) app.adminNotes = body.adminNotes || body.notes;
+      if (env.ABSS_ADMIN) await writeState(env, state);
+      return respond(200, { ok: true, application: app });
+    }
+
+    if (request.method === "GET" && pathname === "/api/admin/internships/students") {
+      if (!(await verifyToken(request, env))) return respond(401, { error: "Unauthorized" });
+      if (hasD1(env)) {
+        try {
+          await initializeDatabase(env.ABSS_DB);
+          const rows = (await env.ABSS_DB.prepare("SELECT id, name, email, status, email_verified, created_at, updated_at FROM students ORDER BY created_at DESC").all()).results || [];
+          const students = rows.map((r) => ({
+            id: r.id,
+            name: r.name,
+            email: r.email,
+            status: r.status,
+            emailVerified: Boolean(r.email_verified),
+            createdAt: r.created_at,
+            updatedAt: r.updated_at,
+          }));
+          return respond(200, { ok: true, students });
+        } catch (dbErr) {
+          safeLogError("D1 list students error", dbErr);
+          return respond(500, { error: "Database error" });
+        }
+      }
+      const state = env.ABSS_ADMIN ? await readState(env) : defaultState;
+      return respond(200, { ok: true, students: state.students || [] });
+    }
+
+    if (request.method === "GET" && pathname === "/api/admin/internships/overview") {
+      if (!(await verifyToken(request, env))) return respond(401, { error: "Unauthorized" });
+      if (hasD1(env)) {
+        try {
+          await initializeDatabase(env.ABSS_DB);
+          const metrics = await getDashboardMetrics(env.ABSS_DB);
+          const recentApps = (await listInternshipApplications(env.ABSS_DB, { pageSize: 5 })).items || [];
+          return respond(200, {
+            ok: true,
+            metrics: {
+              applicationsCount: metrics.totalApplications || 0,
+              enrolledInternsCount: metrics.enrolledStudents || 0,
+              verifiedPaymentsCount: 0,
+              issuedCertificatesCount: metrics.issuedCertificates || 0,
+              activeTracksCount: metrics.activeTracks || 5,
+            },
+            recentApplications: recentApps,
+          });
+        } catch (dbErr) {
+          safeLogError("D1 internships overview error", dbErr);
+          return respond(500, { error: "Database error" });
+        }
+      }
+      const state = env.ABSS_ADMIN ? await readState(env) : defaultState;
+      return respond(200, {
+        ok: true,
+        metrics: {
+          applicationsCount: (state.internshipApplications || []).length,
+          enrolledInternsCount: (state.students || []).length,
+          verifiedPaymentsCount: 0,
+          issuedCertificatesCount: (state.certificates || []).length,
+          activeTracksCount: 5,
+        },
+        recentApplications: (state.internshipApplications || []).slice(0, 5),
+      });
+    }
+
+    if (request.method === "GET" && pathname === "/api/admin/company/overview") {
+      if (!(await verifyToken(request, env))) return respond(401, { error: "Unauthorized" });
+      if (hasD1(env)) {
+        try {
+          await initializeDatabase(env.ABSS_DB);
+          const metrics = await getDashboardMetrics(env.ABSS_DB);
+          const recentLeads = (await listLeads(env.ABSS_DB, { pageSize: 5 })).items || [];
+          return respond(200, {
+            ok: true,
+            metrics: {
+              leadsCount: metrics.totalLeads || 0,
+              activeProjectsCount: metrics.activeProjects || 0,
+              clientsCount: metrics.totalClients || 0,
+              servicesCount: 17,
+              publishedPagesCount: "68+",
+            },
+            recentLeads,
+          });
+        } catch (dbErr) {
+          safeLogError("D1 company overview error", dbErr);
+          return respond(500, { error: "Database error" });
+        }
+      }
+      const state = env.ABSS_ADMIN ? await readState(env) : defaultState;
+      return respond(200, {
+        ok: true,
+        metrics: {
+          leadsCount: (state.leads || []).length,
+          activeProjectsCount: (state.projects || []).length,
+          clientsCount: (state.clients || []).length,
+          servicesCount: 17,
+          publishedPagesCount: "68+",
+        },
+        recentLeads: (state.leads || []).slice(0, 5),
+      });
+    }
+
+    // =========================================================================
     // Certificate Registry & Verification APIs
     // =========================================================================
 
@@ -1788,9 +2070,9 @@ export async function onRequest(context) {
       }
       if (env.ABSS_ADMIN) {
         const state = await readState(env);
-        return respond(200, { ok: true, certificates: state.certificates?.length ? state.certificates : DEFAULT_CERTIFICATES });
+        return respond(200, { ok: true, certificates: state.certificates || [] });
       }
-      return respond(200, { ok: true, certificates: DEFAULT_CERTIFICATES });
+      return respond(200, { ok: true, certificates: [] });
     }
 
     if (request.method === "POST" && pathname === "/api/admin/internships/certificates") {

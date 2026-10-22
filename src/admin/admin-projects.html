@@ -116,23 +116,23 @@
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 24px;">
       <div class="card" style="padding: 20px; border-radius: 14px; background: #ffffff;">
         <span style="font-size: 0.78rem; font-weight: 700; color: #6e6e73;">ACTIVE DELIVERIES</span>
-        <strong style="display: block; font-size: 1.7rem; color: #0066cc; margin: 4px 0;">12</strong>
+        <strong style="display: block; font-size: 1.7rem; color: #0066cc; margin: 4px 0;" data-metric="projects">0</strong>
         <small style="color: #10b981;">100% on schedule</small>
       </div>
       <div class="card" style="padding: 20px; border-radius: 14px; background: #ffffff;">
         <span style="font-size: 0.78rem; font-weight: 700; color: #6e6e73;">IN QA AUDIT</span>
-        <strong style="display: block; font-size: 1.7rem; color: #f59e0b; margin: 4px 0;">3</strong>
+        <strong style="display: block; font-size: 1.7rem; color: #f59e0b; margin: 4px 0;">0</strong>
         <small style="color: #6e6e73;">Final staging tests</small>
       </div>
       <div class="card" style="padding: 20px; border-radius: 14px; background: #ffffff;">
         <span style="font-size: 0.78rem; font-weight: 700; color: #6e6e73;">DEPLOYED THIS MONTH</span>
-        <strong style="display: block; font-size: 1.7rem; color: #10b981; margin: 4px 0;">6</strong>
+        <strong style="display: block; font-size: 1.7rem; color: #10b981; margin: 4px 0;">0</strong>
         <small style="color: #10b981;">Zero rollback rate</small>
       </div>
       <div class="card" style="padding: 20px; border-radius: 14px; background: #ffffff;">
         <span style="font-size: 0.78rem; font-weight: 700; color: #6e6e73;">AVG TURNAROUND</span>
-        <strong style="display: block; font-size: 1.7rem; color: #8b5cf6; margin: 4px 0;">6.2 Days</strong>
-        <small style="color: #10b981;">Ahead of SLA</small>
+        <strong style="display: block; font-size: 1.7rem; color: #8b5cf6; margin: 4px 0;">Ahead of SLA</strong>
+        <small style="color: #10b981;">Automated CI/CD</small>
       </div>
     </div>
 
@@ -149,39 +149,18 @@
               <th style="padding: 12px;">Build ID</th>
               <th style="padding: 12px;">Project Name</th>
               <th style="padding: 12px;">Client</th>
-              <th style="padding: 12px;">Target SLA</th>
-              <th style="padding: 12px;">Tech Stack</th>
+              <th style="padding: 12px;">Contract Value</th>
               <th style="padding: 12px;">Status</th>
               <th style="padding: 12px;">Actions</th>
             </tr>
           </thead>
-          <tbody>
-            <tr style="border-bottom: 1px solid #e5e5ea;">
-              <td style="padding: 12px; font-weight: 600;">PRJ-101</td>
-              <td style="padding: 12px;"><strong>Fintech Payment Core</strong></td>
-              <td style="padding: 12px;">Zenith Systems</td>
-              <td style="padding: 12px;">2026-10-30</td>
-              <td style="padding: 12px;">Cloudflare Workers, D1 SQL, Node.js</td>
-              <td style="padding: 12px;"><span style="background: rgba(0, 102, 204, 0.12); color: #0066cc; padding: 4px 10px; border-radius: 999px; font-size: 0.76rem; font-weight: 700;">IN DEV</span></td>
-              <td style="padding: 12px;"><button type="button" style="padding: 6px 12px; background: #f5f5f7; border: 1px solid #d2d2d7; border-radius: 6px; font-size: 0.8rem; cursor: pointer;">Milestones</button></td>
-            </tr>
-            <tr style="border-bottom: 1px solid #e5e5ea;">
-              <td style="padding: 12px; font-weight: 600;">PRJ-102</td>
-              <td style="padding: 12px;"><strong>Telehealth Doctor App</strong></td>
-              <td style="padding: 12px;">Medicare Health</td>
-              <td style="padding: 12px;">2026-11-05</td>
-              <td style="padding: 12px;">Progressive Web App, WebRTC, Tailwind</td>
-              <td style="padding: 12px;"><span style="background: rgba(245, 158, 11, 0.15); color: #d97706; padding: 4px 10px; border-radius: 999px; font-size: 0.76rem; font-weight: 700;">QA AUDIT</span></td>
-              <td style="padding: 12px;"><button type="button" style="padding: 6px 12px; background: #f5f5f7; border: 1px solid #d2d2d7; border-radius: 6px; font-size: 0.8rem; cursor: pointer;">Milestones</button></td>
-            </tr>
-            <tr style="border-bottom: 1px solid #e5e5ea;">
-              <td style="padding: 12px; font-weight: 600;">PRJ-103</td>
-              <td style="padding: 12px;"><strong>Urban Retail Storefront</strong></td>
-              <td style="padding: 12px;">Urban Retail</td>
-              <td style="padding: 12px;">2026-10-24</td>
-              <td style="padding: 12px;">Vanilla CSS, Static Edge, WhatsApp API</td>
-              <td style="padding: 12px;"><span style="background: rgba(16, 185, 129, 0.15); color: #10b981; padding: 4px 10px; border-radius: 999px; font-size: 0.76rem; font-weight: 700;">LIVE</span></td>
-              <td style="padding: 12px;"><button type="button" style="padding: 6px 12px; background: #f5f5f7; border: 1px solid #d2d2d7; border-radius: 6px; font-size: 0.8rem; cursor: pointer;">Milestones</button></td>
+          <tbody data-projects-table>
+            <tr>
+              <td colspan="6" style="text-align: center; padding: 48px 16px; color: #6e6e73;">
+                <div style="font-size: 2rem; margin-bottom: 8px;">💼</div>
+                <strong style="display: block; font-size: 1rem; color: #1d1d1f; margin-bottom: 4px;">Loading Live Projects...</strong>
+                <p style="margin: 0; font-size: 0.85rem; color: #6e6e73;">Connecting to Cloudflare D1 project registry.</p>
+              </td>
             </tr>
           </tbody>
         </table>
@@ -193,6 +172,7 @@
     <script src="/src/config/admin-config.js"></script>
     <script src="/src/services/admin-api.js"></script>
     <script src="/src/scripts/admin-auth-guard.js"></script>
+    <script src="/src/scripts/admin-app.js"></script>
     <script src="/src/scripts/script.js"></script>
   </body>
 </html>

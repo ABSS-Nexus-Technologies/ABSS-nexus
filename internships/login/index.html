@@ -210,6 +210,13 @@
           }
         }
 
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get("verified") === "1") {
+          showAlert("success", "Email address verified successfully! Please log in to your account.");
+        } else if (urlParams.get("registered") === "1") {
+          showAlert("success", "Account created successfully! Please log in.");
+        }
+
         form.addEventListener("submit", async function(e) {
           e.preventDefault();
           alertBox.className = "auth-alert";
@@ -235,7 +242,13 @@
 
             if (!res.ok) {
               if (res.status === 403 && data.emailVerified === false) {
-                showAlert("error", "", "<strong>" + data.error + "</strong><div style='margin-top: 8px;'><a href='/internships/verify-email' style='color: #0066CC; text-decoration: underline;'>Click here to verify your email address &rarr;</a></div>");
+                let verifyHtml = "<strong>" + (data.error || "Please verify your email address before logging in.") + "</strong>";
+                if (data.devVerificationUrl) {
+                  verifyHtml += `<div style="margin-top: 12px;"><a href="${data.devVerificationUrl}" class="btn-primary" style="display:inline-block; padding: 8px 16px; font-size: 0.88rem; background: #0066cc; color: #fff; border-radius: 8px; text-decoration: none; font-weight: 600;">Activate &amp; Verify Email Now &rarr;</a></div>`;
+                } else {
+                  verifyHtml += `<div style="margin-top: 8px;"><a href="/internships/verify-email" style="color: #0066CC; text-decoration: underline; font-weight: 600;">Click here to verify your email address &rarr;</a></div>`;
+                }
+                showAlert("error", "", verifyHtml);
               } else {
                 showAlert("error", data.error || "Invalid email or password.");
               }

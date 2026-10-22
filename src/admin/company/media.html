@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="/src/styles/styles.css?v=20261023v2" />
+    <link rel="stylesheet" href="/src/styles/styles.css" />
     <link rel="stylesheet" href="/src/styles/components/admin.css" />
   </head>
   <body class="admin-body">
@@ -104,7 +104,7 @@
               <span>💼</span>
               <span>Portfolio & Projects</span>
             </span>
-            <span class="sidebar-badge">3</span>
+            <span class="sidebar-badge">0</span>
           </a>
         
           <a href="/admin/company/leads" class="sidebar-nav-item ">
@@ -112,7 +112,7 @@
               <span>📬</span>
               <span>Inquiries & Leads</span>
             </span>
-            <span class="sidebar-badge">20</span>
+            <span class="sidebar-badge">46</span>
           </a>
         
           <a href="/admin/company/careers" class="sidebar-nav-item ">
@@ -257,16 +257,6 @@
     <script src="/src/config/admin-config.js"></script>
     <script src="/src/services/admin-api.js"></script>
     <script src="/src/scripts/admin-auth-guard.js"></script>
-    <script>
-      document.addEventListener("DOMContentLoaded", async () => {
-        const session = await window.AbssAdminAuthGuard.requireAdminSession(null, "company");
-        if (session && session.admin) {
-          const roleBadge = document.getElementById("adminUserRoleBadge");
-          if (roleBadge) {
-            roleBadge.textContent = session.admin.role || "super_admin";
-          }
-        }
-      });
-    </script>
+    <script src="/src/scripts/admin-app.js"></script>
   </body>
 </html>

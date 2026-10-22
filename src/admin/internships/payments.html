@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="/src/styles/styles.css?v=20261023v2" />
+    <link rel="stylesheet" href="/src/styles/styles.css" />
     <link rel="stylesheet" href="/src/styles/components/admin.css" />
   </head>
   <body class="admin-body">
@@ -80,7 +80,7 @@
               <span>🎓</span>
               <span>Enrolled Interns</span>
             </span>
-            <span class="sidebar-badge">19</span>
+            <span class="sidebar-badge">45</span>
           </a>
         
           <a href="/admin/internships/tasks" class="sidebar-nav-item ">
@@ -120,7 +120,7 @@
               <span>📜</span>
               <span>Certificate Registry</span>
             </span>
-            <span class="sidebar-badge">3</span>
+            <span class="sidebar-badge">10</span>
           </a>
         
           <a href="/admin/internships/reports" class="sidebar-nav-item ">
@@ -176,12 +176,12 @@
     <div class="admin-kpi-grid">
       <div class="admin-kpi-card">
         <span class="kpi-label">TOTAL VERIFIED FEES</span>
-        <div class="kpi-value">₹9,998</div>
+        <div class="kpi-value" data-metric="verified-fees">₹0</div>
         <div class="kpi-sub" style="color: #10b981;">100% reconciled</div>
       </div>
       <div class="admin-kpi-card">
         <span class="kpi-label">COMPLETED TRANSACTIONS</span>
-        <div class="kpi-value">2</div>
+        <div class="kpi-value" data-metric="payments">0</div>
         <div class="kpi-sub">Gateway verified</div>
       </div>
       <div class="admin-kpi-card">
@@ -204,24 +204,13 @@
             <th>Receipt Reference</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody data-payments-table>
           <tr>
-            <td><code style="font-weight: 700;">TXN-84920482</code></td>
-            <td>ABSS-2026-WD-8492</td>
-            <td>Aarav Sharma</td>
-            <td>Web Engineering</td>
-            <td><strong>₹4,999</strong></td>
-            <td><span class="status-pill status-success">Verified / Paid</span></td>
-            <td><small>ABSS-REC-2026-0492</small></td>
-          </tr>
-          <tr>
-            <td><code style="font-weight: 700;">TXN-51209381</code></td>
-            <td>ABSS-2026-AI-5120</td>
-            <td>Priya Verma</td>
-            <td>AI &amp; Machine Learning</td>
-            <td><strong>₹4,999</strong></td>
-            <td><span class="status-pill status-success">Verified / Paid</span></td>
-            <td><small>ABSS-REC-2026-0381</small></td>
+            <td colspan="7" style="text-align: center; padding: 36px 16px; color: var(--admin-text-secondary);">
+              <div style="font-size: 1.8rem; margin-bottom: 6px;">💳</div>
+              <strong style="display: block; color: var(--admin-text); margin-bottom: 4px;">No Payment Transactions Yet</strong>
+              <p style="margin: 0; font-size: 0.85rem;">Student fee payments verified through payment gateways will appear here automatically.</p>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -235,16 +224,6 @@
     <script src="/src/config/admin-config.js"></script>
     <script src="/src/services/admin-api.js"></script>
     <script src="/src/scripts/admin-auth-guard.js"></script>
-    <script>
-      document.addEventListener("DOMContentLoaded", async () => {
-        const session = await window.AbssAdminAuthGuard.requireAdminSession(null, "internships");
-        if (session && session.admin) {
-          const roleBadge = document.getElementById("adminUserRoleBadge");
-          if (roleBadge) {
-            roleBadge.textContent = session.admin.role || "super_admin";
-          }
-        }
-      });
-    </script>
+    <script src="/src/scripts/admin-app.js"></script>
   </body>
 </html>

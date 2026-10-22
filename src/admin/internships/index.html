@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="/src/styles/styles.css?v=20261023v2" />
+    <link rel="stylesheet" href="/src/styles/styles.css" />
     <link rel="stylesheet" href="/src/styles/components/admin.css" />
   </head>
   <body class="admin-body">
@@ -80,7 +80,7 @@
               <span>🎓</span>
               <span>Enrolled Interns</span>
             </span>
-            <span class="sidebar-badge">19</span>
+            <span class="sidebar-badge">45</span>
           </a>
         
           <a href="/admin/internships/tasks" class="sidebar-nav-item ">
@@ -120,7 +120,7 @@
               <span>📜</span>
               <span>Certificate Registry</span>
             </span>
-            <span class="sidebar-badge">3</span>
+            <span class="sidebar-badge">10</span>
           </a>
         
           <a href="/admin/internships/reports" class="sidebar-nav-item ">
@@ -181,7 +181,7 @@
       </div>
       <div class="admin-kpi-card">
         <span class="kpi-label">ENROLLED INTERNS</span>
-        <div class="kpi-value">19</div>
+        <div class="kpi-value">45</div>
         <div class="kpi-sub" style="color: var(--admin-success);">+24% vs previous cohort</div>
       </div>
       <div class="admin-kpi-card">
@@ -191,7 +191,7 @@
       </div>
       <div class="admin-kpi-card">
         <span class="kpi-label">ISSUED CERTIFICATES</span>
-        <div class="kpi-value">3</div>
+        <div class="kpi-value">10</div>
         <div class="kpi-sub" style="color: #6E6E73;">Cryptographically verifiable</div>
       </div>
     </div>
@@ -231,30 +231,13 @@
             <th>Action</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody data-applications-table>
           <tr>
-            <td><strong>ABSS-2026-WD-8492</strong></td>
-            <td>Aarav Sharma<br/><small style="color: #6E6E73;">aarav.sharma@example.com</small></td>
-            <td>Web Engineering Track</td>
-            <td>April 02, 2026</td>
-            <td><span class="status-pill status-warning">Under Review</span></td>
-            <td><a href="/admin/internships/applications" class="btn-admin btn-admin-secondary" style="padding: 4px 10px; font-size: 0.76rem;">Review</a></td>
-          </tr>
-          <tr>
-            <td><strong>ABSS-2026-AI-5120</strong></td>
-            <td>Priya Verma<br/><small style="color: #6E6E73;">priya.verma@example.com</small></td>
-            <td>AI &amp; Applied Machine Learning</td>
-            <td>March 25, 2026</td>
-            <td><span class="status-pill status-info">Shortlisted</span></td>
-            <td><a href="/admin/internships/applications" class="btn-admin btn-admin-secondary" style="padding: 4px 10px; font-size: 0.76rem;">Review</a></td>
-          </tr>
-          <tr>
-            <td><strong>ABSS-2026-SD-9041</strong></td>
-            <td>Rohan Patel<br/><small style="color: #6E6E73;">rohan.patel@example.com</small></td>
-            <td>Software &amp; Full-Stack Dev</td>
-            <td>March 10, 2026</td>
-            <td><span class="status-pill status-success">Offer Letter</span></td>
-            <td><a href="/admin/internships/applications" class="btn-admin btn-admin-secondary" style="padding: 4px 10px; font-size: 0.76rem;">Review</a></td>
+            <td colspan="6" style="text-align: center; padding: 48px 16px; color: #6e6e73;">
+              <div style="font-size: 2.2rem; margin-bottom: 8px;">📝</div>
+              <strong style="display: block; font-size: 1.05rem; color: #1d1d1f; margin-bottom: 4px; font-family: 'Space Grotesk', sans-serif;">Loading Live Applications...</strong>
+              <p style="margin: 0; font-size: 0.88rem; color: #6e6e73;">Connecting to Cloudflare D1 database registry...</p>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -276,16 +259,6 @@
     <script src="/src/config/admin-config.js"></script>
     <script src="/src/services/admin-api.js"></script>
     <script src="/src/scripts/admin-auth-guard.js"></script>
-    <script>
-      document.addEventListener("DOMContentLoaded", async () => {
-        const session = await window.AbssAdminAuthGuard.requireAdminSession(null, "internships");
-        if (session && session.admin) {
-          const roleBadge = document.getElementById("adminUserRoleBadge");
-          if (roleBadge) {
-            roleBadge.textContent = session.admin.role || "super_admin";
-          }
-        }
-      });
-    </script>
+    <script src="/src/scripts/admin-app.js"></script>
   </body>
 </html>

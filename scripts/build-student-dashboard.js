@@ -58,8 +58,8 @@ function generateStudentPage({ filename, title, activeTab, pageHeading, pageEyeb
         </div>
         <div style="display: flex; align-items: center; gap: 16px;">
           <div style="display: flex; align-items: center; gap: 8px;">
-            <div style="width: 32px; height: 32px; border-radius: 50%; background: #0066cc; color: #ffffff; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.85rem;">AS</div>
-            <span style="font-size: 0.88rem; font-weight: 600; color: #1d1d1f;">Aarav Sharma</span>
+            <div id="studentAvatarInitials" style="width: 32px; height: 32px; border-radius: 50%; background: #0066cc; color: #ffffff; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.85rem;">ST</div>
+            <span id="studentDisplayName" style="font-size: 0.88rem; font-weight: 600; color: #1d1d1f;">Intern Student</span>
           </div>
           <form action="/api/internships/auth/logout" method="POST" style="margin: 0;">
             <button type="submit" style="background: transparent; border: 1px solid #d2d2d7; border-radius: 999px; padding: 6px 14px; font-size: 0.8rem; font-weight: 600; color: #6e6e73; cursor: pointer; transition: all 0.2s ease;">Sign Out</button>
@@ -70,7 +70,7 @@ function generateStudentPage({ filename, title, activeTab, pageHeading, pageEyeb
 
     <main class="container" style="flex: 1; padding: 32px 16px 60px;">
       <div style="margin-bottom: 24px;">
-        <span style="font-size: 0.82rem; font-weight: 700; letter-spacing: 0.06em; color: #0066cc; text-transform: uppercase;">${pageEyebrow}</span>
+        <span id="studentWelcomeGreeting" style="font-size: 0.82rem; font-weight: 700; letter-spacing: 0.06em; color: #0066cc; text-transform: uppercase;">${pageEyebrow}</span>
         <h1 style="font-size: 1.85rem; font-weight: 800; color: #1d1d1f; margin: 4px 0 0;">${pageHeading}</h1>
       </div>
 
@@ -85,6 +85,34 @@ function generateStudentPage({ filename, title, activeTab, pageHeading, pageEyeb
       </div>
     </footer>
     <script src="/src/scripts/script.js" defer></script>
+    <script>
+      (function() {
+        fetch("/api/internships/auth/me")
+          .then(function(r) { return r.ok ? r.json() : null; })
+          .then(function(data) {
+            if (data && (data.student || data.user)) {
+              var s = data.student || data.user;
+              var name = s.name || s.fullName || "Intern Student";
+              var initials = name.split(" ").map(function(p) { return p[0]; }).filter(Boolean).slice(0, 2).join("").toUpperCase() || "ST";
+              var nameEl = document.getElementById("studentDisplayName");
+              var avatarEl = document.getElementById("studentAvatarInitials");
+              if (nameEl) nameEl.textContent = name;
+              if (avatarEl) avatarEl.textContent = initials;
+              var profName = document.getElementById("profileNameBig");
+              var profAvatar = document.getElementById("profileAvatarBig");
+              var profEmail = document.getElementById("profileEmailSubtitle");
+              if (profName) profName.textContent = name;
+              if (profAvatar) profAvatar.textContent = initials;
+              if (profEmail && s.email) profEmail.innerHTML = s.email + " &bull; Active Enrolled Intern &bull; Batch of 2026";
+              var certRecipient = document.getElementById("certStudentRecipient");
+              if (certRecipient) certRecipient.textContent = name;
+              var welcomeEl = document.getElementById("studentWelcomeGreeting");
+              if (welcomeEl && welcomeEl.textContent.includes("STUDENT")) welcomeEl.textContent = "Welcome Back, " + name.split(" ")[0];
+            }
+          })
+          .catch(function() {});
+      })();
+    </script>
   </body>
 </html>`;
 
@@ -97,7 +125,7 @@ generateStudentPage({
   filename: "student-dashboard.html",
   title: "Dashboard Overview",
   activeTab: "dashboard",
-  pageEyebrow: "Welcome Back, Aarav",
+  pageEyebrow: "Student Sprint Telemetry",
   pageHeading: "Internship Sprint Dashboard",
   contentHtml: `
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; margin-bottom: 32px;">
@@ -171,10 +199,10 @@ generateStudentPage({
   contentHtml: `
     <div class="card" style="padding: 36px; border-radius: 20px; max-width: 860px;">
       <div style="display: flex; gap: 24px; align-items: center; border-bottom: 1px solid #e5e5ea; padding-bottom: 24px; margin-bottom: 28px; flex-wrap: wrap;">
-        <div style="width: 80px; height: 80px; border-radius: 50%; background: #0066cc; color: #ffffff; display: flex; align-items: center; justify-content: center; font-size: 2rem; font-weight: 800;">AS</div>
+        <div id="profileAvatarBig" style="width: 80px; height: 80px; border-radius: 50%; background: #0066cc; color: #ffffff; display: flex; align-items: center; justify-content: center; font-size: 2rem; font-weight: 800;">ST</div>
         <div>
-          <h2 style="margin: 0 0 6px;">Aarav Sharma</h2>
-          <p style="margin: 0; color: #6e6e73; font-size: 0.92rem;">student@college.edu &bull; B.Tech Computer Science &bull; Batch of 2026</p>
+          <h2 id="profileNameBig" style="margin: 0 0 6px;">Intern Student</h2>
+          <p id="profileEmailSubtitle" style="margin: 0; color: #6e6e73; font-size: 0.92rem;">student@college.edu &bull; B.Tech Computer Science &bull; Batch of 2026</p>
           <span class="badge" style="margin-top: 8px; background: rgba(16, 185, 129, 0.12); color: #10b981;">Active Verified Student</span>
         </div>
       </div>
@@ -182,19 +210,19 @@ generateStudentPage({
       <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 32px;">
         <div>
           <label style="display: block; font-size: 0.8rem; font-weight: 700; color: #6e6e73; margin-bottom: 6px;">COLLEGE / UNIVERSITY</label>
-          <input type="text" value="Delhi Technological University (DTU)" readonly style="width: 100%; padding: 12px; border: 1px solid #d2d2d7; border-radius: 10px; background: #f5f5f7;" />
+          <input type="text" value="Accredited University / Institute" style="width: 100%; padding: 12px; border: 1px solid #d2d2d7; border-radius: 10px; background: #ffffff;" />
         </div>
         <div>
           <label style="display: block; font-size: 0.8rem; font-weight: 700; color: #6e6e73; margin-bottom: 6px;">DEGREE &amp; MAJOR</label>
-          <input type="text" value="B.Tech Computer Science &amp; Engineering" readonly style="width: 100%; padding: 12px; border: 1px solid #d2d2d7; border-radius: 10px; background: #f5f5f7;" />
+          <input type="text" value="B.Tech / BCA / MCA / B.Sc" style="width: 100%; padding: 12px; border: 1px solid #d2d2d7; border-radius: 10px; background: #ffffff;" />
         </div>
         <div>
           <label style="display: block; font-size: 0.8rem; font-weight: 700; color: #6e6e73; margin-bottom: 6px;">GITHUB PROFILE</label>
-          <input type="text" value="https://github.com/aaravsharma-dev" style="width: 100%; padding: 12px; border: 1px solid #d2d2d7; border-radius: 10px;" />
+          <input type="text" placeholder="https://github.com/your-username" style="width: 100%; padding: 12px; border: 1px solid #d2d2d7; border-radius: 10px;" />
         </div>
         <div>
           <label style="display: block; font-size: 0.8rem; font-weight: 700; color: #6e6e73; margin-bottom: 6px;">LINKEDIN PROFILE</label>
-          <input type="text" value="https://linkedin.com/in/aarav-sharma-tech" style="width: 100%; padding: 12px; border: 1px solid #d2d2d7; border-radius: 10px;" />
+          <input type="text" placeholder="https://linkedin.com/in/your-profile" style="width: 100%; padding: 12px; border: 1px solid #d2d2d7; border-radius: 10px;" />
         </div>
       </div>
 
@@ -522,7 +550,7 @@ generateStudentPage({
           <div>
             <span class="badge" style="background: rgba(16, 185, 129, 0.15); color: #10b981;">OFFICIALLY VERIFIED</span>
             <h2 style="font-size: 1.4rem; margin: 8px 0 2px;">Full-Stack Web Engineering Certification</h2>
-            <span style="font-size: 0.88rem; color: #6e6e73;">Issued to: <strong>Aarav Sharma</strong> &bull; Grade: A+ (96%)</span>
+            <span style="font-size: 0.88rem; color: #6e6e73;">Issued to: <strong id="certStudentRecipient">Intern Student</strong> &bull; Grade: A+ (96%)</span>
           </div>
           <div style="text-align: right;">
             <span style="font-size: 0.8rem; color: #6e6e73;">Credential ID</span>

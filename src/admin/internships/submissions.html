@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="/src/styles/styles.css?v=20261023v2" />
+    <link rel="stylesheet" href="/src/styles/styles.css" />
     <link rel="stylesheet" href="/src/styles/components/admin.css" />
   </head>
   <body class="admin-body">
@@ -80,7 +80,7 @@
               <span>🎓</span>
               <span>Enrolled Interns</span>
             </span>
-            <span class="sidebar-badge">19</span>
+            <span class="sidebar-badge">45</span>
           </a>
         
           <a href="/admin/internships/tasks" class="sidebar-nav-item ">
@@ -120,7 +120,7 @@
               <span>📜</span>
               <span>Certificate Registry</span>
             </span>
-            <span class="sidebar-badge">3</span>
+            <span class="sidebar-badge">10</span>
           </a>
         
           <a href="/admin/internships/reports" class="sidebar-nav-item ">
@@ -200,20 +200,11 @@
         </thead>
         <tbody>
           <tr>
-            <td><strong>Aarav Sharma</strong></td>
-            <td>Task 1: Production UI</td>
-            <td><a href="https://github.com/example/pr/42" target="_blank" style="color: var(--admin-accent);">github.com/aarav/task1</a></td>
-            <td>2 Hours ago</td>
-            <td><span class="status-pill status-warning">Awaiting Review</span></td>
-            <td><a href="/admin/internships/reviews" class="btn-admin btn-admin-primary" style="padding: 4px 10px; font-size: 0.76rem;">Grade Work</a></td>
-          </tr>
-          <tr>
-            <td><strong>Priya Verma</strong></td>
-            <td>Task 2: RAG Pipeline</td>
-            <td><a href="https://github.com/example/pr/41" target="_blank" style="color: var(--admin-accent);">github.com/priya/rag-engine</a></td>
-            <td>Yesterday</td>
-            <td><span class="status-pill status-success">Approved (96%)</span></td>
-            <td><a href="/admin/internships/reviews" class="btn-admin btn-admin-secondary" style="padding: 4px 10px; font-size: 0.76rem;">View Grade</a></td>
+            <td colspan="6" style="text-align: center; padding: 48px 16px; color: #6e6e73;">
+              <div style="font-size: 2.2rem; margin-bottom: 8px;">📥</div>
+              <strong style="display: block; font-size: 1.05rem; color: #1d1d1f; margin-bottom: 4px; font-family: 'Space Grotesk', sans-serif;">No Work Submissions Yet</strong>
+              <p style="margin: 0; font-size: 0.88rem; color: #6e6e73;">When enrolled interns submit pull requests and task deliverables, they will appear here.</p>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -227,16 +218,6 @@
     <script src="/src/config/admin-config.js"></script>
     <script src="/src/services/admin-api.js"></script>
     <script src="/src/scripts/admin-auth-guard.js"></script>
-    <script>
-      document.addEventListener("DOMContentLoaded", async () => {
-        const session = await window.AbssAdminAuthGuard.requireAdminSession(null, "internships");
-        if (session && session.admin) {
-          const roleBadge = document.getElementById("adminUserRoleBadge");
-          if (roleBadge) {
-            roleBadge.textContent = session.admin.role || "super_admin";
-          }
-        }
-      });
-    </script>
+    <script src="/src/scripts/admin-app.js"></script>
   </body>
 </html>

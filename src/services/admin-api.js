@@ -210,6 +210,100 @@
       return { ok: true };
     },
 
+    async listApplications() {
+      if (isApiMode() && getToken()) {
+        return requestJson("GET", "/api/admin/internships/applications");
+      }
+      const state = readJson(stateKey, { internshipApplications: [] });
+      return { ok: true, applications: state.internshipApplications || [] };
+    },
+
+    async updateApplication(id, updates) {
+      if (isApiMode() && getToken()) {
+        return requestJson("PUT", `/api/admin/internships/applications/${encodeURIComponent(id)}`, updates);
+      }
+      const state = readJson(stateKey, { internshipApplications: [] });
+      state.internshipApplications = (state.internshipApplications || []).map((app) =>
+        app.id === id ? { ...app, ...updates } : app
+      );
+      writeJson(stateKey, state);
+      return { ok: true };
+    },
+
+    async listStudents() {
+      if (isApiMode() && getToken()) {
+        return requestJson("GET", "/api/admin/internships/students");
+      }
+      const state = readJson(stateKey, { students: [] });
+      return { ok: true, students: state.students || [] };
+    },
+
+    async listCertificates() {
+      if (isApiMode() && getToken()) {
+        return requestJson("GET", "/api/admin/internships/certificates");
+      }
+      const state = readJson(stateKey, { certificates: [] });
+      return { ok: true, certificates: state.certificates || [] };
+    },
+
+    async createCertificate(cert) {
+      if (isApiMode() && getToken()) {
+        return requestJson("POST", "/api/admin/internships/certificates", cert);
+      }
+      const state = readJson(stateKey, { certificates: [] });
+      state.certificates = [cert, ...(state.certificates || [])];
+      writeJson(stateKey, state);
+      return { ok: true, certificate: cert };
+    },
+
+    async revokeCertificate(id) {
+      if (isApiMode() && getToken()) {
+        return requestJson("PUT", "/api/admin/internships/certificates/revoke", { id });
+      }
+      const state = readJson(stateKey, { certificates: [] });
+      state.certificates = (state.certificates || []).map((c) =>
+        c.id === id ? { ...c, status: "Revoked" } : c
+      );
+      writeJson(stateKey, state);
+      return { ok: true };
+    },
+
+    async getInternshipsOverview() {
+      if (isApiMode() && getToken()) {
+        return requestJson("GET", "/api/admin/internships/overview");
+      }
+      const state = readJson(stateKey, {});
+      return {
+        ok: true,
+        metrics: {
+          applicationsCount: (state.internshipApplications || []).length,
+          enrolledInternsCount: (state.students || []).length,
+          verifiedPaymentsCount: 0,
+          issuedCertificatesCount: (state.certificates || []).length,
+          activeTracksCount: 5,
+        },
+        recentApplications: (state.internshipApplications || []).slice(0, 5),
+      };
+    },
+
+    async getCompanyOverview() {
+      if (isApiMode() && getToken()) {
+        return requestJson("GET", "/api/admin/company/overview");
+      }
+      const state = readJson(stateKey, {});
+      return {
+        ok: true,
+        metrics: {
+          leadsCount: (state.leads || []).length,
+          activeProjectsCount: (state.projects || []).length,
+          clientsCount: (state.clients || []).length,
+          servicesCount: 17,
+          publishedPagesCount: "68+",
+        },
+        recentLeads: (state.leads || []).slice(0, 5),
+      };
+    },
+
     async migrateStorage() {
       if (!isApiMode() || !getToken()) {
         throw new Error("Admin session required");

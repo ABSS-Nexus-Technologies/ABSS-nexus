@@ -748,13 +748,32 @@ export const getDashboardMetrics = async (db) => {
     }
   };
 
-  const [leads, activeProjects, openValue, openTickets, convertedLeads, migration] = await Promise.all([
+  const [
+    leads,
+    activeProjects,
+    openValue,
+    openTickets,
+    convertedLeads,
+    migration,
+    studentsCount,
+    applicationsCount,
+    pendingAppsCount,
+    certsCount,
+    programsCount,
+    clientsCount,
+  ] = await Promise.all([
     safeFirst("SELECT COUNT(*) AS total FROM leads"),
     safeFirst("SELECT COUNT(*) AS total FROM projects WHERE status != 'Done'"),
     safeFirst("SELECT COALESCE(SUM(value), 0) AS total FROM projects WHERE status != 'Done'"),
     safeFirst("SELECT COUNT(*) AS total FROM tickets WHERE status != 'Closed'"),
     safeFirst("SELECT COUNT(*) AS total FROM leads WHERE status = 'Converted'"),
     safeFirst("SELECT value, updated_at FROM app_metadata WHERE key = ?", migrationKey),
+    safeFirst("SELECT COUNT(*) AS total FROM students"),
+    safeFirst("SELECT COUNT(*) AS total FROM internship_applications"),
+    safeFirst("SELECT COUNT(*) AS total FROM internship_applications WHERE status IN ('New', 'Under Review')"),
+    safeFirst("SELECT COUNT(*) AS total FROM certificates WHERE status = 'Authentic'"),
+    safeFirst("SELECT COUNT(*) AS total FROM internship_programs WHERE status = 'published' OR status = 'Active'"),
+    safeFirst("SELECT COUNT(*) AS total FROM clients"),
   ]);
   const [byStatus, byService, recentActivity, monthLeads] = await Promise.all([
     safeAll("SELECT status, COUNT(*) AS total FROM leads GROUP BY status"),
@@ -764,6 +783,12 @@ export const getDashboardMetrics = async (db) => {
   ]);
   return {
     totalLeads: Number(leads?.total || 0),
+    enrolledStudents: Number(studentsCount?.total || 0),
+    totalApplications: Number(applicationsCount?.total || 0),
+    pendingApplications: Number(pendingAppsCount?.total || 0),
+    issuedCertificates: Number(certsCount?.total || 0),
+    activeTracks: Number(programsCount?.total || 0) || 5,
+    totalClients: Number(clientsCount?.total || 0),
     activeProjects: Number(activeProjects?.total || 0),
     openProjectValue: Number(openValue?.total || 0),
     openSupportTickets: Number(openTickets?.total || 0),
@@ -779,7 +804,7 @@ export const getDashboardMetrics = async (db) => {
 export const readD1State = async (db) => {
   const safeListLeads = async () => {
     try {
-      return (await listLeads(db, { page: 1, pageSize: 20 })).items;
+      return (await listLeads(db, { page: 1, pageSize: 50 })).items;
     } catch (e) {
       console.warn("readD1State listLeads warning:", e?.message || e);
       return [];
@@ -787,14 +812,38 @@ export const readD1State = async (db) => {
   };
   const safeListInternships = async () => {
     try {
-      return (await listInternshipApplications(db, { page: 1, pageSize: 20 })).items;
+      return (await listInternshipApplications(db, { page: 1, pageSize: 50 })).items;
     } catch (e) {
       console.warn("readD1State listInternshipApplications warning:", e?.message || e);
       return [];
     }
   };
+  const safeListStudents = async () => {
+    try {
+      const rows = await all(db, "SELECT id, name, email, status, email_verified, created_at, updated_at FROM students ORDER BY created_at DESC LIMIT 50");
+      return (rows || []).map((r) => ({
+        id: r.id,
+        name: r.name,
+        email: r.email,
+        status: r.status,
+        emailVerified: Boolean(r.email_verified),
+        createdAt: r.created_at,
+        updatedAt: r.updated_at,
+      }));
+    } catch {
+      return [];
+    }
+  };
+  const safeListCertificates = async () => {
+    try {
+      const rows = await all(db, "SELECT * FROM certificates ORDER BY created_at DESC LIMIT 50");
+      return (rows || []).map(certificateFromRow);
+    } catch {
+      return [];
+    }
+  };
 
-  const [leads, projects, clients, tickets, pricing, activity, internshipApplications, metrics] = await Promise.all([
+  const [leads, projects, clients, tickets, pricing, activity, internshipApplications, students, certificates, metrics] = await Promise.all([
     safeListLeads(),
     listProjects(db),
     listClients(db),
@@ -802,6 +851,8 @@ export const readD1State = async (db) => {
     listPricing(db),
     listActivity(db),
     safeListInternships(),
+    safeListStudents(),
+    safeListCertificates(),
     getDashboardMetrics(db),
   ]);
 
@@ -813,6 +864,8 @@ export const readD1State = async (db) => {
     pricing,
     activity,
     internshipApplications,
+    students,
+    certificates,
     metrics,
   };
 };
@@ -1372,10 +1425,7 @@ export const createD1Certificate = async (db, cert) => {
 
 export const listD1Certificates = async (db) => {
   const rows = await all(db, "SELECT * FROM certificates ORDER BY created_at DESC");
-  if (!rows || rows.length === 0) {
-    return DEFAULT_CERTIFICATES;
-  }
-  return rows.map(certificateFromRow);
+  return (rows || []).map(certificateFromRow);
 };
 
 export const revokeD1Certificate = async (db, certId) => {

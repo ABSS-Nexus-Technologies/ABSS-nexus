@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="/src/styles/styles.css?v=20261023v2" />
+    <link rel="stylesheet" href="/src/styles/styles.css" />
   </head>
   <body style="background: #F5F5F7; min-height: 100vh; display: flex; flex-direction: column;">
     <!-- Top Student Header Bar -->
@@ -26,8 +26,8 @@
         </div>
         <div style="display: flex; align-items: center; gap: 16px;">
           <div style="display: flex; align-items: center; gap: 8px;">
-            <div style="width: 32px; height: 32px; border-radius: 50%; background: #0066cc; color: #ffffff; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.85rem;">AS</div>
-            <span style="font-size: 0.88rem; font-weight: 600; color: #1d1d1f;">Aarav Sharma</span>
+            <div id="studentAvatarInitials" style="width: 32px; height: 32px; border-radius: 50%; background: #0066cc; color: #ffffff; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.85rem;">ST</div>
+            <span id="studentDisplayName" style="font-size: 0.88rem; font-weight: 600; color: #1d1d1f;">Intern Student</span>
           </div>
           <form action="/api/internships/auth/logout" method="POST" style="margin: 0;">
             <button type="submit" style="background: transparent; border: 1px solid #d2d2d7; border-radius: 999px; padding: 6px 14px; font-size: 0.8rem; font-weight: 600; color: #6e6e73; cursor: pointer; transition: all 0.2s ease;">Sign Out</button>
@@ -38,7 +38,7 @@
 
     <main class="container" style="flex: 1; padding: 32px 16px 60px;">
       <div style="margin-bottom: 24px;">
-        <span style="font-size: 0.82rem; font-weight: 700; letter-spacing: 0.06em; color: #0066cc; text-transform: uppercase;">Evaluations & Review History</span>
+        <span id="studentWelcomeGreeting" style="font-size: 0.82rem; font-weight: 700; letter-spacing: 0.06em; color: #0066cc; text-transform: uppercase;">Evaluations & Review History</span>
         <h1 style="font-size: 1.85rem; font-weight: 800; color: #1d1d1f; margin: 4px 0 0;">Work Submission Log &amp; Feedback</h1>
       </div>
 
@@ -138,5 +138,33 @@
       </div>
     </footer>
     <script src="/src/scripts/script.js" defer></script>
+    <script>
+      (function() {
+        fetch("/api/internships/auth/me")
+          .then(function(r) { return r.ok ? r.json() : null; })
+          .then(function(data) {
+            if (data && (data.student || data.user)) {
+              var s = data.student || data.user;
+              var name = s.name || s.fullName || "Intern Student";
+              var initials = name.split(" ").map(function(p) { return p[0]; }).filter(Boolean).slice(0, 2).join("").toUpperCase() || "ST";
+              var nameEl = document.getElementById("studentDisplayName");
+              var avatarEl = document.getElementById("studentAvatarInitials");
+              if (nameEl) nameEl.textContent = name;
+              if (avatarEl) avatarEl.textContent = initials;
+              var profName = document.getElementById("profileNameBig");
+              var profAvatar = document.getElementById("profileAvatarBig");
+              var profEmail = document.getElementById("profileEmailSubtitle");
+              if (profName) profName.textContent = name;
+              if (profAvatar) profAvatar.textContent = initials;
+              if (profEmail && s.email) profEmail.innerHTML = s.email + " &bull; Active Enrolled Intern &bull; Batch of 2026";
+              var certRecipient = document.getElementById("certStudentRecipient");
+              if (certRecipient) certRecipient.textContent = name;
+              var welcomeEl = document.getElementById("studentWelcomeGreeting");
+              if (welcomeEl && welcomeEl.textContent.includes("STUDENT")) welcomeEl.textContent = "Welcome Back, " + name.split(" ")[0];
+            }
+          })
+          .catch(function() {});
+      })();
+    </script>
   </body>
 </html>

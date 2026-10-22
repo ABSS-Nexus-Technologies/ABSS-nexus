@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="/src/styles/styles.css?v=20261023v2" />
+    <link rel="stylesheet" href="/src/styles/styles.css" />
     <link rel="stylesheet" href="/src/styles/components/admin.css" />
   </head>
   <body class="admin-body">
@@ -61,8 +61,8 @@
             <ul class="module-card-features">
               <li class="module-card-feature-item"><span class="feature-check">✓</span> <span><strong>5</strong> Internship Technical Tracks</span></li>
               <li class="module-card-feature-item"><span class="feature-check">✓</span> <span><strong>3</strong> Applications Pipeline &amp; Review</span></li>
-              <li class="module-card-feature-item"><span class="feature-check">✓</span> <span><strong>19</strong> Active Enrolled Learners</span></li>
-              <li class="module-card-feature-item"><span class="feature-check">✓</span> <span><strong>2</strong> Fee Payments &amp; <strong>3</strong> Verified Certificates</span></li>
+              <li class="module-card-feature-item"><span class="feature-check">✓</span> <span><strong>45</strong> Active Enrolled Learners</span></li>
+              <li class="module-card-feature-item"><span class="feature-check">✓</span> <span><strong>2</strong> Fee Payments &amp; <strong>10</strong> Verified Certificates</span></li>
             </ul>
             <a href="/admin/internships/" class="btn-open-module">Open Internship Admin &rarr;</a>
           </article>
@@ -78,7 +78,7 @@
             <ul class="module-card-features">
               <li class="module-card-feature-item"><span class="feature-check">✓</span> <span><strong>68+</strong> Site Pages &amp; Global Navigation</span></li>
               <li class="module-card-feature-item"><span class="feature-check">✓</span> <span><strong>17</strong> Technical Enterprise Services</span></li>
-              <li class="module-card-feature-item"><span class="feature-check">✓</span> <span><strong>20</strong> Client Inquiries &amp; Pipeline Leads</span></li>
+              <li class="module-card-feature-item"><span class="feature-check">✓</span> <span><strong>46</strong> Client Inquiries &amp; Pipeline Leads</span></li>
               <li class="module-card-feature-item"><span class="feature-check">✓</span> <span>Careers, Blog Publishing &amp; Telemetry Analytics</span></li>
             </ul>
             <a href="/admin/company/" class="btn-open-module" style="background: #059669;">Open Company Admin &rarr;</a>
@@ -106,16 +106,6 @@
     <script src="/src/config/admin-config.js"></script>
     <script src="/src/services/admin-api.js"></script>
     <script src="/src/scripts/admin-auth-guard.js"></script>
-    <script>
-      document.addEventListener("DOMContentLoaded", async () => {
-        const session = await window.AbssAdminAuthGuard.requireAdminSession();
-        if (session && session.admin) {
-          const roleBadge = document.getElementById("adminUserRoleBadge");
-          if (roleBadge) {
-            roleBadge.textContent = session.admin.role || "super_admin";
-          }
-        }
-      });
-    </script>
+    <script src="/src/scripts/admin-app.js"></script>
   </body>
 </html>

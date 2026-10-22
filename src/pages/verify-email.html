@@ -263,11 +263,15 @@
             
       <div style="text-align: center; padding: 20px 0;">
         <span style="font-size: 48px; display: block; margin-bottom: 16px;">✉️</span>
+        <div id="auth-alert" class="auth-alert" style="margin-bottom: 16px;"></div>
         <p style="color: #6e6e73; line-height: 1.6; margin-bottom: 24px;">Click the activation link dispatched to your email inbox, or enter your verification token manually below:</p>
-        <form action="/api/internships/auth/verify-email" method="POST" style="margin-bottom: 20px;">
-          <input type="text" name="token" placeholder="Paste verification token" required style="width: 100%; padding: 12px 14px; border: 1px solid #d2d2d7; border-radius: 10px; margin-bottom: 12px;" />
-          <button type="submit" class="btn btn-primary" style="width: 100%; padding: 14px;">Activate Account &rarr;</button>
+        <form id="verify-form" action="/api/internships/auth/verify-email" method="POST" style="margin-bottom: 20px;">
+          <input type="text" id="verify-token" name="token" placeholder="Paste verification token" required style="width: 100%; padding: 12px 14px; border: 1px solid #d2d2d7; border-radius: 10px; margin-bottom: 12px;" />
+          <button type="submit" id="verify-submit-btn" class="btn btn-primary" style="width: 100%; padding: 14px;">Activate Account &rarr;</button>
         </form>
+        <div id="verify-success-actions" style="display: none; margin-bottom: 20px;">
+          <a href="/login" class="btn btn-primary" style="display: inline-block; padding: 12px 24px; text-decoration: none;">Proceed to Student Login &rarr;</a>
+        </div>
         <a href="/login" style="font-size: 0.88rem; color: #0066cc;">Return to Login</a>
       </div>
     
@@ -375,7 +379,81 @@
     <script src="/src/scripts/seo-schema.js"></script>
     <script src="/src/scripts/components/footer.js" defer></script>
     <script src="/src/scripts/script.js"></script>
-    <script src="/src/scripts/script.js" defer></script>
+    <script>
+      (function() {
+        const form = document.getElementById("verify-form");
+        const alertBox = document.getElementById("auth-alert");
+        const submitBtn = document.getElementById("verify-submit-btn");
+        const tokenInput = document.getElementById("verify-token");
+        const successActions = document.getElementById("verify-success-actions");
 
+        function showAlert(type, message, htmlContent = "") {
+          if (!alertBox) return;
+          alertBox.className = "auth-alert visible auth-alert-" + type;
+          if (htmlContent) {
+            alertBox.innerHTML = htmlContent;
+          } else {
+            alertBox.textContent = message;
+          }
+        }
+
+        async function submitVerification(token) {
+          if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.textContent = "Verifying Token...";
+          }
+
+          try {
+            const res = await fetch("/api/internships/auth/verify-email", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ token })
+            });
+            const data = await res.json();
+
+            if (!res.ok) {
+              showAlert("error", data.error || "Email verification failed.");
+              if (submitBtn) {
+                submitBtn.disabled = false;
+                submitBtn.textContent = "Activate Account \u2192";
+              }
+              return;
+            }
+
+            if (form) form.style.display = "none";
+            if (successActions) successActions.style.display = "block";
+            showAlert("success", data.message || "Email address verified successfully! You can now log in.");
+            setTimeout(() => {
+              window.location.href = "/login?verified=1";
+            }, 1500);
+          } catch (err) {
+            showAlert("error", "Network connection error. Please try again.");
+            if (submitBtn) {
+              submitBtn.disabled = false;
+              submitBtn.textContent = "Activate Account \u2192";
+            }
+          }
+        }
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const queryToken = urlParams.get("token");
+        if (queryToken && tokenInput) {
+          tokenInput.value = queryToken;
+          submitVerification(queryToken);
+        }
+
+        if (form) {
+          form.addEventListener("submit", function(e) {
+            e.preventDefault();
+            const token = tokenInput ? tokenInput.value.trim() : "";
+            if (!token) {
+              showAlert("error", "Please paste or enter your verification token.");
+              return;
+            }
+            submitVerification(token);
+          });
+        }
+      })();
+    </script>
   </body>
 </html>

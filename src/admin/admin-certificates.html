@@ -115,8 +115,8 @@
         
     <div class="card" style="padding: 28px; border-radius: 16px; background: #ffffff;">
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-        <h2 style="font-size: 1.25rem; margin: 0;">Issued Certificate Credentials (86)</h2>
-        <button class="btn btn-primary" onclick="alert('Issue Certificate modal opening...');" style="font-size: 0.85rem;">+ Mint New Certificate</button>
+        <h2 style="font-size: 1.25rem; margin: 0;">Issued Certificate Credentials (<span data-metric="certificates">0</span>)</h2>
+        <button class="btn btn-primary" data-btn-new-cert style="font-size: 0.85rem;">+ Mint New Certificate</button>
       </div>
 
       <div style="overflow-x: auto;">
@@ -127,18 +127,17 @@
               <th style="padding: 12px 14px;">Student Name</th>
               <th style="padding: 12px 14px;">Program Track</th>
               <th style="padding: 12px 14px;">Issue Date</th>
+              <th style="padding: 12px 14px;">Grade / Distinction</th>
+              <th style="padding: 12px 14px;">Registry Status</th>
               <th style="padding: 12px 14px;">Action</th>
             </tr>
           </thead>
-          <tbody>
-            <tr style="border-bottom: 1px solid #e5e5ea;">
-              <td style="padding: 14px; font-family: monospace;">ABSS-CERT-2026-WD-1042</td>
-              <td style="padding: 14px;"><strong>Aarav Sharma</strong></td>
-              <td style="padding: 14px;">Full-Stack Web Engineering</td>
-              <td style="padding: 14px;">March 2026</td>
-              <td style="padding: 14px;">
-                <a href="/verify-certificate" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="padding: 4px 10px; font-size: 0.78rem;">Verify</a>
-                <button class="btn btn-secondary" onclick="alert('Credential revoked.');" style="padding: 4px 10px; font-size: 0.78rem; color: #dc2626;">Revoke</button>
+          <tbody data-certificates-table>
+            <tr>
+              <td colspan="7" style="text-align: center; padding: 48px 16px; color: #6e6e73;">
+                <div style="font-size: 2rem; margin-bottom: 8px;">📜</div>
+                <strong style="display: block; font-size: 1rem; color: #1d1d1f; margin-bottom: 4px;">Loading Live Certificates...</strong>
+                <p style="margin: 0; font-size: 0.85rem; color: #6e6e73;">Connecting to Cloudflare D1 tamper-proof credential registry.</p>
               </td>
             </tr>
           </tbody>
@@ -151,6 +150,7 @@
     <script src="/src/config/admin-config.js"></script>
     <script src="/src/services/admin-api.js"></script>
     <script src="/src/scripts/admin-auth-guard.js"></script>
+    <script src="/src/scripts/admin-app.js"></script>
     <script src="/src/scripts/script.js"></script>
   </body>
 </html>

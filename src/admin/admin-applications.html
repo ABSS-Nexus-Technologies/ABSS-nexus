@@ -128,32 +128,20 @@
         <table style="width: 100%; border-collapse: collapse; font-size: 0.9rem;">
           <thead>
             <tr style="background: #f5f5f7; border-bottom: 2px solid #d2d2d7; text-align: left;">
+              <th style="padding: 12px 14px;">App ID</th>
               <th style="padding: 12px 14px;">Applicant Name</th>
               <th style="padding: 12px 14px;">Program Track</th>
-              <th style="padding: 12px 14px;">Institution</th>
-              <th style="padding: 12px 14px;">Applied Date</th>
+              <th style="padding: 12px 14px;">Institution / Notes</th>
+              <th style="padding: 12px 14px;">Status</th>
               <th style="padding: 12px 14px;">Decision</th>
             </tr>
           </thead>
-          <tbody>
-            <tr style="border-bottom: 1px solid #e5e5ea;">
-              <td style="padding: 14px;"><strong>Rhea Kapoor</strong><br /><small style="color: #6e6e73;">rhea.k@college.edu</small></td>
-              <td style="padding: 14px;">Full-Stack Web Engineering</td>
-              <td style="padding: 14px;">IIT Roorkee</td>
-              <td style="padding: 14px;">Oct 19, 2026</td>
-              <td style="padding: 14px;">
-                <button class="btn btn-primary" style="padding: 4px 10px; font-size: 0.78rem;">Approve &amp; Send Offer</button>
-                <button class="btn btn-secondary" style="padding: 4px 10px; font-size: 0.78rem;">Reject</button>
-              </td>
-            </tr>
-            <tr style="border-bottom: 1px solid #e5e5ea;">
-              <td style="padding: 14px;"><strong>Vikram Patel</strong><br /><small style="color: #6e6e73;">vikram.p@college.edu</small></td>
-              <td style="padding: 14px;">AI &amp; Machine Learning</td>
-              <td style="padding: 14px;">BITS Pilani</td>
-              <td style="padding: 14px;">Oct 18, 2026</td>
-              <td style="padding: 14px;">
-                <button class="btn btn-primary" style="padding: 4px 10px; font-size: 0.78rem;">Approve &amp; Send Offer</button>
-                <button class="btn btn-secondary" style="padding: 4px 10px; font-size: 0.78rem;">Reject</button>
+          <tbody data-applications-table>
+            <tr>
+              <td colspan="6" style="text-align: center; padding: 48px 16px; color: #6e6e73;">
+                <div style="font-size: 2rem; margin-bottom: 8px;">📝</div>
+                <strong style="display: block; font-size: 1rem; color: #1d1d1f; margin-bottom: 4px;">Loading Real Applications...</strong>
+                <p style="margin: 0; font-size: 0.85rem; color: #6e6e73;">Connecting to Cloudflare D1 student application database.</p>
               </td>
             </tr>
           </tbody>
@@ -166,6 +154,7 @@
     <script src="/src/config/admin-config.js"></script>
     <script src="/src/services/admin-api.js"></script>
     <script src="/src/scripts/admin-auth-guard.js"></script>
+    <script src="/src/scripts/admin-app.js"></script>
     <script src="/src/scripts/script.js"></script>
   </body>
 </html>

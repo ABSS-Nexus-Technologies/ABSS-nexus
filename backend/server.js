@@ -747,9 +747,15 @@ const readBody = (request) =>
       }
     });
     request.on("end", () => {
+      if (!body) return resolve({});
       try {
-        resolve(body ? JSON.parse(body) : {});
+        resolve(JSON.parse(body));
       } catch (error) {
+        try {
+          const params = new URLSearchParams(body);
+          const entries = Object.fromEntries(params.entries());
+          if (Object.keys(entries).length > 0) return resolve(entries);
+        } catch {}
         reject(error);
       }
     });

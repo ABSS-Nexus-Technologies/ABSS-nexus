@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="/src/styles/styles.css?v=20261023v2" />
+    <link rel="stylesheet" href="/src/styles/styles.css" />
     <link rel="stylesheet" href="/src/styles/components/admin.css" />
   </head>
   <body class="admin-body">
@@ -80,7 +80,7 @@
               <span>🎓</span>
               <span>Enrolled Interns</span>
             </span>
-            <span class="sidebar-badge">19</span>
+            <span class="sidebar-badge">45</span>
           </a>
         
           <a href="/admin/internships/tasks" class="sidebar-nav-item ">
@@ -120,7 +120,7 @@
               <span>📜</span>
               <span>Certificate Registry</span>
             </span>
-            <span class="sidebar-badge">3</span>
+            <span class="sidebar-badge">10</span>
           </a>
         
           <a href="/admin/internships/reports" class="sidebar-nav-item ">
@@ -199,36 +199,12 @@
             <th>Actions</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody data-applications-table>
           <tr>
-            <td><strong>ABSS-2026-WD-8492</strong></td>
-            <td><strong>Aarav Sharma</strong><br/><small style="color: #6e6e73;">aarav.sharma@example.com</small></td>
-            <td>Web Engineering</td>
-            <td>Portfolio: github.com/aarav-dev (92% test score)</td>
-            <td><span class="status-pill status-warning">Under Review</span></td>
-            <td>
-              <button class="btn-admin btn-admin-secondary" style="padding: 4px 8px; font-size: 0.76rem;">Approve</button>
-              <button class="btn-admin btn-admin-secondary" style="padding: 4px 8px; font-size: 0.76rem; color: #dc2626;">Reject</button>
-            </td>
-          </tr>
-          <tr>
-            <td><strong>ABSS-2026-AI-5120</strong></td>
-            <td><strong>Priya Verma</strong><br/><small style="color: #6e6e73;">priya.verma@example.com</small></td>
-            <td>AI &amp; Applied ML</td>
-            <td>Candidate shortlisted for technical assessment round</td>
-            <td><span class="status-pill status-info">Shortlisted</span></td>
-            <td>
-              <button class="btn-admin btn-admin-secondary" style="padding: 4px 8px; font-size: 0.76rem;">Send Offer</button>
-            </td>
-          </tr>
-          <tr>
-            <td><strong>ABSS-2026-SD-9041</strong></td>
-            <td><strong>Rohan Patel</strong><br/><small style="color: #6e6e73;">rohan.patel@example.com</small></td>
-            <td>Software Development</td>
-            <td>Offer letter dispatched via email. Orientation scheduled.</td>
-            <td><span class="status-pill status-success">Offer Dispatched</span></td>
-            <td>
-              <button class="btn-admin btn-admin-secondary" style="padding: 4px 8px; font-size: 0.76rem;">View Offer</button>
+            <td colspan="6" style="text-align: center; padding: 48px 16px; color: #6e6e73;">
+              <div style="font-size: 2.2rem; margin-bottom: 8px;">📝</div>
+              <strong style="display: block; font-size: 1.05rem; color: #1d1d1f; margin-bottom: 4px; font-family: 'Space Grotesk', sans-serif;">Loading Live Applications...</strong>
+              <p style="margin: 0; font-size: 0.88rem; color: #6e6e73;">Connecting to Cloudflare D1 database registry...</p>
             </td>
           </tr>
         </tbody>
@@ -243,16 +219,6 @@
     <script src="/src/config/admin-config.js"></script>
     <script src="/src/services/admin-api.js"></script>
     <script src="/src/scripts/admin-auth-guard.js"></script>
-    <script>
-      document.addEventListener("DOMContentLoaded", async () => {
-        const session = await window.AbssAdminAuthGuard.requireAdminSession(null, "internships");
-        if (session && session.admin) {
-          const roleBadge = document.getElementById("adminUserRoleBadge");
-          if (roleBadge) {
-            roleBadge.textContent = session.admin.role || "super_admin";
-          }
-        }
-      });
-    </script>
+    <script src="/src/scripts/admin-app.js"></script>
   </body>
 </html>

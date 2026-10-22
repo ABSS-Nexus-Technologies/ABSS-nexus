@@ -116,34 +116,28 @@
     <div class="card" style="padding: 28px; border-radius: 16px; background: #ffffff;">
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 12px;">
         <input type="search" placeholder="Filter student roster..." style="padding: 8px 14px; border: 1px solid #d2d2d7; border-radius: 8px; font-size: 0.85rem; width: 320px;" />
-        <span style="font-size: 0.85rem; color: #6e6e73;">Total Active Interns: <strong>148 Students</strong></span>
+        <span style="font-size: 0.85rem; color: #6e6e73;">Total Active Interns: <strong data-metric="students">0 Students</strong></span>
       </div>
 
       <div style="overflow-x: auto;">
         <table style="width: 100%; border-collapse: collapse; font-size: 0.9rem;">
           <thead>
             <tr style="background: #f5f5f7; border-bottom: 2px solid #d2d2d7; text-align: left;">
+              <th style="padding: 12px 14px;">Student ID</th>
               <th style="padding: 12px 14px;">Student Name</th>
-              <th style="padding: 12px 14px;">Enrolled Program</th>
-              <th style="padding: 12px 14px;">Sprint Progress</th>
-              <th style="padding: 12px 14px;">Mentor</th>
+              <th style="padding: 12px 14px;">Email Address</th>
               <th style="padding: 12px 14px;">Status</th>
+              <th style="padding: 12px 14px;">Enrolled Date</th>
+              <th style="padding: 12px 14px;">Action</th>
             </tr>
           </thead>
-          <tbody>
-            <tr style="border-bottom: 1px solid #e5e5ea;">
-              <td style="padding: 14px;"><strong>Aarav Sharma</strong><br /><small style="color: #6e6e73;">student@college.edu</small></td>
-              <td style="padding: 14px;">Full-Stack Web Engineering</td>
-              <td style="padding: 14px;">Sprint 3/4 (75%)</td>
-              <td style="padding: 14px;">Rohan Verma</td>
-              <td style="padding: 14px;"><span class="badge" style="background: rgba(16, 185, 129, 0.15); color: #10b981;">Active</span></td>
-            </tr>
-            <tr style="border-bottom: 1px solid #e5e5ea;">
-              <td style="padding: 14px;"><strong>Ananya Roy</strong><br /><small style="color: #6e6e73;">ananya.r@college.edu</small></td>
-              <td style="padding: 14px;">UI/UX Design Systems</td>
-              <td style="padding: 14px;">Sprint 4/4 (100%)</td>
-              <td style="padding: 14px;">Kavita Das</td>
-              <td style="padding: 14px;"><span class="badge" style="background: rgba(99, 102, 241, 0.15); color: #6366f1;">Certified</span></td>
+          <tbody data-students-table>
+            <tr>
+              <td colspan="6" style="text-align: center; padding: 48px 16px; color: #6e6e73;">
+                <div style="font-size: 2rem; margin-bottom: 8px;">🎓</div>
+                <strong style="display: block; font-size: 1rem; color: #1d1d1f; margin-bottom: 4px;">Loading Live Students...</strong>
+                <p style="margin: 0; font-size: 0.85rem; color: #6e6e73;">Querying registered student accounts from Cloudflare D1.</p>
+              </td>
             </tr>
           </tbody>
         </table>
@@ -155,6 +149,7 @@
     <script src="/src/config/admin-config.js"></script>
     <script src="/src/services/admin-api.js"></script>
     <script src="/src/scripts/admin-auth-guard.js"></script>
+    <script src="/src/scripts/admin-app.js"></script>
     <script src="/src/scripts/script.js"></script>
   </body>
 </html>

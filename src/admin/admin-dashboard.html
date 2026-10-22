@@ -116,23 +116,23 @@
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 28px;">
       <div class="card" style="padding: 20px; border-radius: 14px; background: #ffffff;">
         <span style="font-size: 0.78rem; font-weight: 700; color: #6e6e73;">ENROLLED STUDENTS</span>
-        <strong style="display: block; font-size: 1.7rem; color: #0066cc; margin: 4px 0;">148</strong>
-        <small style="color: #10b981;">+24% from last cohort</small>
+        <strong style="display: block; font-size: 1.7rem; color: #0066cc; margin: 4px 0;" data-metric="students">0</strong>
+        <small style="color: #10b981;">Live D1 accounts</small>
       </div>
       <div class="card" style="padding: 20px; border-radius: 14px; background: #ffffff;">
         <span style="font-size: 0.78rem; font-weight: 700; color: #6e6e73;">ACTIVE TRACKS</span>
-        <strong style="display: block; font-size: 1.7rem; color: #10b981; margin: 4px 0;">5 Tracks</strong>
+        <strong style="display: block; font-size: 1.7rem; color: #10b981; margin: 4px 0;" data-metric="tracks">5 Tracks</strong>
         <small style="color: #6e6e73;">Web, Software, AI, Cloud, UI/UX</small>
       </div>
       <div class="card" style="padding: 20px; border-radius: 14px; background: #ffffff;">
         <span style="font-size: 0.78rem; font-weight: 700; color: #6e6e73;">PENDING SUBMISSIONS</span>
-        <strong style="display: block; font-size: 1.7rem; color: #f59e0b; margin: 4px 0;">18 Awaiting</strong>
-        <small style="color: #6e6e73;">Reviewer SLA: &lt; 24h</small>
+        <strong style="display: block; font-size: 1.7rem; color: #f59e0b; margin: 4px 0;" data-metric="applications">0</strong>
+        <small style="color: #6e6e73;">Active submissions</small>
       </div>
       <div class="card" style="padding: 20px; border-radius: 14px; background: #ffffff;">
         <span style="font-size: 0.78rem; font-weight: 700; color: #6e6e73;">CERTIFICATES ISSUED</span>
-        <strong style="display: block; font-size: 1.7rem; color: #6366f1; margin: 4px 0;">86 Certified</strong>
-        <small style="color: #10b981;">100% Cryptographic verification</small>
+        <strong style="display: block; font-size: 1.7rem; color: #6366f1; margin: 4px 0;" data-metric="certificates">0</strong>
+        <small style="color: #10b981;">Verifiable registry</small>
       </div>
     </div>
 
@@ -172,12 +172,44 @@
         </div>
       </div>
     </div>
+
+    <!-- Recent Live Inquiries on Overview -->
+    <div class="card" style="padding: 24px; border-radius: 16px; background: #ffffff; margin-top: 24px;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+        <h2 style="font-size: 1.2rem; margin: 0;">Recent Real-Time Inquiries</h2>
+        <a href="/admin/leads" style="font-size: 0.82rem; color: #0066cc; font-weight: 600;">View All Inquiries &rarr;</a>
+      </div>
+      <div style="overflow-x: auto;">
+        <table style="width: 100%; border-collapse: collapse; font-size: 0.88rem; text-align: left;">
+          <thead>
+            <tr style="border-bottom: 2px solid #e5e5ea; color: #6e6e73;">
+              <th style="padding: 12px;">Lead ID</th>
+              <th style="padding: 12px;">Client Name</th>
+              <th style="padding: 12px;">Service Requested</th>
+              <th style="padding: 12px;">Timeline</th>
+              <th style="padding: 12px;">Budget</th>
+              <th style="padding: 12px;">Date</th>
+              <th style="padding: 12px;">Status</th>
+              <th style="padding: 12px;">Actions</th>
+            </tr>
+          </thead>
+          <tbody data-leads-table>
+            <tr>
+              <td colspan="8" style="text-align: center; padding: 32px 16px; color: #6e6e73;">
+                Loading live inquiries from Cloudflare D1...
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
   
       </section>
     </main>
     <script src="/src/config/admin-config.js"></script>
     <script src="/src/services/admin-api.js"></script>
     <script src="/src/scripts/admin-auth-guard.js"></script>
+    <script src="/src/scripts/admin-app.js"></script>
     <script src="/src/scripts/script.js"></script>
   </body>
 </html>

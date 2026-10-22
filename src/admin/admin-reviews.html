@@ -113,43 +113,13 @@
   
 
         
-    <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 24px;">
-      <div class="card" style="padding: 28px; border-radius: 16px; background: #ffffff;">
-        <h2 style="font-size: 1.25rem; margin: 0 0 16px;">Evaluation Rubric: TASK-10</h2>
-        <form onsubmit="event.preventDefault(); alert('Review evaluation submitted successfully! Student has been notified.');">
-          <div style="margin-bottom: 16px;">
-            <label style="display: block; font-weight: 600; margin-bottom: 6px;">Code Architecture &amp; Cleanliness (Max 40)</label>
-            <input type="number" min="0" max="40" value="38" required style="width: 100%; padding: 10px; border: 1px solid #d2d2d7; border-radius: 8px;" />
-          </div>
-          <div style="margin-bottom: 16px;">
-            <label style="display: block; font-weight: 600; margin-bottom: 6px;">Security &amp; Edge Token Handling (Max 30)</label>
-            <input type="number" min="0" max="30" value="29" required style="width: 100%; padding: 10px; border: 1px solid #d2d2d7; border-radius: 8px;" />
-          </div>
-          <div style="margin-bottom: 16px;">
-            <label style="display: block; font-weight: 600; margin-bottom: 6px;">Documentation &amp; Test Coverage (Max 30)</label>
-            <input type="number" min="0" max="30" value="28" required style="width: 100%; padding: 10px; border: 1px solid #d2d2d7; border-radius: 8px;" />
-          </div>
-          <div style="margin-bottom: 20px;">
-            <label style="display: block; font-weight: 600; margin-bottom: 6px;">Mentor Feedback &amp; Suggestions</label>
-            <textarea rows="4" style="width: 100%; padding: 10px; border: 1px solid #d2d2d7; border-radius: 8px;">Strong implementation of timing-safe token verification. Recommended adding automated curl examples to README.</textarea>
-          </div>
-          <div style="display: flex; gap: 12px;">
-            <button type="submit" class="btn btn-primary" style="flex: 1;">Approve Milestone (Score: 95/100) &rarr;</button>
-            <button type="button" class="btn btn-secondary" onclick="alert('Revision requested from student.');">Request Revision</button>
-          </div>
-        </form>
-      </div>
-
-      <div class="card" style="padding: 28px; border-radius: 16px; background: #ffffff;">
-        <h2 style="font-size: 1.2rem; margin: 0 0 16px;">Submission Metadata</h2>
-        <p style="font-size: 0.88rem; color: #6e6e73; line-height: 1.6;">
-          <strong>Student:</strong> Aarav Sharma<br />
-          <strong>Email:</strong> student@college.edu<br />
-          <strong>Repository:</strong> <a href="https://github.com" target="_blank" rel="noopener noreferrer" style="color: #0066cc;">abss-internship/pr/45</a><br />
-          <strong>Commit:</strong> <code style="background: #f5f5f7; padding: 2px 6px; border-radius: 4px;">7e2f5b8</code><br />
-          <strong>Live Preview:</strong> <a href="/" target="_blank" rel="noopener noreferrer" style="color: #0066cc;">View Preview</a>
-        </p>
-      </div>
+    <div class="card" style="padding: 48px 24px; border-radius: 16px; background: #ffffff; text-align: center;">
+      <div style="font-size: 2.2rem; margin-bottom: 12px;">📝</div>
+      <h2 style="font-size: 1.3rem; margin: 0 0 8px;">No Submissions Awaiting Review</h2>
+      <p style="color: #6e6e73; max-width: 500px; margin: 0 auto 20px; font-size: 0.9rem;">
+        When enrolled interns submit milestone code pull requests or deliverables, mentor evaluation rubrics will appear here automatically.
+      </p>
+      <a href="/admin/submissions" class="btn btn-secondary" style="display: inline-block; padding: 8px 18px; font-size: 0.85rem; text-decoration: none;">Check All Submissions</a>
     </div>
   
       </section>
@@ -157,6 +127,7 @@
     <script src="/src/config/admin-config.js"></script>
     <script src="/src/services/admin-api.js"></script>
     <script src="/src/scripts/admin-auth-guard.js"></script>
+    <script src="/src/scripts/admin-app.js"></script>
     <script src="/src/scripts/script.js"></script>
   </body>
 </html>
