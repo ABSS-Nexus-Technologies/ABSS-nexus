@@ -4,9 +4,6 @@
   "compatibility_date": "2024-09-23",
   "compatibility_flags": ["nodejs_compat"],
   "pages_build_output_dir": "./dist",
-  "build": {
-    "command": "npm run build"
-  },
   "d1_databases": [
     {
       "binding": "ABSS_DB",
