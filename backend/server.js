@@ -102,6 +102,25 @@ const toFirestoreFields = (data) => {
 };
 
 const syncToFirestoreServer = (collectionName, docId, data) => {
+  if (process.env.NODE_ENV === "test" || process.env.SKIP_FIRESTORE_SYNC === "true") return;
+  if (!data) return;
+
+  // Strictly block automated test records from polluting live production Firebase
+  const isTest =
+    data.client === "Regression Test Client" ||
+    data.client === "Firebase Test Client" ||
+    data.name === "Test Student" ||
+    data.studentName === "Test Audit Learner" ||
+    data.studentName === "Rahul Verma" ||
+    data.studentName === "Aarav Sharma" ||
+    String(data.email || "").includes("regression@") ||
+    String(data.email || "").includes("test.student.") ||
+    String(data.email || "").includes("@test.com") ||
+    String(data.email || "").includes("@example.com") ||
+    String(docId || "").includes("test") ||
+    String(docId || "").includes("TEST");
+  if (isTest) return;
+
   const safeData = { ...data };
   delete safeData.password;
   delete safeData.passwordHash;

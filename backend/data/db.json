@@ -1,45 +1,10 @@
 {
-  "leads": [
-    {
-      "id": "lead-1792790130701",
-      "client": "Firebase Test Client",
-      "service": "Cloud & AI Architecture",
-      "budget": 25000,
-      "status": "New",
-      "contact": ""
-    },
-    {
-      "id": "lead-1792430831473",
-      "client": "Website Inquiry",
-      "service": "Website Development",
-      "budget": 15000,
-      "status": "New",
-      "contact": ""
-    }
-  ],
+  "leads": [],
   "projects": [],
   "clients": [],
   "tickets": [],
   "pricing": [],
   "activity": [
-    "Regression Test Client submitted website inquiry",
-    "Firebase Test Client submitted website inquiry",
-    "Regression Test Client submitted website inquiry",
-    "Regression Test Client submitted website inquiry",
-    "Regression Test Client submitted website inquiry",
-    "Regression Test Client submitted website inquiry",
-    "Regression Test Client submitted website inquiry",
-    "Regression Test Client submitted website inquiry",
-    "Regression Test Client submitted website inquiry",
-    "Regression Test Client submitted website inquiry",
-    "Regression Test Client submitted website inquiry",
-    "Regression Test Client submitted website inquiry",
-    "Regression Test Client submitted website inquiry",
-    "Regression Test Client submitted website inquiry",
-    "Regression Test Client submitted website inquiry",
-    "Regression Test Client submitted website inquiry",
-    "admin revoked certificate ABSS-CERT-TEST-1792688060992",
-    "admin issued certificate ABSS-CERT-TEST-1792688060992 to Test Audit Learner",
     "Regression Test Client submitted website inquiry",
     "Regression Test Client submitted website inquiry"
   ],
@@ -137,21 +102,7 @@
       "updatedAt": "2026-10-19T17:00:00.000Z"
     }
   ],
-  "students": [
-    {
-      "id": "student-61b9b8eb-98cf-4627-b7c5-a6b740beaa49",
-      "name": "Aarav Sharma",
-      "email": "student_1792753551468@test.com",
-      "phone": "9876543210",
-      "passwordHash": "pbkdf2$89b89a0c3b13dcd03f49d69ad3885233$be7d9fbe91c5996008f922afd8fff7fe367a9131d6db3e0ee7dc72043403f47d",
-      "track": "web-development",
-      "duration": "4 week",
-      "status": "active",
-      "emailVerified": 1,
-      "createdAt": "2026-10-23T11:05:51.482Z",
-      "updatedAt": "2026-10-23T11:05:51.497Z"
-    }
-  ],
+  "students": [],
   "studentTokens": [],
   "studentSessions": [],
   "certificates": [

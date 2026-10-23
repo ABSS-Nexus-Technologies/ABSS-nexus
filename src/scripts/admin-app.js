@@ -84,10 +84,10 @@
 
     // Ensure metrics object
     // Filter out automated test artifacts so the admin console displays only authentic live data
-    const isTestLead = (l) => l.client === "Regression Test Client" || String(l.email || "").includes("regression@example.com");
-    const isTestStudent = (s) => String(s.email || "").includes("test.student.") || s.name === "Test Student";
-    const isTestCert = (c) => c.studentName === "Test Audit Learner" || c.status === "Revoked";
-    const isTestApp = (a) => String(a.email || "").includes("@example.com");
+    const isTestLead = (l) => l.client === "Regression Test Client" || l.client === "Firebase Test Client" || String(l.email || "").includes("regression@") || String(l.email || "").includes("test@") || String(l.email || "").includes("example.com");
+    const isTestStudent = (s) => String(s.email || "").includes("test.") || String(s.email || "").includes("@test.com") || s.name === "Test Student" || s.name === "Aarav Sharma";
+    const isTestCert = (c) => c.studentName === "Test Audit Learner" || c.studentName === "Aarav Sharma" || c.studentName === "Priya Verma" || c.studentName === "Rohan Patel" || c.status === "Revoked" || String(c.id).includes("TEST");
+    const isTestApp = (a) => String(a.email || "").includes("@example.com") || a.name === "Aarav Sharma";
 
     const leads = (liveState.leads || []).filter((l) => !isTestLead(l));
     const applications = (liveState.internshipApplications || []).filter((a) => !isTestApp(a));
