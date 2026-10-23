@@ -5,18 +5,7 @@
   "tickets": [],
   "pricing": [],
   "activity": [],
-  "internshipApplications": [
-    {
-      "id": "ABSS-2026-WD-8492",
-      "name": "Aarav Sharma",
-      "email": "aarav.sharma@example.com",
-      "program": "Web Engineering Internship Track",
-      "status": "Under Review",
-      "step": 2,
-      "submittedAt": "April 02, 2026",
-      "notes": "Technical portfolio submitted. Application is currently under mentor technical review."
-    }
-  ],
+  "internshipApplications": [],
   "internshipPrograms": [
     {
       "id": "prog-web-dev",
@@ -102,74 +91,6 @@
   "students": [],
   "studentTokens": [],
   "studentSessions": [],
-  "certificates": [
-    {
-      "id": "ABSS-CERT-2026-WD-1042",
-      "studentName": "Aarav Sharma",
-      "program": "Full-Stack Web Engineering",
-      "issueDate": "March 15, 2026",
-      "grade": "Grade A+ (Distinction - 96%)",
-      "status": "Authentic",
-      "verificationHash": "7e2f5b89a1c4d6e8f0123456789abcdef0123456789abcdef0123456789abcde",
-      "skills": [
-        "HTML5",
-        "CSS3",
-        "JavaScript ES6+",
-        "React",
-        "Cloudflare Workers",
-        "REST APIs"
-      ],
-      "issuer": "ABSS Nexus Technologies",
-      "verificationUrl": "https://abssnexus.in/verify-certificate?id=ABSS-CERT-2026-WD-1042"
-    },
-    {
-      "id": "ABSS-CERT-2026-AI-2084",
-      "studentName": "Priya Verma",
-      "program": "AI & Applied Machine Learning",
-      "issueDate": "February 28, 2026",
-      "grade": "Grade A (92%)",
-      "status": "Authentic",
-      "verificationHash": "4a1d9c3e8b7f2015e6834199abcdef1029384756abcdef0129384756abcdef12",
-      "skills": [
-        "Python",
-        "PyTorch",
-        "Prompt Engineering",
-        "OpenAI API",
-        "Data Pipelines"
-      ],
-      "issuer": "ABSS Nexus Technologies",
-      "verificationUrl": "https://abssnexus.in/verify-certificate?id=ABSS-CERT-2026-AI-2084"
-    },
-    {
-      "id": "ABSS-CERT-2026-SD-3091",
-      "studentName": "Rohan Patel",
-      "program": "Software & Full-Stack Development",
-      "issueDate": "January 20, 2026",
-      "grade": "Grade A+ (Distinction - 98%)",
-      "status": "Authentic",
-      "verificationHash": "8f3b2c1d9e0a4f5b6c7d8e9f0a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b",
-      "skills": [
-        "TypeScript",
-        "Node.js",
-        "PostgreSQL",
-        "Docker",
-        "System Design"
-      ],
-      "issuer": "ABSS Nexus Technologies",
-      "verificationUrl": "https://abssnexus.in/verify-certificate?id=ABSS-CERT-2026-SD-3091"
-    }
-  ],
-  "internshipPayments": [
-    {
-      "txnId": "TXN-84920482",
-      "applicationId": "ABSS-2026-WD-8492",
-      "studentName": "Aarav Sharma",
-      "amount": "₹4,999",
-      "status": "Paid",
-      "program": "Web Engineering Track",
-      "paymentDate": "April 05, 2026",
-      "receiptNumber": "ABSS-REC-2026-0492",
-      "mode": "UPI / Net Banking"
-    }
-  ]
+  "certificates": [],
+  "internshipPayments": []
 }
