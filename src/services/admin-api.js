@@ -485,11 +485,16 @@
 
     async createCertificate(cert) {
       if (isApiMode() && getToken()) {
-        return requestJson("POST", "/api/admin/internships/certificates", cert);
+        const res = await requestJson("POST", "/api/admin/internships/certificates", cert);
+        if (res?.certificate) {
+          try { window.AbssDataSync?.dualSyncRecord("certificate", res.certificate); } catch {}
+        }
+        return res;
       }
       const state = readJson(stateKey, { certificates: [] });
       state.certificates = [cert, ...(state.certificates || [])];
       writeJson(stateKey, state);
+      try { window.AbssDataSync?.dualSyncRecord("certificate", cert); } catch {}
       return { ok: true, certificate: cert };
     },
 
