@@ -83,7 +83,7 @@
             <span>or sign in with email</span>
           </div>
 
-          <form id="login-form" novalidate>
+          <form action="/api/internships/auth/login" method="POST" id="login-form">
             <div class="auth-form-group">
               <label for="login-email">Email Address *</label>
               <input class="auth-input" type="email" id="login-email" name="email" required placeholder="your.email@example.com" autocomplete="email" />
@@ -192,126 +192,6 @@
     <script src="/src/scripts/components/footer.js" defer></script>
     <script src="/src/scripts/script.js"></script>
 
-    <script src="/src/config/admin-config.js"></script>
-    <script src="/src/services/admin-api.js"></script>
-    <script src="/src/scripts/script.js"></script>
-    <script>
-      (function() {
-        const form = document.getElementById("login-form");
-        const alertBox = document.getElementById("auth-alert");
-        const submitBtn = document.getElementById("login-submit-btn");
-
-        function showAlert(type, message, htmlContent = "") {
-          alertBox.className = "auth-alert visible auth-alert-" + type;
-          if (htmlContent) {
-            alertBox.innerHTML = htmlContent;
-          } else {
-            alertBox.textContent = message;
-          }
-        }
-
-        const urlParams = new URLSearchParams(window.location.search);
-        if (urlParams.get("verified") === "1") {
-          showAlert("success", "Email address verified successfully! Please log in to your account.");
-        } else if (urlParams.get("registered") === "1") {
-          showAlert("success", "Account created successfully! Please log in.");
-        }
-
-        form.addEventListener("submit", async function(e) {
-          e.preventDefault();
-          alertBox.className = "auth-alert";
-
-          const email = document.getElementById("login-email").value.trim().toLowerCase();
-          const password = document.getElementById("login-password").value;
-
-          if (!email || !password) {
-            showAlert("error", "Please provide both your email address and password.");
-            return;
-          }
-
-          submitBtn.disabled = true;
-          submitBtn.textContent = "Authenticating...";
-
-          try {
-            const res = await fetch("/api/internships/auth/login", {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({ email, password })
-            });
-            const data = await res.json();
-
-            if (!res.ok) {
-              if (res.status === 403 && data.emailVerified === false) {
-                let verifyHtml = "<strong>" + (data.error || "Please verify your email address before logging in.") + "</strong>";
-                if (data.devVerificationUrl) {
-                  verifyHtml += `<div style="margin-top: 12px;"><a href="${data.devVerificationUrl}" class="btn-primary" style="display:inline-block; padding: 8px 16px; font-size: 0.88rem; background: #0066cc; color: #fff; border-radius: 8px; text-decoration: none; font-weight: 600;">Activate &amp; Verify Email Now &rarr;</a></div>`;
-                } else {
-                  verifyHtml += `<div style="margin-top: 8px;"><a href="/internships/verify-email" style="color: #0066CC; text-decoration: underline; font-weight: 600;">Click here to verify your email address &rarr;</a></div>`;
-                }
-                showAlert("error", "", verifyHtml);
-              } else {
-                showAlert("error", data.error || "Invalid email or password.");
-              }
-              submitBtn.disabled = false;
-              submitBtn.textContent = "Log In";
-              return;
-            }
-
-            showAlert("success", "Login successful! Redirecting to dashboard...");
-            const urlParams = new URLSearchParams(window.location.search);
-            const redirectTarget = urlParams.get("redirect");
-            const safeRedirect = (redirectTarget && redirectTarget.startsWith("/") && !redirectTarget.startsWith("//"))
-              ? redirectTarget
-              : "/internships/dashboard";
-
-            setTimeout(() => {
-              window.location.href = safeRedirect;
-            }, 500);
-          } catch (err) {
-            showAlert("error", "Network connection error. Please try again.");
-            submitBtn.disabled = false;
-            submitBtn.textContent = "Log In";
-          }
-        });
-      })();
-    </script>
-    <script type="module">
-      import { handleGoogleSignInFlow } from "/src/scripts/firebase-auth.js";
-
-      const googleBtn = document.getElementById("btn-google-auth");
-      const alertBox = document.getElementById("auth-alert");
-
-      function showAlert(type, message) {
-        alertBox.className = "auth-alert visible auth-alert-" + type;
-        alertBox.textContent = message;
-      }
-
-      if (googleBtn) {
-        googleBtn.addEventListener("click", async () => {
-          alertBox.className = "auth-alert";
-          const originalHtml = googleBtn.innerHTML;
-          googleBtn.disabled = true;
-          googleBtn.innerHTML = `<span>Connecting to Google...</span>`;
-
-          try {
-            const result = await handleGoogleSignInFlow(async (googleUser) => {
-              const entered = window.prompt(`Welcome, ${googleUser.displayName || 'Student'}!\n\nPlease enter your 10-digit WhatsApp / Mobile number to complete your registration:`);
-              return entered;
-            });
-
-            showAlert("success", "Login successful! Redirecting to dashboard...");
-            const urlParams = new URLSearchParams(window.location.search);
-            const redirectTarget = urlParams.get("redirect") || result.redirect || "/internships/dashboard";
-            setTimeout(() => {
-              window.location.href = redirectTarget;
-            }, 600);
-          } catch (err) {
-            showAlert("error", err.message || "Google sign-in could not be completed.");
-            googleBtn.disabled = false;
-            googleBtn.innerHTML = originalHtml;
-          }
-        });
-      }
-    </script>
+    <script src="/src/scripts/auth.js" defer></script>
   </body>
 </html>

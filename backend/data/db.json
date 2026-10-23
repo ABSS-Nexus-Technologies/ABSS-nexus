@@ -1,6 +1,30 @@
 {
   "leads": [
     {
+      "id": "lead-1792753680215",
+      "client": "Regression Test Client",
+      "service": "Website Development",
+      "budget": 15000,
+      "status": "New",
+      "contact": ""
+    },
+    {
+      "id": "lead-1792735682630",
+      "client": "Regression Test Client",
+      "service": "Website Development",
+      "budget": 15000,
+      "status": "New",
+      "contact": ""
+    },
+    {
+      "id": "lead-1792732752522",
+      "client": "Regression Test Client",
+      "service": "Website Development",
+      "budget": 15000,
+      "status": "New",
+      "contact": ""
+    },
+    {
       "id": "lead-1792707851262",
       "client": "Regression Test Client",
       "service": "Website Development",
@@ -413,6 +437,9 @@
     "Regression Test Client submitted website inquiry",
     "Regression Test Client submitted website inquiry",
     "Regression Test Client submitted website inquiry",
+    "Regression Test Client submitted website inquiry",
+    "Regression Test Client submitted website inquiry",
+    "Regression Test Client submitted website inquiry",
     "admin revoked certificate ABSS-CERT-TEST-1792688060992",
     "admin issued certificate ABSS-CERT-TEST-1792688060992 to Test Audit Learner",
     "Regression Test Client submitted website inquiry",
@@ -420,9 +447,6 @@
     "Regression Test Client submitted website inquiry",
     "admin revoked certificate ABSS-CERT-TEST-1792685283343",
     "admin issued certificate ABSS-CERT-TEST-1792685283343 to Test Audit Learner",
-    "Regression Test Client submitted website inquiry",
-    "Regression Test Client submitted website inquiry",
-    "Regression Test Client submitted website inquiry",
     "Regression Test Client submitted website inquiry",
     "Regression Test Client submitted website inquiry",
     "Regression Test Client submitted website inquiry"
@@ -1067,6 +1091,71 @@
       "emailVerified": 1,
       "createdAt": "2026-10-22T22:24:11.194Z",
       "updatedAt": "2026-10-22T22:24:11.236Z"
+    },
+    {
+      "id": "student-9226d4fe-de73-4659-af0e-f9f6d2c21e02",
+      "name": "Test User",
+      "email": "testuser.1792732226922@example.com",
+      "phone": "9876543210",
+      "passwordHash": "pbkdf2$394f527499eb4952441ab2a246cad7cb$5770ef1c44f56ba41589c6b8d63bb223adc93006a058dd84bbcc2306ee56c198",
+      "track": "Web Development",
+      "duration": "3 Months",
+      "status": "active",
+      "emailVerified": 1,
+      "createdAt": "2026-10-23T05:10:26.967Z",
+      "updatedAt": "2026-10-23T05:10:26.989Z"
+    },
+    {
+      "id": "student-3aa88560-a2c6-4805-b215-458063f693ca",
+      "name": "Test Student",
+      "email": "test.student.1792732752437@example.com",
+      "phone": "",
+      "passwordHash": "pbkdf2$d912d6652f75dbc4de89994a8ae4c4de$a30362e6432495200ab3c30913cac46dc9f304590a6e428fa160d62a0b7e4abb",
+      "track": "",
+      "duration": "",
+      "status": "active",
+      "emailVerified": 1,
+      "createdAt": "2026-10-23T05:19:12.450Z",
+      "updatedAt": "2026-10-23T05:19:12.495Z"
+    },
+    {
+      "id": "student-9d77cf30-d571-48b7-a588-a7929cdf69b9",
+      "name": "Test Student",
+      "email": "test.student.1792735682545@example.com",
+      "phone": "",
+      "passwordHash": "pbkdf2$c28c5b7d67b68a5f5f4993b281b9a14a$4c14270deecafe11ad00c6ff517b74c591d8290931f39c1c978ab74f38ed0e4f",
+      "track": "",
+      "duration": "",
+      "status": "active",
+      "emailVerified": 1,
+      "createdAt": "2026-10-23T06:08:02.558Z",
+      "updatedAt": "2026-10-23T06:08:02.602Z"
+    },
+    {
+      "id": "student-61b9b8eb-98cf-4627-b7c5-a6b740beaa49",
+      "name": "Aarav Sharma",
+      "email": "student_1792753551468@test.com",
+      "phone": "9876543210",
+      "passwordHash": "pbkdf2$89b89a0c3b13dcd03f49d69ad3885233$be7d9fbe91c5996008f922afd8fff7fe367a9131d6db3e0ee7dc72043403f47d",
+      "track": "web-development",
+      "duration": "4 week",
+      "status": "active",
+      "emailVerified": 1,
+      "createdAt": "2026-10-23T11:05:51.482Z",
+      "updatedAt": "2026-10-23T11:05:51.497Z"
+    },
+    {
+      "id": "student-b66c598c-9278-4388-a152-32a4c68ebbf6",
+      "name": "Test Student",
+      "email": "test.student.1792753680110@example.com",
+      "phone": "",
+      "passwordHash": "pbkdf2$703b41f58aa800a233626d14e9bdd7cd$84ef6753b9d93e212216458b97bc7925bede12719c2ee75107fac7976d93fe0a",
+      "track": "",
+      "duration": "",
+      "status": "active",
+      "emailVerified": 1,
+      "createdAt": "2026-10-23T11:08:00.124Z",
+      "updatedAt": "2026-10-23T11:08:00.180Z"
     }
   ],
   "studentTokens": [
@@ -1951,6 +2040,96 @@
       "expiresAt": "2026-10-22T23:24:11.224Z",
       "usedAt": "2026-10-22T22:24:11.225Z",
       "createdAt": "2026-10-22T22:24:11.224Z"
+    },
+    {
+      "id": "token-61c39c22-a7fb-4e7f-9023-16f242d5bd3e",
+      "studentId": "student-9226d4fe-de73-4659-af0e-f9f6d2c21e02",
+      "tokenHash": "3eff3761f32552c8dc2048ba55395ddcc85fc2294892a1f65c1fca95702d153a",
+      "tokenType": "email_verification",
+      "expiresAt": "2026-10-24T05:10:26.967Z",
+      "usedAt": "2026-10-23T05:10:26.989Z",
+      "createdAt": "2026-10-23T05:10:26.967Z"
+    },
+    {
+      "id": "token-453de3a3-db71-4b6d-9570-cc8fb3182906",
+      "studentId": "student-3aa88560-a2c6-4805-b215-458063f693ca",
+      "tokenHash": "6396ea7bcbffab245f5ddb46284273d179d1ae82840b0a84f82f913862c4d879",
+      "tokenType": "email_verification",
+      "expiresAt": "2026-10-24T05:19:12.450Z",
+      "usedAt": "2026-10-23T05:19:12.466Z",
+      "createdAt": "2026-10-23T05:19:12.450Z"
+    },
+    {
+      "id": "token-7bcf8a24-b464-4c8a-acbe-a5aa9cc22388",
+      "studentId": "student-3aa88560-a2c6-4805-b215-458063f693ca",
+      "tokenHash": "b049482d56c45aa6c1611ad9282a6dc7c47c2c6c1d0c1da751ee29d11607cfa7",
+      "tokenType": "password_reset",
+      "expiresAt": "2026-10-23T06:19:12.482Z",
+      "usedAt": "2026-10-23T05:19:12.484Z",
+      "createdAt": "2026-10-23T05:19:12.482Z"
+    },
+    {
+      "id": "token-ee5b30f5-f94d-4a3a-971b-74101621349e",
+      "studentId": "student-9d77cf30-d571-48b7-a588-a7929cdf69b9",
+      "tokenHash": "99d259231630db327cc932d5974cee31a6018a16ca2cc4807eeff02474f7f8cc",
+      "tokenType": "email_verification",
+      "expiresAt": "2026-10-24T06:08:02.558Z",
+      "usedAt": "2026-10-23T06:08:02.573Z",
+      "createdAt": "2026-10-23T06:08:02.558Z"
+    },
+    {
+      "id": "token-87af0293-651e-4640-b6e3-1ecddc6eeb17",
+      "studentId": "student-9d77cf30-d571-48b7-a588-a7929cdf69b9",
+      "tokenHash": "3b5182315cf7a7e0f44a5680061a87e886d3798021b5d3545099b558153b1c8a",
+      "tokenType": "password_reset",
+      "expiresAt": "2026-10-23T07:08:02.590Z",
+      "usedAt": "2026-10-23T06:08:02.591Z",
+      "createdAt": "2026-10-23T06:08:02.590Z"
+    },
+    {
+      "id": "token-d17ef3ee-906c-43ad-b5c2-a2587123a543",
+      "studentId": "student-61b9b8eb-98cf-4627-b7c5-a6b740beaa49",
+      "tokenHash": "128c2ee0b441767a6f671f922c6ece4c232c55daa85b1bfa84f155c758f26a19",
+      "tokenType": "email_verification",
+      "expiresAt": "2026-10-24T11:05:51.483Z",
+      "usedAt": "2026-10-23T11:05:51.497Z",
+      "createdAt": "2026-10-23T11:05:51.483Z"
+    },
+    {
+      "id": "token-285d37bf-5d18-46c4-bd03-721189852429",
+      "studentId": "student-61b9b8eb-98cf-4627-b7c5-a6b740beaa49",
+      "tokenHash": "ca0b4fb5d5e89618b3feb0a4720e00e87f8af964d83ea5fa98aba617419a3d5d",
+      "tokenType": "email_verification",
+      "expiresAt": "2026-10-24T11:05:51.496Z",
+      "usedAt": null,
+      "createdAt": "2026-10-23T11:05:51.496Z"
+    },
+    {
+      "id": "token-a46041a2-8f77-4978-8997-a00537767144",
+      "studentId": "student-b66c598c-9278-4388-a152-32a4c68ebbf6",
+      "tokenHash": "ad925bf9042a75b9da7c593867104b59d0433664248eeff4aaf61555d919dc63",
+      "tokenType": "email_verification",
+      "expiresAt": "2026-10-24T11:08:00.124Z",
+      "usedAt": "2026-10-23T11:08:00.143Z",
+      "createdAt": "2026-10-23T11:08:00.124Z"
+    },
+    {
+      "id": "token-b3958b30-7888-4327-b798-8c81ac31c75e",
+      "studentId": "student-b66c598c-9278-4388-a152-32a4c68ebbf6",
+      "tokenHash": "6c2f318074b22457d14a5a1675e29811949becf0c171cedaf76042a7222c404f",
+      "tokenType": "email_verification",
+      "expiresAt": "2026-10-24T11:08:00.139Z",
+      "usedAt": null,
+      "createdAt": "2026-10-23T11:08:00.139Z"
+    },
+    {
+      "id": "token-25ed0ad2-553f-42ac-a47c-fd98376f4c16",
+      "studentId": "student-b66c598c-9278-4388-a152-32a4c68ebbf6",
+      "tokenHash": "5613f68f99cd91f0b8941d468c7b9a2410910bc9ae63d53c96f90bbc10fd20f9",
+      "tokenType": "password_reset",
+      "expiresAt": "2026-10-23T12:08:00.165Z",
+      "usedAt": "2026-10-23T11:08:00.167Z",
+      "createdAt": "2026-10-23T11:08:00.165Z"
     }
   ],
   "studentSessions": [
@@ -1960,6 +2139,27 @@
       "sessionHash": "bc40949c6ba647e0a5fcda74a1a100bed2886f9b8a65e335e94f09a4041ad410",
       "expiresAt": "2026-10-29T16:42:28.828Z",
       "createdAt": "2026-10-22T16:42:28.828Z"
+    },
+    {
+      "id": "sess-55b5a548-5a0e-433f-9c31-1c8d1a2349e8",
+      "studentId": "student-9226d4fe-de73-4659-af0e-f9f6d2c21e02",
+      "sessionHash": "dea25a43f6920747dd86dfb93b250b60338de4515a07b59bb26379320b39f0d9",
+      "expiresAt": "2026-10-30T05:10:27.004Z",
+      "createdAt": "2026-10-23T05:10:27.004Z"
+    },
+    {
+      "id": "sess-52d0cdac-cd8a-4c92-843d-a4470805fc0c",
+      "studentId": "student-61b9b8eb-98cf-4627-b7c5-a6b740beaa49",
+      "sessionHash": "ab226b9e603314cc942bd72499c44e98885db14ef20550a2708056241b31d28a",
+      "expiresAt": "2026-10-30T11:05:51.510Z",
+      "createdAt": "2026-10-23T11:05:51.510Z"
+    },
+    {
+      "id": "sess-f0bf31f0-4d64-4486-ac72-4b79efab66b2",
+      "studentId": "student-61b9b8eb-98cf-4627-b7c5-a6b740beaa49",
+      "sessionHash": "1acc8bcf7a08151aad50e575a0b68286408ca35570cc31e6ae2514c31522b96e",
+      "expiresAt": "2026-10-30T11:05:51.524Z",
+      "createdAt": "2026-10-23T11:05:51.524Z"
     }
   ],
   "certificates": [

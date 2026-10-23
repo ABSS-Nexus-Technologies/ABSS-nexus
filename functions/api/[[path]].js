@@ -327,12 +327,14 @@ const parseCookies = (request) => {
   return list;
 };
 
-const buildSessionCookie = (rawToken, maxAge = 7 * 24 * 3600) => {
-  return `abss_student_session=${encodeURIComponent(rawToken)}; Path=/; HttpOnly; SameSite=Lax; Max-Age=${maxAge}; Secure`;
+const buildSessionCookie = (rawToken, maxAge = 7 * 24 * 3600, request = null) => {
+  const isHttps = !request || (request.url && request.url.startsWith("https://"));
+  return `abss_student_session=${encodeURIComponent(rawToken)}; Path=/; HttpOnly; SameSite=Lax; Max-Age=${maxAge}${isHttps ? "; Secure" : ""}`;
 };
 
-const buildLogoutCookie = () => {
-  return "abss_student_session=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT; HttpOnly; SameSite=Lax; Secure";
+const buildLogoutCookie = (request = null) => {
+  const isHttps = !request || (request.url && request.url.startsWith("https://"));
+  return `abss_student_session=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT; HttpOnly; SameSite=Lax${isHttps ? "; Secure" : ""}`;
 };
 
 const generateRandomHex = (bytes = 32) => {
@@ -1288,7 +1290,16 @@ export async function onRequest(context) {
         try {
           await initializeDatabase(env.ABSS_DB);
           const student = await findD1StudentByEmail(env.ABSS_DB, email);
+          const acceptsHtml = (request.headers.get("accept") || "").includes("text/html");
+          const isAjax = request.headers.get("x-requested-with") || (request.headers.get("content-type") || "").includes("application/json");
+
           if (!student || !(await verifyPassword(password, student.passwordHash))) {
+            if (acceptsHtml && !isAjax) {
+              return new Response(null, {
+                status: 302,
+                headers: { Location: `/internships/login?error=${encodeURIComponent("Invalid email or password.")}` },
+              });
+            }
             return respond(401, { error: "Invalid email or password." });
           }
 
@@ -1309,6 +1320,15 @@ export async function onRequest(context) {
               await createD1VerificationToken(env.ABSS_DB, tokenRecord);
               devVerificationUrl = `/internships/verify-email?token=${rawToken}`;
             }
+            if (acceptsHtml && !isAjax) {
+              const redir = devVerificationUrl
+                ? `/internships/login?error=${encodeURIComponent("Please verify your email address before logging in.")}&devVerificationUrl=${encodeURIComponent(devVerificationUrl)}`
+                : `/internships/login?error=${encodeURIComponent("Please verify your email address before logging in.")}`;
+              return new Response(null, {
+                status: 302,
+                headers: { Location: redir },
+              });
+            }
             return respond(403, {
               error: "Please verify your email address before logging in.",
               emailVerified: false,
@@ -1326,14 +1346,12 @@ export async function onRequest(context) {
 
           await createD1StudentSession(env.ABSS_DB, sessionRecord);
 
-          const acceptsHtml = (request.headers.get("accept") || "").includes("text/html");
-          const isAjax = request.headers.get("x-requested-with") || (request.headers.get("content-type") || "").includes("application/json");
           if (acceptsHtml && !isAjax) {
             return new Response(null, {
               status: 302,
               headers: {
                 Location: "/internships/dashboard",
-                "Set-Cookie": buildSessionCookie(rawSessionToken),
+                "Set-Cookie": buildSessionCookie(rawSessionToken, 7 * 24 * 3600, request),
               },
             });
           }
@@ -1350,7 +1368,7 @@ export async function onRequest(context) {
                 emailVerified: true,
               },
             },
-            { "Set-Cookie": buildSessionCookie(rawSessionToken) }
+            { "Set-Cookie": buildSessionCookie(rawSessionToken, 7 * 24 * 3600, request) }
           );
         } catch (err) {
           safeLogError("D1 student login error", err);
@@ -1362,7 +1380,16 @@ export async function onRequest(context) {
         const state = await readState(env);
         const student = (state.students || []).find((s) => s.email.toLowerCase() === email);
 
+        const acceptsHtml = (request.headers.get("accept") || "").includes("text/html");
+        const isAjax = request.headers.get("x-requested-with") || (request.headers.get("content-type") || "").includes("application/json");
+
         if (!student || !(await verifyPassword(password, student.passwordHash))) {
+          if (acceptsHtml && !isAjax) {
+            return new Response(null, {
+              status: 302,
+              headers: { Location: `/internships/login?error=${encodeURIComponent("Invalid email or password.")}` },
+            });
+          }
           return respond(401, { error: "Invalid email or password." });
         }
 
@@ -1385,6 +1412,15 @@ export async function onRequest(context) {
             await writeState(env, state);
             devVerificationUrl = `/internships/verify-email?token=${rawToken}`;
           }
+          if (acceptsHtml && !isAjax) {
+            const redir = devVerificationUrl
+              ? `/internships/login?error=${encodeURIComponent("Please verify your email address before logging in.")}&devVerificationUrl=${encodeURIComponent(devVerificationUrl)}`
+              : `/internships/login?error=${encodeURIComponent("Please verify your email address before logging in.")}`;
+            return new Response(null, {
+              status: 302,
+              headers: { Location: redir },
+            });
+          }
           return respond(403, {
             error: "Please verify your email address before logging in.",
             emailVerified: false,
@@ -1402,14 +1438,12 @@ export async function onRequest(context) {
         });
         await writeState(env, state);
 
-        const acceptsHtml = (request.headers.get("accept") || "").includes("text/html");
-        const isAjax = request.headers.get("x-requested-with") || (request.headers.get("content-type") || "").includes("application/json");
         if (acceptsHtml && !isAjax) {
           return new Response(null, {
             status: 302,
             headers: {
               Location: "/internships/dashboard",
-              "Set-Cookie": buildSessionCookie(rawSessionToken),
+              "Set-Cookie": buildSessionCookie(rawSessionToken, 7 * 24 * 3600, request),
             },
           });
         }
@@ -1426,7 +1460,7 @@ export async function onRequest(context) {
               emailVerified: true,
             },
           },
-          { "Set-Cookie": buildSessionCookie(rawSessionToken) }
+          { "Set-Cookie": buildSessionCookie(rawSessionToken, 7 * 24 * 3600, request) }
         );
       }
 
@@ -1528,7 +1562,7 @@ export async function onRequest(context) {
               },
               redirect: "/internships/dashboard",
             },
-            { "Set-Cookie": buildSessionCookie(rawSessionToken) }
+            { "Set-Cookie": buildSessionCookie(rawSessionToken, 7 * 24 * 3600, request) }
           );
         } catch (err) {
           safeLogError("D1 student google auth error", err);
@@ -1608,7 +1642,7 @@ export async function onRequest(context) {
           },
           redirect: "/internships/dashboard",
         },
-        { "Set-Cookie": buildSessionCookie(rawSessionToken) }
+        { "Set-Cookie": buildSessionCookie(rawSessionToken, 7 * 24 * 3600, request) }
       );
     }
 
@@ -1648,7 +1682,7 @@ export async function onRequest(context) {
           } catch {}
         }
       }
-      return respond(200, { ok: true }, { "Set-Cookie": buildLogoutCookie() });
+      return respond(200, { ok: true }, { "Set-Cookie": buildLogoutCookie(request) });
     }
 
     if (request.method === "POST" && pathname === "/api/internships/auth/forgot-password") {

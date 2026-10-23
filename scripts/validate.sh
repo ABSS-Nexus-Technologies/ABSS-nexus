@@ -4,6 +4,7 @@ set -euo pipefail
 node --check src/scripts/script.js
 node --check src/scripts/hero-3d.js
 node --check src/scripts/firebase-auth.js
+node --check src/scripts/auth.js
 node --check src/services/firebase-config.js
 node --check src/services/admin-api.js
 node --check src/config/admin-config.js

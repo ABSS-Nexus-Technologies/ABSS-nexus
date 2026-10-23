@@ -1741,13 +1741,53 @@ const server = http.createServer(async (request, response) => {
       const db = readDb();
       const student = (db.students || []).find((s) => s.email.toLowerCase() === email);
 
+      const acceptsHtml = (request.headers.accept || "").includes("text/html");
+      const isAjax = request.headers["x-requested-with"] || (request.headers["content-type"] || "").includes("application/json");
+
       if (!student || !verifyPassword(password, student.passwordHash)) {
+        if (acceptsHtml && !isAjax) {
+          response.writeHead(302, { Location: "/internships/login?error=" + encodeURIComponent("Invalid email or password.") });
+          response.end();
+          return;
+        }
         send(response, 401, { error: "Invalid email or password." });
         return;
       }
 
       if (!student.emailVerified) {
-        send(response, 403, { error: "Please verify your email address before logging in.", emailVerified: false });
+        let devVerificationUrl = null;
+        if (!isEmailConfigured) {
+          const rawToken = crypto.randomBytes(32).toString("hex");
+          const tokenHash = hashToken(rawToken);
+          const tokenRecord = {
+            id: `token-${crypto.randomUUID()}`,
+            studentId: student.id,
+            tokenHash,
+            tokenType: "email_verification",
+            expiresAt: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString(),
+            usedAt: null,
+            createdAt: new Date().toISOString(),
+          };
+          db.studentTokens = db.studentTokens || [];
+          db.studentTokens.push(tokenRecord);
+          writeDb(db);
+          devVerificationUrl = `/internships/verify-email?token=${rawToken}`;
+        }
+
+        if (acceptsHtml && !isAjax) {
+          const redir = devVerificationUrl
+            ? "/internships/login?error=" + encodeURIComponent("Please verify your email address before logging in.") + "&devVerificationUrl=" + encodeURIComponent(devVerificationUrl)
+            : "/internships/login?error=" + encodeURIComponent("Please verify your email address before logging in.");
+          response.writeHead(302, { Location: redir });
+          response.end();
+          return;
+        }
+
+        send(response, 403, {
+          error: "Please verify your email address before logging in.",
+          emailVerified: false,
+          devVerificationUrl,
+        });
         return;
       }
 
@@ -1763,6 +1803,15 @@ const server = http.createServer(async (request, response) => {
 
       db.studentSessions.push(sessionRecord);
       writeDb(db);
+
+      if (acceptsHtml && !isAjax) {
+        response.writeHead(302, {
+          Location: "/internships/dashboard",
+          "Set-Cookie": buildSessionCookie(rawSessionToken),
+        });
+        response.end();
+        return;
+      }
 
       send(
         response,
