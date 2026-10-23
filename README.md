@@ -53,6 +53,14 @@ Migrate KV Data to D1
 
 The migration reads `admin-state.json` from `ABSS_ADMIN`, inserts records into D1 with idempotent inserts, writes completion metadata to `app_metadata`, and does not delete or reset the KV data.
 
+### Multi-Destination Data Synchronization Architecture
+
+The platform supports redundant real-time synchronization across:
+1. **Cloudflare D1 & SQLite Database**: Relational storage with strict transactions.
+2. **Firebase Firestore (Option A)**: Direct Google Cloud NoSQL mirroring for real-time console tracking (`abss-nexus-technologies`).
+3. **Google Sheets Live Webhook (Option B)**: Zero-latency webhook receiver automatically logging leads, students, applications, and certificates into separate formatted spreadsheet tabs on Google Drive.
+4. **Excel 1-Click Export Center**: Instant UTF-8 BOM CSV exports across all admin tables compatible with Microsoft Excel and Google Sheets.
+
 ### Rollback
 
 Do not delete the `ABSS_ADMIN` KV namespace. If D1 needs to be temporarily disconnected, remove or disable the `ABSS_DB` binding and the API will use the KV fallback. Reconnect `ABSS_DB` after the issue is fixed.
