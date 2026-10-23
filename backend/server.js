@@ -150,7 +150,7 @@ const syncToFirestoreServer = (collectionName, docId, data) => {
   });
 };
 
-const GOOGLE_SHEETS_WEBHOOK_URL = process.env.GOOGLE_SHEETS_WEBHOOK_URL || "";
+const GOOGLE_SHEETS_WEBHOOK_URL = process.env.GOOGLE_SHEETS_WEBHOOK_URL || "https://script.google.com/macros/s/AKfycbxWakMKIDy67PtVMScD8bl4R3N75dfrc3QWwtUkG9zIYQAR5fgtF_UJruR6wrzBy9y4mg/exec";
 
 const syncToGoogleSheetsServer = (type, data) => {
   const webhookUrl = GOOGLE_SHEETS_WEBHOOK_URL;

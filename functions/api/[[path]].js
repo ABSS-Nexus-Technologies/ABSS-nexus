@@ -135,7 +135,7 @@ const syncToFirestoreEdge = (collectionName, docId, data) => {
 
 const syncToGoogleSheetsEdge = (env, type, data) => {
   try {
-    const webhookUrl = env?.GOOGLE_SHEETS_WEBHOOK_URL;
+    const webhookUrl = env?.GOOGLE_SHEETS_WEBHOOK_URL || "https://script.google.com/macros/s/AKfycbxWakMKIDy67PtVMScD8bl4R3N75dfrc3QWwtUkG9zIYQAR5fgtF_UJruR6wrzBy9y4mg/exec";
     if (!webhookUrl || !data) return;
 
     const isTest =

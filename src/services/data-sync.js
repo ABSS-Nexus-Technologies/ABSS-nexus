@@ -15,12 +15,13 @@
   "use strict";
 
   const STORAGE_KEY_WEBHOOK = "abss_google_sheets_webhook_url";
+  const DEFAULT_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbxWakMKIDy67PtVMScD8bl4R3N75dfrc3QWwtUkG9zIYQAR5fgtF_UJruR6wrzBy9y4mg/exec";
 
   const getWebhookUrl = () => {
     return (
-      (typeof window !== "undefined" && window.__ABSS_CONFIG__?.GOOGLE_SHEETS_WEBHOOK_URL) ||
       (typeof localStorage !== "undefined" && localStorage.getItem(STORAGE_KEY_WEBHOOK)) ||
-      ""
+      (typeof window !== "undefined" && window.__ABSS_CONFIG__?.GOOGLE_SHEETS_WEBHOOK_URL) ||
+      DEFAULT_WEBHOOK_URL
     );
   };
 
