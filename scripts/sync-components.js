@@ -91,7 +91,7 @@ function syncComponents() {
   for (const file of files) {
     if (!file.endsWith(".html")) continue;
     // Skip student dashboard internal views and admin views (which use custom app shells)
-    if (file.startsWith("student-") || file.startsWith("admin-")) {
+    if (file.startsWith("student-") || file.startsWith("admin-") || file === "internships-dashboard.html") {
       skippedCount++;
       continue;
     }
