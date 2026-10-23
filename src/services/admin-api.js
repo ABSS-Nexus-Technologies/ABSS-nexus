@@ -178,14 +178,39 @@
     },
 
     async createLead(lead) {
+      const cleanLead = {
+        id: lead.id || `lead-${Date.now()}`,
+        client: lead.client || lead.name || "Client Inquiry",
+        name: lead.name || lead.client || "Client Inquiry",
+        email: lead.email || "",
+        phone: lead.phone || "",
+        service: lead.service || "Technical Consultation",
+        budgetLabel: lead.budgetLabel || "Flexible",
+        message: lead.message || "",
+        status: lead.status || "New",
+        createdAt: lead.createdAt || new Date().toISOString(),
+      };
+
       if (isApiMode() && getToken()) {
-        return requestJson("POST", "/api/leads/contact", lead);
+        try {
+          const res = await requestJson("POST", "/api/admin/leads", cleanLead);
+          if (res && res.lead) {
+            const state = readJson(stateKey, { leads: [] });
+            state.leads = [res.lead, ...(state.leads || []).filter((l) => l.id !== res.lead.id)];
+            writeJson(stateKey, state);
+            try { window.AbssDataSync?.dualSyncRecord("contact_lead", res.lead); } catch {}
+            return res;
+          }
+        } catch (e) {
+          console.warn("POST /api/admin/leads failed, falling back to local storage", e);
+        }
       }
 
       const state = readJson(stateKey, { leads: [] });
-      state.leads = [lead, ...(state.leads || [])];
+      state.leads = [cleanLead, ...(state.leads || [])];
       writeJson(stateKey, state);
-      return { ok: true, lead };
+      try { window.AbssDataSync?.dualSyncRecord("contact_lead", cleanLead); } catch {}
+      return { ok: true, lead: cleanLead };
     },
 
     async updateLead(id, updates) {
@@ -239,11 +264,10 @@
     },
 
     async createStudent(student) {
-      const state = this.loadState({});
       const newStudent = {
         id: student.id || `student-${Date.now()}`,
         name: student.name,
-        email: student.email,
+        email: (student.email || "").toLowerCase().trim(),
         phone: student.phone || "",
         track: student.track || "Web Development",
         duration: student.duration || "4 Weeks",
@@ -252,20 +276,40 @@
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
       };
+
+      if (isApiMode() && getToken()) {
+        try {
+          const res = await requestJson("POST", "/api/admin/internships/students", newStudent);
+          if (res && res.student) {
+            const state = readJson(stateKey, {});
+            state.students = [res.student, ...(state.students || []).filter((s) => s.id !== res.student.id)];
+            writeJson(stateKey, state);
+            try { window.AbssDataSync?.dualSyncRecord("student_registration", res.student); } catch {}
+            return res;
+          }
+        } catch (e) {
+          console.warn("POST /api/admin/internships/students failed, falling back to state save", e);
+        }
+      }
+
+      const state = readJson(stateKey, {});
       state.students = [newStudent, ...(state.students || [])];
-      await this.saveStateAsync(state);
+      writeJson(stateKey, state);
+      if (isApiMode() && getToken()) {
+        await this.saveStateAsync(state).catch(() => {});
+      }
+      try { window.AbssDataSync?.dualSyncRecord("student_registration", newStudent); } catch {}
       return { ok: true, student: newStudent };
     },
 
     async deleteStudent(id) {
       const state = this.loadState({});
       state.students = (state.students || []).filter((s) => s.id !== id);
-      await this.saveStateAsync(state);
+      await this.saveStateAsync(state).catch(() => {});
       return { ok: true };
     },
 
     async createProject(project) {
-      const state = this.loadState({});
       const newProj = {
         id: project.id || `proj-${Date.now()}`,
         name: project.name,
@@ -275,20 +319,40 @@
         status: project.status || "In Development",
         createdAt: new Date().toISOString(),
       };
+
+      if (isApiMode() && getToken()) {
+        try {
+          const res = await requestJson("POST", "/api/admin/company/projects", newProj);
+          if (res && res.project) {
+            const state = readJson(stateKey, {});
+            state.projects = [res.project, ...(state.projects || []).filter((p) => p.id !== res.project.id)];
+            writeJson(stateKey, state);
+            try { window.AbssDataSync?.dualSyncRecord("project_record", res.project); } catch {}
+            return res;
+          }
+        } catch (e) {
+          console.warn("POST /api/admin/company/projects failed", e);
+        }
+      }
+
+      const state = readJson(stateKey, {});
       state.projects = [newProj, ...(state.projects || [])];
-      await this.saveStateAsync(state);
+      writeJson(stateKey, state);
+      if (isApiMode() && getToken()) {
+        await this.saveStateAsync(state).catch(() => {});
+      }
+      try { window.AbssDataSync?.dualSyncRecord("project_record", newProj); } catch {}
       return { ok: true, project: newProj };
     },
 
     async deleteProject(id) {
       const state = this.loadState({});
       state.projects = (state.projects || []).filter((p) => p.id !== id);
-      await this.saveStateAsync(state);
+      await this.saveStateAsync(state).catch(() => {});
       return { ok: true };
     },
 
     async createClient(client) {
-      const state = this.loadState({});
       const newCli = {
         id: client.id || `cli-${Date.now()}`,
         name: client.name,
@@ -299,25 +363,45 @@
         status: client.status || "Active",
         createdAt: new Date().toISOString(),
       };
+
+      if (isApiMode() && getToken()) {
+        try {
+          const res = await requestJson("POST", "/api/admin/company/clients", newCli);
+          if (res && res.client) {
+            const state = readJson(stateKey, {});
+            state.clients = [res.client, ...(state.clients || []).filter((c) => c.id !== res.client.id)];
+            writeJson(stateKey, state);
+            try { window.AbssDataSync?.dualSyncRecord("client_record", res.client); } catch {}
+            return res;
+          }
+        } catch (e) {
+          console.warn("POST /api/admin/company/clients failed", e);
+        }
+      }
+
+      const state = readJson(stateKey, {});
       state.clients = [newCli, ...(state.clients || [])];
-      await this.saveStateAsync(state);
+      writeJson(stateKey, state);
+      if (isApiMode() && getToken()) {
+        await this.saveStateAsync(state).catch(() => {});
+      }
+      try { window.AbssDataSync?.dualSyncRecord("client_record", newCli); } catch {}
       return { ok: true, client: newCli };
     },
 
     async deleteClient(id) {
       const state = this.loadState({});
       state.clients = (state.clients || []).filter((c) => c.id !== id);
-      await this.saveStateAsync(state);
+      await this.saveStateAsync(state).catch(() => {});
       return { ok: true };
     },
 
     async createApplication(app) {
-      const state = this.loadState({});
       const newApp = {
         id: app.id || `ABSS-${new Date().getFullYear()}-APP-${Math.floor(1000 + Math.random() * 9000)}`,
         fullName: app.fullName || app.name,
         name: app.fullName || app.name,
-        email: app.email,
+        email: (app.email || "").toLowerCase().trim(),
         phone: app.phone || "",
         college: app.college || "",
         course: app.course || "",
@@ -328,13 +412,33 @@
         adminNotes: app.notes || "Registered via operations console",
         createdAt: new Date().toISOString(),
       };
+
+      if (isApiMode() && getToken()) {
+        try {
+          const res = await requestJson("POST", "/api/admin/internships/applications", newApp);
+          if (res && res.application) {
+            const state = readJson(stateKey, {});
+            state.internshipApplications = [res.application, ...(state.internshipApplications || []).filter((a) => a.id !== res.application.id)];
+            writeJson(stateKey, state);
+            try { window.AbssDataSync?.dualSyncRecord("internship_application", res.application); } catch {}
+            return res;
+          }
+        } catch (e) {
+          console.warn("POST /api/admin/internships/applications failed", e);
+        }
+      }
+
+      const state = readJson(stateKey, {});
       state.internshipApplications = [newApp, ...(state.internshipApplications || [])];
-      await this.saveStateAsync(state);
+      writeJson(stateKey, state);
+      if (isApiMode() && getToken()) {
+        await this.saveStateAsync(state).catch(() => {});
+      }
+      try { window.AbssDataSync?.dualSyncRecord("internship_application", newApp); } catch {}
       return { ok: true, application: newApp };
     },
 
     async createTask(task) {
-      const state = this.loadState({});
       const newTask = {
         id: task.id || `task-${Date.now()}`,
         title: task.title,
@@ -345,8 +449,29 @@
         instructions: task.instructions || "",
         createdAt: new Date().toISOString(),
       };
+
+      if (isApiMode() && getToken()) {
+        try {
+          const res = await requestJson("POST", "/api/admin/internships/tasks", newTask);
+          if (res && res.task) {
+            const state = readJson(stateKey, {});
+            state.tasks = [res.task, ...(state.tasks || []).filter((t) => t.id !== res.task.id)];
+            writeJson(stateKey, state);
+            try { window.AbssDataSync?.dualSyncRecord("task_record", res.task); } catch {}
+            return res;
+          }
+        } catch (e) {
+          console.warn("POST /api/admin/internships/tasks failed", e);
+        }
+      }
+
+      const state = readJson(stateKey, {});
       state.tasks = [newTask, ...(state.tasks || [])];
-      await this.saveStateAsync(state);
+      writeJson(stateKey, state);
+      if (isApiMode() && getToken()) {
+        await this.saveStateAsync(state).catch(() => {});
+      }
+      try { window.AbssDataSync?.dualSyncRecord("task_record", newTask); } catch {}
       return { ok: true, task: newTask };
     },
 

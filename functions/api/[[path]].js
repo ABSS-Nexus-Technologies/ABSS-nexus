@@ -834,6 +834,115 @@ export async function onRequest(context) {
       }
     }
 
+    if (request.method === "POST" && (route === "/api/admin/leads" || route === "/api/admin/company/leads")) {
+      const configError = requireConfiguredAdminStorage(env);
+      if (configError) return configError;
+      if (!(await verifyToken(request, env))) return respond(401, { error: "Unauthorized" });
+      let body;
+      try {
+        body = await request.json();
+      } catch {
+        return respond(400, { error: "Invalid JSON" });
+      }
+      if (!hasD1(env)) {
+        const state = await readState(env);
+        const newLead = normalizeLead({
+          id: body.id || `lead-${Date.now()}`,
+          client: body.client || body.name || "Client Inquiry",
+          name: body.name || body.client || "Client Inquiry",
+          email: body.email || "",
+          phone: body.phone || "",
+          service: body.service || "Technical Consultation",
+          budgetLabel: body.budgetLabel || "Flexible",
+          message: body.message || "",
+          status: body.status || "New",
+          createdAt: new Date().toISOString(),
+        });
+        state.leads = [newLead, ...(state.leads || [])];
+        await writeState(env, state);
+        return respond(201, { ok: true, lead: newLead });
+      }
+      try {
+        await initializeDatabase(env.ABSS_DB);
+        const lead = await createLead(env.ABSS_DB, body);
+        return respond(201, { ok: true, lead });
+      } catch (error) {
+        safeLogError("D1 lead creation failed", error);
+        return respond(500, { error: "Database error" });
+      }
+    }
+
+    if (request.method === "POST" && (route === "/api/admin/company/projects" || route === "/api/admin/projects")) {
+      const configError = requireConfiguredAdminStorage(env);
+      if (configError) return configError;
+      if (!(await verifyToken(request, env))) return respond(401, { error: "Unauthorized" });
+      let body;
+      try {
+        body = await request.json();
+      } catch {
+        return respond(400, { error: "Invalid JSON" });
+      }
+      if (hasD1(env)) {
+        try {
+          await initializeDatabase(env.ABSS_DB);
+          const project = await createProject(env.ABSS_DB, body);
+          return respond(201, { ok: true, project });
+        } catch (dbErr) {
+          safeLogError("D1 create project error", dbErr);
+          return respond(500, { error: "Database error" });
+        }
+      }
+      const state = env.ABSS_ADMIN ? await readState(env) : defaultState;
+      const newProj = {
+        id: body.id || `proj-${Date.now()}`,
+        name: body.name || "Commercial Project",
+        client: body.client || "Enterprise Client",
+        service: body.service || "Software Engineering",
+        value: Number(body.value || 0),
+        status: body.status || "In Development",
+        createdAt: new Date().toISOString(),
+      };
+      state.projects = [newProj, ...(state.projects || [])];
+      if (env.ABSS_ADMIN) await writeState(env, state);
+      return respond(201, { ok: true, project: newProj });
+    }
+
+    if (request.method === "POST" && (route === "/api/admin/company/clients" || route === "/api/admin/clients")) {
+      const configError = requireConfiguredAdminStorage(env);
+      if (configError) return configError;
+      if (!(await verifyToken(request, env))) return respond(401, { error: "Unauthorized" });
+      let body;
+      try {
+        body = await request.json();
+      } catch {
+        return respond(400, { error: "Invalid JSON" });
+      }
+      if (hasD1(env)) {
+        try {
+          await initializeDatabase(env.ABSS_DB);
+          const client = await createClient(env.ABSS_DB, body);
+          return respond(201, { ok: true, client });
+        } catch (dbErr) {
+          safeLogError("D1 create client error", dbErr);
+          return respond(500, { error: "Database error" });
+        }
+      }
+      const state = env.ABSS_ADMIN ? await readState(env) : defaultState;
+      const newCli = {
+        id: body.id || `cli-${Date.now()}`,
+        name: body.name || "Enterprise Client",
+        company: body.company || body.name || "Enterprise Client",
+        email: body.email || "",
+        phone: body.phone || "",
+        service: body.service || "IT Consulting",
+        status: body.status || "Active",
+        createdAt: new Date().toISOString(),
+      };
+      state.clients = [newCli, ...(state.clients || [])];
+      if (env.ABSS_ADMIN) await writeState(env, state);
+      return respond(201, { ok: true, client: newCli });
+    }
+
     if (request.method === "PUT" && route.startsWith("/api/admin/leads/")) {
       const configError = requireConfiguredAdminStorage(env);
       if (configError) return configError;
@@ -2010,6 +2119,104 @@ export async function onRequest(context) {
       }
       const state = env.ABSS_ADMIN ? await readState(env) : defaultState;
       return respond(200, { ok: true, students: state.students || [] });
+    }
+
+    if (request.method === "POST" && pathname === "/api/admin/internships/applications") {
+      if (!(await verifyToken(request, env))) return respond(401, { error: "Unauthorized" });
+      let body;
+      try {
+        body = await request.json();
+      } catch {
+        return respond(400, { error: "Invalid JSON" });
+      }
+      if (hasD1(env)) {
+        try {
+          await initializeDatabase(env.ABSS_DB);
+          const application = await createInternshipApplication(env.ABSS_DB, body);
+          return respond(201, { ok: true, application });
+        } catch (dbErr) {
+          safeLogError("D1 create application error", dbErr);
+          return respond(500, { error: "Database error" });
+        }
+      }
+      const state = env.ABSS_ADMIN ? await readState(env) : defaultState;
+      const newApp = {
+        id: body.id || `ABSS-${new Date().getFullYear()}-APP-${Math.floor(1000 + Math.random() * 9000)}`,
+        fullName: body.fullName || body.name || "Applicant",
+        name: body.fullName || body.name || "Applicant",
+        email: (body.email || "").toLowerCase().trim(),
+        phone: body.phone || "",
+        college: body.college || "",
+        course: body.course || "",
+        internshipProgram: body.internshipProgram || body.track || "Web Engineering Internship Track",
+        program: body.internshipProgram || body.track || "Web Engineering Internship Track",
+        status: body.status || "New",
+        notes: body.notes || "Registered via admin console",
+        adminNotes: body.notes || "Registered via admin console",
+        createdAt: body.createdAt || new Date().toISOString(),
+      };
+      state.internshipApplications = [newApp, ...(state.internshipApplications || [])];
+      if (env.ABSS_ADMIN) await writeState(env, state);
+      return respond(201, { ok: true, application: newApp });
+    }
+
+    if (request.method === "POST" && pathname === "/api/admin/internships/students") {
+      if (!(await verifyToken(request, env))) return respond(401, { error: "Unauthorized" });
+      let body;
+      try {
+        body = await request.json();
+      } catch {
+        return respond(400, { error: "Invalid JSON" });
+      }
+      const newStudent = {
+        id: body.id || `student-${Date.now()}`,
+        name: body.name || "Student",
+        email: (body.email || "").toLowerCase().trim(),
+        status: body.status || "active",
+        emailVerified: body.emailVerified ? 1 : 0,
+        createdAt: body.createdAt || new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+      };
+      if (hasD1(env)) {
+        try {
+          await initializeDatabase(env.ABSS_DB);
+          await env.ABSS_DB.prepare(
+            "INSERT INTO students (id, name, email, password_hash, status, email_verified, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)"
+          ).bind(newStudent.id, newStudent.name, newStudent.email, "", newStudent.status, newStudent.emailVerified, newStudent.createdAt, newStudent.updatedAt).run();
+          return respond(201, { ok: true, student: newStudent });
+        } catch (dbErr) {
+          safeLogError("D1 create student error", dbErr);
+          return respond(500, { error: "Database error" });
+        }
+      }
+      const state = env.ABSS_ADMIN ? await readState(env) : defaultState;
+      state.students = [newStudent, ...(state.students || [])];
+      if (env.ABSS_ADMIN) await writeState(env, state);
+      return respond(201, { ok: true, student: newStudent });
+    }
+
+    if (request.method === "POST" && pathname === "/api/admin/internships/tasks") {
+      if (!(await verifyToken(request, env))) return respond(401, { error: "Unauthorized" });
+      let body;
+      try {
+        body = await request.json();
+      } catch {
+        return respond(400, { error: "Invalid JSON" });
+      }
+      const newTask = {
+        id: body.id || `task-${Date.now()}`,
+        title: body.title || "Curriculum Task",
+        track: body.track || "All Tracks",
+        week: body.week || "Week 1",
+        points: Number(body.points || 100),
+        status: "Active",
+        instructions: body.instructions || "",
+        createdAt: new Date().toISOString(),
+      };
+      const state = env.ABSS_ADMIN ? await readState(env) : defaultState;
+      state.tasks = [newTask, ...(state.tasks || [])];
+      if (env.ABSS_ADMIN) await writeState(env, state);
+      return respond(201, { ok: true, task: newTask });
     }
 
     if (request.method === "GET" && pathname === "/api/admin/internships/overview") {

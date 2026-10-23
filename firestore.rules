@@ -1,0 +1,346 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ===============================================================
+    // Assumed Data Models
+    // ===============================================================
+    //
+    // Collection: leads (Company Database)
+    // Document ID: auto-generated or sanitised string
+    // Fields:
+    //   - client / name: string (2..120 chars) - Client or Company Contact
+    //   - email: string (valid email format, 3..254 chars)
+    //   - phone: string (optional, 0..25 chars)
+    //   - service: string (optional, 0..160 chars)
+    //   - budgetLabel / budget: string or number (optional)
+    //   - timeline: string (optional, 0..100 chars)
+    //   - message: string (optional, 0..5000 chars)
+    //   - status: string (in ['New', 'Follow Up', 'Call Booked', 'Proposal Sent', 'Converted', 'Rejected'])
+    //   - source: string (optional, 0..100 chars)
+    //   - type: string (optional, 0..80 chars)
+    //   - timestamp: string (optional, 0..80 chars)
+    //   - createdAtIso: string (optional, 0..80 chars)
+    //
+    // Collection: clients (Company Database)
+    // Document ID: cli-* or custom string
+    // Fields:
+    //   - id: string (optional, 0..120 chars)
+    //   - name: string (2..120 chars)
+    //   - company: string (optional, 0..120 chars)
+    //   - email: string (optional, valid email, 0..254 chars)
+    //   - phone: string (optional, 0..25 chars)
+    //   - service: string (optional, 0..160 chars)
+    //   - status: string (optional, 0..50 chars)
+    //   - source: string (optional, 0..100 chars)
+    //   - type: string (optional, 0..80 chars)
+    //   - timestamp: string (optional, 0..80 chars)
+    //   - createdAtIso: string (optional, 0..80 chars)
+    //
+    // Collection: projects (Company Database)
+    // Document ID: proj-* or custom string
+    // Fields:
+    //   - id: string (optional, 0..120 chars)
+    //   - name: string (2..160 chars)
+    //   - client: string (optional, 0..120 chars)
+    //   - service: string (optional, 0..160 chars)
+    //   - value: number (optional, >= 0)
+    //   - status: string (optional, 0..50 chars)
+    //   - source: string (optional, 0..100 chars)
+    //   - type: string (optional, 0..80 chars)
+    //   - timestamp: string (optional, 0..80 chars)
+    //   - createdAtIso: string (optional, 0..80 chars)
+    //
+    // Collection: students (Internship Database)
+    // Document ID: student-* or email-derived string
+    // Fields:
+    //   - id: string (optional, 0..120 chars)
+    //   - name: string (2..120 chars)
+    //   - email: string (valid email format, 3..254 chars)
+    //   - phone: string (optional, 0..25 chars)
+    //   - track: string (optional, 0..160 chars)
+    //   - duration: string (optional, 0..60 chars)
+    //   - status: string (optional, 0..50 chars)
+    //   - emailVerified: bool or number (optional)
+    //   - source: string (optional, 0..100 chars)
+    //   - type: string (optional, 0..80 chars)
+    //   - timestamp: string (optional, 0..80 chars)
+    //   - createdAtIso: string (optional, 0..80 chars)
+    //   NOTE: Plaintext password, passwordHash, and secrets are STRICTLY FORBIDDEN.
+    //
+    // Collection: applications (Internship Database)
+    // Document ID: ABSS-* or custom string
+    // Fields:
+    //   - id: string (optional, 0..120 chars)
+    //   - fullName / name: string (2..120 chars)
+    //   - email: string (valid email format, 3..254 chars)
+    //   - phone: string (optional, 0..25 chars)
+    //   - college: string (optional, 0..160 chars)
+    //   - course: string (optional, 0..120 chars)
+    //   - internshipProgram / track: string (optional, 0..160 chars)
+    //   - program: string (optional, 0..160 chars)
+    //   - status: string (optional, 0..50 chars)
+    //   - notes / adminNotes: string (optional, 0..2000 chars)
+    //   - source: string (optional, 0..100 chars)
+    //   - type: string (optional, 0..80 chars)
+    //   - timestamp: string (optional, 0..80 chars)
+    //   - createdAtIso: string (optional, 0..80 chars)
+    //
+    // Collection: tasks (Internship Database)
+    // Document ID: task-* or custom string
+    // Fields:
+    //   - id: string (optional, 0..120 chars)
+    //   - title: string (2..160 chars)
+    //   - track: string (optional, 0..160 chars)
+    //   - week: string (optional, 0..50 chars)
+    //   - points: number (optional, >= 0)
+    //   - status: string (optional, 0..50 chars)
+    //   - instructions: string (optional, 0..5000 chars)
+    //   - source: string (optional, 0..100 chars)
+    //   - type: string (optional, 0..80 chars)
+    //   - timestamp: string (optional, 0..80 chars)
+    //   - createdAtIso: string (optional, 0..80 chars)
+    //
+    // Collection: certificates (Internship Database)
+    // Document ID: ABSS-CERT-* or custom string
+    // Fields:
+    //   - id: string (optional, 0..120 chars)
+    //   - studentName: string (2..120 chars)
+    //   - studentEmail: string (optional, 0..254 chars)
+    //   - program: string (2..160 chars)
+    //   - issueDate: string (optional, 0..60 chars)
+    //   - grade: string (optional, 0..80 chars)
+    //   - status: string (in ['Authentic', 'Issued', 'Revoked'])
+    //   - certificateNumber: string (optional, 0..120 chars)
+    //   - source: string (optional, 0..100 chars)
+    //   - type: string (optional, 0..80 chars)
+    //   - timestamp: string (optional, 0..80 chars)
+    //   - createdAtIso: string (optional, 0..80 chars)
+    //
+    // ===============================================================
+
+    // ===============================================================
+    // Helper Functions
+    // ===============================================================
+
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return isAuthenticated() && (
+        request.auth.token.role == 'super_admin' ||
+        request.auth.token.role == 'admin' ||
+        request.auth.token.admin == true
+      );
+    }
+
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
+    function noSensitiveAuthData() {
+      return !request.resource.data.keys().hasAny(['password', 'passwordHash', 'authToken', 'secret', 'token']);
+    }
+
+    function isValidEmail(email) {
+      return email is string &&
+        email.size() >= 3 &&
+        email.size() <= 254 &&
+        email.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$");
+    }
+
+    function isValidOptString(data, field, maxLen) {
+      return !(field in data) || (data[field] is string && data[field].size() <= maxLen);
+    }
+
+    // ===============================================================
+    // Domain Validators
+    // ===============================================================
+
+    function isValidLead(data) {
+      return noSensitiveAuthData() &&
+        (
+          ('email' in data && isValidEmail(data.email)) ||
+          ('client' in data && data.client is string && data.client.size() >= 2 && data.client.size() <= 120) ||
+          ('name' in data && data.name is string && data.name.size() >= 2 && data.name.size() <= 120)
+        ) &&
+        isValidOptString(data, 'client', 120) &&
+        isValidOptString(data, 'name', 120) &&
+        isValidOptString(data, 'phone', 25) &&
+        isValidOptString(data, 'service', 160) &&
+        isValidOptString(data, 'budgetLabel', 160) &&
+        isValidOptString(data, 'timeline', 100) &&
+        isValidOptString(data, 'message', 5000) &&
+        isValidOptString(data, 'status', 50) &&
+        isValidOptString(data, 'source', 100) &&
+        isValidOptString(data, 'type', 80) &&
+        isValidOptString(data, 'timestamp', 80) &&
+        isValidOptString(data, 'createdAtIso', 80);
+    }
+
+    function isValidClient(data) {
+      return noSensitiveAuthData() &&
+        ('name' in data && data.name is string && data.name.size() >= 2 && data.name.size() <= 120) &&
+        isValidOptString(data, 'id', 120) &&
+        isValidOptString(data, 'company', 120) &&
+        isValidOptString(data, 'phone', 25) &&
+        isValidOptString(data, 'service', 160) &&
+        isValidOptString(data, 'status', 50) &&
+        isValidOptString(data, 'source', 100) &&
+        isValidOptString(data, 'type', 80) &&
+        isValidOptString(data, 'timestamp', 80) &&
+        isValidOptString(data, 'createdAtIso', 80);
+    }
+
+    function isValidProject(data) {
+      return noSensitiveAuthData() &&
+        ('name' in data && data.name is string && data.name.size() >= 2 && data.name.size() <= 160) &&
+        isValidOptString(data, 'id', 120) &&
+        isValidOptString(data, 'client', 120) &&
+        isValidOptString(data, 'service', 160) &&
+        (!('value' in data) || (data.value is number && data.value >= 0)) &&
+        isValidOptString(data, 'status', 50) &&
+        isValidOptString(data, 'source', 100) &&
+        isValidOptString(data, 'type', 80) &&
+        isValidOptString(data, 'timestamp', 80) &&
+        isValidOptString(data, 'createdAtIso', 80);
+    }
+
+    function isValidStudent(data) {
+      return noSensitiveAuthData() &&
+        ('name' in data && data.name is string && data.name.size() >= 2 && data.name.size() <= 120) &&
+        ('email' in data && isValidEmail(data.email)) &&
+        isValidOptString(data, 'id', 120) &&
+        isValidOptString(data, 'phone', 25) &&
+        isValidOptString(data, 'track', 160) &&
+        isValidOptString(data, 'duration', 60) &&
+        isValidOptString(data, 'status', 50) &&
+        (!('emailVerified' in data) || data.emailVerified is bool || data.emailVerified is number) &&
+        isValidOptString(data, 'source', 100) &&
+        isValidOptString(data, 'type', 80) &&
+        isValidOptString(data, 'timestamp', 80) &&
+        isValidOptString(data, 'createdAtIso', 80);
+    }
+
+    function isValidApplication(data) {
+      return noSensitiveAuthData() &&
+        (
+          ('fullName' in data && data.fullName is string && data.fullName.size() >= 2 && data.fullName.size() <= 120) ||
+          ('name' in data && data.name is string && data.name.size() >= 2 && data.name.size() <= 120)
+        ) &&
+        ('email' in data && isValidEmail(data.email)) &&
+        isValidOptString(data, 'id', 120) &&
+        isValidOptString(data, 'phone', 25) &&
+        isValidOptString(data, 'college', 160) &&
+        isValidOptString(data, 'course', 120) &&
+        isValidOptString(data, 'internshipProgram', 160) &&
+        isValidOptString(data, 'track', 160) &&
+        isValidOptString(data, 'program', 160) &&
+        isValidOptString(data, 'status', 50) &&
+        isValidOptString(data, 'notes', 2000) &&
+        isValidOptString(data, 'adminNotes', 2000) &&
+        isValidOptString(data, 'source', 100) &&
+        isValidOptString(data, 'type', 80) &&
+        isValidOptString(data, 'timestamp', 80) &&
+        isValidOptString(data, 'createdAtIso', 80);
+    }
+
+    function isValidTask(data) {
+      return noSensitiveAuthData() &&
+        ('title' in data && data.title is string && data.title.size() >= 2 && data.title.size() <= 160) &&
+        isValidOptString(data, 'id', 120) &&
+        isValidOptString(data, 'track', 160) &&
+        isValidOptString(data, 'week', 50) &&
+        (!('points' in data) || (data.points is number && data.points >= 0)) &&
+        isValidOptString(data, 'status', 50) &&
+        isValidOptString(data, 'instructions', 5000) &&
+        isValidOptString(data, 'source', 100) &&
+        isValidOptString(data, 'type', 80) &&
+        isValidOptString(data, 'timestamp', 80) &&
+        isValidOptString(data, 'createdAtIso', 80);
+    }
+
+    function isValidCertificate(data) {
+      return noSensitiveAuthData() &&
+        ('studentName' in data && data.studentName is string && data.studentName.size() >= 2 && data.studentName.size() <= 120) &&
+        ('program' in data && data.program is string && data.program.size() >= 2 && data.program.size() <= 160) &&
+        isValidOptString(data, 'id', 120) &&
+        isValidOptString(data, 'studentEmail', 254) &&
+        isValidOptString(data, 'issueDate', 60) &&
+        isValidOptString(data, 'grade', 80) &&
+        isValidOptString(data, 'status', 50) &&
+        isValidOptString(data, 'certificateNumber', 120) &&
+        isValidOptString(data, 'source', 100) &&
+        isValidOptString(data, 'type', 80) &&
+        isValidOptString(data, 'timestamp', 80) &&
+        isValidOptString(data, 'createdAtIso', 80);
+    }
+
+    // ===============================================================
+    // Collection Rules: 1. Company Database
+    // ===============================================================
+
+    // Leads / Inquiries from prospective clients
+    match /leads/{leadId} {
+      allow create: if isValidLead(request.resource.data);
+      allow read, update, delete: if isAdmin();
+    }
+
+    // Commercial clients
+    match /clients/{clientId} {
+      allow create: if isAdmin() && isValidClient(request.resource.data);
+      allow update: if isAdmin() && isValidClient(request.resource.data);
+      allow read, delete: if isAdmin();
+    }
+
+    // Commercial delivery projects
+    match /projects/{projectId} {
+      allow create: if isAdmin() && isValidProject(request.resource.data);
+      allow update: if isAdmin() && isValidProject(request.resource.data);
+      allow read, delete: if isAdmin();
+    }
+
+    // ===============================================================
+    // Collection Rules: 2. Internship Database
+    // ===============================================================
+
+    // Enrolled Students
+    match /students/{studentId} {
+      allow create: if (isAdmin() || isAuthenticated()) && isValidStudent(request.resource.data);
+      allow read: if isAdmin() || isOwner(studentId);
+      allow update: if (isAdmin() || isOwner(studentId)) && isValidStudent(request.resource.data);
+      allow delete: if isAdmin();
+    }
+
+    // Internship Applications
+    match /applications/{applicationId} {
+      allow create: if isValidApplication(request.resource.data);
+      allow read: if isAdmin() || (isAuthenticated() && request.auth.token.email == resource.data.email);
+      allow update: if isAdmin() && isValidApplication(request.resource.data);
+      allow delete: if isAdmin();
+    }
+
+    // Internship Curriculum & Tasks
+    match /tasks/{taskId} {
+      allow read: if isAuthenticated() || isAdmin();
+      allow create, update: if isAdmin() && isValidTask(request.resource.data);
+      allow delete: if isAdmin();
+    }
+
+    // Issued & Verifiable Certificates
+    match /certificates/{certificateId} {
+      // Public read required for public certificate verification URL (/verify-certificate)
+      allow read: if true;
+      allow create, update: if isAdmin() && isValidCertificate(request.resource.data);
+      allow delete: if isAdmin();
+    }
+
+    // ===============================================================
+    // Default Deny Rule for Any Unmatched Collection
+    // ===============================================================
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

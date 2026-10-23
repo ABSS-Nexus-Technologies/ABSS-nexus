@@ -115,8 +115,15 @@
     // 1. Google Sheets background sync (fire-and-forget)
     syncToGoogleSheets(payload).catch(() => {});
 
-    // 2. Firebase Firestore sync (fire-and-forget)
-    const collectionName = type === "contact_lead" ? "leads" : "students";
+    let collectionName = "students";
+    if (type === "contact_lead" || type === "lead") collectionName = "leads";
+    else if (type === "internship_application" || type === "application") collectionName = "applications";
+    else if (type === "project" || type === "project_record") collectionName = "projects";
+    else if (type === "client" || type === "client_record") collectionName = "clients";
+    else if (type === "task" || type === "task_record") collectionName = "tasks";
+    else if (type === "certificate" || type === "certificate_record") collectionName = "certificates";
+    else if (type === "student_registration" || type === "student") collectionName = "students";
+
     syncToFirestore(collectionName, payload).catch(() => {});
 
     return { ok: true };

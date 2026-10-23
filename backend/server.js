@@ -1040,6 +1040,82 @@ const server = http.createServer(async (request, response) => {
       return;
     }
 
+    if (request.method === "POST" && pathname === "/api/admin/internships/students") {
+      const admin = requireRole(request, response, ["super_admin", "internship_admin"]);
+      if (!admin) return;
+      const body = await readBody(request);
+      const db = readDb();
+      const newStudent = {
+        id: body.id || `student-${Date.now()}`,
+        name: body.name || "Student",
+        email: (body.email || "").toLowerCase().trim(),
+        phone: body.phone || "",
+        track: body.track || "Web Development",
+        duration: body.duration || "4 Weeks",
+        status: body.status || "active",
+        emailVerified: body.emailVerified ? 1 : 0,
+        createdAt: body.createdAt || new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+      };
+      db.students = [newStudent, ...(db.students || [])];
+      db.activity = db.activity || [];
+      db.activity.unshift(`${admin.username} enrolled student ${newStudent.name}`);
+      writeDb(db);
+      send(response, 201, { ok: true, student: newStudent });
+      return;
+    }
+
+    if (request.method === "POST" && pathname === "/api/admin/internships/applications") {
+      const admin = requireRole(request, response, ["super_admin", "internship_admin", "internship_reviewer"]);
+      if (!admin) return;
+      const body = await readBody(request);
+      const db = readDb();
+      const newApp = {
+        id: body.id || `ABSS-${new Date().getFullYear()}-APP-${Math.floor(1000 + Math.random() * 9000)}`,
+        fullName: body.fullName || body.name || "Applicant",
+        name: body.fullName || body.name || "Applicant",
+        email: (body.email || "").toLowerCase().trim(),
+        phone: body.phone || "",
+        college: body.college || "",
+        course: body.course || "",
+        internshipProgram: body.internshipProgram || body.track || "Web Engineering Internship Track",
+        program: body.internshipProgram || body.track || "Web Engineering Internship Track",
+        status: body.status || "New",
+        notes: body.notes || "Registered via admin console",
+        adminNotes: body.notes || "Registered via admin console",
+        createdAt: body.createdAt || new Date().toISOString(),
+      };
+      db.internshipApplications = [newApp, ...(db.internshipApplications || [])];
+      db.activity = db.activity || [];
+      db.activity.unshift(`${admin.username} registered application for ${newApp.fullName}`);
+      writeDb(db);
+      send(response, 201, { ok: true, application: newApp });
+      return;
+    }
+
+    if (request.method === "POST" && pathname === "/api/admin/internships/tasks") {
+      const admin = requireRole(request, response, ["super_admin", "internship_admin"]);
+      if (!admin) return;
+      const body = await readBody(request);
+      const db = readDb();
+      const newTask = {
+        id: body.id || `task-${Date.now()}`,
+        title: body.title || "Curriculum Task",
+        track: body.track || "All Tracks",
+        week: body.week || "Week 1",
+        points: Number(body.points || 100),
+        status: "Active",
+        instructions: body.instructions || "",
+        createdAt: new Date().toISOString(),
+      };
+      db.internshipTasks = [newTask, ...(db.internshipTasks || [])];
+      db.activity = db.activity || [];
+      db.activity.unshift(`${admin.username} created milestone task ${newTask.title}`);
+      writeDb(db);
+      send(response, 201, { ok: true, task: newTask });
+      return;
+    }
+
     if (request.method === "GET" && pathname === "/api/admin/internships/tasks") {
       const admin = requireRole(request, response, ["super_admin", "internship_admin", "internship_reviewer"]);
       if (!admin) return;
@@ -1296,6 +1372,77 @@ const server = http.createServer(async (request, response) => {
       if (!admin) return;
       const db = readDb();
       send(response, 200, { ok: true, leads: db.leads || [] });
+      return;
+    }
+
+    if (request.method === "POST" && (pathname === "/api/admin/company/leads" || pathname === "/api/admin/leads")) {
+      const admin = requireRole(request, response, ["super_admin", "company_admin"]);
+      if (!admin) return;
+      const body = await readBody(request);
+      const db = readDb();
+      const newLead = {
+        id: body.id || `lead-${Date.now()}`,
+        client: body.client || body.name || "Client Inquiry",
+        name: body.name || body.client || "Client Inquiry",
+        email: body.email || "",
+        phone: body.phone || "",
+        service: body.service || "Technical Consultation",
+        budgetLabel: body.budgetLabel || (body.budget ? `₹${body.budget}` : "Flexible"),
+        budget: Number(body.budget || 0),
+        status: body.status || "New",
+        message: body.message || "",
+        createdAt: body.createdAt || new Date().toISOString(),
+      };
+      db.leads = [newLead, ...(db.leads || [])];
+      db.activity = db.activity || [];
+      db.activity.unshift(`${admin.username} logged client inquiry for ${newLead.client}`);
+      writeDb(db);
+      send(response, 201, { ok: true, lead: newLead });
+      return;
+    }
+
+    if (request.method === "POST" && (pathname === "/api/admin/company/projects" || pathname === "/api/admin/projects")) {
+      const admin = requireRole(request, response, ["super_admin", "company_admin"]);
+      if (!admin) return;
+      const body = await readBody(request);
+      const db = readDb();
+      const newProj = {
+        id: body.id || `proj-${Date.now()}`,
+        name: body.name || "Commercial Project",
+        client: body.client || "Enterprise Client",
+        service: body.service || "Software Engineering",
+        value: Number(body.value || 0),
+        status: body.status || "In Development",
+        createdAt: body.createdAt || new Date().toISOString(),
+      };
+      db.projects = [newProj, ...(db.projects || [])];
+      db.activity = db.activity || [];
+      db.activity.unshift(`${admin.username} created project ${newProj.name}`);
+      writeDb(db);
+      send(response, 201, { ok: true, project: newProj });
+      return;
+    }
+
+    if (request.method === "POST" && (pathname === "/api/admin/company/clients" || pathname === "/api/admin/clients")) {
+      const admin = requireRole(request, response, ["super_admin", "company_admin"]);
+      if (!admin) return;
+      const body = await readBody(request);
+      const db = readDb();
+      const newCli = {
+        id: body.id || `cli-${Date.now()}`,
+        name: body.name || "Enterprise Client",
+        company: body.company || body.name || "Enterprise Client",
+        email: body.email || "",
+        phone: body.phone || "",
+        service: body.service || "IT Consulting",
+        status: body.status || "Active",
+        createdAt: body.createdAt || new Date().toISOString(),
+      };
+      db.clients = [newCli, ...(db.clients || [])];
+      db.activity = db.activity || [];
+      db.activity.unshift(`${admin.username} registered client ${newCli.name}`);
+      writeDb(db);
+      send(response, 201, { ok: true, client: newCli });
       return;
     }
 
