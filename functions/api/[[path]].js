@@ -133,6 +133,43 @@ const syncToFirestoreEdge = (collectionName, docId, data) => {
   } catch {}
 };
 
+const syncToGoogleSheetsEdge = (env, type, data) => {
+  try {
+    const webhookUrl = env?.GOOGLE_SHEETS_WEBHOOK_URL;
+    if (!webhookUrl || !data) return;
+
+    const isTest =
+      data.client === "Regression Test Client" ||
+      data.client === "Firebase Test Client" ||
+      data.name === "Test Student" ||
+      data.studentName === "Test Audit Learner" ||
+      data.studentName === "Rahul Verma" ||
+      data.studentName === "Aarav Sharma" ||
+      String(data.email || "").includes("regression@") ||
+      String(data.email || "").includes("test.student.") ||
+      String(data.email || "").includes("@test.com") ||
+      String(data.email || "").includes("@example.com") ||
+      String(data.id || "").includes("test") ||
+      String(data.id || "").includes("TEST");
+    if (isTest) return;
+
+    const safeData = { ...data };
+    delete safeData.password;
+    delete safeData.passwordHash;
+    delete safeData.secret;
+    delete safeData.studentTokens;
+    delete safeData.studentSessions;
+    safeData.type = type;
+    safeData.timestamp = safeData.timestamp || new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" });
+
+    fetch(webhookUrl, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(safeData),
+    }).catch(() => {});
+  } catch {}
+};
+
 const respond = (status, body, headers = {}) =>
   new Response(JSON.stringify(body), {
     status,
@@ -1126,6 +1163,7 @@ export async function onRequest(context) {
           }
           const lead = await createD1Lead(env.ABSS_DB, input);
           syncToFirestoreEdge("leads", lead.id, lead);
+          syncToGoogleSheetsEdge(env, "contact_lead", lead);
           dispatchContactLeadNotifications(lead);
           return respond(201, { success: true, message: "Inquiry submitted successfully.", ok: true, lead, notificationsDispatched: isEmailServiceConfigured(env) });
         } catch (error) {
@@ -1148,6 +1186,7 @@ export async function onRequest(context) {
       state.activity = [`${lead.client} submitted website inquiry`, ...(state.activity || [])].slice(0, 50);
       await writeState(env, state);
       syncToFirestoreEdge("leads", lead.id, lead);
+      syncToGoogleSheetsEdge(env, "contact_lead", lead);
       dispatchContactLeadNotifications(lead);
       return respond(201, { success: true, message: "Inquiry submitted successfully.", ok: true, lead, notificationsDispatched: isEmailServiceConfigured(env) });
     }
@@ -1251,6 +1290,7 @@ export async function onRequest(context) {
           }
 
           syncToFirestoreEdge("students", studentId, { id: studentId, name, email, status: "pending_verification" });
+          syncToGoogleSheetsEdge(env, "student_registration", { id: studentId, name, email, status: "pending_verification" });
 
           const acceptsHtml = (request.headers.get("accept") || "").includes("text/html");
           const isAjax = request.headers.get("x-requested-with") || (request.headers.get("content-type") || "").includes("application/json");
@@ -1312,6 +1352,7 @@ export async function onRequest(context) {
         state.studentTokens.push(tokenRecord);
         await writeState(env, state);
         syncToFirestoreEdge("students", studentId, newStudent);
+        syncToGoogleSheetsEdge(env, "student_registration", newStudent);
 
         const isConfigured = isEmailServiceConfigured(env);
         const origin = url.origin || "https://abssnexus.in";
@@ -2201,6 +2242,7 @@ export async function onRequest(context) {
           await initializeDatabase(env.ABSS_DB);
           const application = await createInternshipApplication(env.ABSS_DB, body);
           syncToFirestoreEdge("applications", application?.id, application);
+          syncToGoogleSheetsEdge(env, "internship_application", application);
           return respond(201, { ok: true, application });
         } catch (dbErr) {
           safeLogError("D1 create application error", dbErr);
@@ -2226,6 +2268,7 @@ export async function onRequest(context) {
       state.internshipApplications = [newApp, ...(state.internshipApplications || [])];
       if (env.ABSS_ADMIN) await writeState(env, state);
       syncToFirestoreEdge("applications", newApp.id, newApp);
+      syncToGoogleSheetsEdge(env, "internship_application", newApp);
       return respond(201, { ok: true, application: newApp });
     }
 
@@ -2253,6 +2296,7 @@ export async function onRequest(context) {
             "INSERT INTO students (id, name, email, password_hash, status, email_verified, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)"
           ).bind(newStudent.id, newStudent.name, newStudent.email, "", newStudent.status, newStudent.emailVerified, newStudent.createdAt, newStudent.updatedAt).run();
           syncToFirestoreEdge("students", newStudent.id, newStudent);
+          syncToGoogleSheetsEdge(env, "student_registration", newStudent);
           return respond(201, { ok: true, student: newStudent });
         } catch (dbErr) {
           safeLogError("D1 create student error", dbErr);
@@ -2263,6 +2307,7 @@ export async function onRequest(context) {
       state.students = [newStudent, ...(state.students || [])];
       if (env.ABSS_ADMIN) await writeState(env, state);
       syncToFirestoreEdge("students", newStudent.id, newStudent);
+      syncToGoogleSheetsEdge(env, "student_registration", newStudent);
       return respond(201, { ok: true, student: newStudent });
     }
 
@@ -2288,6 +2333,7 @@ export async function onRequest(context) {
       state.tasks = [newTask, ...(state.tasks || [])];
       if (env.ABSS_ADMIN) await writeState(env, state);
       syncToFirestoreEdge("tasks", newTask.id, newTask);
+      syncToGoogleSheetsEdge(env, "task_record", newTask);
       return respond(201, { ok: true, task: newTask });
     }
 
@@ -2424,6 +2470,7 @@ export async function onRequest(context) {
           await initializeDatabase(env.ABSS_DB);
           const savedCert = await createD1Certificate(env.ABSS_DB, cert);
           syncToFirestoreEdge("certificates", cert.id, cert);
+          syncToGoogleSheetsEdge(env, "certificate", cert);
           return respond(201, { ok: true, certificate: savedCert });
         } catch (dbErr) {
           safeLogError("D1 create certificate error", dbErr);
@@ -2436,6 +2483,7 @@ export async function onRequest(context) {
         state.certificates.unshift(cert);
         await writeState(env, state);
         syncToFirestoreEdge("certificates", cert.id, cert);
+        syncToGoogleSheetsEdge(env, "certificate", cert);
         return respond(201, { ok: true, certificate: cert });
       }
       return respond(503, { error: "Storage service not configured" });

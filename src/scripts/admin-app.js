@@ -1162,8 +1162,98 @@
   }
 
   // =========================================================================
-  // CSV EXPORT ENGINE
   // =========================================================================
+  // CSV / EXCEL EXPORT ENGINE
+  // =========================================================================
+  function downloadCsvFile(filename, rows) {
+    // Add UTF-8 BOM so Microsoft Excel correctly displays rupee symbols, special characters, and accents
+    const csvContent = "\uFEFF" + rows.map((e) => e.map((x) => `"${String(x ?? "").replace(/"/g, '""')}"`).join(",")).join("\r\n");
+    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  }
+
+  function exportCurrentModuleCsv() {
+    let rows = [];
+    let filename = "abss-export.csv";
+    const path = window.location.pathname.toLowerCase();
+    const today = new Date().toISOString().split("T")[0];
+
+    if (path.includes("leads") || path.includes("inquiries")) {
+      filename = `abss-company-leads-${today}.csv`;
+      rows = [["Lead ID", "Client Name", "Email", "Phone", "Service", "Budget", "Status", "Date Logged"]];
+      (liveState.leads || []).forEach((l) => {
+        rows.push([l.id, l.client || l.name, l.email, l.phone, l.service, l.budgetLabel || l.budget, l.status, l.createdAt]);
+      });
+    } else if (path.includes("applications")) {
+      filename = `abss-internship-applications-${today}.csv`;
+      rows = [["Application ID", "Applicant Name", "Email", "Phone", "Track", "College", "Status", "Date Submitted"]];
+      (liveState.internshipApplications || []).forEach((a) => {
+        rows.push([a.id, a.fullName || a.name, a.email, a.phone, a.internshipProgram || a.program, a.college, a.status, a.createdAt]);
+      });
+    } else if (path.includes("students")) {
+      filename = `abss-enrolled-students-${today}.csv`;
+      rows = [["Student ID", "Full Name", "Email", "Phone", "Track", "Status", "Verified", "Date Enrolled"]];
+      (liveState.students || []).forEach((s) => {
+        rows.push([s.id, s.name, s.email, s.phone || "", s.track || "", s.status || "active", s.emailVerified ? "Yes" : "No", s.createdAt]);
+      });
+    } else if (path.includes("certificates")) {
+      filename = `abss-certificates-${today}.csv`;
+      rows = [["Certificate ID", "Student Name", "Program", "Grade", "Status", "Issue Date", "Verification URL"]];
+      (liveState.certificates || []).forEach((c) => {
+        rows.push([c.id, c.studentName, c.program, c.grade, c.status, c.issueDate, c.verificationUrl || `https://abssnexus.in/verify-certificate?id=${c.id}`]);
+      });
+    } else if (path.includes("projects")) {
+      filename = `abss-company-projects-${today}.csv`;
+      rows = [["Project ID", "Project Name", "Client", "Service", "Value (INR)", "Status", "Date"]];
+      (liveState.projects || []).forEach((p) => {
+        rows.push([p.id, p.name, p.client, p.service, p.value, p.status, p.createdAt]);
+      });
+    } else if (path.includes("clients")) {
+      filename = `abss-company-clients-${today}.csv`;
+      rows = [["Client ID", "Client Name", "Email", "Phone", "Service", "Status", "Date"]];
+      (liveState.clients || []).forEach((c) => {
+        rows.push([c.id, c.name, c.email, c.phone, c.service, c.status, c.createdAt]);
+      });
+    } else if (path.includes("tasks")) {
+      filename = `abss-internship-tasks-${today}.csv`;
+      rows = [["Task ID", "Title", "Track", "Week", "Points", "Status", "Date"]];
+      (liveState.tasks || []).forEach((t) => {
+        rows.push([t.id, t.title, t.track, t.week, t.points, t.status, t.createdAt]);
+      });
+    } else if (path.includes("payments")) {
+      filename = `abss-payments-${today}.csv`;
+      rows = [["Txn ID", "Application ID", "Student Name", "Amount", "Status", "Program", "Date", "Receipt Number"]];
+      (liveState.internshipPayments || []).forEach((p) => {
+        rows.push([p.txnId, p.applicationId, p.studentName, p.amount, p.status, p.program, p.paymentDate, p.receiptNumber]);
+      });
+    } else {
+      filename = `abss-database-summary-${today}.csv`;
+      rows = [
+        ["Database Entity", "Current Record Count"],
+        ["Leads (Company DB)", (liveState.leads || []).length],
+        ["Clients (Company DB)", (liveState.clients || []).length],
+        ["Projects (Company DB)", (liveState.projects || []).length],
+        ["Internship Applications (Internship DB)", (liveState.internshipApplications || []).length],
+        ["Enrolled Interns (Internship DB)", (liveState.students || []).length],
+        ["Certificates (Internship DB)", (liveState.certificates || []).length]
+      ];
+    }
+
+    downloadCsvFile(filename, rows);
+  }
+
+  window.AbssExporter = {
+    downloadCsvFile,
+    exportCurrentModuleCsv,
+  };
+
   function bindExportCsv() {
     const exportBtns = document.querySelectorAll(
       ".btn-admin-secondary[onclick*='CSV'], button[onclick*='CSV'], button[onclick*='Exporting'], [data-btn-export-csv]"
@@ -1173,68 +1263,7 @@
       exportBtn.addEventListener("click", (e) => {
         e.preventDefault();
         e.stopPropagation();
-
-        let rows = [];
-        let filename = "abss-admin-export.csv";
-        const path = window.location.pathname.toLowerCase();
-
-        if (path.includes("leads") || path.includes("inquiries")) {
-          filename = "abss-leads.csv";
-          rows = [["Lead ID", "Client Name", "Email", "Phone", "Service", "Budget", "Status", "Date"]];
-          (liveState.leads || []).forEach((l) => {
-            rows.push([l.id, l.client || l.name, l.email, l.phone, l.service, l.budgetLabel || l.budget, l.status, l.createdAt]);
-          });
-        } else if (path.includes("applications")) {
-          filename = "abss-applications.csv";
-          rows = [["Application ID", "Name", "Email", "Phone", "Track", "College", "Status", "Date"]];
-          (liveState.internshipApplications || []).forEach((a) => {
-            rows.push([a.id, a.fullName || a.name, a.email, a.phone, a.internshipProgram || a.program, a.college, a.status, a.createdAt]);
-          });
-        } else if (path.includes("students")) {
-          filename = "abss-students.csv";
-          rows = [["Student ID", "Name", "Email", "Phone", "Track", "Verified", "Date"]];
-          (liveState.students || []).forEach((s) => {
-            rows.push([s.id, s.name, s.email, s.phone || "", s.track || "", s.emailVerified ? "Yes" : "No", s.createdAt]);
-          });
-        } else if (path.includes("certificates")) {
-          filename = "abss-certificates.csv";
-          rows = [["Certificate ID", "Student Name", "Program", "Grade", "Status", "Issue Date"]];
-          (liveState.certificates || []).forEach((c) => {
-            rows.push([c.id, c.studentName, c.program, c.grade, c.status, c.issueDate]);
-          });
-        } else if (path.includes("projects")) {
-          filename = "abss-projects.csv";
-          rows = [["Project ID", "Project Name", "Client", "Service", "Value", "Status", "Date"]];
-          (liveState.projects || []).forEach((p) => {
-            rows.push([p.id, p.name, p.client, p.service, p.value, p.status, p.createdAt]);
-          });
-        } else if (path.includes("clients")) {
-          filename = "abss-clients.csv";
-          rows = [["Client ID", "Name", "Email", "Phone", "Service", "Status", "Date"]];
-          (liveState.clients || []).forEach((c) => {
-            rows.push([c.id, c.name, c.email, c.phone, c.service, c.status, c.createdAt]);
-          });
-        } else {
-          filename = "abss-database-summary.csv";
-          rows = [
-            ["Entity", "Total Real Records in D1"],
-            ["Leads (Company DB)", (liveState.leads || []).length],
-            ["Clients (Company DB)", (liveState.clients || []).length],
-            ["Projects (Company DB)", (liveState.projects || []).length],
-            ["Internship Applications (Internship DB)", (liveState.internshipApplications || []).length],
-            ["Enrolled Interns (Internship DB)", (liveState.students || []).length],
-            ["Certificates (Internship DB)", (liveState.certificates || []).length]
-          ];
-        }
-
-        const csvContent = "data:text/csv;charset=utf-8," + rows.map((e) => e.map((x) => `"${String(x ?? '').replace(/"/g, '""')}"`).join(",")).join("\n");
-        const encodedUri = encodeURI(csvContent);
-        const link = document.createElement("a");
-        link.setAttribute("href", encodedUri);
-        link.setAttribute("download", filename);
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
+        exportCurrentModuleCsv();
       });
     });
   }

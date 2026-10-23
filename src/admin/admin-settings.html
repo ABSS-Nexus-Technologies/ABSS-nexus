@@ -168,14 +168,101 @@
             <span id="sheetSyncBadge" style="background: rgba(0, 102, 204, 0.1); color: #0066cc; padding: 4px 10px; border-radius: 999px; font-size: 0.78rem; font-weight: 700;">Zero-Latency Webhook</span>
           </div>
           <p style="font-size: 0.85rem; color: #6e6e73; margin: 0 0 12px;">
-            Enter your Google Apps Script Webhook URL to automatically append new student registrations and website inquiries as live rows in your Google Sheet on Google Drive.
+            Automatically append new student registrations and website inquiries as live rows in your Google Sheet on Google Drive.
           </p>
-          <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+          <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px;">
             <input type="url" id="googleSheetWebhookInput" placeholder="https://script.google.com/macros/s/AKfycb.../exec" style="flex: 1; min-width: 280px; padding: 10px 14px; border: 1px solid #d2d2d7; border-radius: 8px; font-size: 0.86rem; font-family: monospace;" />
             <button type="button" id="saveSheetWebhookBtn" class="btn btn-primary" style="padding: 10px 18px; font-size: 0.86rem;">Save Webhook</button>
             <button type="button" id="testSheetWebhookBtn" class="btn btn-secondary" style="padding: 10px 18px; font-size: 0.86rem; background: #f5f5f7; border: 1px solid #d2d2d7; border-radius: 8px; cursor: pointer;">Send Test Row</button>
           </div>
-          <small id="webhookStatusMessage" style="display: block; margin-top: 8px; font-size: 0.8rem; color: #10b981; font-weight: 600;"></small>
+          <small id="webhookStatusMessage" style="display: block; margin-bottom: 16px; font-size: 0.8rem; color: #10b981; font-weight: 600;"></small>
+
+          <!-- 60-Second Google Sheets Setup Guide -->
+          <details style="background: #f9f9fb; border: 1px solid #e5e5ea; border-radius: 8px; padding: 14px 16px; font-size: 0.85rem; color: #1d1d1f;">
+            <summary style="font-weight: 600; cursor: pointer; color: #0066cc; outline: none;">
+              📖 How to create your Google Sheet in 60 seconds (Click to expand)
+            </summary>
+            <div style="margin-top: 12px; line-height: 1.6;">
+              <ol style="padding-left: 20px; margin: 0 0 12px;">
+                <li>Open <a href="https://sheets.new" target="_blank" rel="noopener noreferrer" style="color: #0066cc; font-weight: 600;">sheets.new</a> in your browser. Name it: <em>ABSS Nexus Technologies - Live Database</em></li>
+                <li>In top menu, click: <strong>Extensions &rarr; Apps Script</strong></li>
+                <li>Delete any code in <code style="background: #eef2f6; padding: 2px 6px; border-radius: 4px;">Code.gs</code> and paste the ABSS script below.</li>
+                <li>Click <strong>Deploy &rarr; New deployment</strong> &rarr; Select type: <strong>Web app</strong>.</li>
+                <li>Set: <em>Execute as:</em> <strong>Me</strong>, and <em>Who has access:</em> <strong>Anyone</strong>.</li>
+                <li>Click <strong>Deploy</strong> &rarr; <strong>Authorize Access</strong> &rarr; Copy the Web app URL.</li>
+                <li>Paste the URL above in <strong>Option B</strong> and click <strong>Save Webhook</strong>!</li>
+              </ol>
+              <div style="display: flex; gap: 8px; align-items: center; margin-bottom: 8px;">
+                <button type="button" id="copyAppsScriptBtn" style="background: #0066cc; color: #ffffff; border: none; padding: 6px 14px; border-radius: 6px; font-size: 0.8rem; font-weight: 600; cursor: pointer;">📋 Copy Google Apps Script Code</button>
+                <span id="copyAppsScriptStatus" style="font-size: 0.8rem; color: #10b981; font-weight: 600;"></span>
+              </div>
+              <textarea id="appsScriptCodeBlock" readonly style="width: 100%; height: 140px; font-family: monospace; font-size: 0.78rem; background: #ffffff; border: 1px solid #d2d2d7; border-radius: 6px; padding: 8px; box-sizing: border-box; resize: vertical;"></textarea>
+            </div>
+          </details>
+        </div>
+      </div>
+
+      <!-- Instant Excel (.csv) Master Export Center -->
+      <h2 style="font-size: 1.25rem; margin: 0 0 20px;">Excel (.csv) 1-Click Export Center</h2>
+      <div style="background: #ffffff; border: 1px solid #d2d2d7; border-radius: 12px; padding: 20px; margin-bottom: 28px;">
+        <p style="font-size: 0.85rem; color: #6e6e73; margin: 0 0 16px;">
+          Download clean Microsoft Excel-compatible (.csv UTF-8 BOM) spreadsheets instantly with Indian rupee (₹) formatting and timestamped audit logs.
+        </p>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px;">
+          <!-- Company Database Group -->
+          <div style="border: 1px solid #e5e5ea; border-radius: 8px; padding: 16px; background: #fafafc;">
+            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 10px;">
+              <span style="font-size: 1.1rem;">🏢</span>
+              <strong style="font-size: 0.95rem;">Company Database</strong>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+              <button type="button" class="export-module-btn" data-export-type="leads" style="display: flex; align-items: center; justify-content: space-between; background: #ffffff; border: 1px solid #d2d2d7; padding: 8px 12px; border-radius: 6px; font-size: 0.82rem; font-weight: 600; cursor: pointer; text-align: left;">
+                <span>📥 Client Leads &amp; Inquiries</span>
+                <span style="color: #0066cc; font-size: 0.75rem;">.CSV Excel &rarr;</span>
+              </button>
+              <button type="button" class="export-module-btn" data-export-type="projects" style="display: flex; align-items: center; justify-content: space-between; background: #ffffff; border: 1px solid #d2d2d7; padding: 8px 12px; border-radius: 6px; font-size: 0.82rem; font-weight: 600; cursor: pointer; text-align: left;">
+                <span>📥 Commercial Projects</span>
+                <span style="color: #0066cc; font-size: 0.75rem;">.CSV Excel &rarr;</span>
+              </button>
+              <button type="button" class="export-module-btn" data-export-type="clients" style="display: flex; align-items: center; justify-content: space-between; background: #ffffff; border: 1px solid #d2d2d7; padding: 8px 12px; border-radius: 6px; font-size: 0.82rem; font-weight: 600; cursor: pointer; text-align: left;">
+                <span>📥 Corporate Clients</span>
+                <span style="color: #0066cc; font-size: 0.75rem;">.CSV Excel &rarr;</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Internship Database Group -->
+          <div style="border: 1px solid #e5e5ea; border-radius: 8px; padding: 16px; background: #fafafc;">
+            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 10px;">
+              <span style="font-size: 1.1rem;">🎓</span>
+              <strong style="font-size: 0.95rem;">Internship Database</strong>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+              <button type="button" class="export-module-btn" data-export-type="applications" style="display: flex; align-items: center; justify-content: space-between; background: #ffffff; border: 1px solid #d2d2d7; padding: 8px 12px; border-radius: 6px; font-size: 0.82rem; font-weight: 600; cursor: pointer; text-align: left;">
+                <span>📥 Internship Applications</span>
+                <span style="color: #0066cc; font-size: 0.75rem;">.CSV Excel &rarr;</span>
+              </button>
+              <button type="button" class="export-module-btn" data-export-type="students" style="display: flex; align-items: center; justify-content: space-between; background: #ffffff; border: 1px solid #d2d2d7; padding: 8px 12px; border-radius: 6px; font-size: 0.82rem; font-weight: 600; cursor: pointer; text-align: left;">
+                <span>📥 Enrolled Students</span>
+                <span style="color: #0066cc; font-size: 0.75rem;">.CSV Excel &rarr;</span>
+              </button>
+              <button type="button" class="export-module-btn" data-export-type="certificates" style="display: flex; align-items: center; justify-content: space-between; background: #ffffff; border: 1px solid #d2d2d7; padding: 8px 12px; border-radius: 6px; font-size: 0.82rem; font-weight: 600; cursor: pointer; text-align: left;">
+                <span>📥 Verified Certificates</span>
+                <span style="color: #0066cc; font-size: 0.75rem;">.CSV Excel &rarr;</span>
+              </button>
+              <button type="button" class="export-module-btn" data-export-type="tasks" style="display: flex; align-items: center; justify-content: space-between; background: #ffffff; border: 1px solid #d2d2d7; padding: 8px 12px; border-radius: 6px; font-size: 0.82rem; font-weight: 600; cursor: pointer; text-align: left;">
+                <span>📥 Curriculum Tasks</span>
+                <span style="color: #0066cc; font-size: 0.75rem;">.CSV Excel &rarr;</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top: 16px; border-top: 1px solid #e5e5ea; padding-top: 14px; display: flex; justify-content: flex-end;">
+          <button type="button" class="export-module-btn btn btn-primary" data-export-type="all" style="padding: 10px 18px; font-size: 0.86rem;">
+            📥 Download Complete Master Summary (.csv)
+          </button>
         </div>
       </div>
 
@@ -191,6 +278,29 @@
         const saveBtn = document.getElementById("saveSheetWebhookBtn");
         const testBtn = document.getElementById("testSheetWebhookBtn");
         const statusMsg = document.getElementById("webhookStatusMessage");
+        const copyScriptBtn = document.getElementById("copyAppsScriptBtn");
+        const copyStatus = document.getElementById("copyAppsScriptStatus");
+        const codeBlock = document.getElementById("appsScriptCodeBlock");
+
+        // Load Apps Script into codeBlock for copy preview
+        fetch("/scripts/google-sheets-sync.js")
+          .then((r) => r.text())
+          .then((txt) => {
+            if (codeBlock) codeBlock.value = txt;
+          })
+          .catch(() => {});
+
+        copyScriptBtn?.addEventListener("click", () => {
+          if (!codeBlock) return;
+          navigator.clipboard.writeText(codeBlock.value).then(() => {
+            if (copyStatus) copyStatus.textContent = "✓ Copied to clipboard!";
+            setTimeout(() => { if (copyStatus) copyStatus.textContent = ""; }, 3000);
+          }).catch(() => {
+            codeBlock.select();
+            document.execCommand("copy");
+            if (copyStatus) copyStatus.textContent = "✓ Copied!";
+          });
+        });
 
         if (input && window.AbssDataSync) {
           input.value = window.AbssDataSync.getWebhookUrl() || "";
@@ -239,6 +349,78 @@
             testBtn.disabled = false;
             testBtn.textContent = "Send Test Row";
           }
+        });
+
+        // 1-Click Excel Export Handlers
+        document.querySelectorAll(".export-module-btn").forEach((btn) => {
+          btn.addEventListener("click", async (e) => {
+            e.preventDefault();
+            const type = btn.getAttribute("data-export-type") || "all";
+            const today = new Date().toISOString().split("T")[0];
+            let liveState = {};
+            try {
+              liveState = await window.adminApi?.loadStateAsync({}) || {};
+            } catch {
+              liveState = window.adminApi?.loadState({}) || {};
+            }
+
+            const downloadCsv = (filename, rows) => {
+              if (window.AbssExporter?.downloadCsvFile) {
+                window.AbssExporter.downloadCsvFile(filename, rows);
+              } else {
+                const csvContent = "\uFEFF" + rows.map((e) => e.map((x) => `"${String(x ?? "").replace(/"/g, '""')}"`).join(",")).join("\r\n");
+                const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement("a");
+                link.href = url;
+                link.download = filename;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+              }
+            };
+
+            if (type === "leads") {
+              const rows = [["Lead ID", "Client Name", "Email", "Phone", "Service", "Budget", "Status", "Date Logged"]];
+              (liveState.leads || []).forEach((l) => rows.push([l.id, l.client || l.name, l.email, l.phone, l.service, l.budgetLabel || l.budget, l.status, l.createdAt]));
+              downloadCsv(`abss-company-leads-${today}.csv`, rows);
+            } else if (type === "projects") {
+              const rows = [["Project ID", "Project Name", "Client", "Service", "Value (INR)", "Status", "Date"]];
+              (liveState.projects || []).forEach((p) => rows.push([p.id, p.name, p.client, p.service, p.value, p.status, p.createdAt]));
+              downloadCsv(`abss-company-projects-${today}.csv`, rows);
+            } else if (type === "clients") {
+              const rows = [["Client ID", "Client Name", "Email", "Phone", "Service", "Status", "Date"]];
+              (liveState.clients || []).forEach((c) => rows.push([c.id, c.name, c.email, c.phone, c.service, c.status, c.createdAt]));
+              downloadCsv(`abss-company-clients-${today}.csv`, rows);
+            } else if (type === "applications") {
+              const rows = [["Application ID", "Applicant Name", "Email", "Phone", "Track", "College", "Status", "Date Submitted"]];
+              (liveState.internshipApplications || []).forEach((a) => rows.push([a.id, a.fullName || a.name, a.email, a.phone, a.internshipProgram || a.program, a.college, a.status, a.createdAt]));
+              downloadCsv(`abss-internship-applications-${today}.csv`, rows);
+            } else if (type === "students") {
+              const rows = [["Student ID", "Full Name", "Email", "Phone", "Track", "Status", "Verified", "Date Enrolled"]];
+              (liveState.students || []).forEach((s) => rows.push([s.id, s.name, s.email, s.phone || "", s.track || "", s.status || "active", s.emailVerified ? "Yes" : "No", s.createdAt]));
+              downloadCsv(`abss-enrolled-students-${today}.csv`, rows);
+            } else if (type === "certificates") {
+              const rows = [["Certificate ID", "Student Name", "Program", "Grade", "Status", "Issue Date", "Verification URL"]];
+              (liveState.certificates || []).forEach((c) => rows.push([c.id, c.studentName, c.program, c.grade, c.status, c.issueDate, c.verificationUrl || `https://abssnexus.in/verify-certificate?id=${c.id}`]));
+              downloadCsv(`abss-certificates-${today}.csv`, rows);
+            } else if (type === "tasks") {
+              const rows = [["Task ID", "Title", "Track", "Week", "Points", "Status", "Date"]];
+              (liveState.tasks || []).forEach((t) => rows.push([t.id, t.title, t.track, t.week, t.points, t.status, t.createdAt]));
+              downloadCsv(`abss-internship-tasks-${today}.csv`, rows);
+            } else {
+              const rows = [
+                ["Database Entity", "Current Record Count"],
+                ["Leads (Company DB)", (liveState.leads || []).length],
+                ["Clients (Company DB)", (liveState.clients || []).length],
+                ["Projects (Company DB)", (liveState.projects || []).length],
+                ["Internship Applications (Internship DB)", (liveState.internshipApplications || []).length],
+                ["Enrolled Interns (Internship DB)", (liveState.students || []).length],
+                ["Certificates (Internship DB)", (liveState.certificates || []).length]
+              ];
+              downloadCsv(`abss-database-summary-${today}.csv`, rows);
+            }
+          });
         });
       })();
     </script>

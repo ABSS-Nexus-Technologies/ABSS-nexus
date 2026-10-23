@@ -150,6 +150,47 @@ const syncToFirestoreServer = (collectionName, docId, data) => {
   });
 };
 
+const GOOGLE_SHEETS_WEBHOOK_URL = process.env.GOOGLE_SHEETS_WEBHOOK_URL || "";
+
+const syncToGoogleSheetsServer = (type, data) => {
+  const webhookUrl = GOOGLE_SHEETS_WEBHOOK_URL;
+  if (!webhookUrl || process.env.NODE_ENV === "test" || !data) return;
+
+  const isTest =
+    data.client === "Regression Test Client" ||
+    data.client === "Firebase Test Client" ||
+    data.name === "Test Student" ||
+    data.studentName === "Test Audit Learner" ||
+    data.studentName === "Rahul Verma" ||
+    data.studentName === "Aarav Sharma" ||
+    String(data.email || "").includes("regression@") ||
+    String(data.email || "").includes("test.student.") ||
+    String(data.email || "").includes("@test.com") ||
+    String(data.email || "").includes("@example.com") ||
+    String(data.id || "").includes("test") ||
+    String(data.id || "").includes("TEST");
+  if (isTest) return;
+
+  const safeData = { ...data };
+  delete safeData.password;
+  delete safeData.passwordHash;
+  delete safeData.secret;
+  safeData.type = type;
+  safeData.timestamp = safeData.timestamp || new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" });
+
+  fetch(webhookUrl, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(safeData),
+  }).then((res) => {
+    if (res.ok) {
+      console.log(`[Google Sheets Server Sync] ✓ Appended row to Google Sheet (${type})`);
+    }
+  }).catch((err) => {
+    console.warn(`[Google Sheets Server Sync] Non-blocking network error:`, err?.message || err);
+  });
+};
+
 const contentTypes = {
   ".html": "text/html; charset=utf-8",
   ".css": "text/css; charset=utf-8",
@@ -1151,6 +1192,7 @@ const server = http.createServer(async (request, response) => {
       db.activity.unshift(`${admin.username} enrolled student ${newStudent.name}`);
       writeDb(db);
       syncToFirestoreServer("students", newStudent.id, newStudent);
+      syncToGoogleSheetsServer("student_registration", newStudent);
       send(response, 201, { ok: true, student: newStudent });
       return;
     }
@@ -1180,6 +1222,7 @@ const server = http.createServer(async (request, response) => {
       db.activity.unshift(`${admin.username} registered application for ${newApp.fullName}`);
       writeDb(db);
       syncToFirestoreServer("applications", newApp.id, newApp);
+      syncToGoogleSheetsServer("internship_application", newApp);
       send(response, 201, { ok: true, application: newApp });
       return;
     }
@@ -1204,6 +1247,7 @@ const server = http.createServer(async (request, response) => {
       db.activity.unshift(`${admin.username} created milestone task ${newTask.title}`);
       writeDb(db);
       syncToFirestoreServer("tasks", newTask.id, newTask);
+      syncToGoogleSheetsServer("task_record", newTask);
       send(response, 201, { ok: true, task: newTask });
       return;
     }
@@ -1276,6 +1320,7 @@ const server = http.createServer(async (request, response) => {
       db.activity.unshift(`${admin.username} issued certificate ${certId} to ${cert.studentName}`);
       writeDb(db);
       syncToFirestoreServer("certificates", cert.id, cert);
+      syncToGoogleSheetsServer("certificate", cert);
       send(response, 201, { ok: true, certificate: cert });
       return;
     }
@@ -1491,6 +1536,7 @@ const server = http.createServer(async (request, response) => {
       db.activity.unshift(`${admin.username} logged client inquiry for ${newLead.client}`);
       writeDb(db);
       syncToFirestoreServer("leads", newLead.id, newLead);
+      syncToGoogleSheetsServer("contact_lead", newLead);
       send(response, 201, { ok: true, lead: newLead });
       return;
     }
@@ -1514,6 +1560,7 @@ const server = http.createServer(async (request, response) => {
       db.activity.unshift(`${admin.username} created project ${newProj.name}`);
       writeDb(db);
       syncToFirestoreServer("projects", newProj.id, newProj);
+      syncToGoogleSheetsServer("project_record", newProj);
       send(response, 201, { ok: true, project: newProj });
       return;
     }
@@ -1538,6 +1585,7 @@ const server = http.createServer(async (request, response) => {
       db.activity.unshift(`${admin.username} registered client ${newCli.name}`);
       writeDb(db);
       syncToFirestoreServer("clients", newCli.id, newCli);
+      syncToGoogleSheetsServer("client_record", newCli);
       send(response, 201, { ok: true, client: newCli });
       return;
     }
@@ -1558,6 +1606,7 @@ const server = http.createServer(async (request, response) => {
       db.activity.unshift(`${admin.username} updated lead ${leadId} (${lead.client}) status to ${lead.status}`);
       writeDb(db);
       syncToFirestoreServer("leads", lead.id, lead);
+      syncToGoogleSheetsServer("contact_lead", lead);
       send(response, 200, { ok: true, lead });
       return;
     }
@@ -1709,6 +1758,7 @@ const server = http.createServer(async (request, response) => {
       db.activity = db.activity.slice(0, 20);
       writeDb(db);
       syncToFirestoreServer("leads", lead.id, lead);
+      syncToGoogleSheetsServer("contact_lead", lead);
 
       if (isEmailConfigured) {
         dispatchServerNotification({
@@ -1905,6 +1955,7 @@ const server = http.createServer(async (request, response) => {
       db.studentTokens.push(tokenRecord);
       writeDb(db);
       syncToFirestoreServer("students", newStudent.id, newStudent);
+      syncToGoogleSheetsServer("student_registration", newStudent);
 
       if (isEmailConfigured) {
         dispatchServerNotification({
