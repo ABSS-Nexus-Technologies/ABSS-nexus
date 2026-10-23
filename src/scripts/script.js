@@ -675,7 +675,11 @@ document.querySelectorAll("form.contact-form").forEach((form) => {
     }
 
     try {
-      await window.AbssAdminApi?.queueContactLead(formToLead(form));
+      const leadData = formToLead(form);
+      await window.AbssAdminApi?.queueContactLead(leadData);
+      try {
+        window.AbssDataSync?.dualSyncRecord("contact_lead", leadData);
+      } catch {}
       form.reset();
       if (characterCount && form.matches("[data-inquiry-form]")) characterCount.textContent = "0";
       setFormStatus(form, "success", form.matches("[data-inquiry-form]")

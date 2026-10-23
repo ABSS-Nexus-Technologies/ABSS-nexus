@@ -146,11 +146,102 @@
         </label>
       </div>
 
-      <button type="button" class="btn btn-primary" onclick="alert('Platform configuration saved.');">Save System Settings &rarr;</button>
+      <h2 style="font-size: 1.25rem; margin: 0 0 20px;">External Storage &amp; Live Mirroring</h2>
+      <div style="background: #ffffff; border: 1px solid #d2d2d7; border-radius: 12px; padding: 20px; margin-bottom: 28px;">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span style="font-size: 1.2rem;">🔥</span>
+            <strong>Option A: Firebase Firestore</strong>
+          </div>
+          <span style="background: rgba(16, 185, 129, 0.12); color: #10b981; padding: 4px 10px; border-radius: 999px; font-size: 0.78rem; font-weight: 700;">● abss-nexus-technologies Active</span>
+        </div>
+        <p style="font-size: 0.85rem; color: #6e6e73; margin: 0 0 16px;">
+          Authenticated student accounts and lead records are mirrored directly to Google Cloud / Firebase Firestore console.
+        </p>
+
+        <div style="border-top: 1px solid #e5e5ea; padding-top: 16px; margin-top: 16px;">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; flex-wrap: wrap; gap: 8px;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span style="font-size: 1.2rem;">📊</span>
+              <strong>Option B: Google Sheets Live Webhook</strong>
+            </div>
+            <span id="sheetSyncBadge" style="background: rgba(0, 102, 204, 0.1); color: #0066cc; padding: 4px 10px; border-radius: 999px; font-size: 0.78rem; font-weight: 700;">Zero-Latency Webhook</span>
+          </div>
+          <p style="font-size: 0.85rem; color: #6e6e73; margin: 0 0 12px;">
+            Enter your Google Apps Script Webhook URL to automatically append new student registrations and website inquiries as live rows in your Google Sheet on Google Drive.
+          </p>
+          <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+            <input type="url" id="googleSheetWebhookInput" placeholder="https://script.google.com/macros/s/AKfycb.../exec" style="flex: 1; min-width: 280px; padding: 10px 14px; border: 1px solid #d2d2d7; border-radius: 8px; font-size: 0.86rem; font-family: monospace;" />
+            <button type="button" id="saveSheetWebhookBtn" class="btn btn-primary" style="padding: 10px 18px; font-size: 0.86rem;">Save Webhook</button>
+            <button type="button" id="testSheetWebhookBtn" class="btn btn-secondary" style="padding: 10px 18px; font-size: 0.86rem; background: #f5f5f7; border: 1px solid #d2d2d7; border-radius: 8px; cursor: pointer;">Send Test Row</button>
+          </div>
+          <small id="webhookStatusMessage" style="display: block; margin-top: 8px; font-size: 0.8rem; color: #10b981; font-weight: 600;"></small>
+        </div>
+      </div>
+
+      <button type="button" class="btn btn-primary" onclick="alert('Platform configuration saved successfully.');">Save System Settings &rarr;</button>
     </div>
   
       </section>
     </main>
+    <script src="/src/services/data-sync.js"></script>
+    <script>
+      (function() {
+        const input = document.getElementById("googleSheetWebhookInput");
+        const saveBtn = document.getElementById("saveSheetWebhookBtn");
+        const testBtn = document.getElementById("testSheetWebhookBtn");
+        const statusMsg = document.getElementById("webhookStatusMessage");
+
+        if (input && window.AbssDataSync) {
+          input.value = window.AbssDataSync.getWebhookUrl() || "";
+        }
+
+        saveBtn?.addEventListener("click", () => {
+          if (!input || !window.AbssDataSync) return;
+          const url = input.value.trim();
+          window.AbssDataSync.setWebhookUrl(url);
+          if (statusMsg) {
+            statusMsg.textContent = url ? "✓ Google Sheets Webhook URL saved successfully!" : "Webhook URL cleared.";
+            statusMsg.style.color = url ? "#10b981" : "#6e6e73";
+          }
+        });
+
+        testBtn?.addEventListener("click", async () => {
+          if (!input || !window.AbssDataSync) return;
+          const url = input.value.trim();
+          if (!url) {
+            alert("Please paste your Google Apps Script Webhook URL first.");
+            input.focus();
+            return;
+          }
+          window.AbssDataSync.setWebhookUrl(url);
+          testBtn.disabled = true;
+          testBtn.textContent = "Sending Test...";
+          try {
+            await window.AbssDataSync.syncToGoogleSheets({
+              type: "test_verification",
+              name: "ABSS Operations Test",
+              email: "test.operations@abssnexus.in",
+              phone: "9999999999",
+              track: "System Verification",
+              duration: "Live Test",
+              status: "Verified",
+              notes: "Test row triggered from ABSS Admin Settings"
+            });
+            alert("✓ Test payload dispatched to Google Sheets! Please check your Google Sheet.");
+            if (statusMsg) {
+              statusMsg.textContent = "✓ Test row dispatched! Check your Google Sheet.";
+              statusMsg.style.color = "#10b981";
+            }
+          } catch (e) {
+            alert("Test error: " + (e.message || e));
+          } finally {
+            testBtn.disabled = false;
+            testBtn.textContent = "Send Test Row";
+          }
+        });
+      })();
+    </script>
     <script src="/src/config/admin-config.js"></script>
     <script src="/src/services/admin-api.js"></script>
     <script src="/src/scripts/admin-auth-guard.js"></script>

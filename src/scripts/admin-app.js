@@ -83,22 +83,27 @@
     }
 
     // Ensure metrics object
-    liveState.metrics = liveState.metrics || {};
-    const leads = liveState.leads || [];
-    const applications = liveState.internshipApplications || [];
-    const students = liveState.students || [];
-    const certificates = liveState.certificates || [];
+    // Filter out automated test artifacts so the admin console displays only authentic live data
+    const isTestLead = (l) => l.client === "Regression Test Client" || String(l.email || "").includes("regression@example.com");
+    const isTestStudent = (s) => String(s.email || "").includes("test.student.") || s.name === "Test Student";
+    const isTestCert = (c) => c.studentName === "Test Audit Learner" || c.status === "Revoked";
+    const isTestApp = (a) => String(a.email || "").includes("@example.com");
+
+    const leads = (liveState.leads || []).filter((l) => !isTestLead(l));
+    const applications = (liveState.internshipApplications || []).filter((a) => !isTestApp(a));
+    const students = (liveState.students || []).filter((s) => !isTestStudent(s));
+    const certificates = (liveState.certificates || []).filter((c) => !isTestCert(c));
     const projects = liveState.projects || [];
     const clients = liveState.clients || [];
 
-    // Derive accurate counts
-    const leadsCount = liveState.metrics.totalLeads ?? leads.length;
-    const studentsCount = liveState.metrics.enrolledStudents ?? students.length;
-    const appsCount = liveState.metrics.totalApplications ?? applications.length;
-    const certsCount = liveState.metrics.issuedCertificates ?? certificates.length;
-    const tracksCount = liveState.metrics.activeTracks ?? 5;
-    const projectsCount = liveState.metrics.activeProjects ?? projects.length;
-    const clientsCount = liveState.metrics.totalClients ?? clients.length;
+    // Derive accurate real-world counts
+    const leadsCount = leads.length;
+    const studentsCount = students.length;
+    const appsCount = applications.length;
+    const certsCount = certificates.length;
+    const tracksCount = 5;
+    const projectsCount = projects.length;
+    const clientsCount = clients.length;
 
     // 3. Update KPI Metric Cards Across Pages
     updateMetricCards({

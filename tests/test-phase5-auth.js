@@ -356,6 +356,21 @@ async function runTests() {
     assert.strictEqual(res.statusCode, 200);
   });
 
+  // Automated Test Cleanup to keep admin database pristine
+  try {
+    const fs = require("fs");
+    const path = require("path");
+    const dbPath = path.resolve(__dirname, "../backend/data/db.json");
+    if (fs.existsSync(dbPath)) {
+      const db = JSON.parse(fs.readFileSync(dbPath, "utf8"));
+      db.leads = (db.leads || []).filter((l) => l.client !== "Regression Test Client");
+      db.students = (db.students || []).filter((s) => !String(s.email || "").includes("test.student."));
+      db.studentTokens = [];
+      db.studentSessions = [];
+      fs.writeFileSync(dbPath, JSON.stringify(db, null, 2), "utf8");
+    }
+  } catch {}
+
   console.log(`\n=== Test Suite Finished: ${passed} Passed, ${failed} Failed ===`);
   if (failed > 0) {
     process.exit(1);

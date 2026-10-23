@@ -231,6 +231,18 @@
             return;
           }
 
+          // Dual Sync: mirror student registration to Firebase Firestore & Google Sheets (non-blocking)
+          try {
+            window.AbssDataSync?.dualSyncRecord("student_registration", {
+              name,
+              email,
+              phone,
+              track,
+              duration,
+              status: "Registered",
+            });
+          } catch {}
+
           regForm.reset();
           let successHtml = "<strong>" + (data.message || "Account registered successfully!") + "</strong>";
           if (data.devVerificationUrl) {
