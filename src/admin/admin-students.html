@@ -115,7 +115,10 @@
         
     <div class="card" style="padding: 28px; border-radius: 16px; background: #ffffff;">
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 12px;">
-        <input type="search" placeholder="Filter student roster..." style="padding: 8px 14px; border: 1px solid #d2d2d7; border-radius: 8px; font-size: 0.85rem; width: 320px;" />
+        <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+          <input type="search" placeholder="Filter student roster..." style="padding: 8px 14px; border: 1px solid #d2d2d7; border-radius: 8px; font-size: 0.85rem; width: 320px;" />
+          <button type="button" class="btn btn-primary" data-action="create-record" style="padding: 8px 16px; background: #0066cc; color: #fff; border-radius: 8px; border: none; font-size: 0.85rem; font-weight: 600; cursor: pointer;">+ Enroll New Student</button>
+        </div>
         <span style="font-size: 0.85rem; color: #6e6e73;">Total Active Interns: <strong data-metric="students">0 Students</strong></span>
       </div>
 

@@ -152,6 +152,9 @@
 
     // 9. Bind Certificate Issuance Modal & Revocation
     bindCertificateActions();
+
+    // 10. Universal Record Creation Engine (Students, Leads, Projects, Clients, etc.)
+    bindUniversalRecordCreation();
   }
 
   function updateMetricCards(counts) {
@@ -449,8 +452,14 @@
     table.innerHTML = students.map((s) => `
       <tr style="border-bottom: 1px solid #e5e5ea;">
         <td style="padding: 14px; font-family: monospace; font-size: 0.82rem;">${escapeHtml(s.id || "STD-" + Math.abs(s.email.hashCode?.() || 101))}</td>
-        <td style="padding: 14px;"><strong>${escapeHtml(s.name)}</strong></td>
-        <td style="padding: 14px;"><a href="mailto:${escapeHtml(s.email)}" style="color: #0066cc;">${escapeHtml(s.email)}</a></td>
+        <td style="padding: 14px;">
+          <strong>${escapeHtml(s.name)}</strong><br/>
+          <small style="color: #6e6e73;">${escapeHtml(s.track || "Internship Track")}${s.duration ? ` &bull; ${escapeHtml(s.duration)}` : ""}</small>
+        </td>
+        <td style="padding: 14px;">
+          <a href="mailto:${escapeHtml(s.email)}" style="color: #0066cc;">${escapeHtml(s.email)}</a><br/>
+          <small style="color: #6e6e73;">${escapeHtml(s.phone || "")}</small>
+        </td>
         <td style="padding: 14px;">
           <span class="status-pill ${s.emailVerified ? 'status-success' : 'status-warning'}" style="padding: 4px 10px; border-radius: 999px; font-size: 0.74rem; font-weight: 700;">
             ${s.emailVerified ? 'Verified' : 'Pending Verification'}
@@ -458,10 +467,28 @@
         </td>
         <td style="padding: 14px; color: #6e6e73; font-size: 0.84rem;">${escapeHtml(formatDate(s.createdAt))}</td>
         <td style="padding: 14px;">
-          <a href="mailto:${escapeHtml(s.email)}" style="padding: 4px 10px; background: #f5f5f7; border: 1px solid #d2d2d7; border-radius: 6px; font-size: 0.76rem; text-decoration: none; color: #1d1d1f;">Contact</a>
+          <div style="display: flex; gap: 6px;">
+            <a href="mailto:${escapeHtml(s.email)}" style="padding: 4px 10px; background: #f5f5f7; border: 1px solid #d2d2d7; border-radius: 6px; font-size: 0.76rem; text-decoration: none; color: #1d1d1f;">Contact</a>
+            <button type="button" class="btn-action-delete-student" data-id="${escapeHtml(s.id)}" style="padding: 4px 8px; background: #fff; color: #dc2626; border: 1px solid #fee2e2; border-radius: 6px; font-size: 0.76rem; cursor: pointer;">Delete</button>
+          </div>
         </td>
       </tr>
     `).join("");
+
+    table.querySelectorAll(".btn-action-delete-student").forEach((btn) => {
+      btn.addEventListener("click", async () => {
+        const id = btn.dataset.id;
+        if (!confirm("Are you sure you want to remove this student record?")) return;
+        try {
+          await adminApi.deleteStudent(id);
+          liveState.students = (liveState.students || []).filter((s) => s.id !== id);
+          renderStudentsTable(liveState.students);
+          updateMetricCards({ ...liveState.metrics, studentsCount: liveState.students.length });
+        } catch (e) {
+          alert("Could not delete student: " + e.message);
+        }
+      });
+    });
   }
 
   // =========================================================================
@@ -531,9 +558,29 @@
         <td style="padding: 12px;"><a href="mailto:${escapeHtml(c.email)}" style="color: #0066cc;">${escapeHtml(c.email || "—")}</a></td>
         <td style="padding: 12px;">${escapeHtml(c.phone || "—")}</td>
         <td style="padding: 12px;"><span class="status-pill status-success" style="padding: 4px 10px; border-radius: 999px; font-size: 0.74rem;">ACTIVE</span></td>
-        <td style="padding: 12px;"><button type="button" style="padding: 4px 10px; background: #f5f5f7; border: 1px solid #d2d2d7; border-radius: 6px; font-size: 0.76rem; cursor: pointer;">Manage</button></td>
+        <td style="padding: 12px;">
+          <div style="display: flex; gap: 6px;">
+            <a href="mailto:${escapeHtml(c.email)}" style="padding: 4px 10px; background: #f5f5f7; border: 1px solid #d2d2d7; border-radius: 6px; font-size: 0.76rem; text-decoration: none; color: #1d1d1f;">Contact</a>
+            <button type="button" class="btn-action-delete-client" data-id="${escapeHtml(c.id)}" style="padding: 4px 8px; background: #fff; color: #dc2626; border: 1px solid #fee2e2; border-radius: 6px; font-size: 0.76rem; cursor: pointer;">Delete</button>
+          </div>
+        </td>
       </tr>
     `).join("");
+
+    table.querySelectorAll(".btn-action-delete-client").forEach((btn) => {
+      btn.addEventListener("click", async () => {
+        const id = btn.dataset.id;
+        if (!confirm("Are you sure you want to remove this client?")) return;
+        try {
+          await adminApi.deleteClient(id);
+          liveState.clients = (liveState.clients || []).filter((c) => c.id !== id);
+          renderClientsTable(liveState.clients);
+          updateMetricCards({ ...liveState.metrics, clientsCount: liveState.clients.length });
+        } catch (e) {
+          alert("Could not delete client: " + e.message);
+        }
+      });
+    });
   }
 
   function renderProjectsTable(projects) {
@@ -552,9 +599,26 @@
         <td style="padding: 12px;">${escapeHtml(p.client)}</td>
         <td style="padding: 12px; font-weight: 600; color: #0066cc;">${formatMoney(p.value)}</td>
         <td style="padding: 12px;"><span class="status-pill status-info" style="padding: 4px 10px; border-radius: 999px; font-size: 0.74rem;">${escapeHtml(p.status || "IN DEV")}</span></td>
-        <td style="padding: 12px;"><button type="button" style="padding: 4px 10px; background: #f5f5f7; border: 1px solid #d2d2d7; border-radius: 6px; font-size: 0.76rem; cursor: pointer;">Milestones</button></td>
+        <td style="padding: 12px;">
+          <button type="button" class="btn-action-delete-project" data-id="${escapeHtml(p.id)}" style="padding: 4px 8px; background: #fff; color: #dc2626; border: 1px solid #fee2e2; border-radius: 6px; font-size: 0.76rem; cursor: pointer;">Delete</button>
+        </td>
       </tr>
     `).join("");
+
+    table.querySelectorAll(".btn-action-delete-project").forEach((btn) => {
+      btn.addEventListener("click", async () => {
+        const id = btn.dataset.id;
+        if (!confirm("Are you sure you want to remove this project?")) return;
+        try {
+          await adminApi.deleteProject(id);
+          liveState.projects = (liveState.projects || []).filter((p) => p.id !== id);
+          renderProjectsTable(liveState.projects);
+          updateMetricCards({ ...liveState.metrics, projectsCount: liveState.projects.length });
+        } catch (e) {
+          alert("Could not delete project: " + e.message);
+        }
+      });
+    });
   }
 
   // =========================================================================
@@ -637,6 +701,451 @@
   }
 
   // =========================================================================
+  // UNIVERSAL RECORD CREATION MODAL ENGINE (Company & Internship DB)
+  // =========================================================================
+  const RECORD_TYPES_CONFIG = {
+    student: {
+      dbGroup: "internship",
+      dbLabel: "🎓 Internship DB",
+      tabLabel: "🎓 Enroll Intern",
+      title: "🎓 Enroll New Student (Internship DB)",
+      subtitle: "Add an active student directly into the verified internship learner roster."
+    },
+    application: {
+      dbGroup: "internship",
+      dbLabel: "🎓 Internship DB",
+      tabLabel: "📝 Application",
+      title: "📝 Candidate Application (Internship DB)",
+      subtitle: "Register an applicant into the review pipeline for internship tracks."
+    },
+    task: {
+      dbGroup: "internship",
+      dbLabel: "🎓 Internship DB",
+      tabLabel: "📋 Sprint Task",
+      title: "📋 Assign Sprint Task (Internship DB)",
+      subtitle: "Publish a milestone task for students in active cohort tracks."
+    },
+    lead: {
+      dbGroup: "company",
+      dbLabel: "🏢 Company DB",
+      tabLabel: "📬 Inquiry / Lead",
+      title: "📬 Log Client Inquiry (Company DB)",
+      subtitle: "Record a prospective client project inquiry or consultation request."
+    },
+    client: {
+      dbGroup: "company",
+      dbLabel: "🏢 Company DB",
+      tabLabel: "🏢 Client Account",
+      title: "🏢 Register Enterprise Client (Company DB)",
+      subtitle: "Add a corporate client into the commercial business registry."
+    },
+    project: {
+      dbGroup: "company",
+      dbLabel: "🏢 Company DB",
+      tabLabel: "🚀 Project Build",
+      title: "🚀 Create Production Project (Company DB)",
+      subtitle: "Create a software, web, or cloud project milestone in the delivery pipeline."
+    }
+  };
+
+  function bindUniversalRecordCreation() {
+    // 1. Remove dummy inline alerts from all buttons
+    document.querySelectorAll("button[onclick*='Record creation modal'], button[onclick*='Create task modal']").forEach((btn) => {
+      btn.removeAttribute("onclick");
+      btn.setAttribute("data-action", "create-record");
+    });
+
+    // 2. Attach click handlers to any create button
+    document.querySelectorAll("button, a.btn, .btn-admin-primary").forEach((btn) => {
+      const text = (btn.textContent || "").trim().toLowerCase();
+      const hasAction = btn.getAttribute("data-action") === "create-record";
+      const hasDataBtn = btn.hasAttribute("data-btn-new-record") ||
+                         btn.hasAttribute("data-btn-new-student") ||
+                         btn.hasAttribute("data-btn-new-lead") ||
+                         btn.hasAttribute("data-btn-new-project") ||
+                         btn.hasAttribute("data-btn-new-client") ||
+                         btn.hasAttribute("data-btn-new-app");
+
+      if (
+        hasAction ||
+        hasDataBtn ||
+        text === "+ new record" ||
+        text.includes("enroll new student") ||
+        text.includes("log new inquiry") ||
+        text.includes("create milestone task") ||
+        text.includes("new project build") ||
+        text.includes("add client") ||
+        text.includes("+ add candidate")
+      ) {
+        btn.removeAttribute("onclick");
+        btn.setAttribute("data-action", "create-record");
+        btn.style.cursor = "pointer";
+        btn.addEventListener("click", (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+
+          let forcedType = null;
+          if (text.includes("student") || text.includes("intern")) forcedType = "student";
+          else if (text.includes("inquiry") || text.includes("lead")) forcedType = "lead";
+          else if (text.includes("project")) forcedType = "project";
+          else if (text.includes("client")) forcedType = "client";
+          else if (text.includes("task")) forcedType = "task";
+          else if (text.includes("candidate") || text.includes("application")) forcedType = "application";
+
+          openCreateRecordModal(forcedType);
+        });
+      }
+    });
+  }
+
+  function openCreateRecordModal(forcedType = null) {
+    const path = window.location.pathname.toLowerCase();
+    let currentType = forcedType;
+
+    if (!currentType) {
+      if (path.includes("students")) currentType = "student";
+      else if (path.includes("leads") || path.includes("inquiries")) currentType = "lead";
+      else if (path.includes("applications")) currentType = "application";
+      else if (path.includes("projects")) currentType = "project";
+      else if (path.includes("clients")) currentType = "client";
+      else if (path.includes("tasks")) currentType = "task";
+      else if (path.includes("certificates")) {
+        const certBtn = document.querySelector("[data-btn-new-cert]");
+        if (certBtn) { certBtn.click(); return; }
+        currentType = "student";
+      } else if (path.includes("company")) {
+        currentType = "lead";
+      } else if (path.includes("internships")) {
+        currentType = "student";
+      } else {
+        currentType = "student";
+      }
+    }
+
+    let modal = document.getElementById("universalCreateModal");
+    if (!modal) {
+      modal = document.createElement("dialog");
+      modal.id = "universalCreateModal";
+      modal.style.cssText = "border: none; border-radius: 16px; padding: 0; box-shadow: 0 24px 60px rgba(0,0,0,0.3); max-width: 580px; width: 92%; background: #ffffff; color: #1d1d1f; font-family: 'Inter', -apple-system, sans-serif;";
+      document.body.appendChild(modal);
+    }
+
+    function renderModalBody(type) {
+      currentType = type;
+      const conf = RECORD_TYPES_CONFIG[type] || RECORD_TYPES_CONFIG.student;
+
+      let formHtml = "";
+      if (type === "student") {
+        formHtml = `
+          <div>
+            <label style="display: block; font-size: 0.78rem; font-weight: 700; color: #6e6e73; margin-bottom: 6px;">STUDENT FULL NAME *</label>
+            <input type="text" id="mStudentName" required placeholder="e.g. Aman Sharma" style="width: 100%; padding: 10px 12px; border: 1px solid #d2d2d7; border-radius: 8px; font-size: 0.9rem; box-sizing: border-box;" />
+          </div>
+          <div>
+            <label style="display: block; font-size: 0.78rem; font-weight: 700; color: #6e6e73; margin-bottom: 6px;">EMAIL ADDRESS *</label>
+            <input type="email" id="mStudentEmail" required placeholder="student@example.com" style="width: 100%; padding: 10px 12px; border: 1px solid #d2d2d7; border-radius: 8px; font-size: 0.9rem; box-sizing: border-box;" />
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+            <div>
+              <label style="display: block; font-size: 0.78rem; font-weight: 700; color: #6e6e73; margin-bottom: 6px;">PHONE / WHATSAPP</label>
+              <input type="tel" id="mStudentPhone" placeholder="10-digit mobile" style="width: 100%; padding: 10px 12px; border: 1px solid #d2d2d7; border-radius: 8px; font-size: 0.9rem; box-sizing: border-box;" />
+            </div>
+            <div>
+              <label style="display: block; font-size: 0.78rem; font-weight: 700; color: #6e6e73; margin-bottom: 6px;">DURATION</label>
+              <select id="mStudentDuration" style="width: 100%; padding: 10px 12px; border: 1px solid #d2d2d7; border-radius: 8px; font-size: 0.9rem; box-sizing: border-box;">
+                <option value="4 Weeks">4 Weeks</option>
+                <option value="8 Weeks">8 Weeks</option>
+                <option value="12 Weeks">12 Weeks</option>
+                <option value="6 Months">6 Months</option>
+              </select>
+            </div>
+          </div>
+          <div>
+            <label style="display: block; font-size: 0.78rem; font-weight: 700; color: #6e6e73; margin-bottom: 6px;">PROGRAM TRACK *</label>
+            <select id="mStudentTrack" required style="width: 100%; padding: 10px 12px; border: 1px solid #d2d2d7; border-radius: 8px; font-size: 0.9rem; box-sizing: border-box;">
+              <option value="Web Engineering Internship Track">Web Engineering Internship Track</option>
+              <option value="AI & Applied Machine Learning Track">AI & Applied Machine Learning Track</option>
+              <option value="Software & Full-Stack Development Track">Software & Full-Stack Development Track</option>
+              <option value="UI/UX Product Design Track">UI/UX Product Design Track</option>
+              <option value="Cloud Computing & DevOps Track">Cloud Computing & DevOps Track</option>
+            </select>
+          </div>
+        `;
+      } else if (type === "application") {
+        formHtml = `
+          <div>
+            <label style="display: block; font-size: 0.78rem; font-weight: 700; color: #6e6e73; margin-bottom: 6px;">APPLICANT FULL NAME *</label>
+            <input type="text" id="mAppName" required placeholder="e.g. Rohit Kumar" style="width: 100%; padding: 10px 12px; border: 1px solid #d2d2d7; border-radius: 8px; font-size: 0.9rem; box-sizing: border-box;" />
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+            <div>
+              <label style="display: block; font-size: 0.78rem; font-weight: 700; color: #6e6e73; margin-bottom: 6px;">EMAIL ADDRESS *</label>
+              <input type="email" id="mAppEmail" required placeholder="applicant@example.com" style="width: 100%; padding: 10px 12px; border: 1px solid #d2d2d7; border-radius: 8px; font-size: 0.9rem; box-sizing: border-box;" />
+            </div>
+            <div>
+              <label style="display: block; font-size: 0.78rem; font-weight: 700; color: #6e6e73; margin-bottom: 6px;">PHONE / WHATSAPP</label>
+              <input type="tel" id="mAppPhone" placeholder="10-digit mobile" style="width: 100%; padding: 10px 12px; border: 1px solid #d2d2d7; border-radius: 8px; font-size: 0.9rem; box-sizing: border-box;" />
+            </div>
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+            <div>
+              <label style="display: block; font-size: 0.78rem; font-weight: 700; color: #6e6e73; margin-bottom: 6px;">COLLEGE / INSTITUTION</label>
+              <input type="text" id="mAppCollege" placeholder="e.g. ABSS Institute" style="width: 100%; padding: 10px 12px; border: 1px solid #d2d2d7; border-radius: 8px; font-size: 0.9rem; box-sizing: border-box;" />
+            </div>
+            <div>
+              <label style="display: block; font-size: 0.78rem; font-weight: 700; color: #6e6e73; margin-bottom: 6px;">PROGRAM TRACK</label>
+              <select id="mAppTrack" style="width: 100%; padding: 10px 12px; border: 1px solid #d2d2d7; border-radius: 8px; font-size: 0.9rem; box-sizing: border-box;">
+                <option value="Web Engineering Internship Track">Web Engineering</option>
+                <option value="AI & Applied Machine Learning Track">AI & Machine Learning</option>
+                <option value="Software Development Track">Software Development</option>
+                <option value="UI/UX Product Design Track">UI/UX Design</option>
+                <option value="Cloud Computing & DevOps Track">Cloud & DevOps</option>
+              </select>
+            </div>
+          </div>
+        `;
+      } else if (type === "task") {
+        formHtml = `
+          <div>
+            <label style="display: block; font-size: 0.78rem; font-weight: 700; color: #6e6e73; margin-bottom: 6px;">TASK TITLE *</label>
+            <input type="text" id="mTaskTitle" required placeholder="e.g. Build Modern Responsive Dashboard" style="width: 100%; padding: 10px 12px; border: 1px solid #d2d2d7; border-radius: 8px; font-size: 0.9rem; box-sizing: border-box;" />
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+            <div>
+              <label style="display: block; font-size: 0.78rem; font-weight: 700; color: #6e6e73; margin-bottom: 6px;">TRACK</label>
+              <select id="mTaskTrack" style="width: 100%; padding: 10px 12px; border: 1px solid #d2d2d7; border-radius: 8px; font-size: 0.9rem; box-sizing: border-box;">
+                <option value="All Tracks">All Tracks</option>
+                <option value="Web Engineering">Web Engineering</option>
+                <option value="AI & Machine Learning">AI & Machine Learning</option>
+                <option value="Software Development">Software Development</option>
+                <option value="UI/UX Design">UI/UX Design</option>
+              </select>
+            </div>
+            <div>
+              <label style="display: block; font-size: 0.78rem; font-weight: 700; color: #6e6e73; margin-bottom: 6px;">MODULE / WEEK</label>
+              <input type="text" id="mTaskWeek" value="Week 1" style="width: 100%; padding: 10px 12px; border: 1px solid #d2d2d7; border-radius: 8px; font-size: 0.9rem; box-sizing: border-box;" />
+            </div>
+          </div>
+        `;
+      } else if (type === "lead") {
+        formHtml = `
+          <div>
+            <label style="display: block; font-size: 0.78rem; font-weight: 700; color: #6e6e73; margin-bottom: 6px;">CLIENT / COMPANY NAME *</label>
+            <input type="text" id="mLeadClient" required placeholder="e.g. Apex Health Systems" style="width: 100%; padding: 10px 12px; border: 1px solid #d2d2d7; border-radius: 8px; font-size: 0.9rem; box-sizing: border-box;" />
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+            <div>
+              <label style="display: block; font-size: 0.78rem; font-weight: 700; color: #6e6e73; margin-bottom: 6px;">EMAIL ADDRESS *</label>
+              <input type="email" id="mLeadEmail" required placeholder="contact@company.com" style="width: 100%; padding: 10px 12px; border: 1px solid #d2d2d7; border-radius: 8px; font-size: 0.9rem; box-sizing: border-box;" />
+            </div>
+            <div>
+              <label style="display: block; font-size: 0.78rem; font-weight: 700; color: #6e6e73; margin-bottom: 6px;">PHONE NUMBER</label>
+              <input type="tel" id="mLeadPhone" placeholder="Mobile / WhatsApp" style="width: 100%; padding: 10px 12px; border: 1px solid #d2d2d7; border-radius: 8px; font-size: 0.9rem; box-sizing: border-box;" />
+            </div>
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+            <div>
+              <label style="display: block; font-size: 0.78rem; font-weight: 700; color: #6e6e73; margin-bottom: 6px;">SERVICE REQUIRED</label>
+              <select id="mLeadService" style="width: 100%; padding: 10px 12px; border: 1px solid #d2d2d7; border-radius: 8px; font-size: 0.9rem; box-sizing: border-box;">
+                <option value="Website Development">Website Development</option>
+                <option value="AI & Machine Learning Solutions">AI & Machine Learning Solutions</option>
+                <option value="Cloud Computing & DevOps">Cloud Computing & DevOps</option>
+                <option value="Custom Software Development">Custom Software Development</option>
+                <option value="UI/UX Product Design">UI/UX Product Design</option>
+                <option value="IT Consulting & Strategy">IT Consulting & Strategy</option>
+              </select>
+            </div>
+            <div>
+              <label style="display: block; font-size: 0.78rem; font-weight: 700; color: #6e6e73; margin-bottom: 6px;">ESTIMATED BUDGET</label>
+              <input type="text" id="mLeadBudget" placeholder="e.g. ₹25,000" style="width: 100%; padding: 10px 12px; border: 1px solid #d2d2d7; border-radius: 8px; font-size: 0.9rem; box-sizing: border-box;" />
+            </div>
+          </div>
+          <div>
+            <label style="display: block; font-size: 0.78rem; font-weight: 700; color: #6e6e73; margin-bottom: 6px;">PROJECT SCOPE / MESSAGE</label>
+            <textarea id="mLeadMessage" rows="2" placeholder="Brief requirements or scope..." style="width: 100%; padding: 10px 12px; border: 1px solid #d2d2d7; border-radius: 8px; font-size: 0.9rem; box-sizing: border-box;"></textarea>
+          </div>
+        `;
+      } else if (type === "client") {
+        formHtml = `
+          <div>
+            <label style="display: block; font-size: 0.78rem; font-weight: 700; color: #6e6e73; margin-bottom: 6px;">CLIENT / COMPANY NAME *</label>
+            <input type="text" id="mCliName" required placeholder="e.g. CloudTech Global Ltd." style="width: 100%; padding: 10px 12px; border: 1px solid #d2d2d7; border-radius: 8px; font-size: 0.9rem; box-sizing: border-box;" />
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+            <div>
+              <label style="display: block; font-size: 0.78rem; font-weight: 700; color: #6e6e73; margin-bottom: 6px;">EMAIL</label>
+              <input type="email" id="mCliEmail" placeholder="contact@client.com" style="width: 100%; padding: 10px 12px; border: 1px solid #d2d2d7; border-radius: 8px; font-size: 0.9rem; box-sizing: border-box;" />
+            </div>
+            <div>
+              <label style="display: block; font-size: 0.78rem; font-weight: 700; color: #6e6e73; margin-bottom: 6px;">PHONE NUMBER</label>
+              <input type="tel" id="mCliPhone" placeholder="Mobile / WhatsApp" style="width: 100%; padding: 10px 12px; border: 1px solid #d2d2d7; border-radius: 8px; font-size: 0.9rem; box-sizing: border-box;" />
+            </div>
+          </div>
+        `;
+      } else if (type === "project") {
+        formHtml = `
+          <div>
+            <label style="display: block; font-size: 0.78rem; font-weight: 700; color: #6e6e73; margin-bottom: 6px;">PROJECT NAME *</label>
+            <input type="text" id="mProjName" required placeholder="e.g. Enterprise Cloud ERP Migration" style="width: 100%; padding: 10px 12px; border: 1px solid #d2d2d7; border-radius: 8px; font-size: 0.9rem; box-sizing: border-box;" />
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+            <div>
+              <label style="display: block; font-size: 0.78rem; font-weight: 700; color: #6e6e73; margin-bottom: 6px;">CLIENT NAME</label>
+              <input type="text" id="mProjClient" placeholder="e.g. Horizon Labs" style="width: 100%; padding: 10px 12px; border: 1px solid #d2d2d7; border-radius: 8px; font-size: 0.9rem; box-sizing: border-box;" />
+            </div>
+            <div>
+              <label style="display: block; font-size: 0.78rem; font-weight: 700; color: #6e6e73; margin-bottom: 6px;">PROJECT VALUE (₹)</label>
+              <input type="number" id="mProjValue" placeholder="50000" style="width: 100%; padding: 10px 12px; border: 1px solid #d2d2d7; border-radius: 8px; font-size: 0.9rem; box-sizing: border-box;" />
+            </div>
+          </div>
+        `;
+      }
+
+      const tabsHtml = Object.entries(RECORD_TYPES_CONFIG).map(([k, item]) => {
+        const isActive = k === type;
+        const activeStyle = isActive
+          ? "background: #0066cc; color: #ffffff; border-color: #0066cc;"
+          : "background: #ffffff; color: #1d1d1f; border-color: #d2d2d7;";
+        return `<button type="button" class="btn-modal-db-tab" data-tab-type="${k}" style="padding: 6px 12px; border-radius: 999px; font-size: 0.78rem; font-weight: 600; border: 1px solid; cursor: pointer; transition: all 0.2s; white-space: nowrap; ${activeStyle}">${item.tabLabel}</button>`;
+      }).join("");
+
+      modal.innerHTML = `
+        <div style="padding: 20px 24px; border-bottom: 1px solid #e5e5ea; display: flex; justify-content: space-between; align-items: flex-start; background: #fafafa; border-radius: 16px 16px 0 0;">
+          <div>
+            <span style="display: inline-block; padding: 2px 8px; background: ${conf.dbGroup === 'internship' ? '#eff6ff' : '#ecfdf5'}; color: ${conf.dbGroup === 'internship' ? '#1d4ed8' : '#047857'}; font-size: 0.72rem; font-weight: 700; border-radius: 6px; text-transform: uppercase; margin-bottom: 4px;">
+              ${conf.dbLabel}
+            </span>
+            <h3 style="margin: 0; font-size: 1.18rem; font-weight: 700; color: #1d1d1f;">${conf.title}</h3>
+            <p style="margin: 4px 0 0; font-size: 0.8rem; color: #6e6e73;">${conf.subtitle}</p>
+          </div>
+          <button type="button" id="closeUnivModal" style="background: none; border: none; font-size: 1.6rem; cursor: pointer; color: #86868b; line-height: 1; padding: 0;">&times;</button>
+        </div>
+
+        <div style="padding: 10px 24px; background: #f5f5f7; border-bottom: 1px solid #e5e5ea; display: flex; align-items: center; gap: 8px; overflow-x: auto;">
+          <span style="font-size: 0.72rem; font-weight: 700; color: #86868b; text-transform: uppercase; white-space: nowrap;">Database Switch:</span>
+          ${tabsHtml}
+        </div>
+
+        <form id="universalCreateForm" style="padding: 24px; display: flex; flex-direction: column; gap: 14px;">
+          ${formHtml}
+          <div style="margin-top: 10px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #f0f0f2; padding-top: 16px;">
+            <small style="color: #86868b; font-size: 0.78rem;">✓ Live persistent D1 &amp; Sheets/Firebase sync</small>
+            <div style="display: flex; gap: 10px;">
+              <button type="button" id="cancelUnivBtn" style="padding: 8px 16px; background: #f5f5f7; border: 1px solid #d2d2d7; border-radius: 8px; font-size: 0.85rem; font-weight: 600; cursor: pointer;">Cancel</button>
+              <button type="submit" id="submitUnivBtn" style="padding: 8px 20px; background: #0066cc; color: #fff; border: none; border-radius: 8px; font-size: 0.85rem; font-weight: 600; cursor: pointer;">Save Record &rarr;</button>
+            </div>
+          </div>
+        </form>
+      `;
+
+      // Event Listeners inside modal
+      document.getElementById("closeUnivModal")?.addEventListener("click", () => modal.close());
+      document.getElementById("cancelUnivBtn")?.addEventListener("click", () => modal.close());
+
+      modal.querySelectorAll(".btn-modal-db-tab").forEach((tabBtn) => {
+        tabBtn.addEventListener("click", () => {
+          const targetType = tabBtn.getAttribute("data-tab-type");
+          if (targetType) renderModalBody(targetType);
+        });
+      });
+
+      document.getElementById("universalCreateForm")?.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const submitBtn = document.getElementById("submitUnivBtn");
+        if (submitBtn) {
+          submitBtn.disabled = true;
+          submitBtn.textContent = "Saving...";
+        }
+
+        try {
+          if (currentType === "student") {
+            const name = document.getElementById("mStudentName").value.trim();
+            const email = document.getElementById("mStudentEmail").value.trim().toLowerCase();
+            const phone = document.getElementById("mStudentPhone")?.value.trim() || "";
+            const track = document.getElementById("mStudentTrack").value;
+            const duration = document.getElementById("mStudentDuration").value;
+            const res = await adminApi.createStudent({ name, email, phone, track, duration });
+            liveState.students = [res.student, ...(liveState.students || [])];
+            renderStudentsTable(liveState.students);
+            updateMetricCards({ ...liveState.metrics, studentsCount: liveState.students.length });
+            try {
+              window.AbssDataSync?.dualSyncRecord("student_registration", { name, email, phone, track, duration, status: "Enrolled by Admin" });
+            } catch {}
+            alert(`✓ Student "${name}" successfully enrolled in Internship Database!`);
+          } else if (currentType === "lead") {
+            const client = document.getElementById("mLeadClient").value.trim();
+            const email = document.getElementById("mLeadEmail").value.trim().toLowerCase();
+            const phone = document.getElementById("mLeadPhone")?.value.trim() || "";
+            const service = document.getElementById("mLeadService").value;
+            const budget = document.getElementById("mLeadBudget")?.value.trim() || "Negotiable";
+            const message = document.getElementById("mLeadMessage")?.value.trim() || "";
+            const res = await adminApi.createLead({ client, name: client, email, phone, service, budgetLabel: budget, message, status: "New" });
+            const newLead = res.lead || { id: `lead-${Date.now()}`, client, email, phone, service, budgetLabel: budget, status: "New" };
+            liveState.leads = [newLead, ...(liveState.leads || [])];
+            renderLeadsTable(liveState.leads);
+            updateMetricCards({ ...liveState.metrics, leadsCount: liveState.leads.length });
+            try {
+              window.AbssDataSync?.dualSyncRecord("contact_lead", { client, name: client, email, phone, service, budget, message });
+            } catch {}
+            alert(`✓ Client inquiry for "${client}" logged into Company Database!`);
+          } else if (currentType === "application") {
+            const name = document.getElementById("mAppName").value.trim();
+            const email = document.getElementById("mAppEmail").value.trim().toLowerCase();
+            const phone = document.getElementById("mAppPhone")?.value.trim() || "";
+            const college = document.getElementById("mAppCollege")?.value.trim() || "";
+            const track = document.getElementById("mAppTrack").value;
+            const res = await adminApi.createApplication({ fullName: name, email, phone, college, track });
+            liveState.internshipApplications = [res.application, ...(liveState.internshipApplications || [])];
+            renderApplicationsTable(liveState.internshipApplications);
+            updateMetricCards({ ...liveState.metrics, appsCount: liveState.internshipApplications.length });
+            try {
+              window.AbssDataSync?.dualSyncRecord("internship_application", { fullName: name, email, phone, college, track });
+            } catch {}
+            alert(`✓ Application for "${name}" registered in Internship Database!`);
+          } else if (currentType === "project") {
+            const name = document.getElementById("mProjName").value.trim();
+            const client = document.getElementById("mProjClient")?.value.trim() || "Enterprise Client";
+            const value = document.getElementById("mProjValue")?.value || 0;
+            const res = await adminApi.createProject({ name, client, value });
+            liveState.projects = [res.project, ...(liveState.projects || [])];
+            renderProjectsTable(liveState.projects);
+            updateMetricCards({ ...liveState.metrics, projectsCount: liveState.projects.length });
+            alert(`✓ Project "${name}" created in Company Database!`);
+          } else if (currentType === "client") {
+            const name = document.getElementById("mCliName").value.trim();
+            const email = document.getElementById("mCliEmail")?.value.trim() || "";
+            const phone = document.getElementById("mCliPhone")?.value.trim() || "";
+            const res = await adminApi.createClient({ name, email, phone });
+            liveState.clients = [res.client, ...(liveState.clients || [])];
+            renderClientsTable(liveState.clients);
+            updateMetricCards({ ...liveState.metrics, clientsCount: liveState.clients.length });
+            alert(`✓ Enterprise Client "${name}" added to Company Database!`);
+          } else if (currentType === "task") {
+            const title = document.getElementById("mTaskTitle").value.trim();
+            const track = document.getElementById("mTaskTrack").value;
+            const week = document.getElementById("mTaskWeek")?.value.trim() || "Week 1";
+            const res = await adminApi.createTask({ title, track, week });
+            liveState.tasks = [res.task, ...(liveState.tasks || [])];
+            alert(`✓ Sprint Task "${title}" assigned to Internship Database!`);
+          }
+
+          modal.close();
+        } catch (err) {
+          alert("Creation failed: " + (err.message || err));
+        } finally {
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.textContent = "Save Record →";
+          }
+        }
+      });
+    }
+
+    renderModalBody(currentType);
+    modal.showModal();
+  }
+
+  // =========================================================================
   // LIVE SEARCH
   // =========================================================================
   function bindSearchFilters() {
@@ -653,62 +1162,80 @@
   }
 
   // =========================================================================
-  // CSV EXPORT
+  // CSV EXPORT ENGINE
   // =========================================================================
   function bindExportCsv() {
-    const exportBtn = document.querySelector(".btn-admin-secondary[onclick*='CSV'], button[onclick*='CSV']");
-    if (!exportBtn) return;
+    const exportBtns = document.querySelectorAll(
+      ".btn-admin-secondary[onclick*='CSV'], button[onclick*='CSV'], button[onclick*='Exporting'], [data-btn-export-csv]"
+    );
+    exportBtns.forEach((exportBtn) => {
+      exportBtn.removeAttribute("onclick");
+      exportBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
 
-    exportBtn.removeAttribute("onclick");
-    exportBtn.addEventListener("click", () => {
-      let rows = [];
-      let filename = "abss-admin-export.csv";
+        let rows = [];
+        let filename = "abss-admin-export.csv";
+        const path = window.location.pathname.toLowerCase();
 
-      if (window.location.pathname.includes("leads")) {
-        filename = "abss-leads.csv";
-        rows = [["Lead ID", "Client Name", "Email", "Phone", "Service", "Budget", "Status", "Date"]];
-        (liveState.leads || []).forEach((l) => {
-          rows.push([l.id, l.client || l.name, l.email, l.phone, l.service, l.budget, l.status, l.createdAt]);
-        });
-      } else if (window.location.pathname.includes("applications")) {
-        filename = "abss-applications.csv";
-        rows = [["Application ID", "Name", "Email", "Track", "College", "Status", "Date"]];
-        (liveState.internshipApplications || []).forEach((a) => {
-          rows.push([a.id, a.fullName || a.name, a.email, a.internshipProgram, a.college, a.status, a.createdAt]);
-        });
-      } else if (window.location.pathname.includes("students")) {
-        filename = "abss-students.csv";
-        rows = [["Student ID", "Name", "Email", "Verified", "Date"]];
-        (liveState.students || []).forEach((s) => {
-          rows.push([s.id, s.name, s.email, s.emailVerified ? "Yes" : "No", s.createdAt]);
-        });
-      } else if (window.location.pathname.includes("certificates")) {
-        filename = "abss-certificates.csv";
-        rows = [["Certificate ID", "Student Name", "Program", "Grade", "Status", "Issue Date"]];
-        (liveState.certificates || []).forEach((c) => {
-          rows.push([c.id, c.studentName, c.program, c.grade, c.status, c.issueDate]);
-        });
-      } else {
-        filename = "abss-database-summary.csv";
-        rows = [
-          ["Entity", "Total Real Records in D1"],
-          ["Leads", (liveState.leads || []).length],
-          ["Internship Applications", (liveState.internshipApplications || []).length],
-          ["Enrolled Students", (liveState.students || []).length],
-          ["Certificates", (liveState.certificates || []).length],
-          ["Projects", (liveState.projects || []).length],
-          ["Clients", (liveState.clients || []).length]
-        ];
-      }
+        if (path.includes("leads") || path.includes("inquiries")) {
+          filename = "abss-leads.csv";
+          rows = [["Lead ID", "Client Name", "Email", "Phone", "Service", "Budget", "Status", "Date"]];
+          (liveState.leads || []).forEach((l) => {
+            rows.push([l.id, l.client || l.name, l.email, l.phone, l.service, l.budgetLabel || l.budget, l.status, l.createdAt]);
+          });
+        } else if (path.includes("applications")) {
+          filename = "abss-applications.csv";
+          rows = [["Application ID", "Name", "Email", "Phone", "Track", "College", "Status", "Date"]];
+          (liveState.internshipApplications || []).forEach((a) => {
+            rows.push([a.id, a.fullName || a.name, a.email, a.phone, a.internshipProgram || a.program, a.college, a.status, a.createdAt]);
+          });
+        } else if (path.includes("students")) {
+          filename = "abss-students.csv";
+          rows = [["Student ID", "Name", "Email", "Phone", "Track", "Verified", "Date"]];
+          (liveState.students || []).forEach((s) => {
+            rows.push([s.id, s.name, s.email, s.phone || "", s.track || "", s.emailVerified ? "Yes" : "No", s.createdAt]);
+          });
+        } else if (path.includes("certificates")) {
+          filename = "abss-certificates.csv";
+          rows = [["Certificate ID", "Student Name", "Program", "Grade", "Status", "Issue Date"]];
+          (liveState.certificates || []).forEach((c) => {
+            rows.push([c.id, c.studentName, c.program, c.grade, c.status, c.issueDate]);
+          });
+        } else if (path.includes("projects")) {
+          filename = "abss-projects.csv";
+          rows = [["Project ID", "Project Name", "Client", "Service", "Value", "Status", "Date"]];
+          (liveState.projects || []).forEach((p) => {
+            rows.push([p.id, p.name, p.client, p.service, p.value, p.status, p.createdAt]);
+          });
+        } else if (path.includes("clients")) {
+          filename = "abss-clients.csv";
+          rows = [["Client ID", "Name", "Email", "Phone", "Service", "Status", "Date"]];
+          (liveState.clients || []).forEach((c) => {
+            rows.push([c.id, c.name, c.email, c.phone, c.service, c.status, c.createdAt]);
+          });
+        } else {
+          filename = "abss-database-summary.csv";
+          rows = [
+            ["Entity", "Total Real Records in D1"],
+            ["Leads (Company DB)", (liveState.leads || []).length],
+            ["Clients (Company DB)", (liveState.clients || []).length],
+            ["Projects (Company DB)", (liveState.projects || []).length],
+            ["Internship Applications (Internship DB)", (liveState.internshipApplications || []).length],
+            ["Enrolled Interns (Internship DB)", (liveState.students || []).length],
+            ["Certificates (Internship DB)", (liveState.certificates || []).length]
+          ];
+        }
 
-      const csvContent = "data:text/csv;charset=utf-8," + rows.map((e) => e.map((x) => `"${String(x ?? '').replace(/"/g, '""')}"`).join(",")).join("\n");
-      const encodedUri = encodeURI(csvContent);
-      const link = document.createElement("a");
-      link.setAttribute("href", encodedUri);
-      link.setAttribute("download", filename);
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
+        const csvContent = "data:text/csv;charset=utf-8," + rows.map((e) => e.map((x) => `"${String(x ?? '').replace(/"/g, '""')}"`).join(",")).join("\n");
+        const encodedUri = encodeURI(csvContent);
+        const link = document.createElement("a");
+        link.setAttribute("href", encodedUri);
+        link.setAttribute("download", filename);
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      });
     });
   }
 

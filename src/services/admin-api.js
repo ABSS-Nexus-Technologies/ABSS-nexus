@@ -238,6 +238,118 @@
       return { ok: true, students: state.students || [] };
     },
 
+    async createStudent(student) {
+      const state = this.loadState({});
+      const newStudent = {
+        id: student.id || `student-${Date.now()}`,
+        name: student.name,
+        email: student.email,
+        phone: student.phone || "",
+        track: student.track || "Web Development",
+        duration: student.duration || "4 Weeks",
+        status: student.status || "active",
+        emailVerified: 1,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+      };
+      state.students = [newStudent, ...(state.students || [])];
+      await this.saveStateAsync(state);
+      return { ok: true, student: newStudent };
+    },
+
+    async deleteStudent(id) {
+      const state = this.loadState({});
+      state.students = (state.students || []).filter((s) => s.id !== id);
+      await this.saveStateAsync(state);
+      return { ok: true };
+    },
+
+    async createProject(project) {
+      const state = this.loadState({});
+      const newProj = {
+        id: project.id || `proj-${Date.now()}`,
+        name: project.name,
+        client: project.client || "Enterprise Client",
+        service: project.service || "Software Engineering",
+        value: Number(project.value || 0),
+        status: project.status || "In Development",
+        createdAt: new Date().toISOString(),
+      };
+      state.projects = [newProj, ...(state.projects || [])];
+      await this.saveStateAsync(state);
+      return { ok: true, project: newProj };
+    },
+
+    async deleteProject(id) {
+      const state = this.loadState({});
+      state.projects = (state.projects || []).filter((p) => p.id !== id);
+      await this.saveStateAsync(state);
+      return { ok: true };
+    },
+
+    async createClient(client) {
+      const state = this.loadState({});
+      const newCli = {
+        id: client.id || `cli-${Date.now()}`,
+        name: client.name,
+        company: client.company || client.name,
+        email: client.email || "",
+        phone: client.phone || "",
+        service: client.service || "IT Consulting",
+        status: client.status || "Active",
+        createdAt: new Date().toISOString(),
+      };
+      state.clients = [newCli, ...(state.clients || [])];
+      await this.saveStateAsync(state);
+      return { ok: true, client: newCli };
+    },
+
+    async deleteClient(id) {
+      const state = this.loadState({});
+      state.clients = (state.clients || []).filter((c) => c.id !== id);
+      await this.saveStateAsync(state);
+      return { ok: true };
+    },
+
+    async createApplication(app) {
+      const state = this.loadState({});
+      const newApp = {
+        id: app.id || `ABSS-${new Date().getFullYear()}-APP-${Math.floor(1000 + Math.random() * 9000)}`,
+        fullName: app.fullName || app.name,
+        name: app.fullName || app.name,
+        email: app.email,
+        phone: app.phone || "",
+        college: app.college || "",
+        course: app.course || "",
+        internshipProgram: app.internshipProgram || app.track || "Web Development Internship",
+        program: app.internshipProgram || app.track || "Web Development Internship",
+        status: app.status || "New",
+        notes: app.notes || "Registered via operations console",
+        adminNotes: app.notes || "Registered via operations console",
+        createdAt: new Date().toISOString(),
+      };
+      state.internshipApplications = [newApp, ...(state.internshipApplications || [])];
+      await this.saveStateAsync(state);
+      return { ok: true, application: newApp };
+    },
+
+    async createTask(task) {
+      const state = this.loadState({});
+      const newTask = {
+        id: task.id || `task-${Date.now()}`,
+        title: task.title,
+        track: task.track || "All Tracks",
+        week: task.week || "Week 1",
+        points: Number(task.points || 100),
+        status: "Active",
+        instructions: task.instructions || "",
+        createdAt: new Date().toISOString(),
+      };
+      state.tasks = [newTask, ...(state.tasks || [])];
+      await this.saveStateAsync(state);
+      return { ok: true, task: newTask };
+    },
+
     async listCertificates() {
       if (isApiMode() && getToken()) {
         return requestJson("GET", "/api/admin/internships/certificates");

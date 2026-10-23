@@ -894,6 +894,53 @@ export const writeD1State = async (db, state = {}) => {
   for (const ticket of state.tickets || []) await createTicket(db, ticket);
   for (const item of state.pricing || []) await createPricingItem(db, item);
   for (const message of (state.activity || []).slice(0, 50)) await addActivity(db, { message });
+
+  if (Array.isArray(state.students) && state.students.length > 0) {
+    for (const student of state.students) {
+      if (!student.id || !student.email) continue;
+      await run(
+        db,
+        "INSERT OR REPLACE INTO students (id, name, email, password_hash, status, email_verified, created_at, updated_at) VALUES (?, ?, ?, COALESCE((SELECT password_hash FROM students WHERE id = ?), ?), ?, ?, ?, ?)",
+        student.id,
+        student.name || "",
+        student.email.toLowerCase(),
+        student.id,
+        student.passwordHash || "",
+        student.status || "active",
+        student.emailVerified ? 1 : 0,
+        student.createdAt || new Date().toISOString(),
+        student.updatedAt || new Date().toISOString()
+      );
+    }
+  }
+
+  if (Array.isArray(state.internshipApplications) && state.internshipApplications.length > 0) {
+    for (const app of state.internshipApplications) {
+      if (!app.id || !app.email) continue;
+      await saveInternshipApplication(db, {
+        id: app.id,
+        fullName: app.fullName || app.name || "",
+        email: app.email,
+        phone: app.phone || "",
+        college: app.college || "",
+        course: app.course || "",
+        graduationYear: app.graduationYear || "",
+        internshipProgram: app.internshipProgram || app.track || "",
+        technicalSkills: app.technicalSkills || "",
+        experienceLevel: app.experienceLevel || "",
+        portfolioUrl: app.portfolioUrl || "",
+        githubUrl: app.githubUrl || "",
+        linkedinUrl: app.linkedinUrl || "",
+        resumeReference: app.resumeReference || "",
+        motivation: app.motivation || "",
+        status: app.status || "New",
+        adminNotes: app.adminNotes || app.notes || "",
+        createdAt: app.createdAt || new Date().toISOString(),
+        updatedAt: app.updatedAt || new Date().toISOString(),
+      });
+    }
+  }
+
   return readD1State(db);
 };
 
