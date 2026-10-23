@@ -69,32 +69,58 @@
     }
   }
 
+  const toFirestoreFields = (data) => {
+    const fields = {};
+    for (const [key, val] of Object.entries(data)) {
+      if (val === undefined || val === null) continue;
+      if (["password", "passwordHash", "authToken", "secret", "token"].includes(key)) continue;
+      if (typeof val === "string") {
+        fields[key] = { stringValue: val };
+      } else if (typeof val === "number") {
+        fields[key] = Number.isInteger(val) ? { integerValue: String(val) } : { doubleValue: val };
+      } else if (typeof val === "boolean") {
+        fields[key] = { booleanValue: val };
+      }
+    }
+    return fields;
+  };
+
   /**
-   * Dispatches student profile to Firebase Firestore (if Firebase is loaded)
+   * Dispatches record directly to Firebase Firestore Native via official Google Cloud REST endpoint
    */
   async function syncToFirestore(collectionName, data) {
     try {
-      const { firebaseConfig, isFirebaseConfigured } = await import("./firebase-config.js");
-      if (!isFirebaseConfigured()) return { success: false, reason: "firebase_not_configured" };
-
-      const { initializeApp, getApps } = await import("https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js");
-      const { getFirestore, collection, addDoc, doc, setDoc } = await import("https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js");
-
-      const app = getApps().length > 0 ? getApps()[0] : initializeApp(firebaseConfig);
-      const db = getFirestore(app);
+      const apiKey = (typeof window !== "undefined" && window.__ABSS_CONFIG__?.FIREBASE_API_KEY) || "AIzaSyBWZ2Ui1Lgwi5buYkmytubFUOwYjxokRXE";
+      const projectId = (typeof window !== "undefined" && window.__ABSS_CONFIG__?.FIREBASE_PROJECT_ID) || "abss-nexus-technologies";
+      const baseUrl = `https://firestore.googleapis.com/v1/projects/${projectId}/databases/(default)/documents`;
 
       const safeData = sanitizeDataForSpreadsheet(data);
-      safeData.createdAtIso = new Date().toISOString();
+      safeData.createdAtIso = safeData.createdAtIso || new Date().toISOString();
 
-      if (data.id || data.email) {
-        const docId = String(data.id || data.email).replace(/[^a-zA-Z0-9_-]/g, "_");
-        await setDoc(doc(db, collectionName, docId), safeData, { merge: true });
-      } else {
-        await addDoc(collection(db, collectionName), safeData);
+      const docId = data.id || (data.email ? String(data.email).replace(/[^a-zA-Z0-9_-]/g, "_") : "");
+      let url = `${baseUrl}/${collectionName}?key=${apiKey}`;
+      let method = "POST";
+      if (docId) {
+        const cleanId = String(docId).replace(/[^a-zA-Z0-9_-]/g, "_");
+        url = `${baseUrl}/${collectionName}/${encodeURIComponent(cleanId)}?key=${apiKey}`;
+        method = "PATCH";
       }
 
-      console.info(`[ABSS Sync] Synced record to Firebase collection "${collectionName}":`, safeData.email || safeData.name);
-      return { success: true };
+      const response = await fetch(url, {
+        method,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ fields: toFirestoreFields(safeData) }),
+      });
+
+      if (!response.ok) {
+        const errJson = await response.json().catch(() => ({}));
+        console.warn("[ABSS Sync] Firestore API response:", response.status, errJson);
+        return { success: false, status: response.status, error: errJson };
+      }
+
+      const resData = await response.json();
+      console.info(`[ABSS Sync] ✓ Synced record to Firestore collection "${collectionName}":`, resData.name?.split("/").pop());
+      return { success: true, doc: resData };
     } catch (err) {
       console.warn("[ABSS Sync] Firestore sync error:", err?.message || err);
       return { success: false, error: err?.message };

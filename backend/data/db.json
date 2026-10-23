@@ -1,6 +1,14 @@
 {
   "leads": [
     {
+      "id": "lead-1792790130701",
+      "client": "Firebase Test Client",
+      "service": "Cloud & AI Architecture",
+      "budget": 25000,
+      "status": "New",
+      "contact": ""
+    },
+    {
       "id": "lead-1792430831473",
       "client": "Website Inquiry",
       "service": "Website Development",
@@ -14,6 +22,8 @@
   "tickets": [],
   "pricing": [],
   "activity": [
+    "Regression Test Client submitted website inquiry",
+    "Firebase Test Client submitted website inquiry",
     "Regression Test Client submitted website inquiry",
     "Regression Test Client submitted website inquiry",
     "Regression Test Client submitted website inquiry",
@@ -31,9 +41,7 @@
     "admin revoked certificate ABSS-CERT-TEST-1792688060992",
     "admin issued certificate ABSS-CERT-TEST-1792688060992 to Test Audit Learner",
     "Regression Test Client submitted website inquiry",
-    "Regression Test Client submitted website inquiry",
-    "Regression Test Client submitted website inquiry",
-    "admin revoked certificate ABSS-CERT-TEST-1792685283343"
+    "Regression Test Client submitted website inquiry"
   ],
   "internshipApplications": [
     {

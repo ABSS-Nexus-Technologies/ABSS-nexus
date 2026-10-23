@@ -13,3 +13,10 @@ window.AbssAdminConfig = {
     provider: "cloudflare-pages-functions",
   },
 };
+
+if (typeof document !== "undefined" && !window.AbssDataSync) {
+  const syncScript = document.createElement("script");
+  syncScript.src = "/src/services/data-sync.js";
+  syncScript.defer = true;
+  document.head.appendChild(syncScript);
+}

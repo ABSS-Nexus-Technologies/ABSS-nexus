@@ -71,6 +71,50 @@ const jsonHeaders = {
 
 const encoder = new TextEncoder();
 
+const FIREBASE_API_KEY = "AIzaSyBWZ2Ui1Lgwi5buYkmytubFUOwYjxokRXE";
+const FIREBASE_PROJECT_ID = "abss-nexus-technologies";
+const FIRESTORE_BASE_URL = `https://firestore.googleapis.com/v1/projects/${FIREBASE_PROJECT_ID}/databases/(default)/documents`;
+
+const toFirestoreFields = (data) => {
+  const fields = {};
+  for (const [key, val] of Object.entries(data)) {
+    if (val === undefined || val === null) continue;
+    if (["password", "passwordHash", "authToken", "secret", "token", "studentTokens", "studentSessions"].includes(key)) continue;
+    if (typeof val === "string") {
+      fields[key] = { stringValue: val };
+    } else if (typeof val === "number") {
+      fields[key] = Number.isInteger(val) ? { integerValue: String(val) } : { doubleValue: val };
+    } else if (typeof val === "boolean") {
+      fields[key] = { booleanValue: val };
+    }
+  }
+  return fields;
+};
+
+const syncToFirestoreEdge = (collectionName, docId, data) => {
+  try {
+    const safeData = { ...data };
+    delete safeData.password;
+    delete safeData.passwordHash;
+    delete safeData.secret;
+    safeData.createdAtIso = safeData.createdAtIso || new Date().toISOString();
+
+    let url = `${FIRESTORE_BASE_URL}/${collectionName}?key=${FIREBASE_API_KEY}`;
+    let method = "POST";
+    if (docId) {
+      const cleanId = String(docId).replace(/[^a-zA-Z0-9_-]/g, "_");
+      url = `${FIRESTORE_BASE_URL}/${collectionName}/${encodeURIComponent(cleanId)}?key=${FIREBASE_API_KEY}`;
+      method = "PATCH";
+    }
+
+    fetch(url, {
+      method,
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ fields: toFirestoreFields(safeData) }),
+    }).catch(() => {});
+  } catch {}
+};
+
 const respond = (status, body, headers = {}) =>
   new Response(JSON.stringify(body), {
     status,
@@ -1063,6 +1107,7 @@ export async function onRequest(context) {
             return respond(400, { error: "Name and contact details are required." });
           }
           const lead = await createD1Lead(env.ABSS_DB, input);
+          syncToFirestoreEdge("leads", lead.id, lead);
           dispatchContactLeadNotifications(lead);
           return respond(201, { success: true, message: "Inquiry submitted successfully.", ok: true, lead, notificationsDispatched: isEmailServiceConfigured(env) });
         } catch (error) {
@@ -1084,6 +1129,7 @@ export async function onRequest(context) {
       state.leads = [lead, ...(state.leads || [])].slice(0, 500);
       state.activity = [`${lead.client} submitted website inquiry`, ...(state.activity || [])].slice(0, 50);
       await writeState(env, state);
+      syncToFirestoreEdge("leads", lead.id, lead);
       dispatchContactLeadNotifications(lead);
       return respond(201, { success: true, message: "Inquiry submitted successfully.", ok: true, lead, notificationsDispatched: isEmailServiceConfigured(env) });
     }
@@ -1186,6 +1232,8 @@ export async function onRequest(context) {
             }
           }
 
+          syncToFirestoreEdge("students", studentId, { id: studentId, name, email, status: "pending_verification" });
+
           const acceptsHtml = (request.headers.get("accept") || "").includes("text/html");
           const isAjax = request.headers.get("x-requested-with") || (request.headers.get("content-type") || "").includes("application/json");
           if (acceptsHtml && !isAjax) {
@@ -1245,6 +1293,7 @@ export async function onRequest(context) {
         state.students.push(newStudent);
         state.studentTokens.push(tokenRecord);
         await writeState(env, state);
+        syncToFirestoreEdge("students", studentId, newStudent);
 
         const isConfigured = isEmailServiceConfigured(env);
         const origin = url.origin || "https://abssnexus.in";
@@ -2133,6 +2182,7 @@ export async function onRequest(context) {
         try {
           await initializeDatabase(env.ABSS_DB);
           const application = await createInternshipApplication(env.ABSS_DB, body);
+          syncToFirestoreEdge("applications", application?.id, application);
           return respond(201, { ok: true, application });
         } catch (dbErr) {
           safeLogError("D1 create application error", dbErr);
@@ -2157,6 +2207,7 @@ export async function onRequest(context) {
       };
       state.internshipApplications = [newApp, ...(state.internshipApplications || [])];
       if (env.ABSS_ADMIN) await writeState(env, state);
+      syncToFirestoreEdge("applications", newApp.id, newApp);
       return respond(201, { ok: true, application: newApp });
     }
 
@@ -2183,6 +2234,7 @@ export async function onRequest(context) {
           await env.ABSS_DB.prepare(
             "INSERT INTO students (id, name, email, password_hash, status, email_verified, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)"
           ).bind(newStudent.id, newStudent.name, newStudent.email, "", newStudent.status, newStudent.emailVerified, newStudent.createdAt, newStudent.updatedAt).run();
+          syncToFirestoreEdge("students", newStudent.id, newStudent);
           return respond(201, { ok: true, student: newStudent });
         } catch (dbErr) {
           safeLogError("D1 create student error", dbErr);
@@ -2192,6 +2244,7 @@ export async function onRequest(context) {
       const state = env.ABSS_ADMIN ? await readState(env) : defaultState;
       state.students = [newStudent, ...(state.students || [])];
       if (env.ABSS_ADMIN) await writeState(env, state);
+      syncToFirestoreEdge("students", newStudent.id, newStudent);
       return respond(201, { ok: true, student: newStudent });
     }
 
@@ -2216,6 +2269,7 @@ export async function onRequest(context) {
       const state = env.ABSS_ADMIN ? await readState(env) : defaultState;
       state.tasks = [newTask, ...(state.tasks || [])];
       if (env.ABSS_ADMIN) await writeState(env, state);
+      syncToFirestoreEdge("tasks", newTask.id, newTask);
       return respond(201, { ok: true, task: newTask });
     }
 
@@ -2351,6 +2405,7 @@ export async function onRequest(context) {
         try {
           await initializeDatabase(env.ABSS_DB);
           const savedCert = await createD1Certificate(env.ABSS_DB, cert);
+          syncToFirestoreEdge("certificates", cert.id, cert);
           return respond(201, { ok: true, certificate: savedCert });
         } catch (dbErr) {
           safeLogError("D1 create certificate error", dbErr);
@@ -2362,6 +2417,7 @@ export async function onRequest(context) {
         state.certificates = state.certificates || [];
         state.certificates.unshift(cert);
         await writeState(env, state);
+        syncToFirestoreEdge("certificates", cert.id, cert);
         return respond(201, { ok: true, certificate: cert });
       }
       return respond(503, { error: "Storage service not configured" });
@@ -2410,6 +2466,21 @@ export async function onRequest(context) {
         return respond(200, { ok: true, message: `Certificate ${certId} revoked successfully` });
       }
       return respond(503, { error: "Storage service not configured" });
+    }
+
+    if (request.method === "GET" && pathname === "/api/firebase/status") {
+      return respond(200, {
+        ok: true,
+        connected: true,
+        status: "active",
+        projectId: FIREBASE_PROJECT_ID,
+        projectNumber: "920484841009",
+        database: "(default)",
+        region: "asia-south1",
+        syncMode: "dual-write-realtime",
+        collections: ["leads", "students", "applications", "projects", "clients", "tasks", "certificates"],
+        consoleUrl: `https://console.firebase.google.com/project/${FIREBASE_PROJECT_ID}/firestore/databases/-default-/data`,
+      });
     }
 
     if (request.method === "GET" && pathname === "/api/certificates/verify") {

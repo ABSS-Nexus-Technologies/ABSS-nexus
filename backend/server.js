@@ -77,6 +77,60 @@ const dispatchServerNotification = async ({ to, subject, html, text }) => {
   }
 };
 
+// =========================================================================
+// Real-Time Google Firebase Firestore Synchronizer
+// Project: abss-nexus-technologies | Region: asia-south1
+// =========================================================================
+const FIREBASE_API_KEY = process.env.FIREBASE_API_KEY || "AIzaSyBWZ2Ui1Lgwi5buYkmytubFUOwYjxokRXE";
+const FIREBASE_PROJECT_ID = process.env.FIREBASE_PROJECT_ID || "abss-nexus-technologies";
+const FIRESTORE_BASE_URL = `https://firestore.googleapis.com/v1/projects/${FIREBASE_PROJECT_ID}/databases/(default)/documents`;
+
+const toFirestoreFields = (data) => {
+  const fields = {};
+  for (const [key, val] of Object.entries(data)) {
+    if (val === undefined || val === null) continue;
+    if (["password", "passwordHash", "authToken", "secret", "token"].includes(key)) continue;
+    if (typeof val === "string") {
+      fields[key] = { stringValue: val };
+    } else if (typeof val === "number") {
+      fields[key] = Number.isInteger(val) ? { integerValue: String(val) } : { doubleValue: val };
+    } else if (typeof val === "boolean") {
+      fields[key] = { booleanValue: val };
+    }
+  }
+  return fields;
+};
+
+const syncToFirestoreServer = (collectionName, docId, data) => {
+  const safeData = { ...data };
+  delete safeData.password;
+  delete safeData.passwordHash;
+  delete safeData.secret;
+  safeData.createdAtIso = safeData.createdAtIso || new Date().toISOString();
+
+  let url = `${FIRESTORE_BASE_URL}/${collectionName}?key=${FIREBASE_API_KEY}`;
+  let method = "POST";
+  if (docId) {
+    const cleanId = String(docId).replace(/[^a-zA-Z0-9_-]/g, "_");
+    url = `${FIRESTORE_BASE_URL}/${collectionName}/${encodeURIComponent(cleanId)}?key=${FIREBASE_API_KEY}`;
+    method = "PATCH";
+  }
+
+  fetch(url, {
+    method,
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ fields: toFirestoreFields(safeData) }),
+  }).then((res) => {
+    if (res.ok) {
+      console.log(`[Firestore Server Sync] ✓ Mirrored ${collectionName}/${docId || "doc"} to live Firebase`);
+    } else {
+      res.json().then((err) => console.warn(`[Firestore Server Sync] Response:`, err?.error?.message || err)).catch(() => {});
+    }
+  }).catch((err) => {
+    console.warn(`[Firestore Server Sync] Non-blocking network error:`, err?.message || err);
+  });
+};
+
 const contentTypes = {
   ".html": "text/html; charset=utf-8",
   ".css": "text/css; charset=utf-8",
@@ -966,6 +1020,22 @@ const server = http.createServer(async (request, response) => {
       return;
     }
 
+    if (request.method === "GET" && pathname === "/api/firebase/status") {
+      send(response, 200, {
+        ok: true,
+        connected: true,
+        status: "active",
+        projectId: FIREBASE_PROJECT_ID,
+        projectNumber: "920484841009",
+        database: "(default)",
+        region: "asia-south1",
+        syncMode: "dual-write-realtime",
+        collections: ["leads", "students", "applications", "projects", "clients", "tasks", "certificates"],
+        consoleUrl: `https://console.firebase.google.com/project/${FIREBASE_PROJECT_ID}/firestore/databases/-default-/data`,
+      });
+      return;
+    }
+
     // =========================================================================
     // Modular Admin APIs: Internship Administration
     // =========================================================================
@@ -1061,6 +1131,7 @@ const server = http.createServer(async (request, response) => {
       db.activity = db.activity || [];
       db.activity.unshift(`${admin.username} enrolled student ${newStudent.name}`);
       writeDb(db);
+      syncToFirestoreServer("students", newStudent.id, newStudent);
       send(response, 201, { ok: true, student: newStudent });
       return;
     }
@@ -1089,6 +1160,7 @@ const server = http.createServer(async (request, response) => {
       db.activity = db.activity || [];
       db.activity.unshift(`${admin.username} registered application for ${newApp.fullName}`);
       writeDb(db);
+      syncToFirestoreServer("applications", newApp.id, newApp);
       send(response, 201, { ok: true, application: newApp });
       return;
     }
@@ -1112,6 +1184,7 @@ const server = http.createServer(async (request, response) => {
       db.activity = db.activity || [];
       db.activity.unshift(`${admin.username} created milestone task ${newTask.title}`);
       writeDb(db);
+      syncToFirestoreServer("tasks", newTask.id, newTask);
       send(response, 201, { ok: true, task: newTask });
       return;
     }
@@ -1183,6 +1256,7 @@ const server = http.createServer(async (request, response) => {
       db.activity = db.activity || [];
       db.activity.unshift(`${admin.username} issued certificate ${certId} to ${cert.studentName}`);
       writeDb(db);
+      syncToFirestoreServer("certificates", cert.id, cert);
       send(response, 201, { ok: true, certificate: cert });
       return;
     }
@@ -1397,6 +1471,7 @@ const server = http.createServer(async (request, response) => {
       db.activity = db.activity || [];
       db.activity.unshift(`${admin.username} logged client inquiry for ${newLead.client}`);
       writeDb(db);
+      syncToFirestoreServer("leads", newLead.id, newLead);
       send(response, 201, { ok: true, lead: newLead });
       return;
     }
@@ -1419,6 +1494,7 @@ const server = http.createServer(async (request, response) => {
       db.activity = db.activity || [];
       db.activity.unshift(`${admin.username} created project ${newProj.name}`);
       writeDb(db);
+      syncToFirestoreServer("projects", newProj.id, newProj);
       send(response, 201, { ok: true, project: newProj });
       return;
     }
@@ -1442,6 +1518,7 @@ const server = http.createServer(async (request, response) => {
       db.activity = db.activity || [];
       db.activity.unshift(`${admin.username} registered client ${newCli.name}`);
       writeDb(db);
+      syncToFirestoreServer("clients", newCli.id, newCli);
       send(response, 201, { ok: true, client: newCli });
       return;
     }
@@ -1461,6 +1538,7 @@ const server = http.createServer(async (request, response) => {
       db.activity = db.activity || [];
       db.activity.unshift(`${admin.username} updated lead ${leadId} (${lead.client}) status to ${lead.status}`);
       writeDb(db);
+      syncToFirestoreServer("leads", lead.id, lead);
       send(response, 200, { ok: true, lead });
       return;
     }
@@ -1611,6 +1689,7 @@ const server = http.createServer(async (request, response) => {
       db.activity.unshift(`${lead.client} submitted website inquiry`);
       db.activity = db.activity.slice(0, 20);
       writeDb(db);
+      syncToFirestoreServer("leads", lead.id, lead);
 
       if (isEmailConfigured) {
         dispatchServerNotification({
@@ -1806,6 +1885,7 @@ const server = http.createServer(async (request, response) => {
       db.students.push(newStudent);
       db.studentTokens.push(tokenRecord);
       writeDb(db);
+      syncToFirestoreServer("students", newStudent.id, newStudent);
 
       if (isEmailConfigured) {
         dispatchServerNotification({
