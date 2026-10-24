@@ -2393,24 +2393,35 @@
           localStorage.setItem('abss_tasks_' + STATE.student.domainSlug, JSON.stringify(STATE.tasks));
           localStorage.setItem('abss_subs_' + STATE.student.domainSlug, JSON.stringify(STATE.submissions));
 
+          const submissionPayload = {
+            studentName: STATE.student.name || 'Intern Student',
+            studentEmail: STATE.student.email || localStorage.getItem('abss_user_email') || 'student@abss.io',
+            trackSlug: STATE.student.domainSlug || 'web-development',
+            trackName: STATE.student.domain || 'Web Development',
+            taskId: taskId,
+            taskName: task ? task.name : taskId,
+            prUrl: proofUrl,
+            demoUrl: '',
+            notes: 'Submitted via student dashboard deliverable modal.'
+          };
+
           // Real-time backend sync so admin mentor queue receives the deliverable immediately
           fetch('/api/internships/submissions', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              studentName: STATE.student.name || 'Intern Student',
-              studentEmail: STATE.student.email || localStorage.getItem('abss_user_email') || 'student@abss.io',
-              trackSlug: STATE.student.domainSlug || 'web-development',
-              trackName: STATE.student.domain || 'Web Development',
-              taskId: taskId,
-              taskName: task ? task.name : taskId,
-              prUrl: proofUrl,
-              demoUrl: '',
-              notes: 'Submitted via student dashboard deliverable modal.'
-            })
+            body: JSON.stringify(submissionPayload)
           }).catch((err) => {
             console.warn('Background submission API sync fallback:', err);
           });
+
+          // Direct Client Dual-Sync to Google Sheets & Firebase
+          try {
+            window.AbssDataSync?.dualSyncRecord('task', {
+              ...submissionPayload,
+              id: 'SUB-' + (STATE.student.domainSlug || 'GEN').toUpperCase().slice(0, 4) + '-' + Date.now().toString(36).toUpperCase(),
+              status: 'Under Review'
+            });
+          } catch (syncErr) {}
         } catch (e) {}
 
         renderTasks();

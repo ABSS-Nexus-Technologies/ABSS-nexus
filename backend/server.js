@@ -105,21 +105,9 @@ const syncToFirestoreServer = (collectionName, docId, data) => {
   if (process.env.NODE_ENV === "test" || process.env.SKIP_FIRESTORE_SYNC === "true") return;
   if (!data) return;
 
-  // Strictly block automated test records from polluting live production Firebase
-  const isTest =
-    data.client === "Regression Test Client" ||
-    data.client === "Firebase Test Client" ||
-    data.name === "Test Student" ||
-    data.studentName === "Test Audit Learner" ||
-    data.studentName === "Rahul Verma" ||
-    data.studentName === "Aarav Sharma" ||
-    String(data.email || "").includes("regression@") ||
-    String(data.email || "").includes("test.student.") ||
-    String(data.email || "").includes("@test.com") ||
-    String(data.email || "").includes("@example.com") ||
-    String(docId || "").includes("test") ||
-    String(docId || "").includes("TEST");
-  if (isTest) return;
+  // Only ignore strictly automated regression runners with explicit flag
+  const isAutomatedCi = data.client === "Regression Test Client" || data.client === "Firebase Test Client" || data.__isAutomatedRegression === true;
+  if (isAutomatedCi) return;
 
   const safeData = { ...data };
   delete safeData.password;
@@ -156,20 +144,9 @@ const syncToGoogleSheetsServer = (type, data) => {
   const webhookUrl = GOOGLE_SHEETS_WEBHOOK_URL;
   if (!webhookUrl || process.env.NODE_ENV === "test" || !data) return;
 
-  const isTest =
-    data.client === "Regression Test Client" ||
-    data.client === "Firebase Test Client" ||
-    data.name === "Test Student" ||
-    data.studentName === "Test Audit Learner" ||
-    data.studentName === "Rahul Verma" ||
-    data.studentName === "Aarav Sharma" ||
-    String(data.email || "").includes("regression@") ||
-    String(data.email || "").includes("test.student.") ||
-    String(data.email || "").includes("@test.com") ||
-    String(data.email || "").includes("@example.com") ||
-    String(data.id || "").includes("test") ||
-    String(data.id || "").includes("TEST");
-  if (isTest) return;
+  // Only ignore strictly automated regression runners with explicit flag
+  const isAutomatedCi = data.client === "Regression Test Client" || data.client === "Firebase Test Client" || data.__isAutomatedRegression === true;
+  if (isAutomatedCi) return;
 
   const safeData = { ...data };
   delete safeData.password;
@@ -1321,6 +1298,8 @@ const server = http.createServer(async (request, response) => {
       };
       db.internshipSubmissions.unshift(newSub);
       writeDb(db);
+      syncToFirestoreServer("tasks", newSub.id, newSub);
+      syncToGoogleSheetsServer("task_submission", newSub);
       send(response, 201, { ok: true, submission: newSub });
       return;
     }

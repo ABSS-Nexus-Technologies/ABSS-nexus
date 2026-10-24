@@ -91,25 +91,13 @@ const toFirestoreFields = (data) => {
   return fields;
 };
 
-const syncToFirestoreEdge = (collectionName, docId, data) => {
+const syncToFirestoreEdge = async (collectionName, docId, data) => {
   try {
     if (!data) return;
 
-    // Strictly block automated test records from polluting live production Firebase
-    const isTest =
-      data.client === "Regression Test Client" ||
-      data.client === "Firebase Test Client" ||
-      data.name === "Test Student" ||
-      data.studentName === "Test Audit Learner" ||
-      data.studentName === "Rahul Verma" ||
-      data.studentName === "Aarav Sharma" ||
-      String(data.email || "").includes("regression@") ||
-      String(data.email || "").includes("test.student.") ||
-      String(data.email || "").includes("@test.com") ||
-      String(data.email || "").includes("@example.com") ||
-      String(docId || "").includes("test") ||
-      String(docId || "").includes("TEST");
-    if (isTest) return;
+    // Only ignore strictly automated regression runners with explicit flag
+    const isAutomatedCi = data.client === "Regression Test Client" || data.client === "Firebase Test Client" || data.__isAutomatedRegression === true;
+    if (isAutomatedCi) return;
 
     const safeData = { ...data };
     delete safeData.password;
@@ -125,33 +113,24 @@ const syncToFirestoreEdge = (collectionName, docId, data) => {
       method = "PATCH";
     }
 
-    fetch(url, {
+    return await fetch(url, {
       method,
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ fields: toFirestoreFields(safeData) }),
-    }).catch(() => {});
-  } catch {}
+    });
+  } catch (err) {
+    safeLogError("Firestore edge sync error", err);
+  }
 };
 
-const syncToGoogleSheetsEdge = (env, type, data) => {
+const syncToGoogleSheetsEdge = async (env, type, data) => {
   try {
     const webhookUrl = env?.GOOGLE_SHEETS_WEBHOOK_URL || "https://script.google.com/macros/s/AKfycbxWakMKIDy67PtVMScD8bl4R3N75dfrc3QWwtUkG9zIYQAR5fgtF_UJruR6wrzBy9y4mg/exec";
     if (!webhookUrl || !data) return;
 
-    const isTest =
-      data.client === "Regression Test Client" ||
-      data.client === "Firebase Test Client" ||
-      data.name === "Test Student" ||
-      data.studentName === "Test Audit Learner" ||
-      data.studentName === "Rahul Verma" ||
-      data.studentName === "Aarav Sharma" ||
-      String(data.email || "").includes("regression@") ||
-      String(data.email || "").includes("test.student.") ||
-      String(data.email || "").includes("@test.com") ||
-      String(data.email || "").includes("@example.com") ||
-      String(data.id || "").includes("test") ||
-      String(data.id || "").includes("TEST");
-    if (isTest) return;
+    // Only ignore strictly automated regression runners with explicit flag
+    const isAutomatedCi = data.client === "Regression Test Client" || data.client === "Firebase Test Client" || data.__isAutomatedRegression === true;
+    if (isAutomatedCi) return;
 
     const safeData = { ...data };
     delete safeData.password;
@@ -162,12 +141,15 @@ const syncToGoogleSheetsEdge = (env, type, data) => {
     safeData.type = type;
     safeData.timestamp = safeData.timestamp || new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" });
 
-    fetch(webhookUrl, {
+    return await fetch(webhookUrl, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(safeData),
-    }).catch(() => {});
-  } catch {}
+      redirect: "follow",
+    });
+  } catch (err) {
+    safeLogError("Google Sheets edge sync error", err);
+  }
 };
 
 const respond = (status, body, headers = {}) =>
@@ -1289,8 +1271,14 @@ export async function onRequest(context) {
             }
           }
 
-          syncToFirestoreEdge("students", studentId, { id: studentId, name, email, status: "pending_verification" });
-          syncToGoogleSheetsEdge(env, "student_registration", { id: studentId, name, email, status: "pending_verification" });
+          try {
+            await Promise.allSettled([
+              syncToFirestoreEdge("students", studentId, newStudent),
+              syncToGoogleSheetsEdge(env, "student_registration", newStudent),
+            ]);
+          } catch (syncErr) {
+            safeLogError("Student registration dual-sync error", syncErr);
+          }
 
           const acceptsHtml = (request.headers.get("accept") || "").includes("text/html");
           const isAjax = request.headers.get("x-requested-with") || (request.headers.get("content-type") || "").includes("application/json");
@@ -1351,8 +1339,14 @@ export async function onRequest(context) {
         state.students.push(newStudent);
         state.studentTokens.push(tokenRecord);
         await writeState(env, state);
-        syncToFirestoreEdge("students", studentId, newStudent);
-        syncToGoogleSheetsEdge(env, "student_registration", newStudent);
+        try {
+          await Promise.allSettled([
+            syncToFirestoreEdge("students", studentId, newStudent),
+            syncToGoogleSheetsEdge(env, "student_registration", newStudent),
+          ]);
+        } catch (syncErr) {
+          safeLogError("Student registration KV dual-sync error", syncErr);
+        }
 
         const isConfigured = isEmailServiceConfigured(env);
         const origin = url.origin || "https://abssnexus.in";
@@ -2370,6 +2364,14 @@ export async function onRequest(context) {
       };
       state.internshipSubmissions.unshift(newSub);
       if (env.ABSS_ADMIN) await writeState(env, state);
+      try {
+        await Promise.allSettled([
+          syncToFirestoreEdge("tasks", newSub.id, newSub),
+          syncToGoogleSheetsEdge(env, "task_submission", newSub),
+        ]);
+      } catch (subErr) {
+        safeLogError("Submission dual sync error", subErr);
+      }
       return respond(201, { ok: true, submission: newSub });
     }
 

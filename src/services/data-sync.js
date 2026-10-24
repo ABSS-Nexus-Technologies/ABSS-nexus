@@ -92,20 +92,9 @@
   async function syncToFirestore(collectionName, data) {
     try {
       if (!data) return { success: false };
-      const isTest =
-        data.client === "Regression Test Client" ||
-        data.client === "Firebase Test Client" ||
-        data.name === "Test Student" ||
-        data.studentName === "Test Audit Learner" ||
-        data.studentName === "Rahul Verma" ||
-        data.studentName === "Aarav Sharma" ||
-        String(data.email || "").includes("regression@") ||
-        String(data.email || "").includes("test.student.") ||
-        String(data.email || "").includes("@test.com") ||
-        String(data.email || "").includes("@example.com") ||
-        String(data.id || "").includes("test") ||
-        String(data.id || "").includes("TEST");
-      if (isTest) return { success: true, ignored: "test_data" };
+      // Only ignore strictly automated regression runners with explicit flag
+      const isAutomatedCi = data.client === "Regression Test Client" || data.__isAutomatedRegression === true;
+      if (isAutomatedCi) return { success: true, ignored: "automated_ci_data" };
 
       const apiKey = (typeof window !== "undefined" && window.__ABSS_CONFIG__?.FIREBASE_API_KEY) || "AIzaSyBWZ2Ui1Lgwi5buYkmytubFUOwYjxokRXE";
       const projectId = (typeof window !== "undefined" && window.__ABSS_CONFIG__?.FIREBASE_PROJECT_ID) || "abss-nexus-technologies";

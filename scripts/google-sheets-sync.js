@@ -22,11 +22,27 @@
  * Done! Every inquiry, student enrollment, and project will automatically create a new live row in this spreadsheet!
  */
 
+// OPTIONAL CONFIGURATION:
+// If you create this script via Google Sheet top menu (Extensions -> Apps Script), leave SPREADSHEET_ID empty "".
+// If you create a Standalone Script from script.google.com, paste your Google Sheet ID between the quotes below.
+var SPREADSHEET_ID = "";
+
+function getSpreadsheet() {
+  if (SPREADSHEET_ID && SPREADSHEET_ID.trim().length > 0) {
+    return SpreadsheetApp.openById(SPREADSHEET_ID.trim());
+  }
+  var active = SpreadsheetApp.getActiveSpreadsheet();
+  if (!active) {
+    throw new Error("No active spreadsheet found. Please either create this script from inside Google Sheets (Extensions -> Apps Script), OR enter your Spreadsheet ID in SPREADSHEET_ID.");
+  }
+  return active;
+}
+
 function doPost(e) {
   try {
     var rawData = e.postData ? e.postData.contents : "{}";
     var data = JSON.parse(rawData);
-    var ss = SpreadsheetApp.getActiveSpreadsheet();
+    var ss = getSpreadsheet();
 
     var type = String(data.type || "lead").toLowerCase();
     var sheetName = "Company_Leads";
@@ -41,7 +57,7 @@ function doPost(e) {
       sheetName = "Company_Clients";
     } else if (type.indexOf("cert") !== -1) {
       sheetName = "Certificates";
-    } else if (type.indexOf("task") !== -1) {
+    } else if (type.indexOf("task") !== -1 || type.indexOf("sub") !== -1) {
       sheetName = "Internship_Tasks";
     }
 
@@ -57,6 +73,8 @@ function doPost(e) {
         headers = ["Date & Time (IST)", "Student ID", "Full Name", "Email", "Phone", "Track", "Duration", "Status"];
       } else if (sheetName === "Internship_Applications") {
         headers = ["Date & Time (IST)", "App ID", "Applicant Name", "Email", "Phone", "College", "Track", "Notes", "Status"];
+      } else if (sheetName === "Internship_Tasks") {
+        headers = ["Date & Time (IST)", "Submission ID", "Student Name", "Email", "Track", "Milestone / Task", "Work Link (PR/Code)", "Notes", "Status"];
       } else if (sheetName === "Company_Projects") {
         headers = ["Date & Time (IST)", "Project ID", "Project Name", "Client", "Service", "Value (INR)", "Status"];
       } else if (sheetName === "Company_Clients") {
@@ -112,6 +130,18 @@ function doPost(e) {
         data.internshipProgram || data.track || "",
         data.notes || data.adminNotes || "",
         data.status || "New"
+      ]);
+    } else if (sheetName === "Internship_Tasks") {
+      sheet.appendRow([
+        timestamp,
+        data.id || "",
+        data.studentName || data.name || "Student",
+        data.studentEmail || data.email || "",
+        data.trackName || data.trackSlug || data.track || "Web Development",
+        data.taskName || data.taskId || data.task || "Milestone Deliverable",
+        data.prUrl || data.url || data.demoUrl || "",
+        data.notes || "",
+        data.status || "Under Review"
       ]);
     } else if (sheetName === "Company_Projects") {
       sheet.appendRow([
