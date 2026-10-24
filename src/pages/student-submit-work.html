@@ -97,10 +97,15 @@
     <div class="card" style="padding: 36px; border-radius: 20px; max-width: 780px;">
       <form id="deliverableForm">
         <div class="form-group" style="margin-bottom: 20px;">
-          <label for="track-select" style="display: block; font-weight: 600; margin-bottom: 6px;">Select Internship Track</label>
-          <select id="track-select" required style="width: 100%; padding: 12px; border: 1px solid #d2d2d7; border-radius: 10px; font-size: 0.95rem; background: #f5f5f7;">
-            <!-- Populated via JS -->
-          </select>
+          <label style="display: block; font-weight: 600; margin-bottom: 6px;">Enrolled Internship Track (Locked)</label>
+          <div style="display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; border: 1px solid rgba(0, 102, 204, 0.3); border-radius: 10px; background: rgba(0, 102, 204, 0.05);">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span style="font-size: 1.2rem;">🎓</span>
+              <strong id="enrolledTrackLabel" style="font-size: 0.95rem; color: #0066cc;">Loading Track...</strong>
+            </div>
+            <span style="font-size: 0.75rem; background: #e5e5ea; color: #48484a; padding: 4px 10px; border-radius: 6px; font-weight: 600;">🔒 Track Locked</span>
+          </div>
+          <input type="hidden" id="track-select" value="web-development" />
         </div>
 
         <div class="form-group" style="margin-bottom: 20px;">
@@ -147,47 +152,63 @@
     <script>
       (function() {
         var domainData = null;
+        var enrolledTrackSlug = "web-development";
 
-        fetch("/api/internships/auth/me")
-          .then(function(r) { return r.ok ? r.json() : null; })
-          .then(function(data) {
-            if (data && (data.student || data.user)) {
-              var s = data.student || data.user;
-              var name = s.name || s.fullName || "Intern Student";
-              var initials = name.split(" ").map(function(p) { return p[0]; }).filter(Boolean).slice(0, 2).join("").toUpperCase() || "ST";
-              var nameEl = document.getElementById("studentDisplayName");
-              var avatarEl = document.getElementById("studentAvatarInitials");
-              if (nameEl) nameEl.textContent = name;
-              if (avatarEl) avatarEl.textContent = initials;
-            }
-          })
-          .catch(function() {});
+        function normalizeTrack(val) {
+          if (!val) return "web-development";
+          return String(val).toLowerCase().trim().replace(/[\s_]+/g, "-");
+        }
 
-        // Fetch domain tasks data
-        fetch("/src/scripts/domain-tasks-data.json")
-          .then(function(res) { return res.json(); })
-          .then(function(data) {
-            domainData = data;
-            var trackSelect = document.getElementById("track-select");
-            if (!trackSelect) return;
+        Promise.all([
+          fetch("/api/internships/auth/me").then(function(r) { return r.ok ? r.json() : null; }).catch(function() { return null; }),
+          fetch("/api/internships/dashboard/overview").then(function(r) { return r.ok ? r.json() : null; }).catch(function() { return null; }),
+          fetch("/src/scripts/domain-tasks-data.json").then(function(r) { return r.ok ? r.json() : null; }).catch(function() { return null; })
+        ]).then(function(results) {
+          var meData = results[0];
+          var overviewData = results[1];
+          domainData = results[2];
 
-            var savedTrack = localStorage.getItem("abss_active_domain") || "web-development";
+          if (meData && (meData.student || meData.user)) {
+            var s = meData.student || meData.user;
+            var name = s.name || s.fullName || "Intern Student";
+            var initials = name.split(" ").map(function(p) { return p[0]; }).filter(Boolean).slice(0, 2).join("").toUpperCase() || "ST";
+            var nameEl = document.getElementById("studentDisplayName");
+            var avatarEl = document.getElementById("studentAvatarInitials");
+            if (nameEl) nameEl.textContent = name;
+            if (avatarEl) avatarEl.textContent = initials;
+          }
 
-            trackSelect.innerHTML = data.AVAILABLE_DOMAINS.map(function(d) {
-              return '<option value="' + d.slug + '" ' + (d.slug === savedTrack ? 'selected' : '') + '>' + d.name + ' (' + d.category + ')</option>';
-            }).join('');
+          var cand = null;
+          if (meData && meData.student && (meData.student.track || meData.student.domain || meData.student.programSlug)) {
+            cand = meData.student.track || meData.student.domain || meData.student.programSlug;
+          } else if (overviewData && overviewData.applications && overviewData.applications.length > 0) {
+            cand = overviewData.applications[0].programSlug || overviewData.applications[0].track || overviewData.applications[0].programTitle;
+          } else if (localStorage.getItem("abss_user_track")) {
+            cand = localStorage.getItem("abss_user_track");
+          } else if (localStorage.getItem("abss_active_domain")) {
+            cand = localStorage.getItem("abss_active_domain");
+          }
+          if (cand) enrolledTrackSlug = normalizeTrack(cand);
 
-            trackSelect.addEventListener("change", function(e) {
-              var slug = e.target.value;
-              localStorage.setItem("abss_active_domain", slug);
-              populateTaskSelect(slug);
+          var trackItem = null;
+          if (domainData && domainData.AVAILABLE_DOMAINS) {
+            trackItem = domainData.AVAILABLE_DOMAINS.find(function(d) {
+              return d.slug === enrolledTrackSlug || d.slug.toLowerCase() === enrolledTrackSlug.toLowerCase();
             });
+          }
 
-            populateTaskSelect(savedTrack);
-          })
-          .catch(function(err) {
-            console.error("Error loading task data", err);
-          });
+          var trackName = trackItem ? (trackItem.name + " (" + trackItem.category + ")") : (enrolledTrackSlug.replace(/-/g, " ").toUpperCase());
+          var trackVal = trackItem ? trackItem.slug : enrolledTrackSlug;
+
+          var labelEl = document.getElementById("enrolledTrackLabel");
+          var inputEl = document.getElementById("track-select");
+          if (labelEl) labelEl.textContent = trackName;
+          if (inputEl) inputEl.value = trackVal;
+
+          populateTaskSelect(trackVal);
+        }).catch(function(err) {
+          console.error("Error initializing submit work page", err);
+        });
 
         function populateTaskSelect(trackSlug) {
           if (!domainData || !domainData.DOMAIN_TASKS) return;

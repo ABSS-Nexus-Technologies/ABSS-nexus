@@ -143,9 +143,9 @@
       <header class="student-topbar">
         <div class="student-topbar-left">
           <h1 class="topbar-page-title" id="page-title">Student Workspace Overview</h1>
-          <div class="topbar-domain-picker">
-            <label for="topbar-track-select" class="topbar-picker-label">FIELD:</label>
-            <select id="topbar-track-select" class="topbar-picker-select" aria-label="Select Internship Field"></select>
+          <div class="topbar-domain-picker" style="display: inline-flex; align-items: center; gap: 8px;">
+            <span class="topbar-picker-label" style="font-size: 0.72rem; font-weight: 700; color: #6e6e73;">TRACK:</span>
+            <span class="enrolled-track-badge" id="topbar-track-badge" style="background: rgba(0, 102, 204, 0.1); color: #0066cc; padding: 4px 12px; border-radius: 999px; font-size: 0.8rem; font-weight: 700; border: 1px solid rgba(0, 102, 204, 0.25);">Web Development</span>
           </div>
         </div>
         <div class="student-topbar-actions">
@@ -212,13 +212,19 @@
             </div>
           </div>
 
-          <!-- Quick Domain Switcher Strip -->
-          <div class="dashboard-domain-strip">
-            <div class="domain-strip-header">
-              <span class="domain-strip-title">🎯 Switch Field / Track (16 Options):</span>
-              <span class="domain-strip-hint">Click any field to switch assigned milestones and deliverables</span>
+          <!-- Enrolled Track Banner (Locked to Student Application) -->
+          <div class="dashboard-domain-strip enrolled-track-banner" style="background: linear-gradient(135deg, rgba(0, 102, 204, 0.08) 0%, rgba(16, 185, 129, 0.08) 100%); border: 1px solid rgba(0, 102, 204, 0.2); border-radius: 12px; padding: 14px 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-bottom: 24px;">
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <span style="font-size: 1.5rem;">🎓</span>
+              <div>
+                <span style="font-size: 0.74rem; font-weight: 700; color: #0066cc; text-transform: uppercase; letter-spacing: 0.05em; display: block;">Enrolled Internship Track</span>
+                <strong class="enrolled-track-display-name" style="font-size: 1.05rem; color: #1d1d1f; font-family: 'Space Grotesk', sans-serif;">Full-Stack Web Engineering</strong>
+              </div>
             </div>
-            <div class="domain-chips-scroll" id="overview-domain-chips"></div>
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <span style="background: rgba(16, 185, 129, 0.15); color: #15803d; font-size: 0.78rem; font-weight: 700; padding: 4px 10px; border-radius: 999px;">● Active Curriculum</span>
+              <span style="background: #f5f5f7; color: #6e6e73; font-size: 0.78rem; font-weight: 600; padding: 4px 10px; border-radius: 999px; border: 1px solid #d2d2d7;">🔒 Track Locked</span>
+            </div>
           </div>
 
           <!-- Overview 2-Column Grid -->
@@ -319,13 +325,19 @@
             </div>
           </div>
 
-          <!-- Domain Track Switcher Strip -->
-          <div class="dashboard-domain-strip">
-            <div class="domain-strip-header">
-              <span class="domain-strip-title">🎯 Switch Field / Track (16 Options):</span>
-              <span class="domain-strip-hint">Click any field to view its 5 specific production tasks</span>
+          <!-- Enrolled Track Banner (Locked to Student Application) -->
+          <div class="dashboard-domain-strip enrolled-track-banner" style="background: linear-gradient(135deg, rgba(0, 102, 204, 0.08) 0%, rgba(16, 185, 129, 0.08) 100%); border: 1px solid rgba(0, 102, 204, 0.2); border-radius: 12px; padding: 14px 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-bottom: 24px;">
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <span style="font-size: 1.5rem;">📋</span>
+              <div>
+                <span style="font-size: 0.74rem; font-weight: 700; color: #0066cc; text-transform: uppercase; letter-spacing: 0.05em; display: block;">Assigned Milestone Roadmaps</span>
+                <strong class="enrolled-track-display-name" style="font-size: 1.05rem; color: #1d1d1f; font-family: 'Space Grotesk', sans-serif;">Full-Stack Web Engineering</strong>
+              </div>
             </div>
-            <div class="domain-chips-scroll" id="roadmap-domain-chips"></div>
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <span style="background: rgba(16, 185, 129, 0.15); color: #15803d; font-size: 0.78rem; font-weight: 700; padding: 4px 10px; border-radius: 999px;">● 5 Production Tasks</span>
+              <span style="background: #f5f5f7; color: #6e6e73; font-size: 0.78rem; font-weight: 600; padding: 4px 10px; border-radius: 999px; border: 1px solid #d2d2d7;">🔒 Track Locked</span>
+            </div>
           </div>
 
           <!-- Task Filter & Search Bar -->

@@ -94,15 +94,19 @@
   
 
       
-    <!-- Active Track Selector Strip -->
-    <div style="background: #ffffff; border: 1px solid #d2d2d7; border-radius: 14px; padding: 16px 20px; margin-bottom: 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px; box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
+    <!-- Enrolled Track Banner (Locked to Student Application) -->
+    <div style="background: linear-gradient(135deg, rgba(0, 102, 204, 0.08) 0%, rgba(16, 185, 129, 0.08) 100%); border: 1px solid rgba(0, 102, 204, 0.2); border-radius: 14px; padding: 16px 20px; margin-bottom: 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px; box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
       <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
-        <label for="trackSelector" style="font-size: 0.82rem; font-weight: 700; color: #0066cc; text-transform: uppercase;">Active Internship Track:</label>
-        <select id="trackSelector" style="padding: 8px 14px; border: 1px solid #d2d2d7; border-radius: 8px; font-weight: 600; font-size: 0.92rem; background: #f5f5f7; cursor: pointer; color: #1d1d1f; outline: none;">
-        </select>
+        <span style="font-size: 1.5rem;">🎓</span>
+        <div>
+          <span style="font-size: 0.72rem; font-weight: 700; color: #0066cc; text-transform: uppercase; letter-spacing: 0.05em; display: block;">Enrolled Internship Track</span>
+          <strong id="enrolledTrackTitle" style="font-size: 1.05rem; color: #1d1d1f; font-weight: 700;">Web Development</strong>
+        </div>
+        <span style="background: rgba(16, 185, 129, 0.15); color: #15803d; font-size: 0.76rem; font-weight: 700; padding: 4px 10px; border-radius: 999px;">● Active Curriculum</span>
+        <span style="background: #f5f5f7; color: #6e6e73; font-size: 0.76rem; font-weight: 600; padding: 4px 10px; border-radius: 999px; border: 1px solid #d2d2d7;">🔒 Track Locked</span>
       </div>
       <div>
-        <a href="/student/dashboard" class="btn btn-secondary" style="padding: 8px 16px; font-size: 0.85rem;">Open Full Workspace Dashboard &rarr;</a>
+        <a href="/student/dashboard" class="btn btn-secondary" style="padding: 8px 16px; font-size: 0.85rem;">Workspace Dashboard &rarr;</a>
       </div>
     </div>
 
@@ -168,22 +172,11 @@
           .then(function(res) { return res.json(); })
           .then(function(data) {
             domainData = data;
-            var selector = document.getElementById("trackSelector");
-            if (!selector) return;
-
-            var savedTrack = localStorage.getItem("abss_active_domain") || "web-development";
-
-            selector.innerHTML = data.AVAILABLE_DOMAINS.map(function(d) {
-              return '<option value="' + d.slug + '" ' + (d.slug === savedTrack ? 'selected' : '') + '>' + d.name + ' (' + d.category + ')</option>';
-            }).join('');
-
-            selector.addEventListener("change", function(e) {
-              var slug = e.target.value;
-              localStorage.setItem("abss_active_domain", slug);
-              renderRows(slug);
-            });
-
-            renderRows(savedTrack);
+            var savedTrack = localStorage.getItem("abss_user_track") || localStorage.getItem("abss_active_domain") || "web-development";
+            var matched = data.AVAILABLE_DOMAINS.find(function(d) { return d.slug === savedTrack; }) || data.AVAILABLE_DOMAINS[0];
+            var titleEl = document.getElementById("enrolledTrackTitle");
+            if (titleEl) titleEl.textContent = matched.name + " (" + matched.category + ")";
+            renderRows(matched.slug);
           })
           .catch(function(err) {
             console.error("Error loading tasks data", err);

@@ -1772,12 +1772,14 @@
   function renderDomainChips() {
     const containers = document.querySelectorAll('.domain-chips-scroll');
     containers.forEach((container) => {
-      container.innerHTML = AVAILABLE_DOMAINS.map((d) => {
-        const icon = DOMAIN_ICONS[d.slug] || '💼';
-        const isActive = (STATE.student.domainSlug === d.slug) ? 'is-active' : '';
-        return `<button type="button" class="domain-chip ${isActive}" data-domain-slug="${d.slug}">${icon} ${d.name}</button>`;
-      }).join('');
+      const icon = DOMAIN_ICONS[STATE.student.domainSlug] || '💼';
+      container.innerHTML = `<span class="enrolled-track-badge" style="display:inline-flex; align-items:center; gap:8px; padding:6px 14px; background:#e0f2fe; color:#0284c7; border-radius:999px; font-weight:700; font-size:0.85rem;">${icon} ${STATE.student.domain} (Enrolled Track)</span>`;
     });
+
+    const topbarTrackBadge = document.getElementById('topbar-track-badge');
+    if (topbarTrackBadge) {
+      topbarTrackBadge.textContent = STATE.student.domain;
+    }
 
     const topbarSelect = document.getElementById('topbar-track-select');
     if (topbarSelect) {
@@ -1870,49 +1872,54 @@
     }
   }
 
-  // Session & Data Sync
+  // Session & Data Sync (Strictly Locked to Enrolled Track)
   async function checkSession() {
+    let enrolledTrack = null;
+
     try {
       const res = await fetch('/api/internships/auth/me');
       if (res.ok) {
         const data = await res.json();
-        if (data && data.student) {
+        if (data && (data.student || data.user)) {
+          const s = data.student || data.user;
           STATE.isAuthenticated = true;
-          STATE.student.name = data.student.name || STATE.student.name;
-          STATE.student.email = data.student.email || STATE.student.email;
-          STATE.student.id = 'ABSS-' + (data.student.id || '2026-WD-8421').slice(-8).toUpperCase();
+          STATE.student.name = s.name || s.fullName || STATE.student.name;
+          STATE.student.email = s.email || STATE.student.email;
+          STATE.student.id = 'ABSS-' + (s.id || '2026-WD-8421').slice(-8).toUpperCase();
+          if (s.track || s.domain || s.programSlug || s.enrolledTrack) {
+            enrolledTrack = s.track || s.domain || s.programSlug || s.enrolledTrack;
+          }
         }
       }
     } catch (e) {
-      // Graceful offline/demo fallback
       console.log('Running in client state mode.');
     }
 
-    // Check active domain from URL parameter or saved user preference
-    try {
-      const urlParams = new URLSearchParams(window.location.search);
-      const queryDomain = urlParams.get('domain') || urlParams.get('track');
-      const savedDomain = localStorage.getItem('abss_active_domain');
-      if (queryDomain) {
-        switchDomain(queryDomain, true);
-      } else if (savedDomain) {
-        switchDomain(savedDomain, true);
-      }
-    } catch (e) {}
-
-    // Try fetching overview from server
+    // Try fetching overview from server to lock to student's applied application
     try {
       const overviewRes = await fetch('/api/internships/dashboard/overview');
       if (overviewRes.ok) {
         const overviewData = await overviewRes.json();
         if (overviewData && overviewData.applications && overviewData.applications.length > 0) {
           const latest = overviewData.applications[0];
-          if (latest.programTitle || latest.programSlug) {
-            switchDomain(latest.programSlug || latest.programTitle, true);
+          if (latest.programSlug || latest.track || latest.programTitle) {
+            enrolledTrack = latest.programSlug || latest.track || latest.programTitle;
           }
         }
       }
     } catch (e) {}
+
+    // Check stored user track or query parameter if not yet determined
+    if (!enrolledTrack) {
+      try {
+        const urlParams = new URLSearchParams(window.location.search);
+        enrolledTrack = urlParams.get('track') || urlParams.get('domain') || localStorage.getItem('abss_user_track') || localStorage.getItem('abss_active_domain');
+      } catch (e) {}
+    }
+
+    if (enrolledTrack) {
+      switchDomain(enrolledTrack, true);
+    }
   }
 
   function renderStudentState() {
@@ -1930,6 +1937,15 @@
     if (coachTrackEl) {
       coachTrackEl.innerHTML = `● Online &bull; Tailored to ${STATE.student.domain}`;
     }
+
+    const topbarTrackBadge = document.getElementById('topbar-track-badge');
+    if (topbarTrackBadge) {
+      topbarTrackBadge.textContent = STATE.student.domain;
+    }
+
+    document.querySelectorAll('.enrolled-track-display-name').forEach((el) => {
+      el.textContent = STATE.student.domain;
+    });
 
     const topbarTrackSelect = document.getElementById('topbar-track-select');
     if (topbarTrackSelect && topbarTrackSelect.value !== STATE.student.domainSlug) {
@@ -2257,21 +2273,8 @@
       });
     });
 
-    // Topbar Domain Select
-    const topbarSelect = document.getElementById('topbar-track-select');
-    if (topbarSelect) {
-      topbarSelect.addEventListener('change', (e) => {
-        switchDomain(e.target.value);
-      });
-    }
-
-    // Delegated click for Domain Chips
-    document.addEventListener('click', (e) => {
-      const chip = e.target.closest('.domain-chip');
-      if (chip && chip.dataset.domainSlug) {
-        switchDomain(chip.dataset.domainSlug);
-      }
-    });
+    // Domain Track is strictly locked to student's enrolled application
+    // Arbitrary track switching is disabled as per institutional academic policy
 
     // Task Filter Buttons
     document.querySelectorAll('[data-task-filter]').forEach((btn) => {

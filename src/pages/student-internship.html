@@ -94,15 +94,21 @@
   
 
       
-    <!-- Active Track Selector Strip -->
-    <div style="background: #ffffff; border: 1px solid #d2d2d7; border-radius: 14px; padding: 16px 20px; margin-bottom: 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px; box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
+    <!-- Enrolled Track Banner (Locked to Student Application) -->
+    <div style="background: linear-gradient(135deg, rgba(0, 102, 204, 0.06), rgba(99, 102, 241, 0.04)); border: 1px solid rgba(0, 102, 204, 0.25); border-radius: 14px; padding: 14px 20px; margin-bottom: 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;">
       <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
-        <label for="trackSelector" style="font-size: 0.82rem; font-weight: 700; color: #0066cc; text-transform: uppercase;">Active Internship Track:</label>
-        <select id="trackSelector" style="padding: 8px 14px; border: 1px solid #d2d2d7; border-radius: 8px; font-weight: 600; font-size: 0.92rem; background: #f5f5f7; cursor: pointer; color: #1d1d1f; outline: none;">
-        </select>
+        <span style="font-size: 1.25rem;">🎓</span>
+        <div>
+          <div style="font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: #0066cc; letter-spacing: 0.05em;">Your Enrolled Internship Track (Locked)</div>
+          <div style="display: flex; align-items: center; gap: 8px; margin-top: 2px;">
+            <strong id="enrolledTrackBannerName" style="font-size: 1.05rem; color: #1d1d1f;">Web Development</strong>
+            <span style="font-size: 0.72rem; background: #e0f2fe; color: #0284c7; padding: 2px 8px; border-radius: 999px; font-weight: 600;">● Active Curriculum</span>
+          </div>
+        </div>
       </div>
-      <div>
-        <a href="/student/tasks" class="btn btn-secondary" style="padding: 8px 16px; font-size: 0.85rem;">View Track Task Board &rarr;</a>
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <span style="font-size: 0.78rem; background: #f5f5f7; color: #6e6e73; padding: 6px 12px; border-radius: 8px; border: 1px solid #d2d2d7; font-weight: 600;">🔒 Track Locked</span>
+        <a href="/student/tasks" class="btn btn-secondary" style="padding: 8px 16px; font-size: 0.85rem;">View Sprint Tasks &rarr;</a>
       </div>
     </div>
 
@@ -145,47 +151,58 @@
     <script>
       (function() {
         var domainData = null;
+        var enrolledTrackSlug = "web-development";
 
-        fetch("/api/internships/auth/me")
-          .then(function(r) { return r.ok ? r.json() : null; })
-          .then(function(data) {
-            if (data && (data.student || data.user)) {
-              var s = data.student || data.user;
-              var name = s.name || s.fullName || "Intern Student";
-              var initials = name.split(" ").map(function(p) { return p[0]; }).filter(Boolean).slice(0, 2).join("").toUpperCase() || "ST";
-              var nameEl = document.getElementById("studentDisplayName");
-              var avatarEl = document.getElementById("studentAvatarInitials");
-              if (nameEl) nameEl.textContent = name;
-              if (avatarEl) avatarEl.textContent = initials;
-            }
-          })
-          .catch(function() {});
+        function normalizeTrack(val) {
+          if (!val) return "web-development";
+          return String(val).toLowerCase().trim().replace(/[\s_]+/g, "-");
+        }
 
-        // Fetch domain tasks data
-        fetch("/src/scripts/domain-tasks-data.json")
-          .then(function(res) { return res.json(); })
-          .then(function(data) {
-            domainData = data;
-            var selector = document.getElementById("trackSelector");
-            if (!selector) return;
+        Promise.all([
+          fetch("/api/internships/auth/me").then(function(r) { return r.ok ? r.json() : null; }).catch(function() { return null; }),
+          fetch("/api/internships/dashboard/overview").then(function(r) { return r.ok ? r.json() : null; }).catch(function() { return null; }),
+          fetch("/src/scripts/domain-tasks-data.json").then(function(r) { return r.ok ? r.json() : null; }).catch(function() { return null; })
+        ]).then(function(results) {
+          var meData = results[0];
+          var overviewData = results[1];
+          domainData = results[2];
 
-            var savedTrack = localStorage.getItem("abss_active_domain") || "web-development";
+          if (meData && (meData.student || meData.user)) {
+            var s = meData.student || meData.user;
+            var name = s.name || s.fullName || "Intern Student";
+            var initials = name.split(" ").map(function(p) { return p[0]; }).filter(Boolean).slice(0, 2).join("").toUpperCase() || "ST";
+            var nameEl = document.getElementById("studentDisplayName");
+            var avatarEl = document.getElementById("studentAvatarInitials");
+            if (nameEl) nameEl.textContent = name;
+            if (avatarEl) avatarEl.textContent = initials;
+          }
 
-            selector.innerHTML = data.AVAILABLE_DOMAINS.map(function(d) {
-              return '<option value="' + d.slug + '" ' + (d.slug === savedTrack ? 'selected' : '') + '>' + d.name + ' (' + d.category + ')</option>';
-            }).join('');
+          var cand = null;
+          if (meData && meData.student && (meData.student.track || meData.student.domain || meData.student.programSlug)) {
+            cand = meData.student.track || meData.student.domain || meData.student.programSlug;
+          } else if (overviewData && overviewData.applications && overviewData.applications.length > 0) {
+            cand = overviewData.applications[0].programSlug || overviewData.applications[0].track || overviewData.applications[0].programTitle;
+          } else if (localStorage.getItem("abss_user_track")) {
+            cand = localStorage.getItem("abss_user_track");
+          } else if (localStorage.getItem("abss_active_domain")) {
+            cand = localStorage.getItem("abss_active_domain");
+          }
+          if (cand) enrolledTrackSlug = normalizeTrack(cand);
 
-            selector.addEventListener("change", function(e) {
-              var slug = e.target.value;
-              localStorage.setItem("abss_active_domain", slug);
-              renderRoadmap(slug);
+          var trackItem = null;
+          if (domainData && domainData.AVAILABLE_DOMAINS) {
+            trackItem = domainData.AVAILABLE_DOMAINS.find(function(d) {
+              return d.slug === enrolledTrackSlug || d.slug.toLowerCase() === enrolledTrackSlug.toLowerCase();
             });
+          }
 
-            renderRoadmap(savedTrack);
-          })
-          .catch(function(err) {
-            console.error("Error loading roadmap data", err);
-          });
+          var bannerEl = document.getElementById("enrolledTrackBannerName");
+          if (bannerEl && trackItem) bannerEl.textContent = trackItem.name + " (" + trackItem.category + ")";
+
+          renderRoadmap(trackItem ? trackItem.slug : enrolledTrackSlug);
+        }).catch(function(err) {
+          console.error("Error loading roadmap data", err);
+        });
 
         function renderRoadmap(trackSlug) {
           if (!domainData || !domainData.DOMAIN_TASKS) return;
