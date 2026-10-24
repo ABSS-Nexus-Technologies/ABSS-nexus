@@ -2392,6 +2392,25 @@
         try {
           localStorage.setItem('abss_tasks_' + STATE.student.domainSlug, JSON.stringify(STATE.tasks));
           localStorage.setItem('abss_subs_' + STATE.student.domainSlug, JSON.stringify(STATE.submissions));
+
+          // Real-time backend sync so admin mentor queue receives the deliverable immediately
+          fetch('/api/internships/submissions', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              studentName: STATE.student.name || 'Intern Student',
+              studentEmail: STATE.student.email || localStorage.getItem('abss_user_email') || 'student@abss.io',
+              trackSlug: STATE.student.domainSlug || 'web-development',
+              trackName: STATE.student.domain || 'Web Development',
+              taskId: taskId,
+              taskName: task ? task.name : taskId,
+              prUrl: proofUrl,
+              demoUrl: '',
+              notes: 'Submitted via student dashboard deliverable modal.'
+            })
+          }).catch((err) => {
+            console.warn('Background submission API sync fallback:', err);
+          });
         } catch (e) {}
 
         renderTasks();

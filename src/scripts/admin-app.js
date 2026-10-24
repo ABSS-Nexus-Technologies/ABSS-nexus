@@ -499,7 +499,8 @@
         </td>
         <td style="padding: 14px; color: #6e6e73; font-size: 0.84rem;">${escapeHtml(formatDate(s.createdAt))}</td>
         <td style="padding: 14px;">
-          <div style="display: flex; gap: 6px;">
+          <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+            <a href="/admin/internships/submissions?search=${encodeURIComponent(s.name)}" style="padding: 4px 10px; background: #e0f2fe; color: #0284c7; border: 1px solid #bae6fd; border-radius: 6px; font-size: 0.76rem; text-decoration: none; font-weight: 700;">Check Work</a>
             <a href="mailto:${escapeHtml(s.email)}" style="padding: 4px 10px; background: #f5f5f7; border: 1px solid #d2d2d7; border-radius: 6px; font-size: 0.76rem; text-decoration: none; color: #1d1d1f;">Contact</a>
             <button type="button" class="btn-action-delete-student" data-id="${escapeHtml(s.id)}" style="padding: 4px 8px; background: #fff; color: #dc2626; border: 1px solid #fee2e2; border-radius: 6px; font-size: 0.76rem; cursor: pointer;">Delete</button>
           </div>

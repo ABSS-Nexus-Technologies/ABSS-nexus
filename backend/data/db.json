@@ -304,6 +304,25 @@
   "internshipPayments": [],
   "internshipSubmissions": [
     {
+      "id": "SUB-WEB--MVMILW73",
+      "studentName": "Rahul Sharma",
+      "studentEmail": "rahul.sharma@example.com",
+      "trackSlug": "web-development",
+      "trackName": "Web Development",
+      "taskId": "TASK-1",
+      "taskName": "Milestone 1: Semantic HTML5 & Modern Layout Architecture",
+      "prUrl": "https://github.com/rahul-sharma/abss-milestone-1-pr",
+      "demoUrl": "https://rahul-portfolio.pages.dev",
+      "notes": "Verified responsive layout with automated lighthouse tests.",
+      "submittedAt": "2026-10-24T14:49:32.991Z",
+      "status": "pending",
+      "score": null,
+      "grade": null,
+      "mentorFeedback": null,
+      "reviewedAt": null,
+      "reviewerName": null
+    },
+    {
       "id": "SUB-WEB-001",
       "studentName": "Pooja Verma",
       "studentEmail": "pooja.verma@example.com",

@@ -300,6 +300,9 @@
               var notes = document.getElementById("notes") ? document.getElementById("notes").value : "";
               var studentName = document.getElementById("studentDisplayName") ? document.getElementById("studentDisplayName").textContent : "Intern Student";
 
+              var trackLabelEl = document.getElementById("enrolledTrackLabel");
+              var trackName = trackLabelEl ? trackLabelEl.textContent.trim() : trackSlug;
+
               fetch("/api/internships/submissions", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -307,6 +310,7 @@
                   studentName: studentName,
                   studentEmail: localStorage.getItem("abss_user_email") || "student@abss.io",
                   trackSlug: trackSlug,
+                  trackName: trackName,
                   taskId: taskId,
                   taskName: task ? task.name : taskId,
                   prUrl: prUrl,
