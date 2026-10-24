@@ -5,6 +5,32 @@ const path = require("path");
 const { URL } = require("url");
 
 const rootDir = path.resolve(__dirname, "..");
+
+// Auto-load environment variables from .env in root directory if present
+const envPath = path.join(rootDir, ".env");
+if (fs.existsSync(envPath)) {
+  try {
+    const envContent = fs.readFileSync(envPath, "utf8");
+    for (const line of envContent.split("\n")) {
+      const trimmed = line.trim();
+      if (!trimmed || trimmed.startsWith("#")) continue;
+      const eqIdx = trimmed.indexOf("=");
+      if (eqIdx !== -1) {
+        const key = trimmed.slice(0, eqIdx).trim();
+        let val = trimmed.slice(eqIdx + 1).trim();
+        if ((val.startsWith('"') && val.endsWith('"')) || (val.startsWith("'") && val.endsWith("'"))) {
+          val = val.slice(1, -1);
+        }
+        if (!process.env[key]) {
+          process.env[key] = val;
+        }
+      }
+    }
+  } catch (err) {
+    console.warn("[Env] Warning loading .env file:", err.message);
+  }
+}
+
 const dbPath = path.join(__dirname, "data", "db.json");
 const port = Number(process.env.PORT || 3000);
 const isDev = process.env.NODE_ENV !== "production" && process.env.ENVIRONMENT !== "production";
@@ -34,47 +60,89 @@ const adminUsername = rawAdminUser || (isDev ? "admin" : "");
 const adminPassword = rawAdminPass || (isDev ? "abss2026" : "");
 const authSecret = rawAuthSecret || (isDev ? "abss-local-dev-secret-key-2026" : "");
 
-const isEmailConfigured = Boolean(process.env.RESEND_API_KEY || process.env.SENDGRID_API_KEY);
+const isApiKeyPlaceholder = (val) => !val || val.includes("your_key_here") || val.includes("re_xxxxxxxx");
+const checkEmailConfigured = () => Boolean(
+  (process.env.RESEND_API_KEY && !isApiKeyPlaceholder(process.env.RESEND_API_KEY)) ||
+  (process.env.SENDGRID_API_KEY && !isApiKeyPlaceholder(process.env.SENDGRID_API_KEY))
+);
 
 const dispatchServerNotification = async ({ to, subject, html, text }) => {
-  if (process.env.RESEND_API_KEY) {
+  const fromAddress = process.env.EMAIL_FROM || "ABSS Nexus Technologies <notifications@abssnexus.in>";
+  const plainText = text || (html ? html.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim() : "");
+  const recipient = Array.isArray(to) ? to : [to];
+
+  // 1. Resend API
+  if (process.env.RESEND_API_KEY && !isApiKeyPlaceholder(process.env.RESEND_API_KEY)) {
     try {
-      await fetch("https://api.resend.com/emails", {
+      console.log(`[EmailService:Resend] Dispatching email to: ${recipient.join(", ")} | Subject: "${subject}"`);
+      const response = await fetch("https://api.resend.com/emails", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
         },
         body: JSON.stringify({
-          from: process.env.EMAIL_FROM || "ABSS Nexus <notifications@abssnexus.in>",
-          to: Array.isArray(to) ? to : [to],
+          from: fromAddress,
+          to: recipient,
           subject,
           html,
-          text,
+          text: plainText,
         }),
       });
+      const data = await response.json().catch(() => ({}));
+      if (response.ok) {
+        console.log(`[EmailService:Resend] ✓ Email delivered successfully. ID: ${data.id}`);
+        return { ok: true, provider: "resend", id: data.id };
+      }
+      console.error(`[EmailService:Resend] ✗ API returned status ${response.status}:`, data);
+      return { ok: false, provider: "resend", status: response.status, error: data };
     } catch (e) {
-      console.error("[EmailService] Resend dispatch error:", e.message);
+      console.error("[EmailService:Resend] ✗ Dispatch error:", e.message);
+      return { ok: false, provider: "resend", error: e.message };
     }
-  } else if (process.env.SENDGRID_API_KEY) {
+  }
+
+  // 2. SendGrid API
+  if (process.env.SENDGRID_API_KEY && !isApiKeyPlaceholder(process.env.SENDGRID_API_KEY)) {
     try {
-      await fetch("https://api.sendgrid.com/v3/mail/send", {
+      console.log(`[EmailService:SendGrid] Dispatching email to: ${recipient.join(", ")} | Subject: "${subject}"`);
+      const response = await fetch("https://api.sendgrid.com/v3/mail/send", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${process.env.SENDGRID_API_KEY}`,
         },
         body: JSON.stringify({
-          personalizations: [{ to: (Array.isArray(to) ? to : [to]).map((em) => ({ email: em })) }],
-          from: { email: process.env.EMAIL_FROM || "notifications@abssnexus.in", name: "ABSS Nexus Technologies" },
+          personalizations: [{ to: recipient.map((em) => ({ email: em })) }],
+          from: { email: process.env.EMAIL_FROM_ADDRESS || "notifications@abssnexus.in", name: "ABSS Nexus Technologies" },
           subject,
-          content: [{ type: "text/html", value: html }],
+          content: [
+            { type: "text/plain", value: plainText },
+            { type: "text/html", value: html },
+          ],
         }),
       });
+      if (response.ok || response.status === 202) {
+        console.log(`[EmailService:SendGrid] ✓ Email delivered successfully.`);
+        return { ok: true, provider: "sendgrid" };
+      }
+      const data = await response.json().catch(() => ({}));
+      console.error(`[EmailService:SendGrid] ✗ API returned status ${response.status}:`, data);
+      return { ok: false, provider: "sendgrid", status: response.status, error: data };
     } catch (e) {
-      console.error("[EmailService] SendGrid dispatch error:", e.message);
+      console.error("[EmailService:SendGrid] ✗ Dispatch error:", e.message);
+      return { ok: false, provider: "sendgrid", error: e.message };
     }
   }
+
+  // 3. Fallback simulated console log
+  console.log(`\n================== [EmailService: Fallback Mode] ==================
+[Notice] RESEND_API_KEY or SENDGRID_API_KEY not configured. Falling back to console log.
+To: ${recipient.join(", ")}
+Subject: "${subject}"
+Content Summary: ${plainText.slice(0, 160)}...
+===================================================================\n`);
+  return { ok: false, simulated: true, provider: "none", message: "API key unconfigured; logged to console." };
 };
 
 // =========================================================================
@@ -940,11 +1008,16 @@ const requireRole = (request, response, allowedRoles) => {
 
 const normalizeLead = (input) => ({
   id: input.id || `lead-${Date.now()}`,
-  client: String(input.client || "Website Inquiry").trim(),
+  client: String(input.client || input.name || "Website Inquiry").trim(),
+  name: String(input.name || input.client || "").trim(),
+  email: String(input.email || "").trim(),
+  phone: String(input.phone || "").trim(),
   service: String(input.service || "Website Inquiry").trim(),
   budget: Number(input.budget || 0),
+  timeline: String(input.timeline || "").trim(),
+  message: String(input.message || "").trim(),
   status: String(input.status || "New").trim(),
-  contact: String(input.contact || "").trim(),
+  contact: String(input.contact || [input.email, input.phone].filter(Boolean).join(" / ")).trim(),
 });
 
 const serveStatic = (request, response, pathname) => {
@@ -1848,15 +1921,93 @@ const server = http.createServer(async (request, response) => {
       syncToFirestoreServer("leads", lead.id, lead);
       syncToGoogleSheetsServer("contact_lead", lead);
 
-      if (isEmailConfigured) {
+      // 1. Send Notification Email to Admin
+      try {
+        const adminEmail = process.env.ADMIN_NOTIFICATION_EMAIL || "contact@abssnexus.in";
+        const adminHtml = `
+<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"><title>New Lead Inquiry</title></head>
+<body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f5f5f7; padding: 20px;">
+  <div style="max-width: 600px; margin: 0 auto; background: #fff; border-radius: 12px; border: 1px solid #e5e7eb; padding: 28px;">
+    <h2 style="color: #0066cc; margin-top: 0;">🔥 New Project Inquiry Received</h2>
+    <table style="width: 100%; border-collapse: collapse; margin-top: 16px; font-size: 14px;">
+      <tr><td style="padding: 8px 0; color: #6b7280; width: 120px;"><strong>Client Name:</strong></td><td style="color: #111827;">${lead.client || lead.name}</td></tr>
+      <tr><td style="padding: 8px 0; color: #6b7280;"><strong>Email:</strong></td><td style="color: #111827;">${lead.email || "N/A"}</td></tr>
+      <tr><td style="padding: 8px 0; color: #6b7280;"><strong>Phone:</strong></td><td style="color: #111827;">${lead.phone || "N/A"}</td></tr>
+      <tr><td style="padding: 8px 0; color: #6b7280;"><strong>Service:</strong></td><td style="color: #111827;">${lead.service}</td></tr>
+      <tr><td style="padding: 8px 0; color: #6b7280;"><strong>Budget:</strong></td><td style="color: #111827;">₹${lead.budget || "Not specified"}</td></tr>
+      <tr><td style="padding: 8px 0; color: #6b7280;"><strong>Timeline:</strong></td><td style="color: #111827;">${lead.timeline || "Standard"}</td></tr>
+      <tr><td style="padding: 8px 0; color: #6b7280; vertical-align: top;"><strong>Message:</strong></td><td style="color: #111827; white-space: pre-wrap;">${lead.message || "No message provided"}</td></tr>
+    </table>
+    <div style="margin-top: 24px; padding-top: 16px; border-top: 1px solid #e5e7eb; font-size: 12px; color: #9ca3af;">
+      Reference ID: ${lead.id} &bull; Received via ABSS Nexus Contact API
+    </div>
+  </div>
+</body>
+</html>`;
+
         dispatchServerNotification({
-          to: process.env.ADMIN_NOTIFICATION_EMAIL || "contact@abssnexus.in",
+          to: adminEmail,
           subject: `🔥 [New Lead] ${lead.client || lead.name} - ${lead.service}`,
-          html: `<p>New project lead from <strong>${lead.client}</strong> (${lead.contact}). Service: ${lead.service}. Budget: ₹${lead.budget}</p>`,
+          html: adminHtml,
+          text: `New project lead from ${lead.client} (${lead.contact}). Service: ${lead.service}. Budget: ₹${lead.budget}. Message: ${lead.message}`,
         });
+      } catch (err) {
+        console.error("[EmailService] Admin notification failed:", err.message);
       }
 
-      send(response, 201, { ok: true, lead, notificationsDispatched: isEmailConfigured });
+      // 2. Send Confirmation Email to User
+      try {
+        const clientEmail = lead.email || (lead.contact && lead.contact.includes("@") ? lead.contact.split("/")[0].trim() : "");
+        if (clientEmail && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(clientEmail)) {
+          const clientHtml = `
+<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"><title>Inquiry Received</title></head>
+<body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f5f5f7; padding: 20px;">
+  <div style="max-width: 600px; margin: 0 auto; background: #fff; border-radius: 12px; border: 1px solid #e5e7eb; overflow: hidden;">
+    <div style="background: linear-gradient(135deg, #0066cc 0%, #00c2ff 100%); padding: 28px; text-align: center;">
+      <h1 style="color: #fff; margin: 0; font-size: 22px;">ABSS Nexus Technologies</h1>
+      <p style="color: rgba(255,255,255,0.9); margin: 4px 0 0; font-size: 13px;">Enterprise IT Services &amp; Software Development</p>
+    </div>
+    <div style="padding: 28px;">
+      <h2 style="font-size: 18px; color: #111827; margin-top: 0;">Thank You for Contacting Us, ${lead.name || lead.client}!</h2>
+      <p style="font-size: 14px; line-height: 1.6; color: #4b5563;">
+        We have received your project inquiry regarding <strong>${lead.service}</strong>. Our engineering consultation desk is reviewing your requirements and will connect with you within <strong>2–4 business hours</strong>.
+      </p>
+      <div style="background: #f9fafb; border-left: 4px solid #0066cc; padding: 14px 16px; margin: 20px 0; font-size: 13px; color: #374151;">
+        <strong>Your Inquiry Summary:</strong><br/>
+        &bull; <strong>Service:</strong> ${lead.service}<br/>
+        &bull; <strong>Contact Phone:</strong> ${lead.phone || "Provided"}<br/>
+        &bull; <strong>Reference ID:</strong> ${lead.id}
+      </div>
+      <p style="font-size: 14px; line-height: 1.6; color: #4b5563;">
+        For urgent inquiries or immediate technical consultation, feel free to connect directly via WhatsApp:
+      </p>
+      <div style="text-align: center; margin: 20px 0;">
+        <a href="https://wa.me/918757928673" style="display: inline-block; background: #25D366; color: #fff; padding: 11px 22px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 14px;">Chat on WhatsApp: +91 87579 28673 &rarr;</a>
+      </div>
+    </div>
+    <div style="background: #f9fafb; padding: 14px 28px; border-top: 1px solid #e5e7eb; font-size: 12px; color: #9ca3af; text-align: center;">
+      &copy; 2026 ABSS Nexus Technologies &bull; contact@abssnexus.in &bull; Jaipur, Rajasthan, India
+    </div>
+  </div>
+</body>
+</html>`;
+
+          dispatchServerNotification({
+            to: clientEmail,
+            subject: `We've received your project inquiry - ABSS Nexus Technologies`,
+            html: clientHtml,
+            text: `Dear ${lead.name || lead.client},\n\nThank you for reaching out to ABSS Nexus Technologies regarding ${lead.service}. We have received your inquiry (Ref: ${lead.id}) and will get back to you within 2-4 hours.\n\nWhatsApp: +91 87579 28673\nEmail: contact@abssnexus.in\n\nBest regards,\nABSS Nexus Technologies Team`,
+          });
+        }
+      } catch (err) {
+        console.error("[EmailService] Client confirmation failed:", err.message);
+      }
+
+      send(response, 201, { ok: true, lead, notificationsDispatched: checkEmailConfigured() });
       return;
     }
 
@@ -2059,11 +2210,15 @@ const server = http.createServer(async (request, response) => {
 
       const rawToken = crypto.randomBytes(32).toString("hex");
       const tokenHash = hashToken(rawToken);
+      const verificationCode = String(Math.floor(100000 + Math.random() * 900000));
+      const codeHash = hashToken(verificationCode);
       const tokenRecord = {
         id: `token-${crypto.randomUUID()}`,
         studentId,
         tokenHash,
         tokenType: "email_verification",
+        verificationCode,
+        codeHash,
         expiresAt: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString(),
         usedAt: null,
         createdAt: new Date().toISOString(),
@@ -2075,22 +2230,55 @@ const server = http.createServer(async (request, response) => {
       syncToFirestoreServer("students", newStudent.id, newStudent);
       syncToGoogleSheetsServer("student_registration", newStudent);
 
-      if (isEmailConfigured) {
-        dispatchServerNotification({
-          to: email,
-          subject: "Verify Your Email Address - ABSS Nexus Internship Portal",
-          html: `<p>Hello ${name}, please verify your email using: <a href="http://localhost:${port}/internships/verify-email?token=${rawToken}">Verify Email</a></p>`,
-        });
-      }
+      const verificationUrl = `http://localhost:${port}/internships/verify-email?token=${rawToken}`;
+      const emailHtml = `
+<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"><title>Verify Your Student Email</title></head>
+<body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f5f5f7; padding: 24px;">
+  <div style="max-width: 580px; margin: 0 auto; background: #ffffff; border-radius: 14px; overflow: hidden; border: 1px solid #e5e7eb;">
+    <div style="background: linear-gradient(135deg, #0066cc 0%, #00c2ff 100%); padding: 32px 28px; text-align: center;">
+      <h1 style="color: #ffffff; margin: 0; font-size: 24px;">ABSS Nexus Academy</h1>
+      <p style="color: rgba(255,255,255,0.9); margin: 6px 0 0; font-size: 14px;">Internship &amp; Engineering Portal</p>
+    </div>
+    <div style="padding: 32px 28px;">
+      <h2 style="font-size: 20px; color: #1d1d1f; margin-top: 0;">Welcome, ${name}!</h2>
+      <p style="font-size: 15px; line-height: 1.6; color: #4b5563;">Thank you for registering for the <strong>ABSS Nexus Virtual Internship Program (${track || "Engineering"})</strong>. Please verify your email address to activate your student account.</p>
+      
+      <div style="background: #f0fdf4; border: 1px solid #86efac; border-radius: 10px; padding: 20px; text-align: center; margin: 24px 0;">
+        <p style="margin: 0 0 8px; font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em; color: #166534; font-weight: 600;">Your 6-Digit Verification Code</p>
+        <span style="font-size: 32px; font-weight: 800; letter-spacing: 6px; color: #15803d; font-family: monospace;">${verificationCode}</span>
+      </div>
+
+      <div style="text-align: center; margin: 28px 0;">
+        <a href="${verificationUrl}" style="display: inline-block; background: #0066cc; color: #ffffff; padding: 13px 28px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 15px;">Verify Email with 1-Click &rarr;</a>
+      </div>
+
+      <p style="font-size: 13px; color: #6b7280; line-height: 1.5;">This verification code and link will expire in 24 hours. If you did not create this account, please ignore this email.</p>
+    </div>
+    <div style="background: #f9fafb; padding: 16px 28px; border-top: 1px solid #e5e7eb; font-size: 12px; color: #9ca3af; text-align: center;">
+      &copy; 2026 ABSS Nexus Technologies &bull; admissions@abssnexus.in &bull; Jaipur, Rajasthan, India
+    </div>
+  </div>
+</body>
+</html>`;
+
+      dispatchServerNotification({
+        to: email,
+        subject: "Verify Your Email Address - ABSS Nexus Internship Portal",
+        html: emailHtml,
+        text: `Welcome ${name}!\n\nYour 6-digit verification code is: ${verificationCode}\n\nOr click here to verify: ${verificationUrl}\n\nExpires in 24 hours.\n- ABSS Nexus Academy`,
+      });
 
       send(response, 201, {
         ok: true,
         studentId,
         email,
-        message: isEmailConfigured
-          ? "Student account created successfully. A verification link has been sent to your email address."
-          : "Student account created successfully. In this environment, email delivery service is not configured so an automated email could not be sent. You can verify your email directly using the link below.",
-        emailServiceConfigured: isEmailConfigured,
+        verificationCode,
+        message: checkEmailConfigured()
+          ? "Student account created successfully. A verification email has been sent to your inbox."
+          : "Student account created successfully. Verification code generated (Email service in fallback mode).",
+        emailServiceConfigured: checkEmailConfigured(),
         devVerificationUrl: `/internships/verify-email?token=${rawToken}`,
       });
       return;
@@ -2104,23 +2292,26 @@ const server = http.createServer(async (request, response) => {
       }
 
       const body = await readBody(request);
-      const rawToken = String(body.token || "").trim();
-      if (!rawToken) {
-        send(response, 400, { error: "Verification token is required." });
+      const rawTokenOrCode = String(body.token || body.code || "").trim();
+      if (!rawTokenOrCode) {
+        send(response, 400, { error: "Verification token or code is required." });
         return;
       }
 
-      const tokenHash = hashToken(rawToken);
+      const tokenHash = hashToken(rawTokenOrCode);
       const db = readDb();
-      const tokenRecord = (db.studentTokens || []).find((t) => t.tokenHash === tokenHash && t.tokenType === "email_verification");
+      const tokenRecord = (db.studentTokens || []).find((t) =>
+        (t.tokenHash === tokenHash || t.codeHash === tokenHash || t.verificationCode === rawTokenOrCode) &&
+        t.tokenType === "email_verification"
+      );
 
       if (!tokenRecord || tokenRecord.usedAt) {
-        send(response, 400, { error: "Invalid or already used verification token." });
+        send(response, 400, { error: "Invalid or already used verification token/code." });
         return;
       }
 
       if (new Date(tokenRecord.expiresAt).getTime() < Date.now()) {
-        send(response, 400, { error: "Verification token has expired. Please request a new verification link." });
+        send(response, 400, { error: "Verification code/token has expired. Please request a new verification link." });
         return;
       }
 
@@ -2171,7 +2362,7 @@ const server = http.createServer(async (request, response) => {
 
       if (!student.emailVerified) {
         let devVerificationUrl = null;
-        if (!isEmailConfigured) {
+        if (!checkEmailConfigured()) {
           const rawToken = crypto.randomBytes(32).toString("hex");
           const tokenHash = hashToken(rawToken);
           const tokenRecord = {
@@ -2416,7 +2607,7 @@ const server = http.createServer(async (request, response) => {
         db.studentTokens.push(tokenRecord);
         writeDb(db);
         devResetUrl = `/internships/reset-password?token=${rawToken}`;
-        if (isEmailConfigured) {
+        if (checkEmailConfigured()) {
           dispatchServerNotification({
             to: email,
             subject: "Reset Your Password - ABSS Nexus Internship Portal",
@@ -2428,7 +2619,7 @@ const server = http.createServer(async (request, response) => {
       send(response, 200, {
         ok: true,
         message: "If an account with that email exists, password reset instructions have been generated.",
-        emailServiceConfigured: isEmailConfigured,
+        emailServiceConfigured: checkEmailConfigured(),
         devResetUrl,
       });
       return;

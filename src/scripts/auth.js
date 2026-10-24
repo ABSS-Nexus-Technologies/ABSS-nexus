@@ -245,6 +245,9 @@
 
           regForm.reset();
           let successHtml = "<strong>" + (data.message || "Account registered successfully!") + "</strong>";
+          if (data.verificationCode) {
+            successHtml += `<div style="margin: 14px 0; padding: 12px; background: rgba(0, 102, 204, 0.08); border-radius: 8px; border: 1px solid rgba(0, 102, 204, 0.2); text-align: center;"><p style="margin: 0 0 4px; font-size: 0.82rem; color: #475569; text-transform: uppercase; font-weight: 600;">Verification Code</p><span style="font-size: 1.6rem; font-weight: 800; letter-spacing: 4px; color: #0066cc; font-family: monospace;">${data.verificationCode}</span></div>`;
+          }
           if (data.devVerificationUrl) {
             successHtml += `<div style="margin-top: 14px; padding: 14px; background: #f0fdf4; border: 1px solid #86efac; border-radius: 10px; text-align: left;"><p style="margin: 0 0 8px; font-weight: 600; color: #166534;">Instant Account Activation:</p><a href="${data.devVerificationUrl}" class="btn btn-primary" style="display: inline-block; padding: 9px 18px; font-size: 0.9rem; background: #0066cc; color: #fff; border-radius: 8px; text-decoration: none; font-weight: 600;">Activate &amp; Verify Email Now &rarr;</a><p style="margin: 8px 0 0; font-size: 0.8rem; color: #166534;">Auto-redirecting in 2 seconds...</p></div>`;
             showAlert("success", "", successHtml, regForm);
@@ -254,6 +257,12 @@
           } else {
             successHtml += `<div style="margin-top: 12px;"><a href="/internships/login" class="btn btn-primary" style="display: inline-block; padding: 9px 18px; font-size: 0.9rem; background: #0066cc; color: #fff; border-radius: 8px; text-decoration: none; font-weight: 600;">Proceed to Login &rarr;</a></div>`;
             showAlert("success", "", successHtml, regForm);
+          }
+
+          if (data.emailServiceConfigured) {
+            console.log("[Auth Registration] ✓ Verification email dispatched via email API to:", email);
+          } else {
+            console.log("[Auth Registration] [Fallback Mode] No email API key configured. Verification Code:", data.verificationCode, "| Verification Link:", data.devVerificationUrl);
           }
 
           if (submitBtn) {
