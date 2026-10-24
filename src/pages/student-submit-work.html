@@ -208,6 +208,39 @@
             var taskId = document.getElementById("task-select").value;
             var prUrl = document.getElementById("pr-url").value;
 
+            // Sync with localStorage for student-tasks and student-dashboard
+            try {
+              var tasks = [];
+              var savedTasks = localStorage.getItem("abss_tasks_" + trackSlug);
+              if (savedTasks) {
+                tasks = JSON.parse(savedTasks);
+              } else if (domainData && domainData.DOMAIN_TASKS && domainData.DOMAIN_TASKS[trackSlug]) {
+                tasks = JSON.parse(JSON.stringify(domainData.DOMAIN_TASKS[trackSlug]));
+              }
+              var task = tasks.find(function(t) { return t.id === taskId; });
+              if (task) {
+                task.status = "in-progress";
+                task.proofUrl = prUrl;
+                task.submittedDate = "Just now";
+                task.feedback = "Project deliverable received! Mentor review assigned.";
+              }
+              localStorage.setItem("abss_tasks_" + trackSlug, JSON.stringify(tasks));
+
+              var subs = [];
+              var savedSubs = localStorage.getItem("abss_subs_" + trackSlug);
+              if (savedSubs) subs = JSON.parse(savedSubs);
+              subs.unshift({
+                task: task ? task.name : taskId,
+                status: "Under Review",
+                feedback: "Deliverable submitted. Evaluation will be finalized shortly.",
+                date: "Just now",
+                url: prUrl
+              });
+              localStorage.setItem("abss_subs_" + trackSlug, JSON.stringify(subs));
+            } catch(e) {
+              console.error(e);
+            }
+
             alert("Work deliverable for " + taskId + " submitted successfully! Your mentor will review within 24-48 hours.");
             window.location.href = "/student/tasks";
           });

@@ -94,34 +94,33 @@
   
 
       
+    <!-- Active Track Selector Strip -->
+    <div style="background: #ffffff; border: 1px solid #d2d2d7; border-radius: 14px; padding: 16px 20px; margin-bottom: 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px; box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
+      <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+        <label for="trackSelector" style="font-size: 0.82rem; font-weight: 700; color: #0066cc; text-transform: uppercase;">Active Internship Track:</label>
+        <select id="trackSelector" style="padding: 8px 14px; border: 1px solid #d2d2d7; border-radius: 8px; font-weight: 600; font-size: 0.92rem; background: #f5f5f7; cursor: pointer; color: #1d1d1f; outline: none;">
+        </select>
+      </div>
+      <div>
+        <a href="/student/submit-work" class="btn btn-primary" style="padding: 8px 16px; font-size: 0.85rem;">+ Submit Work Deliverable</a>
+      </div>
+    </div>
+
     <div class="card" style="padding: 32px; border-radius: 18px;">
-      <h2 style="font-size: 1.25rem; margin: 0 0 20px;">Review Evaluation History</h2>
+      <h2 style="font-size: 1.25rem; margin: 0 0 20px;" id="submissionsCardTitle">Review Evaluation History</h2>
       <div style="overflow-x: auto;">
         <table style="width: 100%; border-collapse: collapse; font-size: 0.9rem;">
           <thead>
             <tr style="background: #f5f5f7; border-bottom: 2px solid #d2d2d7; text-align: left;">
               <th style="padding: 12px 14px;">Submission</th>
               <th style="padding: 12px 14px;">Deliverable Link</th>
-              <th style="padding: 12px 14px;">Score</th>
+              <th style="padding: 12px 14px;">Status / Score</th>
               <th style="padding: 12px 14px;">Reviewer Notes</th>
               <th style="padding: 12px 14px;">Date</th>
             </tr>
           </thead>
-          <tbody>
-            <tr style="border-bottom: 1px solid #e5e5ea;">
-              <td style="padding: 14px;"><strong>TASK-09: D1 Database Migrations</strong></td>
-              <td style="padding: 14px;"><a href="https://github.com" target="_blank" rel="noopener noreferrer" style="color: #0066cc;">PR #42 (github.com)</a></td>
-              <td style="padding: 14px;"><span class="badge" style="background: rgba(16, 185, 129, 0.15); color: #10b981;">98 / 100</span></td>
-              <td style="padding: 14px; font-size: 0.85rem; color: #6e6e73;">"Excellent foreign key constraints and clean schema indexes. Production grade."</td>
-              <td style="padding: 14px; color: #6e6e73;">Oct 18, 2026</td>
-            </tr>
-            <tr style="border-bottom: 1px solid #e5e5ea;">
-              <td style="padding: 14px;"><strong>TASK-08: REST API Architecture</strong></td>
-              <td style="padding: 14px;"><a href="https://github.com" target="_blank" rel="noopener noreferrer" style="color: #0066cc;">PR #38 (github.com)</a></td>
-              <td style="padding: 14px;"><span class="badge" style="background: rgba(16, 185, 129, 0.15); color: #10b981;">95 / 100</span></td>
-              <td style="padding: 14px; font-size: 0.85rem; color: #6e6e73;">"Clean error handling. Minor optimization suggested on query pagination."</td>
-              <td style="padding: 14px; color: #6e6e73;">Oct 12, 2026</td>
-            </tr>
+          <tbody id="submissionsTableBody">
+            <!-- Dynamic submissions rendered via JS -->
           </tbody>
         </table>
       </div>
@@ -140,6 +139,8 @@
     <script src="/src/scripts/script.js" defer></script>
     <script>
       (function() {
+        var domainData = null;
+
         fetch("/api/internships/auth/me")
           .then(function(r) { return r.ok ? r.json() : null; })
           .then(function(data) {
@@ -151,19 +152,69 @@
               var avatarEl = document.getElementById("studentAvatarInitials");
               if (nameEl) nameEl.textContent = name;
               if (avatarEl) avatarEl.textContent = initials;
-              var profName = document.getElementById("profileNameBig");
-              var profAvatar = document.getElementById("profileAvatarBig");
-              var profEmail = document.getElementById("profileEmailSubtitle");
-              if (profName) profName.textContent = name;
-              if (profAvatar) profAvatar.textContent = initials;
-              if (profEmail && s.email) profEmail.innerHTML = s.email + " &bull; Active Enrolled Intern &bull; Batch of 2026";
-              var certRecipient = document.getElementById("certStudentRecipient");
-              if (certRecipient) certRecipient.textContent = name;
-              var welcomeEl = document.getElementById("studentWelcomeGreeting");
-              if (welcomeEl && welcomeEl.textContent.includes("STUDENT")) welcomeEl.textContent = "Welcome Back, " + name.split(" ")[0];
             }
           })
           .catch(function() {});
+
+        // Fetch domain data
+        fetch("/src/scripts/domain-tasks-data.json")
+          .then(function(res) { return res.json(); })
+          .then(function(data) {
+            domainData = data;
+            var selector = document.getElementById("trackSelector");
+            if (!selector) return;
+
+            var savedTrack = localStorage.getItem("abss_active_domain") || "web-development";
+
+            selector.innerHTML = data.AVAILABLE_DOMAINS.map(function(d) {
+              return '<option value="' + d.slug + '" ' + (d.slug === savedTrack ? 'selected' : '') + '>' + d.name + ' (' + d.category + ')</option>';
+            }).join('');
+
+            selector.addEventListener("change", function(e) {
+              var slug = e.target.value;
+              localStorage.setItem("abss_active_domain", slug);
+              renderSubmissions(slug);
+            });
+
+            renderSubmissions(savedTrack);
+          })
+          .catch(function(err) {
+            console.error("Error loading domain data", err);
+          });
+
+        function renderSubmissions(trackSlug) {
+          var tbody = document.getElementById("submissionsTableBody");
+          if (!tbody) return;
+
+          var subs = [];
+          try {
+            var saved = localStorage.getItem("abss_subs_" + trackSlug);
+            if (saved) subs = JSON.parse(saved);
+          } catch(e) {}
+
+          if (!subs || subs.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="5" style="padding: 32px; text-align: center; color: #6e6e73;">No deliverables submitted yet for this track. Use <a href="/student/submit-work" style="color: #0066cc; font-weight: 600;">Submit Work</a> to turn in your first milestone.</td></tr>';
+            return;
+          }
+
+          tbody.innerHTML = subs.map(function(item) {
+            var statusBadge = item.status === 'Approved'
+              ? '<span class="badge" style="background: rgba(16, 185, 129, 0.15); color: #10b981;">Approved ✓</span>'
+              : '<span class="badge" style="background: rgba(0, 102, 204, 0.12); color: #0066cc;">' + (item.status || 'Under Review') + '</span>';
+
+            var linkHtml = item.url
+              ? '<a href="' + item.url + '" target="_blank" rel="noopener noreferrer" style="color: #0066cc; font-weight: 600;">View Deliverable &rarr;</a>'
+              : '--';
+
+            return '<tr style="border-bottom: 1px solid #e5e5ea;">' +
+              '<td style="padding: 14px;"><strong>' + item.task + '</strong></td>' +
+              '<td style="padding: 14px;">' + linkHtml + '</td>' +
+              '<td style="padding: 14px;">' + statusBadge + '</td>' +
+              '<td style="padding: 14px; font-size: 0.85rem; color: #6e6e73;">' + (item.feedback || 'Under mentor evaluation') + '</td>' +
+              '<td style="padding: 14px; color: #6e6e73;">' + (item.date || 'Recently') + '</td>' +
+            '</tr>';
+          }).join('');
+        }
       })();
     </script>
   </body>
