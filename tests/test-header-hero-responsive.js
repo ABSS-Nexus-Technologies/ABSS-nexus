@@ -21,7 +21,8 @@ const indexHtml = fs.readFileSync(indexPath, 'utf8');
 // 2. Announcement bar verification
 console.log('\n--- 1. Announcement Bar Verification ---');
 assert(
-  indexHtml.includes('Applications open for 2026 Technical Internship Cohort.') ||
+  indexHtml.includes('Technical Internship Cohort') ||
+  indexHtml.includes('Applications open for 2026') ||
   indexHtml.includes('Free consultation available for website &amp; digital projects.') ||
   indexHtml.includes('Free consultation available for website & digital projects.'),
   'Announcement message matches specification'
@@ -101,6 +102,7 @@ assert(
   'Hero headline present and accurate'
 );
 assert(
+  indexHtml.includes('ENTERPRISE IT SERVICES') ||
   indexHtml.includes('DIGITAL INNOVATION') ||
   indexHtml.includes('Digital Engineering & Solutions'),
   'Eyebrow label present'

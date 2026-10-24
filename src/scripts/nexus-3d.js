@@ -1,5 +1,5 @@
 /**
- * ABS Nexus - Luxury 3D WebGL Engine & 3D Interactive Card Dynamics
+ * ABSS Nexus Technologies - Luxury 3D WebGL Engine & 3D Interactive Card Dynamics
  * Features:
  * - Real-time Three.js 3D Champagne Gold Polyhedron & Gyroscopic Nexus Core
  * - Dynamic 3D Particle Constellation with Depth Physics
