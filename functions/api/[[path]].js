@@ -2337,6 +2337,107 @@ export async function onRequest(context) {
       return respond(201, { ok: true, task: newTask });
     }
 
+    if (request.method === "POST" && (pathname === "/api/internships/submissions" || pathname === "/api/student/submissions")) {
+      let body;
+      try {
+        body = await request.json();
+      } catch {
+        return respond(400, { error: "Invalid JSON payload" });
+      }
+      if (!body.prUrl || !body.taskId) {
+        return respond(400, { error: "Deliverable PR URL and Task ID are required." });
+      }
+      const state = env.ABSS_ADMIN ? await readState(env) : defaultState;
+      if (!state.internshipSubmissions) state.internshipSubmissions = [];
+      const newSub = {
+        id: `SUB-${(body.trackSlug || "GEN").toUpperCase().slice(0, 4)}-${Date.now().toString(36).toUpperCase()}`,
+        studentName: body.studentName || "Intern Learner",
+        studentEmail: body.studentEmail || "student@abss.io",
+        trackSlug: body.trackSlug || "web-development",
+        trackName: body.trackName || "Web Development",
+        taskId: body.taskId,
+        taskName: body.taskName || body.taskId,
+        prUrl: body.prUrl,
+        demoUrl: body.demoUrl || "",
+        notes: body.notes || "",
+        submittedAt: new Date().toISOString(),
+        status: "pending",
+        score: null,
+        grade: null,
+        mentorFeedback: null,
+        reviewedAt: null,
+        reviewerName: null,
+      };
+      state.internshipSubmissions.unshift(newSub);
+      if (env.ABSS_ADMIN) await writeState(env, state);
+      return respond(201, { ok: true, submission: newSub });
+    }
+
+    if (request.method === "GET" && pathname === "/api/admin/internships/submissions") {
+      if (!(await verifyToken(request, env))) return respond(401, { error: "Unauthorized" });
+      const state = env.ABSS_ADMIN ? await readState(env) : defaultState;
+      return respond(200, { ok: true, submissions: state.internshipSubmissions || [] });
+    }
+
+    if ((request.method === "POST" || request.method === "PUT") && (pathname === "/api/admin/internships/submissions/review" || pathname.startsWith("/api/admin/internships/submissions/review"))) {
+      if (!(await verifyToken(request, env))) return respond(401, { error: "Unauthorized" });
+      let body;
+      try {
+        body = await request.json();
+      } catch {
+        return respond(400, { error: "Invalid JSON payload" });
+      }
+      const { submissionId, status, score, grade, mentorFeedback, reviewerName } = body;
+      if (!submissionId) {
+        return respond(400, { error: "submissionId is required." });
+      }
+      const state = env.ABSS_ADMIN ? await readState(env) : defaultState;
+      if (!state.internshipSubmissions) state.internshipSubmissions = [];
+      if (!state.internshipReviews) state.internshipReviews = [];
+
+      const subIndex = state.internshipSubmissions.findIndex((s) => s.id === submissionId);
+      if (subIndex === -1) {
+        return respond(404, { error: "Submission not found." });
+      }
+
+      const updatedStatus = (status || "approved").toLowerCase();
+      const numScore = Number(score || (updatedStatus === "approved" ? 95 : 68));
+      const calcGrade = grade || (numScore >= 90 ? "Grade A+ (Distinction)" : numScore >= 80 ? "Grade A (Excellent)" : numScore >= 70 ? "Grade B (Good)" : "Needs Revision");
+
+      state.internshipSubmissions[subIndex].status = updatedStatus;
+      state.internshipSubmissions[subIndex].score = numScore;
+      state.internshipSubmissions[subIndex].grade = calcGrade;
+      state.internshipSubmissions[subIndex].mentorFeedback = mentorFeedback || (updatedStatus === "approved" ? "Deliverable approved! High standard of implementation." : "Changes requested. Please address mentor notes and resubmit.");
+      state.internshipSubmissions[subIndex].reviewedAt = new Date().toISOString();
+      state.internshipSubmissions[subIndex].reviewerName = reviewerName || "Senior Technical Mentor";
+
+      const newReview = {
+        id: `REV-${Date.now().toString(36).toUpperCase()}`,
+        submissionId: submissionId,
+        studentName: state.internshipSubmissions[subIndex].studentName,
+        studentEmail: state.internshipSubmissions[subIndex].studentEmail,
+        trackSlug: state.internshipSubmissions[subIndex].trackSlug,
+        taskId: state.internshipSubmissions[subIndex].taskId,
+        taskName: state.internshipSubmissions[subIndex].taskName,
+        score: numScore,
+        grade: calcGrade,
+        status: updatedStatus,
+        mentorFeedback: state.internshipSubmissions[subIndex].mentorFeedback,
+        reviewerName: state.internshipSubmissions[subIndex].reviewerName,
+        reviewedAt: state.internshipSubmissions[subIndex].reviewedAt,
+      };
+
+      state.internshipReviews.unshift(newReview);
+      if (env.ABSS_ADMIN) await writeState(env, state);
+      return respond(200, { ok: true, submission: state.internshipSubmissions[subIndex], review: newReview });
+    }
+
+    if (request.method === "GET" && pathname === "/api/admin/internships/reviews") {
+      if (!(await verifyToken(request, env))) return respond(401, { error: "Unauthorized" });
+      const state = env.ABSS_ADMIN ? await readState(env) : defaultState;
+      return respond(200, { ok: true, reviews: state.internshipReviews || [] });
+    }
+
     if (request.method === "GET" && pathname === "/api/admin/internships/overview") {
       if (!(await verifyToken(request, env))) return respond(401, { error: "Unauthorized" });
       if (hasD1(env)) {

@@ -1292,6 +1292,91 @@ const server = http.createServer(async (request, response) => {
       return;
     }
 
+    if (request.method === "POST" && (pathname === "/api/internships/submissions" || pathname === "/api/student/submissions")) {
+      const body = await readBody(request);
+      if (!body.prUrl || !body.taskId) {
+        send(response, 400, { error: "Deliverable PR URL and Task ID are required." });
+        return;
+      }
+      const db = readDb();
+      if (!db.internshipSubmissions) db.internshipSubmissions = [];
+      const newSub = {
+        id: `SUB-${(body.trackSlug || "GEN").toUpperCase().slice(0, 4)}-${Date.now().toString(36).toUpperCase()}`,
+        studentName: body.studentName || "Intern Learner",
+        studentEmail: body.studentEmail || "student@abss.io",
+        trackSlug: body.trackSlug || "web-development",
+        trackName: body.trackName || "Web Development",
+        taskId: body.taskId,
+        taskName: body.taskName || body.taskId,
+        prUrl: body.prUrl,
+        demoUrl: body.demoUrl || "",
+        notes: body.notes || "",
+        submittedAt: new Date().toISOString(),
+        status: "pending",
+        score: null,
+        grade: null,
+        mentorFeedback: null,
+        reviewedAt: null,
+        reviewerName: null
+      };
+      db.internshipSubmissions.unshift(newSub);
+      writeDb(db);
+      send(response, 201, { ok: true, submission: newSub });
+      return;
+    }
+
+    if ((request.method === "POST" || request.method === "PUT") && (pathname === "/api/admin/internships/submissions/review" || pathname.startsWith("/api/admin/internships/submissions/review"))) {
+      const admin = requireRole(request, response, ["super_admin", "internship_admin", "internship_reviewer"]);
+      if (!admin) return;
+      const body = await readBody(request);
+      const { submissionId, status, score, grade, mentorFeedback, reviewerName } = body;
+      if (!submissionId) {
+        send(response, 400, { error: "submissionId is required." });
+        return;
+      }
+      const db = readDb();
+      if (!db.internshipSubmissions) db.internshipSubmissions = [];
+      if (!db.internshipReviews) db.internshipReviews = [];
+
+      const subIndex = db.internshipSubmissions.findIndex((s) => s.id === submissionId);
+      if (subIndex === -1) {
+        send(response, 404, { error: "Submission not found." });
+        return;
+      }
+
+      const updatedStatus = (status || "approved").toLowerCase();
+      const numScore = Number(score || (updatedStatus === "approved" ? 95 : 68));
+      const calcGrade = grade || (numScore >= 90 ? "Grade A+ (Distinction)" : numScore >= 80 ? "Grade A (Excellent)" : numScore >= 70 ? "Grade B (Good)" : "Needs Revision");
+
+      db.internshipSubmissions[subIndex].status = updatedStatus;
+      db.internshipSubmissions[subIndex].score = numScore;
+      db.internshipSubmissions[subIndex].grade = calcGrade;
+      db.internshipSubmissions[subIndex].mentorFeedback = mentorFeedback || (updatedStatus === "approved" ? "Deliverable approved! High standard of implementation." : "Changes requested. Please address mentor notes and resubmit.");
+      db.internshipSubmissions[subIndex].reviewedAt = new Date().toISOString();
+      db.internshipSubmissions[subIndex].reviewerName = reviewerName || admin.email || "Senior Technical Mentor";
+
+      const newReview = {
+        id: `REV-${Date.now().toString(36).toUpperCase()}`,
+        submissionId: submissionId,
+        studentName: db.internshipSubmissions[subIndex].studentName,
+        studentEmail: db.internshipSubmissions[subIndex].studentEmail,
+        trackSlug: db.internshipSubmissions[subIndex].trackSlug,
+        taskId: db.internshipSubmissions[subIndex].taskId,
+        taskName: db.internshipSubmissions[subIndex].taskName,
+        score: numScore,
+        grade: calcGrade,
+        status: updatedStatus,
+        mentorFeedback: db.internshipSubmissions[subIndex].mentorFeedback,
+        reviewerName: db.internshipSubmissions[subIndex].reviewerName,
+        reviewedAt: db.internshipSubmissions[subIndex].reviewedAt
+      };
+
+      db.internshipReviews.unshift(newReview);
+      writeDb(db);
+      send(response, 200, { ok: true, submission: db.internshipSubmissions[subIndex], review: newReview });
+      return;
+    }
+
     if (request.method === "GET" && pathname === "/api/admin/internships/reviews") {
       const admin = requireRole(request, response, ["super_admin", "internship_admin", "internship_reviewer"]);
       if (!admin) return;

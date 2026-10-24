@@ -273,6 +273,28 @@
                 url: prUrl
               });
               localStorage.setItem("abss_subs_" + trackSlug, JSON.stringify(subs));
+
+              // Sync to backend real-time endpoint for Mentor Admin queue
+              var demoUrl = document.getElementById("demo-url") ? document.getElementById("demo-url").value : "";
+              var notes = document.getElementById("notes") ? document.getElementById("notes").value : "";
+              var studentName = document.getElementById("studentDisplayName") ? document.getElementById("studentDisplayName").textContent : "Intern Student";
+
+              fetch("/api/internships/submissions", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                  studentName: studentName,
+                  studentEmail: localStorage.getItem("abss_user_email") || "student@abss.io",
+                  trackSlug: trackSlug,
+                  taskId: taskId,
+                  taskName: task ? task.name : taskId,
+                  prUrl: prUrl,
+                  demoUrl: demoUrl,
+                  notes: notes
+                })
+              }).catch(function(err) {
+                console.warn("Background submission API sync fallback:", err);
+              });
             } catch(e) {
               console.error(e);
             }

@@ -59,6 +59,8 @@
     tickets: [],
     pricing: [],
     activity: [],
+    internshipSubmissions: [],
+    internshipReviews: [],
     metrics: {}
   };
 
@@ -95,15 +97,22 @@
     const certificates = (liveState.certificates || []).filter((c) => !isTestCert(c));
     const projects = liveState.projects || [];
     const clients = liveState.clients || [];
+    const submissions = liveState.internshipSubmissions || [];
+    const reviews = liveState.internshipReviews || [];
 
     // Derive accurate real-world counts
     const leadsCount = leads.length;
     const studentsCount = students.length;
     const appsCount = applications.length;
     const certsCount = certificates.length;
-    const tracksCount = 5;
+    const tracksCount = 16;
     const projectsCount = projects.length;
     const clientsCount = clients.length;
+    const pendingSubmissionsCount = submissions.filter((s) => (s.status || "").toLowerCase() === "pending").length;
+    const reviewsCount = reviews.length;
+    const avgGrade = reviews.length > 0
+      ? `${Math.round(reviews.reduce((acc, r) => acc + (Number(r.score) || 90), 0) / reviews.length)}%`
+      : "92.0%";
 
     // 3. Update KPI Metric Cards Across Pages
     updateMetricCards({
@@ -113,7 +122,10 @@
       certsCount,
       tracksCount,
       projectsCount,
-      clientsCount
+      clientsCount,
+      pendingSubmissionsCount,
+      reviewsCount,
+      avgGrade
     });
 
     // 4. Update Sidebar Badges
@@ -123,7 +135,9 @@
       appsCount,
       certsCount,
       tracksCount,
-      projectsCount
+      projectsCount,
+      pendingSubmissionsCount,
+      reviewsCount
     });
 
     // 5. Update Hub Page Features (if on /admin/ or /admin/index.html)
@@ -143,6 +157,8 @@
     renderCertificatesTable(certificates);
     renderClientsTable(clients);
     renderProjectsTable(projects);
+    renderSubmissionsTable(submissions);
+    renderReviewsTable(reviews);
 
     // 7. Bind Live Search Inputs
     bindSearchFilters();
@@ -166,6 +182,16 @@
     document.querySelectorAll("[data-metric='tracks']").forEach((el) => { el.textContent = `${counts.tracksCount} Tracks`; });
     document.querySelectorAll("[data-metric='projects']").forEach((el) => { el.textContent = counts.projectsCount; });
     document.querySelectorAll("[data-metric='clients']").forEach((el) => { el.textContent = counts.clientsCount; });
+    document.querySelectorAll("[data-metric='submissions']").forEach((el) => { el.textContent = counts.pendingSubmissionsCount; });
+    document.querySelectorAll("[data-metric='reviews']").forEach((el) => { el.textContent = counts.reviewsCount; });
+
+    // Reviews Specific KPI Elements
+    const avgEl = document.getElementById("kpiAvgGrade");
+    if (avgEl) avgEl.textContent = counts.avgGrade || "92.0%";
+    const revEl = document.getElementById("kpiReviewsCompleted");
+    if (revEl) revEl.textContent = counts.reviewsCount || 0;
+    const pendEl = document.getElementById("kpiPendingReviews");
+    if (pendEl) pendEl.textContent = counts.pendingSubmissionsCount || 0;
 
     // B. Legacy Overview cards by label
     document.querySelectorAll(".card").forEach((card) => {
@@ -174,7 +200,8 @@
       if (!valEl) return;
       if (label.includes("ENROLLED STUDENTS")) valEl.textContent = counts.studentsCount;
       if (label.includes("ACTIVE TRACKS")) valEl.textContent = `${counts.tracksCount} Tracks`;
-      if (label.includes("PENDING SUBMISSIONS") || label.includes("PENDING INQUIRIES")) valEl.textContent = `${counts.appsCount} Active`;
+      if (label.includes("PENDING SUBMISSIONS")) valEl.textContent = `${counts.pendingSubmissionsCount} Pending`;
+      if (label.includes("PENDING INQUIRIES")) valEl.textContent = `${counts.appsCount} Active`;
       if (label.includes("CERTIFICATES ISSUED")) valEl.textContent = `${counts.certsCount} Certified`;
     });
 
@@ -189,6 +216,9 @@
       if (label.includes("ISSUED CERTIFICATES")) valEl.textContent = counts.certsCount;
       if (label.includes("TOTAL LEADS") || label.includes("WEBSITE INQUIRIES")) valEl.textContent = counts.leadsCount;
       if (label.includes("ACTIVE CLIENT PROJECTS")) valEl.textContent = counts.projectsCount;
+      if (label.includes("AVERAGE GRADE")) valEl.textContent = counts.avgGrade || "92.0%";
+      if (label.includes("REVIEWS COMPLETED")) valEl.textContent = counts.reviewsCount || 0;
+      if (label.includes("PENDING REVIEWS")) valEl.textContent = counts.pendingSubmissionsCount || 0;
     });
   }
 
@@ -204,6 +234,8 @@
       if (href.includes("/leads")) badge.textContent = counts.leadsCount;
       if (href.includes("/projects")) badge.textContent = counts.projectsCount;
       if (href.includes("/programs")) badge.textContent = counts.tracksCount;
+      if (href.includes("/submissions")) badge.textContent = counts.pendingSubmissionsCount;
+      if (href.includes("/reviews")) badge.textContent = counts.reviewsCount;
     });
   }
 
@@ -619,6 +651,319 @@
         }
       });
     });
+  }
+
+  // =========================================================================
+  // SUBMISSIONS TABLE & MENTOR EVALUATION
+  // =========================================================================
+  function renderSubmissionsTable(submissions) {
+    const tableEl = document.querySelector("[data-submissions-table]");
+    const tbody = tableEl ? tableEl.querySelector("tbody") || tableEl : (window.location.pathname.includes("submissions") ? document.querySelector("table tbody") : null);
+    if (!tbody) return;
+
+    if (!submissions || submissions.length === 0) {
+      tbody.innerHTML = emptyStateHtml("📥", "No Pending Submissions", "Student project deliverables and pull requests will appear here for mentor grading.", 6);
+      return;
+    }
+
+    tbody.innerHTML = submissions.map((sub) => {
+      const isApproved = (sub.status || "").toLowerCase() === "approved";
+      const isChangesReq = (sub.status || "").toLowerCase().includes("change") || (sub.status || "").toLowerCase().includes("reject");
+      const statusPill = isApproved
+        ? `<span class="status-pill status-success" style="padding: 4px 10px; border-radius: 999px; font-size: 0.74rem; font-weight: 700; background: #dcfce7; color: #15803d;">Approved (${sub.score ? sub.score + '/100' : 'Pass'})</span>`
+        : isChangesReq
+        ? `<span class="status-pill status-danger" style="padding: 4px 10px; border-radius: 999px; font-size: 0.74rem; font-weight: 700; background: #fee2e2; color: #b91c1c;">Changes Requested</span>`
+        : `<span class="status-pill status-warning" style="padding: 4px 10px; border-radius: 999px; font-size: 0.74rem; font-weight: 700; background: #fef3c7; color: #b45309;">Pending Review</span>`;
+
+      return `
+        <tr style="border-bottom: 1px solid #e5e5ea;">
+          <td style="padding: 14px;">
+            <strong style="color: #1d1d1f; font-size: 0.92rem;">${escapeHtml(sub.studentName || "Intern Learner")}</strong><br/>
+            <small style="color: #6e6e73;">${escapeHtml(sub.studentEmail || "student@abss.io")}</small>
+            ${sub.trackName || sub.trackSlug ? `<div style="margin-top: 4px;"><span style="font-size: 0.72rem; background: #e0f2fe; color: #0369a1; padding: 2px 8px; border-radius: 4px; font-weight: 700;">${escapeHtml(sub.trackName || sub.trackSlug)}</span></div>` : ""}
+          </td>
+          <td style="padding: 14px;">
+            <strong style="color: #0066cc;">${escapeHtml(sub.taskId || "TASK")}</strong>: ${escapeHtml(sub.taskName || "Deliverable")}<br/>
+            ${sub.notes ? `<small style="color: #4b5563; font-style: italic; display: block; margin-top: 4px; max-width: 340px;">"${escapeHtml(sub.notes)}"</small>` : ""}
+          </td>
+          <td style="padding: 14px;">
+            <div style="display: flex; flex-direction: column; gap: 6px;">
+              ${sub.prUrl ? `<a href="${escapeHtml(sub.prUrl)}" target="_blank" rel="noopener noreferrer" style="color: #0066cc; font-size: 0.82rem; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 4px;"><span>🔗 GitHub / Repo</span> <span style="font-size: 0.7rem;">↗</span></a>` : '<span style="color: #999;">--</span>'}
+              ${sub.demoUrl ? `<a href="${escapeHtml(sub.demoUrl)}" target="_blank" rel="noopener noreferrer" style="color: #10b981; font-size: 0.82rem; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 4px;"><span>🚀 Live Preview</span> <span style="font-size: 0.7rem;">↗</span></a>` : ''}
+            </div>
+          </td>
+          <td style="padding: 14px; color: #6e6e73; font-size: 0.84rem; white-space: nowrap;">${escapeHtml(formatDate(sub.submittedAt))}</td>
+          <td style="padding: 14px;">${statusPill}</td>
+          <td style="padding: 14px;">
+            <button type="button" class="btn-grade-submission" data-id="${escapeHtml(sub.id)}" style="padding: 6px 14px; background: #0066cc; color: #fff; border: none; border-radius: 8px; font-size: 0.82rem; font-weight: 600; cursor: pointer; white-space: nowrap;">
+              ${isApproved ? 'Edit Evaluation' : 'Grade & Review'}
+            </button>
+          </td>
+        </tr>
+      `;
+    }).join("");
+
+    tbody.querySelectorAll(".btn-grade-submission").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const id = btn.dataset.id;
+        const sub = submissions.find((s) => s.id === id);
+        if (sub) openMentorReviewModal(sub);
+      });
+    });
+  }
+
+  // =========================================================================
+  // REVIEWS TABLE
+  // =========================================================================
+  function renderReviewsTable(reviews) {
+    const tableEl = document.querySelector("[data-reviews-table]");
+    const tbody = tableEl ? tableEl.querySelector("tbody") || tableEl : (window.location.pathname.includes("reviews") ? document.querySelector("table tbody") : null);
+    if (!tbody) return;
+
+    if (!reviews || reviews.length === 0) {
+      tbody.innerHTML = emptyStateHtml("📝", "No Evaluated Submissions Yet", "Milestone submissions reviewed by mentors will appear here with assigned marks and guidance notes.", 5);
+      return;
+    }
+
+    tbody.innerHTML = reviews.map((r) => `
+      <tr style="border-bottom: 1px solid #e5e5ea;">
+        <td style="padding: 14px;">
+          <strong style="color: #1d1d1f; font-size: 0.92rem;">${escapeHtml(r.studentName)}</strong><br/>
+          <small style="color: #6e6e73;">${escapeHtml(r.studentEmail || "")}</small>
+        </td>
+        <td style="padding: 14px;">
+          <strong style="color: #0066cc;">${escapeHtml(r.taskId || "TASK")}</strong>: ${escapeHtml(r.taskName || "Milestone")}<br/>
+          <small style="color: #0369a1; font-weight: 700; background: #e0f2fe; padding: 2px 6px; border-radius: 4px; font-size: 0.72rem;">${escapeHtml(r.trackSlug || "Track")}</small>
+        </td>
+        <td style="padding: 14px;">
+          <div style="font-weight: 800; font-size: 1rem; color: ${r.status === 'changes_requested' ? '#dc2626' : '#15803d'};">
+            ${r.score ? r.score + '/100' : 'Pass'}
+          </div>
+          <span style="display: block; font-size: 0.76rem; color: #6e6e73; font-weight: 600;">${escapeHtml(r.grade || "Grade A")}</span>
+        </td>
+        <td style="padding: 14px; font-size: 0.85rem; max-width: 340px;">
+          <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 8px 12px; color: #334155; line-height: 1.4;">
+            "${escapeHtml(r.mentorFeedback || "Approved without comments.")}"
+          </div>
+        </td>
+        <td style="padding: 14px; font-size: 0.82rem; color: #6e6e73; white-space: nowrap;">
+          <strong style="color: #1d1d1f;">${escapeHtml(r.reviewerName || "Mentor Evaluator")}</strong><br/>
+          <span>${escapeHtml(formatDate(r.reviewedAt || r.createdAt))}</span>
+        </td>
+      </tr>
+    `).join("");
+  }
+
+  // =========================================================================
+  // MENTOR REVIEW EVALUATION MODAL
+  // =========================================================================
+  function openMentorReviewModal(sub) {
+    let modal = document.getElementById("adminMentorReviewModal");
+    if (!modal) {
+      modal = document.createElement("dialog");
+      modal.id = "adminMentorReviewModal";
+      modal.style.cssText = "border: none; border-radius: 16px; padding: 0; box-shadow: 0 24px 60px rgba(0,0,0,0.3); max-width: 650px; width: 92%; background: #ffffff; color: #1d1d1f; font-family: 'Inter', -apple-system, sans-serif;";
+      document.body.appendChild(modal);
+    }
+
+    const currentScore = sub.score !== null && sub.score !== undefined ? sub.score : 95;
+    const currentFeedback = sub.mentorFeedback || "";
+    const isApproved = sub.status === "approved";
+
+    modal.innerHTML = `
+      <div style="padding: 24px 28px; border-bottom: 1px solid #e5e5ea; display: flex; justify-content: space-between; align-items: center; background: #fafafa; border-radius: 16px 16px 0 0;">
+        <div>
+          <span style="font-size: 0.76rem; font-weight: 700; color: #0066cc; text-transform: uppercase; letter-spacing: 0.05em;">Mentor Evaluation Studio</span>
+          <h3 style="margin: 4px 0 0; font-size: 1.25rem; font-weight: 800; color: #1d1d1f;">Grade Student Deliverable</h3>
+        </div>
+        <button type="button" id="closeReviewModalBtn" style="background: none; border: none; font-size: 1.6rem; cursor: pointer; color: #86868b; line-height: 1;">&times;</button>
+      </div>
+
+      <div style="padding: 24px 28px; max-height: 75vh; overflow-y: auto;">
+        <!-- Student & Task Overview -->
+        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 16px; margin-bottom: 20px;">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; font-size: 0.88rem; margin-bottom: 12px;">
+            <div>
+              <strong style="color: #64748b; font-size: 0.75rem; text-transform: uppercase; display: block;">Student</strong>
+              <span style="font-weight: 700; color: #0f172a;">${escapeHtml(sub.studentName)}</span>
+              <span style="display: block; font-size: 0.78rem; color: #64748b;">${escapeHtml(sub.studentEmail)}</span>
+            </div>
+            <div>
+              <strong style="color: #64748b; font-size: 0.75rem; text-transform: uppercase; display: block;">Track Domain</strong>
+              <span style="display: inline-block; padding: 2px 8px; border-radius: 4px; background: #e0f2fe; color: #0369a1; font-weight: 700; font-size: 0.8rem; margin-top: 2px;">
+                ${escapeHtml(sub.trackName || sub.trackSlug || "Track")}
+              </span>
+            </div>
+          </div>
+          <div>
+            <strong style="color: #64748b; font-size: 0.75rem; text-transform: uppercase; display: block;">Milestone Deliverable</strong>
+            <span style="font-weight: 700; color: #0f172a;">${escapeHtml(sub.taskId)}: ${escapeHtml(sub.taskName)}</span>
+          </div>
+        </div>
+
+        <!-- Submitted Deliverable Proof Links -->
+        <div style="margin-bottom: 20px;">
+          <label style="display: block; font-weight: 700; font-size: 0.84rem; color: #1d1d1f; margin-bottom: 8px;">Submitted Proof &amp; Artifacts</label>
+          <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            ${sub.prUrl ? `
+              <a href="${escapeHtml(sub.prUrl)}" target="_blank" rel="noopener noreferrer" style="flex: 1; min-width: 200px; display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; background: #ffffff; border: 1px solid #d2d2d7; border-radius: 8px; text-decoration: none; color: #0066cc; font-size: 0.85rem; font-weight: 600;">
+                <span>🔗 Inspect Code / PR</span>
+                <span style="font-size: 0.78rem;">Open ↗</span>
+              </a>
+            ` : ''}
+            ${sub.demoUrl ? `
+              <a href="${escapeHtml(sub.demoUrl)}" target="_blank" rel="noopener noreferrer" style="flex: 1; min-width: 200px; display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; background: #ffffff; border: 1px solid #d2d2d7; border-radius: 8px; text-decoration: none; color: #10b981; font-size: 0.85rem; font-weight: 600;">
+                <span>🚀 Inspect Live Preview Demo</span>
+                <span style="font-size: 0.78rem;">Open ↗</span>
+              </a>
+            ` : ''}
+          </div>
+          ${sub.notes ? `
+            <div style="margin-top: 10px; padding: 10px 14px; background: #f5f5f7; border-radius: 8px; font-size: 0.84rem; color: #4b5563;">
+              <strong style="color: #1f2937;">Student Implementation Summary:</strong><br/>
+              "${escapeHtml(sub.notes)}"
+            </div>
+          ` : ''}
+        </div>
+
+        <!-- Evaluation Form -->
+        <form id="mentorReviewForm">
+          <div style="margin-bottom: 18px;">
+            <label style="display: block; font-weight: 700; font-size: 0.84rem; color: #1d1d1f; margin-bottom: 8px;">Evaluation Outcome *</label>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+              <label style="display: flex; align-items: center; gap: 8px; padding: 12px; border: 2px solid ${!isApproved && sub.status === 'changes_requested' ? '#d2d2d7' : '#10b981'}; border-radius: 10px; cursor: pointer; background: #f0fdf4;">
+                <input type="radio" name="reviewDecision" value="approved" ${isApproved || sub.status !== 'changes_requested' ? 'checked' : ''} />
+                <div>
+                  <strong style="display: block; font-size: 0.88rem; color: #15803d;">Approve &amp; Pass Milestone</strong>
+                  <span style="font-size: 0.75rem; color: #166534;">Awards milestone completion</span>
+                </div>
+              </label>
+              <label style="display: flex; align-items: center; gap: 8px; padding: 12px; border: 2px solid ${sub.status === 'changes_requested' ? '#dc2626' : '#d2d2d7'}; border-radius: 10px; cursor: pointer; background: #fef2f2;">
+                <input type="radio" name="reviewDecision" value="changes_requested" ${sub.status === 'changes_requested' ? 'checked' : ''} />
+                <div>
+                  <strong style="display: block; font-size: 0.88rem; color: #dc2626;">Request Revisions</strong>
+                  <span style="font-size: 0.75rem; color: #991b1b;">Student must revise and resubmit</span>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 18px;">
+            <div>
+              <label for="reviewScoreInput" style="display: block; font-weight: 700; font-size: 0.84rem; color: #1d1d1f; margin-bottom: 6px;">Score (0–100) *</label>
+              <input type="number" id="reviewScoreInput" min="0" max="100" value="${escapeHtml(currentScore)}" required style="width: 100%; padding: 10px 12px; border: 1px solid #d2d2d7; border-radius: 8px; font-size: 0.95rem; font-weight: 700;" />
+            </div>
+            <div>
+              <label for="reviewGradeInput" style="display: block; font-weight: 700; font-size: 0.84rem; color: #1d1d1f; margin-bottom: 6px;">Grade Tier *</label>
+              <select id="reviewGradeInput" style="width: 100%; padding: 10px 12px; border: 1px solid #d2d2d7; border-radius: 8px; font-size: 0.9rem;">
+                <option value="Grade A+ (Distinction)" ${sub.grade?.includes('A+') ? 'selected' : ''}>Grade A+ (Distinction - 90–100)</option>
+                <option value="Grade A (Excellent)" ${sub.grade?.includes('Grade A ') ? 'selected' : ''}>Grade A (Excellent - 80–89)</option>
+                <option value="Grade B (Good)" ${sub.grade?.includes('Grade B') ? 'selected' : ''}>Grade B (Good - 70–79)</option>
+                <option value="Needs Revision" ${sub.grade?.includes('Revision') ? 'selected' : ''}>Needs Revision (&lt; 70)</option>
+              </select>
+            </div>
+          </div>
+
+          <div style="margin-bottom: 20px;">
+            <label for="reviewFeedbackInput" style="display: block; font-weight: 700; font-size: 0.84rem; color: #1d1d1f; margin-bottom: 6px;">Mentor Technical Feedback &amp; Remarks *</label>
+            <textarea id="reviewFeedbackInput" rows="4" required placeholder="Write constructive review feedback on code quality, responsiveness, architectural patterns, and testing..." style="width: 100%; padding: 12px; border: 1px solid #d2d2d7; border-radius: 8px; font-size: 0.88rem; font-family: inherit;">${escapeHtml(currentFeedback || 'Excellent deliverable! The solution fulfills the milestone requirements with clean code and solid responsive architecture.')}</textarea>
+          </div>
+
+          <div style="display: flex; justify-content: flex-end; gap: 10px; border-top: 1px solid #e5e5ea; padding-top: 18px;">
+            <button type="button" id="cancelReviewBtn" style="padding: 10px 18px; background: #ffffff; border: 1px solid #d2d2d7; border-radius: 8px; font-size: 0.85rem; font-weight: 600; cursor: pointer;">Cancel</button>
+            <button type="submit" id="submitReviewBtn" style="padding: 10px 22px; background: #0066cc; color: #ffffff; border: none; border-radius: 8px; font-size: 0.85rem; font-weight: 700; cursor: pointer;">Save Evaluation &amp; Notify Student &rarr;</button>
+          </div>
+        </form>
+      </div>
+    `;
+
+    document.getElementById("closeReviewModalBtn")?.addEventListener("click", () => modal.close());
+    document.getElementById("cancelReviewBtn")?.addEventListener("click", () => modal.close());
+
+    const reviewForm = document.getElementById("mentorReviewForm");
+    reviewForm?.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const decision = reviewForm.querySelector('input[name="reviewDecision"]:checked')?.value || "approved";
+      const score = Number(document.getElementById("reviewScoreInput")?.value || 95);
+      const grade = document.getElementById("reviewGradeInput")?.value || "Grade A+ (Distinction)";
+      const feedback = document.getElementById("reviewFeedbackInput")?.value.trim() || "";
+
+      const payload = {
+        submissionId: sub.id,
+        status: decision,
+        score: score,
+        grade: grade,
+        mentorFeedback: feedback,
+        reviewerName: "Senior Mentor Evaluator"
+      };
+
+      try {
+        await fetch("/api/admin/internships/submissions/review", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${sessionStorage.getItem("abss-admin-token") || ""}`
+          },
+          body: JSON.stringify(payload)
+        });
+
+        // Update local in-memory state
+        sub.status = decision;
+        sub.score = score;
+        sub.grade = grade;
+        sub.mentorFeedback = feedback;
+        sub.reviewedAt = new Date().toISOString();
+        sub.reviewerName = "Senior Mentor Evaluator";
+
+        // Add to liveState.internshipReviews
+        if (!liveState.internshipReviews) liveState.internshipReviews = [];
+        const existingRevIdx = liveState.internshipReviews.findIndex((r) => r.submissionId === sub.id);
+        const revObj = {
+          id: `REV-${Date.now().toString(36).toUpperCase()}`,
+          submissionId: sub.id,
+          studentName: sub.studentName,
+          studentEmail: sub.studentEmail,
+          trackSlug: sub.trackSlug,
+          taskId: sub.taskId,
+          taskName: sub.taskName,
+          score: score,
+          grade: grade,
+          status: decision,
+          mentorFeedback: feedback,
+          reviewerName: "Senior Mentor Evaluator",
+          reviewedAt: new Date().toISOString()
+        };
+
+        if (existingRevIdx >= 0) {
+          liveState.internshipReviews[existingRevIdx] = revObj;
+        } else {
+          liveState.internshipReviews.unshift(revObj);
+        }
+
+        // Re-render
+        renderSubmissionsTable(liveState.internshipSubmissions || []);
+        renderReviewsTable(liveState.internshipReviews || []);
+        updateMetricCards({
+          leadsCount: (liveState.leads || []).length,
+          studentsCount: (liveState.students || []).length,
+          appsCount: (liveState.internshipApplications || []).length,
+          certsCount: (liveState.certificates || []).length,
+          tracksCount: 16,
+          projectsCount: (liveState.projects || []).length,
+          clientsCount: (liveState.clients || []).length,
+          pendingSubmissionsCount: (liveState.internshipSubmissions || []).filter((s) => (s.status || '').toLowerCase() === 'pending').length,
+          reviewsCount: (liveState.internshipReviews || []).length
+        });
+
+        modal.close();
+        alert(`Evaluation successfully recorded!\n\nOutcome: ${decision === 'approved' ? 'APPROVED' : 'CHANGES REQUESTED'}\nScore: ${score}/100\nGrade: ${grade}\n\nStudent will see the mentor feedback on their dashboard.`);
+      } catch (err) {
+        alert("Evaluation recorded in local session: " + err.message);
+        modal.close();
+      }
+    });
+
+    modal.showModal();
   }
 
   // =========================================================================

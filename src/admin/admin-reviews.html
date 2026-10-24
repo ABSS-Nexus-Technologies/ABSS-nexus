@@ -113,13 +113,51 @@
   
 
         
-    <div class="card" style="padding: 48px 24px; border-radius: 16px; background: #ffffff; text-align: center;">
-      <div style="font-size: 2.2rem; margin-bottom: 12px;">📝</div>
-      <h2 style="font-size: 1.3rem; margin: 0 0 8px;">No Submissions Awaiting Review</h2>
-      <p style="color: #6e6e73; max-width: 500px; margin: 0 auto 20px; font-size: 0.9rem;">
-        When enrolled interns submit milestone code pull requests or deliverables, mentor evaluation rubrics will appear here automatically.
-      </p>
-      <a href="/admin/submissions" class="btn btn-secondary" style="display: inline-block; padding: 8px 18px; font-size: 0.85rem; text-decoration: none;">Check All Submissions</a>
+    <div class="admin-kpi-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-bottom: 24px;">
+      <div class="card" style="padding: 20px; background: #fff; border-radius: 12px; border: 1px solid #d2d2d7;">
+        <span style="font-size: 0.76rem; font-weight: 700; color: #6e6e73; text-transform: uppercase;">AVERAGE GRADE</span>
+        <div style="font-size: 1.8rem; font-weight: 800; color: #1d1d1f; margin: 4px 0;" id="kpiAvgGrade">92.0%</div>
+        <div style="font-size: 0.8rem; color: #10b981; font-weight: 600;">Cohort distinction track</div>
+      </div>
+      <div class="card" style="padding: 20px; background: #fff; border-radius: 12px; border: 1px solid #d2d2d7;">
+        <span style="font-size: 0.76rem; font-weight: 700; color: #6e6e73; text-transform: uppercase;">REVIEWS COMPLETED</span>
+        <div style="font-size: 1.8rem; font-weight: 800; color: #1d1d1f; margin: 4px 0;" id="kpiReviewsCompleted">2</div>
+        <div style="font-size: 0.8rem; color: #6e6e73;">Total evaluations logged</div>
+      </div>
+      <div class="card" style="padding: 20px; background: #fff; border-radius: 12px; border: 1px solid #d2d2d7;">
+        <span style="font-size: 0.76rem; font-weight: 700; color: #6e6e73; text-transform: uppercase;">PENDING REVIEWS</span>
+        <div style="font-size: 1.8rem; font-weight: 800; color: #1d1d1f; margin: 4px 0;" id="kpiPendingReviews">2</div>
+        <div style="font-size: 0.8rem; color: #f59e0b; font-weight: 600;">Assigned to mentor desk</div>
+      </div>
+    </div>
+
+    <div class="card" style="padding: 28px; border-radius: 16px; background: #ffffff;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 10px;">
+        <h2 style="font-size: 1.25rem; margin: 0;">Student Evaluations &amp; Mentor Reviews</h2>
+        <a href="/admin/submissions" class="btn btn-secondary" style="font-size: 0.85rem; padding: 6px 14px; text-decoration: none; border-radius: 8px;">View Pending Submissions &rarr;</a>
+      </div>
+
+      <div style="overflow-x: auto;">
+        <table class="admin-table" data-reviews-table style="width: 100%; border-collapse: collapse; font-size: 0.9rem;">
+          <thead>
+            <tr style="background: #f5f5f7; border-bottom: 2px solid #d2d2d7; text-align: left;">
+              <th style="padding: 12px 14px;">Student</th>
+              <th style="padding: 12px 14px;">Evaluated Task</th>
+              <th style="padding: 12px 14px;">Score &amp; Grade</th>
+              <th style="padding: 12px 14px;">Reviewer Comments</th>
+              <th style="padding: 12px 14px;">Evaluator</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td colspan="5" style="text-align: center; padding: 36px 16px; color: #6e6e73;">
+                <div style="font-size: 1.8rem; margin-bottom: 6px;">📝</div>
+                <strong style="display: block; color: #1d1d1f; margin-bottom: 4px;">Loading evaluations...</strong>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   
       </section>
