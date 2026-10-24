@@ -2322,8 +2322,51 @@
         const proofUrl = getValue('submission-proof');
         const msgEl = document.getElementById('submission-form-message');
 
-        if (!proofUrl || !proofUrl.startsWith('http')) {
-          if (msgEl) msgEl.textContent = 'Please enter a valid HTTP/HTTPS project URL.';
+        // 1. Basic URL format check
+        if (!proofUrl || (!proofUrl.startsWith('http://') && !proofUrl.startsWith('https://'))) {
+          if (msgEl) {
+            msgEl.textContent = 'Please enter a valid HTTP/HTTPS project URL.';
+            msgEl.style.color = '#ef4444';
+          }
+          showToast('Invalid URL format');
+          return;
+        }
+
+        // 2. Reject generic root/homepage URLs
+        const cleanUrl = proofUrl.trim().toLowerCase();
+        const genericRoots = [
+          'https://google.com', 'http://google.com', 'https://www.google.com',
+          'https://github.com', 'http://github.com', 'https://www.github.com',
+          'https://gitlab.com', 'https://www.gitlab.com',
+          'https://youtube.com', 'https://www.youtube.com',
+          'https://facebook.com', 'https://www.facebook.com',
+          'https://instagram.com', 'https://www.instagram.com',
+          'https://linkedin.com', 'https://www.linkedin.com',
+          'https://figma.com', 'https://www.figma.com',
+          'https://twitter.com', 'https://x.com'
+        ];
+        const trimmed = cleanUrl.replace(/\/+$/, '');
+        if (genericRoots.includes(trimmed)) {
+          const errMsg = 'Generic URL Rejected: Please provide a link to your specific repository, project branch, or live deployment — not a generic homepage.';
+          if (msgEl) {
+            msgEl.textContent = errMsg;
+            msgEl.style.color = '#ef4444';
+          }
+          showToast('Generic homepage link rejected. Provide specific project link.');
+          return;
+        }
+
+        // 3. Reject duplicate links across milestones in this track
+        const isDuplicate = STATE.tasks.some(
+          (t) => t.id !== taskId && t.proofUrl && t.proofUrl.trim().toLowerCase() === cleanUrl
+        );
+        if (isDuplicate) {
+          const errMsg = 'Duplicate Link Detected: You have already submitted this URL for another milestone. Each milestone requires its specific deliverable or unique branch/PR.';
+          if (msgEl) {
+            msgEl.textContent = errMsg;
+            msgEl.style.color = '#ef4444';
+          }
+          showToast('Duplicate link rejected. Each milestone requires a unique deliverable.');
           return;
         }
 
@@ -2352,8 +2395,11 @@
         renderSubmissions();
         renderStudentState();
         subForm.reset();
-        showToast('Milestone submitted successfully!');
-        if (msgEl) msgEl.textContent = 'Submission recorded successfully!';
+        showToast('Milestone submitted for review!');
+        if (msgEl) {
+          msgEl.textContent = 'Submission recorded for mentor review!';
+          msgEl.style.color = 'var(--portal-teal)';
+        }
       });
     }
 

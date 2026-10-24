@@ -208,6 +208,42 @@
             var taskId = document.getElementById("task-select").value;
             var prUrl = document.getElementById("pr-url").value;
 
+            // 1. Basic URL check
+            if (!prUrl || (!prUrl.startsWith('http://') && !prUrl.startsWith('https://'))) {
+              alert("Validation Error: Please enter a valid HTTP/HTTPS URL.");
+              return;
+            }
+
+            // 2. Reject generic root homepage links
+            var cleanUrl = prUrl.trim().toLowerCase();
+            var genericRoots = [
+              'https://google.com', 'http://google.com', 'https://www.google.com',
+              'https://github.com', 'http://github.com', 'https://www.github.com',
+              'https://gitlab.com', 'https://www.gitlab.com',
+              'https://youtube.com', 'https://www.youtube.com',
+              'https://facebook.com', 'https://www.facebook.com',
+              'https://instagram.com', 'https://www.instagram.com',
+              'https://linkedin.com', 'https://www.linkedin.com',
+              'https://figma.com', 'https://www.figma.com',
+              'https://twitter.com', 'https://x.com'
+            ];
+            var trimmed = cleanUrl.replace(/\/+$/, '');
+            if (genericRoots.indexOf(trimmed) !== -1) {
+              alert("Validation Error: Generic homepage link rejected!\nPlease provide a link to your specific repository, project branch, or live deployment URL — not a generic homepage.");
+              return;
+            }
+
+            // 3. Duplicate Link Check in this track
+            var savedCheck = localStorage.getItem("abss_tasks_" + trackSlug);
+            var existingTasks = savedCheck ? JSON.parse(savedCheck) : [];
+            var isDuplicate = existingTasks.some(function(t) {
+              return t.id !== taskId && t.proofUrl && t.proofUrl.trim().toLowerCase() === cleanUrl;
+            });
+            if (isDuplicate) {
+              alert("Validation Error: Duplicate Link Detected!\nYou have already submitted this exact URL for another milestone. Each milestone requires its specific deliverable or unique pull request.");
+              return;
+            }
+
             // Sync with localStorage for student-tasks and student-dashboard
             try {
               var tasks = [];
