@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ABSS Nexus Technologies Engineering Blog</title>
+    <link>https://abssnexus.in/blog</link>
+    <description>Engineering insights, technical guides, cloud architecture, web performance, and career development from ABSS Nexus Technologies.</description>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 25 Oct 2026 00:00:00 +0530</lastBuildDate>
+    <atom:link href="https://abssnexus.in/rss.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title>Website Cost Breakdown in India 2026: What Should You Really Pay?</title>
+      <link>https://abssnexus.in/blog/website-cost-breakdown-india</link>
+      <guid>https://abssnexus.in/blog/website-cost-breakdown-india</guid>
+      <pubDate>Sun, 25 Oct 2026 00:00:00 +0530</pubDate>
+      <category>Web Development</category>
+      <description>Understand realistic website costs in India for startups, SMBs, and enterprises. Get an engineering-grade pricing breakdown, avoid hidden fees, and calculate true digital ROI.</description>
+    </item>
+
+    <item>
+      <title>Digital Trust in 2026: Why MSMEs Need Verifiable Credentials for Client Confidence</title>
+      <link>https://abssnexus.in/blog/msme-digital-verification</link>
+      <guid>https://abssnexus.in/blog/msme-digital-verification</guid>
+      <pubDate>Sun, 25 Oct 2026 00:00:00 +0530</pubDate>
+      <category>Business Strategy</category>
+      <description>How digital verification registries, ISO alignment, and government MSME registration bridge the trust gap with corporate clients, speed up sales cycles, and eliminate fraud.</description>
+    </item>
+
+    <item>
+      <title>Career Decision 2026: Technical Internship or Dive Into Full-Time Work?</title>
+      <link>https://abssnexus.in/blog/internship-vs-fulltime-career</link>
+      <guid>https://abssnexus.in/blog/internship-vs-fulltime-career</guid>
+      <pubDate>Sun, 25 Oct 2026 00:00:00 +0530</pubDate>
+      <category>Career Development</category>
+      <description>Compare internship benefits vs full-time roles with real placement data, skill velocity metrics, mentorship structures, and a 5-question decision framework for software engineers.</description>
+    </item>
+
+    <item>
+      <title>Modern Web Performance &amp; Core Web Vitals: An Engineering Guide</title>
+      <link>https://abssnexus.in/blog/modern-web-performance-core-web-vitals</link>
+      <guid>https://abssnexus.in/blog/modern-web-performance-core-web-vitals</guid>
+      <pubDate>Mon, 19 Oct 2026 00:00:00 +0530</pubDate>
+      <category>Web Performance</category>
+      <description>A deep technical breakdown of optimizing Largest Contentful Paint (LCP), Interaction to Next Paint (INP), and layout stability through modern rendering strategies.</description>
+    </item>
+
+    <item>
+      <title>Building Resilient Cloud Architecture with Edge Functions &amp; Serverless KV</title>
+      <link>https://abssnexus.in/blog/resilient-cloud-architecture-edge-computing</link>
+      <guid>https://abssnexus.in/blog/resilient-cloud-architecture-edge-computing</guid>
+      <pubDate>Mon, 19 Oct 2026 00:00:00 +0530</pubDate>
+      <category>Cloud Architecture</category>
+      <description>Practical architectural patterns for deploying business logic at the global edge, managing low-latency key-value state, and implementing zero-trust security.</description>
+    </item>
+
+    <item>
+      <title>Minimalist UI/UX Design Systems: Crafting High-Conversion Interfaces</title>
+      <link>https://abssnexus.in/blog/minimalist-design-systems-conversion</link>
+      <guid>https://abssnexus.in/blog/minimalist-design-systems-conversion</guid>
+      <pubDate>Mon, 19 Oct 2026 00:00:00 +0530</pubDate>
+      <category>UI/UX Design</category>
+      <description>How Apple-inspired visual hierarchy, purposeful whitespace, and WCAG-compliant design tokens increase user trust and interface engagement.</description>
+    </item>
+  </channel>
+</rss>
