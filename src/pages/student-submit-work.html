@@ -95,23 +95,28 @@
 
       
     <div class="card" style="padding: 36px; border-radius: 20px; max-width: 780px;">
-      <form onsubmit="event.preventDefault(); alert('Work deliverable submitted successfully! Your mentor will review within 24-48 hours.'); window.location.href='/student/submissions';">
+      <form id="deliverableForm">
         <div class="form-group" style="margin-bottom: 20px;">
-          <label for="task-select" style="display: block; font-weight: 600; margin-bottom: 6px;">Select Milestone Task</label>
-          <select id="task-select" required style="width: 100%; padding: 12px; border: 1px solid #d2d2d7; border-radius: 10px; font-size: 0.95rem;">
-            <option value="TASK-10">TASK-10: Cloudflare Worker Edge Authentication</option>
-            <option value="TASK-11">TASK-11: Full-Stack Integration Testing</option>
-            <option value="TASK-12">TASK-12: Capstone Final Project Demo</option>
+          <label for="track-select" style="display: block; font-weight: 600; margin-bottom: 6px;">Select Internship Track</label>
+          <select id="track-select" required style="width: 100%; padding: 12px; border: 1px solid #d2d2d7; border-radius: 10px; font-size: 0.95rem; background: #f5f5f7;">
+            <!-- Populated via JS -->
           </select>
         </div>
 
         <div class="form-group" style="margin-bottom: 20px;">
-          <label for="pr-url" style="display: block; font-weight: 600; margin-bottom: 6px;">GitHub Pull Request / Repository URL</label>
-          <input type="url" id="pr-url" required placeholder="https://github.com/your-username/abss-internship/pull/1" style="width: 100%; padding: 12px; border: 1px solid #d2d2d7; border-radius: 10px;" />
+          <label for="task-select" style="display: block; font-weight: 600; margin-bottom: 6px;">Select Milestone Task</label>
+          <select id="task-select" required style="width: 100%; padding: 12px; border: 1px solid #d2d2d7; border-radius: 10px; font-size: 0.95rem;">
+            <!-- Populated dynamically based on track -->
+          </select>
         </div>
 
         <div class="form-group" style="margin-bottom: 20px;">
-          <label for="demo-url" style="display: block; font-weight: 600; margin-bottom: 6px;">Live Demo URL (Cloudflare Pages or Vercel)</label>
+          <label for="pr-url" style="display: block; font-weight: 600; margin-bottom: 6px;">GitHub Pull Request / Work Proof URL *</label>
+          <input type="url" id="pr-url" required placeholder="https://github.com/your-username/abss-internship-proof" style="width: 100%; padding: 12px; border: 1px solid #d2d2d7; border-radius: 10px;" />
+        </div>
+
+        <div class="form-group" style="margin-bottom: 20px;">
+          <label for="demo-url" style="display: block; font-weight: 600; margin-bottom: 6px;">Live Demo URL (Cloudflare Pages, Vercel, or Drive link)</label>
           <input type="url" id="demo-url" placeholder="https://your-preview-deployment.pages.dev" style="width: 100%; padding: 12px; border: 1px solid #d2d2d7; border-radius: 10px;" />
         </div>
 
@@ -123,7 +128,7 @@
         <div style="margin-bottom: 24px;">
           <label style="display: flex; align-items: center; gap: 8px; font-size: 0.88rem; color: #1d1d1f; cursor: pointer;">
             <input type="checkbox" required />
-            <span>I certify this code represents my authentic engineering work meeting ABSS Nexus integrity standards.</span>
+            <span>I certify this deliverable represents my authentic work meeting ABSS Nexus integrity standards.</span>
           </label>
         </div>
 
@@ -141,6 +146,8 @@
     <script src="/src/scripts/script.js" defer></script>
     <script>
       (function() {
+        var domainData = null;
+
         fetch("/api/internships/auth/me")
           .then(function(r) { return r.ok ? r.json() : null; })
           .then(function(data) {
@@ -152,19 +159,59 @@
               var avatarEl = document.getElementById("studentAvatarInitials");
               if (nameEl) nameEl.textContent = name;
               if (avatarEl) avatarEl.textContent = initials;
-              var profName = document.getElementById("profileNameBig");
-              var profAvatar = document.getElementById("profileAvatarBig");
-              var profEmail = document.getElementById("profileEmailSubtitle");
-              if (profName) profName.textContent = name;
-              if (profAvatar) profAvatar.textContent = initials;
-              if (profEmail && s.email) profEmail.innerHTML = s.email + " &bull; Active Enrolled Intern &bull; Batch of 2026";
-              var certRecipient = document.getElementById("certStudentRecipient");
-              if (certRecipient) certRecipient.textContent = name;
-              var welcomeEl = document.getElementById("studentWelcomeGreeting");
-              if (welcomeEl && welcomeEl.textContent.includes("STUDENT")) welcomeEl.textContent = "Welcome Back, " + name.split(" ")[0];
             }
           })
           .catch(function() {});
+
+        // Fetch domain tasks data
+        fetch("/src/scripts/domain-tasks-data.json")
+          .then(function(res) { return res.json(); })
+          .then(function(data) {
+            domainData = data;
+            var trackSelect = document.getElementById("track-select");
+            if (!trackSelect) return;
+
+            var savedTrack = localStorage.getItem("abss_active_domain") || "web-development";
+
+            trackSelect.innerHTML = data.AVAILABLE_DOMAINS.map(function(d) {
+              return '<option value="' + d.slug + '" ' + (d.slug === savedTrack ? 'selected' : '') + '>' + d.name + ' (' + d.category + ')</option>';
+            }).join('');
+
+            trackSelect.addEventListener("change", function(e) {
+              var slug = e.target.value;
+              localStorage.setItem("abss_active_domain", slug);
+              populateTaskSelect(slug);
+            });
+
+            populateTaskSelect(savedTrack);
+          })
+          .catch(function(err) {
+            console.error("Error loading task data", err);
+          });
+
+        function populateTaskSelect(trackSlug) {
+          if (!domainData || !domainData.DOMAIN_TASKS) return;
+          var tasks = domainData.DOMAIN_TASKS[trackSlug] || domainData.DOMAIN_TASKS["web-development"];
+          var taskSelect = document.getElementById("task-select");
+          if (!taskSelect) return;
+
+          taskSelect.innerHTML = tasks.map(function(t) {
+            return '<option value="' + t.id + '">' + t.id + ': ' + t.name + ' (' + (t.difficulty || 'Intermediate') + ')</option>';
+          }).join('');
+        }
+
+        var form = document.getElementById("deliverableForm");
+        if (form) {
+          form.addEventListener("submit", function(e) {
+            e.preventDefault();
+            var trackSlug = document.getElementById("track-select").value;
+            var taskId = document.getElementById("task-select").value;
+            var prUrl = document.getElementById("pr-url").value;
+
+            alert("Work deliverable for " + taskId + " submitted successfully! Your mentor will review within 24-48 hours.");
+            window.location.href = "/student/tasks";
+          });
+        }
       })();
     </script>
   </body>

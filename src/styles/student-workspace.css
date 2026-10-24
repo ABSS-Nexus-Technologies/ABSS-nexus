@@ -1908,3 +1908,109 @@ body.student-portal-body {
     grid-template-columns: 1fr;
   }
 }
+
+/* Topbar Domain Picker */
+.topbar-domain-picker {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(14, 28, 54, 0.7);
+  border: 1px solid var(--portal-line);
+  padding: 4px 10px;
+  border-radius: var(--portal-radius-md);
+  margin-left: 12px;
+}
+.topbar-picker-label {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: var(--portal-cyan);
+  text-transform: uppercase;
+}
+.topbar-picker-select {
+  background: transparent;
+  color: #fff;
+  border: none;
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+  outline: none;
+  padding-right: 4px;
+}
+.topbar-picker-select option {
+  background: #091224;
+  color: #fff;
+}
+
+/* Dashboard Interactive Domain Strip */
+.dashboard-domain-strip {
+  background: rgba(14, 28, 54, 0.6);
+  border: 1px solid var(--portal-line);
+  border-radius: var(--portal-radius-lg);
+  padding: 14px 16px;
+  margin-bottom: 24px;
+  backdrop-filter: blur(12px);
+}
+.domain-strip-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+.domain-strip-title {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--portal-cyan);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.domain-strip-hint {
+  font-size: 12px;
+  color: var(--portal-muted);
+}
+.domain-chips-scroll {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 194, 255, 0.3) transparent;
+}
+.domain-chips-scroll::-webkit-scrollbar {
+  height: 4px;
+}
+.domain-chips-scroll::-webkit-scrollbar-thumb {
+  background: rgba(0, 194, 255, 0.3);
+  border-radius: 4px;
+}
+.domain-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--portal-line);
+  background: rgba(255, 255, 255, 0.03);
+  color: #cbd5e1;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+.domain-chip:hover {
+  background: rgba(0, 119, 255, 0.15);
+  border-color: var(--portal-cyan);
+  color: #fff;
+  transform: translateY(-1px);
+}
+.domain-chip.is-active {
+  background: linear-gradient(135deg, rgba(0, 102, 204, 0.3) 0%, rgba(0, 194, 255, 0.25) 100%);
+  border-color: var(--portal-cyan);
+  color: #fff;
+  box-shadow: 0 0 12px rgba(0, 194, 255, 0.25);
+  font-weight: 700;
+}

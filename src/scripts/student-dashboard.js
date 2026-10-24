@@ -1749,6 +1749,49 @@
     tickets: []
   };
 
+  const DOMAIN_ICONS = {
+    'web-development': '🌐',
+    'data-science': '📊',
+    'machine-learning': '🤖',
+    'data-analyst': '📈',
+    'cyber-security': '🔒',
+    'software-development': '💻',
+    'prompt-engineering': '✍️',
+    'agent-engineering': '⚡',
+    'ai-engineering': '🧠',
+    'android-development': '📱',
+    'product-management': '🎯',
+    'ui-ux-design': '🎨',
+    'graphics-design': '🖌️',
+    'human-resources': '👥',
+    'digital-marketing': '📢',
+    'content-writing': '📝',
+    'cloud-devops': '☁️'
+  };
+
+  function renderDomainChips() {
+    const containers = document.querySelectorAll('.domain-chips-scroll');
+    containers.forEach((container) => {
+      container.innerHTML = AVAILABLE_DOMAINS.map((d) => {
+        const icon = DOMAIN_ICONS[d.slug] || '💼';
+        const isActive = (STATE.student.domainSlug === d.slug) ? 'is-active' : '';
+        return `<button type="button" class="domain-chip ${isActive}" data-domain-slug="${d.slug}">${icon} ${d.name}</button>`;
+      }).join('');
+    });
+
+    const topbarSelect = document.getElementById('topbar-track-select');
+    if (topbarSelect) {
+      if (topbarSelect.options.length <= 1) {
+        topbarSelect.innerHTML = AVAILABLE_DOMAINS.map((d) => {
+          const isSelected = (STATE.student.domainSlug === d.slug) ? 'selected' : '';
+          return `<option value="${d.slug}" ${isSelected}>${d.name}</option>`;
+        }).join('');
+      } else {
+        topbarSelect.value = STATE.student.domainSlug;
+      }
+    }
+  }
+
   function switchDomain(domainSlugOrName, suppressToast = false) {
     if (!domainSlugOrName) return;
     const clean = String(domainSlugOrName).trim().toLowerCase();
@@ -1795,9 +1838,10 @@
     renderStudentState();
     renderTasks();
     renderSubmissions();
+    renderDomainChips();
 
     if (!suppressToast && typeof showToast === 'function') {
-      showToast(`Switched workspace to ${matched.name}`);
+      showToast(`Switched workspace to ${matched.name} (5 milestones loaded)`);
     }
   }
 
@@ -1808,6 +1852,7 @@
   async function init() {
     setupEventListeners();
     await checkSession();
+    renderDomainChips();
     renderStudentState();
     renderTasks();
     renderSubmissions();
@@ -1879,6 +1924,21 @@
     setText('topbar-avatar', initials);
     setText('current-workspace-name', STATE.student.domain);
     setText('sidebar-id', STATE.student.id);
+    setText('roadmap-domain-name', `${STATE.student.domain} Sprint Track`);
+
+    const coachTrackEl = document.getElementById('coach-tailored-track');
+    if (coachTrackEl) {
+      coachTrackEl.innerHTML = `● Online &bull; Tailored to ${STATE.student.domain}`;
+    }
+
+    const topbarTrackSelect = document.getElementById('topbar-track-select');
+    if (topbarTrackSelect && topbarTrackSelect.value !== STATE.student.domainSlug) {
+      topbarTrackSelect.value = STATE.student.domainSlug;
+    }
+
+    document.querySelectorAll('.domain-chip').forEach((chip) => {
+      chip.classList.toggle('is-active', chip.dataset.domainSlug === STATE.student.domainSlug);
+    });
 
     // Tokens & Credits
     setText('top-token-balance', STATE.student.tokens.toFixed(1));
@@ -2195,6 +2255,22 @@
         e.preventDefault();
         switchPanel(btn.dataset.panelTarget);
       });
+    });
+
+    // Topbar Domain Select
+    const topbarSelect = document.getElementById('topbar-track-select');
+    if (topbarSelect) {
+      topbarSelect.addEventListener('change', (e) => {
+        switchDomain(e.target.value);
+      });
+    }
+
+    // Delegated click for Domain Chips
+    document.addEventListener('click', (e) => {
+      const chip = e.target.closest('.domain-chip');
+      if (chip && chip.dataset.domainSlug) {
+        switchDomain(chip.dataset.domainSlug);
+      }
     });
 
     // Task Filter Buttons

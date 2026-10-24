@@ -94,40 +94,25 @@
   
 
       
+    <!-- Active Track Selector Strip -->
+    <div style="background: #ffffff; border: 1px solid #d2d2d7; border-radius: 14px; padding: 16px 20px; margin-bottom: 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px; box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
+      <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+        <label for="trackSelector" style="font-size: 0.82rem; font-weight: 700; color: #0066cc; text-transform: uppercase;">Active Internship Track:</label>
+        <select id="trackSelector" style="padding: 8px 14px; border: 1px solid #d2d2d7; border-radius: 8px; font-weight: 600; font-size: 0.92rem; background: #f5f5f7; cursor: pointer; color: #1d1d1f; outline: none;">
+        </select>
+      </div>
+      <div>
+        <a href="/student/tasks" class="btn btn-secondary" style="padding: 8px 16px; font-size: 0.85rem;">View Track Task Board &rarr;</a>
+      </div>
+    </div>
+
     <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 24px;">
       <div class="card" style="padding: 32px; border-radius: 18px;">
-        <h2 style="font-size: 1.3rem; margin: 0 0 8px;">Milestone Roadmap (8-Week Technical Sprint)</h2>
-        <p style="color: #6e6e73; font-size: 0.92rem; margin: 0 0 24px;">Master production web engineering with industry-reviewed milestones.</p>
+        <h2 style="font-size: 1.3rem; margin: 0 0 8px;" id="trackRoadmapTitle">Milestone Roadmap (Technical Sprint)</h2>
+        <p style="color: #6e6e73; font-size: 0.92rem; margin: 0 0 24px;" id="trackRoadmapSubtitle">Master production engineering and portfolio deliverables with industry-reviewed milestones.</p>
 
-        <div style="display: flex; flex-direction: column; gap: 16px;">
-          <div style="background: #f5f5f7; border-left: 4px solid #10b981; border-radius: 10px; padding: 18px;">
-            <div style="display: flex; justify-content: space-between;">
-              <strong style="color: #1d1d1f;">Weeks 1-2: Advanced Architecture &amp; Core Web Vitals</strong>
-              <span class="badge" style="background: rgba(16, 185, 129, 0.15); color: #10b981;">Completed</span>
-            </div>
-            <p style="font-size: 0.85rem; color: #6e6e73; margin: 6px 0 0;">LCP, FID, CLS tuning, responsive Apple-inspired CSS tokens, semantic layout.</p>
-          </div>
-          <div style="background: #f5f5f7; border-left: 4px solid #10b981; border-radius: 10px; padding: 18px;">
-            <div style="display: flex; justify-content: space-between;">
-              <strong style="color: #1d1d1f;">Weeks 3-4: Serverless APIs &amp; Edge Compute</strong>
-              <span class="badge" style="background: rgba(16, 185, 129, 0.15); color: #10b981;">Completed</span>
-            </div>
-            <p style="font-size: 0.85rem; color: #6e6e73; margin: 6px 0 0;">Node.js endpoints, Cloudflare Workers routing, rate limiting, and CORS security.</p>
-          </div>
-          <div style="background: #f5f5f7; border-left: 4px solid #0066cc; border-radius: 10px; padding: 18px;">
-            <div style="display: flex; justify-content: space-between;">
-              <strong style="color: #1d1d1f;">Weeks 5-6: Database Schema &amp; Cryptographic Auth</strong>
-              <span class="badge" style="background: rgba(0, 102, 204, 0.15); color: #0066cc;">In Progress</span>
-            </div>
-            <p style="font-size: 0.85rem; color: #6e6e73; margin: 6px 0 0;">Relational SQL schemas, PBKDF2 password hashing, HttpOnly session cookies.</p>
-          </div>
-          <div style="background: #f5f5f7; border-left: 4px solid #d2d2d7; border-radius: 10px; padding: 18px;">
-            <div style="display: flex; justify-content: space-between;">
-              <strong style="color: #6e6e73;">Weeks 7-8: Capstone Production Deployment &amp; Review</strong>
-              <span class="badge" style="background: #e5e5ea; color: #6e6e73;">Upcoming</span>
-            </div>
-            <p style="font-size: 0.85rem; color: #6e6e73; margin: 6px 0 0;">CI/CD automation, lighthouse regression tests, and final engineering demo.</p>
-          </div>
+        <div style="display: flex; flex-direction: column; gap: 16px;" id="milestonesContainer">
+          <!-- Milestones rendered dynamically via JS -->
         </div>
       </div>
 
@@ -136,13 +121,15 @@
         <ul style="list-style: none; padding: 0; margin: 0 0 24px; font-size: 0.88rem; line-height: 2;">
           <li>📦 <a href="https://github.com/ABSS-Nexus-Technologies" target="_blank" rel="noopener noreferrer" style="color: #0066cc; font-weight: 600;">Starter GitHub Repository</a></li>
           <li>📖 <a href="/internships/faq" style="color: #0066cc;">Syllabus Documentation</a></li>
-          <li>💬 <a href="/internships/support" style="color: #0066cc;">Discord Mentor Channel</a></li>
+          <li>💬 <a href="/internships/support" style="color: #0066cc;">Technical Mentor Desk</a></li>
           <li>⚡ <a href="/student/tasks" style="color: #0066cc;">Active Sprint Task Board</a></li>
+          <li>🎓 <a href="/student/dashboard" style="color: #0066cc;">Full Student Workspace</a></li>
         </ul>
         <div style="padding: 16px; background: #f5f5f7; border-radius: 12px; font-size: 0.82rem; color: #6e6e73;">
-          <strong>Direct Technical Mentor:</strong><br />
-          Rohan Verma &bull; rohan@abssnexus.in<br />
-          Office Hours: Mon/Thu 4-5 PM IST
+          <strong style="color: #1d1d1f; display: block; margin-bottom: 4px;">Senior Review Panel:</strong>
+          ABSS Nexus Technical Advisory<br />
+          Email: mentor-panel@abssnexus.in<br />
+          Office Hours: Mon-Fri 4:00 PM – 6:00 PM IST
         </div>
       </div>
     </div>
@@ -157,6 +144,8 @@
     <script src="/src/scripts/script.js" defer></script>
     <script>
       (function() {
+        var domainData = null;
+
         fetch("/api/internships/auth/me")
           .then(function(r) { return r.ok ? r.json() : null; })
           .then(function(data) {
@@ -168,19 +157,71 @@
               var avatarEl = document.getElementById("studentAvatarInitials");
               if (nameEl) nameEl.textContent = name;
               if (avatarEl) avatarEl.textContent = initials;
-              var profName = document.getElementById("profileNameBig");
-              var profAvatar = document.getElementById("profileAvatarBig");
-              var profEmail = document.getElementById("profileEmailSubtitle");
-              if (profName) profName.textContent = name;
-              if (profAvatar) profAvatar.textContent = initials;
-              if (profEmail && s.email) profEmail.innerHTML = s.email + " &bull; Active Enrolled Intern &bull; Batch of 2026";
-              var certRecipient = document.getElementById("certStudentRecipient");
-              if (certRecipient) certRecipient.textContent = name;
-              var welcomeEl = document.getElementById("studentWelcomeGreeting");
-              if (welcomeEl && welcomeEl.textContent.includes("STUDENT")) welcomeEl.textContent = "Welcome Back, " + name.split(" ")[0];
             }
           })
           .catch(function() {});
+
+        // Fetch domain tasks data
+        fetch("/src/scripts/domain-tasks-data.json")
+          .then(function(res) { return res.json(); })
+          .then(function(data) {
+            domainData = data;
+            var selector = document.getElementById("trackSelector");
+            if (!selector) return;
+
+            var savedTrack = localStorage.getItem("abss_active_domain") || "web-development";
+
+            selector.innerHTML = data.AVAILABLE_DOMAINS.map(function(d) {
+              return '<option value="' + d.slug + '" ' + (d.slug === savedTrack ? 'selected' : '') + '>' + d.name + ' (' + d.category + ')</option>';
+            }).join('');
+
+            selector.addEventListener("change", function(e) {
+              var slug = e.target.value;
+              localStorage.setItem("abss_active_domain", slug);
+              renderRoadmap(slug);
+            });
+
+            renderRoadmap(savedTrack);
+          })
+          .catch(function(err) {
+            console.error("Error loading roadmap data", err);
+          });
+
+        function renderRoadmap(trackSlug) {
+          if (!domainData || !domainData.DOMAIN_TASKS) return;
+          var tasks = domainData.DOMAIN_TASKS[trackSlug] || domainData.DOMAIN_TASKS["web-development"];
+          var matchedDomain = domainData.AVAILABLE_DOMAINS.find(function(d) { return d.slug === trackSlug; }) || { name: "Web Development" };
+
+          var titleEl = document.getElementById("trackRoadmapTitle");
+          var subEl = document.getElementById("trackRoadmapSubtitle");
+          var container = document.getElementById("milestonesContainer");
+
+          if (titleEl) titleEl.textContent = matchedDomain.name + " - 5 Milestone Roadmap";
+          if (subEl) subEl.textContent = "Industry-reviewed production tasks & deliverables for " + matchedDomain.name + ".";
+
+          if (!container) return;
+
+          container.innerHTML = tasks.map(function(task, index) {
+            var borderColors = ["#10b981", "#0066cc", "#0066cc", "#6366f1", "#d2d2d7"];
+            var borderColor = borderColors[index % borderColors.length];
+
+            var stepsHtml = (task.steps || []).map(function(step) {
+              return '<li style="margin-bottom: 4px; color: #475569; font-size: 0.85rem;">' + step + '</li>';
+            }).join('');
+
+            return '<div style="background: #f5f5f7; border-left: 4px solid ' + borderColor + '; border-radius: 10px; padding: 18px;">' +
+              '<div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 6px; flex-wrap: wrap; gap: 8px;">' +
+                '<strong style="color: #1d1d1f; font-size: 1rem;">' + task.name + '</strong>' +
+                '<span class="badge" style="background: #ffffff; color: #0066cc; font-size: 0.78rem; border: 1px solid #d2d2d7;">' + (task.difficulty || 'Intermediate') + ' &bull; ' + (task.time || '6-8 hrs') + '</span>' +
+              '</div>' +
+              '<p style="font-size: 0.88rem; color: #6e6e73; margin: 0 0 10px;">' + task.desc + '</p>' +
+              '<ul style="padding-left: 18px; margin: 0 0 10px;">' + stepsHtml + '</ul>' +
+              '<div style="display: flex; justify-content: flex-end;">' +
+                '<a href="/student/submit-work" class="btn btn-secondary" style="padding: 4px 12px; font-size: 0.78rem;">Submit Proof &rarr;</a>' +
+              '</div>' +
+            '</div>';
+          }).join('');
+        }
       })();
     </script>
   </body>

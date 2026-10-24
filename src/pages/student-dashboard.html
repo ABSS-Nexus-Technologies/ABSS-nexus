@@ -143,6 +143,10 @@
       <header class="student-topbar">
         <div class="student-topbar-left">
           <h1 class="topbar-page-title" id="page-title">Student Workspace Overview</h1>
+          <div class="topbar-domain-picker">
+            <label for="topbar-track-select" class="topbar-picker-label">FIELD:</label>
+            <select id="topbar-track-select" class="topbar-picker-select" aria-label="Select Internship Field"></select>
+          </div>
         </div>
         <div class="student-topbar-actions">
           <button class="student-referral-pill" type="button" data-panel-target="referrals">
@@ -206,6 +210,15 @@
                 <span class="current-state-visual-label">Cohort Sprint Active</span>
               </div>
             </div>
+          </div>
+
+          <!-- Quick Domain Switcher Strip -->
+          <div class="dashboard-domain-strip">
+            <div class="domain-strip-header">
+              <span class="domain-strip-title">🎯 Switch Field / Track (16 Options):</span>
+              <span class="domain-strip-hint">Click any field to switch assigned milestones and deliverables</span>
+            </div>
+            <div class="domain-chips-scroll" id="overview-domain-chips"></div>
           </div>
 
           <!-- Overview 2-Column Grid -->
@@ -304,6 +317,15 @@
               <strong id="roadmap-domain-name">Full-Stack Web Engineering Sprint Track</strong>
               <span>5 Industry-Aligned Milestones &bull; Code Review from Senior Engineers &bull; ISO 9001:2015 Aligned Credential</span>
             </div>
+          </div>
+
+          <!-- Domain Track Switcher Strip -->
+          <div class="dashboard-domain-strip">
+            <div class="domain-strip-header">
+              <span class="domain-strip-title">🎯 Switch Field / Track (16 Options):</span>
+              <span class="domain-strip-hint">Click any field to view its 5 specific production tasks</span>
+            </div>
+            <div class="domain-chips-scroll" id="roadmap-domain-chips"></div>
           </div>
 
           <!-- Task Filter & Search Bar -->
@@ -575,7 +597,7 @@
               <div>
                 <p class="portal-eyebrow">Personalized AI Mentor</p>
                 <h2 id="career-title" style="margin: 0; color: #fff; font-size: 22px;">ABSS Nexus Career Coach</h2>
-                <span style="font-size: 12px; color: var(--portal-teal);">● Online &bull; Tailored to Full-Stack Web Engineering</span>
+                <span id="coach-tailored-track" style="font-size: 12px; color: var(--portal-teal);">● Online &bull; Tailored to Full-Stack Web Engineering</span>
               </div>
             </div>
             <span class="state-badge state-badge-neutral">0.2 Token / Reply</span>

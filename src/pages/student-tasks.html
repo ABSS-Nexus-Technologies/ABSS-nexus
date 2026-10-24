@@ -94,12 +94,24 @@
   
 
       
+    <!-- Active Track Selector Strip -->
+    <div style="background: #ffffff; border: 1px solid #d2d2d7; border-radius: 14px; padding: 16px 20px; margin-bottom: 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px; box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
+      <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+        <label for="trackSelector" style="font-size: 0.82rem; font-weight: 700; color: #0066cc; text-transform: uppercase;">Active Internship Track:</label>
+        <select id="trackSelector" style="padding: 8px 14px; border: 1px solid #d2d2d7; border-radius: 8px; font-weight: 600; font-size: 0.92rem; background: #f5f5f7; cursor: pointer; color: #1d1d1f; outline: none;">
+        </select>
+      </div>
+      <div>
+        <a href="/student/dashboard" class="btn btn-secondary" style="padding: 8px 16px; font-size: 0.85rem;">Open Full Workspace Dashboard &rarr;</a>
+      </div>
+    </div>
+
     <div class="card" style="padding: 32px; border-radius: 18px;">
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 12px;">
-        <div style="display: flex; gap: 8px;">
-          <button class="btn btn-primary" style="padding: 6px 16px; font-size: 0.85rem;">All Tasks (12)</button>
-          <button class="btn btn-secondary" style="padding: 6px 16px; font-size: 0.85rem;">Pending (2)</button>
-          <button class="btn btn-secondary" style="padding: 6px 16px; font-size: 0.85rem;">Approved (9)</button>
+        <div style="display: flex; gap: 8px;" id="filterButtonsContainer">
+          <button class="btn btn-primary" id="btnFilterAll" style="padding: 6px 16px; font-size: 0.85rem;">All Tasks (5)</button>
+          <button class="btn btn-secondary" id="btnFilterPending" style="padding: 6px 16px; font-size: 0.85rem;">Pending / Progress</button>
+          <button class="btn btn-secondary" id="btnFilterApproved" style="padding: 6px 16px; font-size: 0.85rem;">Approved</button>
         </div>
         <a href="/student/submit-work" class="btn btn-primary" style="font-size: 0.85rem;">+ Submit Work Deliverable</a>
       </div>
@@ -110,33 +122,14 @@
             <tr style="background: #f5f5f7; border-bottom: 2px solid #d2d2d7; text-align: left;">
               <th style="padding: 12px 14px;">Task ID</th>
               <th style="padding: 12px 14px;">Title &amp; Milestone</th>
-              <th style="padding: 12px 14px;">Due Date</th>
+              <th style="padding: 12px 14px;">Estimated Time</th>
+              <th style="padding: 12px 14px;">Difficulty</th>
               <th style="padding: 12px 14px;">Status</th>
               <th style="padding: 12px 14px;">Action</th>
             </tr>
           </thead>
-          <tbody>
-            <tr style="border-bottom: 1px solid #e5e5ea;">
-              <td style="padding: 14px; font-family: monospace;">TASK-10</td>
-              <td style="padding: 14px;"><strong>Cloudflare Worker Edge Authentication</strong><br /><small style="color: #6e6e73;">Milestone 3: Security &amp; Tokens</small></td>
-              <td style="padding: 14px;">Oct 25, 2026</td>
-              <td style="padding: 14px;"><span class="badge" style="background: rgba(0, 102, 204, 0.12); color: #0066cc;">In Progress</span></td>
-              <td style="padding: 14px;"><a href="/student/tasks/task-1" class="btn btn-secondary" style="padding: 6px 14px; font-size: 0.8rem;">View Spec &rarr;</a></td>
-            </tr>
-            <tr style="border-bottom: 1px solid #e5e5ea;">
-              <td style="padding: 14px; font-family: monospace;">TASK-09</td>
-              <td style="padding: 14px;"><strong>PostgreSQL D1 Migration Scripts</strong><br /><small style="color: #6e6e73;">Milestone 3: Database Models</small></td>
-              <td style="padding: 14px;">Oct 18, 2026</td>
-              <td style="padding: 14px;"><span class="badge" style="background: rgba(16, 185, 129, 0.15); color: #10b981;">Approved (98%)</span></td>
-              <td style="padding: 14px;"><a href="/student/submissions" class="btn btn-secondary" style="padding: 6px 14px; font-size: 0.8rem;">Review Notes</a></td>
-            </tr>
-            <tr style="border-bottom: 1px solid #e5e5ea;">
-              <td style="padding: 14px; font-family: monospace;">TASK-08</td>
-              <td style="padding: 14px;"><strong>REST API Endpoint Architecture</strong><br /><small style="color: #6e6e73;">Milestone 2: Serverless Logic</small></td>
-              <td style="padding: 14px;">Oct 12, 2026</td>
-              <td style="padding: 14px;"><span class="badge" style="background: rgba(16, 185, 129, 0.15); color: #10b981;">Approved (95%)</span></td>
-              <td style="padding: 14px;"><a href="/student/submissions" class="btn btn-secondary" style="padding: 6px 14px; font-size: 0.8rem;">Review Notes</a></td>
-            </tr>
+          <tbody id="tasksTableBody">
+            <!-- Dynamic task rows rendered via JS -->
           </tbody>
         </table>
       </div>
@@ -152,6 +145,9 @@
     <script src="/src/scripts/script.js" defer></script>
     <script>
       (function() {
+        var domainData = null;
+        var currentFilter = 'all';
+
         fetch("/api/internships/auth/me")
           .then(function(r) { return r.ok ? r.json() : null; })
           .then(function(data) {
@@ -163,19 +159,93 @@
               var avatarEl = document.getElementById("studentAvatarInitials");
               if (nameEl) nameEl.textContent = name;
               if (avatarEl) avatarEl.textContent = initials;
-              var profName = document.getElementById("profileNameBig");
-              var profAvatar = document.getElementById("profileAvatarBig");
-              var profEmail = document.getElementById("profileEmailSubtitle");
-              if (profName) profName.textContent = name;
-              if (profAvatar) profAvatar.textContent = initials;
-              if (profEmail && s.email) profEmail.innerHTML = s.email + " &bull; Active Enrolled Intern &bull; Batch of 2026";
-              var certRecipient = document.getElementById("certStudentRecipient");
-              if (certRecipient) certRecipient.textContent = name;
-              var welcomeEl = document.getElementById("studentWelcomeGreeting");
-              if (welcomeEl && welcomeEl.textContent.includes("STUDENT")) welcomeEl.textContent = "Welcome Back, " + name.split(" ")[0];
             }
           })
           .catch(function() {});
+
+        // Fetch domain tasks data
+        fetch("/src/scripts/domain-tasks-data.json")
+          .then(function(res) { return res.json(); })
+          .then(function(data) {
+            domainData = data;
+            var selector = document.getElementById("trackSelector");
+            if (!selector) return;
+
+            var savedTrack = localStorage.getItem("abss_active_domain") || "web-development";
+
+            selector.innerHTML = data.AVAILABLE_DOMAINS.map(function(d) {
+              return '<option value="' + d.slug + '" ' + (d.slug === savedTrack ? 'selected' : '') + '>' + d.name + ' (' + d.category + ')</option>';
+            }).join('');
+
+            selector.addEventListener("change", function(e) {
+              var slug = e.target.value;
+              localStorage.setItem("abss_active_domain", slug);
+              renderRows(slug);
+            });
+
+            renderRows(savedTrack);
+          })
+          .catch(function(err) {
+            console.error("Error loading tasks data", err);
+          });
+
+        function renderRows(trackSlug) {
+          if (!domainData || !domainData.DOMAIN_TASKS) return;
+          var tasks = domainData.DOMAIN_TASKS[trackSlug] || domainData.DOMAIN_TASKS["web-development"];
+          var tbody = document.getElementById("tasksTableBody");
+          if (!tbody) return;
+
+          // Check if there are user saved task states
+          try {
+            var saved = localStorage.getItem("abss_tasks_" + trackSlug);
+            if (saved) {
+              tasks = JSON.parse(saved);
+            }
+          } catch(e) {}
+
+          var filtered = tasks.filter(function(t) {
+            if (currentFilter === 'pending') return t.status === 'in-progress' || t.status === 'pending';
+            if (currentFilter === 'approved') return t.status === 'approved';
+            return true;
+          });
+
+          tbody.innerHTML = filtered.map(function(task) {
+            var statusBadge = task.status === 'approved' 
+              ? '<span class="badge" style="background: rgba(16, 185, 129, 0.15); color: #10b981;">Approved ✓</span>'
+              : task.status === 'in-progress'
+              ? '<span class="badge" style="background: rgba(0, 102, 204, 0.12); color: #0066cc;">In Progress ⏳</span>'
+              : '<span class="badge" style="background: rgba(100, 116, 139, 0.12); color: #64748b;">Pending 🔒</span>';
+
+            return '<tr style="border-bottom: 1px solid #e5e5ea;">' +
+              '<td style="padding: 14px; font-family: monospace; font-weight: 700;">' + task.id + '</td>' +
+              '<td style="padding: 14px;"><strong>' + task.name + '</strong><br /><small style="color: #6e6e73;">' + task.desc + '</small></td>' +
+              '<td style="padding: 14px; color: #475569; font-size: 0.85rem;">' + (task.time || '6-8 hrs') + '</td>' +
+              '<td style="padding: 14px;"><span class="badge" style="background: #f1f5f9; color: #334155; font-size: 0.78rem;">' + (task.difficulty || 'Intermediate') + '</span></td>' +
+              '<td style="padding: 14px;">' + statusBadge + '</td>' +
+              '<td style="padding: 14px;"><a href="/student/submit-work" class="btn btn-secondary" style="padding: 6px 14px; font-size: 0.8rem;">Submit Work &rarr;</a></td>' +
+            '</tr>';
+          }).join('');
+        }
+
+        // Filter button clicks
+        var btnAll = document.getElementById("btnFilterAll");
+        var btnPending = document.getElementById("btnFilterPending");
+        var btnApproved = document.getElementById("btnFilterApproved");
+
+        function setFilter(filter, activeBtn) {
+          currentFilter = filter;
+          [btnAll, btnPending, btnApproved].forEach(function(b) {
+            if (b) {
+              b.className = (b === activeBtn) ? "btn btn-primary" : "btn btn-secondary";
+            }
+          });
+          var sel = document.getElementById("trackSelector");
+          if (sel) renderRows(sel.value);
+        }
+
+        if (btnAll) btnAll.onclick = function() { setFilter('all', btnAll); };
+        if (btnPending) btnPending.onclick = function() { setFilter('pending', btnPending); };
+        if (btnApproved) btnApproved.onclick = function() { setFilter('approved', btnApproved); };
       })();
     </script>
   </body>

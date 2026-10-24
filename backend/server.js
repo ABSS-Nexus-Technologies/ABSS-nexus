@@ -2449,18 +2449,8 @@ const server = http.createServer(async (request, response) => {
       return;
     }
 
-    // Server-enforced authentication on student dashboard route
+    // Allow direct dashboard access with client-side session hydration
     if ((request.method === "GET" || request.method === "HEAD") && pathname === "/internships/dashboard") {
-      const db = readDb();
-      const student = getStudentFromSession(request, db);
-      if (!student) {
-        response.writeHead(302, {
-          Location: "/internships/login?redirect=/internships/dashboard",
-          "Cache-Control": "no-store",
-        });
-        response.end();
-        return;
-      }
       serveStatic(request, response, pathname);
       return;
     }
