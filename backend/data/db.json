@@ -1,10 +1,26 @@
 {
-  "leads": [],
+  "leads": [
+    {
+      "id": "lead-1792876283942",
+      "client": "Rohan Gupta",
+      "name": "Rohan Gupta",
+      "email": "rohan.gupta.test@gmail.com",
+      "phone": "+91 98112 23344",
+      "service": "Website Development",
+      "budget": 25000,
+      "timeline": "2-4 Weeks",
+      "message": "We need an e-commerce website with fast edge delivery.",
+      "status": "New",
+      "contact": "rohan.gupta.test@gmail.com / +91 98112 23344"
+    }
+  ],
   "projects": [],
   "clients": [],
   "tickets": [],
   "pricing": [],
-  "activity": [],
+  "activity": [
+    "Rohan Gupta submitted website inquiry"
+  ],
   "internshipApplications": [],
   "internshipPrograms": [
     {
@@ -297,8 +313,34 @@
       "updatedAt": "2026-10-24T04:30:00.000Z"
     }
   ],
-  "students": [],
-  "studentTokens": [],
+  "students": [
+    {
+      "id": "student-ba2a83ed-48c7-4389-9bb1-bb9cbeabee63",
+      "name": "Aman Verma",
+      "email": "aman.verma.1792876283813@gmail.com",
+      "phone": "9876543210",
+      "passwordHash": "pbkdf2$0c01a9c14df23b5cdc86a90b8e5bb86b$c0cbfa879ef6bb77399241f95d36903b11c2cac7d89391ba368ea9623fdea11c",
+      "track": "web-development",
+      "duration": "4 weeks",
+      "status": "active",
+      "emailVerified": 1,
+      "createdAt": "2026-10-24T21:11:23.874Z",
+      "updatedAt": "2026-10-24T21:11:48.381Z"
+    }
+  ],
+  "studentTokens": [
+    {
+      "id": "token-fa3deb76-25c9-4769-a9b9-1e3d69c36c17",
+      "studentId": "student-ba2a83ed-48c7-4389-9bb1-bb9cbeabee63",
+      "tokenHash": "79e57b04b9b680c8de53b1a0741bd303eea99717962696804cf5b962a61c91c5",
+      "tokenType": "email_verification",
+      "verificationCode": "271293",
+      "codeHash": "6d02642c598c89469dad7a97806303096dead7aa2d25e737c09c31f7f7388676",
+      "expiresAt": "2026-10-25T21:11:23.875Z",
+      "usedAt": "2026-10-24T21:11:48.381Z",
+      "createdAt": "2026-10-24T21:11:23.875Z"
+    }
+  ],
   "studentSessions": [],
   "certificates": [],
   "internshipPayments": [],
