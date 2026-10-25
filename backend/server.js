@@ -1001,15 +1001,35 @@ const buildLogoutCookie = () => {
   return "abss_student_session=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT; HttpOnly; SameSite=Lax";
 };
 
+// Comprehensive Enterprise Security Headers (A+ Target)
+const SECURITY_HEADERS = {
+  "X-Content-Type-Options": "nosniff",
+  "X-Frame-Options": "DENY",
+  "X-XSS-Protection": "1; mode=block",
+  "Strict-Transport-Security": "max-age=31536000; includeSubDomains; preload",
+  "Content-Security-Policy": "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://www.googletagmanager.com https://www.google-analytics.com https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: https:; media-src 'self'; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self';",
+  "Referrer-Policy": "strict-origin-when-cross-origin",
+  "Permissions-Policy": "geolocation=(), microphone=(), camera=(), accelerometer=(), magnetometer=(), gyroscope=(), payment=()",
+};
+
+// Strict input sanitization helper (Anti-XSS)
+const sanitizeInput = (input) => {
+  if (typeof input !== "string") return input;
+  return input
+    .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, "")
+    .replace(/<[^>]+>/g, "")
+    .replace(/javascript:/gi, "")
+    .replace(/on\w+=/gi, "")
+    .trim();
+};
+
 const send = (response, status, payload, headers = {}) => {
   const body = typeof payload === "string" ? payload : JSON.stringify(payload);
   const defaultCacheControl = headers["Cache-Control"] || (typeof payload === "object" ? "public, max-age=300" : "no-cache");
   response.writeHead(status, {
     "Content-Type": typeof payload === "string" ? "text/plain; charset=utf-8" : "application/json; charset=utf-8",
     "Cache-Control": defaultCacheControl,
-    "X-Frame-Options": "DENY",
-    "X-Content-Type-Options": "nosniff",
-    "Referrer-Policy": "strict-origin-when-cross-origin",
+    ...SECURITY_HEADERS,
     ...headers,
   });
   response.end(body);
@@ -1103,16 +1123,16 @@ const requireRole = (request, response, allowedRoles) => {
 
 const normalizeLead = (input) => ({
   id: input.id || `lead-${Date.now()}`,
-  client: String(input.client || input.name || "Website Inquiry").trim(),
-  name: String(input.name || input.client || "").trim(),
-  email: String(input.email || "").trim(),
-  phone: String(input.phone || "").trim(),
-  service: String(input.service || "Website Inquiry").trim(),
+  client: sanitizeInput(String(input.client || input.name || "Website Inquiry")),
+  name: sanitizeInput(String(input.name || input.client || "")),
+  email: sanitizeInput(String(input.email || "")),
+  phone: sanitizeInput(String(input.phone || "")),
+  service: sanitizeInput(String(input.service || "Website Inquiry")),
   budget: Number(input.budget || 0),
-  timeline: String(input.timeline || "").trim(),
-  message: String(input.message || "").trim(),
+  timeline: sanitizeInput(String(input.timeline || "")),
+  message: sanitizeInput(String(input.message || "")),
   status: String(input.status || "New").trim(),
-  contact: String(input.contact || [input.email, input.phone].filter(Boolean).join(" / ")).trim(),
+  contact: sanitizeInput(String(input.contact || [input.email, input.phone].filter(Boolean).join(" / "))),
 });
 
 const serveStatic = (request, response, pathname) => {
@@ -1133,6 +1153,7 @@ const serveStatic = (request, response, pathname) => {
         response.writeHead(404, { 
           "Content-Type": "text/html; charset=utf-8",
           "Cache-Control": "no-cache",
+          ...SECURITY_HEADERS,
         });
         response.end(notFoundData);
       });
@@ -1156,6 +1177,7 @@ const serveStatic = (request, response, pathname) => {
       response.writeHead(304, {
         "ETag": etag,
         "Cache-Control": cacheControl,
+        ...SECURITY_HEADERS,
       });
       response.end();
       return;
@@ -1174,9 +1196,7 @@ const serveStatic = (request, response, pathname) => {
         "Cache-Control": cacheControl,
         "ETag": etag,
         "Vary": "Accept-Encoding",
-        "X-Frame-Options": "DENY",
-        "X-Content-Type-Options": "nosniff",
-        "Referrer-Policy": "strict-origin-when-cross-origin",
+        ...SECURITY_HEADERS,
       });
       response.end(gzipped);
       return;
@@ -1187,9 +1207,7 @@ const serveStatic = (request, response, pathname) => {
       "Content-Length": data.length,
       "Cache-Control": cacheControl,
       "ETag": etag,
-      "X-Frame-Options": "DENY",
-      "X-Content-Type-Options": "nosniff",
-      "Referrer-Policy": "strict-origin-when-cross-origin",
+      ...SECURITY_HEADERS,
     });
     response.end(data);
   });
@@ -1200,10 +1218,59 @@ const server = http.createServer(async (request, response) => {
   const pathname = decodeURIComponent(url.pathname);
 
   try {
+    // 1. Strict CORS Middleware & Origin Validation
+    const origin = request.headers["origin"];
+    const allowedOrigins = [
+      "https://abssnexus.in",
+      "https://www.abssnexus.in",
+      "http://localhost:3000",
+      "http://127.0.0.1:3000",
+    ];
+
+    const isOriginAllowed = !origin || allowedOrigins.includes(origin);
+
+    if (origin && isOriginAllowed) {
+      response.setHeader("Access-Control-Allow-Origin", origin);
+      response.setHeader("Access-Control-Allow-Credentials", "true");
+      response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+      response.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization, X-Requested-With, If-None-Match");
+      response.setHeader("Access-Control-Max-Age", "3600");
+    }
+
+    // Handle OPTIONS Preflight Requests
+    if (request.method === "OPTIONS") {
+      if (origin && !isOriginAllowed) {
+        send(response, 403, { error: "Not allowed by CORS" });
+        return;
+      }
+      response.writeHead(204, {
+        ...SECURITY_HEADERS,
+        ...(origin && isOriginAllowed ? {
+          "Access-Control-Allow-Origin": origin,
+          "Access-Control-Allow-Credentials": "true",
+          "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+          "Access-Control-Allow-Headers": "Content-Type, Authorization, X-Requested-With, If-None-Match",
+          "Access-Control-Max-Age": "3600",
+        } : {}),
+      });
+      response.end();
+      return;
+    }
+
+    // 2. Global API Rate Limiting: 60 requests per minute
+    if (pathname.startsWith("/api/")) {
+      const clientIp = getClientIp(request);
+      if (!checkRateLimit(`general_api:${clientIp}`, 60, 60 * 1000)) {
+        send(response, 429, { error: "Too many API requests. Please slow down and try again later." }, { "Retry-After": "60" });
+        return;
+      }
+    }
+
     if ((request.method === "GET" || request.method === "HEAD") && publicRedirects[pathname]) {
       response.writeHead(301, {
         Location: `${publicRedirects[pathname]}${url.search}`,
         "Cache-Control": "no-store",
+        ...SECURITY_HEADERS,
       });
       response.end();
       return;
@@ -2043,7 +2110,12 @@ const server = http.createServer(async (request, response) => {
       return;
     }
 
-    if (request.method === "POST" && pathname === "/api/leads/contact") {
+    if (request.method === "POST" && (pathname === "/api/leads/contact" || pathname === "/api/contact")) {
+      const clientIp = getClientIp(request);
+      if (!checkRateLimit(`contact:${clientIp}`, 3, 60 * 60 * 1000)) {
+        send(response, 429, { error: "Too many contact submissions. Please wait 1 hour before submitting again." }, { "Retry-After": "3600" });
+        return;
+      }
       const origin = request.headers.origin;
       if (origin) {
         try {
@@ -2307,11 +2379,11 @@ const server = http.createServer(async (request, response) => {
       }
 
       const body = await readBody(request);
-      const name = String(body.name || "").trim();
-      const email = String(body.email || "").trim().toLowerCase();
+      const name = sanitizeInput(String(body.name || ""));
+      const email = sanitizeInput(String(body.email || "")).toLowerCase();
       const password = String(body.password || "");
-      const track = String(body.track || "").trim();
-      const duration = String(body.duration || "").trim();
+      const track = sanitizeInput(String(body.track || ""));
+      const duration = sanitizeInput(String(body.duration || ""));
       const rawPhone = String(body.phone || "").trim();
       const cleanPhone = rawPhone.replace(/\D/g, "").slice(-10);
 
@@ -2433,8 +2505,8 @@ const server = http.createServer(async (request, response) => {
 
     if (request.method === "POST" && pathname === "/api/internships/auth/verify-email") {
       const clientIp = getClientIp(request);
-      if (!checkRateLimit(`verify:${clientIp}`, 15, 5 * 60 * 1000)) {
-        send(response, 429, { error: "Too many verification attempts. Please wait a few minutes." });
+      if (!checkRateLimit(`verify:${clientIp}`, 5, 60 * 60 * 1000)) {
+        send(response, 429, { error: "Too many verification attempts. Please wait 1 hour before trying again." }, { "Retry-After": "3600" });
         return;
       }
 
