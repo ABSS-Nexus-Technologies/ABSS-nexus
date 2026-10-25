@@ -11,13 +11,15 @@
     "dev": "node backend/server.js",
     "validate": "scripts/validate.sh",
     "test": "scripts/validate.sh",
-    "sitemap": "node scripts/build.js"
+    "sitemap": "node scripts/build.js",
+    "validate-json": "node -e \"JSON.parse(require('fs').readFileSync('./backend/data/db.json')); console.log('JSON is valid');\""
   },
   "engines": {
     "node": ">=18"
   },
   "dependencies": {
     "@sentry/node": "^11.9.0",
+    "razorpay": "^2.9.8",
     "resend": "^6.34.1"
   }
 }

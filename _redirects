@@ -387,6 +387,11 @@
 /src/pages/internships-payment-status /internships/payment-status 301
 /src/pages/internships-payment-status.html /internships/payment-status 301
 
+/internships/payment/ /internships/payment 301
+/internships-payment.html /internships/payment 301
+/src/pages/internships-payment /internships/payment 301
+/src/pages/internships-payment.html /internships/payment 301
+
 /verify-certificate.html /verify-certificate 301
 /src/pages/verify-certificate /verify-certificate 301
 /src/pages/verify-certificate.html /verify-certificate 301

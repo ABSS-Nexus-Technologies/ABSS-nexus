@@ -19,6 +19,13 @@
   "tickets": [],
   "pricing": [],
   "activity": [
+    "Regression Test Client submitted website inquiry",
+    "Regression Test Client submitted website inquiry",
+    "Regression Test Client submitted website inquiry",
+    "Regression Test Client submitted website inquiry",
+    "Regression Test Client submitted website inquiry",
+    "Regression Test Client submitted website inquiry",
+    "Regression Test Client submitted website inquiry",
     "Test  User submitted website inquiry",
     "Rohan Gupta submitted website inquiry"
   ],
@@ -381,97 +388,8 @@
       "updatedAt": "2026-10-25T11:07:04.998Z"
     }
   ],
-  "studentTokens": [
-    {
-      "id": "token-fa3deb76-25c9-4769-a9b9-1e3d69c36c17",
-      "studentId": "student-ba2a83ed-48c7-4389-9bb1-bb9cbeabee63",
-      "tokenHash": "79e57b04b9b680c8de53b1a0741bd303eea99717962696804cf5b962a61c91c5",
-      "tokenType": "email_verification",
-      "verificationCode": "271293",
-      "codeHash": "6d02642c598c89469dad7a97806303096dead7aa2d25e737c09c31f7f7388676",
-      "expiresAt": "2026-10-25T21:11:23.875Z",
-      "usedAt": "2026-10-24T21:11:48.381Z",
-      "createdAt": "2026-10-24T21:11:23.875Z"
-    },
-    {
-      "id": "token-abdf2974-889e-4075-a32d-96d9aebaea8f",
-      "studentId": "student-ffb3871e-e52f-4dd5-a83e-60a607d0a370",
-      "tokenHash": "210bf0bd541edc9f3d7ad08d3c090b55143dfc81f312e79cda2d8f51444c9257",
-      "tokenType": "email_verification",
-      "verificationCode": "505174",
-      "codeHash": "4894083c07f365b4ea1b20d96e8a3b20f537903b1f5253b40eb8b1f131b70fcd",
-      "expiresAt": "2026-10-26T07:42:33.795Z",
-      "usedAt": "2026-10-25T07:42:33.838Z",
-      "createdAt": "2026-10-25T07:42:33.795Z"
-    },
-    {
-      "id": "token-b41f73ce-6f63-4f41-8046-fa16f81364ed",
-      "studentId": "student-ffb3871e-e52f-4dd5-a83e-60a607d0a370",
-      "tokenHash": "f396e78e8742258661c2b9f0e530c25daa989ce109de8c436940bb84fbfb11fb",
-      "tokenType": "email_verification",
-      "expiresAt": "2026-10-26T07:42:33.834Z",
-      "usedAt": null,
-      "createdAt": "2026-10-25T07:42:33.834Z"
-    },
-    {
-      "id": "token-370b9a9d-e4c5-433c-9002-3d5f475ca6fb",
-      "studentId": "student-d262e939-b1e7-4e05-87ae-5aa0f0e498cf",
-      "tokenHash": "9cad65788f8130646e4ee0f7c6fe78a54afd5f369760dd17c8c7e33427a66b60",
-      "tokenType": "email_verification",
-      "verificationCode": "551758",
-      "codeHash": "5e51f24c222dd53d3523551cd1838a3da0dbe9223bd3e2e6ac0538a68e572c61",
-      "expiresAt": "2026-10-26T10:33:27.187Z",
-      "usedAt": null,
-      "createdAt": "2026-10-25T10:33:27.187Z"
-    },
-    {
-      "id": "token-9367ba2a-87e1-4f67-b775-9cf272db9366",
-      "studentId": "student-4982d4fe-465b-4e24-a006-8c8ffdafda8d",
-      "tokenHash": "f072b49640d3ea90486537f8a8660c8618791d46fd7fd2747ca9f2a497bfac7e",
-      "tokenType": "email_verification",
-      "verificationCode": "795584",
-      "codeHash": "a42c934d090a4dfb37367f1864e5bb30f6935060fd1f03feffc81c1682dcec47",
-      "expiresAt": "2026-10-26T10:33:55.733Z",
-      "usedAt": null,
-      "createdAt": "2026-10-25T10:33:55.733Z"
-    },
-    {
-      "id": "token-a2a4a719-b778-49a5-90ea-cea86145b993",
-      "studentId": "student-1f0538f2-3ba0-4a92-a467-97ea990384b1",
-      "tokenHash": "df09e24b2d4a7c542a39916ffebd7fefe052c644359bd45201742352b81988f2",
-      "tokenType": "email_verification",
-      "verificationCode": "496017",
-      "codeHash": "5025a2254bc73b3e5365c659dfc8ab3db03f22dce8eafe0e47a0181bcf58fd7c",
-      "expiresAt": "2026-10-26T11:06:03.962Z",
-      "usedAt": "2026-10-25T11:07:04.998Z",
-      "createdAt": "2026-10-25T11:06:03.962Z"
-    },
-    {
-      "id": "token-73a53325-b461-4911-9c55-27b7c5e42599",
-      "studentId": "student-1f0538f2-3ba0-4a92-a467-97ea990384b1",
-      "tokenHash": "afdc3815a4234e4fee0dc7256f5754b7186d63c97d40a485e1eeee21c134e835",
-      "tokenType": "email_verification",
-      "expiresAt": "2026-10-26T11:06:08.486Z",
-      "usedAt": null,
-      "createdAt": "2026-10-25T11:06:08.486Z"
-    }
-  ],
-  "studentSessions": [
-    {
-      "id": "sess-43adb737-d6cb-416b-9d31-27327b36725b",
-      "studentId": "student-ffb3871e-e52f-4dd5-a83e-60a607d0a370",
-      "sessionHash": "738a5bbe858cfae92cb696b6844355f0a9fface040785489af478ad745a91573",
-      "expiresAt": "2026-11-01T10:34:16.629Z",
-      "createdAt": "2026-10-25T10:34:16.629Z"
-    },
-    {
-      "id": "sess-df541b4e-229d-471b-9165-b614868622a5",
-      "studentId": "student-1f0538f2-3ba0-4a92-a467-97ea990384b1",
-      "sessionHash": "304357627b5f73066ac60e3807bd2f5a16501a513a3df77cf6bcc3c381ba92ac",
-      "expiresAt": "2026-11-01T11:07:09.636Z",
-      "createdAt": "2026-10-25T11:07:09.636Z"
-    }
-  ],
+  "studentTokens": [],
+  "studentSessions": [],
   "certificates": [],
   "internshipPayments": [],
   "internshipSubmissions": [
@@ -601,6 +519,151 @@
       "mentorFeedback": "Good packet capture, but missing remediation section for the detected clear-text credentials. Please add firewall mitigation rules and re-upload the updated report.",
       "reviewerName": "Aditya Roy (Cybersecurity Lead Mentor)",
       "reviewedAt": "2026-10-24T08:45:00.000Z"
+    }
+  ],
+  "payments": [
+    {
+      "id": "pay_XXXXXXXXXXXXX",
+      "studentId": "student_123",
+      "studentEmail": "student@example.com",
+      "studentName": "Raj Kumar",
+      "internshipTrack": "web-development",
+      "duration": "high",
+      "amount": 249,
+      "currency": "INR",
+      "status": "completed",
+      "razorpayOrderId": "order_XXXXXXXXXXXXX",
+      "razorpayPaymentId": "pay_XXXXXXXXXXXXX",
+      "razorpaySignature": "signature_XXXXXXXXXXXXX",
+      "receiptNumber": "RCP/2026/00001",
+      "invoiceNumber": "INV/2026/00001",
+      "invoiceUrl": "/invoices/INV-2026-00001.pdf",
+      "paymentMethod": "card",
+      "paymentGateway": "razorpay",
+      "createdAt": "2026-10-26T10:30:00Z",
+      "completedAt": "2026-10-26T10:35:00Z",
+      "refundStatus": "none",
+      "refundAmount": 0,
+      "notes": "Payment successful for Web Dev internship",
+      "metadata": {
+        "ip_address": "192.168.1.1",
+        "user_agent": "Mozilla/5.0...",
+        "utm_source": "internship-portal"
+      }
+    },
+    {
+      "id": "pay_pending_1792961499263",
+      "studentId": "student_123",
+      "studentEmail": "test@example.com",
+      "studentName": "Test Student",
+      "internshipTrack": "web-development",
+      "duration": "high",
+      "amount": 249,
+      "currency": "INR",
+      "status": "completed",
+      "razorpayOrderId": "order_1ce313c6ec49a81c",
+      "createdAt": "2026-10-25T20:51:39.263Z",
+      "razorpayPaymentId": "pay_test_12345",
+      "razorpaySignature": "test_sig_12345",
+      "completedAt": "2026-10-25T20:51:50.122Z",
+      "receiptNumber": "RCP/2026/00002",
+      "invoiceNumber": "INV/2026/00002",
+      "invoiceUrl": "/invoices/INV/2026/00002.pdf"
+    },
+    {
+      "id": "pay_pending_1792961585402",
+      "studentId": "student_test_curl",
+      "studentEmail": "curltest@abssnexus.in",
+      "studentName": "Curl Test Student",
+      "internshipTrack": "web-development",
+      "duration": "high",
+      "amount": 249,
+      "currency": "INR",
+      "status": "refunded",
+      "razorpayOrderId": "order_74969b34a222d727",
+      "createdAt": "2026-10-25T20:53:05.402Z",
+      "razorpayPaymentId": "pay_test_curl_9999",
+      "razorpaySignature": "test_sig_mock12345",
+      "completedAt": "2026-10-25T20:53:22.604Z",
+      "receiptNumber": "RCP/2026/00003",
+      "invoiceNumber": "INV/2026/00003",
+      "invoiceUrl": "/invoices/INV/2026/00003.pdf",
+      "refundStatus": "refunded",
+      "refundAmount": 249
+    }
+  ],
+  "invoices": [
+    {
+      "id": "inv_XXXXXXXXXXXXX",
+      "invoiceNumber": "INV/2026/00001",
+      "paymentId": "pay_XXXXXXXXXXXXX",
+      "studentId": "student_123",
+      "studentEmail": "student@example.com",
+      "studentName": "Raj Kumar",
+      "amount": 249,
+      "gst": 0,
+      "total": 249,
+      "issueDate": "2026-10-26",
+      "dueDate": "2026-10-26",
+      "status": "paid",
+      "items": [
+        {
+          "description": "Web Development Internship (High Duration - 8 weeks)",
+          "quantity": 1,
+          "rate": 249,
+          "amount": 249
+        }
+      ],
+      "pdfUrl": "/invoices/INV-2026-00001.pdf",
+      "createdAt": "2026-10-26T10:35:00Z"
+    },
+    {
+      "id": "inv_1792961510122",
+      "invoiceNumber": "INV/2026/00002",
+      "paymentId": "pay_pending_1792961499263",
+      "studentId": "student_123",
+      "studentEmail": "test@example.com",
+      "studentName": "Test Student",
+      "amount": 249,
+      "gst": 0,
+      "total": 249,
+      "issueDate": "2026-10-25",
+      "dueDate": "2026-10-25",
+      "status": "paid",
+      "items": [
+        {
+          "description": "web-development Internship (high duration)",
+          "quantity": 1,
+          "rate": 249,
+          "amount": 249
+        }
+      ],
+      "pdfUrl": "/invoices/INV/2026/00002.pdf",
+      "createdAt": "2026-10-25T20:51:50.122Z"
+    },
+    {
+      "id": "inv_1792961602604",
+      "invoiceNumber": "INV/2026/00003",
+      "paymentId": "pay_pending_1792961585402",
+      "studentId": "student_test_curl",
+      "studentEmail": "curltest@abssnexus.in",
+      "studentName": "Curl Test Student",
+      "amount": 249,
+      "gst": 0,
+      "total": 249,
+      "issueDate": "2026-10-25",
+      "dueDate": "2026-10-25",
+      "status": "paid",
+      "items": [
+        {
+          "description": "web-development Internship (high duration)",
+          "quantity": 1,
+          "rate": 249,
+          "amount": 249
+        }
+      ],
+      "pdfUrl": "/invoices/INV/2026/00003.pdf",
+      "createdAt": "2026-10-25T20:53:22.604Z"
     }
   ]
 }

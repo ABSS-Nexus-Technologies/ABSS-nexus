@@ -88,5 +88,24 @@ service cloud.firestore {
     match /logs/{logId} {
       allow read, write: if false; // Exclusively written via Admin SDK
     }
+
+    // ===============================================================
+    // 8. Payments & Invoices (Student Read-Own, Backend Write)
+    // ===============================================================
+    match /payments/{paymentId} {
+      allow read: if isAuthenticated() && (
+        request.auth.uid == resource.data.studentId ||
+        request.auth.token.email == resource.data.studentEmail
+      );
+      allow write: if false; // Managed exclusively by backend service account
+    }
+
+    match /invoices/{invoiceId} {
+      allow read: if isAuthenticated() && (
+        request.auth.uid == resource.data.studentId ||
+        request.auth.token.email == resource.data.studentEmail
+      );
+      allow write: if false; // Managed exclusively by backend service account
+    }
   }
 }

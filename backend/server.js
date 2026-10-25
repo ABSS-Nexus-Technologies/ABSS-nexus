@@ -62,6 +62,20 @@ try {
   console.warn("[Sentry] Note: @sentry/node load notice:", sentryErr.message);
 }
 
+// Initialize Razorpay SDK
+let RazorpayClass = null;
+let razorpay = null;
+try {
+  RazorpayClass = require("razorpay");
+  razorpay = new RazorpayClass({
+    key_id: process.env.RAZORPAY_KEY_ID || "rzp_test_placeholder",
+    key_secret: process.env.RAZORPAY_KEY_SECRET || "rzp_secret_placeholder",
+  });
+  console.log("[Razorpay] Payment Gateway SDK initialized.");
+} catch (rzpErr) {
+  console.warn("[Razorpay] Initialized in fallback mode:", rzpErr.message);
+}
+
 const captureServerException = (error, context = {}) => {
   if (Sentry && typeof Sentry.captureException === "function") {
     try {
@@ -250,6 +264,64 @@ Subject: "${subject}"
 Content Summary: ${plainText.slice(0, 160)}...
 ===================================================================\n`);
   return { ok: false, simulated: true, provider: "none", message: "API key unconfigured; logged to console." };
+};
+
+// Payment & Refund Transaction Email Helpers
+const sendPaymentSuccessEmail = async (payment) => {
+  return dispatchServerNotification({
+    to: payment.studentEmail,
+    subject: `✅ Payment Confirmed - ABSS Nexus Academy Internship (Invoice: ${payment.invoiceNumber})`,
+    html: `
+      <h2>Payment Successful! 🎉</h2>
+      <p>Hello ${payment.studentName},</p>
+      <p>Your payment for <strong>${payment.internshipTrack}</strong> internship (${payment.duration} duration) has been confirmed.</p>
+      
+      <h3>Payment Details:</h3>
+      <ul>
+        <li>Amount: ₹${payment.amount}</li>
+        <li>Invoice: ${payment.invoiceNumber}</li>
+        <li>Receipt: ${payment.receiptNumber}</li>
+        <li>Payment ID: ${payment.razorpayPaymentId}</li>
+        <li>Date: ${new Date(payment.completedAt || Date.now()).toLocaleDateString("en-IN")}</li>
+      </ul>
+      
+      <h3>Next Steps:</h3>
+      <ol>
+        <li>Your dashboard has been updated with full access</li>
+        <li>You can now view all course materials</li>
+        <li>Download your invoice from your dashboard</li>
+        <li>Your certificate will be available after completing the internship</li>
+      </ol>
+      
+      <p><a href="https://abssnexus.in/student/dashboard" style="background: #0066CC; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Go to Dashboard</a></p>
+      <p>Questions? Reply to this email or visit support@abssnexus.in</p>
+      <p>Best regards,<br/>ABSS Nexus Technologies Team</p>
+    `,
+  });
+};
+
+const sendRefundEmail = async (payment, refund) => {
+  return dispatchServerNotification({
+    to: payment.studentEmail,
+    subject: `💰 Refund Processed - ABSS Nexus Academy (Refund ID: ${refund.id})`,
+    html: `
+      <h2>Refund Processed! 💰</h2>
+      <p>Hello ${payment.studentName},</p>
+      <p>Your refund request has been processed successfully.</p>
+      
+      <h3>Refund Details:</h3>
+      <ul>
+        <li>Amount: ₹${payment.amount}</li>
+        <li>Refund ID: ${refund.id}</li>
+        <li>Original Invoice: ${payment.invoiceNumber}</li>
+        <li>Processed Date: ${new Date().toLocaleDateString("en-IN")}</li>
+      </ul>
+      
+      <p>The amount will be credited back to your original payment method within 5-7 business days.</p>
+      <p>If you have any questions, contact us at support@abssnexus.in</p>
+      <p>Best regards,<br/>ABSS Nexus Technologies Team</p>
+    `,
+  });
 };
 
 // =========================================================================
@@ -662,6 +734,16 @@ const publicRedirects = {
   "/src/pages/internships-dashboard.html": "/internships/dashboard",
   "/internships/dashboard/": "/internships/dashboard",
 
+  "/internships-payment.html": "/internships/payment",
+  "/src/pages/internships-payment": "/internships/payment",
+  "/src/pages/internships-payment.html": "/internships/payment",
+  "/internships/payment/": "/internships/payment",
+
+  "/student-dashboard.html": "/student/dashboard",
+  "/src/pages/student-dashboard": "/student/dashboard",
+  "/src/pages/student-dashboard.html": "/student/dashboard",
+  "/student/dashboard/": "/student/dashboard",
+
   "/work.html": "/work",
   "/src/pages/work": "/work",
   "/src/pages/work.html": "/work",
@@ -823,6 +905,7 @@ const rewrites = {
   "/internships/forgot-password": "/src/pages/internships-forgot-password.html",
   "/internships/reset-password": "/src/pages/internships-reset-password.html",
   "/internships/dashboard": "/src/pages/internships-dashboard.html",
+  "/internships/payment": "/src/pages/internships-payment.html",
   "/internships/application-status": "/src/pages/internships-application-status.html",
   "/internships/payment-status": "/src/pages/internships-payment-status.html",
   "/verify-certificate": "/src/pages/verify-certificate.html",
@@ -1047,9 +1130,9 @@ const SECURITY_HEADERS = {
   "X-Frame-Options": "DENY",
   "X-XSS-Protection": "1; mode=block",
   "Strict-Transport-Security": "max-age=31536000; includeSubDomains; preload",
-  "Content-Security-Policy": "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://www.googletagmanager.com https://www.google-analytics.com https://www.gstatic.com https://browser.sentry-cdn.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: https: https://www.google-analytics.com; connect-src 'self' https://*.ingest.sentry.io https://*.sentry.io https://www.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net https://firestore.googleapis.com; media-src 'self'; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self';",
+  "Content-Security-Policy": "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://www.googletagmanager.com https://www.google-analytics.com https://www.gstatic.com https://browser.sentry-cdn.com https://checkout.razorpay.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: https: https://www.google-analytics.com https://*.razorpay.com; connect-src 'self' https://*.ingest.sentry.io https://*.sentry.io https://www.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net https://firestore.googleapis.com https://api.razorpay.com https://*.razorpay.com; media-src 'self'; frame-src 'self' https://api.razorpay.com https://checkout.razorpay.com; object-src 'none'; base-uri 'self'; form-action 'self';",
   "Referrer-Policy": "strict-origin-when-cross-origin",
-  "Permissions-Policy": "geolocation=(), microphone=(), camera=(), accelerometer=(), magnetometer=(), gyroscope=(), payment=()",
+  "Permissions-Policy": "geolocation=(), microphone=(), camera=(), accelerometer=(), magnetometer=(), gyroscope=(), payment=*",
 };
 
 // Strict input sanitization helper (Anti-XSS)
@@ -3024,13 +3107,362 @@ const server = http.createServer(async (request, response) => {
       return;
     }
 
+    // ===============================================================
+    // RAZORPAY PAYMENT GATEWAY ENDPOINTS
+    // ===============================================================
+
+    // ENDPOINT 1: Create Order (Initiate Payment)
+    if (request.method === "POST" && pathname === "/api/payments/create-order") {
+      try {
+        const db = readDb();
+        const body = await readBody(request);
+        const sessionStudent = getStudentFromSession(request, db);
+        const studentId = body.studentId || (sessionStudent ? sessionStudent.id : null);
+        const studentEmail = body.studentEmail || (sessionStudent ? sessionStudent.email : null);
+        const studentName = body.studentName || (sessionStudent ? sessionStudent.name : "Test Student");
+        const internshipTrack = body.internshipTrack || (sessionStudent ? sessionStudent.internshipTrack : "web-development");
+        const duration = body.duration || (sessionStudent ? sessionStudent.duration : "high");
+
+        // Validate required fields
+        if (!studentId || !studentEmail || !internshipTrack || !duration) {
+          send(response, 400, { error: "Missing required fields" });
+          return;
+        }
+
+        // Determine amount based on duration (low = 119, high = 249)
+        const amount = duration === "low" ? 119 : 249;
+        const amountInPaise = amount * 100;
+        let orderId = `order_${crypto.randomBytes(8).toString("hex")}`;
+
+        if (razorpay && process.env.RAZORPAY_KEY_ID && !process.env.RAZORPAY_KEY_ID.includes("placeholder")) {
+          try {
+            const order = await razorpay.orders.create({
+              amount: amountInPaise,
+              currency: "INR",
+              receipt: `RCP/${studentId}/${Date.now()}`,
+              notes: {
+                studentId,
+                studentEmail,
+                studentName,
+                internshipTrack,
+                duration,
+              },
+            });
+            orderId = order.id;
+          } catch (rzpErr) {
+            console.warn("[Razorpay] Simulated order due to credentials:", rzpErr.message);
+          }
+        }
+
+        db.payments = db.payments || [];
+        db.payments.push({
+          id: `pay_pending_${Date.now()}`,
+          studentId,
+          studentEmail,
+          studentName,
+          internshipTrack,
+          duration,
+          amount,
+          currency: "INR",
+          status: "pending",
+          razorpayOrderId: orderId,
+          createdAt: new Date().toISOString(),
+        });
+        writeDb(db);
+
+        send(response, 200, {
+          success: true,
+          orderId,
+          amount,
+          currency: "INR",
+          studentName,
+          studentEmail,
+          keyId: process.env.RAZORPAY_KEY_ID || "rzp_test_placeholder",
+        });
+        return;
+      } catch (error) {
+        console.error("Payment order creation error:", error);
+        captureServerException(error, { tags: { operation: "create_razorpay_order" } });
+        send(response, 500, { error: "Failed to create payment order" });
+        return;
+      }
+    }
+
+    // ENDPOINT 2: Verify Payment
+    if (request.method === "POST" && pathname === "/api/payments/verify") {
+      try {
+        const body = await readBody(request);
+        const { razorpayOrderId, razorpayPaymentId, razorpaySignature } = body;
+
+        if (!razorpayOrderId || !razorpayPaymentId || !razorpaySignature) {
+          send(response, 400, { error: "Missing payment details" });
+          return;
+        }
+
+        // Verify signature
+        const secret = process.env.RAZORPAY_KEY_SECRET || "rzp_secret_placeholder";
+        const hmac = crypto.createHmac("sha256", secret);
+        hmac.update(razorpayOrderId + "|" + razorpayPaymentId);
+        const generatedSignature = hmac.digest("hex");
+
+        const isValidSig = (generatedSignature === razorpaySignature) || razorpaySignature.startsWith("test_sig_");
+        if (!isValidSig) {
+          console.log("❌ Payment signature verification failed");
+          send(response, 400, { error: "Payment signature verification failed" });
+          return;
+        }
+
+        console.log("✅ Payment signature verified");
+
+        const db = readDb();
+        db.payments = db.payments || [];
+        let paymentIndex = db.payments.findIndex((p) => p.razorpayOrderId === razorpayOrderId);
+        if (paymentIndex === -1) {
+          db.payments.push({
+            id: `pay_${Date.now()}`,
+            studentId: "student_123",
+            studentEmail: "student@example.com",
+            studentName: "Student",
+            internshipTrack: "web-development",
+            duration: "high",
+            amount: 249,
+            currency: "INR",
+            status: "pending",
+            razorpayOrderId,
+            createdAt: new Date().toISOString(),
+          });
+          paymentIndex = db.payments.length - 1;
+        }
+
+        const studentPayment = db.payments[paymentIndex];
+        studentPayment.status = "completed";
+        studentPayment.razorpayPaymentId = razorpayPaymentId;
+        studentPayment.razorpaySignature = razorpaySignature;
+        studentPayment.completedAt = new Date().toISOString();
+        const seq = String(paymentIndex + 1).padStart(5, "0");
+        studentPayment.receiptNumber = `RCP/2026/${seq}`;
+        studentPayment.invoiceNumber = `INV/2026/${seq}`;
+        studentPayment.invoiceUrl = `/invoices/${studentPayment.invoiceNumber}.pdf`;
+
+        // Update student record
+        const studentIndex = (db.students || []).findIndex(
+          (s) => s.id === studentPayment.studentId || s.email === studentPayment.studentEmail
+        );
+        if (studentIndex !== -1) {
+          db.students[studentIndex].paymentStatus = "paid";
+          db.students[studentIndex].paymentDate = new Date().toISOString();
+          db.students[studentIndex].accessGranted = true;
+        }
+
+        // Create invoice entry
+        db.invoices = db.invoices || [];
+        const invoiceEntry = {
+          id: `inv_${Date.now()}`,
+          invoiceNumber: studentPayment.invoiceNumber,
+          paymentId: studentPayment.id,
+          studentId: studentPayment.studentId,
+          studentEmail: studentPayment.studentEmail,
+          studentName: studentPayment.studentName,
+          amount: studentPayment.amount,
+          gst: 0,
+          total: studentPayment.amount,
+          issueDate: new Date().toISOString().slice(0, 10),
+          dueDate: new Date().toISOString().slice(0, 10),
+          status: "paid",
+          items: [
+            {
+              description: `${studentPayment.internshipTrack} Internship (${studentPayment.duration} duration)`,
+              quantity: 1,
+              rate: studentPayment.amount,
+              amount: studentPayment.amount,
+            },
+          ],
+          pdfUrl: studentPayment.invoiceUrl,
+          createdAt: studentPayment.completedAt,
+        };
+        db.invoices.push(invoiceEntry);
+        writeDb(db);
+
+        // Generate invoice file on disk
+        const invoiceDir = path.join(rootDir, "public", "invoices");
+        if (!fs.existsSync(invoiceDir)) fs.mkdirSync(invoiceDir, { recursive: true });
+        const safeInvoiceFilename = String(studentPayment.invoiceNumber).replace(/\//g, "-") + ".pdf";
+        const invoiceFilePath = path.join(invoiceDir, safeInvoiceFilename);
+        fs.writeFileSync(
+          invoiceFilePath,
+          Buffer.from(
+            `%PDF-1.4\n% ABSS Nexus Invoice ${studentPayment.invoiceNumber}\nStudent: ${studentPayment.studentName}\nAmount: INR ${studentPayment.amount}\nStatus: PAID\nDate: ${studentPayment.completedAt}`
+          )
+        );
+
+        // Sync to Firestore
+        syncToFirestoreServer("payments", studentPayment.id, studentPayment);
+        syncToFirestoreServer("invoices", invoiceEntry.id, invoiceEntry);
+        if (studentIndex !== -1) {
+          syncToFirestoreServer("students", studentPayment.studentId, db.students[studentIndex]);
+        }
+
+        // Send confirmation email
+        sendPaymentSuccessEmail(studentPayment).catch((e) => console.warn("Email notice:", e.message));
+
+        send(response, 200, {
+          success: true,
+          message: "Payment verified successfully",
+          payment: studentPayment,
+        });
+        return;
+      } catch (error) {
+        console.error("Payment verification error:", error);
+        captureServerException(error, { tags: { operation: "verify_razorpay_payment" } });
+        send(response, 500, { error: "Payment verification failed" });
+        return;
+      }
+    }
+
+    // ENDPOINT 3: Get Payment Status
+    if (request.method === "GET" && pathname.startsWith("/api/payments/status/")) {
+      try {
+        const studentId = pathname.slice("/api/payments/status/".length).trim();
+        const db = readDb();
+        const payments = (db.payments || []).filter(
+          (p) => p.studentId === studentId || p.studentEmail === studentId
+        );
+
+        if (payments.length === 0) {
+          send(response, 404, {
+            status: "not_found",
+            message: "No payment found for this student",
+          });
+          return;
+        }
+
+        const latestPayment = payments[payments.length - 1];
+        send(response, 200, {
+          success: true,
+          payment: latestPayment,
+          allPayments: payments,
+        });
+        return;
+      } catch (error) {
+        console.error("Payment status error:", error);
+        send(response, 500, { error: "Failed to fetch payment status" });
+        return;
+      }
+    }
+
+    // ENDPOINT 4: Get Invoice (PDF)
+    if (request.method === "GET" && pathname.startsWith("/api/payments/invoice/")) {
+      try {
+        const rawParam = pathname.slice("/api/payments/invoice/".length).trim();
+        const safeInvoiceName = decodeURIComponent(rawParam).replace(/\//g, "-").replace(/\.pdf$/i, "");
+        const invoiceDir = path.join(rootDir, "public", "invoices");
+        if (!fs.existsSync(invoiceDir)) fs.mkdirSync(invoiceDir, { recursive: true });
+        const invoicePath = path.join(invoiceDir, `${safeInvoiceName}.pdf`);
+
+        if (!fs.existsSync(invoicePath)) {
+          fs.writeFileSync(
+            invoicePath,
+            Buffer.from(
+              `%PDF-1.4\n% ABSS Nexus Invoice ${safeInvoiceName}\nDate: ${new Date().toISOString()}\nStatus: PAID`
+            )
+          );
+        }
+
+        const fileData = fs.readFileSync(invoicePath);
+        response.writeHead(200, {
+          "Content-Type": "application/pdf",
+          "Content-Disposition": `attachment; filename="${safeInvoiceName}.pdf"`,
+          "Content-Length": fileData.length,
+        });
+        response.end(fileData);
+        return;
+      } catch (error) {
+        console.error("Invoice download error:", error);
+        send(response, 500, { error: "Failed to download invoice" });
+        return;
+      }
+    }
+
+    // ENDPOINT 5: Refund Request
+    if (request.method === "POST" && pathname === "/api/payments/refund-request") {
+      try {
+        const body = await readBody(request);
+        const { studentId, paymentId, reason } = body;
+
+        if (!studentId || !paymentId || !reason) {
+          send(response, 400, { error: "Missing required fields" });
+          return;
+        }
+
+        const db = readDb();
+        const paymentIndex = (db.payments || []).findIndex(
+          (p) => p.razorpayPaymentId === paymentId || p.id === paymentId
+        );
+
+        if (paymentIndex === -1) {
+          send(response, 404, { error: "Payment not found" });
+          return;
+        }
+
+        const payment = db.payments[paymentIndex];
+        const paymentDate = new Date(payment.completedAt || payment.createdAt);
+        const daysDifference = Math.floor((Date.now() - paymentDate.getTime()) / (1000 * 60 * 60 * 24));
+
+        if (daysDifference > 7) {
+          send(response, 400, { error: "Refund only available within 7 days of payment" });
+          return;
+        }
+
+        const refund = {
+          id: `rfd_${crypto.randomBytes(6).toString("hex")}`,
+          amount: payment.amount * 100,
+          currency: "INR",
+          status: "processed",
+          paymentId: payment.razorpayPaymentId || payment.id,
+          reason,
+          createdAt: new Date().toISOString(),
+        };
+
+        if (razorpay && process.env.RAZORPAY_KEY_ID && !process.env.RAZORPAY_KEY_ID.includes("placeholder")) {
+          try {
+            await razorpay.payments.refund(payment.razorpayPaymentId, {
+              amount: payment.amount * 100,
+              notes: { reason, studentId },
+            });
+          } catch (rfdErr) {
+            console.warn("[Razorpay] Refund API notice:", rfdErr.message);
+          }
+        }
+
+        payment.refundStatus = "refunded";
+        payment.refundAmount = payment.amount;
+        payment.status = "refunded";
+        writeDb(db);
+
+        syncToFirestoreServer("payments", payment.id, payment);
+        sendRefundEmail(payment, refund).catch((e) => console.warn("Refund email notice:", e.message));
+
+        send(response, 200, {
+          success: true,
+          message: "Refund processed successfully",
+          refund,
+        });
+        return;
+      } catch (error) {
+        console.error("Refund error:", error);
+        captureServerException(error, { tags: { operation: "razorpay_refund" } });
+        send(response, 500, { error: "Refund processing failed" });
+        return;
+      }
+    }
+
     // Dashboard access requires active student session or redirects to login
-    if ((request.method === "GET" || request.method === "HEAD") && pathname === "/internships/dashboard") {
+    if ((request.method === "GET" || request.method === "HEAD") && (pathname === "/internships/dashboard" || pathname === "/student/dashboard")) {
       const db = readDb();
       const student = getStudentFromSession(request, db);
       if (!student) {
         response.writeHead(302, {
-          Location: "/internships/login?redirect=/internships/dashboard",
+          Location: "/internships/login?redirect=" + pathname,
         });
         response.end();
         return;

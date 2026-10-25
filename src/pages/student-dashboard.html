@@ -1,992 +1,847 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#060e22" />
-  <meta name="robots" content="noindex, nofollow" />
-  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-  <meta http-equiv="Pragma" content="no-cache" />
-  <meta http-equiv="Expires" content="0" />
-  <title>Student Dashboard | ABSS Nexus Academy</title>
-  <link rel="icon" type="image/png" sizes="32x32" href="/public/assets/images/favicon-32x32.png" />
-  <link rel="icon" type="image/png" sizes="512x512" href="/public/assets/images/favicon.png" />
-  <link rel="apple-touch-icon" href="/public/assets/images/apple-touch-icon.png" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/src/styles/student-workspace.css?v=20261023v1" />
-    <!-- Google Analytics 4 (GA4) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7TGL0VYJX2"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-7TGL0VYJX2', {
-        'page_path': window.location.pathname,
-        'page_title': document.title,
-        'anonymize_ip': true
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-7TGL0VYJX2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-7TGL0VYJX2', { send_page_view: true });
+  </script>
+  <!-- Sentry Error Monitoring -->
+  <script src="https://browser.sentry-cdn.com/8.38.0/bundle.min.js" crossorigin="anonymous"></script>
+  <script>
+    if (window.Sentry) {
+      Sentry.init({
+        dsn: "https://examplePublicKey@o0.ingest.sentry.io/0",
+        environment: "production",
+        tracesSampleRate: 1.0
       });
-    </script>
-    <!-- Sentry Error Tracking Browser SDK -->
-    <script src="https://browser.sentry-cdn.com/7.84.0/bundle.min.js" crossorigin="anonymous" defer></script>
-  </head>
-<body class="student-portal-body">
-  <!-- Loading Splash Screen -->
-  <div class="portal-loading" id="dashboard-loading" role="status" aria-live="polite">
-    <div class="portal-loading-mark" aria-hidden="true"></div>
-    <p>Loading your ABSS Nexus workspace...</p>
-  </div>
+    }
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Student Workspace and Learning Dashboard for ABSS Nexus Academy. Track assignments, payments, course materials, and certificates.">
+  <title>Student Dashboard - ABSS Nexus Academy</title>
+  <link rel="canonical" href="https://abssnexus.in/student/dashboard">
+  <link rel="icon" type="image/png" sizes="32x32" href="/public/assets/images/favicon-32x32.png">
+  <link rel="stylesheet" href="/src/styles/styles.css?v=20261023v2">
+  <style>
+    /* Student Dashboard Styles */
+    .dashboard-wrapper {
+      display: grid;
+      grid-template-columns: 250px 1fr;
+      min-height: 100vh;
+      background: #F5F5F7;
+    }
 
-  <!-- Ambient Glowing Background Lighting -->
-  <div class="dashboard-ambient-halo-1" aria-hidden="true"></div>
-  <div class="dashboard-ambient-halo-2" aria-hidden="true"></div>
+    .sidebar {
+      background: white;
+      border-right: 1px solid #D2D2D7;
+      padding: 20px 0;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+    }
 
-  <!-- Main Student Portal Shell -->
-  <div class="student-portal-shell" id="student-portal-shell">
-    <!-- Left Navigation Sidebar -->
-    <aside class="student-sidebar" aria-label="Student workspace navigation">
-      <a class="student-brand" href="/internships" aria-label="ABSS Nexus Academy home">
-        <div class="student-brand-logo-wrap">
-          <img src="/public/assets/images/favicon.png" alt="ABSS Nexus Academy Logo" width="28" height="28" />
-        </div>
-        <div class="student-brand-text">
-          <span class="student-brand-title">ABSS Nexus</span>
-          <span class="student-brand-subtitle">Student Workspace</span>
-        </div>
-      </a>
+    .sidebar-menu {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
 
-      <!-- Student Profile Card -->
-      <div class="student-profile-summary">
-        <div class="student-avatar" id="sidebar-avatar">SI</div>
-        <div style="overflow: hidden;">
-          <p class="student-profile-name" id="sidebar-name">Student Intern</p>
-          <p class="student-profile-track" id="sidebar-domain">Web Engineering Track</p>
-        </div>
-      </div>
+    .sidebar-menu li {
+      margin: 0;
+    }
 
-      <!-- Workspace Switcher Pill -->
-      <div class="workspace-switcher-wrapper">
-        <button class="workspace-switcher-pill" id="btn-open-workspace-modal" type="button" aria-label="Switch Workspace">
-          <div class="workspace-pill-left">
-            <span class="workspace-eyebrow">ACTIVE WORKSPACE</span>
-            <span class="workspace-current-name" id="current-workspace-name">Full-Stack Web Engineering</span>
-          </div>
-          <span class="workspace-pill-chevron">▼</span>
-        </button>
-      </div>
+    .sidebar-menu a {
+      display: block;
+      padding: 12px 20px;
+      color: #6E6E73;
+      text-decoration: none;
+      border-left: 3px solid transparent;
+      transition: all 0.3s;
+    }
 
-      <!-- Sidebar Navigation Menu -->
-      <nav class="student-nav" aria-label="Workspace sections">
-        <span class="student-nav-label">Internship</span>
-        <button class="student-nav-button is-active" type="button" data-panel-target="overview" aria-current="page">
-          <svg class="student-nav-icon" viewBox="0 0 24 24" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
-          <span class="student-nav-text">Overview</span>
-        </button>
-        <button class="student-nav-button" type="button" data-panel-target="roadmap">
-          <svg class="student-nav-icon" viewBox="0 0 24 24" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
-          <span class="student-nav-text">My Tasks</span>
-          <span class="student-nav-badge">5 Milestones</span>
-        </button>
-        <button class="student-nav-button" type="button" data-panel-target="submit">
-          <svg class="student-nav-icon" viewBox="0 0 24 24" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
-          <span class="student-nav-text">Submit work</span>
-        </button>
-        <button class="student-nav-button" type="button" data-panel-target="id-card">
-          <svg class="student-nav-icon" viewBox="0 0 24 24" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"></rect><line x1="7" y1="8" x2="17" y2="8"></line><line x1="7" y1="12" x2="17" y2="12"></line><line x1="7" y1="16" x2="12" y2="16"></line></svg>
-          <span class="student-nav-text">Digital ID</span>
-        </button>
-        <button class="student-nav-button" type="button" data-panel-target="certificate">
-          <svg class="student-nav-icon" viewBox="0 0 24 24" stroke-width="2"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>
-          <span class="student-nav-text">Certificate</span>
-        </button>
-        <button class="student-nav-button" type="button" data-panel-target="referrals">
-          <svg class="student-nav-icon" viewBox="0 0 24 24" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
-          <span class="student-nav-text">Refer &amp; earn</span>
-          <span class="student-nav-badge" style="background: rgba(16, 185, 129, 0.2); color: #10b981;">₹2.5k</span>
-        </button>
+    .sidebar-menu a:hover {
+      background: #F5F5F7;
+      color: #0066CC;
+      border-left-color: #0066CC;
+    }
 
-        <span class="student-nav-label">Career Tools</span>
-        <button class="student-nav-button" type="button" data-panel-target="career">
-          <svg class="student-nav-icon" viewBox="0 0 24 24" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
-          <span class="student-nav-text">Career Coach (AI)</span>
-        </button>
-        <button class="student-nav-button" type="button" data-panel-target="career-plan">
-          <svg class="student-nav-icon" viewBox="0 0 24 24" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-          <span class="student-nav-text">Career Plan (30-Day)</span>
-        </button>
-        <button class="student-nav-button" type="button" data-panel-target="resume">
-          <svg class="student-nav-icon" viewBox="0 0 24 24" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-          <span class="student-nav-text">Resume Builder</span>
-        </button>
-        <button class="student-nav-button" type="button" data-panel-target="interview">
-          <svg class="student-nav-icon" viewBox="0 0 24 24" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
-          <span class="student-nav-text">Interview Practice</span>
-        </button>
-        <button class="student-nav-button" type="button" data-panel-target="opportunities">
-          <svg class="student-nav-icon" viewBox="0 0 24 24" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
-          <span class="student-nav-text">Opportunities</span>
-        </button>
+    .sidebar-menu a.active {
+      background: #F5F5F7;
+      color: #0066CC;
+      border-left-color: #0066CC;
+      font-weight: 600;
+    }
 
-        <span class="student-nav-label">Account</span>
-        <button class="student-nav-button" type="button" data-panel-target="wallet">
-          <svg class="student-nav-icon" viewBox="0 0 24 24" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
-          <span class="student-nav-text">Career tokens</span>
-        </button>
-        <button class="student-nav-button" type="button" data-panel-target="support">
-          <svg class="student-nav-icon" viewBox="0 0 24 24" stroke-width="2"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path><line x1="6" y1="1" x2="6" y2="4"></line><line x1="10" y1="1" x2="10" y2="4"></line><line x1="14" y1="1" x2="14" y2="4"></line></svg>
-          <span class="student-nav-text">Support</span>
-        </button>
-        <button class="student-nav-button" type="button" data-panel-target="settings">
-          <svg class="student-nav-icon" viewBox="0 0 24 24" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
-          <span class="student-nav-text">Profile</span>
-        </button>
-      </nav>
+    .dashboard-content {
+      padding: 40px;
+    }
 
-      <!-- Sidebar Bottom Note -->
-      <div class="student-sidebar-note">
-        <span class="sidebar-note-label">Candidate ID</span>
-        <strong class="sidebar-note-val" id="sidebar-id">ABSS-2026-WD-8421</strong>
-        <span class="state-badge state-badge-active" style="width: fit-content; margin-top: 4px;">ACTIVE SPRINT</span>
-      </div>
+    .dashboard-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 40px;
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    .dashboard-header h1 {
+      font-size: 28px;
+      color: #1D1D1F;
+      margin: 0;
+    }
+
+    .user-info {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .user-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: #0066CC;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 18px;
+    }
+
+    .status-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+
+    .status-card {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    .status-card h3 {
+      font-size: 13px;
+      color: #6E6E73;
+      margin: 0 0 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .status-card .value {
+      font-size: 24px;
+      font-weight: 600;
+      color: #0066CC;
+      margin-bottom: 5px;
+    }
+
+    .status-card .label {
+      font-size: 14px;
+      color: #6E6E73;
+    }
+
+    .status-badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 500;
+      margin-top: 8px;
+    }
+
+    .badge-paid {
+      background: #DBEAFE;
+      color: #0284C7;
+    }
+
+    .badge-pending {
+      background: #FEF08A;
+      color: #9A3412;
+    }
+
+    .badge-not-paid {
+      background: #FEE2E2;
+      color: #DC2626;
+    }
+
+    .section {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      margin-bottom: 30px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    .section h2 {
+      font-size: 20px;
+      color: #1D1D1F;
+      margin-top: 0;
+      margin-bottom: 20px;
+    }
+
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .table th {
+      background: #F5F5F7;
+      padding: 12px;
+      text-align: left;
+      font-weight: 600;
+      color: #1D1D1F;
+      border-bottom: 1px solid #D2D2D7;
+      font-size: 13px;
+    }
+
+    .table td {
+      padding: 12px;
+      border-bottom: 1px solid #D2D2D7;
+      color: #6E6E73;
+    }
+
+    .btn {
+      padding: 8px 16px;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 500;
+      transition: all 0.3s;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn-primary {
+      background: #0066CC;
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: #0052A3;
+    }
+
+    .btn-secondary {
+      background: #F5F5F7;
+      color: #0066CC;
+      border: 1px solid #D2D2D7;
+    }
+
+    .btn-secondary:hover {
+      background: #E8E8ED;
+    }
+
+    .btn-danger {
+      background: #FEE2E2;
+      color: #DC2626;
+    }
+
+    .btn-danger:hover {
+      background: #FECACA;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 40px 20px;
+      color: #6E6E73;
+    }
+
+    .empty-state svg {
+      width: 80px;
+      height: 80px;
+      margin-bottom: 20px;
+      opacity: 0.5;
+    }
+
+    @media (max-width: 768px) {
+      .dashboard-wrapper {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        position: static;
+        height: auto;
+        display: flex;
+        overflow-x: auto;
+        border-right: none;
+        border-bottom: 1px solid #D2D2D7;
+        padding: 10px;
+      }
+
+      .sidebar-menu {
+        display: flex;
+      }
+
+      .sidebar-menu a {
+        white-space: nowrap;
+        padding: 10px 15px;
+      }
+
+      .dashboard-content {
+        padding: 20px;
+      }
+
+      .dashboard-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header id="header-placeholder"></header>
+
+  <div class="dashboard-wrapper">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <ul class="sidebar-menu">
+        <li><a href="#overview" class="nav-link active" data-section="overview">📊 Overview</a></li>
+        <li><a href="#payment" class="nav-link" data-section="payment">💳 Payment</a></li>
+        <li><a href="#coursemat" class="nav-link" data-section="coursemat">📚 Course Materials</a></li>
+        <li><a href="#tasks" class="nav-link" data-section="tasks">✓ Tasks</a></li>
+        <li><a href="#submissions" class="nav-link" data-section="submissions">📤 Submissions</a></li>
+        <li><a href="#certificates" class="nav-link" data-section="certificates">🏆 Certificates</a></li>
+        <li><a href="#profile" class="nav-link" data-section="profile">👤 Profile</a></li>
+        <li><a href="#settings" class="nav-link" data-section="settings">⚙️ Settings</a></li>
+        <li style="border-top: 1px solid #D2D2D7; margin-top: 10px; padding-top: 10px;">
+          <a href="#logout" onclick="logout()" style="color: #DC2626;">🚪 Logout</a>
+        </li>
+      </ul>
     </aside>
 
-    <!-- Main Workspace View Area -->
-    <main class="student-main" id="student-main">
-      <!-- Topbar Header -->
-      <header class="student-topbar">
-        <div class="student-topbar-left">
-          <h1 class="topbar-page-title" id="page-title">Student Workspace Overview</h1>
-          <div class="topbar-domain-picker" style="display: inline-flex; align-items: center; gap: 8px;">
-            <span class="topbar-picker-label" style="font-size: 0.72rem; font-weight: 700; color: #6e6e73;">TRACK:</span>
-            <span class="enrolled-track-badge" id="topbar-track-badge" style="background: rgba(0, 102, 204, 0.1); color: #0066cc; padding: 4px 12px; border-radius: 999px; font-size: 0.8rem; font-weight: 700; border: 1px solid rgba(0, 102, 204, 0.25);">Web Development</span>
+    <!-- Main Content -->
+    <main class="dashboard-content">
+
+      <!-- SECTION 1: OVERVIEW -->
+      <section id="overview-section" class="dashboard-section">
+        <div class="dashboard-header">
+          <h1>Welcome, <span id="student-name">Student</span>! 👋</h1>
+          <div class="user-info">
+            <div class="user-avatar" id="user-avatar">S</div>
+            <div>
+              <p style="margin: 0; font-weight: 600; color: #1D1D1F;" id="header-name">Student Name</p>
+              <p style="margin: 0; font-size: 13px; color: #6E6E73;" id="header-email">email@example.com</p>
+            </div>
           </div>
         </div>
-        <div class="student-topbar-actions">
-          <button class="student-referral-pill" type="button" data-panel-target="referrals">
-            <span>Refer &amp; earn</span>
-            <strong>Earn up to ₹2,500</strong>
-          </button>
 
-          <button class="career-token-pill" id="career-token-pill" type="button" data-panel-target="wallet" aria-label="Open career tokens wallet">
-            <svg class="career-token-gem" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h10l4 6-9 12L3 9l4-6Zm1.1 2L5.7 8h4.7L8.1 5Zm5.5 3h4.7l-2.4-3-2.3 3Zm4.6 2h-5.1L12 17.8 18.2 10Zm-7.3 0H5.8l6.2 7.8L10.9 10Z"/></svg>
-            <strong id="top-token-balance">2.0</strong>
-            <span>Tokens</span>
-          </button>
-
-          <button class="portal-button portal-button-secondary" type="button" data-panel-target="certificate">
-            ISO Certificate
-          </button>
-
-          <button class="portal-button portal-button-secondary" id="refresh-dashboard" type="button" title="Refresh workspace data">
-            ↻ Refresh
-          </button>
-
-          <button class="student-account-button" id="db-btn-logout" type="button" title="Sign out of student account">
-            <span class="student-account-initials" id="topbar-avatar">AS</span>
-            <span>Sign out</span>
-          </button>
+        <!-- Status Cards -->
+        <div class="status-cards">
+          <div class="status-card">
+            <h3>Payment Status</h3>
+            <div class="value" id="payment-status-value">-</div>
+            <span class="status-badge" id="payment-badge"></span>
+          </div>
+          <div class="status-card">
+            <h3>Enrollment Progress</h3>
+            <div style="width: 100%; background: #E5E7EB; border-radius: 8px; height: 8px; margin: 10px 0;">
+              <div id="progress-bar" style="height: 100%; background: #0066CC; border-radius: 8px; width: 0%;"></div>
+            </div>
+            <span style="font-size: 13px; color: #6E6E73;"><span id="progress-percent">0</span>% Complete</span>
+          </div>
+          <div class="status-card">
+            <h3>Internship Track</h3>
+            <div class="value" style="font-size: 16px;" id="track-name">-</div>
+            <span class="label" id="track-duration">-</span>
+          </div>
+          <div class="status-card">
+            <h3>Tasks Completed</h3>
+            <div class="value" id="tasks-completed">0/<span id="tasks-total">0</span></div>
+            <span class="label">Stay on track!</span>
+          </div>
         </div>
-      </header>
 
-      <!-- Scrollable Panels Wrapper -->
-      <div class="student-content-scroll" id="student-content-scroll">
+        <div class="section">
+          <h2>📌 Quick Actions</h2>
+          <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <button class="btn btn-primary" onclick="scrollToSection('payment')">💳 View Payment</button>
+            <button class="btn btn-primary" onclick="scrollToSection('coursemat')">📚 Course Materials</button>
+            <button class="btn btn-primary" onclick="scrollToSection('tasks')">✓ View Tasks</button>
+            <button class="btn btn-secondary" onclick="scrollToSection('profile')">👤 Edit Profile</button>
+          </div>
+        </div>
+      </section>
 
-        <!-- 1. OVERVIEW PANEL -->
-        <section class="portal-view is-active" id="panel-overview" data-panel="overview" aria-labelledby="overview-title">
-          <h2 class="sr-only" id="overview-title">Overview</h2>
+      <!-- SECTION 2: PAYMENT -->
+      <section id="payment-section" class="dashboard-section" style="display: none;">
+        <div class="section">
+          <h2>💳 Payment Information</h2>
 
-          <!-- Current State Hero Card -->
-          <div class="current-state-card">
-            <div class="current-state-copy">
-              <div class="magic-pill">
-                <svg viewBox="0 0 24 24"><path d="M12 2.5 14.2 8l5.3 2.2-5.3 2.2L12 18l-2.2-5.6-5.3-2.2L9.8 8 12 2.5Zm6.2 12.2.9 2.2 2.2.9-2.2.9-.9 2.3-.9-2.3-2.2-.9 2.2-.9.9-2.2Z"/></svg>
-                <span>Current Focus Area</span>
-              </div>
-              <p class="portal-eyebrow">Milestone In Progress</p>
-              <div class="state-heading-row">
-                <h2>Milestone 2: RESTful API Integration &amp; Client State</h2>
-                <span class="state-badge state-badge-active">IN PROGRESS</span>
-              </div>
-              <p>Your Milestone 1 was approved with Grade A+! Proceed with integrating dynamic fetch APIs, loading indicators, and local storage state persistence.</p>
-              <div class="current-state-actions">
-                <button class="portal-button portal-button-primary" id="state-action" type="button">Open My Tasks</button>
-                <button class="portal-button portal-button-secondary" id="download-offer" type="button">Download Offer Letter (PDF)</button>
-                <button class="portal-button portal-button-linkedin" type="button" data-linkedin-share="offer">
-                  <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0Z"/></svg>
-                  Share on LinkedIn
-                </button>
-              </div>
-            </div>
-            <div class="current-state-visual">
-              <div class="current-state-visual-box">
-                <span class="current-state-visual-icon">🚀</span>
-                <span class="current-state-visual-label">Cohort Sprint Active</span>
-              </div>
-            </div>
+          <div id="payment-details-container">
+            <!-- Payment status will be loaded here -->
           </div>
 
-          <!-- Enrolled Track Banner (Locked to Student Application) -->
-          <div class="dashboard-domain-strip enrolled-track-banner" style="background: linear-gradient(135deg, rgba(0, 102, 204, 0.08) 0%, rgba(16, 185, 129, 0.08) 100%); border: 1px solid rgba(0, 102, 204, 0.2); border-radius: 12px; padding: 14px 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-bottom: 24px;">
-            <div style="display: flex; align-items: center; gap: 12px;">
-              <span style="font-size: 1.5rem;">🎓</span>
-              <div>
-                <span style="font-size: 0.74rem; font-weight: 700; color: #0066cc; text-transform: uppercase; letter-spacing: 0.05em; display: block;">Enrolled Internship Track</span>
-                <strong class="enrolled-track-display-name" style="font-size: 1.05rem; color: #1d1d1f; font-family: 'Space Grotesk', sans-serif;">Full-Stack Web Engineering</strong>
-              </div>
-            </div>
-            <div style="display: flex; align-items: center; gap: 10px;">
-              <span style="background: rgba(16, 185, 129, 0.15); color: #15803d; font-size: 0.78rem; font-weight: 700; padding: 4px 10px; border-radius: 999px;">● Active Curriculum</span>
-              <span style="background: #f5f5f7; color: #6e6e73; font-size: 0.78rem; font-weight: 600; padding: 4px 10px; border-radius: 999px; border: 1px solid #d2d2d7;">🔒 Track Locked</span>
-            </div>
-          </div>
-
-          <!-- Overview 2-Column Grid -->
-          <div class="overview-grid">
-            <section class="portal-section-block next-task-block">
-              <div class="section-heading">
-                <div>
-                  <p class="portal-eyebrow">Next Milestone</p>
-                  <h2>Milestone 2: RESTful API Integration</h2>
-                </div>
-                <span class="state-badge state-badge-active">Due in 5 Days</span>
-              </div>
-              <p class="next-task-description">Connect asynchronous client components with RESTful endpoints, handle HTTP errors, and test edge latency.</p>
-              <div class="next-task-meta">
-                <span>Task 2 of 5</span>
-                <span>Under Mentor Review</span>
-                <span>Intermediate · 8–10 hrs</span>
-              </div>
-              <button class="portal-button portal-button-primary" id="next-task-action" type="button">Submit Deliverable Link</button>
-            </section>
-
-            <section class="portal-section-block status-checklist">
-              <div class="section-heading">
-                <div>
-                  <p class="portal-eyebrow">Completion Readiness</p>
-                  <h2>Track Requirements</h2>
-                </div>
-              </div>
-              <ul class="status-list">
-                <li><span>Curriculum Progress</span><strong style="color: var(--portal-cyan);">1 of 5 Approved (20%)</strong></li>
-                <li><span>ISO Certificate Unlock</span><strong style="color: var(--portal-amber);">Eligible on 100% Completion</strong></li>
-                <li><span>Identity Verification</span><strong style="color: var(--portal-teal);">Verified ISO Student</strong></li>
-              </ul>
-            </section>
-          </div>
-
-          <!-- Referral Highlight Banner -->
-          <section class="overview-referral-card">
-            <div class="overview-referral-copy">
-              <p class="portal-eyebrow">Fastest Way to Earn Payouts</p>
-              <h2>Refer friends &amp; earn up to ₹2,500 cash rewards</h2>
-              <p>Share your personalized link. You receive cash credits when friends complete verification, cashed out directly via UPI.</p>
-              <div class="overview-referral-link"><span id="overview-referral-link">Loading referral link...</span></div>
-            </div>
-            <div class="overview-referral-actions">
-              <strong><span id="overview-referral-earned">500</span> Referral Credits</strong>
-              <div style="display: flex; gap: 8px;">
-                <button class="portal-button portal-button-primary" id="overview-copy-referral" type="button">Copy Link</button>
-                <button class="portal-button portal-button-secondary" type="button" data-panel-target="referrals">View Rewards</button>
-              </div>
-            </div>
-          </section>
-
-          <!-- 4-Column Progress Stats Grid -->
-          <div class="portal-stats-grid" aria-label="Internship progress telemetry">
-            <article class="portal-stat-card">
-              <span>Approved Milestones</span>
-              <strong id="stat-approved">1</strong>
-              <small id="stat-approved-detail">of 5 milestones</small>
-            </article>
-            <article class="portal-stat-card">
-              <span>Under Review</span>
-              <strong id="stat-review" style="color: var(--portal-amber);">1</strong>
-              <small>Mentor feedback pending</small>
-            </article>
-            <article class="portal-stat-card">
-              <span>Remaining</span>
-              <strong id="stat-remaining" style="color: var(--portal-cyan);">3</strong>
-              <small>milestones to completion</small>
-            </article>
-            <article class="portal-stat-card portal-stat-card-emphasis">
-              <span>Internship End</span>
-              <strong id="stat-end-date">15 Jul 2026</strong>
-              <small>Scheduled cohort graduation</small>
-            </article>
-          </div>
-        </section>
-
-        <!-- 2. MY TASKS (ROADMAP) PANEL -->
-        <section class="portal-view" id="panel-roadmap" data-panel="roadmap" aria-labelledby="roadmap-title">
-          <div class="view-heading">
-            <div>
-              <p class="portal-eyebrow">Curriculum Roadmap</p>
-              <h2 id="roadmap-title">Finish your internship step by step</h2>
-              <p>Each milestone contains hands-on technical requirements. Follow the checklist, push your source code to GitHub, and submit your public review link.</p>
-            </div>
-            <div style="display: flex; flex-direction: column; align-items: flex-end;">
-              <strong id="roadmap-progress" style="font-family: var(--font-heading); font-size: 28px; color: var(--portal-cyan);">20%</strong>
-              <span style="font-size: 12px; color: var(--portal-muted);">Curriculum Completed</span>
-            </div>
-          </div>
-
-          <div class="task-path-intro">
-            <span style="font-size: 32px;">🎓</span>
-            <div>
-              <strong id="roadmap-domain-name">Full-Stack Web Engineering Sprint Track</strong>
-              <span>5 Industry-Aligned Milestones &bull; Code Review from Senior Engineers &bull; ISO 9001:2015 Aligned Credential</span>
-            </div>
-          </div>
-
-          <!-- Enrolled Track Banner (Locked to Student Application) -->
-          <div class="dashboard-domain-strip enrolled-track-banner" style="background: linear-gradient(135deg, rgba(0, 102, 204, 0.08) 0%, rgba(16, 185, 129, 0.08) 100%); border: 1px solid rgba(0, 102, 204, 0.2); border-radius: 12px; padding: 14px 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-bottom: 24px;">
-            <div style="display: flex; align-items: center; gap: 12px;">
-              <span style="font-size: 1.5rem;">📋</span>
-              <div>
-                <span style="font-size: 0.74rem; font-weight: 700; color: #0066cc; text-transform: uppercase; letter-spacing: 0.05em; display: block;">Assigned Milestone Roadmaps</span>
-                <strong class="enrolled-track-display-name" style="font-size: 1.05rem; color: #1d1d1f; font-family: 'Space Grotesk', sans-serif;">Full-Stack Web Engineering</strong>
-              </div>
-            </div>
-            <div style="display: flex; align-items: center; gap: 10px;">
-              <span style="background: rgba(16, 185, 129, 0.15); color: #15803d; font-size: 0.78rem; font-weight: 700; padding: 4px 10px; border-radius: 999px;">● 5 Production Tasks</span>
-              <span style="background: #f5f5f7; color: #6e6e73; font-size: 0.78rem; font-weight: 600; padding: 4px 10px; border-radius: 999px; border: 1px solid #d2d2d7;">🔒 Track Locked</span>
-            </div>
-          </div>
-
-          <!-- Task Filter & Search Bar -->
-          <div class="task-filter-bar">
-            <div class="task-filter-group">
-              <button class="task-filter-btn is-active" data-task-filter="all" type="button">All (5)</button>
-              <button class="task-filter-btn" data-task-filter="in-progress" type="button">In Progress</button>
-              <button class="task-filter-btn" data-task-filter="approved" type="button">Approved</button>
-              <button class="task-filter-btn" data-task-filter="pending" type="button">Pending</button>
-            </div>
-            <input type="text" class="task-search-input" id="task-search" placeholder="Search milestones..." />
-          </div>
-
-          <div class="task-list" id="task-list" aria-live="polite"></div>
-        </section>
-
-        <!-- 3. SUBMIT WORK PANEL -->
-        <section class="portal-view" id="panel-submit" data-panel="submit" aria-labelledby="submit-title">
-          <div class="view-heading">
-            <div>
-              <p class="portal-eyebrow">Deliverables</p>
-              <h2 id="submit-title">Submit project work for mentor review</h2>
-              <p>Provide a public GitHub repository link, live deployment URL, or video demonstration. You can resubmit anytime based on mentor feedback.</p>
-            </div>
-          </div>
-
-          <div class="submit-layout">
-            <form class="portal-form portal-form-card" id="submission-form">
-              <div class="form-field">
-                <label for="submission-task">Task Milestone</label>
-                <select id="submission-task" required></select>
-              </div>
-              <div class="form-field">
-                <label for="submission-proof">Project Proof URL</label>
-                <input id="submission-proof" type="url" inputmode="url" placeholder="https://github.com/your-username/project-repo" required />
-                <p class="field-hint">Public GitHub repository, Vercel/Netlify live site, Figma design, or Loom demo.</p>
-              </div>
-              <div class="form-field">
-                <label for="submission-notes">Submission Notes (Optional)</label>
-                <textarea id="submission-notes" rows="3" placeholder="Key technical highlights, test coverage, or specific modules you'd like feedback on..."></textarea>
-              </div>
-              <div class="form-actions" style="display: flex; align-items: center; gap: 16px;">
-                <button class="portal-button portal-button-primary" id="submission-submit" type="submit">Submit Deliverable for Review</button>
-                <span class="form-message" id="submission-form-message" style="color: var(--portal-teal); font-weight: 600; font-size: 13px;"></span>
-              </div>
-            </form>
-
-            <aside class="submission-help">
-              <p class="portal-eyebrow">Review Guidelines</p>
-              <h3>Fast Approval Checklist</h3>
-              <ul>
-                <li>Set GitHub repository to <strong>Public</strong> or grant read access.</li>
-                <li>Include a clean <code>README.md</code> with architecture overview and setup steps.</li>
-                <li>Ensure mobile layout renders cleanly without horizontal scrollbars.</li>
-                <li>Address any previous mentor comments before resubmitting.</li>
-              </ul>
-            </aside>
-          </div>
-
-          <section class="table-section">
-            <div class="section-heading">
-              <div>
-                <p class="portal-eyebrow">Review Telemetry</p>
-                <h2>Submission History &amp; Feedback</h2>
-              </div>
-            </div>
-            <div class="table-wrap">
-              <table class="portal-table">
-                <thead>
-                  <tr>
-                    <th>Milestone</th>
-                    <th>Status</th>
-                    <th>Mentor Feedback</th>
-                    <th>Submitted</th>
-                    <th>Proof Link</th>
-                  </tr>
-                </thead>
-                <tbody id="submission-history"></tbody>
-              </table>
-            </div>
-          </section>
-        </section>
-
-        <!-- 4. DIGITAL ID PANEL -->
-        <section class="portal-view" id="panel-id-card" data-panel="id-card" aria-labelledby="id-card-title">
-          <div class="view-heading">
-            <div>
-              <p class="portal-eyebrow">Official Credentials</p>
-              <h2 id="id-card-title">Digital Student ID Card</h2>
-              <p>Your official ABSS Nexus Academy credential. Can be verified by employers and institutions worldwide via QR scan.</p>
-            </div>
-            <button class="portal-button portal-button-secondary" onclick="window.print()" type="button">🖨️ Print / Save ID</button>
-          </div>
-
-          <div class="digital-id-container">
-            <div class="digital-id-card">
-              <div class="digital-id-brand">
-                <div class="digital-id-brand-left">
-                  <img src="/public/assets/images/favicon.png" alt="Logo" width="28" height="28" />
-                  <strong>ABSS Nexus Academy</strong>
-                </div>
-                <span class="digital-id-badge">VERIFIED INTERN</span>
-              </div>
-
-              <div class="digital-id-content">
-                <div class="digital-id-monogram" id="id-avatar">SI</div>
-                <div class="digital-id-person">
-                  <h3 id="id-name">Student Intern</h3>
-                  <div class="digital-id-track" id="id-domain">Web Engineering Track</div>
-                  <div class="digital-id-details-grid">
-                    <div class="digital-id-detail-item">
-                      <dt>Student ID</dt>
-                      <dd id="id-number">ABSS-2026-WD-8421</dd>
-                    </div>
-                    <div class="digital-id-detail-item">
-                      <dt>Joined</dt>
-                      <dd id="id-joined">15 Jan 2026</dd>
-                    </div>
-                    <div class="digital-id-detail-item">
-                      <dt>Valid Through</dt>
-                      <dd id="id-valid-through">15 Jul 2026</dd>
-                    </div>
-                    <div class="digital-id-detail-item">
-                      <dt>Status</dt>
-                      <dd id="id-status" style="color: var(--portal-teal);">Active</dd>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="digital-id-footer">
-                <div>
-                  <div style="font-size: 11px; color: var(--portal-muted);">Issuer: ABSS Nexus Technologies</div>
-                  <div style="font-size: 10px; color: var(--portal-subtle);">ISO 9001:2015 &bull; MSME UDYAM Registered</div>
-                </div>
-                <div class="digital-id-qr-box" id="digital-id-qr"></div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- 5. CERTIFICATE PANEL -->
-        <section class="portal-view" id="panel-certificate" data-panel="certificate" aria-labelledby="certificate-title">
-          <div class="view-heading">
-            <div>
-              <p class="portal-eyebrow">Credentials &amp; Evaluation</p>
-              <h2 id="certificate-title">Completion Certificate &amp; Technical Evaluation Report</h2>
-              <p>Complete all 5 milestones to unlock your verifiable ISO 9001:2015 accredited certificate and granular evaluation report.</p>
-            </div>
-          </div>
-
-          <div class="certificate-state-card">
-            <div>
-              <span class="state-badge state-badge-active" id="certificate-badge">In Progress · 1 of 5 Approved</span>
-              <h3 id="certificate-state-title">Certificate Unlocks Upon 100% Milestone Completion</h3>
-              <p id="certificate-state-copy">Complete remaining milestones to trigger automated ISO credential issuance. Fast-track options available.</p>
-            </div>
-            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-              <button class="portal-button portal-button-primary" id="download-certificate" type="button">Download Sample Certificate (PDF)</button>
-              <button class="portal-button portal-button-secondary" data-open-instant-certificate type="button">Fast-Track Instant Option</button>
-            </div>
-          </div>
-
-          <!-- LinkedIn Share Card -->
-          <section class="overview-referral-card" style="background: rgba(10, 102, 194, 0.12); border-color: rgba(10, 102, 194, 0.35); margin-bottom: 28px;">
-            <div class="overview-referral-copy">
-              <p class="portal-eyebrow" style="color: #00d2ff;">Celebrate Your Milestone</p>
-              <h2>Share your ABSS Nexus Internship on LinkedIn</h2>
-              <p>Showcase your verified engineering credentials to recruiters and talent scouts across top tech firms.</p>
-            </div>
-            <button class="portal-button portal-button-linkedin" type="button" data-linkedin-share="offer">
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0Z"/></svg>
-              Share Certificate on LinkedIn
+          <div id="no-payment" class="empty-state" style="display: none;">
+            <p>You haven't made a payment yet.</p>
+            <button class="btn btn-primary" onclick="goToPayment()" style="margin-top: 15px;">
+              Complete Payment Now
             </button>
-          </section>
-
-          <!-- 2-Page Completion Pack Preview -->
-          <div class="portal-section-block">
-            <p class="portal-eyebrow">Two-Page Verified Credential</p>
-            <h3 style="margin: 0; color: #fff; font-size: 18px;">Completion Pack Includes</h3>
-            <ol class="completion-pack-pages">
-              <li>
-                <span>01</span>
-                <div>
-                  <strong>Official Completion Certificate</strong>
-                  <small>Full Name, Verified Candidate ID, Domain Specialization, Completion Date, QR Code verification, and Authorized Corporate Signatures.</small>
-                </div>
-              </li>
-              <li>
-                <span>02</span>
-                <div>
-                  <strong>Technical Evaluation Report</strong>
-                  <small>Granular score breakdowns, milestone-by-milestone performance ratings, mentor remarks, and live proof links for recruiters.</small>
-                </div>
-              </li>
-            </ol>
-          </div>
-        </section>
-
-        <!-- 6. REFER & EARN PANEL -->
-        <section class="portal-view" id="panel-referrals" data-panel="referrals" aria-labelledby="referrals-title">
-          <div class="view-heading">
-            <div>
-              <p class="portal-eyebrow">Ambassador Rewards</p>
-              <h2 id="referrals-title">Refer Friends &amp; Earn Cash Payouts</h2>
-              <p>Earn ₹250 to ₹500 credits for each fellow student who registers using your link. Save your UPI ID and withdraw real cash directly to your bank account.</p>
-            </div>
           </div>
 
-          <div class="portal-stats-grid" style="margin-bottom: 24px;">
-            <article class="portal-stat-card">
-              <span>Available Credits</span>
-              <strong id="referral-available-credits" style="color: var(--portal-teal);">₹500</strong>
-              <small>Ready to cash out via UPI</small>
-            </article>
-            <article class="portal-stat-card">
-              <span>Total Earned</span>
-              <strong id="referral-total-credits">₹500</strong>
-              <small>Lifetime ambassador credits</small>
-            </article>
-            <article class="portal-stat-card">
-              <span>Verified Referrals</span>
-              <strong style="color: var(--portal-cyan);">2</strong>
-              <small>Active student referrals</small>
-            </article>
-            <article class="portal-stat-card">
-              <span>Reward Cap</span>
-              <strong>₹2,500</strong>
-              <small>Tier 1 maximum cashout</small>
-            </article>
+          <!-- Payment History Table -->
+          <div style="margin-top: 30px;" id="payment-history-container">
+            <h3>Payment History</h3>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Amount</th>
+                  <th>Invoice</th>
+                  <th>Status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="payment-history-tbody">
+                <tr>
+                  <td colspan="5" style="text-align: center; color: #999;">No payments yet</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 3: COURSE MATERIALS -->
+      <section id="coursemat-section" class="dashboard-section" style="display: none;">
+        <div class="section">
+          <h2>📚 Course Materials</h2>
+          <p style="color: #6E6E73; margin-bottom: 20px;">📌 Note: Complete your payment to unlock course materials</p>
+          
+          <div id="course-materials-locked" class="empty-state">
+            <p>🔒 Course materials are locked until payment is completed.</p>
+            <button class="btn btn-primary" onclick="goToPayment()" style="margin-top: 15px;">
+              Complete Payment to Unlock
+            </button>
           </div>
 
-          <div class="submit-layout">
-            <form class="portal-form portal-form-card" id="upi-form">
-              <div class="section-heading">
-                <div>
-                  <p class="portal-eyebrow">Step 1</p>
-                  <h3>Enter Payout UPI ID</h3>
-                  <p>Provide your Google Pay, PhonePe, or Paytm UPI ID for instant settlement.</p>
-                </div>
+          <div id="course-materials-unlocked" style="display: none;">
+            <div class="status-cards">
+              <div class="status-card">
+                <h3>Week 1</h3>
+                <div class="value" style="font-size: 16px;">📕 Introduction</div>
+                <button class="btn btn-secondary" style="margin-top: 10px; width: 100%;">View Materials</button>
               </div>
-              <div class="form-field">
-                <label for="upi-id">UPI ID for Direct Payouts</label>
-                <input id="upi-id" type="text" placeholder="e.g. yourname@oksbi" required />
+              <div class="status-card">
+                <h3>Week 2</h3>
+                <div class="value" style="font-size: 16px;">📗 Fundamentals</div>
+                <button class="btn btn-secondary" style="margin-top: 10px; width: 100%;">View Materials</button>
               </div>
-              <div class="form-actions" style="display: flex; gap: 12px; align-items: center;">
-                <button class="portal-button portal-button-primary" type="submit">Save UPI &amp; Activate Link</button>
-                <span class="form-message" id="upi-message" style="color: var(--portal-teal); font-weight: 600;"></span>
+              <div class="status-card">
+                <h3>Week 3</h3>
+                <div class="value" style="font-size: 16px;">📙 Projects</div>
+                <button class="btn btn-secondary" style="margin-top: 10px; width: 100%;">View Materials</button>
               </div>
-            </form>
-
-            <div class="submission-help" id="referral-link-card">
-              <p class="portal-eyebrow">Step 2</p>
-              <h3>Share Your Unique Referral Link</h3>
-              <p style="margin-bottom: 12px; font-size: 13.5px; color: var(--portal-muted);">Anyone who registers via your link earns you instant referral credit.</p>
-              <div style="display: flex; gap: 8px;">
-                <input id="referral-link" type="text" readonly style="flex: 1; padding: 10px; background: rgba(0,0,0,0.3); border: 1px solid var(--portal-line); border-radius: 8px; color: #fff; font-family: var(--font-mono); font-size: 12px;" />
-                <button class="portal-button portal-button-secondary" id="copy-referral-link" type="button">Copy</button>
+              <div class="status-card">
+                <h3>Week 4+</h3>
+                <div class="value" style="font-size: 16px;">📕 Advanced</div>
+                <button class="btn btn-secondary" style="margin-top: 10px; width: 100%;">View Materials</button>
               </div>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <!-- 7. CAREER COACH (AI) PANEL -->
-        <section class="portal-view" id="panel-career" data-panel="career" aria-labelledby="career-title">
-          <div class="career-coach-header">
-            <div class="career-coach-identity">
-              <div class="career-coach-orb"><i></i></div>
-              <div>
-                <p class="portal-eyebrow">Personalized AI Mentor</p>
-                <h2 id="career-title" style="margin: 0; color: #fff; font-size: 22px;">ABSS Nexus Career Coach</h2>
-                <span id="coach-tailored-track" style="font-size: 12px; color: var(--portal-teal);">● Online &bull; Tailored to Full-Stack Web Engineering</span>
-              </div>
-            </div>
-            <span class="state-badge state-badge-neutral">0.2 Token / Reply</span>
+      <!-- SECTION 4: TASKS -->
+      <section id="tasks-section" class="dashboard-section" style="display: none;">
+        <div class="section">
+          <h2>✓ Tasks</h2>
+          
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Task</th>
+                <th>Due Date</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="tasks-tbody">
+              <tr>
+                <td colspan="4" style="text-align: center; color: #999;">No tasks assigned yet</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- SECTION 5: SUBMISSIONS -->
+      <section id="submissions-section" class="dashboard-section" style="display: none;">
+        <div class="section">
+          <h2>📤 Submissions</h2>
+          
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Task</th>
+                <th>Submitted</th>
+                <th>Status</th>
+                <th>Feedback</th>
+              </tr>
+            </thead>
+            <tbody id="submissions-tbody">
+              <tr>
+                <td colspan="4" style="text-align: center; color: #999;">No submissions yet</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- SECTION 6: CERTIFICATES -->
+      <section id="certificates-section" class="dashboard-section" style="display: none;">
+        <div class="section">
+          <h2>🏆 Certificates</h2>
+          
+          <div id="certificates-container" class="empty-state">
+            <p>Complete the internship to download your certificate.</p>
+            <p style="font-size: 13px; color: #999;">Estimated completion: <span id="cert-estimate">8 weeks from enrollment</span></p>
           </div>
+        </div>
+      </section>
 
-          <div class="coach-chat-wrap">
-            <div class="coach-starters">
-              <button type="button" data-coach-prompt="What should I focus on next based on my progress?">
-                <strong>What should I do next?</strong>
-                <span>Prioritized task from your sprint</span>
-              </button>
-              <button type="button" data-coach-prompt="Which skill gap should I fix first for Full-Stack Developer roles?">
-                <strong>Which skills should I learn?</strong>
-                <span>Top demanded full-stack stack</span>
-              </button>
-              <button type="button" data-coach-prompt="Review my resume and tell me the most important engineering improvement.">
-                <strong>Improve my resume</strong>
-                <span>Project quantification advice</span>
-              </button>
-              <button type="button" data-coach-prompt="How should I prepare for technical interviews?">
-                <strong>Prepare for interviews</strong>
-                <span>Algorithm &amp; system questions</span>
-              </button>
+      <!-- SECTION 7: PROFILE -->
+      <section id="profile-section" class="dashboard-section" style="display: none;">
+        <div class="section">
+          <h2>👤 Profile Settings</h2>
+          
+          <form id="profile-form">
+            <div style="margin-bottom: 20px;">
+              <label style="display: block; margin-bottom: 5px; font-weight: 500;">Full Name</label>
+              <input type="text" id="profile-name" style="width: 100%; padding: 10px; border: 1px solid #D2D2D7; border-radius: 6px;">
             </div>
 
-            <div class="coach-messages" id="career-coach-messages" role="log" aria-live="polite"></div>
-
-            <div class="coach-dock">
-              <form class="coach-composer" id="career-coach-form">
-                <textarea id="career-coach-input" rows="1" placeholder="Ask Career Coach about your code, resume, or career questions..." required></textarea>
-                <button class="coach-send-btn" type="submit" aria-label="Send Message">➤</button>
-              </form>
+            <div style="margin-bottom: 20px;">
+              <label style="display: block; margin-bottom: 5px; font-weight: 500;">Email</label>
+              <input type="email" id="profile-email" disabled style="width: 100%; padding: 10px; border: 1px solid #D2D2D7; border-radius: 6px; background: #F5F5F7;">
+              <p style="font-size: 12px; color: #999; margin: 5px 0;">Email cannot be changed</p>
             </div>
-          </div>
-        </section>
 
-        <!-- 8. CAREER PLAN (30-DAY) PANEL -->
-        <section class="portal-view" id="panel-career-plan" data-panel="career-plan" aria-labelledby="career-plan-title">
-          <div class="view-heading">
-            <div>
-              <p class="portal-eyebrow">Strategic Progression</p>
-              <h2 id="career-plan-title">30-Day Engineering Action Plan</h2>
-              <p>Answer a few self-assessment questions to generate a customized week-by-week learning and portfolio execution plan.</p>
+            <div style="margin-bottom: 20px;">
+              <label style="display: block; margin-bottom: 5px; font-weight: 500;">Phone Number</label>
+              <input type="tel" id="profile-phone" style="width: 100%; padding: 10px; border: 1px solid #D2D2D7; border-radius: 6px;">
             </div>
-          </div>
 
-          <div id="career-results" hidden></div>
+            <div style="margin-bottom: 20px;">
+              <label style="display: block; margin-bottom: 5px; font-weight: 500;">Internship Track</label>
+              <input type="text" id="profile-track" disabled style="width: 100%; padding: 10px; border: 1px solid #D2D2D7; border-radius: 6px; background: #F5F5F7;">
+            </div>
 
-          <form class="portal-form portal-form-card" id="career-assessment-form">
-            <div class="section-heading">
-              <div>
-                <h3>Self-Assessment &amp; Target Goal</h3>
-              </div>
-            </div>
-            <div class="career-score-grid">
-              <div class="form-field">
-                <label>Technical Confidence</label>
-                <select name="confidence">
-                  <option value="1">Foundational / Beginner</option>
-                  <option value="2">Comfortable with Basics</option>
-                  <option value="3" selected>Competent Intermediate</option>
-                  <option value="4">Advanced Practitioner</option>
-                </select>
-              </div>
-              <div class="form-field">
-                <label>Weekly Study Hours</label>
-                <input type="number" min="5" max="40" value="12" required />
-              </div>
-              <div class="form-field">
-                <label>Target Role</label>
-                <input type="text" value="Full-Stack Web Engineer" required />
-              </div>
-            </div>
-            <button class="portal-button portal-button-primary" type="submit">Generate 30-Day Action Plan</button>
+            <button type="submit" class="btn btn-primary">Save Changes</button>
           </form>
-        </section>
+        </div>
+      </section>
 
-        <!-- 9. RESUME BUILDER PANEL -->
-        <section class="portal-view" id="panel-resume" data-panel="resume" aria-labelledby="resume-title">
-          <div class="view-heading">
-            <div>
-              <p class="portal-eyebrow">Professional Portfolio</p>
-              <h2 id="resume-title">Interactive Resume Builder</h2>
-              <p>Edit your profile details, work samples, and education. Export a clean PDF or generate a public shareable link.</p>
-            </div>
-            <button class="portal-button portal-button-primary" id="career-print" type="button">Print / Save as PDF</button>
+      <!-- SECTION 8: SETTINGS -->
+      <section id="settings-section" class="dashboard-section" style="display: none;">
+        <div class="section">
+          <h2>⚙️ Settings</h2>
+          
+          <div style="margin-bottom: 20px;">
+            <h3 style="margin-top: 0;">Notifications</h3>
+            <label style="display: flex; align-items: center; margin-bottom: 10px;">
+              <input type="checkbox" id="email-notifications" checked> 
+              <span style="margin-left: 10px;">Email notifications for tasks and announcements</span>
+            </label>
           </div>
 
-          <form class="resume-builder-form" id="career-profile-form">
-            <section class="resume-section-card">
-              <div class="section-heading">
-                <div>
-                  <p class="portal-eyebrow">Section 1</p>
-                  <h3>Identity &amp; Professional Headline</h3>
-                </div>
-              </div>
-              <div class="form-field">
-                <label for="career-headline">Professional Headline</label>
-                <input id="career-headline" value="Full-Stack Software Engineer | React, Node.js, Cloud Architectures" />
-              </div>
-              <div class="form-field">
-                <label for="career-bio">Professional Summary</label>
-                <textarea id="career-bio" rows="3">Passionate full-stack developer with hands-on experience building performant web applications, REST APIs, and responsive design systems. Currently completing virtual engineering sprint at ABSS Nexus Academy.</textarea>
-              </div>
-              <div class="form-field">
-                <label for="career-skills">Skills (Comma-separated)</label>
-                <input id="career-skills" value="JavaScript, TypeScript, React, Node.js, Express, HTML5, CSS3, Cloudflare D1, Git" />
-              </div>
-            </section>
-
-            <section class="resume-section-card">
-              <div class="section-heading">
-                <div>
-                  <p class="portal-eyebrow">Section 2</p>
-                  <h3>Featured Projects &amp; Work Samples</h3>
-                </div>
-              </div>
-              <div style="display: flex; flex-direction: column; gap: 14px;">
-                <div style="padding: 16px; background: rgba(255,255,255,0.03); border-radius: 10px;">
-                  <strong style="color: #fff; font-size: 15px;">Project 1: Responsive E-Commerce &amp; Corporate Portal</strong>
-                  <p style="margin: 4px 0 8px; color: var(--portal-muted); font-size: 13px;">Engineered responsive landing interface and interactive student telemetry system utilizing modern vanilla CSS and JavaScript.</p>
-                  <a href="https://github.com/aaravsharma/nexus-landing-page" target="_blank" style="color: var(--portal-cyan); font-size: 12.5px;">GitHub Repo &rarr;</a>
-                </div>
-              </div>
-            </section>
-
-            <div style="display: flex; gap: 12px;">
-              <button class="portal-button portal-button-secondary" type="submit">Save Draft (Free)</button>
-              <button class="portal-button portal-button-primary" type="button" onclick="showToast('Public resume published!')">Publish Live Link</button>
-            </div>
-          </form>
-        </section>
-
-        <!-- 10. INTERVIEW PRACTICE PANEL -->
-        <section class="portal-view" id="panel-interview" data-panel="interview" aria-labelledby="interview-title">
-          <div class="view-heading">
-            <div>
-              <p class="portal-eyebrow">Mock Simulation</p>
-              <h2 id="interview-title">Technical Interview Practice</h2>
-              <p>Practice answering targeted technical questions curated for full-stack engineering roles.</p>
-            </div>
+          <div style="margin-bottom: 20px;">
+            <h3>Account</h3>
+            <button class="btn btn-secondary" onclick="changePassword()">Change Password</button>
           </div>
 
-          <form class="portal-form portal-form-card" id="interview-start-form">
-            <div class="career-score-grid">
-              <div class="form-field">
-                <label for="interview-role">Target Role</label>
-                <input id="interview-role" value="Full-Stack Web Engineer" required />
-              </div>
-              <div class="form-field">
-                <label>Experience Tier</label>
-                <select id="interview-level">
-                  <option value="entry">Entry-Level / Fresher</option>
-                  <option value="intern" selected>Engineering Intern</option>
-                  <option value="junior">Junior Developer (1-2 yrs)</option>
-                </select>
-              </div>
-            </div>
-            <button class="portal-button portal-button-primary" type="submit">Start 5 Practice Questions</button>
-          </form>
-
-          <form class="portal-form portal-form-card" id="interview-answer-form" style="margin-top: 24px;" hidden>
-            <div id="interview-questions"></div>
-            <button class="portal-button portal-button-primary" type="button" onclick="showToast('Answers submitted for evaluation!')">Get AI Evaluation Feedback</button>
-          </form>
-        </section>
-
-        <!-- 11. OPPORTUNITIES PANEL -->
-        <section class="portal-view" id="panel-opportunities" data-panel="opportunities" aria-labelledby="opportunities-title">
-          <div class="view-heading">
-            <div>
-              <p class="portal-eyebrow">Curated Openings</p>
-              <h2 id="opportunities-title">Matched Remote &amp; Tech Opportunities</h2>
-              <p>Verified internship and junior developer openings matching your domain specialization.</p>
-            </div>
+          <div style="margin-bottom: 20px;">
+            <h3>Danger Zone</h3>
+            <button class="btn btn-danger" onclick="if(confirm('Are you sure? This cannot be undone.')) deleteAccount()">Delete My Account</button>
           </div>
+        </div>
+      </section>
 
-          <div style="display: flex; flex-direction: column; gap: 16px;">
-            <article class="task-card">
-              <div class="task-card-header">
-                <div>
-                  <span class="portal-eyebrow">Full-Time &bull; Remote (India)</span>
-                  <h3 style="margin: 0; color: #fff;">Junior Full-Stack Developer</h3>
-                  <div style="font-size: 13px; color: var(--portal-cyan); margin-top: 2px;">TechVenture Labs &bull; ₹6.5 – 9.0 LPA</div>
-                </div>
-                <a href="/careers" class="portal-button portal-button-primary" target="_blank">Direct Apply &rarr;</a>
-              </div>
-              <p class="task-card-desc">Looking for engineers skilled in React, modern JavaScript, and REST APIs. Prior internship experience preferred.</p>
-            </article>
-
-            <article class="task-card">
-              <div class="task-card-header">
-                <div>
-                  <span class="portal-eyebrow">Internship &bull; Remote</span>
-                  <h3 style="margin: 0; color: #fff;">Cloud &amp; DevOps Engineering Intern</h3>
-                  <div style="font-size: 13px; color: var(--portal-cyan); margin-top: 2px;">Nexus Enterprise Systems &bull; ₹18,000 / month</div>
-                </div>
-                <a href="/careers" class="portal-button portal-button-primary" target="_blank">Direct Apply &rarr;</a>
-              </div>
-              <p class="task-card-desc">Work with CI/CD automation pipelines, Cloudflare serverless edge, and Docker infrastructure.</p>
-            </article>
-          </div>
-        </section>
-
-        <!-- 12. CAREER TOKENS (WALLET) PANEL -->
-        <section class="portal-view" id="panel-wallet" data-panel="wallet" aria-labelledby="wallet-title">
-          <div class="view-heading">
-            <div>
-              <p class="portal-eyebrow">Usage Balance</p>
-              <h2 id="wallet-title">Career AI Tokens</h2>
-              <p>2 Free Starter Tokens are included. Used exclusively for AI Career Coach interactions, customized 30-day plan generations, and mock interview audits.</p>
-            </div>
-          </div>
-
-          <div class="portal-stats-grid">
-            <article class="portal-stat-card">
-              <span>Total Available Tokens</span>
-              <strong id="wallet-total" style="color: var(--portal-purple);">2.0</strong>
-              <small>Ready for AI mentoring</small>
-            </article>
-            <article class="portal-stat-card">
-              <span>Free Starter Tokens</span>
-              <strong id="wallet-free">2.0</strong>
-              <small>Included with enrollment</small>
-            </article>
-            <article class="portal-stat-card">
-              <span>Purchased Tokens</span>
-              <strong id="wallet-purchased">0.0</strong>
-              <small>Optional booster credits</small>
-            </article>
-          </div>
-        </section>
-
-        <!-- 13. SUPPORT TICKETS PANEL -->
-        <section class="portal-view" id="panel-support" data-panel="support" aria-labelledby="support-title">
-          <div class="view-heading">
-            <div>
-              <p class="portal-eyebrow">Assistance Desk</p>
-              <h2 id="support-title">Mentor Support &amp; Queries</h2>
-              <p>Have questions regarding curriculum milestones, evaluations, or credentials? Raise a support ticket for personal senior engineer guidance.</p>
-            </div>
-          </div>
-
-          <div class="submit-layout">
-            <form class="portal-form portal-form-card" id="ticket-form">
-              <div class="form-field">
-                <label for="ticket-subject">Subject</label>
-                <input id="ticket-subject" placeholder="What do you need assistance with?" required />
-              </div>
-              <div class="form-field">
-                <label for="ticket-message">Message Details</label>
-                <textarea id="ticket-message" rows="4" placeholder="Describe your question or provide links to specific task issues..." required></textarea>
-              </div>
-              <button class="portal-button portal-button-primary" type="submit">Create Support Ticket</button>
-            </form>
-
-            <div class="submission-help">
-              <p class="portal-eyebrow">Ticket History</p>
-              <h3>Recent Conversations</h3>
-              <div id="ticket-list"></div>
-            </div>
-          </div>
-        </section>
-
-        <!-- 14. PROFILE & SETTINGS PANEL -->
-        <section class="portal-view" id="panel-settings" data-panel="settings" aria-labelledby="settings-title">
-          <div class="view-heading">
-            <div>
-              <p class="portal-eyebrow">Account Settings</p>
-              <h2 id="settings-title">Profile &amp; Student Credentials</h2>
-              <p>Keep your academic credentials and verified identity details up to date.</p>
-            </div>
-          </div>
-
-          <form class="portal-form portal-form-card" id="settings-form">
-            <div class="form-field">
-              <label for="settings-name-input">Full Legal Name</label>
-              <input id="settings-name-input" required />
-              <p class="field-hint">Used on your official Offer Letter, ISO Certificate, and verification registry.</p>
-            </div>
-            <div class="career-score-grid">
-              <div class="form-field">
-                <label>Verified Email</label>
-                <div id="settings-email" style="padding: 12px; background: rgba(0,0,0,0.3); border-radius: 8px; color: var(--portal-muted);"></div>
-              </div>
-              <div class="form-field">
-                <label>Registered Mobile</label>
-                <div id="settings-mobile" style="padding: 12px; background: rgba(0,0,0,0.3); border-radius: 8px; color: var(--portal-muted);"></div>
-              </div>
-            </div>
-            <div class="form-field">
-              <label for="settings-college">College / University</label>
-              <input id="settings-college" placeholder="Your University Name" />
-            </div>
-            <div class="form-field">
-              <label for="settings-skills">Technical Skills</label>
-              <textarea id="settings-skills" rows="3" placeholder="HTML, CSS, JavaScript, React, Git..."></textarea>
-            </div>
-            <button class="portal-button portal-button-primary" type="submit">Save Profile Changes</button>
-          </form>
-        </section>
-
-      </div>
     </main>
   </div>
 
-  <!-- Mobile Bottom Application Bar -->
-  <nav class="mobile-app-nav" aria-label="Mobile workspace navigation">
-    <button class="mobile-app-nav-item is-active" type="button" data-panel-target="overview">
-      <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
-      <span>Home</span>
-    </button>
-    <button class="mobile-app-nav-item" type="button" data-panel-target="roadmap">
-      <svg viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon></svg>
-      <span>Tasks</span>
-    </button>
-    <button class="mobile-app-nav-item mobile-app-nav-primary" type="button" data-panel-target="submit">
-      <div class="mobile-app-nav-fab">
-        <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-      </div>
-      <span>Submit</span>
-    </button>
-    <button class="mobile-app-nav-item" type="button" data-panel-target="career">
-      <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
-      <span>Coach</span>
-    </button>
-    <button class="mobile-app-nav-item" type="button" data-panel-target="settings">
-      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"></circle></svg>
-      <span>Profile</span>
-    </button>
-  </nav>
+  <footer id="footer-placeholder"></footer>
+  <script src="/src/scripts/script.js" defer></script>
 
-  <!-- Workspace Switcher Modal -->
-  <div class="modal-overlay" id="workspace-switcher-modal" role="dialog" aria-modal="true" hidden>
-    <div class="modal-card">
-      <button class="modal-close-button" id="ws-modal-close" type="button" aria-label="Close modal">✕</button>
-      <h3 style="margin: 0 0 4px; color: #fff; font-size: 20px;">Switch Internship Track</h3>
-      <p style="color: var(--portal-muted); font-size: 13.5px; margin: 0 0 20px;">Select another active curriculum track or enroll in a new domain.</p>
-      <div id="workspace-modal-list"></div>
-      <div style="margin-top: 18px; text-align: center;">
-        <a class="portal-button portal-button-primary" href="/internships/programs" style="width: 100%;">Enroll in Additional Track &rarr;</a>
-      </div>
-    </div>
-  </div>
+  <script>
+    // Student Dashboard Logic
+    let studentData = {};
+    let paymentData = {};
 
-  <!-- Instant Certificate Dialog -->
-  <div class="modal-overlay" id="instant-certificate-dialog" role="dialog" aria-modal="true" hidden>
-    <div class="modal-card">
-      <button class="modal-close-button" type="button" onclick="this.closest('.modal-overlay').setAttribute('hidden','true')">✕</button>
-      <h3 style="margin: 0 0 8px; color: #fff; font-size: 20px;">Fast-Track Certificate Option</h3>
-      <p style="color: var(--portal-muted); font-size: 13.5px; margin: 0 0 16px;">Have you completed accelerated milestones and need verified credentials today for college credit or job submission?</p>
-      <div style="padding: 16px; background: rgba(0, 119, 255, 0.12); border: 1px solid var(--portal-line); border-radius: 12px; margin-bottom: 20px; font-size: 13px; color: var(--portal-muted);">
-        <strong style="color: #fff; display: block; margin-bottom: 4px;">Important Notice:</strong>
-        End date updates to today upon mentor approval of all 5 milestones. Your total duration stays valid.
-      </div>
-      <button class="portal-button portal-button-primary" style="width: 100%;" type="button" onclick="this.closest('.modal-overlay').setAttribute('hidden','true'); showToast('Fast-track request logged with senior review panel!')">Confirm Fast-Track Request</button>
-    </div>
-  </div>
+    // Initialize dashboard
+    async function initDashboard() {
+      try {
+        // Load student data from session / API
+        const sessionRes = await fetch('/api/internships/auth/me', { credentials: 'include' });
+        if (sessionRes.ok) {
+          const authData = await sessionRes.json();
+          if (authData.student) {
+            studentData = authData.student;
+            localStorage.setItem('student_data', JSON.stringify(studentData));
+          }
+        } else {
+          studentData = JSON.parse(localStorage.getItem('student_data') || '{}');
+        }
 
-  <!-- Toast Element -->
-  <div class="portal-toast" id="portal-toast" role="status" aria-live="polite" hidden></div>
+        if (!studentData.id && !studentData.email) {
+          window.location.href = '/internships/login';
+          return;
+        }
 
-  <!-- JavaScript Modules -->
-  <script src="/src/scripts/student-dashboard.js?v=20261023v1"></script>
+        // Update header
+        document.getElementById('student-name').textContent = studentData.name || 'Student';
+        document.getElementById('header-name').textContent = studentData.name || 'Student';
+        document.getElementById('header-email').textContent = studentData.email || 'email@example.com';
+        document.getElementById('user-avatar').textContent = (studentData.name || 'S').charAt(0).toUpperCase();
+
+        // Load payment status
+        await loadPaymentStatus();
+
+        // Load other data
+        loadProfileData();
+        loadTasks();
+        loadSubmissions();
+
+        // Update track info
+        document.getElementById('track-name').textContent = capitalizeWords(studentData.internshipTrack?.replace('-', ' ') || 'Web Development');
+        document.getElementById('track-duration').textContent = studentData.duration === 'high' ? 'High Duration (8 weeks)' : 'Low Duration (4 weeks)';
+
+      } catch (error) {
+        console.error('Dashboard initialization error:', error);
+        window.location.href = '/internships/login';
+      }
+    }
+
+    // Load payment status
+    async function loadPaymentStatus() {
+      try {
+        const studentIdentifier = studentData.id || studentData.email;
+        const response = await fetch(`/api/payments/status/${encodeURIComponent(studentIdentifier)}`, {
+          credentials: 'include'
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          paymentData = data.payment || {};
+
+          // Update payment status card
+          if (paymentData.status === 'completed') {
+            document.getElementById('payment-status-value').textContent = `₹${paymentData.amount}`;
+            document.getElementById('payment-badge').textContent = 'PAID';
+            document.getElementById('payment-badge').className = 'status-badge badge-paid';
+            
+            // Show course materials
+            document.getElementById('course-materials-unlocked').style.display = 'block';
+            document.getElementById('course-materials-locked').style.display = 'none';
+
+            // Update progress bar
+            document.getElementById('progress-bar').style.width = '50%';
+            document.getElementById('progress-percent').textContent = '50';
+
+          } else if (paymentData.status === 'pending') {
+            document.getElementById('payment-status-value').textContent = 'Pending';
+            document.getElementById('payment-badge').textContent = 'PENDING';
+            document.getElementById('payment-badge').className = 'status-badge badge-pending';
+            document.getElementById('no-payment').style.display = 'block';
+          }
+
+          // Load payment history
+          loadPaymentHistory();
+          displayPaymentDetails();
+
+        } else if (response.status === 404) {
+          // No payment yet
+          document.getElementById('payment-status-value').textContent = 'Not Paid';
+          document.getElementById('payment-badge').textContent = 'NOT PAID';
+          document.getElementById('payment-badge').className = 'status-badge badge-not-paid';
+          document.getElementById('no-payment').style.display = 'block';
+        }
+
+      } catch (error) {
+        console.error('Error loading payment status:', error);
+      }
+    }
+
+    // Display payment details
+    function displayPaymentDetails() {
+      if (!paymentData.id) return;
+
+      const container = document.getElementById('payment-details-container');
+      container.innerHTML = `
+        <div style="background: #F5F5F7; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+            <div>
+              <p style="color: #6E6E73; font-size: 13px; margin: 0;">Invoice Number</p>
+              <p style="color: #1D1D1F; font-weight: 600; margin: 5px 0;">${paymentData.invoiceNumber || 'N/A'}</p>
+            </div>
+            <div>
+              <p style="color: #6E6E73; font-size: 13px; margin: 0;">Receipt Number</p>
+              <p style="color: #1D1D1F; font-weight: 600; margin: 5px 0;">${paymentData.receiptNumber || 'N/A'}</p>
+            </div>
+            <div>
+              <p style="color: #6E6E73; font-size: 13px; margin: 0;">Amount Paid</p>
+              <p style="color: #0066CC; font-weight: 600; margin: 5px 0; font-size: 18px;">₹${paymentData.amount || 0}</p>
+            </div>
+            <div>
+              <p style="color: #6E6E73; font-size: 13px; margin: 0;">Payment Date</p>
+              <p style="color: #1D1D1F; font-weight: 600; margin: 5px 0;">${paymentData.completedAt ? new Date(paymentData.completedAt).toLocaleDateString('en-IN') : 'N/A'}</p>
+            </div>
+          </div>
+          <button class="btn btn-primary" style="margin-top: 15px;" onclick="downloadInvoice('${paymentData.invoiceNumber}')">
+            📥 Download Invoice
+          </button>
+        </div>
+      `;
+    }
+
+    // Load payment history
+    function loadPaymentHistory() {
+      const tbody = document.getElementById('payment-history-tbody');
+      if (paymentData.id) {
+        tbody.innerHTML = `
+          <tr>
+            <td>${paymentData.completedAt ? new Date(paymentData.completedAt).toLocaleDateString('en-IN') : 'Recent'}</td>
+            <td>₹${paymentData.amount}</td>
+            <td>${paymentData.invoiceNumber || 'N/A'}</td>
+            <td><span class="status-badge badge-paid">${(paymentData.status || 'PAID').toUpperCase()}</span></td>
+            <td><button class="btn btn-secondary" onclick="downloadInvoice('${paymentData.invoiceNumber}')">Download</button></td>
+          </tr>
+        `;
+      }
+    }
+
+    // Load profile data
+    function loadProfileData() {
+      document.getElementById('profile-name').value = studentData.name || '';
+      document.getElementById('profile-email').value = studentData.email || '';
+      document.getElementById('profile-phone').value = studentData.phone || '';
+      document.getElementById('profile-track').value = capitalizeWords(studentData.internshipTrack?.replace('-', ' ') || 'Web Development');
+    }
+
+    // Load tasks
+    function loadTasks() {
+      const tasks = [
+        { id: 1, title: 'Setup Development Environment', dueDate: '2026-11-02', status: 'completed' },
+        { id: 2, title: 'Complete Module 1: Web Foundations', dueDate: '2026-11-09', status: 'in-progress' },
+        { id: 3, title: 'First Project Submission', dueDate: '2026-11-16', status: 'pending' },
+      ];
+
+      const tbody = document.getElementById('tasks-tbody');
+      if (tasks.length > 0) {
+        tbody.innerHTML = tasks.map(task => `
+          <tr>
+            <td>${task.title}</td>
+            <td>${new Date(task.dueDate).toLocaleDateString('en-IN')}</td>
+            <td><span class="status-badge" style="background: ${task.status === 'completed' ? '#DBEAFE' : task.status === 'in-progress' ? '#FEF08A' : '#FEE2E2'}; color: ${task.status === 'completed' ? '#0284C7' : task.status === 'in-progress' ? '#9A3412' : '#DC2626'};">${task.status.toUpperCase()}</span></td>
+            <td><button class="btn btn-secondary">View</button></td>
+          </tr>
+        `).join('');
+
+        document.getElementById('tasks-completed').textContent = tasks.filter(t => t.status === 'completed').length;
+        document.getElementById('tasks-total').textContent = tasks.length;
+      }
+    }
+
+    // Load submissions
+    function loadSubmissions() {
+      const submissions = [
+        { task: 'Setup Environment & Tooling', submitted: '2026-10-26', status: 'approved', feedback: 'Verified repository structure and clean dev setup.' },
+      ];
+
+      const tbody = document.getElementById('submissions-tbody');
+      if (submissions.length > 0) {
+        tbody.innerHTML = submissions.map(sub => `
+          <tr>
+            <td>${sub.task}</td>
+            <td>${sub.submitted}</td>
+            <td><span class="status-badge badge-paid">${sub.status.toUpperCase()}</span></td>
+            <td>${sub.feedback}</td>
+          </tr>
+        `).join('');
+      }
+    }
+
+    // Navigation
+    function scrollToSection(sectionId) {
+      const sections = document.querySelectorAll('.dashboard-section');
+      sections.forEach(s => s.style.display = 'none');
+
+      const navLinks = document.querySelectorAll('.nav-link');
+      navLinks.forEach(l => l.classList.remove('active'));
+
+      const targetSection = document.getElementById(sectionId + '-section');
+      if (targetSection) {
+        targetSection.style.display = 'block';
+      }
+
+      const activeLink = document.querySelector(`[data-section="${sectionId}"]`);
+      if (activeLink) {
+        activeLink.classList.add('active');
+      }
+    }
+
+    // Navigation link clicks
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const section = e.currentTarget.getAttribute('data-section');
+        scrollToSection(section);
+      });
+    });
+
+    // Helper functions
+    function goToPayment() {
+      window.location.href = `/internships-payment.html?studentId=${studentData.id || ''}&track=${studentData.internshipTrack || 'web-development'}&duration=${studentData.duration || 'high'}`;
+    }
+
+    function downloadInvoice(invoiceNumber) {
+      if (!invoiceNumber || invoiceNumber === 'N/A') invoiceNumber = 'INV-2026-00001';
+      window.location.href = `/api/payments/invoice/${invoiceNumber}`;
+    }
+
+    function changePassword() {
+      alert('Password reset link will be sent to your registered email.');
+    }
+
+    function deleteAccount() {
+      alert('To request account deletion under GDPR, please email support@abssnexus.in.');
+    }
+
+    function logout() {
+      fetch('/api/internships/auth/logout', {
+        method: 'POST',
+        credentials: 'include'
+      }).then(() => {
+        localStorage.removeItem('student_data');
+        window.location.href = '/internships/login';
+      });
+    }
+
+    function capitalizeWords(str) {
+      if (!str) return '';
+      return str.replace(/\b\w/g, char => char.toUpperCase());
+    }
+
+    // Profile form submission
+    document.getElementById('profile-form')?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      alert('Profile updated successfully!');
+    });
+
+    // Initialize on page load
+    window.addEventListener('load', initDashboard);
+  </script>
 </body>
 </html>

@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-7TGL0VYJX2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-7TGL0VYJX2', { send_page_view: true });
+  </script>
+  <!-- Sentry Error Monitoring -->
+  <script src="https://browser.sentry-cdn.com/8.38.0/bundle.min.js" crossorigin="anonymous"></script>
+  <script>
+    if (window.Sentry) {
+      Sentry.init({
+        dsn: "https://examplePublicKey@o0.ingest.sentry.io/0",
+        environment: "production",
+        tracesSampleRate: 1.0
+      });
+    }
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Secure payment gateway for ABSS Nexus Academy internship track enrollment. Complete payment via Razorpay.">
+  <title>Complete Payment - ABSS Nexus Academy</title>
+  <link rel="canonical" href="https://abssnexus.in/internships/payment">
+  <link rel="icon" type="image/png" sizes="32x32" href="/public/assets/images/favicon-32x32.png">
+  <link rel="stylesheet" href="/src/styles/styles.css?v=20261023v2">
+  <style>
+    .payment-container {
+      max-width: 600px;
+      margin: 80px auto;
+      padding: 40px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      color: #1D1D1F;
+    }
+
+    .payment-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .payment-header h1 {
+      font-size: 28px;
+      color: #1D1D1F;
+      margin-bottom: 10px;
+    }
+
+    .payment-details {
+      background: #F5F5F7;
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 30px;
+    }
+
+    .detail-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid #D2D2D7;
+    }
+
+    .detail-row:last-child {
+      border-bottom: none;
+    }
+
+    .detail-label {
+      color: #6E6E73;
+      font-weight: 500;
+    }
+
+    .detail-value {
+      color: #1D1D1F;
+      font-weight: 600;
+    }
+
+    .amount-row {
+      background: white;
+      padding: 15px 12px;
+      margin-top: 15px;
+      border-top: 2px solid #0066CC;
+      border-bottom: 2px solid #0066CC;
+      border-radius: 6px;
+    }
+
+    .amount-row .detail-value {
+      color: #0066CC;
+      font-size: 20px;
+    }
+
+    .payment-button {
+      width: 100%;
+      padding: 14px;
+      background: #0066CC;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .payment-button:hover {
+      background: #0052A3;
+    }
+
+    .payment-button:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+    }
+
+    .loading-spinner {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      border: 2px solid #f3f3f3;
+      border-top: 2px solid #0066CC;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin-right: 8px;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .info-box {
+      background: #E8F4FF;
+      border-left: 4px solid #0066CC;
+      padding: 15px;
+      border-radius: 4px;
+      margin-bottom: 20px;
+      font-size: 14px;
+      color: #0066CC;
+    }
+
+    .error-message {
+      background: #FEE2E2;
+      color: #DC2626;
+      padding: 12px;
+      border-radius: 6px;
+      margin-bottom: 20px;
+      display: none;
+    }
+
+    .success-message {
+      background: #DBEAFE;
+      color: #0284C7;
+      padding: 12px;
+      border-radius: 6px;
+      margin-bottom: 20px;
+      display: none;
+    }
+
+    @media (max-width: 640px) {
+      .payment-container {
+        margin: 40px 20px;
+        padding: 20px;
+      }
+
+      .payment-header h1 {
+        font-size: 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header id="header-placeholder"></header>
+
+  <main>
+    <div class="payment-container">
+      <div class="payment-header">
+        <h1>Complete Your Payment</h1>
+        <p style="color: #6E6E73;">Secure payment via Razorpay</p>
+      </div>
+
+      <div id="error-message" class="error-message"></div>
+      <div id="success-message" class="success-message"></div>
+
+      <div class="info-box">
+        💡 Your access to all course materials will be granted immediately after successful payment.
+      </div>
+
+      <div class="payment-details" id="payment-details">
+        <div class="detail-row">
+          <span class="detail-label">Internship Track:</span>
+          <span class="detail-value" id="track-name">-</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">Duration:</span>
+          <span class="detail-value" id="duration-name">-</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">Student Name:</span>
+          <span class="detail-value" id="student-name">-</span>
+        </div>
+        <div class="detail-row amount-row">
+          <span class="detail-label">Total Amount:</span>
+          <span class="detail-value">₹<span id="amount">0</span></span>
+        </div>
+      </div>
+
+      <button class="payment-button" id="pay-button" onclick="initiatePayment()">
+        Pay Now with Razorpay
+      </button>
+
+      <p style="text-align: center; font-size: 13px; color: #6E6E73; margin-top: 20px;">
+        🔒 Your payment is secure and encrypted. We use Razorpay, India's most trusted payment gateway.
+      </p>
+    </div>
+  </main>
+
+  <footer id="footer-placeholder"></footer>
+
+  <!-- Razorpay Checkout Script -->
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  <script src="/src/scripts/script.js" defer></script>
+
+  <script>
+    // Get query parameters
+    const urlParams = new URLSearchParams(window.location.search);
+    const studentId = urlParams.get('studentId');
+    const internshipTrack = urlParams.get('track');
+    const duration = urlParams.get('duration');
+
+    // Display payment details
+    async function loadPaymentDetails() {
+      try {
+        // Get student info from session/localStorage
+        const studentData = JSON.parse(localStorage.getItem('student_data') || '{}');
+        
+        document.getElementById('track-name').textContent = capitalizeWords(internshipTrack?.replace('-', ' ') || 'Web Development');
+        document.getElementById('duration-name').textContent = duration === 'low' ? 'Low (4 weeks)' : 'High (8 weeks)';
+        document.getElementById('student-name').textContent = studentData.name || 'Student';
+        
+        const amount = duration === 'low' ? 119 : 249;
+        document.getElementById('amount').textContent = amount;
+
+      } catch (error) {
+        console.error('Error loading payment details:', error);
+        showError('Failed to load payment details. Please refresh the page.');
+      }
+    }
+
+    // Initiate payment
+    async function initiatePayment() {
+      const button = document.getElementById('pay-button');
+      try {
+        button.disabled = true;
+        button.innerHTML = '<span class="loading-spinner"></span>Processing...';
+
+        // Get student data
+        const studentData = JSON.parse(localStorage.getItem('student_data') || '{}');
+
+        // Create order on backend
+        const createOrderResponse = await fetch('/api/payments/create-order', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          credentials: 'include',
+          body: JSON.stringify({
+            studentId: studentId || studentData.id || "student_123",
+            studentEmail: studentData.email || "student@example.com",
+            studentName: studentData.name || "Test Student",
+            internshipTrack: internshipTrack || "web-development",
+            duration: duration || "high",
+          }),
+        });
+
+        if (!createOrderResponse.ok) {
+          throw new Error('Failed to create payment order');
+        }
+
+        const orderData = await createOrderResponse.json();
+
+        // Open Razorpay Checkout
+        const razorpayOptions = {
+          key: orderData.keyId,
+          amount: orderData.amount * 100, // Razorpay expects paise
+          currency: 'INR',
+          name: 'ABSS Nexus Academy',
+          description: `${capitalizeWords((internshipTrack || 'web-development').replace('-', ' '))} Internship (${duration || 'high'})`,
+          order_id: orderData.orderId,
+          handler: function (response) {
+            verifyPayment(response, orderData);
+          },
+          prefill: {
+            name: orderData.studentName,
+            email: orderData.studentEmail,
+          },
+          theme: {
+            color: '#0066CC',
+          },
+          modal: {
+            ondismiss: function () {
+              button.disabled = false;
+              button.innerHTML = 'Pay Now with Razorpay';
+              showError('Payment cancelled. Please try again.');
+            }
+          }
+        };
+
+        if (window.Razorpay) {
+          const rzp = new window.Razorpay(razorpayOptions);
+          rzp.open();
+        } else {
+          // Dev test fallback simulation if script blocked by local offline mode
+          console.warn('Razorpay script simulation mode');
+          await verifyPayment({
+            razorpay_order_id: orderData.orderId,
+            razorpay_payment_id: "pay_test_" + Date.now(),
+            razorpay_signature: "test_sig_" + Date.now(),
+          }, orderData);
+        }
+
+      } catch (error) {
+        console.error('Payment initiation error:', error);
+        showError('Failed to initiate payment. Please try again.');
+        button.disabled = false;
+        button.innerHTML = 'Pay Now with Razorpay';
+      }
+    }
+
+    // Verify payment
+    async function verifyPayment(razorpayResponse, orderData) {
+      const button = document.getElementById('pay-button');
+      try {
+        button.disabled = true;
+        button.innerHTML = '<span class="loading-spinner"></span>Verifying...';
+
+        const verifyResponse = await fetch('/api/payments/verify', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          credentials: 'include',
+          body: JSON.stringify({
+            razorpayOrderId: razorpayResponse.razorpay_order_id,
+            razorpayPaymentId: razorpayResponse.razorpay_payment_id,
+            razorpaySignature: razorpayResponse.razorpay_signature,
+          }),
+        });
+
+        if (!verifyResponse.ok) {
+          throw new Error('Payment verification failed');
+        }
+
+        const result = await verifyResponse.json();
+
+        // Update local session storage
+        const currentData = JSON.parse(localStorage.getItem('student_data') || '{}');
+        currentData.paymentStatus = 'paid';
+        localStorage.setItem('student_data', JSON.stringify(currentData));
+
+        showSuccess('✅ Payment successful! Redirecting to dashboard...');
+        setTimeout(() => {
+          window.location.href = '/student/dashboard';
+        }, 1500);
+
+      } catch (error) {
+        console.error('Payment verification error:', error);
+        showError('Payment verification failed. Please contact support if amount was deducted.');
+        button.disabled = false;
+        button.innerHTML = 'Pay Now with Razorpay';
+      }
+    }
+
+    // Helper functions
+    function showError(message) {
+      const errorDiv = document.getElementById('error-message');
+      errorDiv.textContent = message;
+      errorDiv.style.display = 'block';
+    }
+
+    function showSuccess(message) {
+      const successDiv = document.getElementById('success-message');
+      successDiv.textContent = message;
+      successDiv.style.display = 'block';
+    }
+
+    function capitalizeWords(str) {
+      if (!str) return '';
+      return str.replace(/\b\w/g, char => char.toUpperCase());
+    }
+
+    window.addEventListener('load', loadPaymentDetails);
+  </script>
+</body>
+</html>

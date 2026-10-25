@@ -117,6 +117,8 @@ const publicPages = [
   ["src/pages/internships-forgot-password.html", path.join("internships", "forgot-password.html")],
   ["src/pages/internships-reset-password.html", path.join("internships", "reset-password.html")],
   ["src/pages/internships-dashboard.html", path.join("internships", "dashboard.html")],
+  ["src/pages/internships-payment.html", path.join("internships", "payment.html")],
+  ["src/pages/internships-payment.html", "internships-payment.html"],
   ["src/pages/work.html", "work.html"],
   ["src/pages/work-fintech-payment-gateway.html", path.join("work", "fintech-payment-gateway.html")],
   ["src/pages/work-healthcare-telemedicine.html", path.join("work", "healthcare-telemedicine-platform.html")],
