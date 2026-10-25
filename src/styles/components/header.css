@@ -44,9 +44,9 @@
 .announcement-bar .container,
 .announcement-bar__container {
   width: 100% !important;
-  max-width: 1240px !important;
+  max-width: var(--container-max-width, 1240px) !important;
   margin: 0 auto !important;
-  padding: 0 24px !important;
+  padding: 0 var(--container-padding, 24px) !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
@@ -103,10 +103,10 @@
    ------------------------------------------------------------------------- */
 .nav {
   width: 100% !important;
-  max-width: 1240px !important;
+  max-width: var(--container-max-width, 1240px) !important;
   min-height: 64px !important;
   margin: 0 auto !important;
-  padding: 0 24px !important;
+  padding: 0 var(--container-padding, 24px) !important;
   display: flex !important;
   align-items: center !important;
   justify-content: space-between !important;
