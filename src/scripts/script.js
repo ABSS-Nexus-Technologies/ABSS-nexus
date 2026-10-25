@@ -1556,7 +1556,7 @@ if (adminApp) {
       const barHeight = (value / max) * 170;
       const x = 44 + index * barWidth;
       const y = height - 52 - barHeight;
-      context.fillStyle = "#0077ff";
+      context.fillStyle = "#0066CC";
       context.fillRect(x, y, barWidth - 18, barHeight);
       context.fillStyle = "#0d1b2a";
       context.font = "700 13px Inter, Arial";
@@ -1578,7 +1578,7 @@ if (adminApp) {
     }, {});
     const entries = Object.entries(counts).slice(0, 4);
     const total = entries.reduce((sum, item) => sum + item[1], 0) || 1;
-    const colors = ["#0077ff", "#00c2ff", "#10b981", "#f59e0b"];
+    const colors = ["#0066CC", "#00C2FF", "#10b981", "#f59e0b"];
     let start = -Math.PI / 2;
     context.clearRect(0, 0, canvas.width, canvas.height);
     context.fillStyle = "#f5f7fa";
