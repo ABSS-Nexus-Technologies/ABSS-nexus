@@ -10,7 +10,8 @@
     "start": "node backend/server.js",
     "dev": "node backend/server.js",
     "validate": "scripts/validate.sh",
-    "test": "scripts/validate.sh"
+    "test": "scripts/validate.sh",
+    "sitemap": "node scripts/build.js"
   },
   "engines": {
     "node": ">=18"

@@ -119,7 +119,7 @@ async function runTests() {
   // Test 4: Generic Errors (Anti-Enumeration)
   console.log('\n4. Testing Generic Error Messages (Anti-Enumeration)...');
   {
-    const testHeaders = { 'x-forwarded-for': '198.51.100.99' };
+    const testHeaders = { 'x-forwarded-for': '198.51.100.' + Math.floor(Math.random() * 200 + 10) };
     // 4a. Bad password on non-existent account
     const resNonExistent = await postJson('/api/internships/auth/login', {
       email: 'definitely.doesnotexist@example.com',

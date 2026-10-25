@@ -8,7 +8,10 @@ const request = (path, options = {}) =>
     const url = new URL(path, BASE_URL);
     const reqOptions = {
       method: options.method || "GET",
-      headers: options.headers || {},
+      headers: {
+        "x-forwarded-for": `192.0.2.${(process.pid % 200) + 1}`,
+        ...(options.headers || {}),
+      },
     };
 
     const req = http.request(url, reqOptions, (res) => {
