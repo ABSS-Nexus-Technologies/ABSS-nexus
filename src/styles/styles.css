@@ -10056,6 +10056,43 @@ body.agency-light-theme .radiant-cta-box .cta-trust-meta span {
   box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.15);
 }
 
+.password-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.password-input-wrapper input {
+  width: 100%;
+  padding-right: 44px !important;
+}
+
+.toggle-password-btn {
+  position: absolute;
+  right: 12px;
+  background: none;
+  border: none;
+  color: #6E6E73;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s ease, transform 0.15s ease;
+  min-width: 32px;
+  min-height: 32px;
+  z-index: 2;
+}
+
+.toggle-password-btn:hover {
+  color: #0066CC;
+}
+
+.toggle-password-btn:active {
+  transform: scale(0.95);
+}
+
 .auth-btn-primary {
   width: 100%;
   padding: 13px 20px;

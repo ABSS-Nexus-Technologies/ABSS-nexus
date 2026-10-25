@@ -1969,3 +1969,34 @@ window.showToast = function showToast(message, type = "info", duration = 3500) {
   }
 })();
 
+// Password toggle functionality across auth forms
+function initPasswordToggles() {
+  document.querySelectorAll('.toggle-password-btn').forEach(btn => {
+    if (btn.dataset.toggleBound) return;
+    btn.dataset.toggleBound = "true";
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const wrapper = btn.closest('.password-input-wrapper') || btn.parentElement;
+      const input = wrapper ? wrapper.querySelector('input') : null;
+      if (!input) return;
+      const isPassword = input.type === 'password';
+      input.type = isPassword ? 'text' : 'password';
+      btn.setAttribute('aria-pressed', !isPassword);
+      btn.setAttribute('aria-label', isPassword ? 'Hide password' : 'Show password');
+      const openEye = btn.querySelector('.eye-open');
+      const offEye = btn.querySelector('.eye-off');
+      if (openEye && offEye) {
+        openEye.style.display = isPassword ? 'none' : 'block';
+        offEye.style.display = isPassword ? 'block' : 'none';
+      }
+    });
+  });
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initPasswordToggles);
+} else {
+  initPasswordToggles();
+}
+
+
