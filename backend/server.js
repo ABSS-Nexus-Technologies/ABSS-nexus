@@ -3,6 +3,19 @@ const fs = require("fs");
 const http = require("http");
 const path = require("path");
 const { URL } = require("url");
+const zlib = require("zlib");
+
+let ResendClass = null;
+try {
+  ResendClass = require("resend").Resend;
+} catch {
+  // Graceful fallback if resend is not yet installed
+}
+
+const generateETag = (buffer) => {
+  const hash = crypto.createHash("sha1").update(buffer).digest("hex").slice(0, 16);
+  return `W/"${hash}-${buffer.length}"`;
+};
 
 const rootDir = path.resolve(__dirname, "..");
 
@@ -71,58 +84,96 @@ const dispatchServerNotification = async ({ to, subject, html, text }) => {
   const plainText = text || (html ? html.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim() : "");
   const recipient = Array.isArray(to) ? to : [to];
 
-  // 1. Resend API
+  // 1. Resend Official SDK
   if (process.env.RESEND_API_KEY && !isApiKeyPlaceholder(process.env.RESEND_API_KEY)) {
     try {
       console.log(`[EmailService:Resend] Dispatching email to: ${recipient.join(", ")} | Subject: "${subject}"`);
-      const response = await fetch("https://api.resend.com/emails", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
-        },
-        body: JSON.stringify({
+      const resend = ResendClass ? new ResendClass(process.env.RESEND_API_KEY) : null;
+      let data, error;
+
+      if (resend) {
+        const result = await resend.emails.send({
           from: fromAddress,
           to: recipient,
           subject,
           html,
           text: plainText,
-        }),
-      });
-      const data = await response.json().catch(() => ({}));
-      if (response.ok) {
-        console.log(`[EmailService:Resend] ✓ Email delivered successfully. ID: ${data.id}`);
-        return { ok: true, provider: "resend", id: data.id };
-      }
-
-      // If custom domain is not yet verified in Resend, automatically retry with sandbox sender
-      if (response.status === 403 && (data?.message || "").toLowerCase().includes("domain")) {
-        console.warn(`[EmailService:Resend] Custom domain (${fromAddress}) not verified yet in Resend. Retrying with onboarding@resend.dev...`);
-        const retryRes = await fetch("https://api.resend.com/emails", {
+        });
+        data = result.data;
+        error = result.error;
+      } else {
+        const response = await fetch("https://api.resend.com/emails", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
           },
           body: JSON.stringify({
-            from: "ABSS Nexus Academy <onboarding@resend.dev>",
+            from: fromAddress,
             to: recipient,
             subject,
             html,
             text: plainText,
           }),
         });
-        const retryData = await retryRes.json().catch(() => ({}));
-        if (retryRes.ok) {
-          console.log(`[EmailService:Resend Sandbox] ✓ Email delivered successfully via onboarding@resend.dev. ID: ${retryData.id}`);
-          return { ok: true, provider: "resend-sandbox", id: retryData.id };
+        const json = await response.json().catch(() => ({}));
+        if (response.ok) {
+          data = json;
+        } else {
+          error = json;
         }
-        console.error(`[EmailService:Resend Sandbox] ✗ API returned status ${retryRes.status}:`, retryData);
-        return { ok: false, provider: "resend", status: retryRes.status, error: retryData };
       }
 
-      console.error(`[EmailService:Resend] ✗ API returned status ${response.status}:`, data);
-      return { ok: false, provider: "resend", status: response.status, error: data };
+      if (error) {
+        console.error(`[EmailService:Resend] ✗ Error:`, error);
+        const errMsg = String(error.message || "").toLowerCase();
+        // If custom domain is not yet verified in Resend, automatically retry with sandbox sender
+        if (errMsg.includes("domain") || errMsg.includes("verify") || errMsg.includes("not verified")) {
+          console.warn(`[EmailService:Resend] Custom domain (${fromAddress}) not verified yet in Resend. Retrying with onboarding@resend.dev...`);
+          let retryData, retryError;
+          if (resend) {
+            const retryRes = await resend.emails.send({
+              from: "Abssnexus <onboarding@resend.dev>",
+              to: recipient,
+              subject,
+              html,
+              text: plainText,
+            });
+            retryData = retryRes.data;
+            retryError = retryRes.error;
+          } else {
+            const retryRes = await fetch("https://api.resend.com/emails", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
+              },
+              body: JSON.stringify({
+                from: "Abssnexus <onboarding@resend.dev>",
+                to: recipient,
+                subject,
+                html,
+                text: plainText,
+              }),
+            });
+            const rJson = await retryRes.json().catch(() => ({}));
+            if (retryRes.ok) retryData = rJson;
+            else retryError = rJson;
+          }
+
+          if (!retryError && retryData?.id) {
+            console.log(`[EmailService:Resend Sandbox] ✓ Email delivered successfully via onboarding@resend.dev. ID: ${retryData.id}`);
+            return { ok: true, provider: "resend-sandbox", id: retryData.id };
+          }
+          console.error(`[EmailService:Resend Sandbox] ✗ Delivery failed:`, retryError);
+          return { ok: false, provider: "resend", error: retryError };
+        }
+
+        return { ok: false, provider: "resend", error };
+      }
+
+      console.log(`[EmailService:Resend] ✓ Email delivered successfully. ID: ${data?.id}`);
+      return { ok: true, provider: "resend", id: data?.id };
     } catch (e) {
       console.error("[EmailService:Resend] ✗ Dispatch error:", e.message);
       return { ok: false, provider: "resend", error: e.message };
@@ -952,8 +1003,10 @@ const buildLogoutCookie = () => {
 
 const send = (response, status, payload, headers = {}) => {
   const body = typeof payload === "string" ? payload : JSON.stringify(payload);
+  const defaultCacheControl = headers["Cache-Control"] || (typeof payload === "object" ? "public, max-age=300" : "no-cache");
   response.writeHead(status, {
     "Content-Type": typeof payload === "string" ? "text/plain; charset=utf-8" : "application/json; charset=utf-8",
+    "Cache-Control": defaultCacheControl,
     "X-Frame-Options": "DENY",
     "X-Content-Type-Options": "nosniff",
     "Referrer-Policy": "strict-origin-when-cross-origin",
@@ -1077,14 +1130,63 @@ const serveStatic = (request, response, pathname) => {
           send(response, 404, "Not found");
           return;
         }
-        response.writeHead(404, { "Content-Type": "text/html; charset=utf-8" });
+        response.writeHead(404, { 
+          "Content-Type": "text/html; charset=utf-8",
+          "Cache-Control": "no-cache",
+        });
         response.end(notFoundData);
       });
       return;
     }
 
+    const ext = path.extname(filePath).toLowerCase();
+    const contentType = contentTypes[ext] || "application/octet-stream";
+    const etag = generateETag(data);
+
+    // Caching Strategy:
+    // - Static assets (JS, CSS, images, fonts, webp): 1 year immutable
+    // - HTML pages: Always fresh / revalidate
+    let cacheControl = "public, max-age=0, must-revalidate";
+    if ([".js", ".css", ".png", ".jpg", ".jpeg", ".webp", ".svg", ".ico", ".woff", ".woff2", ".ttf"].includes(ext)) {
+      cacheControl = "public, max-age=31536000, immutable";
+    }
+
+    // ETag Validation (304 Not Modified)
+    if (request.headers["if-none-match"] === etag) {
+      response.writeHead(304, {
+        "ETag": etag,
+        "Cache-Control": cacheControl,
+      });
+      response.end();
+      return;
+    }
+
+    // Gzip Compression for text/script/style/markup assets
+    const isCompressible = ext === ".html" || ext === ".css" || ext === ".js" || ext === ".json" || ext === ".xml" || ext === ".svg" || ext === ".txt" || !ext;
+    const acceptEncoding = request.headers["accept-encoding"] || "";
+
+    if (isCompressible && acceptEncoding.includes("gzip") && data.length > 512) {
+      const gzipped = zlib.gzipSync(data);
+      response.writeHead(200, {
+        "Content-Type": contentType,
+        "Content-Encoding": "gzip",
+        "Content-Length": gzipped.length,
+        "Cache-Control": cacheControl,
+        "ETag": etag,
+        "Vary": "Accept-Encoding",
+        "X-Frame-Options": "DENY",
+        "X-Content-Type-Options": "nosniff",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+      });
+      response.end(gzipped);
+      return;
+    }
+
     response.writeHead(200, {
-      "Content-Type": contentTypes[path.extname(filePath)] || "application/octet-stream",
+      "Content-Type": contentType,
+      "Content-Length": data.length,
+      "Cache-Control": cacheControl,
+      "ETag": etag,
       "X-Frame-Options": "DENY",
       "X-Content-Type-Options": "nosniff",
       "Referrer-Policy": "strict-origin-when-cross-origin",

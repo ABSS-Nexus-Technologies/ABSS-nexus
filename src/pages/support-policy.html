@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="index, follow" />
     <meta
       name="description"
       content="Read the ABSS Nexus Technologies support policy for response channels, maintenance help, project support scope and client communication."
@@ -11,6 +12,7 @@
     <meta property="og:title" content="Support Policy | ABSS Nexus Technologies" />
     <meta property="og:description" content="Read the ABSS Nexus Technologies support policy for response channels, maintenance help, project support scope and client communication." />
     <meta property="og:image" content="https://abssnexus.in/public/assets/images/LogoGenerated.png" />
+    <meta name="twitter:card" content="summary_large_image" />
     <meta property="og:url" content="https://abssnexus.in/support-policy" />
     <link rel="canonical" href="https://abssnexus.in/support-policy" />
     <title>Support Policy | ABSS Nexus Technologies</title>
@@ -38,7 +40,10 @@
       </div>
       <nav class="nav" aria-label="Main Navigation">
         <a class="brand" href="/" aria-label="ABSS Nexus Technologies home">
-          <img src="/public/assets/images/favicon.png" alt="ABSS Nexus Technologies logo" width="38" height="38" />
+          <picture>
+            <source srcset="/public/assets/images/favicon.webp" type="image/webp" />
+            <img src="/public/assets/images/favicon.png" alt="ABSS Nexus Technologies logo" width="38" height="38" fetchpriority="high" />
+          </picture>
           <span class="brand-name">ABSS Nexus Technologies</span>
         </a>
         <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav-links">
@@ -324,7 +329,10 @@
           <!-- Column 1: Brand -->
           <div class="site-footer__brand footer-brand">
             <a class="site-footer__logo-link" href="/" aria-label="ABSS Nexus Technologies home">
-              <img class="site-footer__logo" src="/public/assets/images/LogoGenerated.png" alt="ABSS Nexus Technologies logo" width="160" height="38" />
+              <picture>
+                <source srcset="/public/assets/images/LogoGenerated.webp" type="image/webp" />
+                <img class="site-footer__logo" src="/public/assets/images/LogoGenerated.png" alt="ABSS Nexus Technologies logo" width="160" height="38" loading="lazy" decoding="async" />
+              </picture>
             </a>
             <p class="site-footer__brand-title footer-brand-title">ABSS Nexus Technologies</p>
             <p class="site-footer__brand-desc">Building high-performance digital solutions for businesses, startups, institutions, and growing brands.</p>
@@ -414,8 +422,8 @@
       <span>WhatsApp</span>
     </a>
 
-    <script src="/src/scripts/seo-schema.js"></script>
+    <script src="/src/scripts/seo-schema.js" defer></script>
     <script src="/src/scripts/components/footer.js" defer></script>
-    <script src="/src/scripts/script.js"></script>
+    <script src="/src/scripts/script.js" defer></script>
   </body>
 </html>

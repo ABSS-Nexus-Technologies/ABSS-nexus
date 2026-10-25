@@ -3,11 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="index, follow" />
     <meta name="description" content="A comprehensive engineering guide to optimizing Largest Contentful Paint, Interaction to Next Paint, and layout stability for high-speed websites." />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Modern Web Performance & Core Web Vitals | ABSS Nexus" />
     <meta property="og:description" content="A comprehensive engineering guide to optimizing Largest Contentful Paint, Interaction to Next Paint, and layout stability for high-speed websites." />
     <meta property="og:image" content="https://abssnexus.in/public/assets/images/LogoGenerated.png" />
+    <meta name="twitter:card" content="summary_large_image" />
     <meta property="og:url" content="https://abssnexus.in/blog/modern-web-performance-core-web-vitals" />
     <link rel="canonical" href="https://abssnexus.in/blog/modern-web-performance-core-web-vitals" />
     <title>Modern Web Performance & Core Web Vitals | ABSS Nexus Technologies</title>
@@ -57,7 +59,10 @@
       </div>
       <nav class="nav" aria-label="Main Navigation">
         <a class="brand" href="/" aria-label="ABSS Nexus Technologies home">
-          <img src="/public/assets/images/favicon.png" alt="ABSS Nexus Technologies logo" width="38" height="38" />
+          <picture>
+            <source srcset="/public/assets/images/favicon.webp" type="image/webp" />
+            <img src="/public/assets/images/favicon.png" alt="ABSS Nexus Technologies logo" width="38" height="38" fetchpriority="high" />
+          </picture>
           <span class="brand-name">ABSS Nexus Technologies</span>
         </a>
         <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav-links">
@@ -363,7 +368,10 @@
           <!-- Column 1: Brand -->
           <div class="site-footer__brand footer-brand">
             <a class="site-footer__logo-link" href="/" aria-label="ABSS Nexus Technologies home">
-              <img class="site-footer__logo" src="/public/assets/images/LogoGenerated.png" alt="ABSS Nexus Technologies logo" width="160" height="38" />
+              <picture>
+                <source srcset="/public/assets/images/LogoGenerated.webp" type="image/webp" />
+                <img class="site-footer__logo" src="/public/assets/images/LogoGenerated.png" alt="ABSS Nexus Technologies logo" width="160" height="38" loading="lazy" decoding="async" />
+              </picture>
             </a>
             <p class="site-footer__brand-title footer-brand-title">ABSS Nexus Technologies</p>
             <p class="site-footer__brand-desc">Building high-performance digital solutions for businesses, startups, institutions, and growing brands.</p>
@@ -453,12 +461,12 @@
       <span>WhatsApp</span>
     </a>
 
-    <script src="/src/scripts/seo-schema.js"></script>
+    <script src="/src/scripts/seo-schema.js" defer></script>
     <script src="/src/scripts/components/footer.js" defer></script>
-    <script src="/src/scripts/script.js"></script>
+    <script src="/src/scripts/script.js" defer></script>
 
     <script src="/src/config/admin-config.js"></script>
     <script src="/src/services/admin-api.js"></script>
-    <script src="/src/scripts/script.js"></script>
+    <script src="/src/scripts/script.js" defer></script>
   </body>
 </html>

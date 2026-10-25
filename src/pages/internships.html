@@ -9,6 +9,7 @@
     <meta property="og:title" content="Internship Portal & Engineering Programs | ABSS Nexus Technologies" />
     <meta property="og:description" content="Industry-recognized virtual engineering internships at ABSS Nexus Technologies. Real production projects, 1-on-1 mentor reviews, and verified ISO-aligned certification." />
     <meta property="og:image" content="https://abssnexus.in/public/assets/images/LogoGenerated.png" />
+    <meta name="twitter:card" content="summary_large_image" />
     <meta property="og:url" content="https://abssnexus.in/internships" />
     <link rel="canonical" href="https://abssnexus.in/internships" />
     <title>Internship Portal & Engineering Programs | ABSS Nexus Technologies</title>
@@ -22,15 +23,16 @@
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "WebPage",
-  "name": "ABSS Nexus Technologies Internship Portal",
-  "description": "Structured virtual engineering internship programs with production deployments, mentor code reviews, and verified ISO-aligned certification.",
+  "@type": "EducationalOrganization",
+  "name": "ABSS Nexus Academy",
+  "description": "8-week engineering internship programs with production deployments, mentor code reviews, and verified ISO-aligned certification.",
   "url": "https://abssnexus.in/internships",
-  "publisher": {
-    "@type": "Organization",
-    "name": "ABSS Nexus Technologies",
-    "url": "https://abssnexus.in"
-  }
+  "image": "https://abssnexus.in/public/assets/images/internship-students-collab.jpg",
+  "sameAs": [
+    "https://www.instagram.com/abssnexus/",
+    "https://www.facebook.com/profile.php?id=61592563923350",
+    "https://x.com/abssnexus"
+  ]
 }
     </script>
   </head>
@@ -47,7 +49,10 @@
       </div>
       <nav class="nav" aria-label="Internship Academy Navigation">
         <a class="brand" href="/internships" aria-label="ABSS Nexus Academy home">
-          <img src="/public/assets/images/favicon.png" alt="ABSS Nexus Academy logo" width="38" height="38" />
+          <picture>
+            <source srcset="/public/assets/images/favicon.webp" type="image/webp" />
+            <img src="/public/assets/images/favicon.png" alt="ABSS Nexus Academy logo" width="38" height="38" fetchpriority="high" />
+          </picture>
           <div class="brand-text-group" style="display: flex; flex-direction: column; text-align: left;">
             <span class="brand-name">ABSS Nexus Academy</span>
             <span class="brand-subtext" style="font-size: 0.72rem; color: #6E6E73; font-weight: 500; letter-spacing: 0.02em;">Internship &amp; Engineering Portal</span>
@@ -871,7 +876,10 @@
           <!-- Column 1: Brand & Academy Vision -->
           <div class="site-footer__brand footer-brand">
             <a class="site-footer__logo-link" href="/internships" aria-label="ABSS Nexus Academy home">
-              <img class="site-footer__logo" src="/public/assets/images/LogoGenerated.png" alt="ABSS Nexus Academy logo" width="160" height="38" />
+              <picture>
+                <source srcset="/public/assets/images/LogoGenerated.webp" type="image/webp" />
+                <img class="site-footer__logo" src="/public/assets/images/LogoGenerated.png" alt="ABSS Nexus Academy logo" width="160" height="38" loading="lazy" decoding="async" />
+              </picture>
             </a>
             <p class="site-footer__brand-title footer-brand-title">ABSS Nexus Academy</p>
             <p class="site-footer__brand-desc">Industry-standard virtual technical internships, hands-on production code reviews, and verifiable credentials for ambitious software engineers.</p>
@@ -946,13 +954,13 @@
       <span>WhatsApp</span>
     </a>
 
-    <script src="/src/scripts/seo-schema.js"></script>
+    <script src="/src/scripts/seo-schema.js" defer></script>
     <script src="/src/scripts/components/footer.js" defer></script>
-    <script src="/src/scripts/script.js"></script>
+    <script src="/src/scripts/script.js" defer></script>
 
     <script src="/src/config/admin-config.js"></script>
     <script src="/src/services/admin-api.js"></script>
-    <script src="/src/scripts/script.js"></script>
+    <script src="/src/scripts/script.js" defer></script>
 
   </body>
 </html>

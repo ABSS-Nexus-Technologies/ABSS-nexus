@@ -4,7 +4,10 @@
           <!-- Column 1: Brand -->
           <div class="site-footer__brand footer-brand">
             <a class="site-footer__logo-link" href="/" aria-label="ABSS Nexus Technologies home">
-              <img class="site-footer__logo" src="/public/assets/images/LogoGenerated.png" alt="ABSS Nexus Technologies logo" width="160" height="38" />
+              <picture>
+                <source srcset="/public/assets/images/LogoGenerated.webp" type="image/webp" />
+                <img class="site-footer__logo" src="/public/assets/images/LogoGenerated.png" alt="ABSS Nexus Technologies logo" width="160" height="38" loading="lazy" decoding="async" />
+              </picture>
             </a>
             <p class="site-footer__brand-title footer-brand-title">ABSS Nexus Technologies</p>
             <p class="site-footer__brand-desc">Building high-performance digital solutions for businesses, startups, institutions, and growing brands.</p>

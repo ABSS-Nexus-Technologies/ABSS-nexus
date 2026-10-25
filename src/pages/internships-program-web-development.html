@@ -6,6 +6,7 @@
     <meta name="description" content="Master modern responsive web architecture, semantic HTML5, fluid vanilla CSS, JavaScript ES6+, Core Web Vitals optimization, and REST API integration." />
     <meta name="robots" content="index, follow" />
     <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
     <meta property="og:title" content="Web Development Internship Track | ABSS Nexus Technologies" />
     <meta property="og:description" content="Master modern responsive web architecture, semantic HTML5, fluid vanilla CSS, JavaScript ES6+, Core Web Vitals optimization, and REST API integration." />
     <meta property="og:image" content="https://abssnexus.in/public/assets/images/LogoGenerated.png" />
@@ -26,10 +27,12 @@
   "name": "Web Development Internship Track",
   "description": "Master modern responsive web architecture, semantic HTML5, fluid vanilla CSS, JavaScript ES6+, Core Web Vitals optimization, and REST API integration.",
   "provider": {
-    "@type": "Organization",
-    "name": "ABSS Nexus Technologies",
-    "url": "https://abssnexus.in"
-  }
+    "@type": "EducationalOrganization",
+    "name": "ABSS Nexus Academy",
+    "url": "https://abssnexus.in/internships"
+  },
+  "duration": "P8W",
+  "timeRequired": "P8W"
 }
     </script>
   </head>
@@ -46,7 +49,10 @@
       </div>
       <nav class="nav" aria-label="Internship Academy Navigation">
         <a class="brand" href="/internships" aria-label="ABSS Nexus Academy home">
-          <img src="/public/assets/images/favicon.png" alt="ABSS Nexus Academy logo" width="38" height="38" />
+          <picture>
+            <source srcset="/public/assets/images/favicon.webp" type="image/webp" />
+            <img src="/public/assets/images/favicon.png" alt="ABSS Nexus Academy logo" width="38" height="38" fetchpriority="high" />
+          </picture>
           <div class="brand-text-group" style="display: flex; flex-direction: column; text-align: left;">
             <span class="brand-name">ABSS Nexus Academy</span>
             <span class="brand-subtext" style="font-size: 0.72rem; color: #6E6E73; font-weight: 500; letter-spacing: 0.02em;">Internship &amp; Engineering Portal</span>
@@ -254,7 +260,10 @@
           <!-- Column 1: Brand & Academy Vision -->
           <div class="site-footer__brand footer-brand">
             <a class="site-footer__logo-link" href="/internships" aria-label="ABSS Nexus Academy home">
-              <img class="site-footer__logo" src="/public/assets/images/LogoGenerated.png" alt="ABSS Nexus Academy logo" width="160" height="38" />
+              <picture>
+                <source srcset="/public/assets/images/LogoGenerated.webp" type="image/webp" />
+                <img class="site-footer__logo" src="/public/assets/images/LogoGenerated.png" alt="ABSS Nexus Academy logo" width="160" height="38" loading="lazy" decoding="async" />
+              </picture>
             </a>
             <p class="site-footer__brand-title footer-brand-title">ABSS Nexus Academy</p>
             <p class="site-footer__brand-desc">Industry-standard virtual technical internships, hands-on production code reviews, and verifiable credentials for ambitious software engineers.</p>

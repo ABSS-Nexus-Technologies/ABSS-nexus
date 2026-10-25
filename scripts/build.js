@@ -243,6 +243,9 @@ if (includeAdmin) {
   }
 }
 
+// Automatically refresh sitemap and robots.txt
+require("./generate-sitemap");
+
 copyTextFile("robots.txt");
 copyTextFile("sitemap.xml");
 if (fs.existsSync(path.join(rootDir, "favicon.ico"))) {
@@ -301,6 +304,46 @@ if (fs.existsSync(srcStylesCss)) {
   // Also optimize dist styles.css so existing <link> tags benefit immediately
   fs.writeFileSync(path.join(distDir, "src", "styles", "styles.css"), minified);
 
+  // Build split modular CSS bundles
+  const headerCss = fs.existsSync(path.join(rootDir, "src", "styles", "components", "header.css"))
+    ? fs.readFileSync(path.join(rootDir, "src", "styles", "components", "header.css"), "utf8")
+    : "";
+  const footerCss = fs.existsSync(path.join(rootDir, "src", "styles", "components", "footer.css"))
+    ? fs.readFileSync(path.join(rootDir, "src", "styles", "components", "footer.css"), "utf8")
+    : "";
+  const baseCss = inlinedRaw.replace(/@import\s+url\([^)]+\)\s*;/g, "").slice(0, 8500);
+
+  // 1. Core CSS: Base tokens + reset + header + footer
+  const coreRaw = `${baseCss}\n${headerCss}\n${footerCss}`;
+  const coreMin = minifyCssString(coreRaw);
+  fs.writeFileSync(path.join(rootDir, "src", "styles", "core.min.css"), coreMin);
+  fs.writeFileSync(path.join(distDir, "src", "styles", "core.min.css"), coreMin);
+
+  // 2. Auth CSS: Core + Scoped Auth styles
+  const authCss = fs.existsSync(path.join(rootDir, "src", "styles", "components", "auth.css"))
+    ? fs.readFileSync(path.join(rootDir, "src", "styles", "components", "auth.css"), "utf8")
+    : "";
+  const authMin = minifyCssString(`${coreRaw}\n${authCss}`);
+  fs.writeFileSync(path.join(rootDir, "src", "styles", "auth.min.css"), authMin);
+  fs.writeFileSync(path.join(distDir, "src", "styles", "auth.min.css"), authMin);
+
+  // 3. Internship Portal CSS: Core + Scoped Internship Portal styles
+  const portalCss = fs.existsSync(path.join(rootDir, "src", "styles", "components", "internship-portal.css"))
+    ? fs.readFileSync(path.join(rootDir, "src", "styles", "components", "internship-portal.css"), "utf8")
+    : "";
+  const portalMin = minifyCssString(`${coreRaw}\n${portalCss}`);
+  fs.writeFileSync(path.join(rootDir, "src", "styles", "internship-portal.min.css"), portalMin);
+  fs.writeFileSync(path.join(distDir, "src", "styles", "internship-portal.min.css"), portalMin);
+
+  // 4. Student Workspace CSS: Minified student workspace dashboard
+  const workspacePath = path.join(rootDir, "src", "styles", "student-workspace.css");
+  if (fs.existsSync(workspacePath)) {
+    const workspaceRaw = fs.readFileSync(workspacePath, "utf8");
+    const workspaceMin = minifyCssString(workspaceRaw);
+    fs.writeFileSync(path.join(rootDir, "src", "styles", "student-workspace.min.css"), workspaceMin);
+    fs.writeFileSync(path.join(distDir, "src", "styles", "student-workspace.min.css"), workspaceMin);
+  }
+
   // Build split modular CSS components
   const componentsDir = path.join(rootDir, "src", "styles", "components");
   if (fs.existsSync(componentsDir)) {
@@ -315,7 +358,12 @@ if (fs.existsSync(srcStylesCss)) {
     }
   }
 
-  console.log(`CSS optimization complete: Inlined @import waterfall, generated styles.min.css (${(minified.length / 1024).toFixed(1)} KB) and modular component bundles.`);
+  console.log(`CSS optimization complete:
+  - styles.min.css: ${(minified.length / 1024).toFixed(1)} KB (Full Bundle)
+  - core.min.css: ${(coreMin.length / 1024).toFixed(1)} KB
+  - auth.min.css: ${(authMin.length / 1024).toFixed(1)} KB
+  - internship-portal.min.css: ${(portalMin.length / 1024).toFixed(1)} KB
+  - student-workspace.min.css: ${(fs.existsSync(path.join(rootDir, "src", "styles", "student-workspace.min.css")) ? (fs.readFileSync(path.join(rootDir, "src", "styles", "student-workspace.min.css"), "utf8").length / 1024).toFixed(1) : 0)} KB`);
 }
 
 const requiredBuildFiles = [

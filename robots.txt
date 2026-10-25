@@ -1,12 +1,9 @@
 User-agent: *
-Disallow: /admin-login.html
-Disallow: /admin-dashboard.html
-Disallow: /admin-leads.html
-Disallow: /admin-projects.html
-Disallow: /admin-clients.html
-Disallow: /admin-support.html
-Disallow: /admin-pricing.html
 Disallow: /src/admin/
+Disallow: /admin/
+Disallow: /admin-*
+Disallow: /student/
+Disallow: /student-*
 Disallow: /internships/dashboard
 Disallow: /api/
 

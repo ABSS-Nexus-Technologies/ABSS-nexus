@@ -9,6 +9,7 @@
     <meta property="og:title" content="Student Registration | ABSS Nexus Technologies" />
     <meta property="og:description" content="Register for an official ABSS Nexus Technologies student account. Access verified technical internship programs, assignments, and mentorship portals." />
     <meta property="og:image" content="https://abssnexus.in/public/assets/images/LogoGenerated.png" />
+    <meta name="twitter:card" content="summary_large_image" />
     <meta property="og:url" content="https://abssnexus.in/register" />
     <link rel="canonical" href="https://abssnexus.in/register" />
     <title>Student Registration | ABSS Nexus Technologies</title>
@@ -18,7 +19,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="/src/styles/styles.css?v=20261023v2" />
+    <link rel="stylesheet" href="/src/styles/auth.min.css?v=20261023v2"" />
 
 
   </head>
@@ -35,7 +36,10 @@
       </div>
       <nav class="nav" aria-label="Main Navigation">
         <a class="brand" href="/" aria-label="ABSS Nexus Technologies home">
-          <img src="/public/assets/images/favicon.png" alt="ABSS Nexus Technologies logo" width="38" height="38" />
+          <picture>
+            <source srcset="/public/assets/images/favicon.webp" type="image/webp" />
+            <img src="/public/assets/images/favicon.png" alt="ABSS Nexus Technologies logo" width="38" height="38" fetchpriority="high" />
+          </picture>
           <span class="brand-name">ABSS Nexus Technologies</span>
         </a>
         <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav-links">
@@ -339,7 +343,10 @@
           <!-- Column 1: Brand -->
           <div class="site-footer__brand footer-brand">
             <a class="site-footer__logo-link" href="/" aria-label="ABSS Nexus Technologies home">
-              <img class="site-footer__logo" src="/public/assets/images/LogoGenerated.png" alt="ABSS Nexus Technologies logo" width="160" height="38" />
+              <picture>
+                <source srcset="/public/assets/images/LogoGenerated.webp" type="image/webp" />
+                <img class="site-footer__logo" src="/public/assets/images/LogoGenerated.png" alt="ABSS Nexus Technologies logo" width="160" height="38" loading="lazy" decoding="async" />
+              </picture>
             </a>
             <p class="site-footer__brand-title footer-brand-title">ABSS Nexus Technologies</p>
             <p class="site-footer__brand-desc">Building high-performance digital solutions for businesses, startups, institutions, and growing brands.</p>
@@ -433,9 +440,9 @@
     <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore-compat.js"></script>
-    <script src="/src/scripts/seo-schema.js"></script>
+    <script src="/src/scripts/seo-schema.js" defer></script>
     <script src="/src/scripts/components/footer.js" defer></script>
-    <script src="/src/scripts/script.js"></script>
+    <script src="/src/scripts/script.js" defer></script>
     <script src="/src/services/data-sync.js" defer></script>
     <script src="/src/scripts/auth.js" defer></script>
   </body>
