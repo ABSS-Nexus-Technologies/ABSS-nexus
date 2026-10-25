@@ -42,14 +42,8 @@ for (const file of files) {
   let html = fs.readFileSync(filePath, "utf8");
   let modified = false;
 
-  // 1. Auth CSS splitting
-  if (authPages.has(file)) {
-    if (html.includes("/src/styles/styles.css")) {
-      html = html.replace(/(href=["']\/src\/styles\/styles(?:\.min)?\.css)(?:\?[^"']*)?(["'])/g, 'href="/src/styles/auth.min.css?v=20261023v2"$2');
-      modified = true;
-      updatedAuthCss++;
-    }
-  }
+  // 1. Auth pages keep full styles.css to support header, dark theme, and footer
+
 
   // 2. Defer script.js
   if (/<script\s+src=["']\/src\/scripts\/script\.js["']\s*><\/script>/i.test(html)) {

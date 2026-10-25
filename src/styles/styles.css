@@ -3,6 +3,7 @@
 @import url("./components/footer.css");
 @import url("./components/public-sections.css");
 @import url("./components/internship-portal.css");
+@import url("./components/auth.css");
 
 :root {
   /* Layout & Container Standards */
