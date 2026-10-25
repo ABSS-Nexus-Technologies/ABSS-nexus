@@ -52,6 +52,20 @@
   ]
 }
     </script>
+    <!-- Google Analytics 4 (GA4) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7TGL0VYJX2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-7TGL0VYJX2', {
+        'page_path': window.location.pathname,
+        'page_title': document.title,
+        'anonymize_ip': true
+      });
+    </script>
+    <!-- Sentry Error Tracking Browser SDK -->
+    <script src="https://browser.sentry-cdn.com/7.84.0/bundle.min.js" crossorigin="anonymous" defer></script>
   </head>
   <body>
     <header class="site-header" role="banner">

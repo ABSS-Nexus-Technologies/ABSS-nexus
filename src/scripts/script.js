@@ -2023,10 +2023,14 @@ if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", () => {
     initPasswordToggles();
     initPasswordStrengthIndicators();
+    initGA4EventTracking();
+    initPerformanceMonitoring();
   });
 } else {
   initPasswordToggles();
   initPasswordStrengthIndicators();
+  initGA4EventTracking();
+  initPerformanceMonitoring();
 }
 
 function calculatePasswordStrength(password) {
@@ -2079,6 +2083,258 @@ function initPasswordStrengthIndicators() {
     input.addEventListener('input', update);
   });
 }
+
+// =========================================================================
+// Sentry Frontend Error Monitoring (SECTION 2)
+// =========================================================================
+(function initSentryFrontend() {
+  if (typeof window === "undefined") return;
+
+  const sentryDsn = window.__SENTRY_DSN__ || "";
+  if (typeof Sentry !== "undefined" && sentryDsn) {
+    try {
+      Sentry.init({
+        dsn: sentryDsn,
+        environment: "production",
+        integrations: [
+          new Sentry.Replay({
+            maskAllText: true,
+            blockAllMedia: true,
+          }),
+        ],
+        tracesSampleRate: 0.1,
+        replaysSessionSampleRate: 0.1,
+        replaysOnErrorSampleRate: 1.0,
+      });
+      console.log("[Sentry] Frontend initialized successfully");
+    } catch (e) {
+      console.warn("[Sentry] Frontend initialization warning:", e.message);
+    }
+  }
+
+  // Global unhandled error & rejection listeners
+  window.addEventListener("error", (event) => {
+    if (typeof Sentry !== "undefined" && typeof Sentry.captureException === "function") {
+      Sentry.captureException(event.error || event.message);
+    }
+    if (typeof gtag === "function") {
+      gtag("event", "page_error", {
+        error_message: event.message || "Unknown error",
+        error_source: event.filename || "inline",
+        error_lineno: event.lineno || 0,
+        page_path: window.location.pathname,
+      });
+    }
+  });
+
+  window.addEventListener("unhandledrejection", (event) => {
+    if (typeof Sentry !== "undefined" && typeof Sentry.captureException === "function") {
+      Sentry.captureException(event.reason);
+    }
+    if (typeof gtag === "function") {
+      gtag("event", "unhandled_promise_rejection", {
+        reason: String(event.reason || "Unknown rejection"),
+        page_path: window.location.pathname,
+      });
+    }
+  });
+})();
+
+// =========================================================================
+// Google Analytics 4 (GA4) Event Tracking Suite (SECTION 1)
+// =========================================================================
+function initGA4EventTracking() {
+  if (typeof window === "undefined") return;
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = window.gtag || function() { window.dataLayer.push(arguments); };
+
+  // 1. Page Views handled automatically by gtag config
+
+  // 2. Button Clicks - CTA Tracking
+  document.querySelectorAll("a.cta, a.nav-cta, button.cta, .btn-primary, .btn-apple-primary, .cinematic-card-cta, .announcement-bar__link").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      gtag("event", "cta_click", {
+        button_text: (btn.textContent || "").trim().slice(0, 50),
+        button_class: btn.className,
+        page_path: window.location.pathname,
+      });
+    });
+  });
+
+  // 3. Form Submissions - Signup / Contact
+  document.getElementById("register-form")?.addEventListener("submit", () => {
+    gtag("event", "form_submit", {
+      form_name: "student_registration",
+      form_location: window.location.pathname,
+    });
+  });
+
+  document.getElementById("contact-form")?.addEventListener("submit", () => {
+    gtag("event", "form_submit", {
+      form_name: "contact_form",
+      form_location: window.location.pathname,
+    });
+  });
+
+  // 4. Internship Signup
+  document.getElementById("internship-register-form")?.addEventListener("submit", () => {
+    gtag("event", "internship_signup", {
+      form_location: "/internships/register",
+      timestamp: new Date().toISOString(),
+    });
+  });
+
+  // Generic form submission tracking for modal/inquiry forms
+  document.querySelectorAll("form").forEach((form) => {
+    if (["register-form", "contact-form", "internship-register-form"].includes(form.id)) return;
+    form.addEventListener("submit", () => {
+      gtag("event", "form_submit", {
+        form_name: form.id || form.getAttribute("name") || "general_form",
+        form_location: window.location.pathname,
+      });
+    });
+  });
+
+  // 8. Document Download Tracking
+  document.querySelectorAll('a[href$=".pdf"], a[href$=".doc"], a[href$=".docx"], a[href$=".zip"]').forEach((link) => {
+    link.addEventListener("click", () => {
+      const parts = link.href.split("/");
+      const fileName = parts.pop() || "document";
+      const fileExt = fileName.split(".").pop().toUpperCase();
+      gtag("event", "file_download", {
+        file_name: fileName,
+        file_type: fileExt,
+      });
+    });
+  });
+
+  // 9. External Link Clicks
+  document.querySelectorAll('a[target="_blank"][rel*="noopener"]').forEach((link) => {
+    link.addEventListener("click", () => {
+      gtag("event", "external_link_click", {
+        link_url: link.href,
+        link_text: (link.textContent || "").trim().slice(0, 50),
+      });
+    });
+  });
+}
+
+// Helper: Track Login Success
+function trackLoginSuccess(email) {
+  if (typeof gtag === "function") {
+    gtag("event", "login", {
+      user_email: email,
+      login_type: "email",
+    });
+  }
+}
+window.trackLoginSuccess = trackLoginSuccess;
+
+// Helper: Track Email Verification
+function trackEmailVerification(email) {
+  if (typeof gtag === "function") {
+    gtag("event", "email_verified", {
+      user_email: email,
+    });
+  }
+}
+window.trackEmailVerification = trackEmailVerification;
+
+// Helper: Track Course Enrollment
+function trackCourseEnrollment(courseName) {
+  if (typeof gtag === "function") {
+    gtag("event", "course_enrollment", {
+      course_name: courseName,
+      course_category: "internship",
+    });
+  }
+}
+window.trackCourseEnrollment = trackCourseEnrollment;
+
+// =========================================================================
+// Performance Monitoring: Core Web Vitals & Navigation Timings (SECTION 4)
+// =========================================================================
+function initPerformanceMonitoring() {
+  if (typeof window === "undefined") return;
+
+  // TASK 4A: Web Vitals Tracking (CLS, FID, FCP, LCP, TTFB)
+  const sendWebVitalsToGA = (metric) => {
+    if (typeof gtag === "function") {
+      gtag("event", metric.name, {
+        value: Math.round(metric.value),
+        metric_id: metric.id,
+        metric_value: metric.value,
+        metric_delta: metric.delta,
+      });
+    }
+  };
+
+  import("https://cdn.jsdelivr.net/npm/web-vitals@3/dist/web-vitals.attribution.js")
+    .then(({ onCLS, onFID, onFCP, onLCP, onTTFB }) => {
+      if (typeof onCLS === "function") onCLS(sendWebVitalsToGA);
+      if (typeof onFID === "function") onFID(sendWebVitalsToGA);
+      if (typeof onFCP === "function") onFCP(sendWebVitalsToGA);
+      if (typeof onLCP === "function") onLCP(sendWebVitalsToGA);
+      if (typeof onTTFB === "function") onTTFB(sendWebVitalsToGA);
+      console.log("[Performance] CLS, FID, FCP, LCP, TTFB tracking active");
+    })
+    .catch(() => {
+      // Graceful fallback if module is restricted or offline
+    });
+
+  // TASK 4B: Page Navigation Timing
+  window.addEventListener("load", () => {
+    setTimeout(() => {
+      if (window.performance && window.performance.timing) {
+        const perfData = window.performance.timing;
+        const pageLoadTime = perfData.loadEventEnd - perfData.navigationStart;
+        const connectTime = perfData.responseEnd - perfData.requestStart;
+        const renderTime = perfData.domComplete - perfData.domLoading;
+
+        if (pageLoadTime > 0 && typeof gtag === "function") {
+          gtag("event", "page_timing", {
+            page_load_time: pageLoadTime,
+            connect_time: connectTime,
+            render_time: renderTime,
+            page_path: window.location.pathname,
+          });
+        }
+        console.log(`[Performance] Page Load Time: ${pageLoadTime}ms | Connect: ${connectTime}ms | Render: ${renderTime}ms`);
+      }
+    }, 0);
+  });
+}
+
+// Helper: Measure API response times
+async function trackAPIPerformance(endpoint, method = "GET") {
+  const start = performance.now();
+  try {
+    const response = await fetch(endpoint, { method });
+    const duration = Math.round(performance.now() - start);
+
+    if (typeof gtag === "function") {
+      gtag("event", "api_performance", {
+        endpoint: endpoint,
+        method: method,
+        status_code: response.status,
+        response_time: duration,
+      });
+    }
+
+    return response;
+  } catch (error) {
+    const duration = Math.round(performance.now() - start);
+    if (typeof gtag === "function") {
+      gtag("event", "api_error", {
+        endpoint: endpoint,
+        error_message: error.message,
+        response_time: duration,
+      });
+    }
+    throw error;
+  }
+}
+window.trackAPIPerformance = trackAPIPerformance;
 
 
 

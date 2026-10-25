@@ -36,6 +36,7 @@ let updatedScript = 0;
 let updatedAuthCss = 0;
 let updatedTwitter = 0;
 let updatedRobots = 0;
+let updatedGa = 0;
 
 for (const file of files) {
   const filePath = path.join(pagesDir, file);
@@ -80,6 +81,28 @@ for (const file of files) {
     }
   }
 
+  // 6. Google Analytics 4 (GA4) & Sentry Browser SDK in <head>
+  if (!html.includes("googletagmanager.com/gtag/js?id=G-7TGL0VYJX2")) {
+    const monitoringTags = `    <!-- Google Analytics 4 (GA4) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7TGL0VYJX2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-7TGL0VYJX2', {
+        'page_path': window.location.pathname,
+        'page_title': document.title,
+        'anonymize_ip': true
+      });
+    </script>
+    <!-- Sentry Error Tracking Browser SDK -->
+    <script src="https://browser.sentry-cdn.com/7.84.0/bundle.min.js" crossorigin="anonymous" defer></script>
+  </head>`;
+    html = html.replace(/\s*<\/head>/i, `\n${monitoringTags}`);
+    modified = true;
+    updatedGa++;
+  }
+
   if (modified) {
     fs.writeFileSync(filePath, html, "utf8");
   }
@@ -87,6 +110,8 @@ for (const file of files) {
 
 console.log(`Page optimizations applied successfully:
 - script.js deferred: ${updatedScript}
-- Auth pages switched to auth.min.css: ${updatedAuthCss}
+- Auth pages kept on styles.css: ${updatedAuthCss}
 - twitter:card added: ${updatedTwitter}
-- robots added: ${updatedRobots}`);
+- robots added: ${updatedRobots}
+- GA4 & Sentry tags added: ${updatedGa}`);
+

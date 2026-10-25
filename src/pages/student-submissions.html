@@ -12,6 +12,20 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="/src/styles/styles.css" />
+    <!-- Google Analytics 4 (GA4) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7TGL0VYJX2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-7TGL0VYJX2', {
+        'page_path': window.location.pathname,
+        'page_title': document.title,
+        'anonymize_ip': true
+      });
+    </script>
+    <!-- Sentry Error Tracking Browser SDK -->
+    <script src="https://browser.sentry-cdn.com/7.84.0/bundle.min.js" crossorigin="anonymous" defer></script>
   </head>
   <body style="background: #F5F5F7; min-height: 100vh; display: flex; flex-direction: column;">
     <!-- Top Student Header Bar -->

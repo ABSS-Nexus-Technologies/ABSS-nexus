@@ -44,6 +44,35 @@ if (fs.existsSync(envPath)) {
   }
 }
 
+// Initialize Sentry error monitoring
+let Sentry = null;
+try {
+  Sentry = require("@sentry/node");
+  if (process.env.SENTRY_DSN) {
+    Sentry.init({
+      dsn: process.env.SENTRY_DSN,
+      environment: process.env.NODE_ENV || "development",
+      tracesSampleRate: 1.0,
+    });
+    console.log("[Sentry] Backend error monitoring initialized");
+  } else {
+    console.log("[Sentry] SDK installed. Awaiting SENTRY_DSN in environment.");
+  }
+} catch (sentryErr) {
+  console.warn("[Sentry] Note: @sentry/node load notice:", sentryErr.message);
+}
+
+const captureServerException = (error, context = {}) => {
+  if (Sentry && typeof Sentry.captureException === "function") {
+    try {
+      Sentry.captureException(error, context);
+    } catch (e) {
+      console.error("[Sentry] captureException error:", e.message);
+    }
+  }
+  console.error("[Server Error]", error && error.message ? error.message : error, context);
+};
+
 const dbPath = path.join(__dirname, "data", "db.json");
 const port = Number(process.env.PORT || 3000);
 const isDev = process.env.NODE_ENV !== "production" && process.env.ENVIRONMENT !== "production";
@@ -277,9 +306,18 @@ const syncToFirestoreServer = (collectionName, docId, data) => {
     if (res.ok) {
       console.log(`[Firestore Server Sync] ✓ Mirrored ${collectionName}/${docId || "doc"} to live Firebase`);
     } else {
-      res.json().then((err) => console.warn(`[Firestore Server Sync] Response:`, err?.error?.message || err)).catch(() => {});
+      res.json().then((err) => {
+        const msg = err?.error?.message || err;
+        console.warn(`[Firestore Server Sync] Response:`, msg);
+        captureServerException(new Error(`Firestore sync failed: ${msg}`), {
+          tags: { operation: "firestore_sync", collection: collectionName },
+        });
+      }).catch(() => {});
     }
   }).catch((err) => {
+    captureServerException(err, {
+      tags: { operation: "firestore_sync", collection: collectionName },
+    });
     console.warn(`[Firestore Server Sync] Non-blocking network error:`, err?.message || err);
   });
 };
@@ -1007,7 +1045,7 @@ const SECURITY_HEADERS = {
   "X-Frame-Options": "DENY",
   "X-XSS-Protection": "1; mode=block",
   "Strict-Transport-Security": "max-age=31536000; includeSubDomains; preload",
-  "Content-Security-Policy": "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://www.googletagmanager.com https://www.google-analytics.com https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: https:; media-src 'self'; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self';",
+  "Content-Security-Policy": "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://www.googletagmanager.com https://www.google-analytics.com https://www.gstatic.com https://browser.sentry-cdn.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: https: https://www.google-analytics.com; connect-src 'self' https://*.ingest.sentry.io https://*.sentry.io https://www.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net https://firestore.googleapis.com; media-src 'self'; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self';",
   "Referrer-Policy": "strict-origin-when-cross-origin",
   "Permissions-Policy": "geolocation=(), microphone=(), camera=(), accelerometer=(), magnetometer=(), gyroscope=(), payment=()",
 };
@@ -1273,6 +1311,55 @@ const server = http.createServer(async (request, response) => {
         ...SECURITY_HEADERS,
       });
       response.end();
+      return;
+    }
+
+    // =========================================================================
+    // Health Checks & Uptime Monitoring (SECTION 3)
+    // =========================================================================
+    if (request.method === "GET" && pathname === "/api/health") {
+      const dbAccessible = fs.existsSync(dbPath);
+      const health = {
+        status: "UP",
+        timestamp: new Date().toISOString(),
+        uptime: process.uptime(),
+        environment: process.env.NODE_ENV || "development",
+        database: dbAccessible ? "OK" : "DEGRADED",
+        firestore: "OK",
+        version: "1.0.0",
+      };
+      send(response, 200, health);
+      return;
+    }
+
+    if (request.method === "GET" && pathname === "/api/healthz") {
+      response.writeHead(200, { "Content-Type": "text/plain; charset=utf-8", ...SECURITY_HEADERS });
+      response.end("OK");
+      return;
+    }
+
+    if (request.method === "GET" && pathname === "/api/readyz") {
+      const ready = fs.existsSync(dbPath);
+      response.writeHead(ready ? 200 : 503, { "Content-Type": "text/plain; charset=utf-8", ...SECURITY_HEADERS });
+      response.end(ready ? "Ready" : "Not Ready");
+      return;
+    }
+
+    // Sentry Diagnostic Test Endpoint (TASK 2E)
+    if (request.method === "GET" && pathname === "/api/test-sentry-error") {
+      const testErr = new Error("Test error from ABSS Nexus backend server");
+      captureServerException(testErr, {
+        tags: {
+          test: "true",
+          source: "api_test_sentry_error",
+          environment: process.env.NODE_ENV || "development",
+        },
+      });
+      send(response, 200, {
+        ok: true,
+        message: "Triggered Sentry test error capture",
+        sentryConfigured: Boolean(process.env.SENTRY_DSN),
+      });
       return;
     }
 
@@ -2936,7 +3023,14 @@ const server = http.createServer(async (request, response) => {
 
     send(response, 405, { error: "Method not allowed" });
   } catch (error) {
-    send(response, 500, { error: "Server error" });
+    captureServerException(error, {
+      tags: {
+        api_endpoint: pathname,
+        method: request.method,
+        error_type: "unhandled_server_exception",
+      },
+    });
+    send(response, 500, { error: "Internal server error" });
   }
 });
 
