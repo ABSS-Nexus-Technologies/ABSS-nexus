@@ -326,6 +326,45 @@
       "emailVerified": 1,
       "createdAt": "2026-10-24T21:11:23.874Z",
       "updatedAt": "2026-10-24T21:11:48.381Z"
+    },
+    {
+      "id": "student-ffb3871e-e52f-4dd5-a83e-60a607d0a370",
+      "name": "Test User",
+      "email": "testuser@example.com",
+      "phone": "9876543210",
+      "passwordHash": "pbkdf2$3126b62bdcff2665688e87e4130b4736$e33808594459360779a790a8f26e80acbc866d782f4e7450c20c5abac727ecc4",
+      "track": "web-development",
+      "duration": "4 weeks",
+      "status": "active",
+      "emailVerified": 1,
+      "createdAt": "2026-10-25T07:42:33.795Z",
+      "updatedAt": "2026-10-25T07:42:33.838Z"
+    },
+    {
+      "id": "student-d262e939-b1e7-4e05-87ae-5aa0f0e498cf",
+      "name": "Shubham Kumar",
+      "email": "shubham.test.1792924407122@example.com",
+      "phone": "9876543210",
+      "passwordHash": "pbkdf2$7266ba5eefb7e592ed0f477010794a68$0228fe7d3b5f502b8b7c2ed4e2808c0dace2b6d07ff9c361abfbe9e328a1b829",
+      "track": "web-development",
+      "duration": "4 weeks",
+      "status": "pending_verification",
+      "emailVerified": 0,
+      "createdAt": "2026-10-25T10:33:27.187Z",
+      "updatedAt": "2026-10-25T10:33:27.187Z"
+    },
+    {
+      "id": "student-4982d4fe-465b-4e24-a006-8c8ffdafda8d",
+      "name": "Priya Sharma",
+      "email": "priya.sharma.1792924435712@gmail.com",
+      "phone": "9876543210",
+      "passwordHash": "pbkdf2$3a064e52ada5deef801b2d90300e7bda$141dbc2dac8535998322af671f55210605cc37d0c9b5d4bbb2256d23dde253aa",
+      "track": "web-development",
+      "duration": "4 week",
+      "status": "pending_verification",
+      "emailVerified": 0,
+      "createdAt": "2026-10-25T10:33:55.733Z",
+      "updatedAt": "2026-10-25T10:33:55.733Z"
     }
   ],
   "studentTokens": [
@@ -339,9 +378,59 @@
       "expiresAt": "2026-10-25T21:11:23.875Z",
       "usedAt": "2026-10-24T21:11:48.381Z",
       "createdAt": "2026-10-24T21:11:23.875Z"
+    },
+    {
+      "id": "token-abdf2974-889e-4075-a32d-96d9aebaea8f",
+      "studentId": "student-ffb3871e-e52f-4dd5-a83e-60a607d0a370",
+      "tokenHash": "210bf0bd541edc9f3d7ad08d3c090b55143dfc81f312e79cda2d8f51444c9257",
+      "tokenType": "email_verification",
+      "verificationCode": "505174",
+      "codeHash": "4894083c07f365b4ea1b20d96e8a3b20f537903b1f5253b40eb8b1f131b70fcd",
+      "expiresAt": "2026-10-26T07:42:33.795Z",
+      "usedAt": "2026-10-25T07:42:33.838Z",
+      "createdAt": "2026-10-25T07:42:33.795Z"
+    },
+    {
+      "id": "token-b41f73ce-6f63-4f41-8046-fa16f81364ed",
+      "studentId": "student-ffb3871e-e52f-4dd5-a83e-60a607d0a370",
+      "tokenHash": "f396e78e8742258661c2b9f0e530c25daa989ce109de8c436940bb84fbfb11fb",
+      "tokenType": "email_verification",
+      "expiresAt": "2026-10-26T07:42:33.834Z",
+      "usedAt": null,
+      "createdAt": "2026-10-25T07:42:33.834Z"
+    },
+    {
+      "id": "token-370b9a9d-e4c5-433c-9002-3d5f475ca6fb",
+      "studentId": "student-d262e939-b1e7-4e05-87ae-5aa0f0e498cf",
+      "tokenHash": "9cad65788f8130646e4ee0f7c6fe78a54afd5f369760dd17c8c7e33427a66b60",
+      "tokenType": "email_verification",
+      "verificationCode": "551758",
+      "codeHash": "5e51f24c222dd53d3523551cd1838a3da0dbe9223bd3e2e6ac0538a68e572c61",
+      "expiresAt": "2026-10-26T10:33:27.187Z",
+      "usedAt": null,
+      "createdAt": "2026-10-25T10:33:27.187Z"
+    },
+    {
+      "id": "token-9367ba2a-87e1-4f67-b775-9cf272db9366",
+      "studentId": "student-4982d4fe-465b-4e24-a006-8c8ffdafda8d",
+      "tokenHash": "f072b49640d3ea90486537f8a8660c8618791d46fd7fd2747ca9f2a497bfac7e",
+      "tokenType": "email_verification",
+      "verificationCode": "795584",
+      "codeHash": "a42c934d090a4dfb37367f1864e5bb30f6935060fd1f03feffc81c1682dcec47",
+      "expiresAt": "2026-10-26T10:33:55.733Z",
+      "usedAt": null,
+      "createdAt": "2026-10-25T10:33:55.733Z"
     }
   ],
-  "studentSessions": [],
+  "studentSessions": [
+    {
+      "id": "sess-43adb737-d6cb-416b-9d31-27327b36725b",
+      "studentId": "student-ffb3871e-e52f-4dd5-a83e-60a607d0a370",
+      "sessionHash": "738a5bbe858cfae92cb696b6844355f0a9fface040785489af478ad745a91573",
+      "expiresAt": "2026-11-01T10:34:16.629Z",
+      "createdAt": "2026-10-25T10:34:16.629Z"
+    }
+  ],
   "certificates": [],
   "internshipPayments": [],
   "internshipSubmissions": [
