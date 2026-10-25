@@ -525,6 +525,10 @@
         });
       });
     }
+
+    if (typeof initPasswordStrengthIndicators === "function") {
+      initPasswordStrengthIndicators();
+    }
   }
 
   if (document.readyState === "loading") {

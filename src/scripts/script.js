@@ -1994,9 +1994,65 @@ function initPasswordToggles() {
 }
 
 if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", initPasswordToggles);
+  document.addEventListener("DOMContentLoaded", () => {
+    initPasswordToggles();
+    initPasswordStrengthIndicators();
+  });
 } else {
   initPasswordToggles();
+  initPasswordStrengthIndicators();
 }
+
+function calculatePasswordStrength(password) {
+  if (!password) return { level: 'weak', label: 'Weak' };
+  let score = 0;
+  
+  // Length points
+  if (password.length >= 8) score += 20;
+  if (password.length >= 12) score += 10;
+  if (password.length >= 16) score += 10;
+  
+  // Character diversity
+  if (/[a-z]/.test(password)) score += 15; // lowercase
+  if (/[A-Z]/.test(password)) score += 15; // uppercase
+  if (/[0-9]/.test(password)) score += 15; // numbers
+  if (/[!@#$%^&*]/.test(password)) score += 20; // special chars
+  
+  // Determine level
+  if (score < 50) return { level: 'weak', label: '⚠️ Weak' };
+  if (score < 75) return { level: 'fair', label: '✓ Fair' };
+  return { level: 'strong', label: '✓✓ Strong' };
+}
+
+function initPasswordStrengthIndicators() {
+  const containers = document.querySelectorAll('.password-strength-container');
+  containers.forEach(container => {
+    const parent = container.closest('.auth-form-group') || container.closest('.form-group');
+    const input = parent ? parent.querySelector('input[type="password"], input[type="text"]') : null;
+    const fill = container.querySelector('.strength-fill');
+    const text = container.querySelector('.strength-text');
+
+    if (!input || !fill || !text) return;
+    if (input.dataset.strengthBound) return;
+    input.dataset.strengthBound = "true";
+
+    const update = () => {
+      const val = input.value;
+      if (!val) {
+        fill.className = 'strength-fill';
+        text.className = 'strength-text';
+        text.textContent = 'Weak';
+        return;
+      }
+      const strength = calculatePasswordStrength(val);
+      fill.className = 'strength-fill ' + strength.level;
+      text.className = 'strength-text ' + strength.level;
+      text.textContent = strength.label;
+    };
+
+    input.addEventListener('input', update);
+  });
+}
+
 
 
