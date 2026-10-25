@@ -42,7 +42,7 @@ resolve_existing_target() {
 while IFS= read -r file; do
   while IFS= read -r ref; do
     case "$ref" in
-      http*|mailto:*|tel:*|\#*|*\?*|\$\{*)
+      http*|mailto:*|tel:*|javascript:*|data:*|blob:*|\#*|*\?*|\$\{*|\'*|\"*|*\{*|*\}*|*\+*)
         continue
         ;;
     esac

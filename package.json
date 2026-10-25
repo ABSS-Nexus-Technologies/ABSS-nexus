@@ -9,7 +9,8 @@
     "deploy": "node scripts/sync-components.js && node scripts/build.js && wrangler pages deploy dist",
     "start": "node backend/server.js",
     "dev": "node backend/server.js",
-    "validate": "scripts/validate.sh"
+    "validate": "scripts/validate.sh",
+    "test": "scripts/validate.sh"
   },
   "engines": {
     "node": ">=18"

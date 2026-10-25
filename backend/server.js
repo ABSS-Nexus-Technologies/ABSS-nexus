@@ -607,6 +607,7 @@ const publicRedirects = {
   "/internships/programs/prompt-engineering/": "/internships/programs/prompt-engineering",
   "/internships/programs/agent-engineering/": "/internships/programs/agent-engineering",
   "/internships/programs/ai-engineering/": "/internships/programs/ai-engineering",
+  "/internships/programs/ai-machine-learning/": "/internships/programs/ai-machine-learning",
   "/internships/programs/android-development/": "/internships/programs/android-development",
   "/internships/programs/product-management/": "/internships/programs/product-management",
   "/internships/programs/ui-ux-design/": "/internships/programs/ui-ux-design",
@@ -804,6 +805,7 @@ const rewrites = {
   "/internships/programs/prompt-engineering": "/src/pages/internships-program-prompt-engineering.html",
   "/internships/programs/agent-engineering": "/src/pages/internships-program-agent-engineering.html",
   "/internships/programs/ai-engineering": "/src/pages/internships-program-ai-engineering.html",
+  "/internships/programs/ai-machine-learning": "/src/pages/internships-program-ai-machine-learning.html",
   "/internships/programs/android-development": "/src/pages/internships-program-android-development.html",
   "/internships/programs/product-management": "/src/pages/internships-program-product-management.html",
   "/internships/programs/ui-ux-design": "/src/pages/internships-program-ui-ux-design.html",
@@ -3022,8 +3024,17 @@ const server = http.createServer(async (request, response) => {
       return;
     }
 
-    // Allow direct dashboard access with client-side session hydration
+    // Dashboard access requires active student session or redirects to login
     if ((request.method === "GET" || request.method === "HEAD") && pathname === "/internships/dashboard") {
+      const db = readDb();
+      const student = getStudentFromSession(request, db);
+      if (!student) {
+        response.writeHead(302, {
+          Location: "/internships/login?redirect=/internships/dashboard",
+        });
+        response.end();
+        return;
+      }
       serveStatic(request, response, pathname);
       return;
     }
