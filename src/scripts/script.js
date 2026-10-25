@@ -1,3 +1,29 @@
+// =========================================================================
+// ABSS Nexus Technologies — Firebase Client Configuration & Identity Provider
+// Project: abss-nexus-technologies | Region: asia-south1
+// =========================================================================
+const firebaseConfig = {
+  apiKey: "AIzaSyBWZ2Ui1Lgwi5buYkmytubFUOwYjxokRXE",
+  authDomain: "abss-nexus-technologies.firebaseapp.com",
+  projectId: "abss-nexus-technologies",
+  storageBucket: "abss-nexus-technologies.firebasestorage.app",
+  messagingSenderId: "920484841009",
+  appId: "1:920484841009:web:f597c5e6980b5ed8edf710",
+  measurementId: "G-7TGL0VYJX2"
+};
+
+if (typeof window !== "undefined") {
+  window.firebaseConfig = firebaseConfig;
+  if (typeof firebase !== "undefined" && !firebase.apps.length) {
+    try {
+      firebase.initializeApp(firebaseConfig);
+      console.log("✓ Firebase initialized successfully:", firebase.app().name);
+    } catch (e) {
+      console.warn("[Firebase Client] Initialization warning:", e.message);
+    }
+  }
+}
+
 const navToggle = document.querySelector(".nav-toggle");
 const navLinks = document.querySelector(".nav-links");
 
