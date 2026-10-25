@@ -26,6 +26,7 @@
   /* Phase 2 Required Apple-Inspired Design Tokens */
   --color-white: #FFFFFF;
   --color-light-gray: #F5F5F7;
+  --surface-light: #F5F5F7;
   --color-near-black: #1D1D1F;
   --color-blue: #0066CC;
   --color-border: #D2D2D7;
@@ -84,6 +85,200 @@ img {
 
 .section {
   padding: var(--section-py, clamp(60px, 8vw, 88px)) 0;
+}
+
+/* MICRO-INTERACTION ANIMATIONS */
+
+@keyframes cardLift {
+  from { transform: translateY(0); }
+  to { transform: translateY(-4px); }
+}
+
+@keyframes glowPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(0, 194, 255, 0.3); }
+  50% { box-shadow: 0 0 20px 10px rgba(0, 194, 255, 0.1); }
+}
+
+@keyframes borderGlow {
+  0% { border-color: rgba(0, 102, 204, 0.3); }
+  50% { border-color: rgba(0, 194, 255, 0.5); }
+  100% { border-color: rgba(0, 102, 204, 0.3); }
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0.3; }
+  50% { opacity: 1; }
+  100% { opacity: 0.3; }
+}
+
+/* 2. Service Cards Hover Effect */
+.service-card,
+.cinematic-service-card,
+.related-service-card {
+  transition: all 0.3s ease;
+  border: 1px solid #D2D2D7;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .service-card:hover,
+  .cinematic-service-card:hover,
+  .related-service-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(0, 194, 255, 0.45);
+    box-shadow: 0 12px 32px rgba(0, 102, 204, 0.12);
+    animation: borderGlow 2s ease-in-out infinite;
+  }
+}
+
+/* 3. Academy/Feature Cards Hover */
+.feature-card,
+.academy-card,
+.academy-feature-card,
+.portal-card {
+  transition: all 0.25s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .feature-card:hover,
+  .academy-card:hover,
+  .academy-feature-card:hover,
+  .portal-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(0, 194, 255, 0.45);
+    background: rgba(0, 194, 255, 0.02);
+  }
+}
+
+/* 4. Button Hover Effects */
+.btn-primary,
+.cta-button,
+.btn-glow-cyan {
+  transition: all 0.25s ease;
+  position: relative;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .btn-primary:hover,
+  .cta-button:hover,
+  .btn-glow-cyan:hover {
+    background: #0054a3; /* Darker shade */
+    box-shadow: 0 8px 24px rgba(0, 102, 204, 0.3);
+    transform: translateY(-2px);
+  }
+}
+
+.btn-primary:active,
+.cta-button:active,
+.btn-glow-cyan:active {
+  transform: translateY(0);
+}
+
+/* 5. Secondary Buttons */
+.btn-secondary,
+.btn-outline,
+.btn-glass {
+  transition: all 0.25s ease;
+  border: 1.5px solid #0066CC;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .btn-secondary:hover,
+  .btn-outline:hover,
+  .btn-glass:hover {
+    background: rgba(0, 102, 204, 0.08);
+    border-color: #00C2FF;
+    transform: translateY(-2px);
+  }
+}
+
+/* 6. Tech Stack Ticker (Marquee) Smooth Fade */
+.tech-ticker,
+.tech-ticker-section,
+.tech-marquee-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+.tech-ticker::before,
+.tech-ticker-section::before,
+.tech-marquee-wrapper::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 80px;
+  background: linear-gradient(to right, var(--surface-light, #F5F5F7), transparent);
+  z-index: 10;
+  pointer-events: none;
+}
+
+.tech-ticker::after,
+.tech-ticker-section::after,
+.tech-marquee-wrapper::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 80px;
+  background: linear-gradient(to left, var(--surface-light, #F5F5F7), transparent);
+  z-index: 10;
+  pointer-events: none;
+}
+
+/* 7. Testimonial Cards Hover */
+.testimonial-card,
+.academy-testimonial-card {
+  transition: all 0.3s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .testimonial-card:hover,
+  .academy-testimonial-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.1);
+    border-left-color: #00C2FF;
+  }
+}
+
+/* 8. Form Inputs Focus State */
+input,
+textarea,
+select {
+  transition: all 0.2s ease;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: #0066CC;
+  box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
+  transition: all 0.2s ease;
+}
+
+/* 9. Link Hover Effects */
+a {
+  transition: color 0.25s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  a:hover {
+    color: #0066CC;
+  }
+
+  .btn:hover,
+  .nav-cta:hover,
+  .project-live-btn:hover {
+    color: #ffffff;
+  }
+}
+
+/* 10. Announcement Bar Pulse */
+.pulse-dot,
+.live-pulse-dot {
+  animation: glowPulse 2s ease-in-out infinite;
 }
 
 
