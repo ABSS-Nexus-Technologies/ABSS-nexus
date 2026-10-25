@@ -94,6 +94,23 @@
   letter-spacing: 0.02em;
   margin-bottom: 14px;
   text-transform: none;
+  max-width: 100%;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 480px) {
+  .site-hero__eyebrow {
+    font-size: 0.75rem;
+    padding: 4px 10px;
+    gap: 6px;
+  }
+}
+
+@media (max-width: 360px) {
+  .site-hero__eyebrow {
+    font-size: 0.6875rem;
+    padding: 4px 8px;
+  }
 }
 
 .site-hero__eyebrow--subtle {
