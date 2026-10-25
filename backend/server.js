@@ -94,6 +94,33 @@ const dispatchServerNotification = async ({ to, subject, html, text }) => {
         console.log(`[EmailService:Resend] ✓ Email delivered successfully. ID: ${data.id}`);
         return { ok: true, provider: "resend", id: data.id };
       }
+
+      // If custom domain is not yet verified in Resend, automatically retry with sandbox sender
+      if (response.status === 403 && (data?.message || "").toLowerCase().includes("domain")) {
+        console.warn(`[EmailService:Resend] Custom domain (${fromAddress}) not verified yet in Resend. Retrying with onboarding@resend.dev...`);
+        const retryRes = await fetch("https://api.resend.com/emails", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
+          },
+          body: JSON.stringify({
+            from: "ABSS Nexus Academy <onboarding@resend.dev>",
+            to: recipient,
+            subject,
+            html,
+            text: plainText,
+          }),
+        });
+        const retryData = await retryRes.json().catch(() => ({}));
+        if (retryRes.ok) {
+          console.log(`[EmailService:Resend Sandbox] ✓ Email delivered successfully via onboarding@resend.dev. ID: ${retryData.id}`);
+          return { ok: true, provider: "resend-sandbox", id: retryData.id };
+        }
+        console.error(`[EmailService:Resend Sandbox] ✗ API returned status ${retryRes.status}:`, retryData);
+        return { ok: false, provider: "resend", status: retryRes.status, error: retryData };
+      }
+
       console.error(`[EmailService:Resend] ✗ API returned status ${response.status}:`, data);
       return { ok: false, provider: "resend", status: response.status, error: data };
     } catch (e) {
@@ -2294,10 +2321,10 @@ const server = http.createServer(async (request, response) => {
         email,
         verificationCode,
         message: checkEmailConfigured()
-          ? "Student account created successfully. A verification email has been sent to your inbox."
+          ? "Account created! Check your email for verification link."
           : "Student account created successfully. Verification code generated (Email service in fallback mode).",
         emailServiceConfigured: checkEmailConfigured(),
-        devVerificationUrl: `/internships/verify-email?token=${rawToken}`,
+        devVerificationUrl: checkEmailConfigured() ? null : `/internships/verify-email?token=${rawToken}`,
       });
       return;
     }
