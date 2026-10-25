@@ -2635,113 +2635,125 @@ const server = http.createServer(async (request, response) => {
     }
 
     if (request.method === "POST" && pathname === "/api/internships/auth/login") {
-      const clientIp = getClientIp(request);
-      if (!checkRateLimit(`login:${clientIp}`, 10, 5 * 60 * 1000)) {
-        send(response, 429, { error: "Too many login attempts. Please wait 5 minutes before trying again." });
-        return;
-      }
-
-      const body = await readBody(request);
-      const email = String(body.email || "").trim().toLowerCase();
-      const password = String(body.password || "");
-
-      if (!isValidEmail(email) || !password || password.length > 128) {
-        send(response, 400, { error: "A valid email address and password are required." });
-        return;
-      }
-
-      const db = readDb();
-      const student = (db.students || []).find((s) => s.email.toLowerCase() === email);
-
-      const acceptsHtml = (request.headers.accept || "").includes("text/html");
-      const isAjax = request.headers["x-requested-with"] || (request.headers["content-type"] || "").includes("application/json");
-
-      if (!student || !verifyPassword(password, student.passwordHash)) {
-        if (acceptsHtml && !isAjax) {
-          response.writeHead(302, { Location: "/internships/login?error=" + encodeURIComponent("Invalid email or password.") });
-          response.end();
-          return;
-        }
-        send(response, 401, { error: "Invalid email or password." });
-        return;
-      }
-
-      if (!student.emailVerified) {
-        let devVerificationUrl = null;
-        if (!checkEmailConfigured()) {
-          const rawToken = crypto.randomBytes(32).toString("hex");
-          const tokenHash = hashToken(rawToken);
-          const tokenRecord = {
-            id: `token-${crypto.randomUUID()}`,
-            studentId: student.id,
-            tokenHash,
-            tokenType: "email_verification",
-            expiresAt: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString(),
-            usedAt: null,
-            createdAt: new Date().toISOString(),
-          };
-          db.studentTokens = db.studentTokens || [];
-          db.studentTokens.push(tokenRecord);
-          writeDb(db);
-          devVerificationUrl = `/internships/verify-email?token=${rawToken}`;
-        }
-
-        if (acceptsHtml && !isAjax) {
-          const redir = devVerificationUrl
-            ? "/internships/login?error=" + encodeURIComponent("Please verify your email address before logging in.") + "&devVerificationUrl=" + encodeURIComponent(devVerificationUrl)
-            : "/internships/login?error=" + encodeURIComponent("Please verify your email address before logging in.");
-          response.writeHead(302, { Location: redir });
-          response.end();
+      try {
+        const clientIp = getClientIp(request);
+        if (!checkRateLimit(`login:${clientIp}`, 10, 5 * 60 * 1000)) {
+          send(response, 429, { error: "Too many login attempts. Please wait 5 minutes before trying again." });
           return;
         }
 
-        send(response, 403, {
-          error: "Please verify your email address before logging in.",
-          emailVerified: false,
-          devVerificationUrl,
-        });
-        return;
-      }
+        const body = await readBody(request);
+        const email = String(body.email || "").trim().toLowerCase();
+        const password = String(body.password || "");
 
-      const rawSessionToken = crypto.randomBytes(32).toString("hex");
-      const sessionHash = hashToken(rawSessionToken);
-      const sessionRecord = {
-        id: `sess-${crypto.randomUUID()}`,
-        studentId: student.id,
-        sessionHash,
-        expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(),
-        createdAt: new Date().toISOString(),
-      };
+        if (!isValidEmail(email) || !password || password.length > 128) {
+          send(response, 400, { error: "A valid email address and password are required." });
+          return;
+        }
 
-      db.studentSessions.push(sessionRecord);
-      writeDb(db);
+        const db = readDb();
+        const student = (db.students || []).find((s) => s.email.toLowerCase() === email);
 
-      if (acceptsHtml && !isAjax) {
-        response.writeHead(302, {
-          Location: "/internships/dashboard",
-          "Set-Cookie": buildSessionCookie(rawSessionToken),
-        });
-        response.end();
-        return;
-      }
+        const acceptsHtml = (request.headers.accept || "").includes("text/html");
+        const isAjax = request.headers["x-requested-with"] || (request.headers["content-type"] || "").includes("application/json");
 
-      send(
-        response,
-        200,
-        {
-          ok: true,
-          student: {
-            id: student.id,
-            name: student.name,
-            email: student.email,
-            status: student.status,
-            emailVerified: true,
+        if (!student || !verifyPassword(password, student.passwordHash)) {
+          if (acceptsHtml && !isAjax) {
+            response.writeHead(302, { Location: "/internships/login?error=" + encodeURIComponent("Invalid email or password.") });
+            response.end();
+            return;
+          }
+          send(response, 401, { error: "Invalid email or password." });
+          return;
+        }
+
+        if (!student.emailVerified) {
+          let devVerificationUrl = null;
+          if (!checkEmailConfigured()) {
+            const rawToken = crypto.randomBytes(32).toString("hex");
+            const tokenHash = hashToken(rawToken);
+            const tokenRecord = {
+              id: `token-${crypto.randomUUID()}`,
+              studentId: student.id,
+              tokenHash,
+              tokenType: "email_verification",
+              expiresAt: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString(),
+              usedAt: null,
+              createdAt: new Date().toISOString(),
+            };
+            db.studentTokens = db.studentTokens || [];
+            db.studentTokens.push(tokenRecord);
+            writeDb(db);
+            devVerificationUrl = `/internships/verify-email?token=${rawToken}`;
+          }
+
+          if (acceptsHtml && !isAjax) {
+            const redir = devVerificationUrl
+              ? "/internships/login?error=" + encodeURIComponent("Please verify your email address before logging in.") + "&devVerificationUrl=" + encodeURIComponent(devVerificationUrl)
+              : "/internships/login?error=" + encodeURIComponent("Please verify your email address before logging in.");
+            response.writeHead(302, { Location: redir });
+            response.end();
+            return;
+          }
+
+          send(response, 403, {
+            error: "Please verify your email address before logging in.",
+            emailVerified: false,
+            devVerificationUrl,
+          });
+          return;
+        }
+
+        const rawSessionToken = crypto.randomBytes(32).toString("hex");
+        const sessionHash = hashToken(rawSessionToken);
+        const sessionRecord = {
+          id: `sess-${crypto.randomUUID()}`,
+          studentId: student.id,
+          sessionHash,
+          expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(),
+          createdAt: new Date().toISOString(),
+        };
+
+        db.studentSessions.push(sessionRecord);
+        writeDb(db);
+
+        if (acceptsHtml && !isAjax) {
+          response.writeHead(302, {
+            Location: "/internships/dashboard",
+            "Set-Cookie": buildSessionCookie(rawSessionToken),
+          });
+          response.end();
+          return;
+        }
+
+        send(
+          response,
+          200,
+          {
+            ok: true,
+            student: {
+              id: student.id,
+              name: student.name,
+              email: student.email,
+              status: student.status,
+              emailVerified: true,
+            },
           },
-        },
-        { "Set-Cookie": buildSessionCookie(rawSessionToken) }
-      );
-      return;
+          { "Set-Cookie": buildSessionCookie(rawSessionToken) }
+        );
+        return;
+      } catch (authError) {
+        captureServerException(authError, {
+          tags: {
+            api_endpoint: "/api/internships/auth/login",
+            error_type: "authentication",
+          },
+        });
+        send(response, 500, { error: "Internal server error" });
+        return;
+      }
     }
+
 
     if (request.method === "POST" && pathname === "/api/internships/auth/google") {
       const clientIp = getClientIp(request);

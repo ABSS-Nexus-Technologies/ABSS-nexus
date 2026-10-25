@@ -2138,7 +2138,21 @@ function initPasswordStrengthIndicators() {
       });
     }
   });
+
+  // TASK 2E: Sentry Test Trigger Helper
+  window.triggerSentryTestError = function() {
+    setTimeout(() => {
+      throw new Error("Test error from ABSS Nexus website");
+    }, 500);
+  };
+
+  if (typeof window !== "undefined" && window.location.search.includes("test_sentry=true")) {
+    setTimeout(() => {
+      throw new Error("Test error from ABSS Nexus website");
+    }, 2000);
+  }
 })();
+
 
 // =========================================================================
 // Google Analytics 4 (GA4) Event Tracking Suite (SECTION 1)
