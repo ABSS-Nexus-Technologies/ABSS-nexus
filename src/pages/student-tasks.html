@@ -1,259 +1,272 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="robots" content="noindex, nofollow" />
-    <title>Task Board | ABSS Nexus Student Portal</title>
-    <link rel="icon" type="image/png" sizes="32x32" href="/public/assets/images/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="512x512" href="/public/assets/images/favicon.png" />
-    <link rel="apple-touch-icon" href="/public/assets/images/apple-touch-icon.png" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="/src/styles/styles.css" />
-    <!-- Google Analytics 4 (GA4) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7TGL0VYJX2"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-7TGL0VYJX2', {
-        'page_path': window.location.pathname,
-        'page_title': document.title,
-        'anonymize_ip': true
-      });
-    </script>
-    <!-- Sentry Error Tracking Browser SDK -->
-    <script src="https://browser.sentry-cdn.com/7.84.0/bundle.min.js" crossorigin="anonymous" defer></script>
-  </head>
-  <body style="background: #F5F5F7; min-height: 100vh; display: flex; flex-direction: column;">
-    <!-- Top Student Header Bar -->
-    <header style="background: #FFFFFF; border-bottom: 1px solid #D2D2D7; padding: 14px 0; position: sticky; top: 0; z-index: 100;">
-      <div class="container" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
-        <div style="display: flex; align-items: center; gap: 14px;">
-          <a href="/" style="display: flex; align-items: center; gap: 10px; text-decoration: none;">
-            <img src="/public/assets/images/favicon.png" alt="ABSS Nexus Logo" width="32" height="32" style="height: 32px; width: 32px;" />
-            <strong style="font-size: 1.05rem; color: #1D1D1F; font-family: 'Space Grotesk', sans-serif;">ABSS Nexus Student Portal</strong>
-          </a>
-          <span style="background: rgba(0, 102, 204, 0.08); color: #0066CC; padding: 4px 10px; border-radius: 999px; font-size: 0.76rem; font-weight: 700;">Full-Stack Web Engineering</span>
-        </div>
-        <div style="display: flex; align-items: center; gap: 16px;">
-          <div style="display: flex; align-items: center; gap: 8px;">
-            <div id="studentAvatarInitials" style="width: 32px; height: 32px; border-radius: 50%; background: #0066cc; color: #ffffff; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.85rem;">ST</div>
-            <span id="studentDisplayName" style="font-size: 0.88rem; font-weight: 600; color: #1d1d1f;">Intern Student</span>
-          </div>
-          <form action="/api/internships/auth/logout" method="POST" style="margin: 0;">
-            <button type="submit" style="background: transparent; border: 1px solid #d2d2d7; border-radius: 999px; padding: 6px 14px; font-size: 0.8rem; font-weight: 600; color: #6e6e73; cursor: pointer; transition: all 0.2s ease;">Sign Out</button>
-          </form>
-        </div>
-      </div>
-    </header>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="ABSS Nexus Academy Weekly Task Workspace. Submit milestone solutions and view mentor review feedback." />
+  <title>Weekly Tasks Workspace | ABSS Nexus Academy</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="/public/assets/images/favicon-32x32.png" />
+  <link rel="stylesheet" href="/src/styles/styles.css?v=20261023v2" />
+  <style>
+    .tasks-page-wrapper {
+      max-width: 960px;
+      margin: 40px auto 80px;
+      padding: 0 20px;
+      color: #1D1D1F;
+    }
+    .page-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+      background: #ffffff;
+      padding: 24px;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      border: 1px solid #E5E7EB;
+    }
+    .task-card {
+      background: #ffffff;
+      border-radius: 12px;
+      border: 1px solid #E5E7EB;
+      padding: 24px;
+      margin-bottom: 24px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      transition: all 0.2s;
+    }
+    .task-card.active-task {
+      border-left: 5px solid #0066CC;
+      box-shadow: 0 4px 16px rgba(0,102,204,0.1);
+    }
+    .task-card.approved-task {
+      border-left: 5px solid #10B981;
+    }
+    .task-card.locked-task {
+      opacity: 0.75;
+      background: #F9FAFB;
+    }
+    .task-badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .badge-available { background: #DBEAFE; color: #1E40AF; }
+    .badge-approved { background: #D1FAE5; color: #065F46; }
+    .badge-review { background: #FEF3C7; color: #92400E; }
+    .badge-rejected { background: #FEE2E2; color: #991B1B; }
+    .badge-locked { background: #E5E7EB; color: #4B5563; }
 
-    <main class="container" style="flex: 1; padding: 32px 16px 60px;">
-      <div style="margin-bottom: 24px;">
-        <span id="studentWelcomeGreeting" style="font-size: 0.82rem; font-weight: 700; letter-spacing: 0.06em; color: #0066cc; text-transform: uppercase;">Sprint Tasks &amp; Milestones</span>
-        <h1 style="font-size: 1.85rem; font-weight: 800; color: #1d1d1f; margin: 4px 0 0;">Technical Assignments &amp; Sprints</h1>
+    .submission-box {
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid #E5E7EB;
+    }
+    .form-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: #374151;
+      display: block;
+      margin-bottom: 6px;
+    }
+    .form-textarea {
+      width: 100%;
+      min-height: 120px;
+      padding: 12px;
+      border: 1px solid #D1D5DB;
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 14px;
+      box-sizing: border-box;
+      margin-bottom: 14px;
+    }
+    .form-input {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #D1D5DB;
+      border-radius: 8px;
+      font-size: 14px;
+      box-sizing: border-box;
+      margin-bottom: 14px;
+    }
+    .btn-submit {
+      background: #0066CC;
+      color: #ffffff;
+      padding: 10px 24px;
+      border: none;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    .btn-submit:hover { background: #0052A3; }
+    .feedback-box {
+      background: #F0FDF4;
+      border-left: 4px solid #10B981;
+      padding: 14px;
+      border-radius: 4px;
+      margin-top: 14px;
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body class="agency-dark-theme">
+  <header class="site-header site-header--academy" role="banner">
+    <nav class="nav" aria-label="Internship Academy Navigation">
+      <a class="brand" href="/student/dashboard" aria-label="ABSS Nexus Academy home">
+        <img src="/public/assets/images/favicon.png" alt="ABSS Nexus logo" width="38" height="38" />
+        <div class="brand-text-group" style="display: flex; flex-direction: column; text-align: left;">
+          <span class="brand-name">ABSS Nexus Academy</span>
+          <span class="brand-subtext" style="font-size: 0.72rem; color: #6E6E73; font-weight: 500;">Task Submission Workspace</span>
+        </div>
+      </a>
+      <div class="nav-links">
+        <a href="/student/dashboard" class="nav-link">&larr; Back to Dashboard</a>
       </div>
-
-      
-    <nav class="student-tabs-nav" style="display: flex; gap: 8px; overflow-x: auto; padding: 12px 0; border-bottom: 1px solid #d2d2d7; margin-bottom: 28px;">
-      
-        <a href="/student/dashboard" style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 999px; font-size: 0.88rem; font-weight: 600; text-decoration: none; white-space: nowrap; transition: all 0.2s ease; background: #ffffff; color: #1d1d1f; border: 1px solid #d2d2d7;">
-          <span>📊</span>
-          <span>Dashboard</span>
-        </a>
-      
-        <a href="/student/profile" style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 999px; font-size: 0.88rem; font-weight: 600; text-decoration: none; white-space: nowrap; transition: all 0.2s ease; background: #ffffff; color: #1d1d1f; border: 1px solid #d2d2d7;">
-          <span>👤</span>
-          <span>Profile</span>
-        </a>
-      
-        <a href="/student/applications" style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 999px; font-size: 0.88rem; font-weight: 600; text-decoration: none; white-space: nowrap; transition: all 0.2s ease; background: #ffffff; color: #1d1d1f; border: 1px solid #d2d2d7;">
-          <span>📝</span>
-          <span>My Applications</span>
-        </a>
-      
-        <a href="/student/internship" style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 999px; font-size: 0.88rem; font-weight: 600; text-decoration: none; white-space: nowrap; transition: all 0.2s ease; background: #ffffff; color: #1d1d1f; border: 1px solid #d2d2d7;">
-          <span>🎓</span>
-          <span>My Track</span>
-        </a>
-      
-        <a href="/student/tasks" style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 999px; font-size: 0.88rem; font-weight: 600; text-decoration: none; white-space: nowrap; transition: all 0.2s ease; background: #0066cc; color: #ffffff;">
-          <span>📋</span>
-          <span>Task List</span>
-        </a>
-      
-        <a href="/student/submissions" style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 999px; font-size: 0.88rem; font-weight: 600; text-decoration: none; white-space: nowrap; transition: all 0.2s ease; background: #ffffff; color: #1d1d1f; border: 1px solid #d2d2d7;">
-          <span>📤</span>
-          <span>Work Submissions</span>
-        </a>
-      
-        <a href="/student/submit-work" style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 999px; font-size: 0.88rem; font-weight: 600; text-decoration: none; white-space: nowrap; transition: all 0.2s ease; background: #ffffff; color: #1d1d1f; border: 1px solid #d2d2d7;">
-          <span>🚀</span>
-          <span>Submit Work</span>
-        </a>
-      
-        <a href="/student/certificates" style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 999px; font-size: 0.88rem; font-weight: 600; text-decoration: none; white-space: nowrap; transition: all 0.2s ease; background: #ffffff; color: #1d1d1f; border: 1px solid #d2d2d7;">
-          <span>🏆</span>
-          <span>Certificates</span>
-        </a>
-      
-        <a href="/student/settings" style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 999px; font-size: 0.88rem; font-weight: 600; text-decoration: none; white-space: nowrap; transition: all 0.2s ease; background: #ffffff; color: #1d1d1f; border: 1px solid #d2d2d7;">
-          <span>⚙️</span>
-          <span>Settings</span>
-        </a>
-      
     </nav>
-  
+  </header>
 
-      
-    <!-- Enrolled Track Banner (Locked to Student Application) -->
-    <div style="background: linear-gradient(135deg, rgba(0, 102, 204, 0.08) 0%, rgba(16, 185, 129, 0.08) 100%); border: 1px solid rgba(0, 102, 204, 0.2); border-radius: 14px; padding: 16px 20px; margin-bottom: 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px; box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
-      <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
-        <span style="font-size: 1.5rem;">🎓</span>
-        <div>
-          <span style="font-size: 0.72rem; font-weight: 700; color: #0066cc; text-transform: uppercase; letter-spacing: 0.05em; display: block;">Enrolled Internship Track</span>
-          <strong id="enrolledTrackTitle" style="font-size: 1.05rem; color: #1d1d1f; font-weight: 700;">Web Development</strong>
-        </div>
-        <span style="background: rgba(16, 185, 129, 0.15); color: #15803d; font-size: 0.76rem; font-weight: 700; padding: 4px 10px; border-radius: 999px;">● Active Curriculum</span>
-        <span style="background: #f5f5f7; color: #6e6e73; font-size: 0.76rem; font-weight: 600; padding: 4px 10px; border-radius: 999px; border: 1px solid #d2d2d7;">🔒 Track Locked</span>
+  <main class="tasks-page-wrapper">
+    <div class="page-header">
+      <div>
+        <h1 style="margin: 0; font-size: 26px;">Milestone Tasks & Project Work</h1>
+        <p style="margin: 6px 0 0; color: #6B7280; font-size: 14px;">Submit your weekly engineering solutions for instructor review and certificate eligibility.</p>
       </div>
       <div>
-        <a href="/student/dashboard" class="btn btn-secondary" style="padding: 8px 16px; font-size: 0.85rem;">Workspace Dashboard &rarr;</a>
+        <span style="font-size: 13px; color: #6B7280;">Total Score:</span>
+        <div style="font-size: 24px; font-weight: 800; color: #0066CC;"><span id="display-points">0</span> / <span id="display-max-points">40</span> pts</div>
       </div>
     </div>
 
-    <div class="card" style="padding: 32px; border-radius: 18px;">
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 12px;">
-        <div style="display: flex; gap: 8px;" id="filterButtonsContainer">
-          <button class="btn btn-primary" id="btnFilterAll" style="padding: 6px 16px; font-size: 0.85rem;">All Tasks (5)</button>
-          <button class="btn btn-secondary" id="btnFilterPending" style="padding: 6px 16px; font-size: 0.85rem;">Pending / Progress</button>
-          <button class="btn btn-secondary" id="btnFilterApproved" style="padding: 6px 16px; font-size: 0.85rem;">Approved</button>
-        </div>
-        <a href="/student/submit-work" class="btn btn-primary" style="font-size: 0.85rem;">+ Submit Work Deliverable</a>
-      </div>
-
-      <div style="overflow-x: auto;">
-        <table style="width: 100%; border-collapse: collapse; font-size: 0.9rem;">
-          <thead>
-            <tr style="background: #f5f5f7; border-bottom: 2px solid #d2d2d7; text-align: left;">
-              <th style="padding: 12px 14px;">Task ID</th>
-              <th style="padding: 12px 14px;">Title &amp; Milestone</th>
-              <th style="padding: 12px 14px;">Estimated Time</th>
-              <th style="padding: 12px 14px;">Difficulty</th>
-              <th style="padding: 12px 14px;">Status</th>
-              <th style="padding: 12px 14px;">Action</th>
-            </tr>
-          </thead>
-          <tbody id="tasksTableBody">
-            <!-- Dynamic task rows rendered via JS -->
-          </tbody>
-        </table>
-      </div>
+    <div id="tasks-container">
+      <div style="text-align: center; padding: 40px; color: #6B7280;">Loading tasks...</div>
     </div>
-  
-    </main>
+  </main>
 
-    <footer style="background: #ffffff; border-top: 1px solid #d2d2d7; padding: 24px 0; text-align: center; font-size: 0.85rem; color: #6e6e73;">
-      <div class="container">
-        &copy; 2026 ABSS Nexus Technologies. All rights reserved. &bull; <a href="/internships/support" style="color: #0066cc;">Technical Support</a> &bull; <a href="/privacy-policy" style="color: #0066cc;">Privacy</a>
-      </div>
-    </footer>
-    <script src="/src/scripts/script.js" defer></script>
-    <script>
-      (function() {
-        var domainData = null;
-        var currentFilter = 'all';
-
-        fetch("/api/internships/auth/me")
-          .then(function(r) { return r.ok ? r.json() : null; })
-          .then(function(data) {
-            if (data && (data.student || data.user)) {
-              var s = data.student || data.user;
-              var name = s.name || s.fullName || "Intern Student";
-              var initials = name.split(" ").map(function(p) { return p[0]; }).filter(Boolean).slice(0, 2).join("").toUpperCase() || "ST";
-              var nameEl = document.getElementById("studentDisplayName");
-              var avatarEl = document.getElementById("studentAvatarInitials");
-              if (nameEl) nameEl.textContent = name;
-              if (avatarEl) avatarEl.textContent = initials;
-            }
-          })
-          .catch(function() {});
-
-        // Fetch domain tasks data
-        fetch("/src/scripts/domain-tasks-data.json")
-          .then(function(res) { return res.json(); })
-          .then(function(data) {
-            domainData = data;
-            var savedTrack = localStorage.getItem("abss_user_track") || localStorage.getItem("abss_active_domain") || "web-development";
-            var matched = data.AVAILABLE_DOMAINS.find(function(d) { return d.slug === savedTrack; }) || data.AVAILABLE_DOMAINS[0];
-            var titleEl = document.getElementById("enrolledTrackTitle");
-            if (titleEl) titleEl.textContent = matched.name + " (" + matched.category + ")";
-            renderRows(matched.slug);
-          })
-          .catch(function(err) {
-            console.error("Error loading tasks data", err);
-          });
-
-        function renderRows(trackSlug) {
-          if (!domainData || !domainData.DOMAIN_TASKS) return;
-          var tasks = domainData.DOMAIN_TASKS[trackSlug] || domainData.DOMAIN_TASKS["web-development"];
-          var tbody = document.getElementById("tasksTableBody");
-          if (!tbody) return;
-
-          // Check if there are user saved task states
-          try {
-            var saved = localStorage.getItem("abss_tasks_" + trackSlug);
-            if (saved) {
-              tasks = JSON.parse(saved);
-            }
-          } catch(e) {}
-
-          var filtered = tasks.filter(function(t) {
-            if (currentFilter === 'pending') return t.status === 'in-progress' || t.status === 'pending';
-            if (currentFilter === 'approved') return t.status === 'approved';
-            return true;
-          });
-
-          tbody.innerHTML = filtered.map(function(task) {
-            var statusBadge = task.status === 'approved' 
-              ? '<span class="badge" style="background: rgba(16, 185, 129, 0.15); color: #10b981;">Approved ✓</span>'
-              : task.status === 'in-progress'
-              ? '<span class="badge" style="background: rgba(0, 102, 204, 0.12); color: #0066cc;">In Progress ⏳</span>'
-              : '<span class="badge" style="background: rgba(100, 116, 139, 0.12); color: #64748b;">Pending 🔒</span>';
-
-            return '<tr style="border-bottom: 1px solid #e5e5ea;">' +
-              '<td style="padding: 14px; font-family: monospace; font-weight: 700;">' + task.id + '</td>' +
-              '<td style="padding: 14px;"><strong>' + task.name + '</strong><br /><small style="color: #6e6e73;">' + task.desc + '</small></td>' +
-              '<td style="padding: 14px; color: #475569; font-size: 0.85rem;">' + (task.time || '6-8 hrs') + '</td>' +
-              '<td style="padding: 14px;"><span class="badge" style="background: #f1f5f9; color: #334155; font-size: 0.78rem;">' + (task.difficulty || 'Intermediate') + '</span></td>' +
-              '<td style="padding: 14px;">' + statusBadge + '</td>' +
-              '<td style="padding: 14px;"><a href="/student/submit-work" class="btn btn-secondary" style="padding: 6px 14px; font-size: 0.8rem;">Submit Work &rarr;</a></td>' +
-            '</tr>';
-          }).join('');
+  <script>
+    async function loadTasks() {
+      try {
+        const res = await fetch("/api/tasks/available", { credentials: "include" });
+        if (!res.ok) {
+          window.location.href = "/internships/login";
+          return;
         }
 
-        // Filter button clicks
-        var btnAll = document.getElementById("btnFilterAll");
-        var btnPending = document.getElementById("btnFilterPending");
-        var btnApproved = document.getElementById("btnFilterApproved");
+        const data = await res.json();
+        document.getElementById('display-points').textContent = data.totalPoints || 0;
 
-        function setFilter(filter, activeBtn) {
-          currentFilter = filter;
-          [btnAll, btnPending, btnApproved].forEach(function(b) {
-            if (b) {
-              b.className = (b === activeBtn) ? "btn btn-primary" : "btn btn-secondary";
-            }
-          });
-          var sel = document.getElementById("trackSelector");
-          if (sel) renderRows(sel.value);
+        const container = document.getElementById('tasks-container');
+        if (!data.tasks || !data.tasks.length) {
+          container.innerHTML = '<div style="text-align: center; padding: 40px;">No tasks found for your enrolled track.</div>';
+          return;
         }
 
-        if (btnAll) btnAll.onclick = function() { setFilter('all', btnAll); };
-        if (btnPending) btnPending.onclick = function() { setFilter('pending', btnPending); };
-        if (btnApproved) btnApproved.onclick = function() { setFilter('approved', btnApproved); };
-      })();
-    </script>
-  </body>
+        container.innerHTML = data.tasks.map((task) => {
+          let badgeClass = "badge-locked";
+          let badgeText = "Locked";
+          let cardClass = "task-card locked-task";
+
+          if (task.availability === "approved") {
+            badgeClass = "badge-approved";
+            badgeText = `Approved (${task.latestSubmission ? task.latestSubmission.score : 10}/10 pts)`;
+            cardClass = "task-card approved-task";
+          } else if (task.availability === "under_review") {
+            badgeClass = "badge-review";
+            badgeText = "Under Teacher Review";
+            cardClass = "task-card active-task";
+          } else if (task.availability === "resubmit_allowed") {
+            badgeClass = "badge-rejected";
+            badgeText = "Changes Requested (Resubmit)";
+            cardClass = "task-card active-task";
+          } else if (task.availability === "available") {
+            badgeClass = "badge-available";
+            badgeText = "Available for Submission";
+            cardClass = "task-card active-task";
+          }
+
+          let formHtml = "";
+          if (task.isSubmittable || task.availability === "resubmit_allowed") {
+            formHtml = `
+              <div class="submission-box">
+                <h4 style="margin: 0 0 10px; font-size: 15px;">Submit Solution for ${task.title}</h4>
+                <div class="form-group">
+                  <label class="form-label">Written Answer & Implementation Details * (min. 20 chars)</label>
+                  <textarea id="text-ans-${task.id}" class="form-textarea" placeholder="Detail your solution, code approach, and verification steps..."></textarea>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">GitHub Repository Link (Recommended)</label>
+                  <input type="url" id="github-link-${task.id}" class="form-input" placeholder="https://github.com/username/project" />
+                </div>
+                <button type="button" class="btn-submit" onclick="submitTask('${task.id}')">Submit for Teacher Review</button>
+              </div>
+            `;
+          }
+
+          let reviewHtml = "";
+          if (task.latestSubmission && task.latestSubmission.feedback) {
+            reviewHtml = `
+              <div class="feedback-box">
+                <strong>👨‍🏫 Instructor Feedback:</strong>
+                <p style="margin: 4px 0 0;">"${task.latestSubmission.feedback}"</p>
+                <div style="font-size: 11px; color: #6B7280; margin-top: 6px;">Reviewed by: ${task.latestSubmission.reviewedBy || 'Instructor'}</div>
+              </div>
+            `;
+          }
+
+          return `
+            <div class="${cardClass}">
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
+                <div>
+                  <span style="font-size: 12px; font-weight: 700; color: #6B7280; text-transform: uppercase;">Week ${task.week}</span>
+                  <h3 style="margin: 4px 0; font-size: 18px;">${task.title}</h3>
+                </div>
+                <span class="task-badge ${badgeClass}">${badgeText}</span>
+              </div>
+              <p style="color: #4B5563; font-size: 14px; line-height: 1.6; margin: 0 0 16px;">${task.description}</p>
+              ${reviewHtml}
+              ${formHtml}
+            </div>
+          `;
+        }).join('');
+
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    async function submitTask(taskId) {
+      const textAnswer = document.getElementById(`text-ans-${taskId}`).value.trim();
+      const githubLink = document.getElementById(`github-link-${taskId}`).value.trim();
+
+      if (!textAnswer || textAnswer.length < 20) {
+        alert("Please provide a detailed text answer (at least 20 characters).");
+        return;
+      }
+
+      try {
+        const res = await fetch("/api/submissions/submit", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          credentials: "include",
+          body: JSON.stringify({ taskId, textAnswer, githubLink })
+        });
+        const data = await res.json();
+        if (!res.ok) {
+          alert(data.error || "Submission failed.");
+          return;
+        }
+
+        alert("Task submitted successfully! It is now queued for teacher review.");
+        loadTasks();
+      } catch (err) {
+        alert("Network error submitting task.");
+      }
+    }
+
+    window.addEventListener("load", loadTasks);
+  </script>
+</body>
 </html>

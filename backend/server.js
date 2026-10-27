@@ -12,6 +12,14 @@ try {
   // Graceful fallback if resend is not yet installed
 }
 
+// Student Management System Modules
+const { generateAndSendOtp, verifyOtpRecord } = require("./api/otp");
+const { initiateTrackChangeOrder, executeTrackChange } = require("./api/track-change");
+const { getTasksForStudent, submitTaskSolution } = require("./api/tasks");
+const { reviewSubmission, getSubmissionsForReview } = require("./api/submissions");
+const { checkCertificateEligibility, generateCertificate } = require("./api/certificates");
+
+
 const generateETag = (buffer) => {
   const hash = crypto.createHash("sha1").update(buffer).digest("hex").slice(0, 16);
   return `W/"${hash}-${buffer.length}"`;
@@ -924,6 +932,9 @@ const rewrites = {
   "/student/submit-work": "/src/pages/student-submit-work.html",
   "/student/certificates": "/src/pages/student-certificates.html",
   "/student/settings": "/src/pages/student-settings.html",
+  "/student-tasks.html": "/src/pages/student-tasks.html",
+  "/admin-tasks.html": "/src/pages/admin-tasks.html",
+  "/admin-submissions.html": "/src/pages/admin-submissions.html",
   "/admin/dashboard": "/src/admin/admin-dashboard.html",
   "/admin/programs": "/src/admin/admin-programs.html",
   "/admin/applications": "/src/admin/admin-applications.html",
@@ -3452,6 +3463,655 @@ const server = http.createServer(async (request, response) => {
         console.error("Refund error:", error);
         captureServerException(error, { tags: { operation: "razorpay_refund" } });
         send(response, 500, { error: "Refund processing failed" });
+        return;
+      }
+    }
+
+    // ===============================================================
+    // SECTION 1 & 2: REGISTRATION & PASSWORD RESET WITH OTP
+    // ===============================================================
+
+    // POST /api/internships/register (New 5-step registration initiation with OTP)
+    if (request.method === "POST" && (pathname === "/api/internships/register" || pathname === "/api/internships/auth/register-v2")) {
+      try {
+        const body = await readBody(request);
+        const name = sanitizeInput(String(body.name || ""));
+        const email = sanitizeInput(String(body.email || "")).toLowerCase();
+        const password = String(body.password || "");
+        const track = sanitizeInput(String(body.track || body.internshipTrack || "web-development"));
+        const duration = sanitizeInput(String(body.duration || "high"));
+        const phone = sanitizeInput(String(body.phone || "")).replace(/\D/g, "").slice(-10);
+
+        if (!name || name.length < 2) {
+          send(response, 400, { error: "Please enter your full name." });
+          return;
+        }
+        if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+          send(response, 400, { error: "Please provide a valid email address." });
+          return;
+        }
+        if (!password || password.length < 8) {
+          send(response, 400, { error: "Password must be at least 8 characters long." });
+          return;
+        }
+
+        const db = readDb();
+        const existingStudent = (db.students || []).find((s) => s.email.toLowerCase() === email);
+        if (existingStudent && existingStudent.paymentStatus === "paid") {
+          send(response, 409, { error: "An enrolled student account already exists with this email. Please log in." });
+          return;
+        }
+
+        const amount = duration === "low" ? 119 : 249;
+        const studentId = existingStudent ? existingStudent.id : `student-${crypto.randomUUID()}`;
+        const studentRecord = {
+          id: studentId,
+          name,
+          email,
+          phone,
+          passwordHash: hashPassword(password),
+          internshipTrack: track,
+          track,
+          duration,
+          durationWeeks: duration === "high" ? 8 : 4,
+          tasksCount: duration === "high" ? 8 : 4,
+          paymentStatus: "pending",
+          paymentAmount: amount,
+          accessGranted: false,
+          emailVerified: false,
+          totalPoints: 0,
+          currentWeek: 1,
+          enrolledAt: new Date().toISOString(),
+          createdAt: existingStudent ? existingStudent.createdAt : new Date().toISOString(),
+          updatedAt: new Date().toISOString(),
+        };
+
+        if (existingStudent) {
+          const idx = db.students.findIndex((s) => s.id === existingStudent.id);
+          db.students[idx] = studentRecord;
+        } else {
+          db.students.push(studentRecord);
+        }
+        writeDb(db);
+
+        // Send OTP
+        const otpResult = await generateAndSendOtp({
+          email,
+          phone,
+          type: "registration",
+          db,
+          writeDb,
+          sendEmailFn: dispatchServerNotification,
+        });
+
+        if (otpResult.error) {
+          send(response, 400, { error: otpResult.error });
+          return;
+        }
+
+        send(response, 200, {
+          success: true,
+          message: "Registration initiated. OTP sent to your email and phone.",
+          studentId,
+          email,
+          amount,
+          track,
+          duration,
+          resendsRemaining: otpResult.resendsRemaining,
+          demoOtp: otpResult.demoOtp,
+        });
+        return;
+      } catch (err) {
+        console.error("Registration error:", err);
+        send(response, 500, { error: "Registration failed. Please try again." });
+        return;
+      }
+    }
+
+    // POST /api/internships/verify-otp
+    if (request.method === "POST" && pathname === "/api/internships/verify-otp") {
+      try {
+        const body = await readBody(request);
+        const { email, code, type = "registration" } = body;
+
+        if (!email || !code) {
+          send(response, 400, { error: "Email and OTP code are required." });
+          return;
+        }
+
+        const db = readDb();
+        const verifyRes = verifyOtpRecord({ email, code, type, db, writeDb });
+        if (verifyRes.error) {
+          send(response, 400, { error: verifyRes.error });
+          return;
+        }
+
+        // Mark student emailVerified
+        const student = (db.students || []).find((s) => s.email.toLowerCase() === email.toLowerCase());
+        if (student) {
+          student.emailVerified = true;
+          student.updatedAt = new Date().toISOString();
+          writeDb(db);
+        }
+
+        send(response, 200, {
+          success: true,
+          message: "OTP verified successfully. Please complete payment to activate your dashboard.",
+          email,
+        });
+        return;
+      } catch (err) {
+        console.error("OTP verification error:", err);
+        send(response, 500, { error: "OTP verification failed." });
+        return;
+      }
+    }
+
+    // POST /api/internships/resend-otp
+    if (request.method === "POST" && pathname === "/api/internships/resend-otp") {
+      try {
+        const body = await readBody(request);
+        const { email, phone, type = "registration" } = body;
+        if (!email) {
+          send(response, 400, { error: "Email is required to resend OTP." });
+          return;
+        }
+
+        const db = readDb();
+        const resendRes = await generateAndSendOtp({
+          email,
+          phone,
+          type,
+          db,
+          writeDb,
+          sendEmailFn: dispatchServerNotification,
+        });
+
+        if (resendRes.error) {
+          send(response, 400, { error: resendRes.error });
+          return;
+        }
+
+        send(response, 200, resendRes);
+        return;
+      } catch (err) {
+        console.error("Resend OTP error:", err);
+        send(response, 500, { error: "Failed to resend OTP." });
+        return;
+      }
+    }
+
+    // POST /api/internships/forgot-password (OTP based)
+    if (request.method === "POST" && (pathname === "/api/internships/forgot-password" || pathname === "/api/internships/auth/forgot-password-otp")) {
+      try {
+        const body = await readBody(request);
+        const email = sanitizeInput(String(body.email || "")).toLowerCase();
+        if (!email) {
+          send(response, 400, { error: "Please provide your registered email address." });
+          return;
+        }
+
+        const db = readDb();
+        const student = (db.students || []).find((s) => s.email.toLowerCase() === email);
+        if (student) {
+          await generateAndSendOtp({
+            email,
+            phone: student.phone,
+            type: "forgot_password",
+            db,
+            writeDb,
+            sendEmailFn: dispatchServerNotification,
+          });
+        }
+
+        // Generic anti-enumeration response
+        send(response, 200, {
+          success: true,
+          message: "If an account with that email exists, an OTP has been dispatched to your email.",
+        });
+        return;
+      } catch (err) {
+        console.error("Forgot password OTP error:", err);
+        send(response, 500, { error: "Failed to process request." });
+        return;
+      }
+    }
+
+    // POST /api/internships/verify-reset-otp
+    if (request.method === "POST" && pathname === "/api/internships/verify-reset-otp") {
+      try {
+        const body = await readBody(request);
+        const { email, code } = body;
+        const db = readDb();
+        const verifyRes = verifyOtpRecord({ email, code, type: "forgot_password", db, writeDb });
+        if (verifyRes.error) {
+          send(response, 400, { error: verifyRes.error });
+          return;
+        }
+        send(response, 200, { success: true, message: "Reset OTP verified." });
+        return;
+      } catch (err) {
+        console.error("Verify reset OTP error:", err);
+        send(response, 500, { error: "Failed to verify reset OTP." });
+        return;
+      }
+    }
+
+    // POST /api/internships/reset-password
+    if (request.method === "POST" && pathname === "/api/internships/reset-password") {
+      try {
+        const body = await readBody(request);
+        const email = sanitizeInput(String(body.email || "")).toLowerCase();
+        const { code, newPassword } = body;
+
+        if (!email || !newPassword || newPassword.length < 8) {
+          send(response, 400, { error: "Password must be at least 8 characters long." });
+          return;
+        }
+
+        const db = readDb();
+        const verifiedOtp = (db.otps || []).find(
+          (o) => o.email === email && o.type === "forgot_password" && (o.verified || o.code === code)
+        );
+        if (!verifiedOtp) {
+          send(response, 400, { error: "Please verify your OTP code before resetting password." });
+          return;
+        }
+
+        const student = (db.students || []).find((s) => s.email.toLowerCase() === email);
+        if (!student) {
+          send(response, 404, { error: "Student account not found." });
+          return;
+        }
+
+        student.passwordHash = hashPassword(newPassword);
+        student.updatedAt = new Date().toISOString();
+        verifiedOtp.verified = true;
+        writeDb(db);
+
+        send(response, 200, {
+          success: true,
+          message: "Password reset successful! You may now log in with your new password.",
+        });
+        return;
+      } catch (err) {
+        console.error("Reset password error:", err);
+        send(response, 500, { error: "Failed to reset password." });
+        return;
+      }
+    }
+
+    // ===============================================================
+    // SECTION 3: TRACK CHANGE SYSTEM (₹49 Fee)
+    // ===============================================================
+
+    // POST /api/internships/change-track/order
+    if (request.method === "POST" && pathname === "/api/internships/change-track/order") {
+      try {
+        const db = readDb();
+        const student = getStudentFromSession(request, db);
+        if (!student) {
+          send(response, 401, { error: "Authentication required" });
+          return;
+        }
+        const body = await readBody(request);
+        const newTrack = sanitizeInput(String(body.newTrack || ""));
+        const orderRes = initiateTrackChangeOrder({ student, newTrack, razorpayInstance: razorpay });
+        if (orderRes.error) {
+          send(response, 400, { error: orderRes.error });
+          return;
+        }
+        orderRes.keyId = process.env.RAZORPAY_KEY_ID || "rzp_test_TsuViLpY06ShVz";
+        send(response, 200, orderRes);
+        return;
+      } catch (err) {
+        console.error("Track change order error:", err);
+        send(response, 500, { error: "Failed to create track change order." });
+        return;
+      }
+    }
+
+    // POST /api/internships/change-track
+    if (request.method === "POST" && pathname === "/api/internships/change-track") {
+      try {
+        const db = readDb();
+        const student = getStudentFromSession(request, db);
+        if (!student) {
+          send(response, 401, { error: "Authentication required" });
+          return;
+        }
+        const body = await readBody(request);
+        const { newTrack, paymentId } = body;
+        const changeRes = executeTrackChange({ student, newTrack, paymentId, db, writeDb });
+        if (changeRes.error) {
+          send(response, 400, { error: changeRes.error });
+          return;
+        }
+        send(response, 200, changeRes);
+        return;
+      } catch (err) {
+        console.error("Track change execution error:", err);
+        send(response, 500, { error: "Failed to change track." });
+        return;
+      }
+    }
+
+    // ===============================================================
+    // SECTION 4: TASK SUBMISSION SYSTEM
+    // ===============================================================
+
+    // GET /api/tasks (Catalog of all active tasks)
+    if (request.method === "GET" && pathname === "/api/tasks") {
+      const db = readDb();
+      const track = url.searchParams.get("track");
+      let list = db.tasks || [];
+      if (track) list = list.filter((t) => t.track === track);
+      send(response, 200, { success: true, tasks: list });
+      return;
+    }
+
+    // GET /api/tasks/available (Student's weekly progress & submittable tasks)
+    if (request.method === "GET" && pathname === "/api/tasks/available") {
+      const db = readDb();
+      const student = getStudentFromSession(request, db);
+      if (!student) {
+        send(response, 401, { error: "Authentication required" });
+        return;
+      }
+      const tasks = getTasksForStudent({ student, db });
+      send(response, 200, {
+        success: true,
+        currentWeek: student.currentWeek || 1,
+        totalPoints: student.totalPoints || 0,
+        tasks,
+      });
+      return;
+    }
+
+    // POST /api/submissions/submit
+    if (request.method === "POST" && pathname === "/api/submissions/submit") {
+      try {
+        const db = readDb();
+        const student = getStudentFromSession(request, db);
+        if (!student) {
+          send(response, 401, { error: "Authentication required" });
+          return;
+        }
+        const body = await readBody(request);
+        const { taskId, textAnswer, githubLink } = body;
+        const subRes = submitTaskSolution({ student, taskId, textAnswer, githubLink, db, writeDb });
+        if (subRes.error) {
+          send(response, 400, { error: subRes.error });
+          return;
+        }
+        send(response, 200, subRes);
+        return;
+      } catch (err) {
+        console.error("Task submission error:", err);
+        send(response, 500, { error: "Failed to submit task." });
+        return;
+      }
+    }
+
+    // GET /api/submissions (Student's all submissions)
+    if (request.method === "GET" && pathname === "/api/submissions") {
+      const db = readDb();
+      const student = getStudentFromSession(request, db);
+      if (!student) {
+        send(response, 401, { error: "Authentication required" });
+        return;
+      }
+      const list = (db.submissions || []).filter((s) => s.studentId === student.id);
+      send(response, 200, { success: true, submissions: list });
+      return;
+    }
+
+    // GET /api/submissions/:submissionId
+    if (request.method === "GET" && pathname.startsWith("/api/submissions/")) {
+      const subId = pathname.slice("/api/submissions/".length).trim();
+      const db = readDb();
+      const sub = (db.submissions || []).find((s) => s.id === subId);
+      if (!sub) {
+        send(response, 404, { error: "Submission not found" });
+        return;
+      }
+      send(response, 200, { success: true, submission: sub });
+      return;
+    }
+
+    // ===============================================================
+    // SECTION 5: TEACHER REVIEW & GRADING
+    // ===============================================================
+
+    // GET /api/admin/submissions
+    if (request.method === "GET" && pathname === "/api/admin/submissions") {
+      const db = readDb();
+      const track = url.searchParams.get("track") || "all";
+      const status = url.searchParams.get("status") || "all";
+      const list = getSubmissionsForReview({ track, status, db });
+      send(response, 200, { success: true, count: list.length, submissions: list });
+      return;
+    }
+
+    // POST /api/admin/submissions/:id/review
+    if (request.method === "POST" && pathname.startsWith("/api/admin/submissions/") && pathname.endsWith("/review")) {
+      try {
+        const parts = pathname.split("/");
+        const subId = parts[parts.length - 2];
+        const body = await readBody(request);
+        const { score, feedback, status } = body;
+        const db = readDb();
+        const reviewRes = reviewSubmission({
+          submissionId: subId,
+          reviewerEmail: "instructor@abssnexus.in",
+          score,
+          feedback,
+          status,
+          db,
+          writeDb,
+        });
+        if (reviewRes.error) {
+          send(response, 400, { error: reviewRes.error });
+          return;
+        }
+        send(response, 200, reviewRes);
+        return;
+      } catch (err) {
+        console.error("Submission review error:", err);
+        send(response, 500, { error: "Failed to record review." });
+        return;
+      }
+    }
+
+    // GET /api/admin/students
+    if (request.method === "GET" && pathname === "/api/admin/students") {
+      const db = readDb();
+      const studentsList = (db.students || []).map((s) => ({
+        id: s.id,
+        name: s.name,
+        email: s.email,
+        phone: s.phone,
+        track: s.internshipTrack || s.track,
+        duration: s.duration,
+        paymentStatus: s.paymentStatus || "pending",
+        totalPoints: s.totalPoints || 0,
+        currentWeek: s.currentWeek || 1,
+        enrolledAt: s.enrolledAt || s.createdAt,
+      }));
+      send(response, 200, { success: true, count: studentsList.length, students: studentsList });
+      return;
+    }
+
+    // ===============================================================
+    // SECTION 6: CERTIFICATE ENGINE
+    // ===============================================================
+
+    // POST /api/certificates/generate
+    if (request.method === "POST" && pathname === "/api/certificates/generate") {
+      try {
+        const db = readDb();
+        const student = getStudentFromSession(request, db);
+        if (!student) {
+          send(response, 401, { error: "Authentication required" });
+          return;
+        }
+        const certRes = generateCertificate({
+          student,
+          rootDir,
+          db,
+          writeDb,
+          sendEmailFn: dispatchServerNotification,
+        });
+        if (certRes.error) {
+          send(response, 400, { error: certRes.error });
+          return;
+        }
+        send(response, 200, certRes);
+        return;
+      } catch (err) {
+        console.error("Certificate generation error:", err);
+        send(response, 500, { error: "Failed to generate certificate." });
+        return;
+      }
+    }
+
+    // GET /api/certificates/:id
+    if (request.method === "GET" && pathname.startsWith("/api/certificates/")) {
+      const certId = pathname.slice("/api/certificates/".length).trim();
+      const db = readDb();
+      const cert = (db.certificates || []).find(
+        (c) => c.id === certId || c.certificateNumber === decodeURIComponent(certId)
+      );
+      if (!cert) {
+        send(response, 404, { error: "Certificate not found" });
+        return;
+      }
+      send(response, 200, { success: true, certificate: cert });
+      return;
+    }
+
+    // GET /api/verify-certificate (Public QR verification)
+    if (request.method === "GET" && (pathname === "/api/verify-certificate" || pathname === "/verify-certificate")) {
+      const certId = url.searchParams.get("id");
+      const db = readDb();
+      if (!certId) {
+        send(response, 400, { error: "Certificate ID is required (?id=CERT/2026/00001)" });
+        return;
+      }
+      const cert = (db.certificates || []).find(
+        (c) => c.certificateNumber === certId || c.certificateNumber === decodeURIComponent(certId) || c.id === certId
+      );
+      if (!cert) {
+        send(response, 404, { verified: false, error: "Invalid certificate ID. This credential is not in the official registry." });
+        return;
+      }
+      send(response, 200, {
+        verified: true,
+        certificateNumber: cert.certificateNumber,
+        studentName: cert.studentName,
+        track: cert.track,
+        completionDate: cert.completionDate,
+        score: cert.score,
+        issuedAt: cert.issuedAt,
+        digitalSignature: cert.digitalSignature,
+        pdfUrl: cert.pdfUrl,
+      });
+      return;
+    }
+
+    // ===============================================================
+    // SECTION 7: ADMIN PANEL - TASK MANAGEMENT CRUD
+    // ===============================================================
+
+    // GET /api/admin/tasks
+    if (request.method === "GET" && pathname === "/api/admin/tasks") {
+      const db = readDb();
+      const track = url.searchParams.get("track");
+      let list = db.tasks || [];
+      if (track) list = list.filter((t) => t.track === track);
+      send(response, 200, { success: true, tasks: list });
+      return;
+    }
+
+    // POST /api/admin/tasks (Create task)
+    if (request.method === "POST" && pathname === "/api/admin/tasks") {
+      try {
+        const body = await readBody(request);
+        const { track, duration = "both", week, title, description, points = 10 } = body;
+        if (!track || !week || !title || !description) {
+          send(response, 400, { error: "Track, week, title, and description are required." });
+          return;
+        }
+        const db = readDb();
+        db.tasks = db.tasks || [];
+        const newTask = {
+          id: `task-${track}-w${week}-${Date.now()}`,
+          track,
+          duration,
+          week: Number(week),
+          title: sanitizeInput(title),
+          description: sanitizeInput(description),
+          points: Number(points) || 10,
+          status: "active",
+          createdAt: new Date().toISOString(),
+        };
+        db.tasks.push(newTask);
+        writeDb(db);
+        send(response, 201, { success: true, message: "Task created successfully.", task: newTask });
+        return;
+      } catch (err) {
+        console.error("Create task error:", err);
+        send(response, 500, { error: "Failed to create task." });
+        return;
+      }
+    }
+
+    // PUT /api/admin/tasks/:id (Update task)
+    if (request.method === "PUT" && pathname.startsWith("/api/admin/tasks/")) {
+      try {
+        const taskId = pathname.slice("/api/admin/tasks/".length).trim();
+        const body = await readBody(request);
+        const db = readDb();
+        const taskIndex = (db.tasks || []).findIndex((t) => t.id === taskId);
+        if (taskIndex === -1) {
+          send(response, 404, { error: "Task not found" });
+          return;
+        }
+        const task = db.tasks[taskIndex];
+        if (body.title) task.title = sanitizeInput(body.title);
+        if (body.description) task.description = sanitizeInput(body.description);
+        if (body.points) task.points = Number(body.points);
+        if (body.duration) task.duration = body.duration;
+        if (body.status) task.status = body.status;
+        task.updatedAt = new Date().toISOString();
+        writeDb(db);
+        send(response, 200, { success: true, message: "Task updated successfully.", task });
+        return;
+      } catch (err) {
+        console.error("Update task error:", err);
+        send(response, 500, { error: "Failed to update task." });
+        return;
+      }
+    }
+
+    // DELETE /api/admin/tasks/:id (Soft delete task)
+    if (request.method === "DELETE" && pathname.startsWith("/api/admin/tasks/")) {
+      try {
+        const taskId = pathname.slice("/api/admin/tasks/".length).trim();
+        const db = readDb();
+        const task = (db.tasks || []).find((t) => t.id === taskId);
+        if (!task) {
+          send(response, 404, { error: "Task not found" });
+          return;
+        }
+        task.status = "archived";
+        task.updatedAt = new Date().toISOString();
+        writeDb(db);
+        send(response, 200, { success: true, message: "Task archived successfully." });
+        return;
+      } catch (err) {
+        console.error("Delete task error:", err);
+        send(response, 500, { error: "Failed to delete task." });
         return;
       }
     }

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Teacher Review & Grading | ABSS Nexus Academy</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="/public/assets/images/favicon-32x32.png" />
+  <link rel="stylesheet" href="/src/styles/styles.css?v=20261023v2" />
+  <style>
+    .teacher-wrapper {
+      max-width: 1040px;
+      margin: 40px auto 80px;
+      padding: 0 20px;
+      color: #1D1D1F;
+    }
+    .header-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #ffffff;
+      padding: 24px;
+      border-radius: 12px;
+      border: 1px solid #E5E7EB;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      margin-bottom: 24px;
+    }
+    .filter-bar {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 24px;
+      background: #ffffff;
+      padding: 16px 20px;
+      border-radius: 10px;
+      border: 1px solid #E5E7EB;
+    }
+    .filter-select {
+      padding: 8px 12px;
+      border: 1px solid #D1D5DB;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+    .review-card {
+      background: #ffffff;
+      border: 1px solid #E5E7EB;
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 24px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+    .student-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #F3F4F6;
+      padding-bottom: 12px;
+      margin-bottom: 16px;
+    }
+    .score-radio-group {
+      display: flex;
+      gap: 16px;
+      margin: 12px 0;
+    }
+    .score-option {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 14px;
+    }
+    .btn-approve {
+      background: #10B981;
+      color: #ffffff;
+      border: none;
+      padding: 10px 24px;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .btn-approve:hover { background: #059669; }
+    .btn-reject {
+      background: #EF4444;
+      color: #ffffff;
+      border: none;
+      padding: 10px 24px;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .btn-reject:hover { background: #DC2626; }
+    .status-badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 16px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .status-pending { background: #FEF3C7; color: #92400E; }
+    .status-approved { background: #D1FAE5; color: #065F46; }
+    .status-rejected { background: #FEE2E2; color: #991B1B; }
+  </style>
+</head>
+<body class="agency-dark-theme">
+  <header class="site-header site-header--academy" role="banner">
+    <nav class="nav" aria-label="Internship Academy Navigation">
+      <a class="brand" href="/admin" aria-label="ABSS Nexus Academy home">
+        <img src="/public/assets/images/favicon.png" alt="ABSS Nexus logo" width="38" height="38" />
+        <div class="brand-text-group" style="display: flex; flex-direction: column; text-align: left;">
+          <span class="brand-name">ABSS Nexus Instructor Portal</span>
+          <span class="brand-subtext" style="font-size: 0.72rem; color: #6E6E73; font-weight: 500;">Grading &amp; Task Reviews</span>
+        </div>
+      </a>
+      <div class="nav-links">
+        <a href="/admin/tasks" class="nav-link">Task Catalog</a>
+        <a href="/admin" class="nav-link">Admin Home</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="teacher-wrapper">
+    <div class="header-bar">
+      <div>
+        <h1 style="margin: 0; font-size: 24px;">Student Task Submissions</h1>
+        <p style="margin: 4px 0 0; color: #6B7280; font-size: 14px;">Review student code submissions, assign scores (0-10 points), and provide actionable feedback.</p>
+      </div>
+      <div>
+        <span style="font-size: 13px; color: #6B7280;">Submissions:</span>
+        <strong id="count-display" style="font-size: 20px; color: #0066CC;">0</strong>
+      </div>
+    </div>
+
+    <div class="filter-bar">
+      <div>
+        <label style="font-size: 12px; font-weight: 600; color: #6B7280; display: block;">Track Filter</label>
+        <select id="filter-track" class="filter-select" onchange="fetchSubmissions()">
+          <option value="all">All Tracks</option>
+          <option value="web-development">Web Development</option>
+          <option value="data-science">Data Science</option>
+          <option value="cloud-devops">Cloud & DevOps</option>
+          <option value="ai-machine-learning">AI & Machine Learning</option>
+          <option value="ui-ux-design">UI/UX Design</option>
+        </select>
+      </div>
+      <div>
+        <label style="font-size: 12px; font-weight: 600; color: #6B7280; display: block;">Status Filter</label>
+        <select id="filter-status" class="filter-select" onchange="fetchSubmissions()">
+          <option value="all">All Statuses</option>
+          <option value="pending" selected>Pending Review</option>
+          <option value="approved">Approved</option>
+          <option value="rejected">Rejected</option>
+        </select>
+      </div>
+    </div>
+
+    <div id="submissions-list">
+      <div style="text-align: center; padding: 40px; color: #6B7280;">Loading submissions...</div>
+    </div>
+  </main>
+
+  <script>
+    async function fetchSubmissions() {
+      const track = document.getElementById('filter-track').value;
+      const status = document.getElementById('filter-status').value;
+
+      try {
+        const res = await fetch(`/api/admin/submissions?track=${track}&status=${status}`);
+        const data = await res.json();
+
+        document.getElementById('count-display').textContent = data.count || 0;
+        const container = document.getElementById('submissions-list');
+
+        if (!data.submissions || !data.submissions.length) {
+          container.innerHTML = '<div style="text-align: center; padding: 40px; background: white; border-radius: 12px; border: 1px solid #E5E7EB;">No submissions match the selected filters.</div>';
+          return;
+        }
+
+        container.innerHTML = data.submissions.map((sub) => {
+          const isPending = sub.status === "pending";
+          return `
+            <div class="review-card" id="card-${sub.id}">
+              <div class="student-header">
+                <div>
+                  <h3 style="margin: 0; font-size: 17px;">${sub.studentName} (${sub.studentEmail})</h3>
+                  <div style="font-size: 13px; color: #6B7280; margin-top: 2px;">
+                    Track: <strong>${sub.track.toUpperCase()}</strong> • Week <strong>${sub.week}</strong> • Submitted: ${new Date(sub.submittedAt).toLocaleDateString()}
+                  </div>
+                </div>
+                <span class="status-badge status-${sub.status}">${sub.status.toUpperCase()}</span>
+              </div>
+
+              <div style="background: #F9FAFB; padding: 14px; border-radius: 8px; margin-bottom: 16px; border: 1px solid #E5E7EB;">
+                <strong style="font-size: 12px; text-transform: uppercase; color: #6B7280; display: block; margin-bottom: 6px;">Submitted Answer:</strong>
+                <p style="margin: 0; font-size: 14px; line-height: 1.6; white-space: pre-wrap;">${sub.textAnswer}</p>
+                ${sub.githubLink ? `<div style="margin-top: 10px;"><a href="${sub.githubLink}" target="_blank" style="color: #0066CC; font-weight: 600; font-size: 13px;">🔗 View GitHub Repository &rarr;</a></div>` : ''}
+              </div>
+
+              <div style="background: #ffffff; border: 1px solid #E5E7EB; border-radius: 8px; padding: 16px;">
+                <label style="font-size: 13px; font-weight: 700; color: #374151; display: block;">Assign Score (Points out of 10):</label>
+                <div class="score-radio-group">
+                  <label class="score-option"><input type="radio" name="score-${sub.id}" value="10" ${sub.score === 10 ? 'checked' : ''} /> 10 pts</label>
+                  <label class="score-option"><input type="radio" name="score-${sub.id}" value="8" ${sub.score === 8 ? 'checked' : ''} /> 8 pts</label>
+                  <label class="score-option"><input type="radio" name="score-${sub.id}" value="6" ${sub.score === 6 ? 'checked' : ''} /> 6 pts</label>
+                  <label class="score-option"><input type="radio" name="score-${sub.id}" value="4" ${sub.score === 4 ? 'checked' : ''} /> 4 pts</label>
+                  <label class="score-option"><input type="radio" name="score-${sub.id}" value="2" ${sub.score === 2 ? 'checked' : ''} /> 2 pts</label>
+                  <label class="score-option"><input type="radio" name="score-${sub.id}" value="0" ${sub.score === 0 ? 'checked' : ''} /> 0 pts</label>
+                </div>
+
+                <label style="font-size: 13px; font-weight: 700; color: #374151; display: block; margin-top: 12px;">Instructor Comments / Feedback:</label>
+                <textarea id="feedback-${sub.id}" style="width: 100%; min-height: 80px; padding: 10px; border: 1px solid #D1D5DB; border-radius: 6px; box-sizing: border-box; font-family: inherit; font-size: 14px; margin-top: 6px;" placeholder="Provide feedback to the student...">${sub.feedback || ''}</textarea>
+
+                <div style="display: flex; gap: 12px; margin-top: 16px;">
+                  <button type="button" class="btn-approve" onclick="saveReview('${sub.id}', 'approved')">✓ Approve Submission</button>
+                  <button type="button" class="btn-reject" onclick="saveReview('${sub.id}', 'rejected')">✕ Reject &amp; Request Resubmission</button>
+                </div>
+              </div>
+            </div>
+          `;
+        }).join('');
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    async function saveReview(subId, status) {
+      const radios = document.getElementsByName(`score-${subId}`);
+      let selectedScore = 10;
+      for (const r of radios) {
+        if (r.checked) {
+          selectedScore = Number(r.value);
+          break;
+        }
+      }
+
+      const feedback = document.getElementById(`feedback-${subId}`).value.trim();
+
+      try {
+        const res = await fetch(`/api/admin/submissions/${subId}/review`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ score: selectedScore, feedback, status })
+        });
+        const data = await res.json();
+        if (!res.ok) {
+          alert(data.error || "Review failed.");
+          return;
+        }
+
+        alert(`Submission ${status === 'approved' ? 'Approved' : 'Rejected'}! Student record updated.`);
+        fetchSubmissions();
+      } catch (err) {
+        alert("Failed to submit review.");
+      }
+    }
+
+    window.addEventListener("load", fetchSubmissions);
+  </script>
+</body>
+</html>

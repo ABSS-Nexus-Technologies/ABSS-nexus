@@ -145,6 +145,8 @@ const publicPages = [
   ["src/pages/student-submit-work.html", path.join("student", "submit-work.html")],
   ["src/pages/student-certificates.html", path.join("student", "certificates.html")],
   ["src/pages/student-settings.html", path.join("student", "settings.html")],
+  ["src/pages/admin-tasks.html", "admin-tasks.html"],
+  ["src/pages/admin-submissions.html", "admin-submissions.html"],
   ["src/pages/404.html", "404.html"],
 ];
 

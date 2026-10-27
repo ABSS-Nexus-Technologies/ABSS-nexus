@@ -107,5 +107,54 @@ service cloud.firestore {
       );
       allow write: if false; // Managed exclusively by backend service account
     }
+
+    // ===============================================================
+    // 9. OTP Verification (Backend Managed Only)
+    // ===============================================================
+    match /otps/{otpId} {
+      allow read, write: if false; // Zero-trust: Exclusively managed via backend
+    }
+
+    // ===============================================================
+    // 10. Tracks & Tasks Catalog
+    // ===============================================================
+    match /tracks/{trackId} {
+      allow read: if true; // Public track catalog
+      allow write: if false; // Admin managed
+    }
+
+    match /tasks/{taskId} {
+      allow read: if isAuthenticated(); // Authenticated enrolled students
+      allow write: if false; // Admin managed
+    }
+
+    // ===============================================================
+    // 11. Student Submissions & Grading
+    // ===============================================================
+    match /submissions/{submissionId} {
+      allow create: if isAuthenticated() && 
+        request.auth.uid == request.resource.data.studentId;
+      allow read: if isAuthenticated() && (
+        request.auth.uid == resource.data.studentId ||
+        request.auth.token.email == resource.data.studentEmail ||
+        request.auth.token.role == "admin" ||
+        request.auth.token.role == "teacher"
+      );
+      allow update: if isAuthenticated() && (
+        request.auth.token.role == "admin" ||
+        request.auth.token.role == "teacher"
+      );
+      allow delete: if false;
+    }
+
+    // ===============================================================
+    // 12. Track Change History
+    // ===============================================================
+    match /track_changes/{changeId} {
+      allow read: if isAuthenticated() && 
+        request.auth.uid == resource.data.studentId;
+      allow write: if false; // Managed exclusively via backend payment workflow
+    }
   }
 }
+

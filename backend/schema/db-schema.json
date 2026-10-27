@@ -1,0 +1,160 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ABSS Nexus Student Management System Schema",
+  "type": "object",
+  "properties": {
+    "students": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "email", "internshipTrack", "duration", "paymentStatus"],
+        "properties": {
+          "id": { "type": "string" },
+          "name": { "type": "string" },
+          "email": { "type": "string", "format": "email" },
+          "phone": { "type": "string" },
+          "passwordHash": { "type": "string" },
+          "salt": { "type": "string" },
+          "internshipTrack": { "type": "string" },
+          "duration": { "type": "string", "enum": ["low", "high"] },
+          "durationWeeks": { "type": "integer", "enum": [4, 8] },
+          "tasksCount": { "type": "integer", "enum": [4, 8] },
+          "paymentStatus": { "type": "string", "enum": ["pending", "paid", "refunded"] },
+          "paymentAmount": { "type": "integer", "enum": [119, 249] },
+          "paymentDate": { "type": "string" },
+          "accessGranted": { "type": "boolean" },
+          "enrolledAt": { "type": "string" },
+          "completionDate": { "type": ["string", "null"] },
+          "totalPoints": { "type": "integer" },
+          "currentWeek": { "type": "integer" },
+          "emailVerified": { "type": "boolean" },
+          "createdAt": { "type": "string" },
+          "updatedAt": { "type": "string" }
+        }
+      }
+    },
+    "otps": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "email", "code", "type", "expiresAt", "verified"],
+        "properties": {
+          "id": { "type": "string" },
+          "email": { "type": "string" },
+          "phone": { "type": "string" },
+          "code": { "type": "string" },
+          "type": { "type": "string", "enum": ["registration", "forgot_password"] },
+          "attempts": { "type": "integer" },
+          "resendsCount": { "type": "integer" },
+          "expiresAt": { "type": "string" },
+          "verified": { "type": "boolean" },
+          "createdAt": { "type": "string" }
+        }
+      }
+    },
+    "tracks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "slug", "title", "lowDurationWeeks", "highDurationWeeks"],
+        "properties": {
+          "id": { "type": "string" },
+          "slug": { "type": "string" },
+          "title": { "type": "string" },
+          "description": { "type": "string" },
+          "lowDurationWeeks": { "type": "integer" },
+          "highDurationWeeks": { "type": "integer" },
+          "lowTasksCount": { "type": "integer" },
+          "highTasksCount": { "type": "integer" },
+          "status": { "type": "string" }
+        }
+      }
+    },
+    "tasks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "track", "duration", "week", "title", "description", "points"],
+        "properties": {
+          "id": { "type": "string" },
+          "track": { "type": "string" },
+          "duration": { "type": "string", "enum": ["low", "high", "both"] },
+          "week": { "type": "integer" },
+          "title": { "type": "string" },
+          "description": { "type": "string" },
+          "points": { "type": "integer", "default": 10 },
+          "status": { "type": "string", "enum": ["active", "draft", "archived"] },
+          "createdAt": { "type": "string" }
+        }
+      }
+    },
+    "submissions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "studentId", "taskId", "textAnswer", "status"],
+        "properties": {
+          "id": { "type": "string" },
+          "studentId": { "type": "string" },
+          "studentEmail": { "type": "string" },
+          "studentName": { "type": "string" },
+          "taskId": { "type": "string" },
+          "track": { "type": "string" },
+          "week": { "type": "integer" },
+          "textAnswer": { "type": "string" },
+          "githubLink": { "type": "string" },
+          "status": { "type": "string", "enum": ["pending", "approved", "rejected"] },
+          "score": { "type": ["integer", "null"] },
+          "feedback": { "type": "string" },
+          "reviewedBy": { "type": "string" },
+          "reviewedAt": { "type": ["string", "null"] },
+          "submittedAt": { "type": "string" }
+        }
+      }
+    },
+    "track_changes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "studentId", "oldTrack", "newTrack", "chargeApplied", "status"],
+        "properties": {
+          "id": { "type": "string" },
+          "studentId": { "type": "string" },
+          "oldTrack": { "type": "string" },
+          "newTrack": { "type": "string" },
+          "chargeApplied": { "type": "integer" },
+          "currency": { "type": "string" },
+          "paymentId": { "type": "string" },
+          "status": { "type": "string" },
+          "changedAt": { "type": "string" }
+        }
+      }
+    },
+    "certificates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "certificateNumber", "studentId", "track", "completionDate"],
+        "properties": {
+          "id": { "type": "string" },
+          "certificateNumber": { "type": "string" },
+          "studentId": { "type": "string" },
+          "studentName": { "type": "string" },
+          "studentEmail": { "type": "string" },
+          "track": { "type": "string" },
+          "completionDate": { "type": "string" },
+          "score": { "type": "integer" },
+          "qrCodeData": { "type": "string" },
+          "pdfUrl": { "type": "string" },
+          "issuedAt": { "type": "string" }
+        }
+      }
+    },
+    "payments": {
+      "type": "array"
+    },
+    "invoices": {
+      "type": "array"
+    }
+  }
+}
