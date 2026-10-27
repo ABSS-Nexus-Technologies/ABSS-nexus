@@ -241,8 +241,8 @@
       const textAnswer = document.getElementById(`text-ans-${taskId}`).value.trim();
       const githubLink = document.getElementById(`github-link-${taskId}`).value.trim();
 
-      if (!textAnswer || textAnswer.length < 20) {
-        alert("Please provide a detailed text answer (at least 20 characters).");
+      if (!textAnswer || textAnswer.length < 50) {
+        alert("Please provide a detailed text answer explaining your solution (minimum 50 characters required).");
         return;
       }
 

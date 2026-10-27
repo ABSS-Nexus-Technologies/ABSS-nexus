@@ -31,6 +31,8 @@ cleanup() {
 trap cleanup EXIT
 
 node tests/test-security-five-points.js
+node tests/test-phase1-security-hardening.js
+node tests/test-phase2-security-hardening.js
 node tests/test-phase5-auth.js
 node tests/test-verification-registry.js
 node tests/test-cloudflare-student-auth.js

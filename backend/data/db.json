@@ -27,6 +27,15 @@
     "Regression Test Client submitted website inquiry",
     "Regression Test Client submitted website inquiry",
     "Regression Test Client submitted website inquiry",
+    "Regression Test Client submitted website inquiry",
+    "Regression Test Client submitted website inquiry",
+    "Regression Test Client submitted website inquiry",
+    "Regression Test Client submitted website inquiry",
+    "Regression Test Client submitted website inquiry",
+    "Regression Test Client submitted website inquiry",
+    "Regression Test Client submitted website inquiry",
+    "Regression Test Client submitted website inquiry",
+    "Regression Test Client submitted website inquiry",
     "Test  User submitted website inquiry",
     "Rohan Gupta submitted website inquiry"
   ],
@@ -431,6 +440,1888 @@
       "enrolledAt": "2026-10-27T12:29:29.653Z",
       "createdAt": "2026-10-27T12:29:29.655Z",
       "updatedAt": "2026-10-27T12:29:29.655Z"
+    },
+    {
+      "id": "student-e77dfc81-f1f5-48bf-82ff-f4a723752be7",
+      "name": "Security Phase Two",
+      "email": "secphase2_1793107042560@teststudent.com",
+      "phone": "9876543210",
+      "passwordHash": "pbkdf2$v2$1000000$abe239227fdaa6fe1260e9714f02084d2c95f22469d8ef55f8588299e5d9da1a$cd0fa728f772f951777fdb5f65655de236d4cef674d3d5495eb7975db8ed3a8e09ff6ac0a4e24a3a1b0c89c9cc2318ee9db8c88e52543ca1a7811dfcf7d9a06c",
+      "passwordChangedAt": "2026-10-27T13:17:22.801Z",
+      "passwordExpiresAt": "2027-01-25T13:17:22.801Z",
+      "passwordHistory": [
+        {
+          "hash": "pbkdf2$v2$1000000$abe239227fdaa6fe1260e9714f02084d2c95f22469d8ef55f8588299e5d9da1a$cd0fa728f772f951777fdb5f65655de236d4cef674d3d5495eb7975db8ed3a8e09ff6ac0a4e24a3a1b0c89c9cc2318ee9db8c88e52543ca1a7811dfcf7d9a06c",
+          "changedAt": "2026-10-27T13:17:22.801Z"
+        }
+      ],
+      "failedLoginAttempts": 0,
+      "lastFailedLoginAt": null,
+      "accountLockedUntil": null,
+      "internshipTrack": "web-development",
+      "track": "web-development",
+      "duration": "low",
+      "durationWeeks": 4,
+      "tasksCount": 4,
+      "paymentStatus": "pending",
+      "paymentAmount": 119,
+      "accessGranted": false,
+      "emailVerified": false,
+      "totalPoints": 0,
+      "currentWeek": 1,
+      "enrolledAt": "2026-10-27T13:17:22.801Z",
+      "createdAt": "2026-10-27T13:17:22.801Z",
+      "updatedAt": "2026-10-27T13:17:22.801Z"
+    },
+    {
+      "id": "student-dec57638-719d-4a1e-b93a-d06d05918607",
+      "name": "Csrf Student",
+      "email": "csrfstudent_1793107042823@example.com",
+      "phone": "9123456789",
+      "passwordHash": "pbkdf2$v2$1000000$3af6f5483886a92db237d629c48b439f2ff56d4024507f00285c4b5be897e71e$e1158e190642cd9a28b4d94bb3816adb1ee635b23000f22dc0457bd2e8b256a67de6ac6ee9b13b8dce438dc26a1830f4187b66d80d5a131a58c038a46579897f",
+      "passwordChangedAt": "2026-10-27T13:17:23.095Z",
+      "passwordExpiresAt": "2027-01-25T13:17:23.095Z",
+      "passwordHistory": [
+        {
+          "hash": "pbkdf2$v2$1000000$3af6f5483886a92db237d629c48b439f2ff56d4024507f00285c4b5be897e71e$e1158e190642cd9a28b4d94bb3816adb1ee635b23000f22dc0457bd2e8b256a67de6ac6ee9b13b8dce438dc26a1830f4187b66d80d5a131a58c038a46579897f",
+          "changedAt": "2026-10-27T13:17:23.095Z"
+        }
+      ],
+      "failedLoginAttempts": 0,
+      "lastFailedLoginAt": null,
+      "accountLockedUntil": null,
+      "internshipTrack": "cloud-devops",
+      "track": "cloud-devops",
+      "duration": "low",
+      "durationWeeks": 4,
+      "tasksCount": 4,
+      "paymentStatus": "pending",
+      "paymentAmount": 119,
+      "accessGranted": false,
+      "emailVerified": false,
+      "totalPoints": 0,
+      "currentWeek": 1,
+      "enrolledAt": "2026-10-27T13:17:23.095Z",
+      "createdAt": "2026-10-27T13:17:23.095Z",
+      "updatedAt": "2026-10-27T13:17:23.095Z"
+    },
+    {
+      "id": "student-7139a942-760d-4bd1-916e-437fcbbb2295",
+      "name": "CSRF Target",
+      "email": "csrfattack_1793107043099@example.com",
+      "phone": "9234567890",
+      "passwordHash": "pbkdf2$v2$1000000$08ee6efbad3a6a79f1a64eafafbab3a09be119be0384a86d29f2683d06edfee9$f85f0435c533f2e8cc3eac3af751eb6bb1b98401eaae3d6a9cfd374595d9fd86f78cd755c3c2af14517babd91623978bfe7d0f83064986f1e7adbfd074f7026d",
+      "passwordChangedAt": "2026-10-27T13:17:23.375Z",
+      "passwordExpiresAt": "2027-01-25T13:17:23.375Z",
+      "passwordHistory": [
+        {
+          "hash": "pbkdf2$v2$1000000$08ee6efbad3a6a79f1a64eafafbab3a09be119be0384a86d29f2683d06edfee9$f85f0435c533f2e8cc3eac3af751eb6bb1b98401eaae3d6a9cfd374595d9fd86f78cd755c3c2af14517babd91623978bfe7d0f83064986f1e7adbfd074f7026d",
+          "changedAt": "2026-10-27T13:17:23.375Z"
+        }
+      ],
+      "failedLoginAttempts": 0,
+      "lastFailedLoginAt": null,
+      "accountLockedUntil": null,
+      "internshipTrack": "web-development",
+      "track": "web-development",
+      "duration": "low",
+      "durationWeeks": 4,
+      "tasksCount": 4,
+      "paymentStatus": "pending",
+      "paymentAmount": 119,
+      "accessGranted": false,
+      "emailVerified": false,
+      "totalPoints": 0,
+      "currentWeek": 1,
+      "enrolledAt": "2026-10-27T13:17:23.375Z",
+      "createdAt": "2026-10-27T13:17:23.375Z",
+      "updatedAt": "2026-10-27T13:17:23.375Z"
+    },
+    {
+      "id": "student-b050e072-5ff1-42c6-b9e4-db0b784eb552",
+      "name": "CSRF Legit",
+      "email": "csrflegit_1793107043379@example.com",
+      "phone": "9345678901",
+      "passwordHash": "pbkdf2$v2$1000000$db006eec1bbd2b972193460f90aa62ab7d02447d690431639f5f20be17ce8c46$5efbf9bb89c6c3d1364424bb58b2c1a581493d12a1c811ffc165572f152d7466f4f58b0b96ace8a64d44ccbd002c3781ab9c2417cfdedca78fc08c2e845f338b",
+      "passwordChangedAt": "2026-10-27T13:17:23.607Z",
+      "passwordExpiresAt": "2027-01-25T13:17:23.607Z",
+      "passwordHistory": [
+        {
+          "hash": "pbkdf2$v2$1000000$db006eec1bbd2b972193460f90aa62ab7d02447d690431639f5f20be17ce8c46$5efbf9bb89c6c3d1364424bb58b2c1a581493d12a1c811ffc165572f152d7466f4f58b0b96ace8a64d44ccbd002c3781ab9c2417cfdedca78fc08c2e845f338b",
+          "changedAt": "2026-10-27T13:17:23.607Z"
+        }
+      ],
+      "failedLoginAttempts": 0,
+      "lastFailedLoginAt": null,
+      "accountLockedUntil": null,
+      "internshipTrack": "web-development",
+      "track": "web-development",
+      "duration": "low",
+      "durationWeeks": 4,
+      "tasksCount": 4,
+      "paymentStatus": "pending",
+      "paymentAmount": 119,
+      "accessGranted": false,
+      "emailVerified": false,
+      "totalPoints": 0,
+      "currentWeek": 1,
+      "enrolledAt": "2026-10-27T13:17:23.607Z",
+      "createdAt": "2026-10-27T13:17:23.607Z",
+      "updatedAt": "2026-10-27T13:17:23.607Z"
+    },
+    {
+      "id": "student-52350736-8049-482e-8c4f-5eee944ec194",
+      "name": "Security Phase Two",
+      "email": "secphase2_1793107201995@teststudent.com",
+      "phone": "9876543210",
+      "passwordHash": "pbkdf2$v2$1000000$4032d0c2e11bf01bef4a538a07bfac8e1d6130bebadf995eab848812b3427a22$8b48e8f408bd44cad1b505b1361e78a238c9d8f5fd9dde2836301fa85f8d2c3b5db5e70eb2841d80ccf38aa723f758e395f770be089081f173ba2c0fb88358c2",
+      "passwordChangedAt": "2026-10-27T13:20:02.215Z",
+      "passwordExpiresAt": "2027-01-25T13:20:02.215Z",
+      "passwordHistory": [
+        {
+          "hash": "pbkdf2$v2$1000000$4032d0c2e11bf01bef4a538a07bfac8e1d6130bebadf995eab848812b3427a22$8b48e8f408bd44cad1b505b1361e78a238c9d8f5fd9dde2836301fa85f8d2c3b5db5e70eb2841d80ccf38aa723f758e395f770be089081f173ba2c0fb88358c2",
+          "changedAt": "2026-10-27T13:20:02.215Z"
+        }
+      ],
+      "failedLoginAttempts": 0,
+      "lastFailedLoginAt": null,
+      "accountLockedUntil": null,
+      "track": "web-development",
+      "duration": "low",
+      "status": "pending_verification",
+      "emailVerified": 0,
+      "createdAt": "2026-10-27T13:20:02.215Z",
+      "updatedAt": "2026-10-27T13:20:02.215Z"
+    },
+    {
+      "id": "student-ff966c80-eb31-40c4-981f-77a57c656b8d",
+      "name": "Csrf Student",
+      "email": "csrfstudent_1793107202265@example.com",
+      "phone": "9123456789",
+      "passwordHash": "pbkdf2$v2$1000000$a54da84fa04442b260d493ee5e1b6d16a6f110227666601bf3ebadd563c628b3$678d1f6ad45e709c3f234e7ca1de3e59c37d6493c3467a86692385b25137a8149fcdd0d254802a7cab924af0b23607980adfe0141284aec4336fc3907da16f49",
+      "passwordChangedAt": "2026-10-27T13:20:02.505Z",
+      "passwordExpiresAt": "2027-01-25T13:20:02.505Z",
+      "passwordHistory": [
+        {
+          "hash": "pbkdf2$v2$1000000$a54da84fa04442b260d493ee5e1b6d16a6f110227666601bf3ebadd563c628b3$678d1f6ad45e709c3f234e7ca1de3e59c37d6493c3467a86692385b25137a8149fcdd0d254802a7cab924af0b23607980adfe0141284aec4336fc3907da16f49",
+          "changedAt": "2026-10-27T13:20:02.505Z"
+        }
+      ],
+      "failedLoginAttempts": 0,
+      "lastFailedLoginAt": null,
+      "accountLockedUntil": null,
+      "track": "cloud-devops",
+      "duration": "low",
+      "status": "active",
+      "emailVerified": 1,
+      "createdAt": "2026-10-27T13:20:02.505Z",
+      "updatedAt": "2026-10-27T13:20:02.509Z",
+      "lastLoginAt": "2026-10-27T13:20:02.729Z",
+      "lastLoginIp": "::1",
+      "lastLoginDevice": "unknown",
+      "loginHistory": [
+        {
+          "timestamp": "2026-10-27T13:20:02.729Z",
+          "ip": "::1",
+          "device": "unknown",
+          "fingerprint": "76630062f3def692842f23ef1b2aa30ec72a4dba786e4e49b37da2663d43b8a9",
+          "success": true,
+          "reason": "success"
+        }
+      ]
+    },
+    {
+      "id": "student-6ebfbadc-b9b9-47e0-8efa-5d3259a33ce0",
+      "name": "CSRF Target",
+      "email": "csrfattack_1793107202731@example.com",
+      "phone": "9234567890",
+      "passwordHash": "pbkdf2$v2$1000000$1a4a947d8b2dc8f5ba052dbe70d9b608777fcbce7c7911ba046dbde19e165232$cb1587840ad8564eca868322c942241212561200e85d0f3eb68b77410fa090f04ad14d94f13c2096c9e5b6f1b93d4cf3197138aa89b0f5ba132f8ec0e50f368e",
+      "passwordChangedAt": "2026-10-27T13:20:02.945Z",
+      "passwordExpiresAt": "2027-01-25T13:20:02.945Z",
+      "passwordHistory": [
+        {
+          "hash": "pbkdf2$v2$1000000$1a4a947d8b2dc8f5ba052dbe70d9b608777fcbce7c7911ba046dbde19e165232$cb1587840ad8564eca868322c942241212561200e85d0f3eb68b77410fa090f04ad14d94f13c2096c9e5b6f1b93d4cf3197138aa89b0f5ba132f8ec0e50f368e",
+          "changedAt": "2026-10-27T13:20:02.945Z"
+        }
+      ],
+      "failedLoginAttempts": 0,
+      "lastFailedLoginAt": null,
+      "accountLockedUntil": null,
+      "track": "web-development",
+      "duration": "low",
+      "status": "active",
+      "emailVerified": 1,
+      "createdAt": "2026-10-27T13:20:02.945Z",
+      "updatedAt": "2026-10-27T13:20:02.948Z",
+      "lastLoginAt": "2026-10-27T13:20:03.182Z",
+      "lastLoginIp": "::1",
+      "lastLoginDevice": "unknown",
+      "loginHistory": [
+        {
+          "timestamp": "2026-10-27T13:20:03.182Z",
+          "ip": "::1",
+          "device": "unknown",
+          "fingerprint": "76630062f3def692842f23ef1b2aa30ec72a4dba786e4e49b37da2663d43b8a9",
+          "success": true,
+          "reason": "success"
+        }
+      ]
+    },
+    {
+      "id": "student-0fbeea4e-94a8-4545-880c-5b3b70e29459",
+      "name": "CSRF Legit",
+      "email": "csrflegit_1793107203188@example.com",
+      "phone": "9345678901",
+      "passwordHash": "pbkdf2$v2$1000000$c180c081efab7ff3bc001b74e50ea4a554dbd863702e3392c617f624503e2445$dcc83ad3662623723d05c117001af9ae62bfd15dcf17ff2d823edaf203959b351ff1559fbd371b755897814c8218f320863e7670c938a2582ebd3c5723bf4225",
+      "passwordChangedAt": "2026-10-27T13:20:04.498Z",
+      "passwordExpiresAt": "2027-01-25T13:20:04.498Z",
+      "passwordHistory": [
+        {
+          "hash": "pbkdf2$v2$1000000$025ec6377ba87b0b528aa114102b0147d4083e44351195a9704b5614bc242ea2$9c56fe86a5e2abab26e06c23dbc184b3e2267b94902f071728457d1c1bd1404f55f34dc76a3036b947672242834fcf3e3824e6bb1f49916f62588dc161c7dcd5",
+          "changedAt": "2026-10-27T13:20:03.410Z"
+        },
+        {
+          "hash": "pbkdf2$v2$1000000$025ec6377ba87b0b528aa114102b0147d4083e44351195a9704b5614bc242ea2$9c56fe86a5e2abab26e06c23dbc184b3e2267b94902f071728457d1c1bd1404f55f34dc76a3036b947672242834fcf3e3824e6bb1f49916f62588dc161c7dcd5",
+          "changedAt": "2026-10-27T13:20:04.285Z"
+        }
+      ],
+      "failedLoginAttempts": 0,
+      "lastFailedLoginAt": null,
+      "accountLockedUntil": null,
+      "track": "web-development",
+      "duration": "low",
+      "status": "active",
+      "emailVerified": 1,
+      "createdAt": "2026-10-27T13:20:03.410Z",
+      "updatedAt": "2026-10-27T13:20:04.498Z",
+      "lastLoginAt": "2026-10-27T13:20:03.635Z",
+      "lastLoginIp": "::1",
+      "lastLoginDevice": "unknown",
+      "loginHistory": [
+        {
+          "timestamp": "2026-10-27T13:20:03.635Z",
+          "ip": "::1",
+          "device": "unknown",
+          "fingerprint": "76630062f3def692842f23ef1b2aa30ec72a4dba786e4e49b37da2663d43b8a9",
+          "success": true,
+          "reason": "success"
+        }
+      ]
+    },
+    {
+      "id": "student-7cddbb2c-6679-4f31-b3b7-2dd475e4f335",
+      "name": "Security Phase Two",
+      "email": "secphase2_1793107259600@teststudent.com",
+      "phone": "9876543210",
+      "passwordHash": "pbkdf2$v2$1000000$369028cdcb11c2191805ccd732e87e636c091808c20afdce65625ff0a3c765a5$e8edb4f2e4ade4cc6d4f4613deb01782c1e3cf060b7dc0988773924dea86376ccc103079bedfa816c52bf6e46197cae93b4d2942c4a540e69664b3efa52a2037",
+      "passwordChangedAt": "2026-10-27T13:20:59.821Z",
+      "passwordExpiresAt": "2027-01-25T13:20:59.821Z",
+      "passwordHistory": [
+        {
+          "hash": "pbkdf2$v2$1000000$369028cdcb11c2191805ccd732e87e636c091808c20afdce65625ff0a3c765a5$e8edb4f2e4ade4cc6d4f4613deb01782c1e3cf060b7dc0988773924dea86376ccc103079bedfa816c52bf6e46197cae93b4d2942c4a540e69664b3efa52a2037",
+          "changedAt": "2026-10-27T13:20:59.821Z"
+        }
+      ],
+      "failedLoginAttempts": 0,
+      "lastFailedLoginAt": null,
+      "accountLockedUntil": null,
+      "track": "web-development",
+      "duration": "low",
+      "status": "pending_verification",
+      "emailVerified": 0,
+      "createdAt": "2026-10-27T13:20:59.821Z",
+      "updatedAt": "2026-10-27T13:20:59.821Z"
+    },
+    {
+      "id": "student-7686b2e3-5ccd-44b3-b28e-b0a8366114a4",
+      "name": "Csrf Student",
+      "email": "csrfstudent_1793107259825@example.com",
+      "phone": "9123456789",
+      "passwordHash": "pbkdf2$v2$1000000$dce24fe6d8512d4ca74150e7294708d8e72ac2ddeeee0aa3b9813826a3aba871$ee580a6e7c3075498598be3f74f1d2d0bf1efa3bd89cd5a8c57abc50b2f6a8bb89d0c9a0e906b23cfe75341fb24e13e5ca167128a0ae7a12f983074064cbe37b",
+      "passwordChangedAt": "2026-10-27T13:21:00.042Z",
+      "passwordExpiresAt": "2027-01-25T13:21:00.042Z",
+      "passwordHistory": [
+        {
+          "hash": "pbkdf2$v2$1000000$dce24fe6d8512d4ca74150e7294708d8e72ac2ddeeee0aa3b9813826a3aba871$ee580a6e7c3075498598be3f74f1d2d0bf1efa3bd89cd5a8c57abc50b2f6a8bb89d0c9a0e906b23cfe75341fb24e13e5ca167128a0ae7a12f983074064cbe37b",
+          "changedAt": "2026-10-27T13:21:00.042Z"
+        }
+      ],
+      "failedLoginAttempts": 0,
+      "lastFailedLoginAt": null,
+      "accountLockedUntil": null,
+      "track": "cloud-devops",
+      "duration": "low",
+      "status": "active",
+      "emailVerified": 1,
+      "createdAt": "2026-10-27T13:21:00.042Z",
+      "updatedAt": "2026-10-27T13:21:00.045Z",
+      "lastLoginAt": "2026-10-27T13:21:00.277Z",
+      "lastLoginIp": "::1",
+      "lastLoginDevice": "unknown",
+      "loginHistory": [
+        {
+          "timestamp": "2026-10-27T13:21:00.277Z",
+          "ip": "::1",
+          "device": "unknown",
+          "fingerprint": "76630062f3def692842f23ef1b2aa30ec72a4dba786e4e49b37da2663d43b8a9",
+          "success": true,
+          "reason": "success"
+        }
+      ]
+    },
+    {
+      "id": "student-0b6ea015-d54f-4dc9-947d-e520363153f0",
+      "name": "CSRF Target",
+      "email": "csrfattack_1793107260278@example.com",
+      "phone": "9234567890",
+      "passwordHash": "pbkdf2$v2$1000000$df2d6731e3ca5a95e2c7984bbc13e265da5b79a05096448900f9447b677fdc7b$ab5e586a1c55fe7ea4bd412291852317a9dedc3d7ebe93e87a9c255d4e7c8b6552bc1ae2da8126115ef22a05d46535ead7bca66bf117fb6f444cf57b8452f8fd",
+      "passwordChangedAt": "2026-10-27T13:21:00.496Z",
+      "passwordExpiresAt": "2027-01-25T13:21:00.496Z",
+      "passwordHistory": [
+        {
+          "hash": "pbkdf2$v2$1000000$df2d6731e3ca5a95e2c7984bbc13e265da5b79a05096448900f9447b677fdc7b$ab5e586a1c55fe7ea4bd412291852317a9dedc3d7ebe93e87a9c255d4e7c8b6552bc1ae2da8126115ef22a05d46535ead7bca66bf117fb6f444cf57b8452f8fd",
+          "changedAt": "2026-10-27T13:21:00.496Z"
+        }
+      ],
+      "failedLoginAttempts": 0,
+      "lastFailedLoginAt": null,
+      "accountLockedUntil": null,
+      "track": "web-development",
+      "duration": "low",
+      "status": "active",
+      "emailVerified": 1,
+      "createdAt": "2026-10-27T13:21:00.496Z",
+      "updatedAt": "2026-10-27T13:21:00.499Z",
+      "lastLoginAt": "2026-10-27T13:21:00.740Z",
+      "lastLoginIp": "::1",
+      "lastLoginDevice": "unknown",
+      "loginHistory": [
+        {
+          "timestamp": "2026-10-27T13:21:00.740Z",
+          "ip": "::1",
+          "device": "unknown",
+          "fingerprint": "76630062f3def692842f23ef1b2aa30ec72a4dba786e4e49b37da2663d43b8a9",
+          "success": true,
+          "reason": "success"
+        }
+      ]
+    },
+    {
+      "id": "student-c7ac1575-89df-4729-a213-53621c53ecbd",
+      "name": "CSRF Legit",
+      "email": "csrflegit_1793107260746@example.com",
+      "phone": "9345678901",
+      "passwordHash": "pbkdf2$v2$1000000$47b8d1cf53f652dd623c37c2ecf538d287552339f05bd3055510fd7932af89f4$d005cd4ab710f9fac917543a71b32ebc6e46e9ea5e22411b51fd19962d7bedc41ce539292bbb6e83792069280ca4d89bda71599df84ca9d642b13a19ac313c9e",
+      "passwordChangedAt": "2026-10-27T13:21:00.963Z",
+      "passwordExpiresAt": "2027-01-25T13:21:00.963Z",
+      "passwordHistory": [
+        {
+          "hash": "pbkdf2$v2$1000000$47b8d1cf53f652dd623c37c2ecf538d287552339f05bd3055510fd7932af89f4$d005cd4ab710f9fac917543a71b32ebc6e46e9ea5e22411b51fd19962d7bedc41ce539292bbb6e83792069280ca4d89bda71599df84ca9d642b13a19ac313c9e",
+          "changedAt": "2026-10-27T13:21:00.963Z"
+        }
+      ],
+      "failedLoginAttempts": 0,
+      "lastFailedLoginAt": null,
+      "accountLockedUntil": null,
+      "track": "web-development",
+      "duration": "low",
+      "status": "pending_verification",
+      "emailVerified": 0,
+      "createdAt": "2026-10-27T13:21:00.963Z",
+      "updatedAt": "2026-10-27T13:21:00.963Z"
+    },
+    {
+      "id": "student-a6c33e58-6f9a-4ff3-85e9-fe95a45a299c",
+      "name": "Rohan Kumar",
+      "email": "expiredpass_1793107261194@example.com",
+      "phone": "9456789012",
+      "passwordHash": "pbkdf2$v2$1000000$2db97e9aaa01998823301d152f4c7348dda9a56e84fb93a3e872be70d670ddd6$79fa67be0854e219116cd8c911561da6c68599e1cbe2f7e5f6831d00b03f7fc0fa4062d8e4aca62d7360c55bfbe6a9edbb95fffb0c5c1226f990b228f00b1e54",
+      "passwordChangedAt": "2026-10-27T13:21:01.413Z",
+      "passwordExpiresAt": "2026-10-26T13:21:01.417Z",
+      "passwordHistory": [
+        {
+          "hash": "pbkdf2$v2$1000000$2db97e9aaa01998823301d152f4c7348dda9a56e84fb93a3e872be70d670ddd6$79fa67be0854e219116cd8c911561da6c68599e1cbe2f7e5f6831d00b03f7fc0fa4062d8e4aca62d7360c55bfbe6a9edbb95fffb0c5c1226f990b228f00b1e54",
+          "changedAt": "2026-10-27T13:21:01.413Z"
+        }
+      ],
+      "failedLoginAttempts": 0,
+      "lastFailedLoginAt": null,
+      "accountLockedUntil": null,
+      "track": "data-science",
+      "duration": "low",
+      "status": "pending_verification",
+      "emailVerified": 0,
+      "createdAt": "2026-10-27T13:21:01.413Z",
+      "updatedAt": "2026-10-27T13:21:01.413Z"
+    },
+    {
+      "id": "student-ff7d60de-0b98-4c71-b61c-72294c432354",
+      "name": "Security Phase Two",
+      "email": "secphase2_1793107547011@teststudent.com",
+      "phone": "9876543210",
+      "passwordHash": "pbkdf2$v2$1000000$68a988a233a823f81230dba32b51a22a60e5670be360b298314b91c1f1c833fc$ad6483719beb4fdceebdf9750ca8e089a1c1778d72d831ef573fc91127623e44e4723a32accab36e69211f75b5b0fe54437ef37c16d5ac1344b841dbba99048e",
+      "passwordChangedAt": "2026-10-27T13:25:47.241Z",
+      "passwordExpiresAt": "2027-01-25T13:25:47.241Z",
+      "passwordHistory": [
+        {
+          "hash": "pbkdf2$v2$1000000$68a988a233a823f81230dba32b51a22a60e5670be360b298314b91c1f1c833fc$ad6483719beb4fdceebdf9750ca8e089a1c1778d72d831ef573fc91127623e44e4723a32accab36e69211f75b5b0fe54437ef37c16d5ac1344b841dbba99048e",
+          "changedAt": "2026-10-27T13:25:47.241Z"
+        }
+      ],
+      "failedLoginAttempts": 0,
+      "lastFailedLoginAt": null,
+      "accountLockedUntil": null,
+      "track": "web-development",
+      "duration": "low",
+      "status": "pending_verification",
+      "emailVerified": 0,
+      "createdAt": "2026-10-27T13:25:47.241Z",
+      "updatedAt": "2026-10-27T13:25:47.241Z"
+    },
+    {
+      "id": "student-4d2f1ccf-39d5-4a24-aa0d-3f4263e8ff20",
+      "name": "Csrf Student",
+      "email": "csrfstudent_1793107547280@example.com",
+      "phone": "9123456789",
+      "passwordHash": "pbkdf2$v2$1000000$a30b35c1a69c4bff5b2a7002f1eb0610b4f5207a82347f1f891e41a8ca812af8$56be46a738301f77405f590f1becccbe992ea2e28a16ebdef5765fc0be9ad825426efe0e44069a1b42b4a8206a734f8886e36ce29deb608f2bc0a2710032e17d",
+      "passwordChangedAt": "2026-10-27T13:25:47.507Z",
+      "passwordExpiresAt": "2027-01-25T13:25:47.507Z",
+      "passwordHistory": [
+        {
+          "hash": "pbkdf2$v2$1000000$a30b35c1a69c4bff5b2a7002f1eb0610b4f5207a82347f1f891e41a8ca812af8$56be46a738301f77405f590f1becccbe992ea2e28a16ebdef5765fc0be9ad825426efe0e44069a1b42b4a8206a734f8886e36ce29deb608f2bc0a2710032e17d",
+          "changedAt": "2026-10-27T13:25:47.507Z"
+        }
+      ],
+      "failedLoginAttempts": 0,
+      "lastFailedLoginAt": null,
+      "accountLockedUntil": null,
+      "track": "cloud-devops",
+      "duration": "low",
+      "status": "active",
+      "emailVerified": 1,
+      "createdAt": "2026-10-27T13:25:47.507Z",
+      "updatedAt": "2026-10-27T13:25:47.510Z",
+      "lastLoginAt": "2026-10-27T13:25:47.747Z",
+      "lastLoginIp": "::1",
+      "lastLoginDevice": "unknown",
+      "loginHistory": [
+        {
+          "timestamp": "2026-10-27T13:25:47.747Z",
+          "ip": "::1",
+          "device": "unknown",
+          "fingerprint": "76630062f3def692842f23ef1b2aa30ec72a4dba786e4e49b37da2663d43b8a9",
+          "success": true,
+          "reason": "success"
+        }
+      ]
+    },
+    {
+      "id": "student-9f2a6d36-51a6-47fc-a8a6-afeac7eb0fa2",
+      "name": "CSRF Target",
+      "email": "csrfattack_1793107547749@example.com",
+      "phone": "9234567890",
+      "passwordHash": "pbkdf2$v2$1000000$0003fd8a21337be9239e5d6d97c4785ca1b40dfb60abd1927099cbc1ebfa9636$b8c2e471bed281cb58ffd53293abe52ddc0e10fcfedfa7f6f0dffb9974db7a9fb4d457bf5dd4d3fab0f4f878dfa7a3b5dface5751ec794823912b10b7c086cd8",
+      "passwordChangedAt": "2026-10-27T13:25:47.978Z",
+      "passwordExpiresAt": "2027-01-25T13:25:47.978Z",
+      "passwordHistory": [
+        {
+          "hash": "pbkdf2$v2$1000000$0003fd8a21337be9239e5d6d97c4785ca1b40dfb60abd1927099cbc1ebfa9636$b8c2e471bed281cb58ffd53293abe52ddc0e10fcfedfa7f6f0dffb9974db7a9fb4d457bf5dd4d3fab0f4f878dfa7a3b5dface5751ec794823912b10b7c086cd8",
+          "changedAt": "2026-10-27T13:25:47.978Z"
+        }
+      ],
+      "failedLoginAttempts": 0,
+      "lastFailedLoginAt": null,
+      "accountLockedUntil": null,
+      "track": "web-development",
+      "duration": "low",
+      "status": "active",
+      "emailVerified": 1,
+      "createdAt": "2026-10-27T13:25:47.978Z",
+      "updatedAt": "2026-10-27T13:25:47.981Z",
+      "lastLoginAt": "2026-10-27T13:25:48.220Z",
+      "lastLoginIp": "::1",
+      "lastLoginDevice": "unknown",
+      "loginHistory": [
+        {
+          "timestamp": "2026-10-27T13:25:48.220Z",
+          "ip": "::1",
+          "device": "unknown",
+          "fingerprint": "76630062f3def692842f23ef1b2aa30ec72a4dba786e4e49b37da2663d43b8a9",
+          "success": true,
+          "reason": "success"
+        }
+      ]
+    },
+    {
+      "id": "student-7f8201a6-8a19-463a-96d6-85ecc293a6c7",
+      "name": "CSRF Legit",
+      "email": "csrflegit_1793107548233@example.com",
+      "phone": "9345678901",
+      "passwordHash": "pbkdf2$v2$1000000$609496846c1d5cb8650493270144bc6bbf707bbfdd3567d9bd31bdd0ecef839d$5497366f195154bb44df38c6b8ceb6065d3417abaf0ed79d6f1d0f54ea78dbeb24204d9790dab840c52559ccd8796ff9a3cb607a18a9b9cd29f6fa02cfbfe0bd",
+      "passwordChangedAt": "2026-10-27T13:25:49.559Z",
+      "passwordExpiresAt": "2027-01-25T13:25:49.559Z",
+      "passwordHistory": [
+        {
+          "hash": "pbkdf2$v2$1000000$3c3aeceb27e14cf231c4388c90e174ff9e609d3f88bb1cfad832535864df5779$15d5c8bc66bfe96cb41b4422bc3f71ef3674053dd9273fea925fe2e9060407b1d5a287f405c96462f79233c2e7ef1644ca6c66eac4dda9fd2822bc530958fa22",
+          "changedAt": "2026-10-27T13:25:48.464Z"
+        },
+        {
+          "hash": "pbkdf2$v2$1000000$3c3aeceb27e14cf231c4388c90e174ff9e609d3f88bb1cfad832535864df5779$15d5c8bc66bfe96cb41b4422bc3f71ef3674053dd9273fea925fe2e9060407b1d5a287f405c96462f79233c2e7ef1644ca6c66eac4dda9fd2822bc530958fa22",
+          "changedAt": "2026-10-27T13:25:49.344Z"
+        }
+      ],
+      "failedLoginAttempts": 0,
+      "lastFailedLoginAt": null,
+      "accountLockedUntil": null,
+      "track": "web-development",
+      "duration": "low",
+      "status": "active",
+      "emailVerified": 1,
+      "createdAt": "2026-10-27T13:25:48.464Z",
+      "updatedAt": "2026-10-27T13:25:49.559Z",
+      "lastLoginAt": "2026-10-27T13:25:48.691Z",
+      "lastLoginIp": "::1",
+      "lastLoginDevice": "unknown",
+      "loginHistory": [
+        {
+          "timestamp": "2026-10-27T13:25:48.691Z",
+          "ip": "::1",
+          "device": "unknown",
+          "fingerprint": "76630062f3def692842f23ef1b2aa30ec72a4dba786e4e49b37da2663d43b8a9",
+          "success": true,
+          "reason": "success"
+        }
+      ]
+    },
+    {
+      "id": "student-3bac13d2-a02f-4c1a-9fa7-19fd028d5894",
+      "name": "Rohan Kumar",
+      "email": "expiredpass_1793107549564@example.com",
+      "phone": "9456789012",
+      "passwordHash": "pbkdf2$v2$1000000$ad09bc85fa68885548a42ca18bc3559dac258a5d614e1729b86d9df32397f0d4$cc467eb8961231755c5b6497d321ae72815671ed057b277ebfdaa36e7962eff0b7f11b538a9b4bc80973457885ca38f68ed6de6a30ec53efb0bf4235f57f5501",
+      "passwordChangedAt": "2026-10-27T13:25:49.818Z",
+      "passwordExpiresAt": "2026-10-26T13:25:49.822Z",
+      "passwordHistory": [
+        {
+          "hash": "pbkdf2$v2$1000000$ad09bc85fa68885548a42ca18bc3559dac258a5d614e1729b86d9df32397f0d4$cc467eb8961231755c5b6497d321ae72815671ed057b277ebfdaa36e7962eff0b7f11b538a9b4bc80973457885ca38f68ed6de6a30ec53efb0bf4235f57f5501",
+          "changedAt": "2026-10-27T13:25:49.818Z"
+        }
+      ],
+      "failedLoginAttempts": 0,
+      "lastFailedLoginAt": null,
+      "accountLockedUntil": null,
+      "track": "data-science",
+      "duration": "low",
+      "status": "active",
+      "emailVerified": 1,
+      "createdAt": "2026-10-27T13:25:49.818Z",
+      "updatedAt": "2026-10-27T13:25:49.821Z",
+      "mustChangePassword": true
+    },
+    {
+      "id": "student-adff391f-6a76-40bc-a76b-742bf13ee801",
+      "name": "Security Phase Two",
+      "email": "secphase2_1793107676394@teststudent.com",
+      "phone": "9876543210",
+      "passwordHash": "pbkdf2$v2$1000000$ace8c6379bc02a811aac19d5a8d3cdcca363fc8b1244ed999d706541042d81e2$63eadb6744b443ad5f664e08ba29364173c3de63886a55a4a32646ce9f934fb324e93ff9165846cf91c4bdf87dfb634b5f91213e4506025dc261df0f96ee7d52",
+      "passwordChangedAt": "2026-10-27T13:27:56.614Z",
+      "passwordExpiresAt": "2027-01-25T13:27:56.614Z",
+      "passwordHistory": [
+        {
+          "hash": "pbkdf2$v2$1000000$ace8c6379bc02a811aac19d5a8d3cdcca363fc8b1244ed999d706541042d81e2$63eadb6744b443ad5f664e08ba29364173c3de63886a55a4a32646ce9f934fb324e93ff9165846cf91c4bdf87dfb634b5f91213e4506025dc261df0f96ee7d52",
+          "changedAt": "2026-10-27T13:27:56.614Z"
+        }
+      ],
+      "failedLoginAttempts": 0,
+      "lastFailedLoginAt": null,
+      "accountLockedUntil": null,
+      "track": "web-development",
+      "duration": "low",
+      "status": "pending_verification",
+      "emailVerified": 0,
+      "createdAt": "2026-10-27T13:27:56.614Z",
+      "updatedAt": "2026-10-27T13:27:56.614Z"
+    },
+    {
+      "id": "student-1be04708-266a-485b-99a6-1ab070e28cb6",
+      "name": "Csrf Student",
+      "email": "csrfstudent_1793107676617@example.com",
+      "phone": "9123456789",
+      "passwordHash": "pbkdf2$v2$1000000$bbcd8929bfec30155a11ae9939a132edf0ebfbc405a3ab7cfaa543c3d41365b7$c900f0f66ecd6f36789aff1757269d3ab1353043e80946a86b30ecfd8d4869d90902c6ef825420499bd21f4d59ede1a2fe1e92946f47adabe3ed08b3c4013eb8",
+      "passwordChangedAt": "2026-10-27T13:27:56.836Z",
+      "passwordExpiresAt": "2027-01-25T13:27:56.836Z",
+      "passwordHistory": [
+        {
+          "hash": "pbkdf2$v2$1000000$bbcd8929bfec30155a11ae9939a132edf0ebfbc405a3ab7cfaa543c3d41365b7$c900f0f66ecd6f36789aff1757269d3ab1353043e80946a86b30ecfd8d4869d90902c6ef825420499bd21f4d59ede1a2fe1e92946f47adabe3ed08b3c4013eb8",
+          "changedAt": "2026-10-27T13:27:56.836Z"
+        }
+      ],
+      "failedLoginAttempts": 0,
+      "lastFailedLoginAt": null,
+      "accountLockedUntil": null,
+      "track": "cloud-devops",
+      "duration": "low",
+      "status": "active",
+      "emailVerified": 1,
+      "createdAt": "2026-10-27T13:27:56.836Z",
+      "updatedAt": "2026-10-27T13:27:56.841Z",
+      "lastLoginAt": "2026-10-27T13:27:57.069Z",
+      "lastLoginIp": "::1",
+      "lastLoginDevice": "unknown",
+      "loginHistory": [
+        {
+          "timestamp": "2026-10-27T13:27:57.069Z",
+          "ip": "::1",
+          "device": "unknown",
+          "fingerprint": "76630062f3def692842f23ef1b2aa30ec72a4dba786e4e49b37da2663d43b8a9",
+          "success": true,
+          "reason": "success"
+        }
+      ]
+    },
+    {
+      "id": "student-c0d674f1-e518-485b-9a2c-87478f7f89aa",
+      "name": "CSRF Target",
+      "email": "csrfattack_1793107677070@example.com",
+      "phone": "9234567890",
+      "passwordHash": "pbkdf2$v2$1000000$297ff948be4ce63704a4f686f7519d26ca2c83630c5172c50f8e5527c653973a$ceee0c902f918e75ed04608167138adc6f84cd9902881214271d9853a834cf59f0ce0226117765aaf921b476722a2ac11b71ef349f6da647ad37954d8f5b2b49",
+      "passwordChangedAt": "2026-10-27T13:27:57.291Z",
+      "passwordExpiresAt": "2027-01-25T13:27:57.291Z",
+      "passwordHistory": [
+        {
+          "hash": "pbkdf2$v2$1000000$297ff948be4ce63704a4f686f7519d26ca2c83630c5172c50f8e5527c653973a$ceee0c902f918e75ed04608167138adc6f84cd9902881214271d9853a834cf59f0ce0226117765aaf921b476722a2ac11b71ef349f6da647ad37954d8f5b2b49",
+          "changedAt": "2026-10-27T13:27:57.291Z"
+        }
+      ],
+      "failedLoginAttempts": 0,
+      "lastFailedLoginAt": null,
+      "accountLockedUntil": null,
+      "track": "web-development",
+      "duration": "low",
+      "status": "pending_verification",
+      "emailVerified": 0,
+      "createdAt": "2026-10-27T13:27:57.291Z",
+      "updatedAt": "2026-10-27T13:27:57.291Z"
+    },
+    {
+      "id": "student-879a5914-c27e-4435-aeb9-8cb32deff33f",
+      "name": "CSRF Legit",
+      "email": "csrflegit_1793107677515@example.com",
+      "phone": "9345678901",
+      "passwordHash": "pbkdf2$v2$1000000$c211d7ad2acc7ffefc76ff60a8fba2d5459903d4cfbf4ed475e2455604a0eefe$460e52614de79f89983d2d908a58087a44e3838a4dd5572bdafb17a108d585e483415c53cfc3903bf4fd03c845f38cabc509f4c205a722b4e105474f22acdca8",
+      "passwordChangedAt": "2026-10-27T13:27:57.742Z",
+      "passwordExpiresAt": "2027-01-25T13:27:57.742Z",
+      "passwordHistory": [
+        {
+          "hash": "pbkdf2$v2$1000000$c211d7ad2acc7ffefc76ff60a8fba2d5459903d4cfbf4ed475e2455604a0eefe$460e52614de79f89983d2d908a58087a44e3838a4dd5572bdafb17a108d585e483415c53cfc3903bf4fd03c845f38cabc509f4c205a722b4e105474f22acdca8",
+          "changedAt": "2026-10-27T13:27:57.742Z"
+        }
+      ],
+      "failedLoginAttempts": 0,
+      "lastFailedLoginAt": null,
+      "accountLockedUntil": null,
+      "track": "web-development",
+      "duration": "low",
+      "status": "pending_verification",
+      "emailVerified": 0,
+      "createdAt": "2026-10-27T13:27:57.742Z",
+      "updatedAt": "2026-10-27T13:27:57.742Z"
+    },
+    {
+      "id": "student-763fe991-ab1b-4ad3-ab2a-aa361a6cfebc",
+      "name": "Rohan Kumar",
+      "email": "expiredpass_1793107677963@example.com",
+      "phone": "9456789012",
+      "passwordHash": "pbkdf2$v2$1000000$4fe02428a058b00b7e49d9e592626b17b49953f76dcb89de07e15ce122d8c507$cf2f741c9d60fd7a1803cfb07bd47dfa091ac9fc36a471e615f97080e5a34ff19e8c29a7dabe21840561dd0ee02ba1b37a8799edcafaea762f0597c7e129e7a4",
+      "passwordChangedAt": "2026-10-27T13:27:58.189Z",
+      "passwordExpiresAt": "2026-10-26T13:27:58.192Z",
+      "passwordHistory": [
+        {
+          "hash": "pbkdf2$v2$1000000$4fe02428a058b00b7e49d9e592626b17b49953f76dcb89de07e15ce122d8c507$cf2f741c9d60fd7a1803cfb07bd47dfa091ac9fc36a471e615f97080e5a34ff19e8c29a7dabe21840561dd0ee02ba1b37a8799edcafaea762f0597c7e129e7a4",
+          "changedAt": "2026-10-27T13:27:58.189Z"
+        }
+      ],
+      "failedLoginAttempts": 0,
+      "lastFailedLoginAt": null,
+      "accountLockedUntil": null,
+      "track": "data-science",
+      "duration": "low",
+      "status": "pending_verification",
+      "emailVerified": 0,
+      "createdAt": "2026-10-27T13:27:58.189Z",
+      "updatedAt": "2026-10-27T13:27:58.189Z"
+    },
+    {
+      "id": "student-49956f7c-0054-4d9d-81ee-f038a3484135",
+      "name": "CSRF Legit",
+      "email": "test_login_debug_1793107719920@example.com",
+      "phone": "9345678901",
+      "passwordHash": "pbkdf2$v2$1000000$ee3092c9f8873029c2a55089f16a0f073945bb9172dd60df8210c3c604b2d513$8edae2aa04ce695c665c2f549f8c87937f9ca7a731a20339bf00214f3dec1e6d19a70f69631e4763ab8f0a3c8c98bd4b0d2d4a7441a9f7ffb5f33ca40f3a8625",
+      "passwordChangedAt": "2026-10-27T13:28:40.543Z",
+      "passwordExpiresAt": "2027-01-25T13:28:40.543Z",
+      "passwordHistory": [
+        {
+          "hash": "pbkdf2$v2$1000000$ee3092c9f8873029c2a55089f16a0f073945bb9172dd60df8210c3c604b2d513$8edae2aa04ce695c665c2f549f8c87937f9ca7a731a20339bf00214f3dec1e6d19a70f69631e4763ab8f0a3c8c98bd4b0d2d4a7441a9f7ffb5f33ca40f3a8625",
+          "changedAt": "2026-10-27T13:28:40.543Z"
+        }
+      ],
+      "failedLoginAttempts": 0,
+      "lastFailedLoginAt": null,
+      "accountLockedUntil": null,
+      "track": "web-development",
+      "duration": "low",
+      "status": "pending_verification",
+      "emailVerified": 0,
+      "createdAt": "2026-10-27T13:28:40.543Z",
+      "updatedAt": "2026-10-27T13:28:40.543Z"
+    },
+    {
+      "id": "student-a1db0d15-80af-48da-bdfc-31ec6acb3c41",
+      "name": "Security Phase Two",
+      "email": "secphase2_1793107861021@teststudent.com",
+      "phone": "9876543210",
+      "passwordHash": "pbkdf2$v2$1000000$f85f80077e76082596e826f81ceff15e2bea65120665d351db3e99492f89e324$a685aa5893264d478be410828bfb0d8e4f813bb1ac6e6a2872b9c6a11b03c2e8737768a00e80e315b323972ffdd1081355368555e192bee1b98a96899f00cdbf",
+      "passwordChangedAt": "2026-10-27T13:31:02.371Z",
+      "passwordExpiresAt": "2027-01-25T13:31:02.371Z",
+      "passwordHistory": [
+        {
+          "hash": "pbkdf2$v2$1000000$f85f80077e76082596e826f81ceff15e2bea65120665d351db3e99492f89e324$a685aa5893264d478be410828bfb0d8e4f813bb1ac6e6a2872b9c6a11b03c2e8737768a00e80e315b323972ffdd1081355368555e192bee1b98a96899f00cdbf",
+          "changedAt": "2026-10-27T13:31:02.371Z"
+        }
+      ],
+      "failedLoginAttempts": 0,
+      "lastFailedLoginAt": null,
+      "accountLockedUntil": null,
+      "track": "web-development",
+      "duration": "low",
+      "status": "pending_verification",
+      "emailVerified": 0,
+      "createdAt": "2026-10-27T13:31:02.371Z",
+      "updatedAt": "2026-10-27T13:31:02.371Z"
+    },
+    {
+      "id": "student-c2221065-9d9f-4b4e-8009-18b29e10b73b",
+      "name": "Csrf Student",
+      "email": "csrfstudent_1793107862421@example.com",
+      "phone": "9123456789",
+      "passwordHash": "pbkdf2$v2$1000000$c6af282797468e37382ccbc3fc5185986c30b68397a1e3807adfab7931f4a8cf$92a67770c8091a68d3ae05ff3404a3ff30a35b64a9739955a228fcf1953c376ceb1b64f9f02a9869b0c287def035143d78e4a7686902da536069183cb5a1fdd5",
+      "passwordChangedAt": "2026-10-27T13:31:02.650Z",
+      "passwordExpiresAt": "2027-01-25T13:31:02.650Z",
+      "passwordHistory": [
+        {
+          "hash": "pbkdf2$v2$1000000$c6af282797468e37382ccbc3fc5185986c30b68397a1e3807adfab7931f4a8cf$92a67770c8091a68d3ae05ff3404a3ff30a35b64a9739955a228fcf1953c376ceb1b64f9f02a9869b0c287def035143d78e4a7686902da536069183cb5a1fdd5",
+          "changedAt": "2026-10-27T13:31:02.650Z"
+        }
+      ],
+      "failedLoginAttempts": 0,
+      "lastFailedLoginAt": null,
+      "accountLockedUntil": null,
+      "track": "cloud-devops",
+      "duration": "low",
+      "status": "active",
+      "emailVerified": 1,
+      "createdAt": "2026-10-27T13:31:02.650Z",
+      "updatedAt": "2026-10-27T13:31:02.654Z",
+      "lastLoginAt": "2026-10-27T13:31:02.925Z",
+      "lastLoginIp": "::1",
+      "lastLoginDevice": "unknown",
+      "loginHistory": [
+        {
+          "timestamp": "2026-10-27T13:31:02.925Z",
+          "ip": "::1",
+          "device": "unknown",
+          "fingerprint": "76630062f3def692842f23ef1b2aa30ec72a4dba786e4e49b37da2663d43b8a9",
+          "success": true,
+          "reason": "success"
+        }
+      ]
+    },
+    {
+      "id": "student-f8a821ac-9e1e-4def-beb9-01823878a498",
+      "name": "CSRF Target",
+      "email": "csrfattack_1793107862927@example.com",
+      "phone": "9234567890",
+      "passwordHash": "pbkdf2$v2$1000000$06eb45b93fdfb167b79b0efa3bbcbd7d9daa55831cba43160e785d600f1ff96d$fe1b13b56d505ef8d097932fe40818ed057cecc1e118b1aea4819456eca0369a48bc143cadbcf44d2c1e3fdf23305f0c8fba4b66963cdd721ea19cdc155e3216",
+      "passwordChangedAt": "2026-10-27T13:31:03.158Z",
+      "passwordExpiresAt": "2027-01-25T13:31:03.158Z",
+      "passwordHistory": [
+        {
+          "hash": "pbkdf2$v2$1000000$06eb45b93fdfb167b79b0efa3bbcbd7d9daa55831cba43160e785d600f1ff96d$fe1b13b56d505ef8d097932fe40818ed057cecc1e118b1aea4819456eca0369a48bc143cadbcf44d2c1e3fdf23305f0c8fba4b66963cdd721ea19cdc155e3216",
+          "changedAt": "2026-10-27T13:31:03.158Z"
+        }
+      ],
+      "failedLoginAttempts": 0,
+      "lastFailedLoginAt": null,
+      "accountLockedUntil": null,
+      "track": "web-development",
+      "duration": "low",
+      "status": "active",
+      "emailVerified": 1,
+      "createdAt": "2026-10-27T13:31:03.158Z",
+      "updatedAt": "2026-10-27T13:31:03.161Z",
+      "lastLoginAt": "2026-10-27T13:31:03.388Z",
+      "lastLoginIp": "::1",
+      "lastLoginDevice": "unknown",
+      "loginHistory": [
+        {
+          "timestamp": "2026-10-27T13:31:03.388Z",
+          "ip": "::1",
+          "device": "unknown",
+          "fingerprint": "76630062f3def692842f23ef1b2aa30ec72a4dba786e4e49b37da2663d43b8a9",
+          "success": true,
+          "reason": "success"
+        }
+      ]
+    },
+    {
+      "id": "student-241a7a86-e2af-4528-8c9a-357d1a586e33",
+      "name": "CSRF Legit",
+      "email": "csrflegit_1793107863400@example.com",
+      "phone": "9345678901",
+      "passwordHash": "pbkdf2$v2$1000000$6a9083cf53821c127e304703e238ffc6693fd12cb8463d6db29e50c1370eb786$7fedab6d73dc88cf31bf0a3f93f4e7ada8e939cdf5b6a5431b9459d24e17fc4062df5252f7e8df2dc170ca48a04a09f873ccb1b692b483dad2be48c04f02b4c2",
+      "passwordChangedAt": "2026-10-27T13:31:04.730Z",
+      "passwordExpiresAt": "2027-01-25T13:31:04.730Z",
+      "passwordHistory": [
+        {
+          "hash": "pbkdf2$v2$1000000$681eb86a987dc55499390ee7e2cf261fa3dfab5c509a666e22f7bcc2e9316b4b$ec061e4aa773a63800a8a00f5110675aab90d21921c9be09a632be7b3a2cf3133f1bdd9e00c6318c0f3c8d8ee622b5b58a599cadc4ab31bf7a6b8a58a659ece4",
+          "changedAt": "2026-10-27T13:31:03.628Z"
+        },
+        {
+          "hash": "pbkdf2$v2$1000000$681eb86a987dc55499390ee7e2cf261fa3dfab5c509a666e22f7bcc2e9316b4b$ec061e4aa773a63800a8a00f5110675aab90d21921c9be09a632be7b3a2cf3133f1bdd9e00c6318c0f3c8d8ee622b5b58a599cadc4ab31bf7a6b8a58a659ece4",
+          "changedAt": "2026-10-27T13:31:04.511Z"
+        }
+      ],
+      "failedLoginAttempts": 0,
+      "lastFailedLoginAt": null,
+      "accountLockedUntil": null,
+      "track": "web-development",
+      "duration": "low",
+      "status": "active",
+      "emailVerified": 1,
+      "createdAt": "2026-10-27T13:31:03.628Z",
+      "updatedAt": "2026-10-27T13:31:04.730Z",
+      "lastLoginAt": "2026-10-27T13:31:03.848Z",
+      "lastLoginIp": "::1",
+      "lastLoginDevice": "unknown",
+      "loginHistory": [
+        {
+          "timestamp": "2026-10-27T13:31:03.848Z",
+          "ip": "::1",
+          "device": "unknown",
+          "fingerprint": "76630062f3def692842f23ef1b2aa30ec72a4dba786e4e49b37da2663d43b8a9",
+          "success": true,
+          "reason": "success"
+        }
+      ]
+    },
+    {
+      "id": "student-46efae96-b10e-4b62-a6aa-7ecbb1bb69bb",
+      "name": "Rohan Kumar",
+      "email": "expiredpass_1793107864735@example.com",
+      "phone": "9456789012",
+      "passwordHash": "pbkdf2$v2$1000000$c91e23f01d8ff8b4b7fe4822a5ef6983de8b14f06d5977980f1a4b71f5a9d925$0006a39a844857f2806216684f2b042a7cb475ed48244bb00f54d56f446b2eaa23169e050697074d2432da8c5888fae797eb7ec25031ca5d0b9ab341d2083d7c",
+      "passwordChangedAt": "2026-10-27T13:31:04.961Z",
+      "passwordExpiresAt": "2026-10-26T13:31:04.970Z",
+      "passwordHistory": [
+        {
+          "hash": "pbkdf2$v2$1000000$c91e23f01d8ff8b4b7fe4822a5ef6983de8b14f06d5977980f1a4b71f5a9d925$0006a39a844857f2806216684f2b042a7cb475ed48244bb00f54d56f446b2eaa23169e050697074d2432da8c5888fae797eb7ec25031ca5d0b9ab341d2083d7c",
+          "changedAt": "2026-10-27T13:31:04.961Z"
+        }
+      ],
+      "failedLoginAttempts": 0,
+      "lastFailedLoginAt": null,
+      "accountLockedUntil": null,
+      "track": "data-science",
+      "duration": "low",
+      "status": "active",
+      "emailVerified": 1,
+      "createdAt": "2026-10-27T13:31:04.961Z",
+      "updatedAt": "2026-10-27T13:31:04.966Z",
+      "mustChangePassword": true
+    },
+    {
+      "id": "student-53b4cbcc-aa2a-4c00-bf04-9a76af07bc1b",
+      "name": "Security Phase Two",
+      "email": "secphase2_1793107997380@teststudent.com",
+      "phone": "9876543210",
+      "passwordHash": "pbkdf2$v2$1000000$0f13281f2bbb5ca9dac634b22fcaca40e396baf0153cd8c3388f8df5eeef40d7$727c51a4861e036f1da81a0384d37298bca929d4c53db391071b98e74c3aaf1388e9f459bf49f686ea963298ea1ff02367a7263fdbfe89d112bc9ba8324db8fc",
+      "passwordChangedAt": "2026-10-27T13:33:17.608Z",
+      "passwordExpiresAt": "2027-01-25T13:33:17.608Z",
+      "passwordHistory": [
+        {
+          "hash": "pbkdf2$v2$1000000$0f13281f2bbb5ca9dac634b22fcaca40e396baf0153cd8c3388f8df5eeef40d7$727c51a4861e036f1da81a0384d37298bca929d4c53db391071b98e74c3aaf1388e9f459bf49f686ea963298ea1ff02367a7263fdbfe89d112bc9ba8324db8fc",
+          "changedAt": "2026-10-27T13:33:17.608Z"
+        }
+      ],
+      "failedLoginAttempts": 0,
+      "lastFailedLoginAt": null,
+      "accountLockedUntil": null,
+      "track": "web-development",
+      "duration": "low",
+      "status": "pending_verification",
+      "emailVerified": 0,
+      "createdAt": "2026-10-27T13:33:17.608Z",
+      "updatedAt": "2026-10-27T13:33:17.608Z"
+    },
+    {
+      "id": "student-8ea798ac-6967-4d23-b5fd-828f47fafc35",
+      "name": "Csrf Student",
+      "email": "csrfstudent_1793107997612@example.com",
+      "phone": "9123456789",
+      "passwordHash": "pbkdf2$v2$1000000$6277429f87eec7fdeeb63151706a4be9eb3a0b987340909d1acd8ed60a804463$78d5e461f73197a8eba6996992598f06e30b5bf54695b021bafb02377950336f972e5a0135935d76a06de203f7d2597371b05d5f791db8a8bae11374c5728563",
+      "passwordChangedAt": "2026-10-27T13:33:17.829Z",
+      "passwordExpiresAt": "2027-01-25T13:33:17.829Z",
+      "passwordHistory": [
+        {
+          "hash": "pbkdf2$v2$1000000$6277429f87eec7fdeeb63151706a4be9eb3a0b987340909d1acd8ed60a804463$78d5e461f73197a8eba6996992598f06e30b5bf54695b021bafb02377950336f972e5a0135935d76a06de203f7d2597371b05d5f791db8a8bae11374c5728563",
+          "changedAt": "2026-10-27T13:33:17.829Z"
+        }
+      ],
+      "failedLoginAttempts": 0,
+      "lastFailedLoginAt": null,
+      "accountLockedUntil": null,
+      "track": "cloud-devops",
+      "duration": "low",
+      "status": "active",
+      "emailVerified": 1,
+      "createdAt": "2026-10-27T13:33:17.829Z",
+      "updatedAt": "2026-10-27T13:33:17.832Z",
+      "lastLoginAt": "2026-10-27T13:33:18.049Z",
+      "lastLoginIp": "::1",
+      "lastLoginDevice": "unknown",
+      "loginHistory": [
+        {
+          "timestamp": "2026-10-27T13:33:18.049Z",
+          "ip": "::1",
+          "device": "unknown",
+          "fingerprint": "76630062f3def692842f23ef1b2aa30ec72a4dba786e4e49b37da2663d43b8a9",
+          "success": true,
+          "reason": "success"
+        }
+      ]
+    },
+    {
+      "id": "student-231ae529-e7ad-4f64-9b2e-87d4eafc4a55",
+      "name": "CSRF Target",
+      "email": "csrfattack_1793107998050@example.com",
+      "phone": "9234567890",
+      "passwordHash": "pbkdf2$v2$1000000$629b83f0db5e7f4a672f31fd19755cb34489c79e43fe3c2ccb10b5c438a043a2$13b965118da97272d81e209907b87c4c68ecd2889c15a919d435e47d7ad1744f0474fd8cfa04ceb7808c3aefe598cc55cac77c32a481ad356e3916fd042a3a88",
+      "passwordChangedAt": "2026-10-27T13:33:18.269Z",
+      "passwordExpiresAt": "2027-01-25T13:33:18.269Z",
+      "passwordHistory": [
+        {
+          "hash": "pbkdf2$v2$1000000$629b83f0db5e7f4a672f31fd19755cb34489c79e43fe3c2ccb10b5c438a043a2$13b965118da97272d81e209907b87c4c68ecd2889c15a919d435e47d7ad1744f0474fd8cfa04ceb7808c3aefe598cc55cac77c32a481ad356e3916fd042a3a88",
+          "changedAt": "2026-10-27T13:33:18.269Z"
+        }
+      ],
+      "failedLoginAttempts": 0,
+      "lastFailedLoginAt": null,
+      "accountLockedUntil": null,
+      "track": "web-development",
+      "duration": "low",
+      "status": "active",
+      "emailVerified": 1,
+      "createdAt": "2026-10-27T13:33:18.269Z",
+      "updatedAt": "2026-10-27T13:33:18.271Z",
+      "lastLoginAt": "2026-10-27T13:33:18.489Z",
+      "lastLoginIp": "::1",
+      "lastLoginDevice": "unknown",
+      "loginHistory": [
+        {
+          "timestamp": "2026-10-27T13:33:18.489Z",
+          "ip": "::1",
+          "device": "unknown",
+          "fingerprint": "76630062f3def692842f23ef1b2aa30ec72a4dba786e4e49b37da2663d43b8a9",
+          "success": true,
+          "reason": "success"
+        }
+      ]
+    },
+    {
+      "id": "student-d910dc0e-51c8-441e-8ffa-3290e2780aa7",
+      "name": "CSRF Legit",
+      "email": "csrflegit_1793107998491@example.com",
+      "phone": "9345678901",
+      "passwordHash": "pbkdf2$v2$1000000$d3dd30c47485314d1b6650f7560a78f9d6c6785902ba821ed70f19115c9b0efa$d1d671332983d57892e49885548bbf32118f75e2c0a83d037d56d117657c05adb2d6d00ef335557d39cba57bdb243013d8423ae8180a551b6f475ad330f6f715",
+      "passwordChangedAt": "2026-10-27T13:33:20.006Z",
+      "passwordExpiresAt": "2027-01-25T13:33:20.006Z",
+      "passwordHistory": [
+        {
+          "hash": "pbkdf2$v2$1000000$e563fe21bb838ba42008b9fe303d651e9779450f611887a6dfe51def51839047$45ac5021cd3a72a31a0574bcf08efcffcb4b71b4f4a0d288038b2107215187dedd9aa1ca6470e27cf4edc24da509c0d3678b74154b146e3ed9fe0bb81ec02b08",
+          "changedAt": "2026-10-27T13:33:18.706Z"
+        },
+        {
+          "hash": "pbkdf2$v2$1000000$e563fe21bb838ba42008b9fe303d651e9779450f611887a6dfe51def51839047$45ac5021cd3a72a31a0574bcf08efcffcb4b71b4f4a0d288038b2107215187dedd9aa1ca6470e27cf4edc24da509c0d3678b74154b146e3ed9fe0bb81ec02b08",
+          "changedAt": "2026-10-27T13:33:19.718Z"
+        }
+      ],
+      "failedLoginAttempts": 0,
+      "lastFailedLoginAt": null,
+      "accountLockedUntil": null,
+      "track": "web-development",
+      "duration": "low",
+      "status": "active",
+      "emailVerified": 1,
+      "createdAt": "2026-10-27T13:33:18.706Z",
+      "updatedAt": "2026-10-27T13:33:20.006Z",
+      "lastLoginAt": "2026-10-27T13:33:18.928Z",
+      "lastLoginIp": "::1",
+      "lastLoginDevice": "unknown",
+      "loginHistory": [
+        {
+          "timestamp": "2026-10-27T13:33:18.928Z",
+          "ip": "::1",
+          "device": "unknown",
+          "fingerprint": "76630062f3def692842f23ef1b2aa30ec72a4dba786e4e49b37da2663d43b8a9",
+          "success": true,
+          "reason": "success"
+        }
+      ]
+    },
+    {
+      "id": "student-6c54fcfb-3cd0-40d3-8083-e2b9593d5beb",
+      "name": "Rohan Kumar",
+      "email": "expiredpass_1793108000011@example.com",
+      "phone": "9456789012",
+      "passwordHash": "pbkdf2$v2$1000000$1880588aefc40d7261aa7dfad12d2f7e4b8fb06c135aba8e5209431463dbe603$3017ad756d0fff8406ad0aa45bebb7f7578196c4cd47d7129c09fa42a047113d55e3cd0304f8023d8c1f10c69e502dc28ae96c1c69648e533e17864ca8a4242e",
+      "passwordChangedAt": "2026-10-27T13:33:20.579Z",
+      "passwordExpiresAt": "2026-10-26T13:33:20.591Z",
+      "passwordHistory": [
+        {
+          "hash": "pbkdf2$v2$1000000$1880588aefc40d7261aa7dfad12d2f7e4b8fb06c135aba8e5209431463dbe603$3017ad756d0fff8406ad0aa45bebb7f7578196c4cd47d7129c09fa42a047113d55e3cd0304f8023d8c1f10c69e502dc28ae96c1c69648e533e17864ca8a4242e",
+          "changedAt": "2026-10-27T13:33:20.579Z"
+        }
+      ],
+      "failedLoginAttempts": 0,
+      "lastFailedLoginAt": null,
+      "accountLockedUntil": null,
+      "track": "data-science",
+      "duration": "low",
+      "status": "active",
+      "emailVerified": 1,
+      "createdAt": "2026-10-27T13:33:20.579Z",
+      "updatedAt": "2026-10-27T13:33:20.589Z",
+      "mustChangePassword": true
+    },
+    {
+      "id": "student-e8303ac4-430f-4124-ada8-1d88cc521937",
+      "name": "Security Phase Two",
+      "email": "secphase2_1793108260270@teststudent.com",
+      "phone": "9876543210",
+      "passwordHash": "pbkdf2$v2$1000000$ffd0a659468666a62cb387094582a009da8e25f47bdcb574930dbc9864688783$12e45f73de4cd849fb0f55e956745ad52a9699c458c87811e1fddcbc740d4f98d9544c6172d0ff3b880c42bc7fe37e172792daef295645e23058769981a4819a",
+      "passwordChangedAt": "2026-10-27T13:37:40.483Z",
+      "passwordExpiresAt": "2027-01-25T13:37:40.483Z",
+      "passwordHistory": [
+        {
+          "hash": "pbkdf2$v2$1000000$ffd0a659468666a62cb387094582a009da8e25f47bdcb574930dbc9864688783$12e45f73de4cd849fb0f55e956745ad52a9699c458c87811e1fddcbc740d4f98d9544c6172d0ff3b880c42bc7fe37e172792daef295645e23058769981a4819a",
+          "changedAt": "2026-10-27T13:37:40.483Z"
+        }
+      ],
+      "failedLoginAttempts": 0,
+      "lastFailedLoginAt": null,
+      "accountLockedUntil": null,
+      "track": "web-development",
+      "duration": "low",
+      "status": "pending_verification",
+      "emailVerified": 0,
+      "createdAt": "2026-10-27T13:37:40.483Z",
+      "updatedAt": "2026-10-27T13:37:40.483Z"
+    },
+    {
+      "id": "student-08e8a47e-560e-493b-9ff1-e2f504d86ad3",
+      "name": "Csrf Student",
+      "email": "csrfstudent_1793108260531@example.com",
+      "phone": "9123456789",
+      "passwordHash": "pbkdf2$v2$1000000$5bfaaec0b79351deb5d1d5f23c5b352fc50153faae9ac8a41ff8bae6afb0d8df$0014c93762ef8267ad5603bced4e71181dac8d95a9b4644c05033fae0aa559bf1ca88d99d05347084f2e5ac0d960e00eb3b0d0b4a591228fcce3114b545c6155",
+      "passwordChangedAt": "2026-10-27T13:37:40.759Z",
+      "passwordExpiresAt": "2027-01-25T13:37:40.759Z",
+      "passwordHistory": [
+        {
+          "hash": "pbkdf2$v2$1000000$5bfaaec0b79351deb5d1d5f23c5b352fc50153faae9ac8a41ff8bae6afb0d8df$0014c93762ef8267ad5603bced4e71181dac8d95a9b4644c05033fae0aa559bf1ca88d99d05347084f2e5ac0d960e00eb3b0d0b4a591228fcce3114b545c6155",
+          "changedAt": "2026-10-27T13:37:40.759Z"
+        }
+      ],
+      "failedLoginAttempts": 0,
+      "lastFailedLoginAt": null,
+      "accountLockedUntil": null,
+      "track": "cloud-devops",
+      "duration": "low",
+      "status": "active",
+      "emailVerified": 1,
+      "createdAt": "2026-10-27T13:37:40.759Z",
+      "updatedAt": "2026-10-27T13:37:40.763Z",
+      "lastLoginAt": "2026-10-27T13:37:40.976Z",
+      "lastLoginIp": "::1",
+      "lastLoginDevice": "unknown",
+      "loginHistory": [
+        {
+          "timestamp": "2026-10-27T13:37:40.976Z",
+          "ip": "::1",
+          "device": "unknown",
+          "fingerprint": "76630062f3def692842f23ef1b2aa30ec72a4dba786e4e49b37da2663d43b8a9",
+          "success": true,
+          "reason": "success"
+        }
+      ]
+    },
+    {
+      "id": "student-5903d996-3fdb-4632-b255-d1fa6ce96db3",
+      "name": "CSRF Target",
+      "email": "csrfattack_1793108260978@example.com",
+      "phone": "9234567890",
+      "passwordHash": "pbkdf2$v2$1000000$1bdcc6579d63b69576cb398240b13d5e99d8d86f49e4c9035baa9085b398ccfe$aa17a369eb85b849f1f379d0fef098d6d8d239135ee11c0ffaafdf638a6596f755fd00be5e7926dc63207b7ee8c2d2a951500b7cbbaf06f218243f5cf7cc2a2d",
+      "passwordChangedAt": "2026-10-27T13:37:41.222Z",
+      "passwordExpiresAt": "2027-01-25T13:37:41.222Z",
+      "passwordHistory": [
+        {
+          "hash": "pbkdf2$v2$1000000$1bdcc6579d63b69576cb398240b13d5e99d8d86f49e4c9035baa9085b398ccfe$aa17a369eb85b849f1f379d0fef098d6d8d239135ee11c0ffaafdf638a6596f755fd00be5e7926dc63207b7ee8c2d2a951500b7cbbaf06f218243f5cf7cc2a2d",
+          "changedAt": "2026-10-27T13:37:41.222Z"
+        }
+      ],
+      "failedLoginAttempts": 0,
+      "lastFailedLoginAt": null,
+      "accountLockedUntil": null,
+      "track": "web-development",
+      "duration": "low",
+      "status": "active",
+      "emailVerified": 1,
+      "createdAt": "2026-10-27T13:37:41.222Z",
+      "updatedAt": "2026-10-27T13:37:41.226Z",
+      "lastLoginAt": "2026-10-27T13:37:41.458Z",
+      "lastLoginIp": "::1",
+      "lastLoginDevice": "unknown",
+      "loginHistory": [
+        {
+          "timestamp": "2026-10-27T13:37:41.458Z",
+          "ip": "::1",
+          "device": "unknown",
+          "fingerprint": "76630062f3def692842f23ef1b2aa30ec72a4dba786e4e49b37da2663d43b8a9",
+          "success": true,
+          "reason": "success"
+        }
+      ]
+    },
+    {
+      "id": "student-c2d9b66d-8977-4e29-9a8e-05e3e26bb948",
+      "name": "CSRF Legit",
+      "email": "csrflegit_1793108261468@example.com",
+      "phone": "9345678901",
+      "passwordHash": "pbkdf2$v2$1000000$789319ddfdda01ff135c46ce987509f6d0b5979edc17ac8cb09b7378dbc06d46$034e37213b79bf0ce06892ee03cc09c71537b2912d0704115349e840889f63ea7845690b86b850c18ff9ddcc7fcc97dd3c7428de53886e1947597d1defd00b96",
+      "passwordChangedAt": "2026-10-27T13:37:42.965Z",
+      "passwordExpiresAt": "2027-01-25T13:37:42.965Z",
+      "passwordHistory": [
+        {
+          "hash": "pbkdf2$v2$1000000$0d3299d4fc4f831cef7fb97b40307e686369ccd59a38a2dac3f14838500ef682$1efcd4aa25378fb2aef190dd909a2505cc2c0500f67511ffa502ed63dfff64ef7911b842caf26f0a2fafb55fb316eb93e69102f46312632aa9445dbe2d6df823",
+          "changedAt": "2026-10-27T13:37:41.684Z"
+        },
+        {
+          "hash": "pbkdf2$v2$1000000$0d3299d4fc4f831cef7fb97b40307e686369ccd59a38a2dac3f14838500ef682$1efcd4aa25378fb2aef190dd909a2505cc2c0500f67511ffa502ed63dfff64ef7911b842caf26f0a2fafb55fb316eb93e69102f46312632aa9445dbe2d6df823",
+          "changedAt": "2026-10-27T13:37:42.717Z"
+        }
+      ],
+      "failedLoginAttempts": 0,
+      "lastFailedLoginAt": null,
+      "accountLockedUntil": null,
+      "track": "web-development",
+      "duration": "low",
+      "status": "active",
+      "emailVerified": 1,
+      "createdAt": "2026-10-27T13:37:41.684Z",
+      "updatedAt": "2026-10-27T13:37:42.965Z",
+      "lastLoginAt": "2026-10-27T13:37:41.913Z",
+      "lastLoginIp": "::1",
+      "lastLoginDevice": "unknown",
+      "loginHistory": [
+        {
+          "timestamp": "2026-10-27T13:37:41.913Z",
+          "ip": "::1",
+          "device": "unknown",
+          "fingerprint": "76630062f3def692842f23ef1b2aa30ec72a4dba786e4e49b37da2663d43b8a9",
+          "success": true,
+          "reason": "success"
+        }
+      ]
+    },
+    {
+      "id": "student-4f39cac4-6e12-4369-9058-624f74b275ae",
+      "name": "Rohan Kumar",
+      "email": "expiredpass_1793108262976@example.com",
+      "phone": "9456789012",
+      "passwordHash": "pbkdf2$v2$1000000$2c9a17fb9907b401a1e040dfe2c2d5f1ce3bf615699e9940271e8bd731b76154$b04dd251a22eb72da14a04addb85e2eaec705524437dec9435b358a3302c50dba4813026d46c9928efc2094b8eeabadbb8a6421641fdcc1855a3022bebc7f4f6",
+      "passwordChangedAt": "2026-10-27T13:37:43.317Z",
+      "passwordExpiresAt": "2026-10-26T13:37:43.325Z",
+      "passwordHistory": [
+        {
+          "hash": "pbkdf2$v2$1000000$2c9a17fb9907b401a1e040dfe2c2d5f1ce3bf615699e9940271e8bd731b76154$b04dd251a22eb72da14a04addb85e2eaec705524437dec9435b358a3302c50dba4813026d46c9928efc2094b8eeabadbb8a6421641fdcc1855a3022bebc7f4f6",
+          "changedAt": "2026-10-27T13:37:43.317Z"
+        }
+      ],
+      "failedLoginAttempts": 0,
+      "lastFailedLoginAt": null,
+      "accountLockedUntil": null,
+      "track": "data-science",
+      "duration": "low",
+      "status": "active",
+      "emailVerified": 1,
+      "createdAt": "2026-10-27T13:37:43.317Z",
+      "updatedAt": "2026-10-27T13:37:43.323Z",
+      "mustChangePassword": true
+    },
+    {
+      "id": "student-ffbd37fa-aa3b-40ac-b2bc-5dad49d4a0ee",
+      "name": "Security Phase Two",
+      "email": "secphase2_1793108334018@teststudent.com",
+      "phone": "9876543210",
+      "passwordHash": "pbkdf2$v2$1000000$62df58213214037bae565446140d14bd17691314504fc419b7dd77a54d9eda5c$9c9b550df1be713867f76cbe1bc353dd2e140352e73a3912831f61933d7ced750375840677bc576855ba590158dd44074c19196cb7b8bf5ef4d110399c0c6f00",
+      "passwordChangedAt": "2026-10-27T13:38:54.236Z",
+      "passwordExpiresAt": "2027-01-25T13:38:54.236Z",
+      "passwordHistory": [
+        {
+          "hash": "pbkdf2$v2$1000000$62df58213214037bae565446140d14bd17691314504fc419b7dd77a54d9eda5c$9c9b550df1be713867f76cbe1bc353dd2e140352e73a3912831f61933d7ced750375840677bc576855ba590158dd44074c19196cb7b8bf5ef4d110399c0c6f00",
+          "changedAt": "2026-10-27T13:38:54.236Z"
+        }
+      ],
+      "failedLoginAttempts": 0,
+      "lastFailedLoginAt": null,
+      "accountLockedUntil": null,
+      "track": "web-development",
+      "duration": "low",
+      "status": "pending_verification",
+      "emailVerified": 0,
+      "createdAt": "2026-10-27T13:38:54.236Z",
+      "updatedAt": "2026-10-27T13:38:54.236Z"
+    },
+    {
+      "id": "student-2e70c8f6-8e0d-43ba-8d73-a5e4e47d4dac",
+      "name": "Csrf Student",
+      "email": "csrfstudent_1793108334276@example.com",
+      "phone": "9123456789",
+      "passwordHash": "pbkdf2$v2$1000000$04f186bae586cd11ea42dc5d1c2a1878679ccfc57167aa37e6577010c5d1f0a6$7cf3852e6dc3687b133e6a27122c4f0987d8c5c2bf0fa3b5ae95c3d272f80e1c5296452f2d989f390262fe4878c18633a15fc387ea2a6431d0c06012378f96be",
+      "passwordChangedAt": "2026-10-27T13:38:54.502Z",
+      "passwordExpiresAt": "2027-01-25T13:38:54.502Z",
+      "passwordHistory": [
+        {
+          "hash": "pbkdf2$v2$1000000$04f186bae586cd11ea42dc5d1c2a1878679ccfc57167aa37e6577010c5d1f0a6$7cf3852e6dc3687b133e6a27122c4f0987d8c5c2bf0fa3b5ae95c3d272f80e1c5296452f2d989f390262fe4878c18633a15fc387ea2a6431d0c06012378f96be",
+          "changedAt": "2026-10-27T13:38:54.502Z"
+        }
+      ],
+      "failedLoginAttempts": 0,
+      "lastFailedLoginAt": null,
+      "accountLockedUntil": null,
+      "track": "cloud-devops",
+      "duration": "low",
+      "status": "active",
+      "emailVerified": 1,
+      "createdAt": "2026-10-27T13:38:54.502Z",
+      "updatedAt": "2026-10-27T13:38:54.505Z",
+      "lastLoginAt": "2026-10-27T13:38:54.724Z",
+      "lastLoginIp": "::1",
+      "lastLoginDevice": "unknown",
+      "loginHistory": [
+        {
+          "timestamp": "2026-10-27T13:38:54.724Z",
+          "ip": "::1",
+          "device": "unknown",
+          "fingerprint": "76630062f3def692842f23ef1b2aa30ec72a4dba786e4e49b37da2663d43b8a9",
+          "success": true,
+          "reason": "success"
+        }
+      ]
+    },
+    {
+      "id": "student-60f0ca8a-72d5-4a29-a53c-298dc061885b",
+      "name": "CSRF Target",
+      "email": "csrfattack_1793108334725@example.com",
+      "phone": "9234567890",
+      "passwordHash": "pbkdf2$v2$1000000$bfb0efe3649bdb1635ffdb5130d4c1596939155566ff5a039c47f41dd8b99d0c$21cbcaa0b1263fad19a5b6872f1c1620c73ae18009d79e95377168e379164a8cdb72c159b77b1f681f7c4c5b408a595ae28053a2cbb367a411b5a6f7e45d6785",
+      "passwordChangedAt": "2026-10-27T13:38:54.945Z",
+      "passwordExpiresAt": "2027-01-25T13:38:54.945Z",
+      "passwordHistory": [
+        {
+          "hash": "pbkdf2$v2$1000000$bfb0efe3649bdb1635ffdb5130d4c1596939155566ff5a039c47f41dd8b99d0c$21cbcaa0b1263fad19a5b6872f1c1620c73ae18009d79e95377168e379164a8cdb72c159b77b1f681f7c4c5b408a595ae28053a2cbb367a411b5a6f7e45d6785",
+          "changedAt": "2026-10-27T13:38:54.945Z"
+        }
+      ],
+      "failedLoginAttempts": 0,
+      "lastFailedLoginAt": null,
+      "accountLockedUntil": null,
+      "track": "web-development",
+      "duration": "low",
+      "status": "active",
+      "emailVerified": 1,
+      "createdAt": "2026-10-27T13:38:54.945Z",
+      "updatedAt": "2026-10-27T13:38:54.947Z",
+      "lastLoginAt": "2026-10-27T13:38:55.172Z",
+      "lastLoginIp": "::1",
+      "lastLoginDevice": "unknown",
+      "loginHistory": [
+        {
+          "timestamp": "2026-10-27T13:38:55.172Z",
+          "ip": "::1",
+          "device": "unknown",
+          "fingerprint": "76630062f3def692842f23ef1b2aa30ec72a4dba786e4e49b37da2663d43b8a9",
+          "success": true,
+          "reason": "success"
+        }
+      ]
+    },
+    {
+      "id": "student-61a21cb5-8040-4bc2-ad51-5400ce93204e",
+      "name": "CSRF Legit",
+      "email": "csrflegit_1793108335181@example.com",
+      "phone": "9345678901",
+      "passwordHash": "pbkdf2$v2$1000000$70f89dba1dea1dba8b5ff1649f33b8d77cfc7df507afa30eaf3e9faea6d8052d$fb8f4f70112cb067b9744401380baf38dde4aa16476b496e7a2338e2f41cf5c9307b4e6f4f1e48ca6debb1e7811fd7e2aa5cb2e41ae26fbc5e2c692e17642abf",
+      "passwordChangedAt": "2026-10-27T13:38:56.564Z",
+      "passwordExpiresAt": "2027-01-25T13:38:56.564Z",
+      "passwordHistory": [
+        {
+          "hash": "pbkdf2$v2$1000000$da8d0f15b7be5b4a9c5823b4ddbf320ba6920d2bbb68f4fe7061f6d714a8bc4c$7de66d94e212de7a122abe1021c0e234d302c112f684b29d4d2ec43e26f2ed31461358a25ac02bd0c3146195bf2141f77b314a4f2434eadcf166efc04ee3d6dc",
+          "changedAt": "2026-10-27T13:38:55.465Z"
+        },
+        {
+          "hash": "pbkdf2$v2$1000000$da8d0f15b7be5b4a9c5823b4ddbf320ba6920d2bbb68f4fe7061f6d714a8bc4c$7de66d94e212de7a122abe1021c0e234d302c112f684b29d4d2ec43e26f2ed31461358a25ac02bd0c3146195bf2141f77b314a4f2434eadcf166efc04ee3d6dc",
+          "changedAt": "2026-10-27T13:38:56.348Z"
+        }
+      ],
+      "failedLoginAttempts": 0,
+      "lastFailedLoginAt": null,
+      "accountLockedUntil": null,
+      "track": "web-development",
+      "duration": "low",
+      "status": "active",
+      "emailVerified": 1,
+      "createdAt": "2026-10-27T13:38:55.465Z",
+      "updatedAt": "2026-10-27T13:38:56.564Z",
+      "lastLoginAt": "2026-10-27T13:38:55.692Z",
+      "lastLoginIp": "::1",
+      "lastLoginDevice": "unknown",
+      "loginHistory": [
+        {
+          "timestamp": "2026-10-27T13:38:55.692Z",
+          "ip": "::1",
+          "device": "unknown",
+          "fingerprint": "76630062f3def692842f23ef1b2aa30ec72a4dba786e4e49b37da2663d43b8a9",
+          "success": true,
+          "reason": "success"
+        }
+      ]
+    },
+    {
+      "id": "student-1adad85f-9648-40a7-b614-42b473cbd791",
+      "name": "Rohan Kumar",
+      "email": "expiredpass_1793108336569@example.com",
+      "phone": "9456789012",
+      "passwordHash": "pbkdf2$v2$1000000$f60648e37d0ebee04da76533e8cf8a5bb287078571dc4e14ded9b3cedfc963cf$9306b0eabec5c60a855d59b372b8d8ebd86b53fb463cb6eeb2fefcf40fe409fe4e3e6dcd7a508bba4ac9791a7d69f230557aba3ab2200217704af1bd935ed40c",
+      "passwordChangedAt": "2026-10-27T13:38:56.789Z",
+      "passwordExpiresAt": "2026-10-26T13:38:56.792Z",
+      "passwordHistory": [
+        {
+          "hash": "pbkdf2$v2$1000000$f60648e37d0ebee04da76533e8cf8a5bb287078571dc4e14ded9b3cedfc963cf$9306b0eabec5c60a855d59b372b8d8ebd86b53fb463cb6eeb2fefcf40fe409fe4e3e6dcd7a508bba4ac9791a7d69f230557aba3ab2200217704af1bd935ed40c",
+          "changedAt": "2026-10-27T13:38:56.789Z"
+        }
+      ],
+      "failedLoginAttempts": 0,
+      "lastFailedLoginAt": null,
+      "accountLockedUntil": null,
+      "track": "data-science",
+      "duration": "low",
+      "status": "active",
+      "emailVerified": 1,
+      "createdAt": "2026-10-27T13:38:56.789Z",
+      "updatedAt": "2026-10-27T13:38:56.791Z",
+      "mustChangePassword": true
+    },
+    {
+      "id": "student-b210df7e-201f-470d-895f-d0fed028b31d",
+      "name": "Security Phase Two",
+      "email": "secphase2_1793108944108@teststudent.com",
+      "phone": "9876543210",
+      "passwordHash": "pbkdf2$v2$1000000$29aa5411135d056b86a21dc36c982a4752cd87c6e722ec9e11768ef171d6f3ba$c299d67bf9e4be7f616aeff857db1fc5ef2d6a77b598923ae4105b7a115329fbda0155b8e1d7a91e08959967340e2314dcb512503e343f3398f06504d5721abb",
+      "passwordChangedAt": "2026-10-27T13:49:04.325Z",
+      "passwordExpiresAt": "2027-01-25T13:49:04.325Z",
+      "passwordHistory": [
+        {
+          "hash": "pbkdf2$v2$1000000$29aa5411135d056b86a21dc36c982a4752cd87c6e722ec9e11768ef171d6f3ba$c299d67bf9e4be7f616aeff857db1fc5ef2d6a77b598923ae4105b7a115329fbda0155b8e1d7a91e08959967340e2314dcb512503e343f3398f06504d5721abb",
+          "changedAt": "2026-10-27T13:49:04.325Z"
+        }
+      ],
+      "failedLoginAttempts": 0,
+      "lastFailedLoginAt": null,
+      "accountLockedUntil": null,
+      "track": "web-development",
+      "duration": "low",
+      "status": "pending_verification",
+      "emailVerified": 0,
+      "createdAt": "2026-10-27T13:49:04.325Z",
+      "updatedAt": "2026-10-27T13:49:04.325Z"
+    },
+    {
+      "id": "student-435aa76c-341f-40f5-889b-7c4d7001207c",
+      "name": "Csrf Student",
+      "email": "csrfstudent_1793108944359@example.com",
+      "phone": "9123456789",
+      "passwordHash": "pbkdf2$v2$1000000$6a7ff1f74c8a93624126ed4825e50bcfbd35347f08d7e71d4fa7432f63172128$31045e354838a4079ce56165d80c88c610a260778f60ac1d1e44f6c858f50c45a15e655fb07471ed4700c58472f8a1f4e72ba4ab3b53fcf9d7e77694f9bbede5",
+      "passwordChangedAt": "2026-10-27T13:49:04.577Z",
+      "passwordExpiresAt": "2027-01-25T13:49:04.577Z",
+      "passwordHistory": [
+        {
+          "hash": "pbkdf2$v2$1000000$6a7ff1f74c8a93624126ed4825e50bcfbd35347f08d7e71d4fa7432f63172128$31045e354838a4079ce56165d80c88c610a260778f60ac1d1e44f6c858f50c45a15e655fb07471ed4700c58472f8a1f4e72ba4ab3b53fcf9d7e77694f9bbede5",
+          "changedAt": "2026-10-27T13:49:04.577Z"
+        }
+      ],
+      "failedLoginAttempts": 0,
+      "lastFailedLoginAt": null,
+      "accountLockedUntil": null,
+      "track": "cloud-devops",
+      "duration": "low",
+      "status": "active",
+      "emailVerified": 1,
+      "createdAt": "2026-10-27T13:49:04.577Z",
+      "updatedAt": "2026-10-27T13:49:04.579Z",
+      "lastLoginAt": "2026-10-27T13:49:04.798Z",
+      "lastLoginIp": "::1",
+      "lastLoginDevice": "unknown",
+      "loginHistory": [
+        {
+          "timestamp": "2026-10-27T13:49:04.798Z",
+          "ip": "::1",
+          "device": "unknown",
+          "fingerprint": "76630062f3def692842f23ef1b2aa30ec72a4dba786e4e49b37da2663d43b8a9",
+          "success": true,
+          "reason": "success"
+        }
+      ]
+    },
+    {
+      "id": "student-ec6ff557-7d64-4c6a-a220-e1f295b59551",
+      "name": "CSRF Target",
+      "email": "csrfattack_1793108944800@example.com",
+      "phone": "9234567890",
+      "passwordHash": "pbkdf2$v2$1000000$8ae2358030aa7c1ea889da75e5a3d13fad4053e690bc904f9358bee57505273e$edba3deac5f7f0749350b02051cbc6e6019bcd4708bc245e732c3f1316368857c6b9924bbe07485cccdb2d9ee8c89497b7f1630042366841978303b1e294d957",
+      "passwordChangedAt": "2026-10-27T13:49:05.022Z",
+      "passwordExpiresAt": "2027-01-25T13:49:05.022Z",
+      "passwordHistory": [
+        {
+          "hash": "pbkdf2$v2$1000000$8ae2358030aa7c1ea889da75e5a3d13fad4053e690bc904f9358bee57505273e$edba3deac5f7f0749350b02051cbc6e6019bcd4708bc245e732c3f1316368857c6b9924bbe07485cccdb2d9ee8c89497b7f1630042366841978303b1e294d957",
+          "changedAt": "2026-10-27T13:49:05.022Z"
+        }
+      ],
+      "failedLoginAttempts": 0,
+      "lastFailedLoginAt": null,
+      "accountLockedUntil": null,
+      "track": "web-development",
+      "duration": "low",
+      "status": "active",
+      "emailVerified": 1,
+      "createdAt": "2026-10-27T13:49:05.022Z",
+      "updatedAt": "2026-10-27T13:49:05.025Z",
+      "lastLoginAt": "2026-10-27T13:49:05.247Z",
+      "lastLoginIp": "::1",
+      "lastLoginDevice": "unknown",
+      "loginHistory": [
+        {
+          "timestamp": "2026-10-27T13:49:05.247Z",
+          "ip": "::1",
+          "device": "unknown",
+          "fingerprint": "76630062f3def692842f23ef1b2aa30ec72a4dba786e4e49b37da2663d43b8a9",
+          "success": true,
+          "reason": "success"
+        }
+      ]
+    },
+    {
+      "id": "student-3faf5d3a-d437-4533-9923-f9174c442775",
+      "name": "CSRF Legit",
+      "email": "csrflegit_1793108945253@example.com",
+      "phone": "9345678901",
+      "passwordHash": "pbkdf2$v2$1000000$23a4fe519eca19d1961c036af69dd34b394f16c7a01159a841c3a3e66c48ebff$b100bbfe886b6838be775c4e0d3785797e627182aeec8ab118ce73c0141a4fa67c74f6093a594bb7930d256280831e3a11afca634f689de2d40e52d82020a6cb",
+      "passwordChangedAt": "2026-10-27T13:49:06.561Z",
+      "passwordExpiresAt": "2027-01-25T13:49:06.561Z",
+      "passwordHistory": [
+        {
+          "hash": "pbkdf2$v2$1000000$c1d6b5ee83367ef799f0aa6780e6a4150d8bcfe2aa78b8c55a99bfc977cd141d$3c5b53c9870ea5527b2daec2ac1eb5652fabe999d7d36ffaf2e2c15daff9bf3dcee8541b08950cc177533f599b31ca1dcfea9c4e441e96ffd8414e842c0f3d2c",
+          "changedAt": "2026-10-27T13:49:05.468Z"
+        },
+        {
+          "hash": "pbkdf2$v2$1000000$c1d6b5ee83367ef799f0aa6780e6a4150d8bcfe2aa78b8c55a99bfc977cd141d$3c5b53c9870ea5527b2daec2ac1eb5652fabe999d7d36ffaf2e2c15daff9bf3dcee8541b08950cc177533f599b31ca1dcfea9c4e441e96ffd8414e842c0f3d2c",
+          "changedAt": "2026-10-27T13:49:06.344Z"
+        }
+      ],
+      "failedLoginAttempts": 0,
+      "lastFailedLoginAt": null,
+      "accountLockedUntil": null,
+      "track": "web-development",
+      "duration": "low",
+      "status": "active",
+      "emailVerified": 1,
+      "createdAt": "2026-10-27T13:49:05.468Z",
+      "updatedAt": "2026-10-27T13:49:06.561Z",
+      "lastLoginAt": "2026-10-27T13:49:05.688Z",
+      "lastLoginIp": "::1",
+      "lastLoginDevice": "unknown",
+      "loginHistory": [
+        {
+          "timestamp": "2026-10-27T13:49:05.688Z",
+          "ip": "::1",
+          "device": "unknown",
+          "fingerprint": "76630062f3def692842f23ef1b2aa30ec72a4dba786e4e49b37da2663d43b8a9",
+          "success": true,
+          "reason": "success"
+        }
+      ]
+    },
+    {
+      "id": "student-b06b4696-e571-4f37-a723-a24859d4a44d",
+      "name": "Rohan Kumar",
+      "email": "expiredpass_1793108946565@example.com",
+      "phone": "9456789012",
+      "passwordHash": "pbkdf2$v2$1000000$9dc5eb1b57bb83759978a7e4d69d8e42aa3a6d666016c158dacefcc56d23b85b$cf2baef3fff4b1f42d51621717940e61741a347d422a45be237f2680d4bf6ec45f443b46ef624d085a81a543d56174dc2cb5ed0447811ff472c4a037abc114c9",
+      "passwordChangedAt": "2026-10-27T13:49:06.786Z",
+      "passwordExpiresAt": "2026-10-26T13:49:06.791Z",
+      "passwordHistory": [
+        {
+          "hash": "pbkdf2$v2$1000000$9dc5eb1b57bb83759978a7e4d69d8e42aa3a6d666016c158dacefcc56d23b85b$cf2baef3fff4b1f42d51621717940e61741a347d422a45be237f2680d4bf6ec45f443b46ef624d085a81a543d56174dc2cb5ed0447811ff472c4a037abc114c9",
+          "changedAt": "2026-10-27T13:49:06.786Z"
+        }
+      ],
+      "failedLoginAttempts": 0,
+      "lastFailedLoginAt": null,
+      "accountLockedUntil": null,
+      "track": "data-science",
+      "duration": "low",
+      "status": "active",
+      "emailVerified": 1,
+      "createdAt": "2026-10-27T13:49:06.786Z",
+      "updatedAt": "2026-10-27T13:49:06.790Z",
+      "mustChangePassword": true
+    },
+    {
+      "id": "student-43c4381e-f253-4323-9207-e1803db8b69c",
+      "name": "Security Phase Two",
+      "email": "secphase2_1793109017904@teststudent.com",
+      "phone": "9876543210",
+      "passwordHash": "pbkdf2$v2$1000000$5757e648525514fd1a1fed19c8213792d0fcdf5b4ae3294814f1994deff461fd$e387a41e66b6843448ea1dc29c5e6e7155344075510d9088a660298edb8369c6fd9cd2b8377e699bb75ae52bee9c4f37e46e66ea8e5b0462e906f5d87d0facce",
+      "passwordChangedAt": "2026-10-27T13:50:18.121Z",
+      "passwordExpiresAt": "2027-01-25T13:50:18.121Z",
+      "passwordHistory": [
+        {
+          "hash": "pbkdf2$v2$1000000$5757e648525514fd1a1fed19c8213792d0fcdf5b4ae3294814f1994deff461fd$e387a41e66b6843448ea1dc29c5e6e7155344075510d9088a660298edb8369c6fd9cd2b8377e699bb75ae52bee9c4f37e46e66ea8e5b0462e906f5d87d0facce",
+          "changedAt": "2026-10-27T13:50:18.121Z"
+        }
+      ],
+      "failedLoginAttempts": 0,
+      "lastFailedLoginAt": null,
+      "accountLockedUntil": null,
+      "track": "web-development",
+      "duration": "low",
+      "status": "pending_verification",
+      "emailVerified": 0,
+      "createdAt": "2026-10-27T13:50:18.121Z",
+      "updatedAt": "2026-10-27T13:50:18.121Z"
+    },
+    {
+      "id": "student-61e061ba-2305-4f03-b0ec-655f2b2fadee",
+      "name": "Csrf Student",
+      "email": "csrfstudent_1793109018160@example.com",
+      "phone": "9123456789",
+      "passwordHash": "pbkdf2$v2$1000000$d689d40d005dca3144b935821538b00cbfc15a22a5bf22569427a2514c9d73a2$2bcb1c63fc87dfd768f53a63071b89d4fe9ce5f4c4eb6b715ded07ffdc826b10b657d8e656ae8386b56180f8a0c3c3a732140dcde81f0e7b2688350ae1783607",
+      "passwordChangedAt": "2026-10-27T13:50:18.380Z",
+      "passwordExpiresAt": "2027-01-25T13:50:18.380Z",
+      "passwordHistory": [
+        {
+          "hash": "pbkdf2$v2$1000000$d689d40d005dca3144b935821538b00cbfc15a22a5bf22569427a2514c9d73a2$2bcb1c63fc87dfd768f53a63071b89d4fe9ce5f4c4eb6b715ded07ffdc826b10b657d8e656ae8386b56180f8a0c3c3a732140dcde81f0e7b2688350ae1783607",
+          "changedAt": "2026-10-27T13:50:18.380Z"
+        }
+      ],
+      "failedLoginAttempts": 0,
+      "lastFailedLoginAt": null,
+      "accountLockedUntil": null,
+      "track": "cloud-devops",
+      "duration": "low",
+      "status": "active",
+      "emailVerified": 1,
+      "createdAt": "2026-10-27T13:50:18.380Z",
+      "updatedAt": "2026-10-27T13:50:18.382Z",
+      "lastLoginAt": "2026-10-27T13:50:18.604Z",
+      "lastLoginIp": "::1",
+      "lastLoginDevice": "unknown",
+      "loginHistory": [
+        {
+          "timestamp": "2026-10-27T13:50:18.604Z",
+          "ip": "::1",
+          "device": "unknown",
+          "fingerprint": "76630062f3def692842f23ef1b2aa30ec72a4dba786e4e49b37da2663d43b8a9",
+          "success": true,
+          "reason": "success"
+        }
+      ]
+    },
+    {
+      "id": "student-9262198b-8924-4ce8-920b-03f578b73614",
+      "name": "CSRF Target",
+      "email": "csrfattack_1793109018606@example.com",
+      "phone": "9234567890",
+      "passwordHash": "pbkdf2$v2$1000000$bb54e426edde45b4ce383b756ccea2f5b342c624740d8a75ef3824acb1b2685f$609e00af03cac69624e1195cb172727842bb1bee7e3c927cb574992bbf3bc9cd3cd401b6befc7b2db4e500c6fbd7631120edce6d8e9220aedb2f49b012412daa",
+      "passwordChangedAt": "2026-10-27T13:50:18.820Z",
+      "passwordExpiresAt": "2027-01-25T13:50:18.820Z",
+      "passwordHistory": [
+        {
+          "hash": "pbkdf2$v2$1000000$bb54e426edde45b4ce383b756ccea2f5b342c624740d8a75ef3824acb1b2685f$609e00af03cac69624e1195cb172727842bb1bee7e3c927cb574992bbf3bc9cd3cd401b6befc7b2db4e500c6fbd7631120edce6d8e9220aedb2f49b012412daa",
+          "changedAt": "2026-10-27T13:50:18.820Z"
+        }
+      ],
+      "failedLoginAttempts": 0,
+      "lastFailedLoginAt": null,
+      "accountLockedUntil": null,
+      "track": "web-development",
+      "duration": "low",
+      "status": "active",
+      "emailVerified": 1,
+      "createdAt": "2026-10-27T13:50:18.820Z",
+      "updatedAt": "2026-10-27T13:50:18.822Z",
+      "lastLoginAt": "2026-10-27T13:50:19.041Z",
+      "lastLoginIp": "::1",
+      "lastLoginDevice": "unknown",
+      "loginHistory": [
+        {
+          "timestamp": "2026-10-27T13:50:19.041Z",
+          "ip": "::1",
+          "device": "unknown",
+          "fingerprint": "76630062f3def692842f23ef1b2aa30ec72a4dba786e4e49b37da2663d43b8a9",
+          "success": true,
+          "reason": "success"
+        }
+      ]
+    },
+    {
+      "id": "student-43d23053-508c-445e-b4e4-57c12f21c4b3",
+      "name": "CSRF Legit",
+      "email": "csrflegit_1793109019046@example.com",
+      "phone": "9345678901",
+      "passwordHash": "pbkdf2$v2$1000000$68aa97995589c4873b2cb7c22934fb64855f992b581788436ac8f050a0c5947e$5e71ab2576f941932513afd9bf04b2aef4c81a42049ac1d9f94be299991329deeaa02aa42f4267a023f32a62b2d3427fbeb9acab48f6722ecda29015247dbeb3",
+      "passwordChangedAt": "2026-10-27T13:50:20.330Z",
+      "passwordExpiresAt": "2027-01-25T13:50:20.330Z",
+      "passwordHistory": [
+        {
+          "hash": "pbkdf2$v2$1000000$1db603fba261b4671865c5fc5f4d7108bddee33d9800de3b6a5ac1f9508f99c7$13d7994f1744bcea6e164211ba3fab8416ea8cc5581c6a2c64f1721672f32c1d3a6892fa480e0ae5b6005beaea011cb7131dc1745a4582c2568c915cdd5238f8",
+          "changedAt": "2026-10-27T13:50:19.257Z"
+        },
+        {
+          "hash": "pbkdf2$v2$1000000$1db603fba261b4671865c5fc5f4d7108bddee33d9800de3b6a5ac1f9508f99c7$13d7994f1744bcea6e164211ba3fab8416ea8cc5581c6a2c64f1721672f32c1d3a6892fa480e0ae5b6005beaea011cb7131dc1745a4582c2568c915cdd5238f8",
+          "changedAt": "2026-10-27T13:50:20.115Z"
+        }
+      ],
+      "failedLoginAttempts": 0,
+      "lastFailedLoginAt": null,
+      "accountLockedUntil": null,
+      "track": "web-development",
+      "duration": "low",
+      "status": "active",
+      "emailVerified": 1,
+      "createdAt": "2026-10-27T13:50:19.257Z",
+      "updatedAt": "2026-10-27T13:50:20.330Z",
+      "lastLoginAt": "2026-10-27T13:50:19.472Z",
+      "lastLoginIp": "::1",
+      "lastLoginDevice": "unknown",
+      "loginHistory": [
+        {
+          "timestamp": "2026-10-27T13:50:19.472Z",
+          "ip": "::1",
+          "device": "unknown",
+          "fingerprint": "76630062f3def692842f23ef1b2aa30ec72a4dba786e4e49b37da2663d43b8a9",
+          "success": true,
+          "reason": "success"
+        }
+      ]
+    },
+    {
+      "id": "student-745fbda3-8740-42be-b386-f5d8dc446615",
+      "name": "Rohan Kumar",
+      "email": "expiredpass_1793109020333@example.com",
+      "phone": "9456789012",
+      "passwordHash": "pbkdf2$v2$1000000$2be138268c19790f12d75468409d92a78f95fa46a9157e5616426f0eda7e58ca$53f8676393c3eea5a83bc8878969e2a6e8f476979a80e78f6380817a0611d6cd5238653277a9a5b9ea81a3f44130e524ea9776d112c608643a11950b5cac546e",
+      "passwordChangedAt": "2026-10-27T13:50:20.549Z",
+      "passwordExpiresAt": "2026-10-26T13:50:20.553Z",
+      "passwordHistory": [
+        {
+          "hash": "pbkdf2$v2$1000000$2be138268c19790f12d75468409d92a78f95fa46a9157e5616426f0eda7e58ca$53f8676393c3eea5a83bc8878969e2a6e8f476979a80e78f6380817a0611d6cd5238653277a9a5b9ea81a3f44130e524ea9776d112c608643a11950b5cac546e",
+          "changedAt": "2026-10-27T13:50:20.549Z"
+        }
+      ],
+      "failedLoginAttempts": 0,
+      "lastFailedLoginAt": null,
+      "accountLockedUntil": null,
+      "track": "data-science",
+      "duration": "low",
+      "status": "active",
+      "emailVerified": 1,
+      "createdAt": "2026-10-27T13:50:20.549Z",
+      "updatedAt": "2026-10-27T13:50:20.551Z",
+      "mustChangePassword": true
+    },
+    {
+      "id": "student-a226a541-a28b-4cba-aa06-b344f15dcaba",
+      "name": "Security Phase Two",
+      "email": "secphase2_1793109085994@teststudent.com",
+      "phone": "9876543210",
+      "passwordHash": "pbkdf2$v2$1000000$4e16b6ae23ed7395c7ce0ce87879acce233db2a71225200a50f9b81fdfacaaf5$9a0caa0d4f13d703f9025b9fa6c7424cbb8d3d2431db7fddbeb5da199db9a7c6ff1221a1246b0cf5ff659ac8e0fc17deba2a4c9d6fa52c2b11a31b0aa3e114c8",
+      "passwordChangedAt": "2026-10-27T13:51:26.212Z",
+      "passwordExpiresAt": "2027-01-25T13:51:26.212Z",
+      "passwordHistory": [
+        {
+          "hash": "pbkdf2$v2$1000000$4e16b6ae23ed7395c7ce0ce87879acce233db2a71225200a50f9b81fdfacaaf5$9a0caa0d4f13d703f9025b9fa6c7424cbb8d3d2431db7fddbeb5da199db9a7c6ff1221a1246b0cf5ff659ac8e0fc17deba2a4c9d6fa52c2b11a31b0aa3e114c8",
+          "changedAt": "2026-10-27T13:51:26.212Z"
+        }
+      ],
+      "failedLoginAttempts": 0,
+      "lastFailedLoginAt": null,
+      "accountLockedUntil": null,
+      "track": "web-development",
+      "duration": "low",
+      "status": "pending_verification",
+      "emailVerified": 0,
+      "createdAt": "2026-10-27T13:51:26.212Z",
+      "updatedAt": "2026-10-27T13:51:26.212Z"
+    },
+    {
+      "id": "student-5c4bb59c-e159-4c75-986b-b6d03fc76c40",
+      "name": "Csrf Student",
+      "email": "csrfstudent_1793109086226@example.com",
+      "phone": "9123456789",
+      "passwordHash": "pbkdf2$v2$1000000$3db038eacd027d82c150bd22624976dca52500a69bf12a57ba8a5a1172346d55$9b9a792430e0c458f358f2173f4d3cb618790d9c0e4dc3846d39841ce9d59d0baf0dffc0215edb20867d2a2cf03c702cbb51162135191d56dc5d7bc04fc91f53",
+      "passwordChangedAt": "2026-10-27T13:51:26.457Z",
+      "passwordExpiresAt": "2027-01-25T13:51:26.457Z",
+      "passwordHistory": [
+        {
+          "hash": "pbkdf2$v2$1000000$3db038eacd027d82c150bd22624976dca52500a69bf12a57ba8a5a1172346d55$9b9a792430e0c458f358f2173f4d3cb618790d9c0e4dc3846d39841ce9d59d0baf0dffc0215edb20867d2a2cf03c702cbb51162135191d56dc5d7bc04fc91f53",
+          "changedAt": "2026-10-27T13:51:26.457Z"
+        }
+      ],
+      "failedLoginAttempts": 0,
+      "lastFailedLoginAt": null,
+      "accountLockedUntil": null,
+      "track": "cloud-devops",
+      "duration": "low",
+      "status": "active",
+      "emailVerified": 1,
+      "createdAt": "2026-10-27T13:51:26.457Z",
+      "updatedAt": "2026-10-27T13:51:26.460Z",
+      "lastLoginAt": "2026-10-27T13:51:26.678Z",
+      "lastLoginIp": "::1",
+      "lastLoginDevice": "unknown",
+      "loginHistory": [
+        {
+          "timestamp": "2026-10-27T13:51:26.678Z",
+          "ip": "::1",
+          "device": "unknown",
+          "fingerprint": "76630062f3def692842f23ef1b2aa30ec72a4dba786e4e49b37da2663d43b8a9",
+          "success": true,
+          "reason": "success"
+        }
+      ]
+    },
+    {
+      "id": "student-e0985212-cb9a-4483-bb67-653aa2237749",
+      "name": "CSRF Target",
+      "email": "csrfattack_1793109086680@example.com",
+      "phone": "9234567890",
+      "passwordHash": "pbkdf2$v2$1000000$8d580f623a4f5aba9322146a7e4656d11df61eb945249c05f636d80575dacefa$27f4af4c2e8f3a5d79605d18518be34463ff6782323a956c9109cbce17bfd90ae9f14ad582ad3e2ef1aeadc0fbbf2d4e15bb21b8ad8e083b873913408efda995",
+      "passwordChangedAt": "2026-10-27T13:51:26.904Z",
+      "passwordExpiresAt": "2027-01-25T13:51:26.904Z",
+      "passwordHistory": [
+        {
+          "hash": "pbkdf2$v2$1000000$8d580f623a4f5aba9322146a7e4656d11df61eb945249c05f636d80575dacefa$27f4af4c2e8f3a5d79605d18518be34463ff6782323a956c9109cbce17bfd90ae9f14ad582ad3e2ef1aeadc0fbbf2d4e15bb21b8ad8e083b873913408efda995",
+          "changedAt": "2026-10-27T13:51:26.904Z"
+        }
+      ],
+      "failedLoginAttempts": 0,
+      "lastFailedLoginAt": null,
+      "accountLockedUntil": null,
+      "track": "web-development",
+      "duration": "low",
+      "status": "active",
+      "emailVerified": 1,
+      "createdAt": "2026-10-27T13:51:26.904Z",
+      "updatedAt": "2026-10-27T13:51:26.909Z",
+      "lastLoginAt": "2026-10-27T13:51:27.133Z",
+      "lastLoginIp": "::1",
+      "lastLoginDevice": "unknown",
+      "loginHistory": [
+        {
+          "timestamp": "2026-10-27T13:51:27.133Z",
+          "ip": "::1",
+          "device": "unknown",
+          "fingerprint": "76630062f3def692842f23ef1b2aa30ec72a4dba786e4e49b37da2663d43b8a9",
+          "success": true,
+          "reason": "success"
+        }
+      ]
+    },
+    {
+      "id": "student-d03919ad-4fd4-473e-9161-62c1b10619df",
+      "name": "CSRF Legit",
+      "email": "csrflegit_1793109087141@example.com",
+      "phone": "9345678901",
+      "passwordHash": "pbkdf2$v2$1000000$a63a36268296d28410b855cf9111ffa92d1f3b2bd62503f5a48fb3b467a3aa2c$24c83e8a742451e605f0856ac43042b6cb108c9c7f5bc98aefbe74222ede1c13554ced58c8e6a32a74a02f997d46056ef07e3e18ae2af47be4f2fb35d099eb60",
+      "passwordChangedAt": "2026-10-27T13:51:28.444Z",
+      "passwordExpiresAt": "2027-01-25T13:51:28.444Z",
+      "passwordHistory": [
+        {
+          "hash": "pbkdf2$v2$1000000$a8346d6db18e27b4dadcce6c923a125f27a99b4341bd3bfe4ea749d8b5c15685$f829fc1b89f25344cc4f98e6607862ab9088eead55da2195134aa5e6bdfc06eb54c21bbaa3df4783af04f1a34e361d06370a42c798bf99f66e34f2b071e0bb9b",
+          "changedAt": "2026-10-27T13:51:27.358Z"
+        },
+        {
+          "hash": "pbkdf2$v2$1000000$a8346d6db18e27b4dadcce6c923a125f27a99b4341bd3bfe4ea749d8b5c15685$f829fc1b89f25344cc4f98e6607862ab9088eead55da2195134aa5e6bdfc06eb54c21bbaa3df4783af04f1a34e361d06370a42c798bf99f66e34f2b071e0bb9b",
+          "changedAt": "2026-10-27T13:51:28.227Z"
+        }
+      ],
+      "failedLoginAttempts": 0,
+      "lastFailedLoginAt": null,
+      "accountLockedUntil": null,
+      "track": "web-development",
+      "duration": "low",
+      "status": "active",
+      "emailVerified": 1,
+      "createdAt": "2026-10-27T13:51:27.358Z",
+      "updatedAt": "2026-10-27T13:51:28.444Z",
+      "lastLoginAt": "2026-10-27T13:51:27.577Z",
+      "lastLoginIp": "::1",
+      "lastLoginDevice": "unknown",
+      "loginHistory": [
+        {
+          "timestamp": "2026-10-27T13:51:27.577Z",
+          "ip": "::1",
+          "device": "unknown",
+          "fingerprint": "76630062f3def692842f23ef1b2aa30ec72a4dba786e4e49b37da2663d43b8a9",
+          "success": true,
+          "reason": "success"
+        }
+      ]
+    },
+    {
+      "id": "student-ef718830-c2bf-49bf-9722-21dd83f460e7",
+      "name": "Rohan Kumar",
+      "email": "expiredpass_1793109088447@example.com",
+      "phone": "9456789012",
+      "passwordHash": "pbkdf2$v2$1000000$0b73e8bd0f471d3f2208be1fe22d5b60b2ab655d9ac69680728ea9337ef2d2ff$fbb1befdda8b58f2dda5a74f37a35e1ef88b61dfa409a9c8775f8a1b2fd390c50b10163857c85fa5ff4ff5f2b73b91f0c115a417f8562d8431af31e7aa7513ab",
+      "passwordChangedAt": "2026-10-27T13:51:28.664Z",
+      "passwordExpiresAt": "2026-10-26T13:51:28.668Z",
+      "passwordHistory": [
+        {
+          "hash": "pbkdf2$v2$1000000$0b73e8bd0f471d3f2208be1fe22d5b60b2ab655d9ac69680728ea9337ef2d2ff$fbb1befdda8b58f2dda5a74f37a35e1ef88b61dfa409a9c8775f8a1b2fd390c50b10163857c85fa5ff4ff5f2b73b91f0c115a417f8562d8431af31e7aa7513ab",
+          "changedAt": "2026-10-27T13:51:28.664Z"
+        }
+      ],
+      "failedLoginAttempts": 0,
+      "lastFailedLoginAt": null,
+      "accountLockedUntil": null,
+      "track": "data-science",
+      "duration": "low",
+      "status": "active",
+      "emailVerified": 1,
+      "createdAt": "2026-10-27T13:51:28.664Z",
+      "updatedAt": "2026-10-27T13:51:28.667Z",
+      "mustChangePassword": true
     }
   ],
   "studentTokens": [],
@@ -846,6 +2737,90 @@
       "expiresAt": "2026-10-27T12:34:29.656Z",
       "verified": false,
       "createdAt": "2026-10-27T12:29:29.656Z"
+    },
+    {
+      "id": "otp-b2418e0a-a237-4bf4-8a5a-99c165509600",
+      "email": "secphase2_1793107042560@teststudent.com",
+      "phone": "9876543210",
+      "codeEncrypted": "2ece58ae79a6",
+      "iv": "b4b60463a9cf312cd4d3921f",
+      "tag": "7a941098616ca2b4a1b14abc7c9de5b9",
+      "type": "registration",
+      "attempts": 0,
+      "maxAttempts": 5,
+      "resendsCount": 0,
+      "deliveryStatus": "sent",
+      "deliveryAttempts": 1,
+      "deliveredAt": "2026-10-27T13:17:22.804Z",
+      "expiresAt": "2026-10-27T13:22:22.803Z",
+      "verified": false,
+      "verifiedAt": null,
+      "requestIp": "::1",
+      "requestUserAgent": "",
+      "createdAt": "2026-10-27T13:17:22.804Z"
+    },
+    {
+      "id": "otp-eb4dfcce-0de8-453f-a152-8803af12022d",
+      "email": "csrfstudent_1793107042823@example.com",
+      "phone": "9123456789",
+      "codeEncrypted": "aa313b8a3a43",
+      "iv": "c2282662ac56981b91358013",
+      "tag": "6dfedd25485dfe21a48afc07aa71869b",
+      "type": "registration",
+      "attempts": 0,
+      "maxAttempts": 5,
+      "resendsCount": 0,
+      "deliveryStatus": "sent",
+      "deliveryAttempts": 1,
+      "deliveredAt": "2026-10-27T13:17:23.096Z",
+      "expiresAt": "2026-10-27T13:22:23.095Z",
+      "verified": false,
+      "verifiedAt": null,
+      "requestIp": "::1",
+      "requestUserAgent": "",
+      "createdAt": "2026-10-27T13:17:23.096Z"
+    },
+    {
+      "id": "otp-fd353db5-8279-452b-97a7-9020a556bb7a",
+      "email": "csrfattack_1793107043099@example.com",
+      "phone": "9234567890",
+      "codeEncrypted": "fe71a364e3a7",
+      "iv": "656f4b5218cb701290cca4bc",
+      "tag": "a7ed5ae38210c97630c659477cb93790",
+      "type": "registration",
+      "attempts": 0,
+      "maxAttempts": 5,
+      "resendsCount": 0,
+      "deliveryStatus": "sent",
+      "deliveryAttempts": 1,
+      "deliveredAt": "2026-10-27T13:17:23.376Z",
+      "expiresAt": "2026-10-27T13:22:23.375Z",
+      "verified": false,
+      "verifiedAt": null,
+      "requestIp": "::1",
+      "requestUserAgent": "",
+      "createdAt": "2026-10-27T13:17:23.376Z"
+    },
+    {
+      "id": "otp-f97a12c8-ec9a-4c46-982a-21393b9c036a",
+      "email": "csrflegit_1793107043379@example.com",
+      "phone": "9345678901",
+      "codeEncrypted": "7619d5854acb",
+      "iv": "12bd41e9a4b64af5c79dd24d",
+      "tag": "83b3b3b0aba9e1d04d9b1f66eec2fcc7",
+      "type": "registration",
+      "attempts": 0,
+      "maxAttempts": 5,
+      "resendsCount": 0,
+      "deliveryStatus": "sent",
+      "deliveryAttempts": 1,
+      "deliveredAt": "2026-10-27T13:17:23.608Z",
+      "expiresAt": "2026-10-27T13:22:23.608Z",
+      "verified": false,
+      "verifiedAt": null,
+      "requestIp": "::1",
+      "requestUserAgent": "",
+      "createdAt": "2026-10-27T13:17:23.608Z"
     }
   ],
   "track_changes": [
@@ -1429,6 +3404,1227 @@
       "points": 10,
       "status": "active",
       "createdAt": "2026-10-27T12:03:34.962Z"
+    }
+  ],
+  "security_events": [
+    {
+      "id": "sec_66da8b3f-4cea-487c-95d1-b73cd21a9603",
+      "timestamp": "2026-10-27T12:49:17.326Z",
+      "eventType": "login_failed",
+      "studentId": null,
+      "emailMasked": "d***t@example.com",
+      "ip": "198.51.100.36",
+      "userAgent": "N/A",
+      "details": "Invalid credentials supplied",
+      "severity": "medium"
+    },
+    {
+      "id": "sec_2d152501-f259-403c-b28d-a2d4e92eb959",
+      "timestamp": "2026-10-27T12:49:17.327Z",
+      "eventType": "login_failed",
+      "studentId": null,
+      "emailMasked": "s***t@example.com",
+      "ip": "198.51.100.36",
+      "userAgent": "N/A",
+      "details": "Invalid credentials supplied",
+      "severity": "medium"
+    },
+    {
+      "id": "sec_4828b8e0-c7eb-4846-a0e1-71fa0b4771cd",
+      "timestamp": "2026-10-27T12:49:17.345Z",
+      "eventType": "login_failed",
+      "studentId": null,
+      "emailMasked": "u***t@example.com",
+      "ip": "::1",
+      "userAgent": "node",
+      "details": "Invalid credentials supplied",
+      "severity": "medium"
+    },
+    {
+      "id": "sec_f1046529-1b68-4bd9-9fa6-4a3649c0c075",
+      "timestamp": "2026-10-27T12:49:18.222Z",
+      "eventType": "login_success",
+      "studentId": "student-0b2715cb-6a96-4555-ba58-a8e7b9a14fa3",
+      "emailMasked": "t***0@example.com",
+      "ip": "192.0.2.161",
+      "userAgent": "N/A",
+      "details": "Student authenticated successfully",
+      "severity": "low"
+    },
+    {
+      "id": "sec_c158118f-ceae-4b51-a8e3-cf170bb3397c",
+      "timestamp": "2026-10-27T12:49:18.906Z",
+      "eventType": "password_reset_success",
+      "studentId": "student-0b2715cb-6a96-4555-ba58-a8e7b9a14fa3",
+      "emailMasked": "t***0@example.com",
+      "ip": "192.0.2.161",
+      "userAgent": "N/A",
+      "details": "Password reset completed successfully and all active sessions revoked",
+      "severity": "medium"
+    },
+    {
+      "id": "sec_568c65f1-882a-428f-877d-fe287316bd49",
+      "timestamp": "2026-10-27T12:49:19.140Z",
+      "eventType": "login_failed",
+      "studentId": "student-0b2715cb-6a96-4555-ba58-a8e7b9a14fa3",
+      "emailMasked": "t***0@example.com",
+      "ip": "192.0.2.161",
+      "userAgent": "N/A",
+      "details": "Invalid credentials supplied",
+      "severity": "medium"
+    },
+    {
+      "id": "sec_cc2f621d-1838-469f-a43f-7916b918c83f",
+      "timestamp": "2026-10-27T12:49:19.374Z",
+      "eventType": "login_success",
+      "studentId": "student-0b2715cb-6a96-4555-ba58-a8e7b9a14fa3",
+      "emailMasked": "t***0@example.com",
+      "ip": "192.0.2.161",
+      "userAgent": "N/A",
+      "details": "Student authenticated successfully",
+      "severity": "low"
+    },
+    {
+      "id": "sec_281d8e17-e5e6-4e03-ad5b-f5a3e6379dfc",
+      "timestamp": "2026-10-27T12:51:20.654Z",
+      "eventType": "login_success",
+      "studentId": "student-09fc2eb1-bb0c-4e94-a262-d38601d0f0f1",
+      "emailMasked": "t***2@example.com",
+      "ip": "192.0.2.110",
+      "userAgent": "N/A",
+      "details": "Student authenticated successfully",
+      "severity": "low"
+    },
+    {
+      "id": "sec_6383931e-8f7b-4ddf-9dca-e45d569eb410",
+      "timestamp": "2026-10-27T12:51:21.368Z",
+      "eventType": "password_reset_success",
+      "studentId": "student-09fc2eb1-bb0c-4e94-a262-d38601d0f0f1",
+      "emailMasked": "t***2@example.com",
+      "ip": "192.0.2.110",
+      "userAgent": "N/A",
+      "details": "Password reset completed successfully and all active sessions revoked",
+      "severity": "medium"
+    },
+    {
+      "id": "sec_f288b38b-9ef0-448b-9f80-4c7c1f1db8d8",
+      "timestamp": "2026-10-27T12:51:21.614Z",
+      "eventType": "login_failed",
+      "studentId": "student-09fc2eb1-bb0c-4e94-a262-d38601d0f0f1",
+      "emailMasked": "t***2@example.com",
+      "ip": "192.0.2.110",
+      "userAgent": "N/A",
+      "details": "Invalid credentials supplied",
+      "severity": "medium"
+    },
+    {
+      "id": "sec_262b4933-a54b-4a9a-b3f9-e3955d8b4e89",
+      "timestamp": "2026-10-27T12:51:21.845Z",
+      "eventType": "login_success",
+      "studentId": "student-09fc2eb1-bb0c-4e94-a262-d38601d0f0f1",
+      "emailMasked": "t***2@example.com",
+      "ip": "192.0.2.110",
+      "userAgent": "N/A",
+      "details": "Student authenticated successfully",
+      "severity": "low"
+    },
+    {
+      "id": "sec_8c34494c-52c1-4070-91ec-097dde89ef8d",
+      "timestamp": "2026-10-27T12:52:30.690Z",
+      "eventType": "login_failed",
+      "studentId": null,
+      "emailMasked": "d***t@example.com",
+      "ip": "198.51.100.148",
+      "userAgent": "N/A",
+      "details": "Invalid credentials supplied",
+      "severity": "medium"
+    },
+    {
+      "id": "sec_3f02c2a1-b38e-4906-ae28-2f11729e1f3e",
+      "timestamp": "2026-10-27T12:52:30.692Z",
+      "eventType": "login_failed",
+      "studentId": null,
+      "emailMasked": "s***t@example.com",
+      "ip": "198.51.100.148",
+      "userAgent": "N/A",
+      "details": "Invalid credentials supplied",
+      "severity": "medium"
+    },
+    {
+      "id": "sec_482fc6ea-0321-44a4-b452-b02dcc795b70",
+      "timestamp": "2026-10-27T12:52:30.702Z",
+      "eventType": "login_failed",
+      "studentId": null,
+      "emailMasked": "u***t@example.com",
+      "ip": "::1",
+      "userAgent": "node",
+      "details": "Invalid credentials supplied",
+      "severity": "medium"
+    },
+    {
+      "id": "sec_ed704f2a-3dfe-40fb-97a4-74be63fad2ba",
+      "timestamp": "2026-10-27T12:52:31.536Z",
+      "eventType": "login_success",
+      "studentId": "student-42da8b83-5487-40c9-9399-f9aaf5bf2f62",
+      "emailMasked": "t***4@example.com",
+      "ip": "192.0.2.61",
+      "userAgent": "N/A",
+      "details": "Student authenticated successfully",
+      "severity": "low"
+    },
+    {
+      "id": "sec_48435545-4278-4478-afb9-285c1975cdfb",
+      "timestamp": "2026-10-27T12:52:32.335Z",
+      "eventType": "password_reset_success",
+      "studentId": "student-42da8b83-5487-40c9-9399-f9aaf5bf2f62",
+      "emailMasked": "t***4@example.com",
+      "ip": "192.0.2.61",
+      "userAgent": "N/A",
+      "details": "Password reset completed successfully and all active sessions revoked",
+      "severity": "medium"
+    },
+    {
+      "id": "sec_594f013e-9760-4a65-8a31-0beceebe9c73",
+      "timestamp": "2026-10-27T12:52:33.136Z",
+      "eventType": "login_failed",
+      "studentId": "student-42da8b83-5487-40c9-9399-f9aaf5bf2f62",
+      "emailMasked": "t***4@example.com",
+      "ip": "192.0.2.61",
+      "userAgent": "N/A",
+      "details": "Invalid credentials supplied",
+      "severity": "medium"
+    },
+    {
+      "id": "sec_df74321d-e7c4-49c2-80ac-ec330230a993",
+      "timestamp": "2026-10-27T12:52:33.413Z",
+      "eventType": "login_success",
+      "studentId": "student-42da8b83-5487-40c9-9399-f9aaf5bf2f62",
+      "emailMasked": "t***4@example.com",
+      "ip": "192.0.2.61",
+      "userAgent": "N/A",
+      "details": "Student authenticated successfully",
+      "severity": "low"
+    },
+    {
+      "id": "sec_4f187090-9b2f-462d-a14a-736be9af2446",
+      "timestamp": "2026-10-27T13:03:09.965Z",
+      "eventType": "login_failed",
+      "studentId": null,
+      "emailMasked": "d***t@example.com",
+      "ip": "198.51.100.103",
+      "userAgent": "N/A",
+      "details": "Invalid credentials supplied",
+      "severity": "medium"
+    },
+    {
+      "id": "sec_e7238818-3978-4cea-82ac-e6cd06d42c28",
+      "timestamp": "2026-10-27T13:03:09.968Z",
+      "eventType": "login_failed",
+      "studentId": null,
+      "emailMasked": "s***t@example.com",
+      "ip": "198.51.100.103",
+      "userAgent": "N/A",
+      "details": "Invalid credentials supplied",
+      "severity": "medium"
+    },
+    {
+      "id": "sec_4f849465-19d9-4075-90dd-50446a6a2c07",
+      "timestamp": "2026-10-27T13:03:09.985Z",
+      "eventType": "login_failed",
+      "studentId": null,
+      "emailMasked": "u***t@example.com",
+      "ip": "::1",
+      "userAgent": "node",
+      "details": "Invalid credentials supplied",
+      "severity": "medium"
+    },
+    {
+      "id": "sec_eca51042-51e2-4e14-9a4f-297fac15ee08",
+      "timestamp": "2026-10-27T13:03:13.488Z",
+      "eventType": "login_success",
+      "studentId": "student-041faa10-7548-4e62-a2a1-c7548b15ed54",
+      "emailMasked": "t***4@example.com",
+      "ip": "192.0.2.29",
+      "userAgent": "N/A",
+      "details": "Student authenticated successfully",
+      "severity": "low"
+    },
+    {
+      "id": "sec_f8f93c49-aa1f-4b7c-a073-384b6f55e124",
+      "timestamp": "2026-10-27T13:03:14.154Z",
+      "eventType": "password_reset_success",
+      "studentId": "student-041faa10-7548-4e62-a2a1-c7548b15ed54",
+      "emailMasked": "t***4@example.com",
+      "ip": "192.0.2.29",
+      "userAgent": "N/A",
+      "details": "Password reset completed successfully and all active sessions revoked",
+      "severity": "medium"
+    },
+    {
+      "id": "sec_a6efe030-16c8-4d86-b06a-ea2c98370da8",
+      "timestamp": "2026-10-27T13:03:14.378Z",
+      "eventType": "login_failed",
+      "studentId": "student-041faa10-7548-4e62-a2a1-c7548b15ed54",
+      "emailMasked": "t***4@example.com",
+      "ip": "192.0.2.29",
+      "userAgent": "N/A",
+      "details": "Invalid credentials supplied",
+      "severity": "medium"
+    },
+    {
+      "id": "sec_c35fde78-7494-4067-9519-ca7d2f588edd",
+      "timestamp": "2026-10-27T13:03:14.609Z",
+      "eventType": "login_success",
+      "studentId": "student-041faa10-7548-4e62-a2a1-c7548b15ed54",
+      "emailMasked": "t***4@example.com",
+      "ip": "192.0.2.29",
+      "userAgent": "N/A",
+      "details": "Student authenticated successfully",
+      "severity": "low"
+    },
+    {
+      "id": "sec_49a28bf8-6bc2-4c54-aa27-352557cd2caa",
+      "timestamp": "2026-10-27T13:20:02.730Z",
+      "eventType": "login_success",
+      "studentId": "student-ff966c80-eb31-40c4-981f-77a57c656b8d",
+      "emailMasked": "c***5@example.com",
+      "ip": "::1",
+      "userAgent": "N/A",
+      "details": "Student authenticated successfully",
+      "severity": "low"
+    },
+    {
+      "id": "sec_c82df59f-a5d2-48e0-b653-cd619024936e",
+      "timestamp": "2026-10-27T13:20:03.182Z",
+      "eventType": "login_success",
+      "studentId": "student-6ebfbadc-b9b9-47e0-8efa-5d3259a33ce0",
+      "emailMasked": "c***1@example.com",
+      "ip": "::1",
+      "userAgent": "N/A",
+      "details": "Student authenticated successfully",
+      "severity": "low"
+    },
+    {
+      "id": "sec_88a916de-36c0-4f9e-bfdf-1bf2d08163ed",
+      "timestamp": "2026-10-27T13:20:03.636Z",
+      "eventType": "login_success",
+      "studentId": "student-0fbeea4e-94a8-4545-880c-5b3b70e29459",
+      "emailMasked": "c***8@example.com",
+      "ip": "::1",
+      "userAgent": "N/A",
+      "details": "Student authenticated successfully",
+      "severity": "low"
+    },
+    {
+      "id": "sec_9108cd52-ea08-477d-8a21-af1991836231",
+      "timestamp": "2026-10-27T13:20:04.499Z",
+      "eventType": "password_changed",
+      "studentId": "student-0fbeea4e-94a8-4545-880c-5b3b70e29459",
+      "emailMasked": "c***8@example.com",
+      "ip": "::1",
+      "userAgent": "N/A",
+      "details": "Student password updated via change-password endpoint",
+      "severity": "medium"
+    },
+    {
+      "id": "sec_06088c11-c3a2-433c-9d8c-ccd6ad4c908e",
+      "timestamp": "2026-10-27T13:21:00.277Z",
+      "eventType": "login_success",
+      "studentId": "student-7686b2e3-5ccd-44b3-b28e-b0a8366114a4",
+      "emailMasked": "c***5@example.com",
+      "ip": "::1",
+      "userAgent": "N/A",
+      "details": "Student authenticated successfully",
+      "severity": "low"
+    },
+    {
+      "id": "sec_316357da-18e0-4e47-9cd6-8c73c9ebd2cd",
+      "timestamp": "2026-10-27T13:21:00.741Z",
+      "eventType": "login_success",
+      "studentId": "student-0b6ea015-d54f-4dc9-947d-e520363153f0",
+      "emailMasked": "c***8@example.com",
+      "ip": "::1",
+      "userAgent": "N/A",
+      "details": "Student authenticated successfully",
+      "severity": "low"
+    },
+    {
+      "id": "sec_c1e95c19-6c14-4d34-ba26-a8da7e7e3da6",
+      "timestamp": "2026-10-27T13:25:47.748Z",
+      "eventType": "login_success",
+      "studentId": "student-4d2f1ccf-39d5-4a24-aa0d-3f4263e8ff20",
+      "emailMasked": "c***0@example.com",
+      "ip": "::1",
+      "userAgent": "N/A",
+      "details": "Student authenticated successfully",
+      "severity": "low"
+    },
+    {
+      "id": "sec_352e5cd7-9e27-49ed-8ce0-8e2ffa842b98",
+      "timestamp": "2026-10-27T13:25:48.220Z",
+      "eventType": "login_success",
+      "studentId": "student-9f2a6d36-51a6-47fc-a8a6-afeac7eb0fa2",
+      "emailMasked": "c***9@example.com",
+      "ip": "::1",
+      "userAgent": "N/A",
+      "details": "Student authenticated successfully",
+      "severity": "low"
+    },
+    {
+      "id": "sec_74eadd3d-f456-4f75-95aa-d86c4a43a51e",
+      "timestamp": "2026-10-27T13:25:48.692Z",
+      "eventType": "login_success",
+      "studentId": "student-7f8201a6-8a19-463a-96d6-85ecc293a6c7",
+      "emailMasked": "c***3@example.com",
+      "ip": "::1",
+      "userAgent": "N/A",
+      "details": "Student authenticated successfully",
+      "severity": "low"
+    },
+    {
+      "id": "sec_30bf8aab-a721-43c4-8e89-f08ed685f090",
+      "timestamp": "2026-10-27T13:25:49.560Z",
+      "eventType": "password_changed",
+      "studentId": "student-7f8201a6-8a19-463a-96d6-85ecc293a6c7",
+      "emailMasked": "c***3@example.com",
+      "ip": "::1",
+      "userAgent": "N/A",
+      "details": "Student password updated via change-password endpoint",
+      "severity": "medium"
+    },
+    {
+      "id": "sec_077e15c5-0fe5-4840-ad83-6d938f2cf894",
+      "timestamp": "2026-10-27T13:25:50.048Z",
+      "eventType": "login_blocked_password_expired",
+      "studentId": "student-3bac13d2-a02f-4c1a-9fa7-19fd028d5894",
+      "emailMasked": "e***4@example.com",
+      "ip": "::1",
+      "userAgent": "N/A",
+      "details": "Student login blocked because 90-day password validity has expired",
+      "severity": "medium"
+    },
+    {
+      "id": "sec_995c23fb-ca6a-4750-83ab-d2da60f97595",
+      "timestamp": "2026-10-27T13:26:14.600Z",
+      "eventType": "login_success",
+      "studentId": "student-77845924-ce35-4975-a6b9-af91a8ffff01",
+      "emailMasked": "t***6@example.com",
+      "ip": "192.0.2.63",
+      "userAgent": "N/A",
+      "details": "Student authenticated successfully",
+      "severity": "low"
+    },
+    {
+      "id": "sec_868d1aa0-852b-4da8-ae45-33d91444b8e8",
+      "timestamp": "2026-10-27T13:26:15.269Z",
+      "eventType": "password_reset_success",
+      "studentId": "student-77845924-ce35-4975-a6b9-af91a8ffff01",
+      "emailMasked": "t***6@example.com",
+      "ip": "192.0.2.63",
+      "userAgent": "N/A",
+      "details": "Password reset completed successfully and all active sessions revoked",
+      "severity": "medium"
+    },
+    {
+      "id": "sec_8e3acd3d-3fc4-4224-8280-3015f68fb49d",
+      "timestamp": "2026-10-27T13:26:15.500Z",
+      "eventType": "login_failed",
+      "studentId": "student-77845924-ce35-4975-a6b9-af91a8ffff01",
+      "emailMasked": "t***6@example.com",
+      "ip": "192.0.2.63",
+      "userAgent": "N/A",
+      "details": "Invalid credentials supplied",
+      "severity": "medium"
+    },
+    {
+      "id": "sec_5c412ecb-ce00-4423-bfd9-789f1aa82e38",
+      "timestamp": "2026-10-27T13:26:15.722Z",
+      "eventType": "login_success",
+      "studentId": "student-77845924-ce35-4975-a6b9-af91a8ffff01",
+      "emailMasked": "t***6@example.com",
+      "ip": "192.0.2.63",
+      "userAgent": "N/A",
+      "details": "Student authenticated successfully",
+      "severity": "low"
+    },
+    {
+      "id": "sec_853d4c05-c5b3-41bc-b818-f3460706c2bf",
+      "timestamp": "2026-10-27T13:27:53.592Z",
+      "eventType": "login_failed",
+      "studentId": null,
+      "emailMasked": "d***t@example.com",
+      "ip": "198.51.100.177",
+      "userAgent": "N/A",
+      "details": "Invalid credentials supplied",
+      "severity": "medium"
+    },
+    {
+      "id": "sec_0e219207-3c9d-4b1c-957b-3d4473b785ee",
+      "timestamp": "2026-10-27T13:27:53.594Z",
+      "eventType": "login_failed",
+      "studentId": null,
+      "emailMasked": "s***t@example.com",
+      "ip": "198.51.100.177",
+      "userAgent": "N/A",
+      "details": "Invalid credentials supplied",
+      "severity": "medium"
+    },
+    {
+      "id": "sec_38a8b069-d9fa-42ce-8667-bcc430a50976",
+      "timestamp": "2026-10-27T13:27:53.606Z",
+      "eventType": "login_failed",
+      "studentId": null,
+      "emailMasked": "u***t@example.com",
+      "ip": "::1",
+      "userAgent": "node",
+      "details": "Invalid credentials supplied",
+      "severity": "medium"
+    },
+    {
+      "id": "sec_b5d7eedf-9208-4e33-bead-cf2409f54785",
+      "timestamp": "2026-10-27T13:27:57.069Z",
+      "eventType": "login_success",
+      "studentId": "student-1be04708-266a-485b-99a6-1ab070e28cb6",
+      "emailMasked": "c***7@example.com",
+      "ip": "::1",
+      "userAgent": "N/A",
+      "details": "Student authenticated successfully",
+      "severity": "low"
+    },
+    {
+      "id": "sec_e0171aa1-ba8c-424f-9764-06fcc3f817d7",
+      "timestamp": "2026-10-27T13:31:02.925Z",
+      "eventType": "login_success",
+      "studentId": "student-c2221065-9d9f-4b4e-8009-18b29e10b73b",
+      "emailMasked": "c***1@example.com",
+      "ip": "::1",
+      "userAgent": "N/A",
+      "details": "Student authenticated successfully",
+      "severity": "low"
+    },
+    {
+      "id": "sec_1d6a9f94-e0bc-4093-a29c-2ae673189753",
+      "timestamp": "2026-10-27T13:31:03.389Z",
+      "eventType": "login_success",
+      "studentId": "student-f8a821ac-9e1e-4def-beb9-01823878a498",
+      "emailMasked": "c***7@example.com",
+      "ip": "::1",
+      "userAgent": "N/A",
+      "details": "Student authenticated successfully",
+      "severity": "low"
+    },
+    {
+      "id": "sec_ed9483c1-e363-4be4-af18-6bf0c9ced1f3",
+      "timestamp": "2026-10-27T13:31:03.849Z",
+      "eventType": "login_success",
+      "studentId": "student-241a7a86-e2af-4528-8c9a-357d1a586e33",
+      "emailMasked": "c***0@example.com",
+      "ip": "::1",
+      "userAgent": "N/A",
+      "details": "Student authenticated successfully",
+      "severity": "low"
+    },
+    {
+      "id": "sec_be63c645-e68a-44db-910e-4279754b27a7",
+      "timestamp": "2026-10-27T13:31:04.732Z",
+      "eventType": "password_changed",
+      "studentId": "student-241a7a86-e2af-4528-8c9a-357d1a586e33",
+      "emailMasked": "c***0@example.com",
+      "ip": "::1",
+      "userAgent": "N/A",
+      "details": "Student password updated via change-password endpoint",
+      "severity": "medium"
+    },
+    {
+      "id": "sec_21d252dc-9947-4333-9738-d8a770f86aa5",
+      "timestamp": "2026-10-27T13:31:05.200Z",
+      "eventType": "login_blocked_password_expired",
+      "studentId": "student-46efae96-b10e-4b62-a6aa-7ecbb1bb69bb",
+      "emailMasked": "e***5@example.com",
+      "ip": "::1",
+      "userAgent": "N/A",
+      "details": "Student login blocked because 90-day password validity has expired",
+      "severity": "medium"
+    },
+    {
+      "id": "sec_bd191375-6020-4f8f-9a1e-790b909ebf10",
+      "timestamp": "2026-10-27T13:33:13.306Z",
+      "eventType": "login_failed",
+      "studentId": null,
+      "emailMasked": "d***t@example.com",
+      "ip": "198.51.100.171",
+      "userAgent": "N/A",
+      "details": "Invalid credentials supplied",
+      "severity": "medium"
+    },
+    {
+      "id": "sec_8f289d52-53e6-4a8e-90ed-ef879cd763c8",
+      "timestamp": "2026-10-27T13:33:13.308Z",
+      "eventType": "login_failed",
+      "studentId": null,
+      "emailMasked": "s***t@example.com",
+      "ip": "198.51.100.171",
+      "userAgent": "N/A",
+      "details": "Invalid credentials supplied",
+      "severity": "medium"
+    },
+    {
+      "id": "sec_996c296d-099c-4772-8448-ade7bf221db7",
+      "timestamp": "2026-10-27T13:33:13.319Z",
+      "eventType": "login_failed",
+      "studentId": null,
+      "emailMasked": "u***t@example.com",
+      "ip": "::1",
+      "userAgent": "node",
+      "details": "Invalid credentials supplied",
+      "severity": "medium"
+    },
+    {
+      "id": "sec_eed4bebe-36d6-43e4-97d6-8074fb93e51d",
+      "timestamp": "2026-10-27T13:33:18.049Z",
+      "eventType": "login_success",
+      "studentId": "student-8ea798ac-6967-4d23-b5fd-828f47fafc35",
+      "emailMasked": "c***2@example.com",
+      "ip": "::1",
+      "userAgent": "N/A",
+      "details": "Student authenticated successfully",
+      "severity": "low"
+    },
+    {
+      "id": "sec_7afeb3fa-ba5c-425a-b71a-d9b2f5440080",
+      "timestamp": "2026-10-27T13:33:18.489Z",
+      "eventType": "login_success",
+      "studentId": "student-231ae529-e7ad-4f64-9b2e-87d4eafc4a55",
+      "emailMasked": "c***0@example.com",
+      "ip": "::1",
+      "userAgent": "N/A",
+      "details": "Student authenticated successfully",
+      "severity": "low"
+    },
+    {
+      "id": "sec_99eeba69-3ce5-48ca-8c4d-69faafcc50ff",
+      "timestamp": "2026-10-27T13:33:18.928Z",
+      "eventType": "login_success",
+      "studentId": "student-d910dc0e-51c8-441e-8ffa-3290e2780aa7",
+      "emailMasked": "c***1@example.com",
+      "ip": "::1",
+      "userAgent": "N/A",
+      "details": "Student authenticated successfully",
+      "severity": "low"
+    },
+    {
+      "id": "sec_d006e6af-464a-442e-86ee-52332b5c70fd",
+      "timestamp": "2026-10-27T13:33:20.007Z",
+      "eventType": "password_changed",
+      "studentId": "student-d910dc0e-51c8-441e-8ffa-3290e2780aa7",
+      "emailMasked": "c***1@example.com",
+      "ip": "::1",
+      "userAgent": "N/A",
+      "details": "Student password updated via change-password endpoint",
+      "severity": "medium"
+    },
+    {
+      "id": "sec_02d3e3b3-5e4b-44a4-903e-d7e07c3802f9",
+      "timestamp": "2026-10-27T13:33:20.991Z",
+      "eventType": "login_blocked_password_expired",
+      "studentId": "student-6c54fcfb-3cd0-40d3-8083-e2b9593d5beb",
+      "emailMasked": "e***1@example.com",
+      "ip": "::1",
+      "userAgent": "N/A",
+      "details": "Student login blocked because 90-day password validity has expired",
+      "severity": "medium"
+    },
+    {
+      "id": "sec_12d7c8d8-9f59-4632-b201-6701e9f058bb",
+      "timestamp": "2026-10-27T13:33:21.919Z",
+      "eventType": "login_success",
+      "studentId": "student-2d673035-fdfb-4e70-ab80-e359b4b83c9b",
+      "emailMasked": "t***3@example.com",
+      "ip": "192.0.2.168",
+      "userAgent": "N/A",
+      "details": "Student authenticated successfully",
+      "severity": "low"
+    },
+    {
+      "id": "sec_a77abc6d-2878-4805-9057-8c1a66688990",
+      "timestamp": "2026-10-27T13:33:22.587Z",
+      "eventType": "password_reset_success",
+      "studentId": "student-2d673035-fdfb-4e70-ab80-e359b4b83c9b",
+      "emailMasked": "t***3@example.com",
+      "ip": "192.0.2.168",
+      "userAgent": "N/A",
+      "details": "Password reset completed successfully and all active sessions revoked",
+      "severity": "medium"
+    },
+    {
+      "id": "sec_e9db00f1-aba4-4c85-b1e0-8e61f880c245",
+      "timestamp": "2026-10-27T13:33:22.808Z",
+      "eventType": "login_failed",
+      "studentId": "student-2d673035-fdfb-4e70-ab80-e359b4b83c9b",
+      "emailMasked": "t***3@example.com",
+      "ip": "192.0.2.168",
+      "userAgent": "N/A",
+      "details": "Invalid credentials supplied",
+      "severity": "medium"
+    },
+    {
+      "id": "sec_34074d5e-ef02-4953-90be-6aeeca131540",
+      "timestamp": "2026-10-27T13:33:23.032Z",
+      "eventType": "login_success",
+      "studentId": "student-2d673035-fdfb-4e70-ab80-e359b4b83c9b",
+      "emailMasked": "t***3@example.com",
+      "ip": "192.0.2.168",
+      "userAgent": "N/A",
+      "details": "Student authenticated successfully",
+      "severity": "low"
+    },
+    {
+      "id": "sec_d34adfba-d37b-4684-aee9-7695d2801101",
+      "timestamp": "2026-10-27T13:37:40.977Z",
+      "eventType": "login_success",
+      "studentId": "student-08e8a47e-560e-493b-9ff1-e2f504d86ad3",
+      "emailMasked": "c***1@example.com",
+      "ip": "::1",
+      "userAgent": "N/A",
+      "details": "Student authenticated successfully",
+      "severity": "low"
+    },
+    {
+      "id": "sec_52d15abd-8ee8-49dd-8b6d-3413045bec74",
+      "timestamp": "2026-10-27T13:37:41.460Z",
+      "eventType": "login_success",
+      "studentId": "student-5903d996-3fdb-4632-b255-d1fa6ce96db3",
+      "emailMasked": "c***8@example.com",
+      "ip": "::1",
+      "userAgent": "N/A",
+      "details": "Student authenticated successfully",
+      "severity": "low"
+    },
+    {
+      "id": "sec_d9437724-f3b9-4606-8a6e-c1f717d1266b",
+      "timestamp": "2026-10-27T13:37:41.914Z",
+      "eventType": "login_success",
+      "studentId": "student-c2d9b66d-8977-4e29-9a8e-05e3e26bb948",
+      "emailMasked": "c***8@example.com",
+      "ip": "::1",
+      "userAgent": "N/A",
+      "details": "Student authenticated successfully",
+      "severity": "low"
+    },
+    {
+      "id": "sec_67e14574-fde6-44a4-9535-d671e4c51b26",
+      "timestamp": "2026-10-27T13:37:42.966Z",
+      "eventType": "password_changed",
+      "studentId": "student-c2d9b66d-8977-4e29-9a8e-05e3e26bb948",
+      "emailMasked": "c***8@example.com",
+      "ip": "::1",
+      "userAgent": "N/A",
+      "details": "Student password updated via change-password endpoint",
+      "severity": "medium"
+    },
+    {
+      "id": "sec_7be88168-7e44-4e91-b5d2-8a3588105698",
+      "timestamp": "2026-10-27T13:37:43.604Z",
+      "eventType": "login_blocked_password_expired",
+      "studentId": "student-4f39cac4-6e12-4369-9058-624f74b275ae",
+      "emailMasked": "e***6@example.com",
+      "ip": "::1",
+      "userAgent": "N/A",
+      "details": "Student login blocked because 90-day password validity has expired",
+      "severity": "medium"
+    },
+    {
+      "id": "sec_420d917d-00d3-45de-9939-f139a7c84115",
+      "timestamp": "2026-10-27T13:38:51.220Z",
+      "eventType": "login_failed",
+      "studentId": null,
+      "emailMasked": "d***t@example.com",
+      "ip": "198.51.100.48",
+      "userAgent": "N/A",
+      "details": "Invalid credentials supplied",
+      "severity": "medium"
+    },
+    {
+      "id": "sec_b0fa6e15-dc18-47d5-9c12-c84316c774b0",
+      "timestamp": "2026-10-27T13:38:51.222Z",
+      "eventType": "login_failed",
+      "studentId": null,
+      "emailMasked": "s***t@example.com",
+      "ip": "198.51.100.48",
+      "userAgent": "N/A",
+      "details": "Invalid credentials supplied",
+      "severity": "medium"
+    },
+    {
+      "id": "sec_0571aa39-7221-45e0-9bd4-72369215a3bb",
+      "timestamp": "2026-10-27T13:38:51.236Z",
+      "eventType": "login_failed",
+      "studentId": null,
+      "emailMasked": "u***t@example.com",
+      "ip": "::1",
+      "userAgent": "node",
+      "details": "Invalid credentials supplied",
+      "severity": "medium"
+    },
+    {
+      "id": "sec_25f6d4b8-6dab-4b31-b239-8c194cd1ebfb",
+      "timestamp": "2026-10-27T13:38:54.724Z",
+      "eventType": "login_success",
+      "studentId": "student-2e70c8f6-8e0d-43ba-8d73-a5e4e47d4dac",
+      "emailMasked": "c***6@example.com",
+      "ip": "::1",
+      "userAgent": "N/A",
+      "details": "Student authenticated successfully",
+      "severity": "low"
+    },
+    {
+      "id": "sec_682e86d9-a7f6-40b5-860b-5b57f80c0e5f",
+      "timestamp": "2026-10-27T13:38:55.173Z",
+      "eventType": "login_success",
+      "studentId": "student-60f0ca8a-72d5-4a29-a53c-298dc061885b",
+      "emailMasked": "c***5@example.com",
+      "ip": "::1",
+      "userAgent": "N/A",
+      "details": "Student authenticated successfully",
+      "severity": "low"
+    },
+    {
+      "id": "sec_9f25cbde-267f-4d6a-8412-d801eb1e30fd",
+      "timestamp": "2026-10-27T13:38:55.693Z",
+      "eventType": "login_success",
+      "studentId": "student-61a21cb5-8040-4bc2-ad51-5400ce93204e",
+      "emailMasked": "c***1@example.com",
+      "ip": "::1",
+      "userAgent": "N/A",
+      "details": "Student authenticated successfully",
+      "severity": "low"
+    },
+    {
+      "id": "sec_bb01e519-4765-4efc-a4a9-0614b6b52384",
+      "timestamp": "2026-10-27T13:38:56.565Z",
+      "eventType": "password_changed",
+      "studentId": "student-61a21cb5-8040-4bc2-ad51-5400ce93204e",
+      "emailMasked": "c***1@example.com",
+      "ip": "::1",
+      "userAgent": "N/A",
+      "details": "Student password updated via change-password endpoint",
+      "severity": "medium"
+    },
+    {
+      "id": "sec_15ed63a1-6625-494f-a8e4-558142808c4c",
+      "timestamp": "2026-10-27T13:38:57.090Z",
+      "eventType": "login_blocked_password_expired",
+      "studentId": "student-1adad85f-9648-40a7-b614-42b473cbd791",
+      "emailMasked": "e***9@example.com",
+      "ip": "::1",
+      "userAgent": "N/A",
+      "details": "Student login blocked because 90-day password validity has expired",
+      "severity": "medium"
+    },
+    {
+      "id": "sec_54bd00a9-ae45-46f3-95d5-f3f4af3e77ba",
+      "timestamp": "2026-10-27T13:38:57.867Z",
+      "eventType": "login_success",
+      "studentId": "student-0c5606fc-487e-49be-9ddc-0b34fa869beb",
+      "emailMasked": "t***2@example.com",
+      "ip": "192.0.2.49",
+      "userAgent": "N/A",
+      "details": "Student authenticated successfully",
+      "severity": "low"
+    },
+    {
+      "id": "sec_7f509b22-5505-4371-9341-c1ec2777be76",
+      "timestamp": "2026-10-27T13:38:58.540Z",
+      "eventType": "password_reset_success",
+      "studentId": "student-0c5606fc-487e-49be-9ddc-0b34fa869beb",
+      "emailMasked": "t***2@example.com",
+      "ip": "192.0.2.49",
+      "userAgent": "N/A",
+      "details": "Password reset completed successfully and all active sessions revoked",
+      "severity": "medium"
+    },
+    {
+      "id": "sec_0faacd96-3f6f-4cf9-a416-8463443d96be",
+      "timestamp": "2026-10-27T13:38:58.764Z",
+      "eventType": "login_failed",
+      "studentId": "student-0c5606fc-487e-49be-9ddc-0b34fa869beb",
+      "emailMasked": "t***2@example.com",
+      "ip": "192.0.2.49",
+      "userAgent": "N/A",
+      "details": "Invalid credentials supplied",
+      "severity": "medium"
+    },
+    {
+      "id": "sec_297458ae-5d54-4e2c-9eeb-f859987bfe93",
+      "timestamp": "2026-10-27T13:38:58.986Z",
+      "eventType": "login_success",
+      "studentId": "student-0c5606fc-487e-49be-9ddc-0b34fa869beb",
+      "emailMasked": "t***2@example.com",
+      "ip": "192.0.2.49",
+      "userAgent": "N/A",
+      "details": "Student authenticated successfully",
+      "severity": "low"
+    },
+    {
+      "id": "sec_f02521ee-b2cd-4281-bbbe-a41e8e649692",
+      "timestamp": "2026-10-27T13:49:01.173Z",
+      "eventType": "login_failed",
+      "studentId": null,
+      "emailMasked": "d***t@example.com",
+      "ip": "198.51.100.96",
+      "userAgent": "N/A",
+      "details": "Invalid credentials supplied",
+      "severity": "medium"
+    },
+    {
+      "id": "sec_ac45dc46-52ea-42f8-bdd6-b62c6eb39660",
+      "timestamp": "2026-10-27T13:49:01.175Z",
+      "eventType": "login_failed",
+      "studentId": null,
+      "emailMasked": "s***t@example.com",
+      "ip": "198.51.100.96",
+      "userAgent": "N/A",
+      "details": "Invalid credentials supplied",
+      "severity": "medium"
+    },
+    {
+      "id": "sec_9b04830b-39ed-4f2a-9451-6310f7ac4d4d",
+      "timestamp": "2026-10-27T13:49:01.189Z",
+      "eventType": "login_failed",
+      "studentId": null,
+      "emailMasked": "u***t@example.com",
+      "ip": "::1",
+      "userAgent": "node",
+      "details": "Invalid credentials supplied",
+      "severity": "medium"
+    },
+    {
+      "id": "sec_7e44a714-e603-42bc-926c-6881fcbee4b7",
+      "timestamp": "2026-10-27T13:49:04.799Z",
+      "eventType": "login_success",
+      "studentId": "student-435aa76c-341f-40f5-889b-7c4d7001207c",
+      "emailMasked": "c***9@example.com",
+      "ip": "::1",
+      "userAgent": "N/A",
+      "details": "Student authenticated successfully",
+      "severity": "low"
+    },
+    {
+      "id": "sec_f37c6496-5564-4e1e-93fa-31706b7d7994",
+      "timestamp": "2026-10-27T13:49:05.248Z",
+      "eventType": "login_success",
+      "studentId": "student-ec6ff557-7d64-4c6a-a220-e1f295b59551",
+      "emailMasked": "c***0@example.com",
+      "ip": "::1",
+      "userAgent": "N/A",
+      "details": "Student authenticated successfully",
+      "severity": "low"
+    },
+    {
+      "id": "sec_b5df60e1-7779-409f-b3fc-5ffd66f48d02",
+      "timestamp": "2026-10-27T13:49:05.689Z",
+      "eventType": "login_success",
+      "studentId": "student-3faf5d3a-d437-4533-9923-f9174c442775",
+      "emailMasked": "c***3@example.com",
+      "ip": "::1",
+      "userAgent": "N/A",
+      "details": "Student authenticated successfully",
+      "severity": "low"
+    },
+    {
+      "id": "sec_fdcd9998-5f83-403f-8c8c-98fe9832816a",
+      "timestamp": "2026-10-27T13:49:06.563Z",
+      "eventType": "password_changed",
+      "studentId": "student-3faf5d3a-d437-4533-9923-f9174c442775",
+      "emailMasked": "c***3@example.com",
+      "ip": "::1",
+      "userAgent": "N/A",
+      "details": "Student password updated via change-password endpoint",
+      "severity": "medium"
+    },
+    {
+      "id": "sec_0dcffef0-0636-47a7-9b9f-5ab3e5cbf8f3",
+      "timestamp": "2026-10-27T13:49:07.008Z",
+      "eventType": "login_blocked_password_expired",
+      "studentId": "student-b06b4696-e571-4f37-a723-a24859d4a44d",
+      "emailMasked": "e***5@example.com",
+      "ip": "::1",
+      "userAgent": "N/A",
+      "details": "Student login blocked because 90-day password validity has expired",
+      "severity": "medium"
+    },
+    {
+      "id": "sec_8d36b236-ee5d-4d40-a05e-f1124ab56659",
+      "timestamp": "2026-10-27T13:49:07.742Z",
+      "eventType": "login_success",
+      "studentId": "student-36486a0f-62a5-4a19-9abe-2dbd4c7a6d77",
+      "emailMasked": "t***0@example.com",
+      "ip": "192.0.2.4",
+      "userAgent": "N/A",
+      "details": "Student authenticated successfully",
+      "severity": "low"
+    },
+    {
+      "id": "sec_f37cf0a5-dbab-418b-8695-3c7dae98fbaa",
+      "timestamp": "2026-10-27T13:49:08.405Z",
+      "eventType": "password_reset_success",
+      "studentId": "student-36486a0f-62a5-4a19-9abe-2dbd4c7a6d77",
+      "emailMasked": "t***0@example.com",
+      "ip": "192.0.2.4",
+      "userAgent": "N/A",
+      "details": "Password reset completed successfully and all active sessions revoked",
+      "severity": "medium"
+    },
+    {
+      "id": "sec_9ea8c027-fde5-433c-bd66-31dca433bd4b",
+      "timestamp": "2026-10-27T13:49:08.629Z",
+      "eventType": "login_failed",
+      "studentId": "student-36486a0f-62a5-4a19-9abe-2dbd4c7a6d77",
+      "emailMasked": "t***0@example.com",
+      "ip": "192.0.2.4",
+      "userAgent": "N/A",
+      "details": "Invalid credentials supplied",
+      "severity": "medium"
+    },
+    {
+      "id": "sec_bbf0c7f9-4ab2-46cb-a578-701dbd638d6c",
+      "timestamp": "2026-10-27T13:49:08.851Z",
+      "eventType": "login_success",
+      "studentId": "student-36486a0f-62a5-4a19-9abe-2dbd4c7a6d77",
+      "emailMasked": "t***0@example.com",
+      "ip": "192.0.2.4",
+      "userAgent": "N/A",
+      "details": "Student authenticated successfully",
+      "severity": "low"
+    },
+    {
+      "id": "sec_e0161ba8-84d2-4228-9274-660991dc680d",
+      "timestamp": "2026-10-27T13:50:18.605Z",
+      "eventType": "login_success",
+      "studentId": "student-61e061ba-2305-4f03-b0ec-655f2b2fadee",
+      "emailMasked": "c***0@example.com",
+      "ip": "::1",
+      "userAgent": "N/A",
+      "details": "Student authenticated successfully",
+      "severity": "low"
+    },
+    {
+      "id": "sec_a1d6d379-3e67-4543-8e2a-5cef3a10c008",
+      "timestamp": "2026-10-27T13:50:19.041Z",
+      "eventType": "login_success",
+      "studentId": "student-9262198b-8924-4ce8-920b-03f578b73614",
+      "emailMasked": "c***6@example.com",
+      "ip": "::1",
+      "userAgent": "N/A",
+      "details": "Student authenticated successfully",
+      "severity": "low"
+    },
+    {
+      "id": "sec_7affa4c5-90ec-4f83-b227-f88197adf371",
+      "timestamp": "2026-10-27T13:50:19.473Z",
+      "eventType": "login_success",
+      "studentId": "student-43d23053-508c-445e-b4e4-57c12f21c4b3",
+      "emailMasked": "c***6@example.com",
+      "ip": "::1",
+      "userAgent": "N/A",
+      "details": "Student authenticated successfully",
+      "severity": "low"
+    },
+    {
+      "id": "sec_83b02e51-651f-41b0-a951-4c6c29d90f4b",
+      "timestamp": "2026-10-27T13:50:20.331Z",
+      "eventType": "password_changed",
+      "studentId": "student-43d23053-508c-445e-b4e4-57c12f21c4b3",
+      "emailMasked": "c***6@example.com",
+      "ip": "::1",
+      "userAgent": "N/A",
+      "details": "Student password updated via change-password endpoint",
+      "severity": "medium"
+    },
+    {
+      "id": "sec_b63616ad-8d23-4d25-850e-68a39def283c",
+      "timestamp": "2026-10-27T13:50:20.768Z",
+      "eventType": "login_blocked_password_expired",
+      "studentId": "student-745fbda3-8740-42be-b386-f5d8dc446615",
+      "emailMasked": "e***3@example.com",
+      "ip": "::1",
+      "userAgent": "N/A",
+      "details": "Student login blocked because 90-day password validity has expired",
+      "severity": "medium"
+    },
+    {
+      "id": "sec_1a840a25-d735-4df7-acca-dfa7b7cd99e3",
+      "timestamp": "2026-10-27T13:51:23.057Z",
+      "eventType": "login_failed",
+      "studentId": null,
+      "emailMasked": "d***t@example.com",
+      "ip": "198.51.100.55",
+      "userAgent": "N/A",
+      "details": "Invalid credentials supplied",
+      "severity": "medium"
+    },
+    {
+      "id": "sec_fe995e9a-5a1a-4b72-82dd-8a86eb8b8e91",
+      "timestamp": "2026-10-27T13:51:23.058Z",
+      "eventType": "login_failed",
+      "studentId": null,
+      "emailMasked": "s***t@example.com",
+      "ip": "198.51.100.55",
+      "userAgent": "N/A",
+      "details": "Invalid credentials supplied",
+      "severity": "medium"
+    },
+    {
+      "id": "sec_f132d5ee-2ef0-4a2d-89fb-2343645170d6",
+      "timestamp": "2026-10-27T13:51:23.069Z",
+      "eventType": "login_failed",
+      "studentId": null,
+      "emailMasked": "u***t@example.com",
+      "ip": "::1",
+      "userAgent": "node",
+      "details": "Invalid credentials supplied",
+      "severity": "medium"
+    },
+    {
+      "id": "sec_a20db545-960a-4027-b1c7-91ffc44677c5",
+      "timestamp": "2026-10-27T13:51:26.679Z",
+      "eventType": "login_success",
+      "studentId": "student-5c4bb59c-e159-4c75-986b-b6d03fc76c40",
+      "emailMasked": "c***6@example.com",
+      "ip": "::1",
+      "userAgent": "N/A",
+      "details": "Student authenticated successfully",
+      "severity": "low"
+    },
+    {
+      "id": "sec_735e0d5f-5119-4a62-ab90-abf43223338e",
+      "timestamp": "2026-10-27T13:51:27.134Z",
+      "eventType": "login_success",
+      "studentId": "student-e0985212-cb9a-4483-bb67-653aa2237749",
+      "emailMasked": "c***0@example.com",
+      "ip": "::1",
+      "userAgent": "N/A",
+      "details": "Student authenticated successfully",
+      "severity": "low"
+    },
+    {
+      "id": "sec_59205370-e4ad-4352-a6e0-a900d1173b26",
+      "timestamp": "2026-10-27T13:51:27.578Z",
+      "eventType": "login_success",
+      "studentId": "student-d03919ad-4fd4-473e-9161-62c1b10619df",
+      "emailMasked": "c***1@example.com",
+      "ip": "::1",
+      "userAgent": "N/A",
+      "details": "Student authenticated successfully",
+      "severity": "low"
+    },
+    {
+      "id": "sec_2365ceae-4e2d-485f-87c3-812c44747d98",
+      "timestamp": "2026-10-27T13:51:28.445Z",
+      "eventType": "password_changed",
+      "studentId": "student-d03919ad-4fd4-473e-9161-62c1b10619df",
+      "emailMasked": "c***1@example.com",
+      "ip": "::1",
+      "userAgent": "N/A",
+      "details": "Student password updated via change-password endpoint",
+      "severity": "medium"
+    },
+    {
+      "id": "sec_2808ce98-732e-412a-9e96-752f1b19d5a2",
+      "timestamp": "2026-10-27T13:51:28.886Z",
+      "eventType": "login_blocked_password_expired",
+      "studentId": "student-ef718830-c2bf-49bf-9722-21dd83f460e7",
+      "emailMasked": "e***7@example.com",
+      "ip": "::1",
+      "userAgent": "N/A",
+      "details": "Student login blocked because 90-day password validity has expired",
+      "severity": "medium"
+    },
+    {
+      "id": "sec_f4439f7f-18c0-4cb3-a45a-1b7623f4e941",
+      "timestamp": "2026-10-27T13:51:29.598Z",
+      "eventType": "login_success",
+      "studentId": "student-c63acc4b-d547-4bc8-8bd9-71f96d2c5aae",
+      "emailMasked": "t***9@example.com",
+      "ip": "192.0.2.97",
+      "userAgent": "N/A",
+      "details": "Student authenticated successfully",
+      "severity": "low"
+    },
+    {
+      "id": "sec_a1507d61-5dce-403b-b740-85f51d52a131",
+      "timestamp": "2026-10-27T13:51:30.267Z",
+      "eventType": "password_reset_success",
+      "studentId": "student-c63acc4b-d547-4bc8-8bd9-71f96d2c5aae",
+      "emailMasked": "t***9@example.com",
+      "ip": "192.0.2.97",
+      "userAgent": "N/A",
+      "details": "Password reset completed successfully and all active sessions revoked",
+      "severity": "medium"
+    },
+    {
+      "id": "sec_1ef2410b-611e-48a4-93f6-7fc30b9d614c",
+      "timestamp": "2026-10-27T13:51:30.495Z",
+      "eventType": "login_failed",
+      "studentId": "student-c63acc4b-d547-4bc8-8bd9-71f96d2c5aae",
+      "emailMasked": "t***9@example.com",
+      "ip": "192.0.2.97",
+      "userAgent": "N/A",
+      "details": "Invalid credentials supplied",
+      "severity": "medium"
+    },
+    {
+      "id": "sec_76b1241c-a6e8-4b14-b8c0-c5da6062cef9",
+      "timestamp": "2026-10-27T13:51:30.714Z",
+      "eventType": "login_success",
+      "studentId": "student-c63acc4b-d547-4bc8-8bd9-71f96d2c5aae",
+      "emailMasked": "t***9@example.com",
+      "ip": "192.0.2.97",
+      "userAgent": "N/A",
+      "details": "Student authenticated successfully",
+      "severity": "low"
+    }
+  ],
+  "otp_logs": [
+    {
+      "id": "log_f688deab-e1d6-484d-afcb-3b1769ad2a68",
+      "otpId": "otp-b2418e0a-a237-4bf4-8a5a-99c165509600",
+      "email": "secphase2_1793107042560@teststudent.com",
+      "action": "requested",
+      "timestamp": "2026-10-27T13:17:22.804Z",
+      "ip": "::1",
+      "userAgent": "",
+      "reason": null
+    },
+    {
+      "id": "log_514fdf42-6e12-4603-94e9-1f81efe2beb0",
+      "otpId": "otp-eb4dfcce-0de8-453f-a152-8803af12022d",
+      "email": "csrfstudent_1793107042823@example.com",
+      "action": "requested",
+      "timestamp": "2026-10-27T13:17:23.096Z",
+      "ip": "::1",
+      "userAgent": "",
+      "reason": null
+    },
+    {
+      "id": "log_cd0f78d5-7af9-4c39-83b9-0980710a6f99",
+      "otpId": "otp-fd353db5-8279-452b-97a7-9020a556bb7a",
+      "email": "csrfattack_1793107043099@example.com",
+      "action": "requested",
+      "timestamp": "2026-10-27T13:17:23.376Z",
+      "ip": "::1",
+      "userAgent": "",
+      "reason": null
+    },
+    {
+      "id": "log_73ec0703-c1a6-4b70-80e2-4ade0b7c4dd8",
+      "otpId": "otp-f97a12c8-ec9a-4c46-982a-21393b9c036a",
+      "email": "csrflegit_1793107043379@example.com",
+      "action": "requested",
+      "timestamp": "2026-10-27T13:17:23.608Z",
+      "ip": "::1",
+      "userAgent": "",
+      "reason": null
     }
   ]
 }

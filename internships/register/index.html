@@ -1,40 +1,255 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Register for your free student account on the ABSS Nexus Internship Portal. Access modular engineering curriculum tracks and milestone projects." />
-    <meta name="robots" content="noindex, nofollow" />
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="Student Registration | ABSS Nexus Internship Portal" />
-    <meta property="og:description" content="Register for your free student account on the ABSS Nexus Internship Portal. Access modular engineering curriculum tracks and milestone projects." />
-    <meta property="og:image" content="https://abssnexus.in/public/assets/images/LogoGenerated.png" />
-    <meta property="og:url" content="https://abssnexus.in/internships/register" />
-    <link rel="canonical" href="https://abssnexus.in/internships/register" />
-    <title>Student Registration | ABSS Nexus Internship Portal</title>
-    <link rel="icon" type="image/png" sizes="32x32" href="/public/assets/images/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="512x512" href="/public/assets/images/favicon.png" />
-    <link rel="apple-touch-icon" href="/public/assets/images/apple-touch-icon.png" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="/src/styles/styles.css?v=20261023v2" />
-
-  </head>
-  <body class="agency-dark-theme">
-    <header class="site-header site-header--academy" role="banner">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Register for the ABSS Nexus Academy Internship Program. 5-step registration with track selection, OTP verification, and instant enrollment." />
+  <title>Student Registration | ABSS Nexus Academy</title>
+  <link rel="canonical" href="https://abssnexus.in/internships/register" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/public/assets/images/favicon-32x32.png" />
+  <link rel="stylesheet" href="/src/styles/styles.css?v=20261023v2" />
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  <style>
+    .reg-wizard-wrapper {
+      max-width: 680px;
+      margin: 40px auto 80px;
+      padding: 0 20px;
+    }
+    .wizard-card {
+      background: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+      padding: 36px 32px;
+      color: #1D1D1F;
+      border: 1px solid #E5E7EB;
+    }
+    .steps-indicator {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 32px;
+      position: relative;
+    }
+    .steps-indicator::before {
+      content: "";
+      position: absolute;
+      top: 18px;
+      left: 20px;
+      right: 20px;
+      height: 2px;
+      background: #E5E7EB;
+      z-index: 1;
+    }
+    .step-item {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      flex: 1;
+    }
+    .step-circle {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #F3F4F6;
+      color: #6B7280;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 14px;
+      margin-bottom: 6px;
+      transition: all 0.3s ease;
+      border: 2px solid #E5E7EB;
+    }
+    .step-item.active .step-circle {
+      background: #0066CC;
+      color: #ffffff;
+      border-color: #0066CC;
+      box-shadow: 0 0 0 4px rgba(0,102,204,0.15);
+    }
+    .step-item.completed .step-circle {
+      background: #10B981;
+      color: #ffffff;
+      border-color: #10B981;
+    }
+    .step-title {
+      font-size: 11px;
+      color: #6B7280;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      display: block;
+    }
+    .step-item.active .step-title {
+      color: #0066CC;
+      font-weight: 700;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    .form-label {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      color: #374151;
+      margin-bottom: 8px;
+    }
+    .form-input, .form-select {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid #D1D5DB;
+      border-radius: 8px;
+      font-size: 15px;
+      color: #1D1D1F;
+      background: #ffffff;
+      box-sizing: border-box;
+      transition: border-color 0.2s;
+    }
+    .form-input:focus, .form-select:focus {
+      outline: none;
+      border-color: #0066CC;
+      box-shadow: 0 0 0 3px rgba(0,102,204,0.1);
+    }
+    .plan-card-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 10px;
+    }
+    .plan-card {
+      border: 2px solid #E5E7EB;
+      border-radius: 12px;
+      padding: 20px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      position: relative;
+    }
+    .plan-card:hover {
+      border-color: #93C5FD;
+      background: #F8FAFC;
+    }
+    .plan-card.selected {
+      border-color: #0066CC;
+      background: #EFF6FF;
+      box-shadow: 0 4px 14px rgba(0,102,204,0.12);
+    }
+    .plan-badge {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 700;
+      background: #DBEAFE;
+      color: #1E40AF;
+      margin-bottom: 8px;
+    }
+    .plan-price {
+      font-size: 26px;
+      font-weight: 800;
+      color: #1D1D1F;
+      margin: 6px 0;
+    }
+    .plan-price span {
+      font-size: 13px;
+      font-weight: 500;
+      color: #6B7280;
+    }
+    .otp-input-group {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin: 24px 0;
+    }
+    .otp-digit {
+      width: 48px;
+      height: 56px;
+      text-align: center;
+      font-size: 24px;
+      font-weight: 700;
+      border: 2px solid #D1D5DB;
+      border-radius: 10px;
+    }
+    .otp-digit:focus {
+      border-color: #0066CC;
+      outline: none;
+    }
+    .btn-action {
+      width: 100%;
+      padding: 14px;
+      background: #0066CC;
+      color: #ffffff;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-action:hover {
+      background: #0052A3;
+    }
+    .btn-action:disabled {
+      background: #9CA3AF;
+      cursor: not-allowed;
+    }
+    .btn-secondary {
+      background: #F3F4F6;
+      color: #4B5563;
+      border: 1px solid #D1D5DB;
+      margin-top: 10px;
+    }
+    .btn-secondary:hover {
+      background: #E5E7EB;
+    }
+    .banner-alert {
+      padding: 12px 16px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      font-size: 14px;
+      display: none;
+    }
+    .banner-alert.error {
+      background: #FEE2E2;
+      color: #B91C1C;
+      border: 1px solid #FCA5A5;
+      display: block;
+    }
+    .banner-alert.success {
+      background: #ECFDF5;
+      color: #047857;
+      border: 1px solid #A7F3D0;
+      display: block;
+    }
+    .timer-display {
+      text-align: center;
+      font-size: 14px;
+      color: #6B7280;
+      margin-top: 10px;
+    }
+    @media (max-width: 640px) {
+      .plan-card-grid { grid-template-columns: 1fr; }
+      .wizard-card { padding: 24px 18px; }
+      .steps-indicator { margin-bottom: 24px; }
+      .step-title { display: none; }
+    }
+  </style>
+</head>
+<body class="agency-dark-theme">
+  <header class="site-header site-header--academy" role="banner">
       <div class="announcement-bar announcement-bar--academy">
         <div class="announcement-bar__container container">
           <span class="announcement-bar__badge">
             <span class="live-pulse-dot" aria-hidden="true"></span>
-            <span>Admissions Open: 2026 Virtual Internship Cohorts &bull; ISO-Verified Credentials</span>
+            <span>Admissions Open: January 2026 Virtual Internship Cohorts &bull; Batch Starts Jan 15</span>
           </span>
           <a class="announcement-bar__link" href="/internships/register" aria-current="page">Apply for Cohort &rarr;</a>
         </div>
       </div>
       <nav class="nav" aria-label="Internship Academy Navigation">
         <a class="brand" href="/internships" aria-label="ABSS Nexus Academy home">
-          <img src="/public/assets/images/favicon.png" alt="ABSS Nexus Academy logo" width="38" height="38" />
+          <picture>
+            <source srcset="/public/assets/images/favicon.webp" type="image/webp" />
+            <img src="/public/assets/images/favicon.png" alt="ABSS Nexus Academy logo" width="38" height="38" fetchpriority="high" />
+          </picture>
           <div class="brand-text-group" style="display: flex; flex-direction: column; text-align: left;">
             <span class="brand-name">ABSS Nexus Academy</span>
             <span class="brand-subtext" style="font-size: 0.72rem; color: #6E6E73; font-weight: 500; letter-spacing: 0.02em;">Internship &amp; Engineering Portal</span>
@@ -58,99 +273,206 @@
       </nav>
     </header>
 
-    <main>
-      <div class="auth-wrapper">
-        <div class="auth-card">
-          <div class="auth-header">
-            <span class="portal-badge">Student Access</span>
-            <h1>Create Student Account</h1>
-            <p>Register to access curriculum tracks, milestone tasks, and technical reviews.</p>
-          </div>
-
-          <div id="auth-alert" class="auth-alert"></div>
-
-          <button type="button" class="btn-google-auth" id="btn-google-auth">
-            <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true">
-              <path fill="#4285F4" d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.874 2.684-6.616z"/>
-              <path fill="#34A853" d="M9 18c2.43 0 4.467-.806 5.956-2.184l-2.908-2.258c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 0 0 9 18z"/>
-              <path fill="#FBBC05" d="M3.964 10.707c-.18-.54-.282-1.117-.282-1.707s.102-1.167.282-1.707V4.961H.957A8.996 8.996 0 0 0 0 9c0 1.452.348 2.827.957 4.039l3.007-2.332z"/>
-              <path fill="#EA4335" d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 0 0 .957 4.961L3.964 7.293C4.672 5.166 6.656 3.58 9 3.58z"/>
-            </svg>
-            <span>Sign Up with Google</span>
-          </button>
-
-          <div class="auth-divider">
-            <span>or register with email</span>
-          </div>
-
-          <form action="/api/internships/auth/register" method="POST" id="register-form">
-            <div class="auth-form-group">
-              <label for="reg-name">Full Name *</label>
-              <input class="auth-input" type="text" id="reg-name" name="name" required placeholder="e.g. Priya Sharma" autocomplete="name" />
-            </div>
-
-            <div class="auth-form-group">
-              <label for="reg-email">Email Address *</label>
-              <input class="auth-input" type="email" id="reg-email" name="email" required placeholder="e.g. priya@example.com" autocomplete="email" />
-            </div>
-
-            <div class="auth-form-group">
-              <label for="reg-phone">WhatsApp / Mobile Number *</label>
-              <input class="auth-input" type="tel" id="reg-phone" name="phone" required pattern="[6-9][0-9]{9}" placeholder="10-digit mobile number (e.g. 9876543210)" autocomplete="tel" />
-              <small style="color: #6E6E73; font-size: 0.8rem; margin-top: 4px; display: block;">Mandatory for certificate verification &amp; mentor evaluation.</small>
-            </div>
-
-            <div class="auth-form-group">
-              <label for="reg-password">Password *</label>
-              <input class="auth-input" type="password" id="reg-password" name="password" required minlength="8" placeholder="Minimum 8 characters (letters &amp; numbers)" autocomplete="new-password" />
-            </div>
-
-            <div class="auth-form-group">
-              <label for="reg-confirm">Confirm Password *</label>
-              <input class="auth-input" type="password" id="reg-confirm" name="confirmPassword" required minlength="8" placeholder="Repeat your password" autocomplete="new-password" />
-            </div>
-
-            <div class="auth-form-group">
-              <label for="reg-track">Preferred Track (Optional)</label>
-              <select class="auth-input" id="reg-track" name="track">
-                <option value="">Select an interest track...</option>
-                <option value="web-development">Web Development Track</option>
-                <option value="software-development">Software &amp; Full-Stack Track</option>
-                <option value="ui-ux-design">UI/UX Design Track</option>
-                <option value="ai-machine-learning">AI &amp; Machine Learning Track</option>
-                <option value="cloud-devops">Cloud Architecture &amp; DevOps Track</option>
-              </select>
-            </div>
-
-            <div class="auth-form-group">
-              <label for="reg-duration">Internship Duration *</label>
-              <select class="auth-input" id="reg-duration" name="duration" required>
-                <option value="">Select duration...</option>
-                <option value="1 week">1 Week</option>
-                <option value="2 week">2 Weeks</option>
-                <option value="3 week">3 Weeks</option>
-                <option value="4 week">4 Weeks</option>
-                <option value="2 months">2 Months</option>
-              </select>
-            </div>
-
-            <button type="submit" class="auth-btn-primary" id="reg-submit-btn">Create Account</button>
-          </form>
-
-          <div class="auth-links">
-            Already have an account? <a href="/internships/login">Log in here</a>
-          </div>
+  <main class="reg-wizard-wrapper">
+    <div class="wizard-card">
+      <!-- Steps Indicator -->
+      <div class="steps-indicator">
+        <div class="step-item active" id="step-ind-1">
+          <div class="step-circle">1</div>
+          <span class="step-title">Basic Info</span>
+        </div>
+        <div class="step-item" id="step-ind-2">
+          <div class="step-circle">2</div>
+          <span class="step-title">Track</span>
+        </div>
+        <div class="step-item" id="step-ind-3">
+          <div class="step-circle">3</div>
+          <span class="step-title">Duration</span>
+        </div>
+        <div class="step-item" id="step-ind-4">
+          <div class="step-circle">4</div>
+          <span class="step-title">OTP</span>
+        </div>
+        <div class="step-item" id="step-ind-5">
+          <div class="step-circle">5</div>
+          <span class="step-title">Payment</span>
         </div>
       </div>
-    </main>
 
-    <footer class="site-footer site-footer--academy" role="contentinfo">
+      <div id="alert-banner" class="banner-alert"></div>
+
+      <!-- STEP 1: Basic Info -->
+      <section id="step-1" class="wizard-step">
+        <h2 style="margin-top:0; font-size: 22px;">Step 1: Your Information</h2>
+        <p style="color: #6B7280; font-size: 14px; margin-bottom: 24px;">Enter your details to create your student account.</p>
+
+        <div class="form-group">
+          <label class="form-label">Full Name *</label>
+          <input type="text" id="reg-name" class="form-input" placeholder="e.g. Aarav Sharma" required />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email Address *</label>
+          <input type="email" id="reg-email" class="form-input" placeholder="name@example.com" required />
+        </div>
+        <div class="form-group">
+          <label class="form-label">10-Digit Mobile Number *</label>
+          <input type="tel" id="reg-phone" class="form-input" placeholder="e.g. 9876543210" maxlength="10" required />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="reg-password">Create Password (min. 12 characters, complex) *</label>
+          <div style="position: relative;">
+            <input type="password" id="reg-password" class="form-input" placeholder="••••••••••••" required autocomplete="new-password" />
+            <button type="button" id="reg-pwd-toggle" class="toggle-password-btn" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; color: #6B7280; font-size: 16px;" aria-label="Toggle password visibility">👁️</button>
+          </div>
+          <div class="password-strength-container" style="margin-top: 8px;">
+            <div style="display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 4px;">
+              <span style="color: #6B7280;">Password Strength:</span>
+              <span class="strength-text" id="reg-strength-text" style="font-weight: 600; color: #EF4444;">Weak</span>
+            </div>
+            <div style="height: 6px; background: #E5E7EB; border-radius: 3px; overflow: hidden;">
+              <div class="strength-fill" id="reg-strength-fill" style="height: 100%; width: 25%; background: #EF4444; transition: all 0.3s;"></div>
+            </div>
+          </div>
+          <div id="reg-pwd-checklist" style="margin-top: 10px; font-size: 12px; color: #6B7280; display: grid; grid-template-columns: 1fr 1fr; gap: 4px;">
+            <span id="chk-len" class="pwd-chk" style="color: #9CA3AF;">✖ 12+ Characters</span>
+            <span id="chk-upper" class="pwd-chk" style="color: #9CA3AF;">✖ 1+ Uppercase (A-Z)</span>
+            <span id="chk-lower" class="pwd-chk" style="color: #9CA3AF;">✖ 1+ Lowercase (a-z)</span>
+            <span id="chk-num" class="pwd-chk" style="color: #9CA3AF;">✖ 1+ Number (0-9)</span>
+            <span id="chk-special" class="pwd-chk" style="color: #9CA3AF;">✖ 1+ Symbol (!@#$%)</span>
+            <span id="chk-seq" class="pwd-chk" style="color: #10B981;">✔ No Patterns (123)</span>
+          </div>
+        </div>
+
+        <div class="form-group" style="margin-top: 14px;">
+          <label class="form-label" for="reg-confirm-password">Confirm Password *</label>
+          <input type="password" id="reg-confirm-password" class="form-input" placeholder="Repeat your password" required autocomplete="new-password" />
+        </div>
+
+        <button type="button" class="btn-action" onclick="goToStep(2)">Continue to Track Selection &rarr;</button>
+        <p style="text-align: center; margin-top: 16px; font-size: 13px; color: #6B7280;">
+          Already have an account? <a href="/internships/login" style="color: #0066CC; font-weight: 600;">Log In</a>
+        </p>
+      </section>
+
+      <!-- STEP 2: Track Selection -->
+      <section id="step-2" class="wizard-step" style="display: none;">
+        <h2 style="margin-top:0; font-size: 22px;">Step 2: Choose Internship Track</h2>
+        <p style="color: #6B7280; font-size: 14px; margin-bottom: 24px;">Select the engineering domain for your cohort enrollment.</p>
+
+        <div class="form-group">
+          <label class="form-label">Select Engineering Track *</label>
+          <select id="reg-track" class="form-select">
+            <option value="web-development">Web Development (Full-Stack JS, React, Node.js, REST APIs)</option>
+            <option value="data-science">Data Science & Analytics (Python, Pandas, ML, Streamlit)</option>
+            <option value="cloud-devops">Cloud & DevOps (Docker, K8s, CI/CD, Terraform)</option>
+            <option value="ai-machine-learning">AI & Machine Learning (PyTorch, Deep Learning, LLM/RAG)</option>
+            <option value="ui-ux-design">UI/UX Design (Figma, Systems, Prototyping, Accessibility)</option>
+          </select>
+        </div>
+
+        <div style="display: flex; gap: 10px;">
+          <button type="button" class="btn-action btn-secondary" onclick="goToStep(1)">&larr; Back</button>
+          <button type="button" class="btn-action" onclick="goToStep(3)">Continue to Duration &rarr;</button>
+        </div>
+      </section>
+
+      <!-- STEP 3: Duration & Pricing -->
+      <section id="step-3" class="wizard-step" style="display: none;">
+        <h2 style="margin-top:0; font-size: 22px;">Step 3: Select Duration & Plan</h2>
+        <p style="color: #6B7280; font-size: 14px; margin-bottom: 24px;">Choose the internship pace that fits your academic schedule.</p>
+
+        <div class="plan-card-grid">
+          <div class="plan-card" id="plan-low" onclick="selectPlan('low')">
+            <span class="plan-badge">Foundation Pace</span>
+            <div class="plan-price">₹119 <span>/ one-time</span></div>
+            <p style="font-weight: 600; font-size: 14px; margin: 6px 0;">Low Duration (4 Weeks)</p>
+            <ul style="font-size: 12px; color: #4B5563; padding-left: 18px; line-height: 1.6; margin: 0;">
+              <li>4 Weekly Milestone Tasks</li>
+              <li>Teacher Review & Scoring</li>
+              <li>Verified Digital Certificate</li>
+            </ul>
+          </div>
+
+          <div class="plan-card selected" id="plan-high" onclick="selectPlan('high')">
+            <span class="plan-badge" style="background:#FEF3C7; color:#92400E;">Enterprise Pace</span>
+            <div class="plan-price">₹249 <span>/ one-time</span></div>
+            <p style="font-weight: 600; font-size: 14px; margin: 6px 0;">High Duration (8 Weeks)</p>
+            <ul style="font-size: 12px; color: #4B5563; padding-left: 18px; line-height: 1.6; margin: 0;">
+              <li>8 In-Depth Capstone Tasks</li>
+              <li>Priority Mentor Grading</li>
+              <li>Honors Verified Certificate with QR</li>
+            </ul>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 10px; margin-top: 24px;">
+          <button type="button" class="btn-action btn-secondary" onclick="goToStep(2)">&larr; Back</button>
+          <button type="button" class="btn-action" id="btn-submit-reg" onclick="submitRegistration()">Send Verification OTP &rarr;</button>
+        </div>
+      </section>
+
+      <!-- STEP 4: OTP Verification -->
+      <section id="step-4" class="wizard-step" style="display: none;">
+        <h2 style="margin-top:0; font-size: 22px; text-align: center;">Step 4: Verify Your Email & Mobile</h2>
+        <p style="color: #6B7280; font-size: 14px; text-align: center;">We sent a 6-digit OTP via APITXT & Email to <strong id="otp-dest-email">-</strong></p>
+
+        <div class="otp-input-group">
+          <input type="text" maxlength="1" class="otp-digit" oninput="focusNext(this, 1)" id="otp-1" />
+          <input type="text" maxlength="1" class="otp-digit" oninput="focusNext(this, 2)" id="otp-2" />
+          <input type="text" maxlength="1" class="otp-digit" oninput="focusNext(this, 3)" id="otp-3" />
+          <input type="text" maxlength="1" class="otp-digit" oninput="focusNext(this, 4)" id="otp-4" />
+          <input type="text" maxlength="1" class="otp-digit" oninput="focusNext(this, 5)" id="otp-5" />
+          <input type="text" maxlength="1" class="otp-digit" oninput="focusNext(this, 6)" id="otp-6" />
+        </div>
+
+        <div class="timer-display" id="timer-display">⏱️ Code expires in: <span id="countdown">05:00</span></div>
+
+        <button type="button" class="btn-action" style="margin-top: 20px;" onclick="verifyOtpCode()">Verify & Proceed to Payment &rarr;</button>
+        <button type="button" class="btn-action btn-secondary" id="btn-resend" onclick="resendOtpCode()" disabled>Resend OTP (3 left)</button>
+      </section>
+
+      <!-- STEP 5: Razorpay Payment -->
+      <section id="step-5" class="wizard-step" style="display: none;">
+        <h2 style="margin-top:0; font-size: 22px; text-align: center;">Step 5: Complete Enrollment Payment</h2>
+        <p style="color: #6B7280; font-size: 14px; text-align: center;">Mandatory enrollment verification via Razorpay. Access unlocks immediately upon payment.</p>
+
+        <div style="background: #F9FAFB; border: 1px solid #E5E7EB; border-radius: 12px; padding: 20px; margin: 24px 0;">
+          <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #E5E7EB;">
+            <span style="color: #6B7280;">Student Name:</span>
+            <strong id="summary-name">-</strong>
+          </div>
+          <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #E5E7EB;">
+            <span style="color: #6B7280;">Selected Track:</span>
+            <strong id="summary-track">-</strong>
+          </div>
+          <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #E5E7EB;">
+            <span style="color: #6B7280;">Duration:</span>
+            <strong id="summary-duration">-</strong>
+          </div>
+          <div style="display: flex; justify-content: space-between; padding: 12px 0 0; font-size: 18px; color: #0066CC;">
+            <span>Total Payable:</span>
+            <strong id="summary-amount">₹249</strong>
+          </div>
+        </div>
+
+        <button type="button" class="btn-action" id="btn-pay-rzp" onclick="launchRazorpayCheckout()">Pay with Razorpay 🔒</button>
+        <p style="text-align: center; font-size: 12px; color: #9CA3AF; margin-top: 14px;">
+          Note: If payment fails, registration is rolled back and no unauthorized student record is activated.
+        </p>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer site-footer--academy" role="contentinfo">
       <div class="site-footer__container container">
         <div class="site-footer__grid footer-grid">
           <!-- Column 1: Brand & Academy Vision -->
           <div class="site-footer__brand footer-brand">
             <a class="site-footer__logo-link" href="/internships" aria-label="ABSS Nexus Academy home">
-              <img class="site-footer__logo" src="/public/assets/images/LogoGenerated.png" alt="ABSS Nexus Academy logo" width="160" height="38" />
+              <picture>
+                <source srcset="/public/assets/images/LogoGenerated.webp" type="image/webp" />
+                <img class="site-footer__logo" src="/public/assets/images/LogoGenerated.png" alt="ABSS Nexus Academy logo" width="160" height="38" loading="lazy" decoding="async" />
+              </picture>
             </a>
             <p class="site-footer__brand-title footer-brand-title">ABSS Nexus Academy</p>
             <p class="site-footer__brand-desc">Industry-standard virtual technical internships, hands-on production code reviews, and verifiable credentials for ambitious software engineers.</p>
@@ -217,18 +539,347 @@
       </div>
     </footer>
 
-    <a class="floating-whatsapp" href="https://wa.me/918757928673" target="_blank" rel="noopener noreferrer" aria-label="Contact us on WhatsApp">
-      <svg viewBox="0 0 32 32" aria-hidden="true" focusable="false">
-        <path d="M16 3.2A12.7 12.7 0 0 0 5.1 22.4L3.4 28.8l6.6-1.7A12.7 12.7 0 1 0 16 3.2Zm0 22.9c-2 0-3.9-.6-5.6-1.6l-.4-.2-3.9 1 1-3.8-.3-.4a10.3 10.3 0 1 1 9.2 5Z" />
-        <path d="M21.7 18.6c-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.2-1.3-.5-2.5-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.6 0-.2-.7-1.7-1-2.3-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.2-1.2 2.9s1.2 3.3 1.4 3.6c.2.2 2.4 3.7 5.9 5.1.8.4 1.5.6 2 .7.8.3 1.6.2 2.2.1.7-.1 1.9-.8 2.2-1.5.3-.7.3-1.4.2-1.5-.1-.1-.3-.2-.6-.4Z" />
-      </svg>
-      <span>WhatsApp</span>
-    </a>
+  <script>
+    let currentStep = 1;
+    let selectedDuration = "high";
+    let registrationData = {};
+    let countdownInterval = null;
+    let resendsLeft = 3;
 
-    <script src="/src/scripts/seo-schema.js"></script>
-    <script src="/src/scripts/components/footer.js" defer></script>
-    <script src="/src/scripts/script.js"></script>
+    function selectPlan(duration) {
+      selectedDuration = duration;
+      document.getElementById('plan-low').classList.toggle('selected', duration === 'low');
+      document.getElementById('plan-high').classList.toggle('selected', duration === 'high');
+    }
 
-    <script src="/src/scripts/auth.js" defer></script>
-  </body>
+    function showAlert(msg, isError = true) {
+      const banner = document.getElementById('alert-banner');
+      banner.className = isError ? 'banner-alert error' : 'banner-alert success';
+      banner.textContent = msg;
+      banner.style.display = 'block';
+    }
+
+    function clearAlert() {
+      const banner = document.getElementById('alert-banner');
+      banner.style.display = 'none';
+    }
+
+    function goToStep(step) {
+      clearAlert();
+      if (step === 2) {
+        const name = document.getElementById('reg-name').value.trim();
+        const email = document.getElementById('reg-email').value.trim();
+        const phone = document.getElementById('reg-phone').value.trim();
+        const password = document.getElementById('reg-password').value;
+        const confirmPassword = document.getElementById('reg-confirm-password') ? document.getElementById('reg-confirm-password').value : '';
+
+        if (!name || name.length < 2) return showAlert("Please enter your full name.");
+        if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return showAlert("Please enter a valid email address.");
+        if (!phone || phone.replace(/\D/g, '').length !== 10) return showAlert("Please enter a valid 10-digit mobile number.");
+        if (!password || password.length < 12) return showAlert("Password must be at least 12 characters in length.");
+        if (!/[A-Z]/.test(password) || !/[a-z]/.test(password) || !/[0-9]/.test(password) || !/[!@#$%^&*]/.test(password)) {
+          return showAlert("Password must include at least one UPPERCASE letter, one lowercase letter, one number, and one special character (!@#$%^&*).");
+        }
+        if (password !== confirmPassword) return showAlert("Passwords do not match. Please verify both password fields.");
+      }
+
+      for (let i = 1; i <= 5; i++) {
+        document.getElementById(`step-${i}`).style.display = (i === step) ? 'block' : 'none';
+        const ind = document.getElementById(`step-ind-${i}`);
+        ind.classList.remove('active', 'completed');
+        if (i < step) ind.classList.add('completed');
+        if (i === step) ind.classList.add('active');
+      }
+      currentStep = step;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      const pwdInp = document.getElementById('reg-password');
+      const toggleBtn = document.getElementById('reg-pwd-toggle');
+      if (toggleBtn && pwdInp) {
+        toggleBtn.addEventListener('click', function() {
+          const isPwd = pwdInp.type === 'password';
+          pwdInp.type = isPwd ? 'text' : 'password';
+          toggleBtn.textContent = isPwd ? '🙈' : '👁️';
+        });
+      }
+
+      if (pwdInp) {
+        pwdInp.addEventListener('input', function() {
+          const val = pwdInp.value;
+          const lenPass = val.length >= 12;
+          const upperPass = /[A-Z]/.test(val);
+          const lowerPass = /[a-z]/.test(val);
+          const numPass = /[0-9]/.test(val);
+          const specPass = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(val);
+          const seqPass = !/(?:012|123|234|345|456|567|678|789|qwerty|asdfgh|zxcvbn)/i.test(val);
+
+          const updateChk = (id, pass, label) => {
+            const el = document.getElementById(id);
+            if (!el) return;
+            el.textContent = (pass ? "✔ " : "✖ ") + label;
+            el.style.color = pass ? "#10B981" : "#9CA3AF";
+            el.style.fontWeight = pass ? "600" : "400";
+          };
+
+          updateChk("chk-len", lenPass, "12+ Characters");
+          updateChk("chk-upper", upperPass, "1+ Uppercase (A-Z)");
+          updateChk("chk-lower", lowerPass, "1+ Lowercase (a-z)");
+          updateChk("chk-num", numPass, "1+ Number (0-9)");
+          updateChk("chk-special", specPass, "1+ Symbol (!@#$%)");
+          updateChk("chk-seq", seqPass, "No Patterns (123)");
+
+          const fill = document.getElementById('reg-strength-fill');
+          const txt = document.getElementById('reg-strength-text');
+          if (!fill || !txt) return;
+
+          let score = [lenPass, upperPass, lowerPass, numPass, specPass, seqPass].filter(Boolean).length;
+
+          if (!val || val.length < 12 || score < 5) {
+            fill.style.width = '25%';
+            fill.style.background = '#EF4444';
+            txt.textContent = 'Weak';
+            txt.style.color = '#EF4444';
+          } else if (score === 5 || val.length < 15) {
+            fill.style.width = '65%';
+            fill.style.background = '#F59E0B';
+            txt.textContent = 'Fair';
+            txt.style.color = '#F59E0B';
+          } else {
+            fill.style.width = '100%';
+            fill.style.background = '#10B981';
+            txt.textContent = 'Strong';
+            txt.style.color = '#10B981';
+          }
+        });
+      }
+    });
+
+    async function submitRegistration() {
+      clearAlert();
+      const btn = document.getElementById('btn-submit-reg');
+      btn.disabled = true;
+      btn.textContent = "Sending OTP...";
+
+      const name = document.getElementById('reg-name').value.trim();
+      const email = document.getElementById('reg-email').value.trim().toLowerCase();
+      const phone = document.getElementById('reg-phone').value.trim();
+      const password = document.getElementById('reg-password').value;
+      const track = document.getElementById('reg-track').value;
+
+      registrationData = { name, email, phone, password, track, duration: selectedDuration };
+
+      try {
+        const res = await fetch("/api/internships/register", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(registrationData)
+        });
+        const data = await res.json();
+
+        if (!res.ok) {
+          showAlert(data.error || "Failed to initiate registration.");
+          btn.disabled = false;
+          btn.textContent = "Send Verification OTP →";
+          return;
+        }
+
+        registrationData.studentId = data.studentId;
+        registrationData.amount = data.amount;
+        document.getElementById('otp-dest-email').textContent = `${email} / +91 ${phone}`;
+        goToStep(4);
+        startCountdown(300); // 5 minutes
+        if (data.demoOtp) {
+          showAlert(`[Dev Mode] Verification code generated: ${data.demoOtp}`, false);
+        }
+      } catch (err) {
+        showAlert("Network connection error. Please try again.");
+      } finally {
+        btn.disabled = false;
+        btn.textContent = "Send Verification OTP →";
+      }
+    }
+
+    function focusNext(input, idx) {
+      if (input.value && idx < 6) {
+        document.getElementById(`otp-${idx + 1}`).focus();
+      }
+    }
+
+    function getEnteredOtp() {
+      let code = "";
+      for (let i = 1; i <= 6; i++) {
+        code += document.getElementById(`otp-${i}`).value.trim();
+      }
+      return code;
+    }
+
+    async function verifyOtpCode() {
+      clearAlert();
+      const code = getEnteredOtp();
+      if (code.length !== 6) {
+        return showAlert("Please enter all 6 digits of the OTP code.");
+      }
+
+      try {
+        const res = await fetch("/api/internships/verify-otp", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email: registrationData.email, code, type: "registration" })
+        });
+        const data = await res.json();
+
+        if (!res.ok) {
+          return showAlert(data.error || "Incorrect or expired OTP code.");
+        }
+
+        clearInterval(countdownInterval);
+        // Prepare Step 5 Summary
+        document.getElementById('summary-name').textContent = registrationData.name;
+        document.getElementById('summary-track').textContent = registrationData.track.replace('-', ' ').toUpperCase();
+        document.getElementById('summary-duration').textContent = registrationData.duration === 'low' ? 'Low (4 Weeks, 4 Tasks)' : 'High (8 Weeks, 8 Tasks)';
+        document.getElementById('summary-amount').textContent = `₹${registrationData.amount}`;
+        goToStep(5);
+        showAlert("OTP verified successfully! Complete payment to activate your dashboard.", false);
+      } catch (err) {
+        showAlert("Network error during verification.");
+      }
+    }
+
+    async function resendOtpCode() {
+      clearAlert();
+      const btn = document.getElementById('btn-resend');
+      btn.disabled = true;
+
+      try {
+        const res = await fetch("/api/internships/resend-otp", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email: registrationData.email, phone: registrationData.phone, type: "registration" })
+        });
+        const data = await res.json();
+        if (!res.ok) {
+          showAlert(data.error || "Failed to resend OTP.");
+          return;
+        }
+
+        resendsLeft = data.resendsRemaining;
+        btn.textContent = `Resend OTP (${resendsLeft} left)`;
+        startCountdown(300);
+        showAlert("A new OTP code has been sent.", false);
+      } catch (err) {
+        showAlert("Failed to resend OTP.");
+      }
+    }
+
+    function startCountdown(seconds) {
+      clearInterval(countdownInterval);
+      const display = document.getElementById('countdown');
+      const resendBtn = document.getElementById('btn-resend');
+      resendBtn.disabled = true;
+
+      let remaining = seconds;
+      countdownInterval = setInterval(() => {
+        const m = Math.floor(remaining / 60);
+        const s = remaining % 60;
+        display.textContent = `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+        remaining--;
+
+        if (remaining < 0) {
+          clearInterval(countdownInterval);
+          display.textContent = "00:00 (Expired)";
+          if (resendsLeft > 0) resendBtn.disabled = false;
+        }
+      }, 1000);
+    }
+
+    async function launchRazorpayCheckout() {
+      clearAlert();
+      const btn = document.getElementById('btn-pay-rzp');
+      btn.disabled = true;
+      btn.textContent = "Connecting to Payment Gateway...";
+
+      try {
+        const orderRes = await fetch("/api/payments/create-order", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            studentId: registrationData.studentId,
+            studentEmail: registrationData.email,
+            studentName: registrationData.name,
+            internshipTrack: registrationData.track,
+            duration: registrationData.duration
+          })
+        });
+        const order = await orderRes.json();
+        if (!orderRes.ok) {
+          showAlert("Failed to initiate payment. Please try again.");
+          btn.disabled = false;
+          btn.textContent = "Pay with Razorpay 🔒";
+          return;
+        }
+
+        const options = {
+          key: order.keyId,
+          amount: order.amount * 100,
+          currency: "INR",
+          name: "ABSS Nexus Academy",
+          description: `Enrollment: ${registrationData.track} (${registrationData.duration})`,
+          order_id: order.orderId,
+          prefill: {
+            name: registrationData.name,
+            email: registrationData.email,
+            contact: registrationData.phone
+          },
+          theme: { color: "#0066CC" },
+          handler: async function (response) {
+            btn.textContent = "Verifying Payment...";
+            const verifyRes = await fetch("/api/payments/verify", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                razorpayOrderId: response.razorpay_order_id,
+                razorpayPaymentId: response.razorpay_payment_id,
+                razorpaySignature: response.razorpay_signature
+              })
+            });
+
+            if (verifyRes.ok) {
+              showAlert("Payment successful! Account fully activated. Redirecting to your dashboard...", false);
+              localStorage.setItem("student_data", JSON.stringify({
+                id: registrationData.studentId,
+                name: registrationData.name,
+                email: registrationData.email,
+                internshipTrack: registrationData.track,
+                duration: registrationData.duration
+              }));
+              setTimeout(() => {
+                window.location.href = "/student/dashboard";
+              }, 1500);
+            } else {
+              showAlert("Payment verification failed. If amount was deducted, please contact support@abssnexus.in");
+              btn.disabled = false;
+              btn.textContent = "Pay with Razorpay 🔒";
+            }
+          },
+          modal: {
+            ondismiss: function () {
+              btn.disabled = false;
+              btn.textContent = "Pay with Razorpay 🔒";
+              showAlert("Payment was cancelled. Your registration is not yet activated.");
+            }
+          }
+        };
+
+        const rzp = new Razorpay(options);
+        rzp.open();
+      } catch (err) {
+        showAlert("Error launching payment. Please try again.");
+        btn.disabled = false;
+        btn.textContent = "Pay with Razorpay 🔒";
+      }
+    }
+  </script>
+</body>
 </html>

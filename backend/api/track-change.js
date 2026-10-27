@@ -16,6 +16,13 @@ function initiateTrackChangeOrder({ student, newTrack, razorpayInstance }) {
     return { error: "Please select a different internship track to switch to." };
   }
 
+  // Enforce 1 track change per 24 hours limit
+  const { checkSlidingRateLimit } = require("../security/rate-limiter");
+  const rateCheck = checkSlidingRateLimit(`ratelimit:track_change:${student.id}`, 1, 24 * 60 * 60 * 1000);
+  if (!rateCheck.allowed) {
+    return { error: "Track change is permitted at most once per 24 hours. Please wait before changing tracks again." };
+  }
+
   const amount = 49;
   const amountInPaise = amount * 100;
   const orderId = `order_tc_${crypto.randomBytes(6).toString("hex")}`;

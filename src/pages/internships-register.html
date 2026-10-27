@@ -319,8 +319,33 @@
           <input type="tel" id="reg-phone" class="form-input" placeholder="e.g. 9876543210" maxlength="10" required />
         </div>
         <div class="form-group">
-          <label class="form-label">Create Password (min. 8 characters) *</label>
-          <input type="password" id="reg-password" class="form-input" placeholder="••••••••" required />
+          <label class="form-label" for="reg-password">Create Password (min. 12 characters, complex) *</label>
+          <div style="position: relative;">
+            <input type="password" id="reg-password" class="form-input" placeholder="••••••••••••" required autocomplete="new-password" />
+            <button type="button" id="reg-pwd-toggle" class="toggle-password-btn" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; color: #6B7280; font-size: 16px;" aria-label="Toggle password visibility">👁️</button>
+          </div>
+          <div class="password-strength-container" style="margin-top: 8px;">
+            <div style="display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 4px;">
+              <span style="color: #6B7280;">Password Strength:</span>
+              <span class="strength-text" id="reg-strength-text" style="font-weight: 600; color: #EF4444;">Weak</span>
+            </div>
+            <div style="height: 6px; background: #E5E7EB; border-radius: 3px; overflow: hidden;">
+              <div class="strength-fill" id="reg-strength-fill" style="height: 100%; width: 25%; background: #EF4444; transition: all 0.3s;"></div>
+            </div>
+          </div>
+          <div id="reg-pwd-checklist" style="margin-top: 10px; font-size: 12px; color: #6B7280; display: grid; grid-template-columns: 1fr 1fr; gap: 4px;">
+            <span id="chk-len" class="pwd-chk" style="color: #9CA3AF;">✖ 12+ Characters</span>
+            <span id="chk-upper" class="pwd-chk" style="color: #9CA3AF;">✖ 1+ Uppercase (A-Z)</span>
+            <span id="chk-lower" class="pwd-chk" style="color: #9CA3AF;">✖ 1+ Lowercase (a-z)</span>
+            <span id="chk-num" class="pwd-chk" style="color: #9CA3AF;">✖ 1+ Number (0-9)</span>
+            <span id="chk-special" class="pwd-chk" style="color: #9CA3AF;">✖ 1+ Symbol (!@#$%)</span>
+            <span id="chk-seq" class="pwd-chk" style="color: #10B981;">✔ No Patterns (123)</span>
+          </div>
+        </div>
+
+        <div class="form-group" style="margin-top: 14px;">
+          <label class="form-label" for="reg-confirm-password">Confirm Password *</label>
+          <input type="password" id="reg-confirm-password" class="form-input" placeholder="Repeat your password" required autocomplete="new-password" />
         </div>
 
         <button type="button" class="btn-action" onclick="goToStep(2)">Continue to Track Selection &rarr;</button>
@@ -546,11 +571,16 @@
         const email = document.getElementById('reg-email').value.trim();
         const phone = document.getElementById('reg-phone').value.trim();
         const password = document.getElementById('reg-password').value;
+        const confirmPassword = document.getElementById('reg-confirm-password') ? document.getElementById('reg-confirm-password').value : '';
 
         if (!name || name.length < 2) return showAlert("Please enter your full name.");
         if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return showAlert("Please enter a valid email address.");
         if (!phone || phone.replace(/\D/g, '').length !== 10) return showAlert("Please enter a valid 10-digit mobile number.");
-        if (!password || password.length < 8) return showAlert("Password must be at least 8 characters long.");
+        if (!password || password.length < 12) return showAlert("Password must be at least 12 characters in length.");
+        if (!/[A-Z]/.test(password) || !/[a-z]/.test(password) || !/[0-9]/.test(password) || !/[!@#$%^&*]/.test(password)) {
+          return showAlert("Password must include at least one UPPERCASE letter, one lowercase letter, one number, and one special character (!@#$%^&*).");
+        }
+        if (password !== confirmPassword) return showAlert("Passwords do not match. Please verify both password fields.");
       }
 
       for (let i = 1; i <= 5; i++) {
@@ -563,6 +593,68 @@
       currentStep = step;
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      const pwdInp = document.getElementById('reg-password');
+      const toggleBtn = document.getElementById('reg-pwd-toggle');
+      if (toggleBtn && pwdInp) {
+        toggleBtn.addEventListener('click', function() {
+          const isPwd = pwdInp.type === 'password';
+          pwdInp.type = isPwd ? 'text' : 'password';
+          toggleBtn.textContent = isPwd ? '🙈' : '👁️';
+        });
+      }
+
+      if (pwdInp) {
+        pwdInp.addEventListener('input', function() {
+          const val = pwdInp.value;
+          const lenPass = val.length >= 12;
+          const upperPass = /[A-Z]/.test(val);
+          const lowerPass = /[a-z]/.test(val);
+          const numPass = /[0-9]/.test(val);
+          const specPass = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(val);
+          const seqPass = !/(?:012|123|234|345|456|567|678|789|qwerty|asdfgh|zxcvbn)/i.test(val);
+
+          const updateChk = (id, pass, label) => {
+            const el = document.getElementById(id);
+            if (!el) return;
+            el.textContent = (pass ? "✔ " : "✖ ") + label;
+            el.style.color = pass ? "#10B981" : "#9CA3AF";
+            el.style.fontWeight = pass ? "600" : "400";
+          };
+
+          updateChk("chk-len", lenPass, "12+ Characters");
+          updateChk("chk-upper", upperPass, "1+ Uppercase (A-Z)");
+          updateChk("chk-lower", lowerPass, "1+ Lowercase (a-z)");
+          updateChk("chk-num", numPass, "1+ Number (0-9)");
+          updateChk("chk-special", specPass, "1+ Symbol (!@#$%)");
+          updateChk("chk-seq", seqPass, "No Patterns (123)");
+
+          const fill = document.getElementById('reg-strength-fill');
+          const txt = document.getElementById('reg-strength-text');
+          if (!fill || !txt) return;
+
+          let score = [lenPass, upperPass, lowerPass, numPass, specPass, seqPass].filter(Boolean).length;
+
+          if (!val || val.length < 12 || score < 5) {
+            fill.style.width = '25%';
+            fill.style.background = '#EF4444';
+            txt.textContent = 'Weak';
+            txt.style.color = '#EF4444';
+          } else if (score === 5 || val.length < 15) {
+            fill.style.width = '65%';
+            fill.style.background = '#F59E0B';
+            txt.textContent = 'Fair';
+            txt.style.color = '#F59E0B';
+          } else {
+            fill.style.width = '100%';
+            fill.style.background = '#10B981';
+            txt.textContent = 'Strong';
+            txt.style.color = '#10B981';
+          }
+        });
+      }
+    });
 
     async function submitRegistration() {
       clearAlert();

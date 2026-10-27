@@ -82,15 +82,27 @@ function submitTaskSolution({ student, taskId, textAnswer, githubLink, db, write
     return { error: "Course materials and tasks are locked until payment is completed." };
   }
 
-  const cleanText = String(textAnswer || "").trim();
-  const cleanGithub = String(githubLink || "").trim();
+  // Enforce sliding-window submission rate limit: Max 10 per hour per student
+  const { checkSlidingRateLimit } = require("../security/rate-limiter");
+  const { validateTaskSubmissionText, validateGitHubUrl } = require("../security/input-validator");
 
-  if (!cleanText || cleanText.length < 20) {
-    return { error: "Please provide a detailed text answer (at least 20 characters)." };
+  const rateCheck = checkSlidingRateLimit(`ratelimit:submission:${student.id}`, 10, 60 * 60 * 1000);
+  if (!rateCheck.allowed) {
+    return { error: "Too many submissions. Maximum 10 submissions per hour permitted. Please wait before submitting again." };
   }
-  if (cleanGithub && !/^https?:\/\/(www\.)?github\.com\/.+/i.test(cleanGithub)) {
-    return { error: "Please provide a valid GitHub URL (https://github.com/username/repo)." };
+
+  const textVal = validateTaskSubmissionText(textAnswer);
+  if (!textVal.isValid) {
+    return { error: textVal.error };
   }
+
+  const ghVal = validateGitHubUrl(githubLink);
+  if (!ghVal.isValid) {
+    return { error: ghVal.error };
+  }
+
+  const cleanText = textVal.textAnswer;
+  const cleanGithub = ghVal.url;
 
   const tasks = getTasksForStudent({ student, db });
   const targetTask = tasks.find((t) => t.id === taskId);

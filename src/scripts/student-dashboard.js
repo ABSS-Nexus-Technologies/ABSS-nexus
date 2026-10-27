@@ -2312,9 +2312,110 @@
         try {
           await fetch('/api/internships/auth/logout', { method: 'POST' });
         } catch (e) {}
+        try {
+          localStorage.setItem('abss_session_event', JSON.stringify({ action: 'logout', timestamp: Date.now() }));
+        } catch (e) {}
         window.location.href = '/internships/login';
       });
     }
+
+    // Enterprise Cross-Tab Session Synchronization (Section 3.2)
+    window.addEventListener('storage', (e) => {
+      if (e.key === 'abss_session_event') {
+        try {
+          const data = JSON.parse(e.newValue);
+          if (data && data.action === 'logout') {
+            window.location.href = '/internships/login?error=' + encodeURIComponent('You have been logged out from another browser window.');
+          }
+        } catch (err) {}
+      }
+    });
+
+    // Enterprise 30-Minute Inactivity Warning System (Section 3.1)
+    let idleTimer = null;
+    let warningModal = null;
+    let countdownInterval = null;
+    const WARNING_THRESHOLD_MS = 25 * 60 * 1000; // 25 Minutes
+
+    function createIdleWarningModal() {
+      if (document.getElementById('idle-warning-modal')) return document.getElementById('idle-warning-modal');
+      const modal = document.createElement('div');
+      modal.id = 'idle-warning-modal';
+      modal.style.cssText = 'position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.65);backdrop-filter:blur(4px);z-index:99999;display:none;align-items:center;justify-content:center;padding:20px;box-sizing:border-box;font-family:Inter,system-ui,sans-serif;';
+      modal.innerHTML = `
+        <div style="background:#ffffff;border-radius:16px;max-width:440px;width:100%;padding:28px;box-shadow:0 20px 40px rgba(0,0,0,0.25);text-align:center;border:1px solid #e2e8f0;">
+          <div style="width:56px;height:56px;border-radius:50%;background:#fef3c7;color:#d97706;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:28px;">⏳</div>
+          <h3 style="margin:0 0 8px;font-size:20px;font-weight:700;color:#0f172a;">Session Expiring Soon</h3>
+          <p style="margin:0 0 20px;font-size:14px;color:#64748b;line-height:1.5;">You have been inactive for 25 minutes. For your security, your session will automatically terminate in <strong id="idle-countdown-seconds" style="color:#ef4444;">300</strong> seconds.</p>
+          <div style="display:flex;gap:12px;justify-content:center;">
+            <button id="btn-stay-logged-in" style="flex:1;padding:10px 18px;border-radius:8px;background:#0066cc;color:#fff;font-weight:600;font-size:14px;border:none;cursor:pointer;transition:background 0.2s;">Stay Logged In</button>
+            <button id="btn-idle-logout" style="padding:10px 18px;border-radius:8px;background:#f1f5f9;color:#475569;font-weight:600;font-size:14px;border:1px solid #cbd5e1;cursor:pointer;">Log Out</button>
+          </div>
+        </div>
+      `;
+      document.body.appendChild(modal);
+
+      modal.querySelector('#btn-stay-logged-in').addEventListener('click', async () => {
+        try {
+          await fetch('/api/internships/auth/me'); // Extends session on backend
+        } catch (e) {}
+        hideIdleWarning();
+        resetIdleTimer();
+      });
+
+      modal.querySelector('#btn-idle-logout').addEventListener('click', async () => {
+        try {
+          await fetch('/api/internships/auth/logout', { method: 'POST' });
+        } catch (e) {}
+        try {
+          localStorage.setItem('abss_session_event', JSON.stringify({ action: 'logout', timestamp: Date.now() }));
+        } catch (e) {}
+        window.location.href = '/internships/login';
+      });
+
+      return modal;
+    }
+
+    function showIdleWarning() {
+      warningModal = createIdleWarningModal();
+      warningModal.style.display = 'flex';
+      let remaining = 300;
+      const countEl = document.getElementById('idle-countdown-seconds');
+      if (countdownInterval) clearInterval(countdownInterval);
+      countdownInterval = setInterval(() => {
+        remaining--;
+        if (countEl) countEl.textContent = String(remaining);
+        if (remaining <= 0) {
+          clearInterval(countdownInterval);
+          try {
+            localStorage.setItem('abss_session_event', JSON.stringify({ action: 'logout', timestamp: Date.now() }));
+          } catch (e) {}
+          window.location.href = '/internships/login?error=' + encodeURIComponent('Your session has expired due to 30 minutes of inactivity.');
+        }
+      }, 1000);
+    }
+
+    function hideIdleWarning() {
+      if (warningModal) warningModal.style.display = 'none';
+      if (countdownInterval) clearInterval(countdownInterval);
+    }
+
+    function resetIdleTimer() {
+      if (idleTimer) clearTimeout(idleTimer);
+      idleTimer = setTimeout(() => {
+        showIdleWarning();
+      }, WARNING_THRESHOLD_MS);
+    }
+
+    ['mousemove', 'keydown', 'click', 'scroll', 'touchstart'].forEach((evt) => {
+      window.addEventListener(evt, () => {
+        if (!warningModal || warningModal.style.display !== 'flex') {
+          resetIdleTimer();
+        }
+      }, { passive: true });
+    });
+    resetIdleTimer();
+
 
     // Submission Form
     const subForm = document.getElementById('submission-form');

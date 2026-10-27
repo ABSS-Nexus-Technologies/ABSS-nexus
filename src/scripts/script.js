@@ -2034,24 +2034,46 @@ if (document.readyState === "loading") {
 }
 
 function calculatePasswordStrength(password) {
-  if (!password) return { level: 'weak', label: 'Weak' };
+  if (!password) return { level: 'weak', label: 'Weak', score: 0 };
+  const pwd = String(password);
   let score = 0;
-  
-  // Length points
-  if (password.length >= 8) score += 20;
-  if (password.length >= 12) score += 10;
-  if (password.length >= 16) score += 10;
-  
+
+  // Length points (12+ mandatory for Fair/Strong)
+  if (pwd.length >= 12) score += 30;
+  if (pwd.length >= 16) score += 15;
+
   // Character diversity
-  if (/[a-z]/.test(password)) score += 15; // lowercase
-  if (/[A-Z]/.test(password)) score += 15; // uppercase
-  if (/[0-9]/.test(password)) score += 15; // numbers
-  if (/[!@#$%^&*]/.test(password)) score += 20; // special chars
-  
-  // Determine level
-  if (score < 50) return { level: 'weak', label: '⚠️ Weak' };
-  if (score < 75) return { level: 'fair', label: '✓ Fair' };
-  return { level: 'strong', label: '✓✓ Strong' };
+  const hasLower = /[a-z]/.test(pwd);
+  const hasUpper = /[A-Z]/.test(pwd);
+  const hasNum = /[0-9]/.test(pwd);
+  const hasSpecial = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(pwd);
+
+  if (hasLower) score += 15;
+  if (hasUpper) score += 15;
+  if (hasNum) score += 15;
+  if (hasSpecial) score += 20;
+
+  // Sequential or keyboard patterns check
+  const sequentialPatterns = ["123", "234", "345", "456", "567", "678", "789", "qwerty", "asdfgh", "zxcvbn"];
+  const lowerPwd = pwd.toLowerCase();
+  let hasSeq = false;
+  for (const seq of sequentialPatterns) {
+    if (lowerPwd.includes(seq)) {
+      hasSeq = true;
+      score -= 35;
+      break;
+    }
+  }
+
+  // Under 12 characters is strictly weak
+  if (pwd.length < 12 || hasSeq || !hasLower || !hasUpper || !hasNum || !hasSpecial) {
+    return { level: 'weak', label: '⚠️ Weak', score: Math.max(10, Math.min(45, score)) };
+  }
+
+  if (score >= 80 && pwd.length >= 14) {
+    return { level: 'strong', label: '✓✓ Strong', score };
+  }
+  return { level: 'fair', label: '✓ Fair', score };
 }
 
 function initPasswordStrengthIndicators() {

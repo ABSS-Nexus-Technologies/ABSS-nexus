@@ -192,8 +192,8 @@
           return;
         }
 
-        if (!password || password.length < 8) {
-          showAlert("error", "Password must be at least 8 characters long.", "", regForm);
+        if (!password || password.length < 12) {
+          showAlert("error", "Password must be at least 12 characters long and include uppercase, lowercase, numbers, and special characters.", "", regForm);
           if (passInput) passInput.focus();
           return;
         }
@@ -449,8 +449,8 @@
           return;
         }
 
-        if (!newPassword || newPassword.length < 8) {
-          showAlert("error", "Password must be at least 8 characters long.", "", resetForm);
+        if (!newPassword || newPassword.length < 12) {
+          showAlert("error", "Password must be at least 12 characters long and include uppercase, lowercase, numbers, and special characters.", "", resetForm);
           return;
         }
 
@@ -537,9 +537,24 @@
     initAuth();
   }
 
+  // Cross-tab logout synchronization
+  window.addEventListener("storage", function (e) {
+    if (e.key === "abss_session_event") {
+      try {
+        const data = JSON.parse(e.newValue);
+        if (data && data.action === "logout") {
+          if (window.location.pathname.includes("/internships/dashboard") || window.location.pathname.includes("/internships/tasks")) {
+            window.location.href = "/internships/login?error=" + encodeURIComponent("You have been logged out from another browser window.");
+          }
+        }
+      } catch (err) {}
+    }
+  });
+
   // Global helper
   window.AbssAuth = {
     showAlert,
     clearAlert,
   };
 })();
+

@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "ABSS Nexus Student Management System Schema",
+  "title": "ABSS Nexus Hardened Enterprise Security & Student Management Schema",
   "type": "object",
   "properties": {
     "students": {
@@ -15,6 +15,25 @@
           "phone": { "type": "string" },
           "passwordHash": { "type": "string" },
           "salt": { "type": "string" },
+          "passwordChangedAt": { "type": ["string", "null"] },
+          "passwordExpiresAt": { "type": ["string", "null"] },
+          "passwordHistory": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "hash": { "type": "string" },
+                "changedAt": { "type": "string" }
+              }
+            }
+          },
+          "lastPasswordWarningAt": { "type": ["string", "null"] },
+          "passwordResetToken": { "type": ["string", "null"] },
+          "passwordResetExpiresAt": { "type": ["string", "null"] },
+          "failedLoginAttempts": { "type": "integer" },
+          "lastFailedLoginAt": { "type": ["string", "null"] },
+          "accountLockedUntil": { "type": ["string", "null"] },
+          "lockReason": { "type": ["string", "null"] },
           "internshipTrack": { "type": "string" },
           "duration": { "type": "string", "enum": ["low", "high"] },
           "durationWeeks": { "type": "integer", "enum": [4, 8] },
@@ -28,6 +47,24 @@
           "totalPoints": { "type": "integer" },
           "currentWeek": { "type": "integer" },
           "emailVerified": { "type": "boolean" },
+          "emailVerifiedAt": { "type": ["string", "null"] },
+          "lastLoginAt": { "type": ["string", "null"] },
+          "lastLoginIp": { "type": ["string", "null"] },
+          "lastLoginDevice": { "type": ["string", "null"] },
+          "loginHistory": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "timestamp": { "type": "string" },
+                "ip": { "type": "string" },
+                "device": { "type": "string" },
+                "success": { "type": "boolean" },
+                "reason": { "type": "string" }
+              }
+            }
+          },
+          "suspiciousActivityCount": { "type": "integer" },
           "createdAt": { "type": "string" },
           "updatedAt": { "type": "string" }
         }
@@ -37,18 +74,88 @@
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["id", "email", "code", "type", "expiresAt", "verified"],
+        "required": ["id", "email", "type", "expiresAt", "verified"],
         "properties": {
           "id": { "type": "string" },
           "email": { "type": "string" },
           "phone": { "type": "string" },
+          "codeEncrypted": { "type": "string" },
+          "iv": { "type": "string" },
+          "tag": { "type": "string" },
           "code": { "type": "string" },
-          "type": { "type": "string", "enum": ["registration", "forgot_password"] },
+          "type": { "type": "string", "enum": ["registration", "forgot_password", "verification"] },
           "attempts": { "type": "integer" },
+          "maxAttempts": { "type": "integer" },
           "resendsCount": { "type": "integer" },
+          "deliveryStatus": { "type": "string" },
+          "deliveryAttempts": { "type": "integer" },
+          "deliveredAt": { "type": ["string", "null"] },
+          "failureReason": { "type": ["string", "null"] },
+          "requestIp": { "type": "string" },
+          "requestUserAgent": { "type": "string" },
           "expiresAt": { "type": "string" },
           "verified": { "type": "boolean" },
+          "verifiedAt": { "type": ["string", "null"] },
           "createdAt": { "type": "string" }
+        }
+      }
+    },
+    "otp_logs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "otpId", "email", "action", "timestamp"],
+        "properties": {
+          "id": { "type": "string" },
+          "otpId": { "type": "string" },
+          "email": { "type": "string" },
+          "action": { "type": "string", "enum": ["requested", "verified", "failed", "expired"] },
+          "timestamp": { "type": "string" },
+          "ip": { "type": "string" },
+          "userAgent": { "type": "string" },
+          "reason": { "type": ["string", "null"] }
+        }
+      }
+    },
+    "sessions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "studentId", "email", "createdAt", "expiresAt", "isActive"],
+        "properties": {
+          "id": { "type": "string" },
+          "sessionHash": { "type": "string" },
+          "studentId": { "type": "string" },
+          "email": { "type": "string" },
+          "deviceFingerprint": { "type": "string" },
+          "userAgent": { "type": "string" },
+          "ipAddress": { "type": "string" },
+          "createdAt": { "type": "string" },
+          "lastActivity": { "type": "string" },
+          "expiresAt": { "type": "string" },
+          "absoluteExpiresAt": { "type": "string" },
+          "isActive": { "type": "boolean" },
+          "isLoggedOut": { "type": "boolean" },
+          "terminatedAt": { "type": ["string", "null"] },
+          "terminationReason": { "type": ["string", "null"] }
+        }
+      }
+    },
+    "security_events": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "timestamp", "eventType", "severity"],
+        "properties": {
+          "id": { "type": "string" },
+          "timestamp": { "type": "string" },
+          "eventType": { "type": "string" },
+          "studentId": { "type": ["string", "null"] },
+          "emailMasked": { "type": "string" },
+          "ip": { "type": "string" },
+          "userAgent": { "type": "string" },
+          "details": { "type": "string" },
+          "severity": { "type": "string", "enum": ["low", "medium", "high", "critical"] }
         }
       }
     },
