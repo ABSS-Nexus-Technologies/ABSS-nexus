@@ -61,7 +61,8 @@ async function dispatchApiTxtSms(phone, code, type) {
 /**
  * Generate and securely dispatch 6-digit OTP
  */
-async function generateAndSendOtp({ email, phone, type, db, writeDb, sendEmailFn, requestIp = "127.0.0.1", requestUserAgent = "" }) {
+async function generateAndSendOtp({ email, phone, type, db, writeDb, sendEmailFn, requestIp = "127.0.0.1", requestUserAgent = "", smsOptions = {} }) {
+  // smsOptions may include schtime, flash, unicode – passed to APITXT SMS dispatcher
   db.otps = db.otps || [];
   db.otp_logs = db.otp_logs || [];
 
@@ -160,7 +161,7 @@ async function generateAndSendOtp({ email, phone, type, db, writeDb, sendEmailFn
 
   // 7. Dispatch via APITXT SMS (if phone provided)
   if (cleanPhone) {
-    dispatchApiTxtSms(cleanPhone, code, type).catch((e) => console.warn("[APITXT] SMS notice:", e.message));
+    dispatchApiTxtSms(cleanPhone, code, type, smsOptions).catch((e) => console.warn("[APITXT] SMS notice:", e.message));
   }
 
   // 8. Dispatch via Transactional Email
