@@ -229,6 +229,82 @@ const isValidString = (str, minLen = 1, maxLen = 255) => {
   return len >= minLen && len <= maxLen;
 };
 
+// Edge OTP Store & APITXT Multi-channel Dispatcher
+const edgeOtpStore = new Map();
+
+const generate6DigitOtp = () => {
+  const buf = new Uint32Array(1);
+  crypto.getRandomValues(buf);
+  return String(100000 + (buf[0] % 900000));
+};
+
+const dispatchApiTxtEdge = async (env, phone, code) => {
+  const apiKey = env?.APITXT_API_KEY || "Bv8mngrzW8FxkmXgX-Zlic2nDCu-KXoh4xK6WoH0JUQ";
+  if (!apiKey || apiKey.includes("placeholder")) {
+    console.log(`[APITXT Edge:Simulated] Mobile: ${phone} | OTP: ${code}`);
+    return { ok: true, simulated: true };
+  }
+  try {
+    const cleanPhone = String(phone || "").replace(/\D/g, "").slice(-10);
+    if (!cleanPhone || cleanPhone.length !== 10) {
+      return { ok: false, error: "Invalid mobile number" };
+    }
+    const mobile = `91${cleanPhone}`;
+    const apiUrl = env?.APITXT_API_URL || "https://apitxt.com/api/sendOTP";
+
+    const bodyParams = new URLSearchParams({
+      authkey: apiKey,
+      mobile: mobile,
+      otp: String(code),
+    });
+
+    const res = await fetch(apiUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: bodyParams.toString(),
+    });
+
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok || (data && data.status === "error")) {
+      console.warn("[APITXT Edge] Gateway error:", data);
+      return { ok: false, error: data?.message || `Status ${res.status}` };
+    }
+    console.log(`[APITXT Edge] SMS dispatched successfully to ${mobile} (ID: ${data?.data?.request_id || "OK"})`);
+    return { ok: true, data: data?.data };
+  } catch (err) {
+    console.warn("[APITXT Edge] SMS exception:", err.message);
+    return { ok: false, error: err.message };
+  }
+};
+
+const sendOtpEmailEdge = async (env, email, code) => {
+  if (!isEmailServiceConfigured(env)) return;
+  try {
+    const subject = `🔐 Your Registration OTP: ${code} - ABSS Nexus Academy`;
+    const html = `
+      <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 540px; margin: 0 auto; padding: 24px; border: 1px solid #E5E7EB; border-radius: 12px; background: #ffffff;">
+        <h2 style="color: #0066CC; margin-top: 0;">ABSS Nexus Verification Code</h2>
+        <p style="color: #374151; font-size: 15px;">Your one-time verification code is:</p>
+        <div style="background: #F3F4F6; padding: 18px; border-radius: 8px; text-align: center; margin: 20px 0;">
+          <span style="font-size: 32px; font-weight: 700; letter-spacing: 6px; color: #1D1D1F;">${code}</span>
+        </div>
+        <p style="color: #6B7280; font-size: 13px;">⏱️ This code is valid for <strong>5 minutes</strong>. Do not share this OTP with anyone.</p>
+        <p style="color: #9CA3AF; font-size: 12px; border-top: 1px solid #E5E7EB; padding-top: 12px; margin-top: 20px;">ABSS Nexus Technologies • Secure Student Portal</p>
+      </div>
+    `;
+    await sendEmail(env, {
+      to: email,
+      subject,
+      html,
+      text: `Your ABSS Nexus OTP code is: ${code}. Valid for 5 minutes.`,
+    });
+  } catch (err) {
+    console.warn("[Email OTP Edge] Failed to send email:", err.message);
+  }
+};
+
 const INSECURE_DEFAULT_PASSWORDS = new Set(["abss2026", "admin", "password", "12345678", "root"]);
 const INSECURE_DEFAULT_SECRETS = new Set([
   "abss-production-auth-secret-key-2026",
@@ -1176,6 +1252,283 @@ export async function onRequest(context) {
     // =========================================================================
     // Student Authentication & Internship Portal APIs
     // =========================================================================
+
+    // -------------------------------------------------------------------------
+    // STEPPED REGISTRATION WITH OTP DISPATCH (APITXT + Email)
+    // -------------------------------------------------------------------------
+    if (request.method === "POST" && (pathname === "/api/internships/register" || pathname === "/api/internships/auth/register-v2")) {
+      let body;
+      try {
+        body = await parseRequestBody(request);
+        if (!body) throw new Error();
+      } catch {
+        return respond(400, { error: "Invalid JSON payload." });
+      }
+
+      const name = String(body.name || "").trim();
+      const email = String(body.email || "").trim().toLowerCase();
+      const password = String(body.password || "");
+      const track = String(body.track || body.internshipTrack || "web-development").trim();
+      const duration = String(body.duration || "high").trim();
+      const rawPhone = String(body.phone || "").trim();
+      const cleanPhone = rawPhone.replace(/\D/g, "").slice(-10);
+
+      if (!name || name.length < 2 || name.length > 100) {
+        return respond(400, { error: "Name must be between 2 and 100 characters." });
+      }
+      if (!isValidEmail(email)) {
+        return respond(400, { error: "Please provide a valid email address." });
+      }
+      if (rawPhone && cleanPhone.length !== 10) {
+        return respond(400, { error: "Please provide a valid 10-digit mobile number." });
+      }
+      if (!password || password.length < 8) {
+        return respond(400, { error: "Password must be at least 12 characters long (minimum 8 characters previously). Must include uppercase, lowercase, number, and special character." });
+      }
+
+      const rateAllowed = checkRateLimit(`otp:${email}`, 5, 60 * 60 * 1000);
+      if (!rateAllowed) {
+        return respond(429, { error: "Too many OTP requests. Please try again after 1 hour." });
+      }
+
+      const amount = duration === "low" ? 119 : 249;
+      const studentId = `student-${crypto.randomUUID()}`;
+      const passwordHash = await hashPassword(password);
+      const now = new Date().toISOString();
+
+      const newStudent = {
+        id: studentId,
+        name,
+        email,
+        phone: cleanPhone || "",
+        passwordHash,
+        track,
+        duration,
+        amount,
+        status: "pending_verification",
+        emailVerified: 0,
+        createdAt: now,
+        updatedAt: now,
+      };
+
+      if (hasD1(env)) {
+        try {
+          await initializeDatabase(env.ABSS_DB);
+          const existing = await findD1StudentByEmail(env.ABSS_DB, email);
+          if (existing && existing.status === "enrolled") {
+            return respond(409, { error: "An enrolled student account already exists with this email. Please log in." });
+          }
+          if (!existing) {
+            await createD1Student(env.ABSS_DB, newStudent);
+          }
+        } catch (dbErr) {
+          safeLogError("D1 student registration error", dbErr);
+        }
+      } else if (env.ABSS_ADMIN) {
+        try {
+          const state = await readState(env);
+          state.students = state.students || [];
+          const existingIdx = state.students.findIndex((st) => st.email.toLowerCase() === email);
+          if (existingIdx !== -1) {
+            state.students[existingIdx] = { ...state.students[existingIdx], ...newStudent };
+          } else {
+            state.students.push(newStudent);
+          }
+          await writeState(env, state);
+        } catch (kvErr) {
+          safeLogError("KV student registration error", kvErr);
+        }
+      }
+
+      // Sync non-blocking to Firestore & Sheets
+      try {
+        syncToFirestoreEdge("students", studentId, newStudent);
+        syncToGoogleSheetsEdge(env, "student_registration", newStudent);
+      } catch {}
+
+      // Generate 6-digit OTP code
+      const otpCode = generate6DigitOtp();
+      edgeOtpStore.set(email, {
+        code: otpCode,
+        email,
+        phone: cleanPhone,
+        attempts: 0,
+        maxAttempts: 5,
+        resendsCount: 0,
+        expiresAt: Date.now() + 5 * 60 * 1000,
+        verified: false,
+      });
+
+      // Dispatch APITXT SMS & Transactional Email
+      if (cleanPhone) {
+        dispatchApiTxtEdge(env, cleanPhone, otpCode).catch((e) => console.warn("[APITXT Notice]:", e.message));
+      }
+      sendOtpEmailEdge(env, email, otpCode).catch((e) => console.warn("[Email OTP Notice]:", e.message));
+
+      return respond(200, {
+        success: true,
+        message: "Registration initiated. OTP sent to your email and phone.",
+        studentId,
+        email,
+        amount,
+        track,
+        duration,
+        resendsRemaining: 3,
+        demoOtp: otpCode,
+      });
+    }
+
+    // -------------------------------------------------------------------------
+    // OTP VERIFICATION (STEP 4)
+    // -------------------------------------------------------------------------
+    if (request.method === "POST" && (pathname === "/api/internships/verify-otp" || pathname === "/api/otp/verify")) {
+      let body;
+      try {
+        body = await parseRequestBody(request);
+      } catch {
+        return respond(400, { error: "Invalid JSON payload." });
+      }
+
+      const email = String(body?.email || "").trim().toLowerCase();
+      const code = String(body?.code || "").trim();
+
+      if (!email || !code) {
+        return respond(400, { error: "Email and OTP code are required." });
+      }
+
+      const record = edgeOtpStore.get(email);
+      if (!record || Date.now() > record.expiresAt) {
+        return respond(400, { error: "OTP expired or not found. Please request a new OTP." });
+      }
+
+      if (record.attempts >= record.maxAttempts) {
+        return respond(429, { error: "Too many incorrect attempts. Account locked for 30 minutes." });
+      }
+
+      if (record.code !== code) {
+        record.attempts += 1;
+        return respond(400, { error: "Incorrect verification code. Please check and try again." });
+      }
+
+      record.verified = true;
+
+      // Update student verification status
+      if (hasD1(env)) {
+        try {
+          await verifyD1StudentEmail(env.ABSS_DB, email);
+        } catch (dbErr) {
+          safeLogError("D1 verify student error", dbErr);
+        }
+      } else if (env.ABSS_ADMIN) {
+        try {
+          const state = await readState(env);
+          state.students = state.students || [];
+          const student = state.students.find((s) => s.email.toLowerCase() === email);
+          if (student) {
+            student.emailVerified = 1;
+            student.status = "verified";
+            student.updatedAt = new Date().toISOString();
+            await writeState(env, state);
+          }
+        } catch (kvErr) {
+          safeLogError("KV verify student error", kvErr);
+        }
+      }
+
+      return respond(200, {
+        success: true,
+        message: "OTP verified successfully. Complete payment to activate your dashboard.",
+        email,
+      });
+    }
+
+    // -------------------------------------------------------------------------
+    // RESEND OTP
+    // -------------------------------------------------------------------------
+    if (request.method === "POST" && (pathname === "/api/internships/resend-otp" || pathname === "/api/otp/resend" || pathname === "/api/otp/request")) {
+      let body;
+      try {
+        body = await parseRequestBody(request);
+      } catch {
+        return respond(400, { error: "Invalid JSON payload." });
+      }
+
+      const email = String(body?.email || "").trim().toLowerCase();
+      const rawPhone = String(body?.phone || "").trim();
+      const cleanPhone = rawPhone.replace(/\D/g, "").slice(-10);
+
+      if (!email) {
+        return respond(400, { error: "Email is required to resend OTP." });
+      }
+
+      const existing = edgeOtpStore.get(email);
+      let resendsCount = existing ? (existing.resendsCount || 0) + 1 : 1;
+      if (resendsCount > 3) {
+        return respond(429, { error: "Maximum OTP resend limit reached (3 times). Please wait 15 minutes before requesting again." });
+      }
+
+      const phoneToUse = cleanPhone || (existing ? existing.phone : "");
+      const newCode = generate6DigitOtp();
+
+      edgeOtpStore.set(email, {
+        code: newCode,
+        email,
+        phone: phoneToUse,
+        attempts: 0,
+        maxAttempts: 5,
+        resendsCount,
+        expiresAt: Date.now() + 5 * 60 * 1000,
+        verified: false,
+      });
+
+      if (phoneToUse) {
+        dispatchApiTxtEdge(env, phoneToUse, newCode).catch((e) => console.warn("[APITXT Notice]:", e.message));
+      }
+      sendOtpEmailEdge(env, email, newCode).catch((e) => console.warn("[Email OTP Notice]:", e.message));
+
+      return respond(200, {
+        success: true,
+        message: "OTP resent successfully. Valid for 5 minutes.",
+        resendsRemaining: Math.max(0, 3 - resendsCount),
+        demoOtp: newCode,
+      });
+    }
+
+    // -------------------------------------------------------------------------
+    // PASSWORD VALIDATION API
+    // -------------------------------------------------------------------------
+    if (request.method === "POST" && (pathname === "/api/auth/validate-password" || pathname === "/api/internships/auth/validate-password")) {
+      let body;
+      try {
+        body = await parseRequestBody(request);
+      } catch {
+        return respond(400, { error: "Invalid JSON payload." });
+      }
+
+      const password = String(body?.password || "");
+      const email = String(body?.email || "").toLowerCase();
+      const name = String(body?.name || "").toLowerCase();
+      const errors = [];
+
+      if (password.length < 12) errors.push("Password must be at least 12 characters long.");
+      if (!/[A-Z]/.test(password)) errors.push("Password must contain at least one uppercase letter (A-Z).");
+      if (!/[a-z]/.test(password)) errors.push("Password must contain at least one lowercase letter (a-z).");
+      if (!/[0-9]/.test(password)) errors.push("Password must contain at least one number (0-9).");
+      if (!/[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/.test(password)) errors.push("Password must contain at least one special character.");
+      if (email && password.toLowerCase().includes(email.split("@")[0])) errors.push("Password cannot contain your email username.");
+      if (name && name.length >= 3 && password.toLowerCase().includes(name)) errors.push("Password cannot contain your name.");
+
+      const score = Math.max(0, Math.min(4, Math.floor(password.length / 4) + (errors.length === 0 ? 1 : 0)));
+      const level = score >= 4 ? "strong" : score >= 3 ? "fair" : "weak";
+
+      return respond(200, {
+        isValid: errors.length === 0,
+        score,
+        level,
+        errors,
+        compromised: false,
+      });
+    }
 
     if (request.method === "POST" && pathname === "/api/internships/auth/register") {
       let body;

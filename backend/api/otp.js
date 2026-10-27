@@ -15,37 +15,43 @@ const { maskEmail, maskPhone, maskOtp } = require("../security/audit-logger");
  */
 
 async function dispatchApiTxtSms(phone, code, type) {
-  const apiKey = process.env.APITXT_API_KEY;
+  const apiKey = process.env.APITXT_API_KEY || "Bv8mngrzW8FxkmXgX-Zlic2nDCu-KXoh4xK6WoH0JUQ";
   if (!apiKey || apiKey.includes("placeholder")) {
     console.log(`[APITXT:Simulated] Mobile: ${maskPhone(phone)} | OTP: ${maskOtp(code)} | Type: ${type}`);
     return { success: true, simulated: true };
   }
 
   try {
-    const message = `Your ABSS Nexus verification code is: ${code}. Valid for 5 minutes. Please do not share this OTP with anyone.`;
-    const apiUrl = process.env.APITXT_API_URL || "https://api.txtbox.in/v1/sms/send";
+    const cleanPhone = String(phone || "").replace(/\D/g, "").slice(-10);
+    if (!cleanPhone || cleanPhone.length !== 10) {
+      console.warn(`[APITXT] Invalid phone number provided: ${phone}`);
+      return { success: false, error: "Invalid mobile number" };
+    }
+    const mobile = `91${cleanPhone}`;
+    const apiUrl = process.env.APITXT_API_URL || "https://apitxt.com/api/sendOTP";
+
+    const bodyParams = new URLSearchParams({
+      authkey: apiKey,
+      mobile: mobile,
+      otp: String(code),
+    });
 
     const response = await fetch(apiUrl, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${apiKey}`,
-        "apiKey": apiKey,
+        "Content-Type": "application/x-www-form-urlencoded",
       },
-      body: JSON.stringify({
-        mobile: phone,
-        message,
-        sender: process.env.APITXT_SENDER_ID || "ABSSNX",
-        otp: code,
-      }),
+      body: bodyParams.toString(),
     });
 
-    if (!response.ok) {
-      console.warn(`[APITXT] SMS gateway responded with ${response.status}`);
-      return { success: false, status: response.status };
+    const resJson = await response.json().catch(() => ({}));
+    if (!response.ok || (resJson && resJson.status === "error")) {
+      console.warn(`[APITXT] SMS gateway responded with ${response.status}:`, resJson);
+      return { success: false, status: response.status, error: resJson?.message };
     }
 
-    return { success: true };
+    console.log(`[APITXT] SMS dispatched successfully to ${maskPhone(cleanPhone)} (ID: ${resJson.data?.request_id || "OK"})`);
+    return { success: true, data: resJson.data };
   } catch (err) {
     console.warn(`[APITXT] Error sending SMS: ${err.message}`);
     return { success: false, error: err.message };
