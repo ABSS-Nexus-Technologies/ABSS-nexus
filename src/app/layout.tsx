@@ -84,7 +84,7 @@ export default function RootLayout({
     description:
       'Enterprise IT services, custom software development, cloud infrastructure, and digital consulting.',
     email: 'abssnexus@gmail.com',
-    telephone: '+91 8757928673',
+    telephone: '+91 7688899205',
     sameAs: [
       'https://instagram.com/abssnexus',
       'https://twitter.com/abssnexus',

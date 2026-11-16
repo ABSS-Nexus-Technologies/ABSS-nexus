@@ -21,7 +21,7 @@
       primaryCta: { text: "Start a Project", href: "/contact#project-inquiry" },
       secondaryCta: { text: "Explore Our Work", href: "/work" },
       tertiaryCta: { text: "All 15 Services", href: "/services" },
-      whatsappCta: { text: "WhatsApp", href: "https://wa.me/918757928673" },
+      whatsappCta: { text: "WhatsApp", href: "https://wa.me/917688899205" },
       portalPills: [
         { label: "15 IT Services", href: "/services", emoji: "⚡" },
         { label: "Client Work", href: "/work", emoji: "💼" },
@@ -119,7 +119,7 @@
       badge: "Get in Touch",
       headline: "Start a Conversation About Your Next Project",
       description: "Connect directly with our engineering leadership to discuss timelines, technical scope, and transparent pricing.",
-      primaryCta: { text: "Direct WhatsApp", href: "https://wa.me/918757928673" },
+      primaryCta: { text: "Direct WhatsApp", href: "https://wa.me/917688899205" },
       secondaryCta: { text: "View Pricing", href: "/pricing" },
       breadcrumb: [{ label: "Home", href: "/" }, { label: "Contact", current: true }]
     },

@@ -473,7 +473,7 @@ export default function HomePage() {
               </Link>
               <a
                 className="bento-btn-whatsapp"
-                href="https://wa.me/918757928673"
+                href="https://wa.me/917688899205"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Chat directly on WhatsApp"
@@ -486,7 +486,7 @@ export default function HomePage() {
             </div>
 
             <div className="bento-cta-trust-row">
-              <span>&#9742; Direct Line: +91 87579 28673</span>
+              <span>&#9742; Direct Line: +91 76888 99205</span>
               <span>&#9993; Email: abssnexus@gmail.com</span>
               <span>&#128205; Location: Jaipur, Rajasthan</span>
             </div>

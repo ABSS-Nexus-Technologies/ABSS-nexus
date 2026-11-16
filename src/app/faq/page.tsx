@@ -40,7 +40,7 @@ export default function FaqPage() {
               <Link className="btn btn-glow-cyan" href="/contact#project-inquiry">
                 Ask Us Directly &rarr;
               </Link>
-              <a className="btn btn-whatsapp-outline" href="https://wa.me/918757928673" target="_blank" rel="noopener noreferrer">
+              <a className="btn btn-whatsapp-outline" href="https://wa.me/917688899205" target="_blank" rel="noopener noreferrer">
                 Chat on WhatsApp
               </a>
             </div>

@@ -8,7 +8,7 @@
 - **Company Name**: ABSS Nexus Technologies
 - **Legal & Operating Base**: Jaipur, Rajasthan, India
 - **Founder & Lead Architect**: Shubham Kumar
-- **Official Direct Phone**: `+91 87579 28673` (tel:+918757928673)
+- **Official Direct Phone**: `+91 76888 99205` (tel:+917688899205)
 - **Official Email**: `abssnexus@gmail.com` (mailto:abssnexus@gmail.com)
 - **Primary Domain**: `https://abssnexus.in`
 - **Social Profiles**:

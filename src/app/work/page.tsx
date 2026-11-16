@@ -63,7 +63,7 @@ export default function WorkPage() {
               <Link className="btn btn-glow-cyan" href="/contact#project-inquiry">
                 Discuss Your Requirements &rarr;
               </Link>
-              <a className="btn btn-whatsapp-outline" href="https://wa.me/918757928673" target="_blank" rel="noopener noreferrer">
+              <a className="btn btn-whatsapp-outline" href="https://wa.me/917688899205" target="_blank" rel="noopener noreferrer">
                 WhatsApp Directly
               </a>
             </div>

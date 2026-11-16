@@ -47,7 +47,7 @@ This document establishes the comprehensive product requirements, functional spe
 - **Homepage Hero**:
   - Decelerating spring entrance animation for badge, headline, copy, and buttons.
   - Interactive device workspace mockup (realistic laptop with SaaS analytics UI, smartphone with e-commerce UI, floating live telemetry badges).
-  - Direct founder contact shortcuts (+91 87579 28673, abssnexus@gmail.com).
+  - Direct founder contact shortcuts (+91 76888 99205, abssnexus@gmail.com).
 - **Core Public Modules**:
   - **16 Service Pages**: In-depth technical guides, deliverables, tech stacks, FAQs, and quote calculators for all 16 disciplines.
   - **Solutions Framework**: Outcome-focused technical frameworks for Business Process Automation, Cloud Modernization, Custom Platforms.

@@ -12,10 +12,10 @@
 })(typeof globalThis !== "undefined" ? globalThis : this, function () {
   return {
     brandName: "ABSS Nexus Technologies",
-    phoneDisplay: "+91 87579 28673",
-    phoneCallable: "+918757928673",
-    whatsappNumber: "918757928673",
-    whatsappUrl: "https://wa.me/918757928673",
+    phoneDisplay: "+91 76888 99205",
+    phoneCallable: "+917688899205",
+    whatsappNumber: "917688899205",
+    whatsappUrl: "https://wa.me/917688899205",
     email: "abssnexus@gmail.com",
     address: "Jaipur, Rajasthan, India",
     inquiryRoute: "/contact#project-inquiry",

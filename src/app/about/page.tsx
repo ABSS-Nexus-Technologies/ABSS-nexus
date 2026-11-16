@@ -94,7 +94,7 @@ export default function AboutPage() {
               </span>
               <span style={{ color: 'var(--border-subtle)' }}>•</span>
               <span style={{ fontSize: '0.9rem', color: 'var(--color-near-black)', fontWeight: 500 }}>
-                📞 +91 87579 28673
+                📞 +91 76888 99205
               </span>
               <span style={{ color: 'var(--border-subtle)' }}>•</span>
               <span style={{ fontSize: '0.9rem', color: 'var(--color-near-black)', fontWeight: 500 }}>
@@ -116,7 +116,7 @@ export default function AboutPage() {
               <Link className="btn btn-glow-cyan" href="/contact#project-inquiry">
                 Schedule Founder Consultation &rarr;
               </Link>
-              <a className="btn btn-whatsapp-outline" href="https://wa.me/918757928673" target="_blank" rel="noopener noreferrer">
+              <a className="btn btn-whatsapp-outline" href="https://wa.me/917688899205" target="_blank" rel="noopener noreferrer">
                 WhatsApp Directly
               </a>
             </div>

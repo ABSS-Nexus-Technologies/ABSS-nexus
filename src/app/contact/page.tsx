@@ -41,8 +41,8 @@ export default function ContactPage() {
                   <span style={{ fontSize: '0.8rem', textTransform: 'uppercase', color: 'var(--color-text-dim)', fontWeight: 600, display: 'block', marginBottom: '6px' }}>
                     Telephone &amp; WhatsApp Hotline
                   </span>
-                  <a href="tel:+918757928673" style={{ fontSize: '1.2rem', fontWeight: 700, color: 'var(--color-blue)', textDecoration: 'none' }}>
-                    +91 87579 28673
+                  <a href="tel:+917688899205" style={{ fontSize: '1.2rem', fontWeight: 700, color: 'var(--color-blue)', textDecoration: 'none' }}>
+                    +91 76888 99205
                   </a>
                   <p style={{ margin: '6px 0 0', fontSize: '0.85rem', color: 'var(--color-text-dim)' }}>
                     Mon &ndash; Sat, 9:00 AM &ndash; 7:00 PM IST
@@ -76,7 +76,7 @@ export default function ContactPage() {
                 <div style={{ textAlign: 'center', marginTop: '8px' }}>
                   <a
                     className="btn btn-whatsapp-outline"
-                    href="https://wa.me/918757928673"
+                    href="https://wa.me/917688899205"
                     target="_blank"
                     rel="noopener noreferrer"
                     style={{ width: '100%', justifyContent: 'center' }}

@@ -196,7 +196,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
               </Link>
               <a
                 className="btn btn-whatsapp-outline"
-                href="https://wa.me/918757928673"
+                href="https://wa.me/917688899205"
                 target="_blank"
                 rel="noopener noreferrer"
               >

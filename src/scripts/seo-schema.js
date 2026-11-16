@@ -8,7 +8,7 @@
     logo: "https://abssnexus.in/public/assets/images/LogoGenerated.png",
     description:
       "ABSS Nexus Technologies provides website development, application development, UI/UX design, landing pages, portfolios, maintenance, and digital solutions.",
-    telephone: "+918757928673",
+    telephone: "+917688899205",
     email: "abssnexus@gmail.com",
     founder: {
       "@type": "Person",

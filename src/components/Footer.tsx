@@ -76,7 +76,7 @@ export default function Footer() {
           <div>
             <h3 className="bento-footer-col-title">Direct Contact</h3>
             <div className="bento-footer-links" style={{ marginBottom: '18px' }}>
-              <a className="bento-footer-link" href="tel:+918757928673">Phone: +91 87579 28673</a>
+              <a className="bento-footer-link" href="tel:+917688899205">Phone: +91 76888 99205</a>
               <a className="bento-footer-link" href="mailto:abssnexus@gmail.com">Email: abssnexus@gmail.com</a>
               <span className="bento-footer-link" style={{ cursor: 'default' }}>Location: Jaipur, Rajasthan, India</span>
               <span className="bento-footer-link" style={{ cursor: 'default' }}>Shubham Kumar &mdash; Founder</span>
