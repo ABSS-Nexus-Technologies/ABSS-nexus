@@ -126,18 +126,15 @@ export default function ProjectCostEstimator() {
                   key={p.id}
                   type="button"
                   onClick={() => setSelectedPlatform(p.id)}
+                  className={`estimator-btn ${selectedPlatform === p.id ? 'selected' : ''}`}
                   style={{
                     display: 'flex',
                     alignItems: 'center',
                     gap: '12px',
                     padding: '12px 16px',
                     borderRadius: 'var(--radius-md)',
-                    background: selectedPlatform === p.id ? 'rgba(0, 194, 255, 0.12)' : 'rgba(255, 255, 255, 0.03)',
-                    border: `1px solid ${selectedPlatform === p.id ? 'var(--accent-cyan)' : 'var(--border-subtle)'}`,
-                    color: selectedPlatform === p.id ? 'var(--text-main)' : 'var(--text-muted)',
                     textAlign: 'left',
                     cursor: 'pointer',
-                    transition: 'all 0.2s ease',
                   }}
                 >
                   <span style={{ fontSize: '1.2rem' }}>{p.icon}</span>
@@ -158,17 +155,14 @@ export default function ProjectCostEstimator() {
                   key={t.id}
                   type="button"
                   onClick={() => setSelectedTier(t.id)}
+                  className={`estimator-btn ${selectedTier === t.id ? 'selected' : ''}`}
                   style={{
                     padding: '10px 8px',
                     borderRadius: 'var(--radius-md)',
-                    background: selectedTier === t.id ? 'rgba(0, 194, 255, 0.12)' : 'rgba(255, 255, 255, 0.03)',
-                    border: `1px solid ${selectedTier === t.id ? 'var(--accent-cyan)' : 'var(--border-subtle)'}`,
-                    color: selectedTier === t.id ? 'var(--accent-cyan)' : 'var(--text-muted)',
                     fontWeight: selectedTier === t.id ? 700 : 500,
                     fontSize: '0.85rem',
                     cursor: 'pointer',
                     textAlign: 'center',
-                    transition: 'all 0.2s ease',
                   }}
                 >
                   {t.name}
@@ -217,19 +211,7 @@ export default function ProjectCostEstimator() {
 
         {/* Live Estimation Output Card */}
         <div style={{ display: 'flex', flexDirection: 'column' }}>
-          <div
-            style={{
-              background: 'linear-gradient(135deg, rgba(14, 20, 36, 0.95), rgba(8, 12, 22, 0.98))',
-              border: '1px solid rgba(0, 194, 255, 0.35)',
-              borderRadius: 'var(--radius-lg)',
-              padding: '28px',
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'space-between',
-              flex: 1,
-              boxShadow: '0 16px 40px rgba(0, 194, 255, 0.1)',
-            }}
-          >
+          <div className="cost-estimator-result-card">
             <div>
               {/* Currency Selector */}
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
@@ -274,7 +256,7 @@ export default function ProjectCostEstimator() {
 
               {/* Big Budget Number */}
               <div style={{ marginBottom: '18px' }}>
-                <span style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(2.4rem, 4vw, 3.2rem)', fontWeight: 800, color: 'var(--accent-cyan)', textShadow: '0 0 25px rgba(0,194,255,0.4)', lineHeight: 1 }}>
+                <span className="cost-big-number" style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(2.4rem, 4vw, 3.2rem)', fontWeight: 800, color: 'var(--accent-cyan)', textShadow: '0 0 25px rgba(0,194,255,0.4)', lineHeight: 1 }}>
                   {currency === 'INR' ? `₹${estimatedInr.toLocaleString('en-IN')}` : `$${estimatedUsd.toLocaleString('en-US')}`}
                 </span>
                 <span style={{ display: 'block', fontSize: '0.8rem', color: 'var(--text-muted)', marginTop: '6px' }}>
@@ -283,7 +265,7 @@ export default function ProjectCostEstimator() {
               </div>
 
               {/* Delivery Speed Toggle */}
-              <div style={{ marginBottom: '24px', padding: '14px', borderRadius: 'var(--radius-md)', background: 'rgba(255, 255, 255, 0.03)', border: '1px solid var(--border-subtle)' }}>
+              <div className="estimator-inner-box" style={{ marginBottom: '24px' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
                   <span style={{ fontSize: '0.84rem', fontWeight: 600, color: 'var(--text-main)' }}>Delivery Timeline</span>
                   <span style={{ fontSize: '0.88rem', fontWeight: 700, color: '#10b981' }}>~{estimatedDays} Business Days</span>
