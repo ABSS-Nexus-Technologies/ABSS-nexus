@@ -1,11 +1,30 @@
 import type { Metadata } from 'next';
 import Script from 'next/script';
+import { Inter, Space_Grotesk, JetBrains_Mono } from 'next/font/google';
 import '@/src/styles/styles.css';
 import '@/src/styles/theme-toggle.css';
 import '@/src/styles/modern-bento.css';
 import Header from '@/src/components/Header';
 import Footer from '@/src/components/Footer';
 import FloatingWhatsApp from '@/src/components/FloatingWhatsApp';
+
+const inter = Inter({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-inter',
+});
+
+const spaceGrotesk = Space_Grotesk({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-space-grotesk',
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-jetbrains-mono',
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://abssnexus.in'),
@@ -99,7 +118,7 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" className={`${inter.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable}`} suppressHydrationWarning>
       <head>
         <script
           dangerouslySetInnerHTML={{

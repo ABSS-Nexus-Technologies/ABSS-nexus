@@ -94,7 +94,7 @@ export default function ContactForm() {
             required
             value={formData.email}
             onChange={handleChange}
-            placeholder="aman@example.com"
+            placeholder="yourname@company.com"
             style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid var(--border-subtle)', background: 'var(--bg-card)' }}
           />
         </div>
@@ -111,7 +111,7 @@ export default function ContactForm() {
             type="tel"
             value={formData.phone}
             onChange={handleChange}
-            placeholder="+91 98765 43210"
+            placeholder="+91 76888 99205"
             style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid var(--border-subtle)', background: 'var(--bg-card)' }}
           />
         </div>
