@@ -44,8 +44,33 @@ export default async function BlogPostDetailPage({ params }: BlogPageProps) {
     notFound();
   }
 
+  const articleSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: post.title,
+    description: post.summary,
+    author: {
+      '@type': 'Person',
+      name: post.author,
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'ABSS Nexus Technologies',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://abssnexus.in/assets/images/LogoGenerated.png',
+      },
+    },
+    datePublished: post.date,
+    mainEntityOfPage: `https://abssnexus.in/blog/${post.slug}`,
+  };
+
   return (
     <main>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
       <section className="site-hero site-hero--page page-hero section" id="hero">
         <div className="site-hero__container container" style={{ maxWidth: '840px' }}>
           <nav className="site-hero__breadcrumb breadcrumb-trail" aria-label="Breadcrumb">

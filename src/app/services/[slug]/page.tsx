@@ -41,8 +41,29 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
     notFound();
   }
 
+  const serviceSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: service.title,
+    serviceType: service.category,
+    provider: {
+      '@type': 'Organization',
+      name: 'ABSS Nexus Technologies',
+      url: 'https://abssnexus.in',
+    },
+    areaServed: {
+      '@type': 'Country',
+      name: 'Worldwide',
+    },
+    description: service.shortDesc,
+  };
+
   return (
     <main>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
+      />
       <section className="site-hero site-hero--page page-hero section" id="hero">
         <div className="site-hero__container container">
           <nav className="site-hero__breadcrumb breadcrumb-trail" aria-label="Breadcrumb">

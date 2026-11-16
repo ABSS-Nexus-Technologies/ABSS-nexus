@@ -11,8 +11,25 @@ export const metadata: Metadata = {
 };
 
 export default function FaqPage() {
+  const faqSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqList.map((item) => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: item.answer,
+      },
+    })),
+  };
+
   return (
     <main>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
       <section className="site-hero site-hero--page page-hero section" id="hero">
         <div className="site-hero__container container">
           <span className="site-hero__eyebrow section-badge-apple">
