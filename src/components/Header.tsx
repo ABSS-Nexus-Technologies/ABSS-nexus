@@ -71,6 +71,10 @@ export default function Header() {
               Home
             </Link>
 
+            <Link href="/ecosystem" className={`bento-nav-link ${pathname === '/ecosystem' ? 'active' : ''}`}>
+              Ecosystem
+            </Link>
+
             {/* Services Dropdown */}
             <div className={`bento-dropdown-wrapper ${servicesOpen ? 'open' : ''}`}>
               <button
@@ -302,6 +306,7 @@ export default function Header() {
           {/* Mobile Drawer */}
           <div className={`bento-mobile-drawer ${mobileMenuOpen ? 'open' : ''}`}>
             <Link href="/" className="bento-nav-link">Home</Link>
+            <Link href="/ecosystem" className="bento-nav-link">Ecosystem &bull; 3 Pillars</Link>
             <Link href="/services" className="bento-nav-link">Services (16 Disciplines)</Link>
             <Link href="/solutions" className="bento-nav-link">Solutions</Link>
             <Link href="/industries" className="bento-nav-link">Industries</Link>

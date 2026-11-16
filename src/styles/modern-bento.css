@@ -1807,3 +1807,179 @@ body {
   color: var(--text-muted);
   line-height: 1.6;
 }
+
+/* ====================================================================
+   ECOSYSTEM & 3-PILLAR CONGLOMERATE ARCHITECTURE
+   ==================================================================== */
+.ecosystem-section {
+  padding: 80px 0;
+  position: relative;
+}
+
+.ecosystem-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  margin-top: 40px;
+}
+
+@media (max-width: 1024px) {
+  .ecosystem-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.ecosystem-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 36px 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.ecosystem-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--card-accent, var(--accent-cyan)), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.ecosystem-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--card-accent, var(--accent-cyan));
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.6), 0 0 30px -10px var(--card-glow, rgba(0, 194, 255, 0.25));
+}
+
+.ecosystem-card:hover::before {
+  opacity: 1;
+}
+
+.ecosystem-card.pillar-services {
+  --card-accent: #00D4FF;
+  --card-glow: rgba(0, 212, 255, 0.25);
+}
+
+.ecosystem-card.pillar-saas {
+  --card-accent: #38BDF8;
+  --card-glow: rgba(56, 189, 248, 0.3);
+  border-color: rgba(56, 189, 248, 0.35);
+  background: linear-gradient(180deg, rgba(14, 25, 45, 0.8) 0%, rgba(10, 14, 23, 0.8) 100%);
+}
+
+.ecosystem-card.pillar-intennexus {
+  --card-accent: #A855F7;
+  --card-glow: rgba(168, 85, 247, 0.25);
+}
+
+.ecosystem-pillar-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 100px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  width: fit-content;
+}
+
+.pillar-services .ecosystem-pillar-tag {
+  background: rgba(0, 212, 255, 0.1);
+  color: #00D4FF;
+  border: 1px solid rgba(0, 212, 255, 0.3);
+}
+
+.pillar-saas .ecosystem-pillar-tag {
+  background: rgba(56, 189, 248, 0.12);
+  color: #38BDF8;
+  border: 1px solid rgba(56, 189, 248, 0.35);
+}
+
+.pillar-intennexus .ecosystem-pillar-tag {
+  background: rgba(168, 85, 247, 0.12);
+  color: #C084FC;
+  border: 1px solid rgba(168, 85, 247, 0.35);
+}
+
+.ecosystem-title {
+  font-family: var(--font-heading);
+  font-size: 1.6rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--text-main);
+  margin-bottom: 10px;
+}
+
+.ecosystem-desc {
+  font-size: 0.94rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+
+.ecosystem-feature-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+.ecosystem-feature-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 0.88rem;
+  color: var(--text-main);
+}
+
+.ecosystem-feature-icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.saas-subdomain-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: #38BDF8;
+}
+
+.saas-subdomain-pill .dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #10B981;
+  box-shadow: 0 0 6px #10B981;
+}
+
+.ecosystem-card-footer {
+  margin-top: auto;
+  padding-top: 20px;
+  border-top: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+

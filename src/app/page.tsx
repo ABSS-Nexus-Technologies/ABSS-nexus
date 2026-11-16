@@ -298,6 +298,147 @@ export default function HomePage() {
       <TrustBar />
 
       {/* ====================================================================
+          SECTION 2.5: THE ABSS NEXUS ECOSYSTEM (3 CORE PILLARS)
+          ==================================================================== */}
+      <section className="bento-section ecosystem-section" id="ecosystem">
+        <div className="bento-container">
+          <div className="bento-section-header" style={{ textAlign: 'center', maxWidth: '840px', margin: '0 auto 40px' }}>
+            <span className="bento-section-eyebrow">CONGLOMERATE ECOSYSTEM &bull; 3 PILLARS</span>
+            <h2 className="bento-section-title">
+              Powering the Future Through Three Synergistic Divisions
+            </h2>
+            <p className="bento-section-subtitle">
+              ABSS Nexus Technologies operates a high-impact corporate ecosystem encompassing client IT consulting, proprietary business cloud platforms (ERP, CRM, HRM), and tech talent incubation via IntenNexus.
+            </p>
+          </div>
+
+          <div className="ecosystem-grid">
+            {/* PILLAR 1: IT Services */}
+            <div className="ecosystem-card pillar-services">
+              <div>
+                <span className="ecosystem-pillar-tag">Pillar 01 &bull; Client Consulting</span>
+                <h3 className="ecosystem-title">ABSS IT Services</h3>
+                <p className="ecosystem-desc">
+                  Bespoke software development, Next.js 16 platforms, mobile apps, multi-cloud DevOps, and cybersecurity built for growing businesses and enterprises worldwide.
+                </p>
+                <div className="ecosystem-feature-list">
+                  <div className="ecosystem-feature-item">
+                    <span style={{ color: '#00D4FF' }}>&bull;</span>
+                    <span><strong>16 Specialized Disciplines:</strong> Web, Software, AI, Cloud, QA</span>
+                  </div>
+                  <div className="ecosystem-feature-item">
+                    <span style={{ color: '#00D4FF' }}>&bull;</span>
+                    <span><strong>Next.js 16 &amp; Cloudflare Edge:</strong> Sub-second global performance</span>
+                  </div>
+                  <div className="ecosystem-feature-item">
+                    <span style={{ color: '#00D4FF' }}>&bull;</span>
+                    <span><strong>Founder-Led Execution:</strong> Direct architecture oversight by Shubham Kumar</span>
+                  </div>
+                </div>
+              </div>
+              <div className="ecosystem-card-footer">
+                <Link href="/services" className="bento-btn-primary" style={{ padding: '8px 18px', fontSize: '0.85rem' }}>
+                  <span>View 16 Services &rarr;</span>
+                </Link>
+                <Link href="/work" style={{ color: 'var(--text-muted)', fontSize: '0.85rem', textDecoration: 'none' }}>
+                  Case Studies &rarr;
+                </Link>
+              </div>
+            </div>
+
+            {/* PILLAR 2: Business SaaS */}
+            <div className="ecosystem-card pillar-saas">
+              <div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <span className="ecosystem-pillar-tag">Pillar 02 &bull; Proprietary Cloud</span>
+                  <span className="saas-subdomain-pill">
+                    <span className="dot" />
+                    <span>Free Subdomains Active</span>
+                  </span>
+                </div>
+                <h3 className="ecosystem-title">ABSS Business SaaS</h3>
+                <p className="ecosystem-desc">
+                  Integrated enterprise cloud platforms engineered for MSMEs and growing businesses. Available under dedicated free subdomains.
+                </p>
+                <div className="ecosystem-feature-list">
+                  <div className="ecosystem-feature-item" style={{ flexDirection: 'column', gap: '4px' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
+                      <strong>📦 ABSS ERP</strong>
+                      <span className="saas-subdomain-pill">erp.abssnexus.in</span>
+                    </div>
+                    <span style={{ fontSize: '0.82rem', color: 'var(--text-muted)' }}>
+                      GST Invoicing, Real-Time Inventory, Ledger &amp; Supply Chain Operations.
+                    </span>
+                  </div>
+
+                  <div className="ecosystem-feature-item" style={{ flexDirection: 'column', gap: '4px' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
+                      <strong>🤝 ABSS CRM</strong>
+                      <span className="saas-subdomain-pill">crm.abssnexus.in</span>
+                    </div>
+                    <span style={{ fontSize: '0.82rem', color: 'var(--text-muted)' }}>
+                      Automated Lead Pipelines, Omnichannel Support &amp; Customer Retention.
+                    </span>
+                  </div>
+
+                  <div className="ecosystem-feature-item" style={{ flexDirection: 'column', gap: '4px' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
+                      <strong>👥 ABSS HRM</strong>
+                      <span className="saas-subdomain-pill">hrm.abssnexus.in</span>
+                    </div>
+                    <span style={{ fontSize: '0.82rem', color: 'var(--text-muted)' }}>
+                      One-Click Payroll, Biometric Attendance &amp; Employee Lifecycle Portal.
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div className="ecosystem-card-footer">
+                <Link href="/ecosystem#business-saas" className="bento-btn-primary" style={{ padding: '8px 18px', fontSize: '0.85rem' }}>
+                  <span>Explore SaaS Suite &rarr;</span>
+                </Link>
+                <Link href="/contact#project-inquiry" style={{ color: 'var(--text-muted)', fontSize: '0.85rem', textDecoration: 'none' }}>
+                  Book Demo &rarr;
+                </Link>
+              </div>
+            </div>
+
+            {/* PILLAR 3: IntenNexus */}
+            <div className="ecosystem-card pillar-intennexus">
+              <div>
+                <span className="ecosystem-pillar-tag">Pillar 03 &bull; EdTech &amp; Talent</span>
+                <h3 className="ecosystem-title">IntenNexus</h3>
+                <p className="ecosystem-desc">
+                  An ABSS Nexus Technologies initiative bridging academic theory and real-world tech engineering through live student internships and career mentorship.
+                </p>
+                <div className="ecosystem-feature-list">
+                  <div className="ecosystem-feature-item">
+                    <span style={{ color: '#C084FC' }}>&bull;</span>
+                    <span><strong>Live Production Internships:</strong> Web Dev, React, Python, Cloud, AI</span>
+                  </div>
+                  <div className="ecosystem-feature-item">
+                    <span style={{ color: '#C084FC' }}>&bull;</span>
+                    <span><strong>Verified Experience Credentials:</strong> QR-verifiable internship certificates</span>
+                  </div>
+                  <div className="ecosystem-feature-item">
+                    <span style={{ color: '#C084FC' }}>&bull;</span>
+                    <span><strong>Direct Placement Pipeline:</strong> Top performers join ABSS Nexus ventures</span>
+                  </div>
+                </div>
+              </div>
+              <div className="ecosystem-card-footer">
+                <Link href="/ecosystem#intennexus" className="bento-btn-primary" style={{ padding: '8px 18px', fontSize: '0.85rem', background: 'linear-gradient(135deg, #7C3AED, #A855F7)' }}>
+                  <span>Explore IntenNexus &rarr;</span>
+                </Link>
+                <Link href="/careers" style={{ color: 'var(--text-muted)', fontSize: '0.85rem', textDecoration: 'none' }}>
+                  Hiring Hub &rarr;
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ====================================================================
           SECTION 3: SERVICES BENTO SECTION
           ==================================================================== */}
       <section className="bento-section" id="services">

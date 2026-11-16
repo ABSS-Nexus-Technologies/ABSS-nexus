@@ -17,22 +17,24 @@ export default function AboutPage() {
         <div className="bento-container" style={{ textAlign: 'center' }}>
           <div className="bento-pill-badge">
             <span className="live-pulse-dot" aria-hidden="true" />
-            <span>Founder-Led Engineering Agency &bull; Jaipur, India</span>
+            <span>Parent Enterprise &amp; Conglomerate &bull; Jaipur, India</span>
           </div>
           <h1 className="bento-hero-headline" style={{ fontSize: 'clamp(2rem, 4vw, 3.4rem)' }}>
             Building Resilient Digital Products That <span className="gradient-text-hero">Empower Businesses</span>
           </h1>
-          <p className="bento-hero-subtitle" style={{ maxWidth: '720px' }}>
-            ABSS Nexus Technologies was founded on a simple conviction: modern businesses deserve clean, high-speed digital
-            platforms built by genuine craftsmen, without bureaucratic agency bloat or unmaintainable templates.
+          <p className="bento-hero-subtitle" style={{ maxWidth: '740px' }}>
+            ABSS Nexus Technologies operates as the parent holding entity behind global IT engineering, proprietary business cloud platforms (ABSS ERP, CRM &amp; HRM), and developer talent incubation via IntenNexus.
           </p>
 
           <div className="bento-hero-actions">
-            <Link className="bento-btn-primary" href="/contact#project-inquiry">
-              <span>Work With Us &rarr;</span>
+            <Link className="bento-btn-primary" href="/ecosystem">
+              <span>Explore Our Ecosystem (3 Pillars) &rarr;</span>
+            </Link>
+            <Link className="bento-btn-glass" href="/services">
+              <span>IT Services</span>
             </Link>
             <Link className="bento-btn-glass" href="/work">
-              <span>Explore Our Work</span>
+              <span>Case Studies</span>
             </Link>
           </div>
         </div>

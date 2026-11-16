@@ -30,12 +30,12 @@ export default function Footer() {
               </div>
             </Link>
             <p className="bento-footer-brand-desc">
-              Building high-performance digital solutions, modern web platforms, and automated cloud systems for enterprises and growing businesses.
+              Parent entity powering Global IT Services, the ABSS Business SaaS Suite (ERP, CRM, HRM), and the IntenNexus developer talent incubator.
             </p>
             <div style={{ marginTop: '14px' }}>
               <span className="bento-footer-status">
                 <span className="live-pulse-dot" aria-hidden="true" />
-                <span>All Systems Operational &bull; Edge Active</span>
+                <span>Ecosystem Active &bull; All Subdomains Live</span>
               </span>
             </div>
           </div>
@@ -45,6 +45,7 @@ export default function Footer() {
             <h3 className="bento-footer-col-title">Navigation</h3>
             <div className="bento-footer-links">
               <Link className="bento-footer-link" href="/">Home</Link>
+              <Link className="bento-footer-link" href="/ecosystem" style={{ color: 'var(--accent-cyan)', fontWeight: 600 }}>Our Ecosystem (3 Pillars)</Link>
               <Link className="bento-footer-link" href="/about">About Us</Link>
               <Link className="bento-footer-link" href="/services">Services Catalog</Link>
               <Link className="bento-footer-link" href="/solutions">Solutions</Link>
@@ -58,19 +59,18 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Column 3: Key Services */}
+          {/* Column 3: Ecosystem Divisions & Core Services */}
           <div>
-            <h3 className="bento-footer-col-title">Core Services</h3>
+            <h3 className="bento-footer-col-title">Ecosystem &amp; SaaS</h3>
             <div className="bento-footer-links">
+              <Link className="bento-footer-link" href="/services">ABSS IT Services (16 Disciplines)</Link>
+              <Link className="bento-footer-link" href="/ecosystem#business-saas">📦 ABSS ERP (erp.abssnexus.in)</Link>
+              <Link className="bento-footer-link" href="/ecosystem#business-saas">🤝 ABSS CRM (crm.abssnexus.in)</Link>
+              <Link className="bento-footer-link" href="/ecosystem#business-saas">👥 ABSS HRM (hrm.abssnexus.in)</Link>
+              <Link className="bento-footer-link" href="/ecosystem#intennexus" style={{ color: '#C084FC' }}>🎓 IntenNexus (Talent Incubator)</Link>
               <Link className="bento-footer-link" href="/services/website-development">Website Development</Link>
               <Link className="bento-footer-link" href="/services/software-development">Software Development</Link>
-              <Link className="bento-footer-link" href="/services/mobile-app-development">Mobile App Dev</Link>
-              <Link className="bento-footer-link" href="/services/ui-ux-design">UI/UX Design Systems</Link>
-              <Link className="bento-footer-link" href="/services/ai-machine-learning">AI &amp; Automations</Link>
-              <Link className="bento-footer-link" href="/services/cloud-computing">Cloud Computing</Link>
-              <Link className="bento-footer-link" href="/services/cybersecurity">Cybersecurity Audits</Link>
-              <Link className="bento-footer-link" href="/services/saas-development">SaaS Development</Link>
-              <Link className="bento-footer-link" href="/services" style={{ color: 'var(--accent-cyan)', fontWeight: 600 }}>All 16 Disciplines &rarr;</Link>
+              <Link className="bento-footer-link" href="/services/cloud-computing">Cloud &amp; DevOps</Link>
             </div>
           </div>
 
@@ -109,7 +109,7 @@ export default function Footer() {
 
         {/* Footer Bottom Bar */}
         <div className="bento-footer-bottom">
-          <p>&copy; {currentYear} ABSS Nexus Technologies. All Rights Reserved.</p>
+          <p>&copy; {currentYear} ABSS Nexus Technologies. All Rights Reserved. &bull; Parent Holding Entity of IntenNexus &amp; ABSS Cloud Platforms.</p>
           <div className="bento-footer-legal-links">
             <Link href="/privacy-policy">Privacy Policy</Link>
             <Link href="/terms-and-conditions">Terms &amp; Conditions</Link>
