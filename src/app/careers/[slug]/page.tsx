@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: CareerPageProps): Promise<Met
   }
 
   return {
-    title: `${role.title} | Careers at ABSS Nexus`,
+    title: `${role.title} | Careers at ABSS Nexus Technologies`,
     description: role.overview,
   };
 }

@@ -58,7 +58,7 @@ export default function Header() {
                 style={{ width: '34px', height: '34px' }}
               />
             </picture>
-            <span className="bento-brand-name">ABSS Nexus</span>
+            <span className="bento-brand-name">ABSS Nexus Technologies</span>
           </Link>
 
           {/* Desktop Nav Links */}

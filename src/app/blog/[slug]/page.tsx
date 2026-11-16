@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: BlogPageProps): Promise<Metad
   }
 
   return {
-    title: `${post.title} | ABSS Nexus Engineering`,
+    title: `${post.title} | ABSS Nexus Technologies Engineering`,
     description: post.summary,
     openGraph: {
       title: post.title,

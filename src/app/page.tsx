@@ -391,7 +391,7 @@ export default function HomePage() {
                 ))}
               </div>
               <p className="testimonial-quote">
-                &ldquo;ABSS Nexus engineered and delivered our SaaS analytics dashboard in just 8 days.
+                &ldquo;ABSS Nexus Technologies engineered and delivered our SaaS analytics dashboard in just 8 days.
                 Having direct access to Shubham without account manager friction eliminated miscommunication.
                 The edge loading speeds and clean modular architecture exceeded our expectations.&rdquo;
               </p>

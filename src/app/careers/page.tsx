@@ -4,9 +4,9 @@ import type { Metadata } from 'next';
 import { careerRoles } from '@/src/lib/data/careers';
 
 export const metadata: Metadata = {
-  title: 'Careers at ABSS Nexus | Engineering & Design Roles',
+  title: 'Careers at ABSS Nexus Technologies | Engineering & Design Roles',
   description:
-    'Join our fast-growing engineering team in Jaipur or remote across India. Explore openings for full-stack developers, UI/UX designers, and cloud architects.',
+    'Join our fast-growing engineering team in Jaipur or remote across India. Explore openings for full-stack developers, UI/UX designers, and cloud architects at ABSS Nexus Technologies.',
 };
 
 export default function CareersPage() {
@@ -39,7 +39,7 @@ export default function CareersPage() {
       <section className="section" style={{ background: 'rgba(0, 0, 0, 0.02)' }}>
         <div className="container">
           <div className="section-heading">
-            <p className="eyebrow">Life at ABSS Nexus</p>
+            <p className="eyebrow">Life at ABSS Nexus Technologies</p>
             <h2>Why Build Your Career Here?</h2>
             <p>We treat engineers as creators, not ticket-pushing cogs.</p>
           </div>

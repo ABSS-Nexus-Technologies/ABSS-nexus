@@ -4,7 +4,7 @@ import type { Metadata } from 'next';
 import { blogPosts } from '@/src/lib/data/blog';
 
 export const metadata: Metadata = {
-  title: 'Engineering & Technology Insights | ABSS Nexus Blog',
+  title: 'Engineering & Technology Insights | ABSS Nexus Technologies Blog',
   description:
     'Authoritative insights on web performance, Core Web Vitals, cloud architecture, MSME digital verification, and modern UI/UX design systems.',
 };
