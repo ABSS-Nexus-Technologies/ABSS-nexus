@@ -8,7 +8,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://abssnexus.in';
   const lastModified = new Date();
 
-  // Static routes
+  // Canonical Static routes
   const staticRoutes: MetadataRoute.Sitemap = [
     { url: `${baseUrl}`, lastModified, changeFrequency: 'weekly', priority: 1.0 },
     { url: `${baseUrl}/about`, lastModified, changeFrequency: 'monthly', priority: 0.8 },
@@ -24,13 +24,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${baseUrl}/privacy-policy`, lastModified, changeFrequency: 'yearly', priority: 0.3 },
     { url: `${baseUrl}/terms-and-conditions`, lastModified, changeFrequency: 'yearly', priority: 0.3 },
     { url: `${baseUrl}/cookie-policy`, lastModified, changeFrequency: 'yearly', priority: 0.3 },
-    { url: `${baseUrl}/disclaimer`, lastModified, changeFrequency: 'yearly', priority: 0.3 },
-    { url: `${baseUrl}/refund-policy`, lastModified, changeFrequency: 'yearly', priority: 0.3 },
-    { url: `${baseUrl}/support-policy`, lastModified, changeFrequency: 'yearly', priority: 0.3 },
-    { url: `${baseUrl}/sitemap`, lastModified, changeFrequency: 'weekly', priority: 0.5 },
   ];
 
-  // 16 Services routes
+  // 16 Service Detail routes
   const serviceRoutes: MetadataRoute.Sitemap = servicesData.map((s) => ({
     url: `${baseUrl}/services/${s.slug}`,
     lastModified,

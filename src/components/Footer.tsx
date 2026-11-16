@@ -107,12 +107,11 @@ export default function Footer() {
           <p>&copy; {currentYear} ABSS Nexus Technologies. All Rights Reserved.</p>
           <div className="bento-footer-legal-links">
             <Link href="/privacy-policy">Privacy Policy</Link>
-            <Link href="/terms-and-conditions">Terms</Link>
-            <Link href="/cookie-policy">Cookies</Link>
-            <Link href="/disclaimer">Disclaimer</Link>
-            <Link href="/refund-policy">Refunds</Link>
-            <Link href="/support-policy">Support</Link>
-            <Link href="/sitemap">Sitemap</Link>
+            <Link href="/terms-and-conditions">Terms &amp; Conditions</Link>
+            <Link href="/cookie-policy">Cookie Policy</Link>
+            <Link href="/terms-and-conditions#support-policy">Warranty &amp; Support SLA</Link>
+            <Link href="/terms-and-conditions#refund-policy">Refund Policy</Link>
+            <Link href="/sitemap.xml">XML Sitemap</Link>
           </div>
         </div>
       </div>
