@@ -10,21 +10,24 @@ export default function Footer() {
         <div className="bento-footer-grid">
           {/* Column 1: Brand & Status */}
           <div>
-            <Link href="/" aria-label="ABSS Nexus Technologies home">
+            <Link href="/" aria-label="ABSS Nexus Technologies home" style={{ display: 'inline-flex', alignItems: 'center', gap: '12px', textDecoration: 'none', marginBottom: '14px' }}>
               <picture>
-                <source srcSet="/assets/images/LogoGenerated.webp" type="image/webp" />
+                <source srcSet="/assets/images/favicon.webp" type="image/webp" />
                 <img
-                  src="/assets/images/LogoGenerated.png"
+                  src="/assets/images/favicon.png"
                   alt="ABSS Nexus Technologies logo"
-                  width={150}
-                  height={36}
+                  width={38}
+                  height={38}
                   loading="lazy"
                   decoding="async"
-                  style={{ height: '36px', width: 'auto' }}
+                  style={{ width: '38px', height: '38px', borderRadius: '8px' }}
                 />
               </picture>
+              <div className="bento-brand-stacked">
+                <span className="bento-brand-top" style={{ fontSize: '1.2rem' }}>ABSS NEXUS</span>
+                <span className="bento-brand-bottom" style={{ fontSize: '0.62rem' }}>TECHNOLOGIES</span>
+              </div>
             </Link>
-            <p className="bento-footer-brand-title">ABSS Nexus Technologies</p>
             <p className="bento-footer-brand-desc">
               Building high-performance digital solutions, modern web platforms, and automated cloud systems for enterprises and growing businesses.
             </p>

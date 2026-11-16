@@ -53,12 +53,15 @@ export default function Header() {
               <img
                 src="/assets/images/favicon.png"
                 alt="ABSS Nexus Technologies logo"
-                width={34}
-                height={34}
-                style={{ width: '34px', height: '34px' }}
+                width={36}
+                height={36}
+                style={{ width: '36px', height: '36px', borderRadius: '8px' }}
               />
             </picture>
-            <span className="bento-brand-name">ABSS Nexus Technologies</span>
+            <div className="bento-brand-stacked">
+              <span className="bento-brand-top">ABSS NEXUS</span>
+              <span className="bento-brand-bottom">TECHNOLOGIES</span>
+            </div>
           </Link>
 
           {/* Desktop Nav Links */}
