@@ -1,0 +1,46 @@
+<svg width="1600" height="480" viewBox="0 0 260 75" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        
+    <linearGradient id="kb-left" x1="20" y1="85" x2="48" y2="15" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0066FF" />
+      <stop offset="100%" stop-color="#00F0FF" />
+    </linearGradient>
+    <linearGradient id="kb-right" x1="52" y1="15" x2="80" y2="85" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#00F0FF" />
+      <stop offset="100%" stop-color="#7928CA" />
+    </linearGradient>
+    <linearGradient id="kb-beam" x1="15" y1="58" x2="85" y2="58" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#00F0FF" />
+      <stop offset="50%" stop-color="#FFFFFF" />
+      <stop offset="100%" stop-color="#00F0FF" />
+    </linearGradient>
+    <filter id="kb-glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="3.5" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  
+      </defs>
+      <!-- Scaled Symbol on Left -->
+      <g transform="translate(8, 6) scale(0.64)">
+        
+  
+
+  <!-- Left Fin Blade -->
+  <path d="M46 16 L22 82 L33 82 L50 32 Z" fill="url(#kb-left)" />
+
+  <!-- Right Fin Blade -->
+  <path d="M54 16 L50 32 L67 82 L78 82 Z" fill="url(#kb-right)" />
+
+  <!-- Top Apex Laser Bridge -->
+  <path d="M46 16 L50 12 L54 16 L50 20 Z" fill="#FFFFFF" />
+
+  <!-- Horizontal Laser Nexus Beam -->
+  <rect x="24" y="55" width="52" height="4.5" rx="2.25" fill="url(#kb-beam)" filter="url(#kb-glow)" />
+  <circle cx="50" cy="57.25" r="4.5" fill="#FFFFFF" />
+  <circle cx="50" cy="57.25" r="2" fill="#00F0FF" />
+
+      </g>
+      <!-- Premium Typography on Right -->
+      <text x="82" y="38" fill="#FFFFFF" font-family="'Space Grotesk', -apple-system, sans-serif" font-weight="800" font-size="26" letter-spacing="-0.5">ABSS <tspan fill="#00F0FF">NEXUS</tspan></text>
+      <text x="84" y="55" fill="#38BDF8" font-family="'Inter', -apple-system, sans-serif" font-weight="700" font-size="9.5" letter-spacing="3.5">TECHNOLOGIES</text>
+    </svg>

@@ -1,0 +1,37 @@
+<svg width="800" height="800" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="hh-outer" x1="15" y1="15" x2="85" y2="85" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#00F0FF" />
+      <stop offset="50%" stop-color="#0066FF" />
+      <stop offset="100%" stop-color="#7928CA" />
+    </linearGradient>
+    <linearGradient id="hh-core" x1="30" y1="30" x2="70" y2="70" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#00F0FF" />
+      <stop offset="100%" stop-color="#FFFFFF" />
+    </linearGradient>
+    <filter id="hh-glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Outer Isometric Hexagon Framework -->
+  <path d="M50 12 L84 31 L84 69 L50 88 L16 69 L16 31 Z" stroke="rgba(0, 240, 255, 0.25)" stroke-width="2" stroke-dasharray="4 4" fill="none" />
+
+  <!-- Internal 'A' Geometric Struts -->
+  <!-- Left Leg -->
+  <path d="M50 16 L20 70 L30 70 L50 32 Z" fill="url(#hh-outer)" />
+  <!-- Right Leg -->
+  <path d="M50 16 L50 32 L70 70 L80 70 Z" fill="url(#hh-outer)" />
+  <!-- Center Nexus Cross-Truss -->
+  <path d="M34 50 L66 50 L50 78 Z" stroke="url(#hh-core)" stroke-width="3" stroke-linejoin="round" fill="none" />
+
+  <!-- Hexagonal Corner Vertex Pins -->
+  <circle cx="50" cy="16" r="3.5" fill="#00F0FF" />
+  <circle cx="20" cy="70" r="3.5" fill="#0066FF" />
+  <circle cx="80" cy="70" r="3.5" fill="#7928CA" />
+
+  <!-- Core Quantum Energy Singularity -->
+  <circle cx="50" cy="50" r="5" fill="#00F0FF" filter="url(#hh-glow)" />
+  <circle cx="50" cy="50" r="2.5" fill="#FFFFFF" />
+</svg>

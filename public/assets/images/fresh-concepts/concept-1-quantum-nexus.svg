@@ -1,0 +1,36 @@
+<svg width="800" height="800" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="q-ribbon-1" x1="20" y1="85" x2="50" y2="15" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0066FF" />
+      <stop offset="60%" stop-color="#00F0FF" />
+      <stop offset="100%" stop-color="#FFFFFF" />
+    </linearGradient>
+    <linearGradient id="q-ribbon-2" x1="50" y1="15" x2="80" y2="85" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#00F0FF" />
+      <stop offset="50%" stop-color="#7928CA" />
+      <stop offset="100%" stop-color="#FF0080" />
+    </linearGradient>
+    <linearGradient id="q-cross" x1="30" y1="58" x2="70" y2="58" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#00F0FF" />
+      <stop offset="50%" stop-color="#7928CA" />
+      <stop offset="100%" stop-color="#0066FF" />
+    </linearGradient>
+    <filter id="q-glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="4" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Left Ascending Ribbon -->
+  <path d="M22 82 C20 72 24 55 36 34 L50 14 L50 26 L39 44 C31 58 29 68 31 76 Z" fill="url(#q-ribbon-1)" />
+
+  <!-- Right Descending Loop -->
+  <path d="M50 14 L64 34 C76 55 80 72 78 82 L69 76 C71 68 69 58 61 44 L50 26 Z" fill="url(#q-ribbon-2)" />
+
+  <!-- Crossover Nexus Bridge (The 'N' loop inside the 'A') -->
+  <path d="M28 62 C34 56 42 56 50 62 C58 68 66 68 72 62 L75 68 C66 76 56 76 48 68 C40 60 34 60 25 68 Z" fill="url(#q-cross)" />
+
+  <!-- Central Nexus Energy Core Spark -->
+  <circle cx="50" cy="50" r="5" fill="#00F0FF" filter="url(#q-glow)" />
+  <circle cx="50" cy="50" r="2.5" fill="#FFFFFF" />
+</svg>

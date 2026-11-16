@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ABSS Nexus Technologies — 4 Brand New Silicon Valley Logo Concepts</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #07090e;
+      --card-bg: rgba(15, 23, 42, 0.75);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --card-border-glow: rgba(0, 240, 255, 0.4);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --cyan: #00f0ff;
+      --cyan-glow: rgba(0, 240, 255, 0.25);
+      --font-heading: 'Space Grotesk', -apple-system, sans-serif;
+      --font-body: 'Inter', -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      line-height: 1.6;
+      padding: 40px 20px 80px;
+      background-image: 
+        radial-gradient(ellipse 80% 50% at 50% -20%, rgba(0, 240, 255, 0.15), transparent 70%),
+        radial-gradient(circle at 10% 20%, rgba(121, 40, 202, 0.12), transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(0, 240, 255, 0.08), transparent 40%);
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 1240px;
+      margin: 0 auto;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .brand-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 18px;
+      border-radius: 9999px;
+      background: rgba(0, 240, 255, 0.1);
+      border: 1px solid rgba(0, 240, 255, 0.35);
+      color: var(--cyan);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      margin-bottom: 16px;
+      box-shadow: 0 0 20px rgba(0, 240, 255, 0.2);
+    }
+
+    .title {
+      font-family: var(--font-heading);
+      font-size: clamp(32px, 5vw, 48px);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 12px;
+      background: linear-gradient(135deg, #ffffff 30%, #94a3b8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .subtitle {
+      font-size: 17px;
+      color: var(--text-muted);
+      max-width: 760px;
+      margin: 0 auto 28px;
+    }
+
+    /* 3D Showcase Presentation Board */
+    .showcase-banner {
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.8), rgba(6, 9, 19, 0.95));
+      border: 1px solid rgba(0, 240, 255, 0.3);
+      border-radius: 24px;
+      padding: 24px;
+      margin-bottom: 50px;
+      box-shadow: 0 20px 50px -15px rgba(0, 0, 0, 0.6);
+    }
+
+    .showcase-banner img {
+      width: 100%;
+      border-radius: 16px;
+      display: block;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    /* Concepts Grid */
+    .concepts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(540px, 1fr));
+      gap: 32px;
+      margin-bottom: 60px;
+    }
+
+    @media (max-width: 640px) {
+      .concepts-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .concept-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 24px;
+      padding: 28px;
+      backdrop-filter: blur(16px);
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .concept-card:hover {
+      border-color: var(--card-border-glow);
+      box-shadow: 0 16px 36px -10px var(--cyan-glow);
+      transform: translateY(-4px);
+    }
+
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .card-tag {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--cyan);
+      background: rgba(0, 240, 255, 0.12);
+      border: 1px solid rgba(0, 240, 255, 0.3);
+      padding: 5px 12px;
+      border-radius: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .vibe-pill {
+      font-size: 12px;
+      color: #cbd5e1;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 4px 12px;
+      border-radius: 9999px;
+    }
+
+    /* Dual Display: Mark & Full Lockup */
+    .preview-cluster {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 16px;
+      margin-bottom: 22px;
+    }
+
+    @media (max-width: 580px) {
+      .preview-cluster {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .mark-box {
+      background: #090d18;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      min-height: 180px;
+    }
+
+    .mark-box img {
+      width: 100%;
+      height: auto;
+      max-height: 120px;
+      object-fit: contain;
+    }
+
+    .lockup-box {
+      background: #090d18;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      min-height: 180px;
+    }
+
+    .lockup-box img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+    }
+
+    .concept-title {
+      font-family: var(--font-heading);
+      font-size: 24px;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 8px;
+    }
+
+    .concept-desc {
+      font-size: 14.5px;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+      line-height: 1.6;
+      flex-grow: 1;
+    }
+
+    .concept-bullets {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 22px;
+      font-size: 13.5px;
+      color: #cbd5e1;
+    }
+
+    .concept-bullets li {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .concept-bullets li::before {
+      content: '✦';
+      color: var(--cyan);
+      font-size: 11px;
+    }
+
+    .downloads {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      padding-top: 16px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .btn-dl {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 12.5px;
+      font-family: var(--font-mono);
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .btn-svg {
+      background: rgba(0, 240, 255, 0.15);
+      border: 1px solid rgba(0, 240, 255, 0.35);
+      color: #38bdf8;
+    }
+    .btn-svg:hover {
+      background: #00f0ff;
+      color: #07090e;
+    }
+
+    .btn-png {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #ffffff;
+    }
+    .btn-png:hover {
+      background: rgba(255, 255, 255, 0.15);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <div class="brand-pill">
+        <span>✦</span> ABSS Nexus Technologies — Next-Gen Brand Concepts
+      </div>
+      <h1 class="title">4 Fresh World-Class Logo Concepts</h1>
+      <p class="subtitle">Designed from scratch with Silicon Valley aesthetics (inspired by Linear, Vercel, OpenAI, Stripe). Minimalist, mathematically proportioned, futuristic, and memorable.</p>
+    </header>
+
+    <!-- 3D 2x2 Brand Identity Board -->
+    <div class="showcase-banner">
+      <img src="/assets/images/fresh-concepts/abss-nexus-4-concepts-showcase.jpg" alt="ABSS Nexus Technologies 4 Logo Concepts Presentation Board">
+    </div>
+
+    <!-- Concepts Grid -->
+    <div class="concepts-grid">
+      <!-- Concept 1: The Quantum Nexus Loop -->
+      <div class="concept-card">
+        <div class="card-top">
+          <span class="card-tag">Concept 01</span>
+          <span class="vibe-pill">AI &amp; Quantum Infrastructure</span>
+        </div>
+        <div class="preview-cluster">
+          <div class="mark-box">
+            <img src="/assets/images/fresh-concepts/concept-1-quantum-nexus.svg" alt="Concept 1 Quantum Nexus Mark">
+          </div>
+          <div class="lockup-box">
+            <img src="/assets/images/fresh-concepts/concept-1-lockup.svg" alt="Concept 1 Lockup">
+          </div>
+        </div>
+        <h3 class="concept-title">The Quantum Nexus Loop</h3>
+        <p class="concept-desc">An impossible continuous geometric ribbon that loops seamlessly through 3D space. From the front, it outlines an ascending apex <strong>&ldquo;A&rdquo;</strong>, while the interwoven cross-bridge forms an interlocking <strong>&ldquo;N&rdquo;</strong> (Nexus) with a glowing core singularity.</p>
+        <ul class="concept-bullets">
+          <li>Electric Cyan (#00F0FF) to Deep Royal (#0052FF) &amp; Neon Magenta (#FF0080)</li>
+          <li>Represents boundless connectivity, AI loops, and infinite scalability</li>
+          <li>Looks iconic as an app icon and mesmerizing as a 3D animated loop</li>
+        </ul>
+        <div class="downloads">
+          <a class="btn-dl btn-svg" href="/assets/images/fresh-concepts/concept-1-quantum-nexus.svg" download>Symbol SVG</a>
+          <a class="btn-dl btn-png" href="/assets/images/fresh-concepts/concept-1-quantum-nexus.png" download>Symbol PNG</a>
+          <a class="btn-dl btn-svg" href="/assets/images/fresh-concepts/concept-1-lockup.svg" download>Lockup SVG</a>
+          <a class="btn-dl btn-png" href="/assets/images/fresh-concepts/concept-1-lockup.png" download>Lockup PNG</a>
+        </div>
+      </div>
+
+      <!-- Concept 2: The Apex Prism -->
+      <div class="concept-card">
+        <div class="card-top">
+          <span class="card-tag">Concept 02</span>
+          <span class="vibe-pill">High-Performance Enterprise Authority</span>
+        </div>
+        <div class="preview-cluster">
+          <div class="mark-box">
+            <img src="/assets/images/fresh-concepts/concept-2-apex-prism.svg" alt="Concept 2 Apex Prism Mark">
+          </div>
+          <div class="lockup-box">
+            <img src="/assets/images/fresh-concepts/concept-2-apex-prism.svg" style="max-height: 120px;" alt="Concept 2 Lockup">
+          </div>
+        </div>
+        <h3 class="concept-title">The Apex Prism (Isometric Delta)</h3>
+        <p class="concept-desc">A sharp, imposing 3D isometric chevron prism. Three precision-shaded geometric facets create an architectural &ldquo;A&rdquo; pyramid with an inner laser cavity and hovering cyan energy diamond.</p>
+        <ul class="concept-bullets">
+          <li>Deep Navy-Blue &amp; Electric Cyan with precision light reflection facets</li>
+          <li>Vibe: Palantir, Vercel, Polygon, Enterprise Cloud Infrastructure</li>
+          <li>Sub-pixel sharp, ultra-clean at 16px favicon and majestic on buildings</li>
+        </ul>
+        <div class="downloads">
+          <a class="btn-dl btn-svg" href="/assets/images/fresh-concepts/concept-2-apex-prism.svg" download>Symbol SVG</a>
+          <a class="btn-dl btn-png" href="/assets/images/fresh-concepts/concept-2-apex-prism.png" download>Symbol PNG</a>
+          <a class="btn-dl btn-svg" href="/assets/images/fresh-concepts/concept-2-lockup.svg" download>Lockup SVG</a>
+          <a class="btn-dl btn-png" href="/assets/images/fresh-concepts/concept-2-lockup.png" download>Lockup PNG</a>
+        </div>
+      </div>
+
+      <!-- Concept 3: The Kinetic Blades -->
+      <div class="concept-card">
+        <div class="card-top">
+          <span class="card-tag">Concept 03</span>
+          <span class="vibe-pill">Sub-Second Velocity &amp; Edge Speed</span>
+        </div>
+        <div class="preview-cluster">
+          <div class="mark-box">
+            <img src="/assets/images/fresh-concepts/concept-3-kinetic-blades.svg" alt="Concept 3 Kinetic Blades Mark">
+          </div>
+          <div class="lockup-box">
+            <img src="/assets/images/fresh-concepts/concept-3-lockup.svg" alt="Concept 3 Lockup">
+          </div>
+        </div>
+        <h3 class="concept-title">The Kinetic Blades</h3>
+        <p class="concept-desc">Two aerodynamic precision-cut geometric fins forming an ultra-sharp futuristic &ldquo;A&rdquo;, pierced by a glowing horizontal laser nexus beam with a glowing photon pulse at the center.</p>
+        <ul class="concept-bullets">
+          <li>Linear, Tesla &amp; SpaceX inspired minimalist aerodynamic geometry</li>
+          <li>Symbolizes sub-second edge deployment, velocity, and sharp execution</li>
+          <li>High-contrast titanium white core with cyan laser pulse</li>
+        </ul>
+        <div class="downloads">
+          <a class="btn-dl btn-svg" href="/assets/images/fresh-concepts/concept-3-kinetic-blades.svg" download>Symbol SVG</a>
+          <a class="btn-dl btn-png" href="/assets/images/fresh-concepts/concept-3-kinetic-blades.png" download>Symbol PNG</a>
+          <a class="btn-dl btn-svg" href="/assets/images/fresh-concepts/concept-3-lockup.svg" download>Lockup SVG</a>
+          <a class="btn-dl btn-png" href="/assets/images/fresh-concepts/concept-3-lockup.png" download>Lockup PNG</a>
+        </div>
+      </div>
+
+      <!-- Concept 4: The Cyber Hyper-Hexagon -->
+      <div class="concept-card">
+        <div class="card-top">
+          <span class="card-tag">Concept 04</span>
+          <span class="vibe-pill">Distributed Networks &amp; Web3</span>
+        </div>
+        <div class="preview-cluster">
+          <div class="mark-box">
+            <img src="/assets/images/fresh-concepts/concept-4-hyper-hexagon.svg" alt="Concept 4 Hyper-Hexagon Mark">
+          </div>
+          <div class="lockup-box">
+            <img src="/assets/images/fresh-concepts/concept-4-lockup.svg" alt="Concept 4 Lockup">
+          </div>
+        </div>
+        <h3 class="concept-title">The Cyber Hyper-Hexagon</h3>
+        <p class="concept-desc">An isometric honeycomb node matrix. An outer hexagonal dashed boundary contains connected triangular trusses that carve out a bold &ldquo;A&rdquo; converging into a central glowing quantum singularity.</p>
+        <ul class="concept-bullets">
+          <li>Ethereum, Supabase &amp; Cloudflare inspired decentralized graph aesthetic</li>
+          <li>Expresses interconnected nodes, database sharding, and resilience</li>
+          <li>Triple-vertex pin stabilization with radiant center core</li>
+        </ul>
+        <div class="downloads">
+          <a class="btn-dl btn-svg" href="/assets/images/fresh-concepts/concept-4-hyper-hexagon.svg" download>Symbol SVG</a>
+          <a class="btn-dl btn-png" href="/assets/images/fresh-concepts/concept-4-hyper-hexagon.png" download>Symbol PNG</a>
+          <a class="btn-dl btn-svg" href="/assets/images/fresh-concepts/concept-4-lockup.svg" download>Lockup SVG</a>
+          <a class="btn-dl btn-png" href="/assets/images/fresh-concepts/concept-4-lockup.png" download>Lockup PNG</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
