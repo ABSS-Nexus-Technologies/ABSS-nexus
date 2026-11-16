@@ -430,6 +430,67 @@ body {
   text-decoration: none;
 }
 
+/* Desktop Hover Support & Invisible Bridge */
+@media (hover: hover) and (pointer: fine) {
+  .bento-dropdown-wrapper:hover .bento-dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+.bento-dropdown-menu::before {
+  content: '';
+  position: absolute;
+  top: -16px;
+  left: 0;
+  right: 0;
+  height: 16px;
+}
+
+.bento-dropdown-card {
+  padding: 14px;
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-subtle);
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.bento-dropdown-card:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(0, 212, 255, 0.4);
+  transform: translateY(-2px);
+}
+
+[data-theme="light"] .bento-dropdown-card {
+  background: rgba(0, 0, 0, 0.02);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+[data-theme="light"] .bento-dropdown-card:hover {
+  background: rgba(0, 0, 0, 0.04);
+  border-color: rgba(0, 102, 255, 0.3);
+}
+
+.bento-mobile-group-title {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent-cyan);
+  padding: 8px 14px 4px;
+  margin-top: 8px;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.bento-mobile-group-title:first-child {
+  margin-top: 0;
+  border-top: none;
+}
+
 /* Mobile Nav Drawer */
 .bento-mobile-toggle {
   display: none;
