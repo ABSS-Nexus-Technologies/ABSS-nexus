@@ -1,9 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: 'export',
+  distDir: 'dist',
   reactStrictMode: true,
   poweredByHeader: false,
   compress: true,
   images: {
+    unoptimized: true,
     formats: ["image/avif", "image/webp"],
   },
   async redirects() {

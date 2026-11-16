@@ -1,3 +1,4 @@
+export const dynamic = 'force-static';
 import { MetadataRoute } from 'next';
 import { servicesData } from '@/src/lib/data/services';
 import { portfolioData } from '@/src/lib/data/work';

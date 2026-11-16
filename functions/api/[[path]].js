@@ -1141,7 +1141,7 @@ export async function onRequest(context) {
       }
     }
 
-    if (request.method === "POST" && route === "/api/leads/contact") {
+    if (request.method === "POST" && (route === "/api/leads/contact" || route === "/api/contact")) {
       if (!String(request.headers.get("Content-Type") || "").toLowerCase().includes("application/json")) {
         return respond(415, { success: false, message: "Please review the submitted information." });
       }
