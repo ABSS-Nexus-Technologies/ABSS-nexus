@@ -1,0 +1,200 @@
+<svg width="800" height="800" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Brilliant Highlight Gradient (Directional light catching the top-left facets) -->
+    <linearGradient id="g-hl-bright" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" />
+      <stop offset="35%" stop-color="#67E8F9" />
+      <stop offset="100%" stop-color="#00F0FF" />
+    </linearGradient>
+
+    <!-- Top Apex Highlight -->
+    <linearGradient id="g-hl-top" x1="20%" y1="0%" x2="80%" y2="100%">
+      <stop offset="0%" stop-color="#E0F2FE" />
+      <stop offset="50%" stop-color="#38BDF8" />
+      <stop offset="100%" stop-color="#00D4FF" />
+    </linearGradient>
+
+    <!-- Illuminated Cyan Surface -->
+    <linearGradient id="g-lit-top" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38BDF8" />
+      <stop offset="60%" stop-color="#00D4FF" />
+      <stop offset="100%" stop-color="#0284C7" />
+    </linearGradient>
+
+    <!-- Standard Lit Facet -->
+    <linearGradient id="g-lit" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00F0FF" />
+      <stop offset="60%" stop-color="#00B4D8" />
+      <stop offset="100%" stop-color="#0077B6" />
+    </linearGradient>
+
+    <!-- Midtone Azure Cyan -->
+    <linearGradient id="g-mid" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00B4D8" />
+      <stop offset="60%" stop-color="#0077B6" />
+      <stop offset="100%" stop-color="#023E8A" />
+    </linearGradient>
+
+    <!-- Shaded Depth Facet (Light shadow) -->
+    <linearGradient id="g-sh-light" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0077B6" />
+      <stop offset="70%" stop-color="#0052FF" />
+      <stop offset="100%" stop-color="#023E8A" />
+    </linearGradient>
+
+    <!-- Shaded Deep Shadow Facet -->
+    <linearGradient id="g-sh-deep" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#023E8A" />
+      <stop offset="60%" stop-color="#03045E" />
+      <stop offset="100%" stop-color="#001845" />
+    </linearGradient>
+
+    <!-- Darkest Cavity Shadow Facet -->
+    <linearGradient id="g-sh-darkest" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#03045E" />
+      <stop offset="100%" stop-color="#010B1C" />
+    </linearGradient>
+
+    <!-- Metallic Embossed Crease Stroke Gradient -->
+    <linearGradient id="g-crease-hl" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.9" />
+      <stop offset="50%" stop-color="#67E8F9" stop-opacity="0.6" />
+      <stop offset="100%" stop-color="#0284C7" stop-opacity="0.3" />
+    </linearGradient>
+
+    <!-- Ambient Shadow Filter -->
+    <filter id="c-ambient-shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#000000" flood-opacity="0.7"/>
+      <feDropShadow dx="0" dy="0" stdDeviation="8" flood-color="#00F0FF" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+
+  <rect width="100%" height="100%" fill="#080C14"/>
+       <radialGradient id="bg-glow" cx="50%" cy="50%" r="50%">
+         <stop offset="0%" stop-color="#00F0FF" stop-opacity="0.15"/>
+         <stop offset="70%" stop-color="#0052FF" stop-opacity="0.05"/>
+         <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+       </radialGradient>
+       <circle cx="50" cy="50" r="45" fill="url(#bg-glow)"/>
+
+  <g filter="url(#c-ambient-shadow)">
+    <!-- Multi-Faceted Triangular Polygons -->
+    
+    <polygon id="f-top-l" points="50,8 44,28 50,22" fill="url(#g-hl-top)" stroke="url(#g-crease-hl)" stroke-width="0.35" stroke-linejoin="round"/>
+    
+    <polygon id="f-top-r" points="50,8 50,22 56,28" fill="url(#g-lit-top)" stroke="url(#g-crease-hl)" stroke-width="0.35" stroke-linejoin="round"/>
+    
+    <polygon id="f-top-lo" points="50,8 38,32 44,28" fill="url(#g-lit)" stroke="url(#g-crease-hl)" stroke-width="0.35" stroke-linejoin="round"/>
+    
+    <polygon id="f-top-ro" points="50,8 56,28 62,32" fill="url(#g-mid)" stroke="url(#g-crease-hl)" stroke-width="0.35" stroke-linejoin="round"/>
+    
+    <polygon id="f-spin-l" points="50,22 44,28 50,38" fill="url(#g-sh-light)" stroke="url(#g-crease-hl)" stroke-width="0.35" stroke-linejoin="round"/>
+    
+    <polygon id="f-spin-r" points="50,22 50,38 56,28" fill="url(#g-sh-deep)" stroke="url(#g-crease-hl)" stroke-width="0.35" stroke-linejoin="round"/>
+    
+    <polygon id="f-l-up-out" points="38,32 28,56 44,28" fill="url(#g-hl-bright)" stroke="url(#g-crease-hl)" stroke-width="0.35" stroke-linejoin="round"/>
+    
+    <polygon id="f-l-up-in" points="44,28 28,56 36,50" fill="url(#g-lit)" stroke="url(#g-crease-hl)" stroke-width="0.35" stroke-linejoin="round"/>
+    
+    <polygon id="f-l-in-up" points="44,28 36,50 50,38" fill="url(#g-mid)" stroke="url(#g-crease-hl)" stroke-width="0.35" stroke-linejoin="round"/>
+    
+    <polygon id="f-l-in-mid" points="50,38 36,50 42,50" fill="url(#g-sh-light)" stroke="url(#g-crease-hl)" stroke-width="0.35" stroke-linejoin="round"/>
+    
+    <polygon id="f-r-up-out" points="62,32 56,28 72,56" fill="url(#g-lit)" stroke="url(#g-crease-hl)" stroke-width="0.35" stroke-linejoin="round"/>
+    
+    <polygon id="f-r-up-in" points="56,28 64,50 72,56" fill="url(#g-mid)" stroke="url(#g-crease-hl)" stroke-width="0.35" stroke-linejoin="round"/>
+    
+    <polygon id="f-r-in-up" points="56,28 50,38 64,50" fill="url(#g-sh-deep)" stroke="url(#g-crease-hl)" stroke-width="0.35" stroke-linejoin="round"/>
+    
+    <polygon id="f-r-in-mid" points="50,38 58,50 64,50" fill="url(#g-sh-darkest)" stroke="url(#g-crease-hl)" stroke-width="0.35" stroke-linejoin="round"/>
+    
+    <polygon id="f-l-mid-out" points="28,56 18,80 36,50" fill="url(#g-hl-bright)" stroke="url(#g-crease-hl)" stroke-width="0.35" stroke-linejoin="round"/>
+    
+    <polygon id="f-l-mid-in" points="36,50 18,80 28,72" fill="url(#g-lit)" stroke="url(#g-crease-hl)" stroke-width="0.35" stroke-linejoin="round"/>
+    
+    <polygon id="f-l-in-bl" points="36,50 28,72 36,62" fill="url(#g-mid)" stroke="url(#g-crease-hl)" stroke-width="0.35" stroke-linejoin="round"/>
+    
+    <polygon id="f-l-in-mid2" points="36,50 42,50 36,62" fill="url(#g-sh-light)" stroke="url(#g-crease-hl)" stroke-width="0.35" stroke-linejoin="round"/>
+    
+    <polygon id="f-l-foot-out" points="18,80 12,88 28,72" fill="url(#g-lit-top)" stroke="url(#g-crease-hl)" stroke-width="0.35" stroke-linejoin="round"/>
+    
+    <polygon id="f-l-foot-bot" points="12,88 24,88 28,72" fill="url(#g-sh-light)" stroke="url(#g-crease-hl)" stroke-width="0.35" stroke-linejoin="round"/>
+    
+    <polygon id="f-l-foot-in" points="24,88 32,80 28,72" fill="url(#g-sh-deep)" stroke="url(#g-crease-hl)" stroke-width="0.35" stroke-linejoin="round"/>
+    
+    <polygon id="f-l-foot-up" points="28,72 32,80 38,70" fill="url(#g-mid)" stroke="url(#g-crease-hl)" stroke-width="0.35" stroke-linejoin="round"/>
+    
+    <polygon id="f-r-mid-out" points="72,56 64,50 82,80" fill="url(#g-mid)" stroke="url(#g-crease-hl)" stroke-width="0.35" stroke-linejoin="round"/>
+    
+    <polygon id="f-r-mid-in" points="64,50 72,72 82,80" fill="url(#g-sh-light)" stroke="url(#g-crease-hl)" stroke-width="0.35" stroke-linejoin="round"/>
+    
+    <polygon id="f-r-in-br" points="64,50 64,62 72,72" fill="url(#g-sh-deep)" stroke="url(#g-crease-hl)" stroke-width="0.35" stroke-linejoin="round"/>
+    
+    <polygon id="f-r-in-mid2" points="64,50 64,62 58,50" fill="url(#g-sh-darkest)" stroke="url(#g-crease-hl)" stroke-width="0.35" stroke-linejoin="round"/>
+    
+    <polygon id="f-r-foot-out" points="82,80 72,72 88,88" fill="url(#g-lit)" stroke="url(#g-crease-hl)" stroke-width="0.35" stroke-linejoin="round"/>
+    
+    <polygon id="f-r-foot-bot" points="88,88 72,72 76,88" fill="url(#g-sh-light)" stroke="url(#g-crease-hl)" stroke-width="0.35" stroke-linejoin="round"/>
+    
+    <polygon id="f-r-foot-in" points="76,88 72,72 68,80" fill="url(#g-sh-deep)" stroke="url(#g-crease-hl)" stroke-width="0.35" stroke-linejoin="round"/>
+    
+    <polygon id="f-r-foot-up" points="72,72 62,70 68,80" fill="url(#g-sh-darkest)" stroke="url(#g-crease-hl)" stroke-width="0.35" stroke-linejoin="round"/>
+    
+    <polygon id="f-cr-top-l" points="36,62 50,62 50,74" fill="url(#g-lit)" stroke="url(#g-crease-hl)" stroke-width="0.35" stroke-linejoin="round"/>
+    
+    <polygon id="f-cr-top-r" points="50,62 64,62 50,74" fill="url(#g-sh-light)" stroke="url(#g-crease-hl)" stroke-width="0.35" stroke-linejoin="round"/>
+    
+    <polygon id="f-cr-bot-l" points="36,62 50,74 38,70" fill="url(#g-sh-deep)" stroke="url(#g-crease-hl)" stroke-width="0.35" stroke-linejoin="round"/>
+    
+    <polygon id="f-cr-bot-r" points="64,62 62,70 50,74" fill="url(#g-sh-darkest)" stroke="url(#g-crease-hl)" stroke-width="0.35" stroke-linejoin="round"/>
+    
+
+    <!-- High-Precision Metallic Outer Border -->
+    <path d="M 50 8 
+    L 38 32 
+    L 28 56 
+    L 18 80 
+    L 12 88 
+    L 24 88 
+    L 32 80 
+    L 38 70 
+    L 50 74 
+    L 62 70 
+    L 68 80 
+    L 76 88 
+    L 88 88 
+    L 82 80 
+    L 72 56 
+    L 62 32 Z" fill="none" stroke="#00F0FF" stroke-width="0.8" stroke-linejoin="round" stroke-opacity="0.95"/>
+    <path d="M 50 8 
+    L 38 32 
+    L 28 56 
+    L 18 80 
+    L 12 88 
+    L 24 88 
+    L 32 80 
+    L 38 70 
+    L 50 74 
+    L 62 70 
+    L 68 80 
+    L 76 88 
+    L 88 88 
+    L 82 80 
+    L 72 56 
+    L 62 32 Z" fill="none" stroke="#FFFFFF" stroke-width="0.25" stroke-linejoin="round" stroke-opacity="0.8"/>
+
+    <!-- High-Precision Metallic Inner Border -->
+    <path d="M 50 38 
+    L 42 50 
+    L 36 62 
+    L 50 62 
+    L 64 62 
+    L 58 50 Z" fill="none" stroke="#00F0FF" stroke-width="0.8" stroke-linejoin="round" stroke-opacity="0.95"/>
+    <path d="M 50 38 
+    L 42 50 
+    L 36 62 
+    L 50 62 
+    L 64 62 
+    L 58 50 Z" fill="none" stroke="#FFFFFF" stroke-width="0.25" stroke-linejoin="round" stroke-opacity="0.8"/>
+  </g>
+</svg>

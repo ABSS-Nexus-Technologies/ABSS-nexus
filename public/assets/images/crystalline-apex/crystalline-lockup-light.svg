@@ -1,0 +1,96 @@
+<svg width="1600" height="480" viewBox="0 0 280 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="gl-bright" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" />
+      <stop offset="35%" stop-color="#67E8F9" />
+      <stop offset="100%" stop-color="#00F0FF" />
+    </linearGradient>
+    <linearGradient id="gl-top" x1="20%" y1="0%" x2="80%" y2="100%">
+      <stop offset="0%" stop-color="#E0F2FE" />
+      <stop offset="50%" stop-color="#38BDF8" />
+      <stop offset="100%" stop-color="#00D4FF" />
+    </linearGradient>
+    <linearGradient id="gl-lit" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00F0FF" />
+      <stop offset="60%" stop-color="#00B4D8" />
+      <stop offset="100%" stop-color="#0077B6" />
+    </linearGradient>
+    <linearGradient id="gl-mid" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00B4D8" />
+      <stop offset="60%" stop-color="#0077B6" />
+      <stop offset="100%" stop-color="#023E8A" />
+    </linearGradient>
+    <linearGradient id="gl-sh-light" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0077B6" />
+      <stop offset="70%" stop-color="#0052FF" />
+      <stop offset="100%" stop-color="#023E8A" />
+    </linearGradient>
+    <linearGradient id="gl-sh-deep" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#023E8A" />
+      <stop offset="60%" stop-color="#03045E" />
+      <stop offset="100%" stop-color="#001845" />
+    </linearGradient>
+    <linearGradient id="gl-sh-darkest" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#03045E" />
+      <stop offset="100%" stop-color="#010B1C" />
+    </linearGradient>
+    <linearGradient id="gl-crease" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.9" />
+      <stop offset="50%" stop-color="#67E8F9" stop-opacity="0.6" />
+      <stop offset="100%" stop-color="#0284C7" stop-opacity="0.3" />
+    </linearGradient>
+    <filter id="gl-drop" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000000" flood-opacity="0.6"/>
+      <feDropShadow dx="0" dy="0" stdDeviation="6" flood-color="#00F0FF" flood-opacity="0.3"/>
+    </filter></defs>
+  
+  <g transform="translate(6, 4) scale(0.72)" filter="url(#gl-drop)">
+    <!-- Polygons -->
+    <polygon points="50,8 44,28 50,22" fill="url(#gl-top)" stroke="url(#gl-crease)" stroke-width="0.35"/>
+    <polygon points="50,8 50,22 56,28" fill="url(#gl-lit)" stroke="url(#gl-crease)" stroke-width="0.35"/>
+    <polygon points="50,8 38,32 44,28" fill="url(#gl-bright)" stroke="url(#gl-crease)" stroke-width="0.35"/>
+    <polygon points="50,8 56,28 62,32" fill="url(#gl-mid)" stroke="url(#gl-crease)" stroke-width="0.35"/>
+    
+    <polygon points="50,22 44,28 50,38" fill="url(#gl-sh-light)" stroke="url(#gl-crease)" stroke-width="0.35"/>
+    <polygon points="50,22 50,38 56,28" fill="url(#gl-sh-deep)" stroke="url(#gl-crease)" stroke-width="0.35"/>
+
+    <polygon points="38,32 28,56 44,28" fill="url(#gl-bright)" stroke="url(#gl-crease)" stroke-width="0.35"/>
+    <polygon points="44,28 28,56 36,50" fill="url(#gl-lit)" stroke="url(#gl-crease)" stroke-width="0.35"/>
+    <polygon points="44,28 36,50 50,38" fill="url(#gl-mid)" stroke="url(#gl-crease)" stroke-width="0.35"/>
+    <polygon points="50,38 36,50 42,50" fill="url(#gl-sh-light)" stroke="url(#gl-crease)" stroke-width="0.35"/>
+
+    <polygon points="62,32 56,28 72,56" fill="url(#gl-lit)" stroke="url(#gl-crease)" stroke-width="0.35"/>
+    <polygon points="56,28 64,50 72,56" fill="url(#gl-mid)" stroke="url(#gl-crease)" stroke-width="0.35"/>
+    <polygon points="56,28 50,38 64,50" fill="url(#gl-sh-deep)" stroke="url(#gl-crease)" stroke-width="0.35"/>
+    <polygon points="50,38 58,50 64,50" fill="url(#gl-sh-darkest)" stroke="url(#gl-crease)" stroke-width="0.35"/>
+
+    <polygon points="28,56 18,80 36,50" fill="url(#gl-bright)" stroke="url(#gl-crease)" stroke-width="0.35"/>
+    <polygon points="36,50 18,80 28,72" fill="url(#gl-lit)" stroke="url(#gl-crease)" stroke-width="0.35"/>
+    <polygon points="36,50 28,72 36,62" fill="url(#gl-mid)" stroke="url(#gl-crease)" stroke-width="0.35"/>
+    <polygon points="36,50 42,50 36,62" fill="url(#gl-sh-light)" stroke="url(#gl-crease)" stroke-width="0.35"/>
+    <polygon points="18,80 12,88 28,72" fill="url(#gl-top)" stroke="url(#gl-crease)" stroke-width="0.35"/>
+    <polygon points="12,88 24,88 28,72" fill="url(#gl-sh-light)" stroke="url(#gl-crease)" stroke-width="0.35"/>
+    <polygon points="24,88 32,80 28,72" fill="url(#gl-sh-deep)" stroke="url(#gl-crease)" stroke-width="0.35"/>
+    <polygon points="28,72 32,80 38,70" fill="url(#gl-mid)" stroke="url(#gl-crease)" stroke-width="0.35"/>
+
+    <polygon points="72,56 64,50 82,80" fill="url(#gl-mid)" stroke="url(#gl-crease)" stroke-width="0.35"/>
+    <polygon points="64,50 72,72 82,80" fill="url(#gl-sh-light)" stroke="url(#gl-crease)" stroke-width="0.35"/>
+    <polygon points="64,50 64,62 72,72" fill="url(#gl-sh-deep)" stroke="url(#gl-crease)" stroke-width="0.35"/>
+    <polygon points="64,50 64,62 58,50" fill="url(#gl-sh-darkest)" stroke="url(#gl-crease)" stroke-width="0.35"/>
+    <polygon points="82,80 72,72 88,88" fill="url(#gl-lit)" stroke="url(#gl-crease)" stroke-width="0.35"/>
+    <polygon points="88,88 72,72 76,88" fill="url(#gl-sh-light)" stroke="url(#gl-crease)" stroke-width="0.35"/>
+    <polygon points="76,88 72,72 68,80" fill="url(#gl-sh-deep)" stroke="url(#gl-crease)" stroke-width="0.35"/>
+    <polygon points="72,72 62,70 68,80" fill="url(#gl-sh-darkest)" stroke="url(#gl-crease)" stroke-width="0.35"/>
+
+    <polygon points="36,62 50,62 50,74" fill="url(#gl-lit)" stroke="url(#gl-crease)" stroke-width="0.35"/>
+    <polygon points="50,62 64,62 50,74" fill="url(#gl-sh-light)" stroke="url(#gl-crease)" stroke-width="0.35"/>
+    <polygon points="36,62 50,74 38,70" fill="url(#gl-sh-deep)" stroke="url(#gl-crease)" stroke-width="0.35"/>
+    <polygon points="64,62 62,70 50,74" fill="url(#gl-sh-darkest)" stroke="url(#gl-crease)" stroke-width="0.35"/>
+
+    <!-- Outlines -->
+    <path d="M 50 8 L 38 32 L 28 56 L 18 80 L 12 88 L 24 88 L 32 80 L 38 70 L 50 74 L 62 70 L 68 80 L 76 88 L 88 88 L 82 80 L 72 56 L 62 32 Z" fill="none" stroke="#00F0FF" stroke-width="0.8"/>
+    <path d="M 50 38 L 42 50 L 36 62 L 50 62 L 64 62 L 58 50 Z" fill="none" stroke="#00F0FF" stroke-width="0.8"/>
+  </g>
+  <text x="88" y="42" fill="#0F172A" font-family="'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-weight="800" font-size="28" letter-spacing="-0.5">ABSS <tspan fill="#0066FF">NEXUS</tspan></text>
+  <text x="90" y="60" fill="#0284C7" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-weight="700" font-size="10.5" letter-spacing="4">TECHNOLOGIES</text>
+</svg>

@@ -49,7 +49,7 @@ export default function Header() {
           {/* Brand Logo & Name */}
           <Link className="bento-brand" href="/" aria-label="ABSS Nexus Technologies home">
             <picture>
-              <source srcSet="/assets/images/apex-prism/apex-prism-symbol.svg" type="image/svg+xml" />
+              <source srcSet="/assets/images/crystalline-apex/crystalline-symbol.svg" type="image/svg+xml" />
               <source srcSet="/assets/images/favicon.webp" type="image/webp" />
               <img
                 src="/assets/images/favicon.png"
