@@ -2165,11 +2165,35 @@ body {
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid var(--border-subtle);
   transition: all 0.25s ease;
+  overflow: hidden;
+  position: relative;
+  word-break: break-word;
 }
 
 .ecosystem-nested-card:hover {
   background: rgba(255, 255, 255, 0.06);
   transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .ecosystem-master-box {
+    padding: 28px 18px;
+  }
+
+  .ecosystem-nested-card {
+    padding: 18px 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .ecosystem-master-box {
+    padding: 22px 14px;
+    border-radius: var(--radius-md);
+  }
+
+  .ecosystem-nested-card {
+    padding: 16px 12px;
+  }
 }
 
 /* Light Mode Overrides: Seamless Apple / Stripe Aesthetic */
