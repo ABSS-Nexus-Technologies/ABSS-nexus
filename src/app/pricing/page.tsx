@@ -93,19 +93,20 @@ export default function PricingPage() {
       {/* Pricing Cards Grid */}
       <section className="bento-section" style={{ paddingTop: '10px' }}>
         <div className="bento-container">
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '24px', marginBottom: '70px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(310px, 1fr))', gap: '28px', marginBottom: '70px', paddingTop: '18px' }}>
             {tiers.map((tier) => (
               <div
                 key={tier.name}
                 className="bento-card"
                 style={{
                   border: tier.popular ? '2px solid var(--accent-cyan)' : '1px solid var(--border-subtle)',
-                  padding: '36px',
+                  padding: '36px 28px',
                   display: 'flex',
                   flexDirection: 'column',
                   justifyContent: 'space-between',
                   boxShadow: tier.popular ? '0 16px 45px rgba(0, 194, 255, 0.2)' : '0 10px 30px rgba(0,0,0,0.15)',
                   position: 'relative',
+                  overflow: 'visible',
                 }}
               >
                 {tier.popular && (
@@ -117,25 +118,49 @@ export default function PricingPage() {
                       transform: 'translateX(-50%)',
                       background: 'linear-gradient(135deg, #00c2ff, #0066cc)',
                       color: '#ffffff',
-                      fontSize: '0.75rem',
+                      fontSize: '0.72rem',
                       fontWeight: 700,
-                      padding: '4px 16px',
+                      padding: '5px 16px',
                       borderRadius: 'var(--radius-pill)',
                       textTransform: 'uppercase',
                       letterSpacing: '0.06em',
-                      boxShadow: '0 0 20px rgba(0,194,255,0.4)',
+                      whiteSpace: 'nowrap',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      gap: '5px',
+                      boxShadow: '0 4px 18px rgba(0, 194, 255, 0.45)',
+                      zIndex: 3,
+                      lineHeight: 1,
                     }}
                   >
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true">
+                      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                    </svg>
                     Recommended Choice
                   </span>
                 )}
 
                 <div>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-                    <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.35rem', color: 'var(--text-main)', margin: 0 }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '10px', marginBottom: '10px' }}>
+                    <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.25rem', color: 'var(--text-main)', margin: 0, lineHeight: 1.3 }}>
                       {tier.name}
                     </h3>
-                    <span style={{ fontSize: '0.8rem', color: 'var(--accent-cyan)', fontWeight: 600 }}>{tier.timeline}</span>
+                    <span
+                      style={{
+                        fontSize: '0.78rem',
+                        color: 'var(--accent-cyan)',
+                        fontWeight: 600,
+                        whiteSpace: 'nowrap',
+                        padding: '3px 8px',
+                        background: 'rgba(0, 194, 255, 0.08)',
+                        borderRadius: 'var(--radius-pill)',
+                        border: '1px solid rgba(0, 194, 255, 0.2)',
+                        lineHeight: 1.2,
+                      }}
+                    >
+                      {tier.timeline}
+                    </span>
                   </div>
                   <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)', marginBottom: '20px', lineHeight: 1.5 }}>
                     {tier.description}
@@ -165,9 +190,17 @@ export default function PricingPage() {
                 <Link
                   className={tier.popular ? 'bento-btn-primary' : 'bento-btn-glass'}
                   href={`/contact?package=${encodeURIComponent(tier.name)}#project-inquiry`}
-                  style={{ width: '100%', justifyContent: 'center' }}
+                  style={{
+                    width: '100%',
+                    justifyContent: 'center',
+                    whiteSpace: 'nowrap',
+                    padding: '12px 18px',
+                    fontSize: '0.94rem',
+                    gap: '8px',
+                  }}
                 >
-                  {tier.cta} &rarr;
+                  <span>{tier.cta}</span>
+                  <span aria-hidden="true" style={{ display: 'inline-block', transition: 'transform 0.2s ease' }}>&rarr;</span>
                 </Link>
               </div>
             ))}
