@@ -47,7 +47,7 @@ export default function EcosystemPage() {
           ==================================================================== */}
       <section className="bento-section" id="it-services" style={{ paddingTop: '60px' }}>
         <div className="bento-container">
-          <div className="bento-card" style={{ padding: '48px 36px', background: 'radial-gradient(circle at 10% 20%, rgba(0, 212, 255, 0.1) 0%, rgba(14, 17, 27, 0.95) 100%)', border: '1px solid rgba(0, 212, 255, 0.35)' }}>
+          <div className="ecosystem-master-box pillar-1-box">
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '40px', alignItems: 'center' }}>
               <div>
                 <span className="ecosystem-pillar-tag" style={{ background: 'rgba(0, 212, 255, 0.15)', color: '#00D4FF', border: '1px solid rgba(0, 212, 255, 0.4)' }}>
@@ -62,11 +62,11 @@ export default function EcosystemPage() {
                 </p>
 
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px', marginBottom: '30px' }}>
-                  <div className="bento-card" style={{ padding: '16px', background: 'rgba(255, 255, 255, 0.03)' }}>
+                  <div className="ecosystem-nested-card" style={{ padding: '16px' }}>
                     <div style={{ fontFamily: 'var(--font-heading)', fontSize: '1.4rem', fontWeight: 800, color: '#00D4FF' }}>16 Disciplines</div>
                     <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Web, Mobile, Cloud, AI, Security</div>
                   </div>
-                  <div className="bento-card" style={{ padding: '16px', background: 'rgba(255, 255, 255, 0.03)' }}>
+                  <div className="ecosystem-nested-card" style={{ padding: '16px' }}>
                     <div style={{ fontFamily: 'var(--font-heading)', fontSize: '1.4rem', fontWeight: 800, color: '#10B981' }}>99.98% Uptime</div>
                     <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Cloudflare Edge &amp; AWS resilient SLAs</div>
                   </div>
@@ -82,7 +82,7 @@ export default function EcosystemPage() {
                 </div>
               </div>
 
-              <div className="bento-card" style={{ padding: '32px', background: 'rgba(255, 255, 255, 0.03)', border: '1px solid rgba(0, 212, 255, 0.2)' }}>
+              <div className="ecosystem-nested-card" style={{ padding: '32px', border: '1px solid rgba(0, 212, 255, 0.25)' }}>
                 <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.3rem', marginBottom: '16px', color: '#00D4FF' }}>
                   Core Engineering Capabilities
                 </h3>
@@ -127,7 +127,7 @@ export default function EcosystemPage() {
           ==================================================================== */}
       <section className="bento-section" id="business-saas" style={{ paddingTop: '80px' }}>
         <div className="bento-container">
-          <div className="bento-card" style={{ padding: '48px 36px', background: 'radial-gradient(circle at 10% 20%, rgba(56, 189, 248, 0.1) 0%, rgba(14, 17, 27, 0.95) 100%)', border: '1px solid rgba(56, 189, 248, 0.35)' }}>
+          <div className="ecosystem-master-box pillar-2-box">
             <div className="bento-section-header" style={{ textAlign: 'center', maxWidth: '840px', margin: '0 auto 40px' }}>
               <div style={{ display: 'inline-flex', gap: '8px', alignItems: 'center', marginBottom: '12px', flexWrap: 'wrap', justifyContent: 'center' }}>
                 <span className="ecosystem-pillar-tag" style={{ background: 'rgba(56, 189, 248, 0.15)', color: '#38BDF8', border: '1px solid rgba(56, 189, 248, 0.4)' }}>
@@ -149,7 +149,7 @@ export default function EcosystemPage() {
 
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '24px' }}>
               {/* PRODUCT 1: ABSS ERP */}
-              <div className="bento-card" style={{ padding: '32px 24px', borderTop: '3px solid #00D4FF', background: 'rgba(255, 255, 255, 0.03)' }}>
+              <div className="ecosystem-nested-card" style={{ padding: '32px 24px', borderTop: '3px solid #00D4FF' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '18px' }}>
                   <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: 'rgba(0, 212, 255, 0.12)', border: '1px solid rgba(0, 212, 255, 0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem' }}>
                     📦
@@ -174,7 +174,7 @@ export default function EcosystemPage() {
               </div>
 
               {/* PRODUCT 2: ABSS CRM */}
-              <div className="bento-card" style={{ padding: '32px 24px', borderTop: '3px solid #38BDF8', background: 'rgba(255, 255, 255, 0.03)' }}>
+              <div className="ecosystem-nested-card" style={{ padding: '32px 24px', borderTop: '3px solid #38BDF8' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '18px' }}>
                   <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: 'rgba(56, 189, 248, 0.12)', border: '1px solid rgba(56, 189, 248, 0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem' }}>
                     🤝
@@ -199,7 +199,7 @@ export default function EcosystemPage() {
               </div>
 
               {/* PRODUCT 3: ABSS HRM */}
-              <div className="bento-card" style={{ padding: '32px 24px', borderTop: '3px solid #10B981', background: 'rgba(255, 255, 255, 0.03)' }}>
+              <div className="ecosystem-nested-card" style={{ padding: '32px 24px', borderTop: '3px solid #10B981' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '18px' }}>
                   <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: 'rgba(16, 185, 129, 0.12)', border: '1px solid rgba(16, 185, 129, 0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem' }}>
                     👥
@@ -232,7 +232,7 @@ export default function EcosystemPage() {
           ==================================================================== */}
       <section className="bento-section" id="intennexus" style={{ paddingTop: '80px', paddingBottom: '90px' }}>
         <div className="bento-container">
-          <div className="bento-card" style={{ padding: '48px 36px', background: 'radial-gradient(circle at 10% 20%, rgba(168, 85, 247, 0.1) 0%, rgba(14, 17, 27, 0.95) 100%)', border: '1px solid rgba(168, 85, 247, 0.35)' }}>
+          <div className="ecosystem-master-box pillar-3-box">
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '40px', alignItems: 'center' }}>
               <div>
                 <span className="ecosystem-pillar-tag" style={{ background: 'rgba(168, 85, 247, 0.15)', color: '#C084FC', border: '1px solid rgba(168, 85, 247, 0.4)' }}>
@@ -272,25 +272,25 @@ export default function EcosystemPage() {
 
               {/* Right Side: Track Cards */}
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
-                <div className="bento-card" style={{ padding: '20px', background: 'rgba(255, 255, 255, 0.03)' }}>
+                <div className="ecosystem-nested-card" style={{ padding: '20px' }}>
                   <div style={{ fontSize: '1.4rem', marginBottom: '8px' }}>💻</div>
                   <div style={{ fontWeight: 700, fontSize: '0.95rem', color: 'var(--text-main)' }}>Fullstack Web Track</div>
                   <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)', marginTop: '4px' }}>React, Next.js, Node.js, PostgreSQL</div>
                 </div>
 
-                <div className="bento-card" style={{ padding: '20px', background: 'rgba(255, 255, 255, 0.03)' }}>
+                <div className="ecosystem-nested-card" style={{ padding: '20px' }}>
                   <div style={{ fontSize: '1.4rem', marginBottom: '8px' }}>☁️</div>
                   <div style={{ fontWeight: 700, fontSize: '0.95rem', color: 'var(--text-main)' }}>Cloud &amp; DevOps</div>
                   <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)', marginTop: '4px' }}>Docker, AWS, Cloudflare, Linux</div>
                 </div>
 
-                <div className="bento-card" style={{ padding: '20px', background: 'rgba(255, 255, 255, 0.03)' }}>
+                <div className="ecosystem-nested-card" style={{ padding: '20px' }}>
                   <div style={{ fontSize: '1.4rem', marginBottom: '8px' }}>🤖</div>
                   <div style={{ fontWeight: 700, fontSize: '0.95rem', color: 'var(--text-main)' }}>AI &amp; Data Engineering</div>
                   <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)', marginTop: '4px' }}>Python, LangChain, API Pipelines</div>
                 </div>
 
-                <div className="bento-card" style={{ padding: '20px', background: 'rgba(255, 255, 255, 0.03)' }}>
+                <div className="ecosystem-nested-card" style={{ padding: '20px' }}>
                   <div style={{ fontSize: '1.4rem', marginBottom: '8px' }}>🎨</div>
                   <div style={{ fontWeight: 700, fontSize: '0.95rem', color: 'var(--text-main)' }}>UI/UX Design Systems</div>
                   <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)', marginTop: '4px' }}>Figma, Design Tokens, Micro-Interactions</div>
