@@ -5,6 +5,8 @@ import { portfolioData } from '@/src/lib/data/work';
 import { faqList } from '@/src/lib/data/faq';
 import ProjectFilter from '@/src/components/ProjectFilter';
 import FaqAccordion from '@/src/components/FaqAccordion';
+import TrustBar from '@/src/components/TrustBar';
+import ProjectCostEstimator from '@/src/components/ProjectCostEstimator';
 
 export default function HomePage() {
   const featuredServices = servicesData.slice(0, 6);
@@ -292,6 +294,9 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Verified Partnerships & Ecosystem Trust Bar */}
+      <TrustBar />
+
       {/* ====================================================================
           SECTION 3: SERVICES BENTO SECTION
           ==================================================================== */}
@@ -451,7 +456,16 @@ export default function HomePage() {
       </section>
 
       {/* ====================================================================
-          SECTION 6: RADIANT PROJECT INQUIRY CTA BOX
+          SECTION 6: INTERACTIVE COST ESTIMATOR & SCOPE ENGINE
+          ==================================================================== */}
+      <section className="bento-section" id="estimator">
+        <div className="bento-container">
+          <ProjectCostEstimator />
+        </div>
+      </section>
+
+      {/* ====================================================================
+          SECTION 7: RADIANT PROJECT INQUIRY CTA BOX
           ==================================================================== */}
       <section className="bento-section" id="project-inquiry">
         <div className="bento-container">

@@ -3,9 +3,10 @@ import Link from 'next/link';
 import type { Metadata } from 'next';
 import { faqList } from '@/src/lib/data/faq';
 import FaqAccordion from '@/src/components/FaqAccordion';
+import ProjectCostEstimator from '@/src/components/ProjectCostEstimator';
 
 export const metadata: Metadata = {
-  title: 'Transparent Pricing & Engineering Packages',
+  title: 'Transparent Pricing & Engineering Packages | ABSS Nexus Technologies',
   description:
     'Honest, transparent pricing for landing pages, multi-page business websites, and enterprise web applications with zero hidden fees.',
 };
@@ -35,7 +36,7 @@ const tiers = [
     price: '₹29,999',
     period: 'one-time',
     timeline: '⏱ 7-12 Days',
-    description: 'Comprehensive multi-page corporate web presence engineered for established brands, clinics, and firms.',
+    description: 'Comprehensive multi-page corporate web presence engineered for established brands, clinics, and growing firms.',
     features: [
       'Up to 8 Custom Responsive Pages',
       'Figma Design Prototype Handoff',
@@ -72,37 +73,39 @@ const tiers = [
 export default function PricingPage() {
   return (
     <main>
-      <section className="site-hero site-hero--page page-hero section" id="hero">
-        <div className="site-hero__container container">
-          <span className="site-hero__eyebrow section-badge-apple">
-            <span className="site-hero__pulse-dot" aria-hidden="true"></span>
-            <span>Transparent Engineering Investment</span>
-          </span>
-          <h1 className="site-hero__title">Transparent Pricing Engineered for High ROI &bull; Zero Hidden Fees</h1>
-          <p className="site-hero__description">
+      {/* Header */}
+      <section className="bento-hero-section" id="hero" style={{ padding: '40px 0 30px' }}>
+        <div className="bento-container" style={{ textAlign: 'center' }}>
+          <div className="bento-pill-badge">
+            <span className="live-pulse-dot" aria-hidden="true" />
+            <span>Transparent Engineering Investment &bull; Zero Hidden Fees</span>
+          </div>
+          <h1 className="bento-hero-headline" style={{ fontSize: 'clamp(2rem, 4vw, 3.4rem)' }}>
+            Transparent Pricing Engineered for <span className="gradient-text-hero">High ROI</span>
+          </h1>
+          <p className="bento-hero-subtitle" style={{ maxWidth: '720px' }}>
             We operate with complete financial transparency. Clear milestone scopes, full code ownership, and zero monthly
             proprietary lock-in fees.
           </p>
         </div>
       </section>
 
-      {/* Pricing Cards */}
-      <section className="section">
-        <div className="container">
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '28px' }}>
+      {/* Pricing Cards Grid */}
+      <section className="bento-section" style={{ paddingTop: '10px' }}>
+        <div className="bento-container">
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '24px', marginBottom: '70px' }}>
             {tiers.map((tier) => (
               <div
                 key={tier.name}
+                className="bento-card"
                 style={{
-                  background: 'var(--bg-card)',
-                  border: tier.popular ? '2px solid var(--color-blue)' : '1px solid var(--border-subtle)',
-                  borderRadius: '16px',
+                  border: tier.popular ? '2px solid var(--accent-cyan)' : '1px solid var(--border-subtle)',
                   padding: '36px',
-                  position: 'relative',
                   display: 'flex',
                   flexDirection: 'column',
                   justifyContent: 'space-between',
-                  boxShadow: tier.popular ? '0 12px 36px rgba(0, 102, 204, 0.12)' : 'none',
+                  boxShadow: tier.popular ? '0 16px 45px rgba(0, 194, 255, 0.2)' : '0 10px 30px rgba(0,0,0,0.15)',
+                  position: 'relative',
                 }}
               >
                 {tier.popular && (
@@ -112,14 +115,15 @@ export default function PricingPage() {
                       top: '-14px',
                       left: '50%',
                       transform: 'translateX(-50%)',
-                      background: 'var(--color-blue)',
+                      background: 'linear-gradient(135deg, #00c2ff, #0066cc)',
                       color: '#ffffff',
-                      fontSize: '0.78rem',
+                      fontSize: '0.75rem',
                       fontWeight: 700,
-                      padding: '4px 14px',
-                      borderRadius: '999px',
+                      padding: '4px 16px',
+                      borderRadius: 'var(--radius-pill)',
                       textTransform: 'uppercase',
-                      letterSpacing: '0.05em',
+                      letterSpacing: '0.06em',
+                      boxShadow: '0 0 20px rgba(0,194,255,0.4)',
                     }}
                   >
                     Recommended Choice
@@ -128,25 +132,29 @@ export default function PricingPage() {
 
                 <div>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-                    <h3 style={{ fontSize: '1.4rem', color: 'var(--color-near-black)', margin: 0 }}>{tier.name}</h3>
-                    <span style={{ fontSize: '0.8rem', color: 'var(--color-blue)', fontWeight: 600 }}>{tier.timeline}</span>
+                    <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.35rem', color: 'var(--text-main)', margin: 0 }}>
+                      {tier.name}
+                    </h3>
+                    <span style={{ fontSize: '0.8rem', color: 'var(--accent-cyan)', fontWeight: 600 }}>{tier.timeline}</span>
                   </div>
-                  <p style={{ fontSize: '0.92rem', color: 'var(--color-text-dim)', marginBottom: '20px' }}>{tier.description}</p>
+                  <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)', marginBottom: '20px', lineHeight: 1.5 }}>
+                    {tier.description}
+                  </p>
 
                   <div style={{ marginBottom: '24px', display: 'flex', alignItems: 'baseline', gap: '6px' }}>
-                    <strong style={{ fontSize: '2.5rem', fontWeight: 800, color: 'var(--color-near-black)' }}>
+                    <strong style={{ fontFamily: 'var(--font-heading)', fontSize: '2.6rem', fontWeight: 800, color: 'var(--text-main)' }}>
                       {tier.price}
                     </strong>
-                    <span style={{ fontSize: '0.9rem', color: 'var(--color-text-dim)' }}>/{tier.period}</span>
+                    <span style={{ fontSize: '0.88rem', color: 'var(--text-muted)' }}>/{tier.period}</span>
                   </div>
 
                   <hr style={{ border: 'none', borderTop: '1px solid var(--border-subtle)', margin: '20px 0' }} />
 
                   <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 28px 0', display: 'flex', flexDirection: 'column', gap: '12px' }}>
                     {tier.features.map((f) => (
-                      <li key={f} style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '0.92rem', color: 'var(--color-near-black)' }}>
+                      <li key={f} style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '0.9rem', color: 'var(--text-main)' }}>
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#10b981" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                          <polyline points="20 6 9 17 4 12"></polyline>
+                          <polyline points="20 6 9 17 4 12" />
                         </svg>
                         <span>{f}</span>
                       </li>
@@ -155,7 +163,7 @@ export default function PricingPage() {
                 </div>
 
                 <Link
-                  className={`btn ${tier.popular ? 'btn-glow-cyan' : 'btn-glass'}`}
+                  className={tier.popular ? 'bento-btn-primary' : 'bento-btn-glass'}
                   href={`/contact?package=${encodeURIComponent(tier.name)}#project-inquiry`}
                   style={{ width: '100%', justifyContent: 'center' }}
                 >
@@ -165,29 +173,39 @@ export default function PricingPage() {
             ))}
           </div>
 
+          {/* Interactive Cost Estimator */}
+          <div style={{ marginBottom: '70px' }}>
+            <ProjectCostEstimator />
+          </div>
+
           {/* Pricing FAQ Section */}
-          <div style={{ marginTop: '64px' }}>
-            <div className="section-heading">
-              <p className="eyebrow">Financial Transparency</p>
-              <h2>Frequently Asked Pricing Questions</h2>
+          <div style={{ marginTop: '50px' }}>
+            <div className="bento-section-header">
+              <span className="bento-section-eyebrow">Financial Transparency</span>
+              <h2 className="bento-section-title">Frequently Asked Questions</h2>
             </div>
             <FaqAccordion items={faqList} />
           </div>
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="section cta-band">
-        <div className="container">
-          <div className="radiant-cta-box">
-            <p className="eyebrow">Custom Scope &amp; Estimates</p>
-            <h2>Need a Specific Architecture Estimate?</h2>
-            <p>Send us your project outline for a line-item technical scope breakdown within 24 hours.</p>
-            <div className="radiant-cta-actions">
-              <Link className="btn btn-glow-cyan" href="/contact#project-inquiry">
+      {/* Radiant CTA Band */}
+      <section className="bento-section" style={{ paddingTop: '10px' }}>
+        <div className="bento-container">
+          <div className="bento-cta-box">
+            <span className="bento-section-eyebrow">Custom Scope &amp; Estimates</span>
+            <h2 className="bento-cta-title">Need a Specific Architecture Estimate?</h2>
+            <p className="bento-cta-desc">Send us your project outline for a line-item technical scope breakdown within 24 hours.</p>
+            <div className="bento-cta-actions">
+              <Link className="bento-btn-primary" href="/contact#project-inquiry">
                 Request Itemized Quote &rarr;
               </Link>
-              <a className="btn btn-whatsapp-outline" href="https://wa.me/917688899205" target="_blank" rel="noopener noreferrer">
+              <a
+                className="bento-btn-whatsapp"
+                href="https://wa.me/917688899205?text=Hi%20Shubham%2C%20I%20saw%20your%20portfolio%20on%20ABSS%20Nexus%20Technologies%20and%20I%20want%20to%20discuss%20a%20new%20project."
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 WhatsApp Directly
               </a>
             </div>

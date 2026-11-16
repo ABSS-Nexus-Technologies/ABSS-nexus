@@ -178,7 +178,7 @@ export default async function CaseStudyDetailPage({ params }: WorkPageProps) {
               <Link className="btn btn-glow-cyan" href="/contact#project-inquiry">
                 Schedule Project Discovery &rarr;
               </Link>
-              <a className="btn btn-whatsapp-outline" href="https://wa.me/917688899205" target="_blank" rel="noopener noreferrer">
+              <a className="btn btn-whatsapp-outline" href="https://wa.me/917688899205?text=Hi%20Shubham%2C%20I%20saw%20your%20portfolio%20on%20ABSS%20Nexus%20Technologies%20and%20I%20want%20to%20discuss%20a%20new%20project." target="_blank" rel="noopener noreferrer">
                 Discuss on WhatsApp
               </a>
             </div>
