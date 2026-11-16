@@ -1,0 +1,47 @@
+<svg width="1024" height="1024" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="em-ring" x1="10" y1="10" x2="90" y2="90" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#00E5FF" />
+      <stop offset="50%" stop-color="#8B5CF6" />
+      <stop offset="100%" stop-color="#FF6B4A" />
+    </linearGradient>
+    <linearGradient id="em-core" x1="20" y1="15" x2="80" y2="85" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0F172A" />
+      <stop offset="100%" stop-color="#020617" />
+    </linearGradient>
+    <linearGradient id="em-mark" x1="36" y1="34" x2="64" y2="66" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#00E5FF" />
+      <stop offset="55%" stop-color="#8B5CF6" />
+      <stop offset="100%" stop-color="#FF6B4A" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Outer Discs & Rings -->
+  <circle cx="50" cy="50" r="46" fill="url(#em-core)" />
+  <circle cx="50" cy="50" r="44.5" stroke="url(#em-ring)" stroke-width="2.5" />
+  <circle cx="50" cy="50" r="40.5" stroke="rgba(255,255,255,0.22)" stroke-width="1" stroke-dasharray="2 3" />
+  
+  <!-- Upper Perimeter Text: ABSS NEXUS -->
+  <g fill="#FFFFFF" font-family="'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-weight="800" font-size="6.4">
+    <text x="50" y="19.5" text-anchor="middle" transform="rotate(-50.00 50 50)">A</text><text x="50" y="19.5" text-anchor="middle" transform="rotate(-38.89 50 50)">B</text><text x="50" y="19.5" text-anchor="middle" transform="rotate(-27.78 50 50)">S</text><text x="50" y="19.5" text-anchor="middle" transform="rotate(-16.67 50 50)">S</text><text x="50" y="19.5" text-anchor="middle" transform="rotate(-5.56 50 50)"> </text><text x="50" y="19.5" text-anchor="middle" transform="rotate(5.56 50 50)">N</text><text x="50" y="19.5" text-anchor="middle" transform="rotate(16.67 50 50)">E</text><text x="50" y="19.5" text-anchor="middle" transform="rotate(27.78 50 50)">X</text><text x="50" y="19.5" text-anchor="middle" transform="rotate(38.89 50 50)">U</text><text x="50" y="19.5" text-anchor="middle" transform="rotate(50.00 50 50)">S</text>
+  </g>
+  
+  <!-- Lower Perimeter Text: TECHNOLOGIES -->
+  <g fill="#00E5FF" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-weight="700" font-size="5.4">
+    <text x="50" y="85.2" text-anchor="middle" transform="rotate(55.00 50 50)">T</text><text x="50" y="85.2" text-anchor="middle" transform="rotate(45.00 50 50)">E</text><text x="50" y="85.2" text-anchor="middle" transform="rotate(35.00 50 50)">C</text><text x="50" y="85.2" text-anchor="middle" transform="rotate(25.00 50 50)">H</text><text x="50" y="85.2" text-anchor="middle" transform="rotate(15.00 50 50)">N</text><text x="50" y="85.2" text-anchor="middle" transform="rotate(5.00 50 50)">O</text><text x="50" y="85.2" text-anchor="middle" transform="rotate(-5.00 50 50)">L</text><text x="50" y="85.2" text-anchor="middle" transform="rotate(-15.00 50 50)">O</text><text x="50" y="85.2" text-anchor="middle" transform="rotate(-25.00 50 50)">G</text><text x="50" y="85.2" text-anchor="middle" transform="rotate(-35.00 50 50)">I</text><text x="50" y="85.2" text-anchor="middle" transform="rotate(-45.00 50 50)">E</text><text x="50" y="85.2" text-anchor="middle" transform="rotate(-55.00 50 50)">S</text>
+  </g>
+  
+  <!-- Diamond Star Pins at 9 and 3 o'clock -->
+  <path d="M13 50L15.2 47.8L17.4 50L15.2 52.2Z" fill="#00E5FF" />
+  <path d="M82.6 50L84.8 47.8L87 50L84.8 52.2Z" fill="#FF6B4A" />
+  
+  <!-- Inner Shield Core -->
+  <circle cx="50" cy="50" r="24" fill="#090D18" stroke="rgba(255,255,255,0.2)" stroke-width="1.4" />
+  <circle cx="50" cy="50" r="21.5" stroke="url(#em-ring)" stroke-opacity="0.5" stroke-width="1" />
+  
+  <!-- Central Stylized Nexus Core Pillars -->
+  <rect x="37.5" y="36" width="6" height="28" rx="3" fill="#00E5FF" />
+  <rect x="56.5" y="36" width="6" height="28" rx="3" fill="#8B5CF6" />
+  <path d="M40.5 39L59.5 61" stroke="url(#em-mark)" stroke-width="6" stroke-linecap="round" />
+  <path d="M50 46.5L53 50L50 53.5L47 50Z" fill="#FFFFFF" />
+</svg>

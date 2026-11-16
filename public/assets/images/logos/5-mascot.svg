@@ -1,0 +1,40 @@
+<svg width="1024" height="1024" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="mc-fur" x1="16" y1="12" x2="64" y2="68" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#00E5FF" />
+      <stop offset="60%" stop-color="#0284C7" />
+      <stop offset="100%" stop-color="#4F46E5" />
+    </linearGradient>
+    <linearGradient id="mc-inner" x1="20" y1="18" x2="30" y2="28" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#38BDF8" />
+      <stop offset="100%" stop-color="#8B5CF6" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Outer Tech Halo -->
+  <circle cx="40" cy="42" r="33" fill="#090D18" stroke="rgba(0, 229, 255, 0.35)" stroke-width="1.5" />
+  
+  <!-- Left & Right Cyber Ears -->
+  <path d="M18 33L15 11L33 23Z" fill="url(#mc-fur)" />
+  <path d="M62 33L65 11L47 23Z" fill="url(#mc-fur)" />
+  <path d="M19 28L18 16L29 24Z" fill="url(#mc-inner)" />
+  <path d="M61 28L62 16L51 24Z" fill="url(#mc-inner)" />
+  
+  <!-- Head Base -->
+  <path d="M16 38C16 26 26 20 40 20C54 20 64 26 64 38C64 53 53 64 40 66C27 64 16 53 16 38Z" fill="url(#mc-fur)" />
+  
+  <!-- White Cheek Highlights -->
+  <path d="M17 41C23 41 29 45 33 52C36 57 38 61 40 66C27 64 17 54 17 41Z" fill="#F8FAFC" />
+  <path d="M63 41C57 41 51 45 47 52C44 57 42 61 40 66C53 64 63 54 63 41Z" fill="#F8FAFC" />
+  
+  <!-- Cyber Visor / Holographic HUD -->
+  <rect x="20" y="32" width="40" height="14" rx="7" fill="#0B132B" stroke="#00E5FF" stroke-width="1.5" />
+  <circle cx="30" cy="39" r="3.5" fill="#00E5FF" />
+  <circle cx="50" cy="39" r="3.5" fill="#00E5FF" />
+  <circle cx="31" cy="38" r="1.3" fill="#FFFFFF" />
+  <circle cx="51" cy="38" r="1.3" fill="#FFFFFF" />
+  
+  <!-- Nose & Smile -->
+  <path d="M36.5 52C36.5 50.3 38 49.5 40 49.5C42 49.5 43.5 50.3 43.5 52C43.5 53.5 41.5 55 40 55C38.5 55 36.5 53.5 36.5 52Z" fill="#090D18" />
+  <path d="M36 58C38.2 60 41.8 60 44 58" stroke="#090D18" stroke-width="2.2" stroke-linecap="round" />
+</svg>

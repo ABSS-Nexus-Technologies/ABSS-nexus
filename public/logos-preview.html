@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ABSS Nexus Technologies — Official Brand Identity & Logo Suite</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #07090e;
+      --card-bg: rgba(15, 23, 42, 0.65);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --card-border-glow: rgba(0, 194, 255, 0.35);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --cyan: #00c2ff;
+      --cyan-glow: rgba(0, 194, 255, 0.25);
+      --violet: #8b5cf6;
+      --font-heading: 'Space Grotesk', -apple-system, sans-serif;
+      --font-body: 'Inter', -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      line-height: 1.6;
+      padding: 40px 20px 80px;
+      background-image: 
+        radial-gradient(ellipse 80% 50% at 50% -20%, rgba(0, 194, 255, 0.15), transparent 70%),
+        radial-gradient(circle at 10% 20%, rgba(139, 92, 246, 0.1), transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(0, 194, 255, 0.08), transparent 40%);
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 1240px;
+      margin: 0 auto;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .brand-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      border-radius: 9999px;
+      background: rgba(0, 194, 255, 0.1);
+      border: 1px solid rgba(0, 194, 255, 0.3);
+      color: var(--cyan);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      margin-bottom: 16px;
+      box-shadow: 0 0 20px rgba(0, 194, 255, 0.2);
+    }
+
+    .title {
+      font-family: var(--font-heading);
+      font-size: clamp(32px, 5vw, 48px);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 12px;
+      background: linear-gradient(135deg, #ffffff 30%, #94a3b8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .subtitle {
+      font-size: 17px;
+      color: var(--text-muted);
+      max-width: 680px;
+      margin: 0 auto 30px;
+    }
+
+    .meta-bar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--card-border);
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-family: var(--font-mono);
+      color: var(--text-muted);
+    }
+    .meta-item strong { color: var(--cyan); }
+
+    /* Grid of Logos */
+    .logo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+      gap: 28px;
+      margin-bottom: 60px;
+    }
+
+    .logo-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 24px;
+      backdrop-filter: blur(16px);
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .logo-card:hover {
+      border-color: var(--card-border-glow);
+      box-shadow: 0 12px 30px -10px var(--cyan-glow);
+      transform: translateY(-4px);
+    }
+
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .card-tag {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--cyan);
+      background: rgba(0, 194, 255, 0.08);
+      border: 1px solid rgba(0, 194, 255, 0.2);
+      padding: 4px 10px;
+      border-radius: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .theme-badge {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .card-canvas {
+      height: 220px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 14px;
+      margin-bottom: 20px;
+      padding: 24px;
+      transition: background 0.2s ease;
+      position: relative;
+    }
+
+    .card-canvas.dark {
+      background: #090d18;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .card-canvas.light {
+      background: #ffffff;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+    }
+
+    .card-canvas img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      filter: drop-shadow(0 4px 12px rgba(0,0,0,0.15));
+    }
+
+    .card-title {
+      font-family: var(--font-heading);
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: #ffffff;
+    }
+
+    .card-desc {
+      font-size: 13.5px;
+      color: var(--text-muted);
+      margin-bottom: 18px;
+      flex-grow: 1;
+    }
+
+    .downloads {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      padding-top: 14px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .btn-dl {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-family: var(--font-mono);
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .btn-svg {
+      background: rgba(0, 194, 255, 0.15);
+      border: 1px solid rgba(0, 194, 255, 0.35);
+      color: #38bdf8;
+    }
+    .btn-svg:hover {
+      background: #00c2ff;
+      color: #07090e;
+    }
+
+    .btn-png {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #e2e8f0;
+    }
+    .btn-png:hover {
+      background: rgba(255, 255, 255, 0.15);
+      color: #ffffff;
+    }
+
+    .btn-jpg {
+      background: rgba(139, 92, 246, 0.12);
+      border: 1px solid rgba(139, 92, 246, 0.3);
+      color: #c084fc;
+    }
+    .btn-jpg:hover {
+      background: #8b5cf6;
+      color: #ffffff;
+    }
+
+    /* Colors Section */
+    .palette-section {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 32px;
+      margin-bottom: 40px;
+    }
+
+    .palette-title {
+      font-family: var(--font-heading);
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    .color-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+    }
+
+    .color-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 16px;
+    }
+
+    .color-swatch {
+      height: 48px;
+      border-radius: 8px;
+      margin-bottom: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .color-name {
+      font-weight: 600;
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+
+    .color-code {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--cyan);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <div class="brand-pill">
+        <span>⚡</span> ABSS Nexus Technologies Brand System
+      </div>
+      <h1 class="title">Official Corporate Logo Suite</h1>
+      <p class="subtitle">Complete, high-resolution vector and raster assets across all 10 corporate design formats. Available in SVG, PNG (transparent), JPG, and WebP.</p>
+      
+      <div class="meta-bar">
+        <div class="meta-item">Organization: <strong>ABSS Nexus Technologies</strong></div>
+        <div class="meta-item">Established: <strong>2026</strong></div>
+        <div class="meta-item">Formats: <strong>SVG • PNG • JPG • WebP</strong></div>
+        <div class="meta-item">Status: <strong>Official Release v2.0</strong></div>
+      </div>
+    </header>
+
+    <div class="logo-grid">
+      <!-- 1. Lettermark -->
+      <div class="logo-card">
+        <div class="card-top">
+          <span class="card-tag">01 • Lettermark</span>
+          <span class="theme-badge">Dark / Squircle</span>
+        </div>
+        <div class="card-canvas dark">
+          <img src="/assets/images/logos/1-lettermark.svg" alt="1-lettermark logo">
+        </div>
+        <h3 class="card-title">Lettermark Monogram</h3>
+        <p class="card-desc">Sleek obsidian squircle with electric cyan 'A' and white 'N' pillars joined by a glowing nexus ribbon. Ideal for mobile app icons, favicons, and social avatars.</p>
+        <div class="downloads">
+          <a class="btn-dl btn-svg" href="/assets/images/logos/1-lettermark.svg" download>SVG</a>
+          <a class="btn-dl btn-png" href="/assets/images/logos/1-lettermark.png" download>PNG</a>
+          <a class="btn-dl btn-jpg" href="/assets/images/logos/1-lettermark.jpg" download>JPG</a>
+        </div>
+      </div>
+
+      <!-- 2. Wordmark Light -->
+      <div class="logo-card">
+        <div class="card-top">
+          <span class="card-tag">02 • Wordmark</span>
+          <span class="theme-badge">Light Theme</span>
+        </div>
+        <div class="card-canvas light">
+          <img src="/assets/images/logos/2-wordmark.svg" alt="2-wordmark light logo">
+        </div>
+        <h3 class="card-title">Wordmark (Light)</h3>
+        <p class="card-desc">Horizontal corporate lockup with deep obsidian 'ABSS' and cyan-violet gradient 'NEXUS' with tracked 'TECHNOLOGIES' divider. For light websites and white paper prints.</p>
+        <div class="downloads">
+          <a class="btn-dl btn-svg" href="/assets/images/logos/2-wordmark.svg" download>SVG</a>
+          <a class="btn-dl btn-png" href="/assets/images/logos/2-wordmark.png" download>PNG</a>
+          <a class="btn-dl btn-jpg" href="/assets/images/logos/2-wordmark.jpg" download>JPG</a>
+        </div>
+      </div>
+
+      <!-- 2. Wordmark Dark -->
+      <div class="logo-card">
+        <div class="card-top">
+          <span class="card-tag">02 • Wordmark</span>
+          <span class="theme-badge">Dark Theme</span>
+        </div>
+        <div class="card-canvas dark">
+          <img src="/assets/images/logos/2-wordmark-dark.svg" alt="2-wordmark dark logo">
+        </div>
+        <h3 class="card-title">Wordmark (Dark)</h3>
+        <p class="card-desc">High-contrast white 'ABSS' and neon cyan 'NEXUS' with glowing accent rule. Perfect for dark mode headers, presentation slide decks, and developer portals.</p>
+        <div class="downloads">
+          <a class="btn-dl btn-svg" href="/assets/images/logos/2-wordmark-dark.svg" download>SVG</a>
+          <a class="btn-dl btn-png" href="/assets/images/logos/2-wordmark-dark.png" download>PNG</a>
+          <a class="btn-dl btn-jpg" href="/assets/images/logos/2-wordmark-dark.jpg" download>JPG</a>
+        </div>
+      </div>
+
+      <!-- 3. Pictorial Mark -->
+      <div class="logo-card">
+        <div class="card-top">
+          <span class="card-tag">03 • Pictorial</span>
+          <span class="theme-badge">Universal</span>
+        </div>
+        <div class="card-canvas dark">
+          <img src="/assets/images/logos/3-pictorial.svg" alt="3-pictorial logo">
+        </div>
+        <h3 class="card-title">Pictorial Supersonic Rocket</h3>
+        <p class="card-desc">Faceted supersonic origami arrow/jet breaking through a dashed orbital telemetry ring with neon speed trails and beacon node. Represents velocity and innovation.</p>
+        <div class="downloads">
+          <a class="btn-dl btn-svg" href="/assets/images/logos/3-pictorial.svg" download>SVG</a>
+          <a class="btn-dl btn-png" href="/assets/images/logos/3-pictorial.png" download>PNG</a>
+          <a class="btn-dl btn-jpg" href="/assets/images/logos/3-pictorial.jpg" download>JPG</a>
+        </div>
+      </div>
+
+      <!-- 4. Abstract Mark -->
+      <div class="logo-card">
+        <div class="card-top">
+          <span class="card-tag">04 • Abstract</span>
+          <span class="theme-badge">Core Symbol</span>
+        </div>
+        <div class="card-canvas dark">
+          <img src="/assets/images/logos/4-abstract.svg" alt="4-abstract logo">
+        </div>
+        <h3 class="card-title">Abstract Nexus Bridge</h3>
+        <p class="card-desc">Two pillared nodes interconnected by an energetic diagonal hyper-bridge with a central sparkling diamond energy core. The pure geometric essence of the Nexus brand.</p>
+        <div class="downloads">
+          <a class="btn-dl btn-svg" href="/assets/images/logos/4-abstract.svg" download>SVG</a>
+          <a class="btn-dl btn-png" href="/assets/images/logos/4-abstract.png" download>PNG</a>
+          <a class="btn-dl btn-jpg" href="/assets/images/logos/4-abstract.jpg" download>JPG</a>
+        </div>
+      </div>
+
+      <!-- 5. Tech Mascot -->
+      <div class="logo-card">
+        <div class="card-top">
+          <span class="card-tag">05 • Mascot</span>
+          <span class="theme-badge">Community / Dev</span>
+        </div>
+        <div class="card-canvas dark">
+          <img src="/assets/images/logos/5-mascot.svg" alt="5-mascot logo">
+        </div>
+        <h3 class="card-title">Cyber Nexus Fox (AI Bot)</h3>
+        <p class="card-desc">Futuristic cybernetic mascot with glowing electric cyan VR goggles, aerodynamic ears, and holographic tech aura. Ideal for developer swag, stickers, and community bots.</p>
+        <div class="downloads">
+          <a class="btn-dl btn-svg" href="/assets/images/logos/5-mascot.svg" download>SVG</a>
+          <a class="btn-dl btn-png" href="/assets/images/logos/5-mascot.png" download>PNG</a>
+          <a class="btn-dl btn-jpg" href="/assets/images/logos/5-mascot.jpg" download>JPG</a>
+        </div>
+      </div>
+
+      <!-- 6. Combination Main Light -->
+      <div class="logo-card">
+        <div class="card-top">
+          <span class="card-tag">06 • Combination</span>
+          <span class="theme-badge">Primary Light</span>
+        </div>
+        <div class="card-canvas light">
+          <img src="/assets/images/logos/6-combination-main.svg" alt="6-combination-main light logo">
+        </div>
+        <h3 class="card-title">Combination Primary (Light)</h3>
+        <p class="card-desc">The flagship master lockup: Abstract Nexus mark on the left with 2-line stacked brand typography on the right. Formatted for white documents and stationery.</p>
+        <div class="downloads">
+          <a class="btn-dl btn-svg" href="/assets/images/logos/6-combination-main.svg" download>SVG</a>
+          <a class="btn-dl btn-png" href="/assets/images/logos/6-combination-main.png" download>PNG</a>
+          <a class="btn-dl btn-jpg" href="/assets/images/logos/6-combination-main.jpg" download>JPG</a>
+        </div>
+      </div>
+
+      <!-- 6. Combination Main Dark -->
+      <div class="logo-card">
+        <div class="card-top">
+          <span class="card-tag">06 • Combination</span>
+          <span class="theme-badge">Primary Dark</span>
+        </div>
+        <div class="card-canvas dark">
+          <img src="/assets/images/logos/6-combination-main-dark.svg" alt="6-combination-main dark logo">
+        </div>
+        <h3 class="card-title">Combination Primary (Dark)</h3>
+        <p class="card-desc">The flagship dark-mode identity for ABSS Nexus Technologies. Used across the main website header, SaaS portals, and official partner listings.</p>
+        <div class="downloads">
+          <a class="btn-dl btn-svg" href="/assets/images/logos/6-combination-main-dark.svg" download>SVG</a>
+          <a class="btn-dl btn-png" href="/assets/images/logos/6-combination-main-dark.png" download>PNG</a>
+          <a class="btn-dl btn-jpg" href="/assets/images/logos/6-combination-main-dark.jpg" download>JPG</a>
+        </div>
+      </div>
+
+      <!-- 7. Emblem Badge -->
+      <div class="logo-card">
+        <div class="card-top">
+          <span class="card-tag">07 • Emblem</span>
+          <span class="theme-badge">Badge / Crest</span>
+        </div>
+        <div class="card-canvas dark">
+          <img src="/assets/images/logos/7-emblem.svg" alt="7-emblem logo">
+        </div>
+        <h3 class="card-title">Corporate Emblem Badge</h3>
+        <p class="card-desc">High-precision circular crest featuring perimeter radial text, gradient ring, orbital telemetry pinstripes, diamond star pins, and central Nexus core.</p>
+        <div class="downloads">
+          <a class="btn-dl btn-svg" href="/assets/images/logos/7-emblem.svg" download>SVG</a>
+          <a class="btn-dl btn-png" href="/assets/images/logos/7-emblem.png" download>PNG</a>
+          <a class="btn-dl btn-jpg" href="/assets/images/logos/7-emblem.jpg" download>JPG</a>
+        </div>
+      </div>
+
+      <!-- 8. Corporate Seal -->
+      <div class="logo-card">
+        <div class="card-top">
+          <span class="card-tag">08 • Seal</span>
+          <span class="theme-badge">Legal & Official</span>
+        </div>
+        <div class="card-canvas light">
+          <img src="/assets/images/logos/8-corporate-seal.svg" alt="8-corporate-seal logo">
+        </div>
+        <h3 class="card-title">Official Corporate Seal</h3>
+        <p class="card-desc">Monochrome deep royal navy seal with circular text '• ABSS NEXUS TECHNOLOGIES •' and 'CORPORATE SEAL • ESTD 2026'. For contracts, certificates, and official stamps.</p>
+        <div class="downloads">
+          <a class="btn-dl btn-svg" href="/assets/images/logos/8-corporate-seal.svg" download>SVG</a>
+          <a class="btn-dl btn-png" href="/assets/images/logos/8-corporate-seal.png" download>PNG</a>
+          <a class="btn-dl btn-jpg" href="/assets/images/logos/8-corporate-seal.jpg" download>JPG</a>
+        </div>
+      </div>
+
+      <!-- 9. Vertical Stacked -->
+      <div class="logo-card">
+        <div class="card-top">
+          <span class="card-tag">09 • Stacked</span>
+          <span class="theme-badge">Centered Lockup</span>
+        </div>
+        <div class="card-canvas dark">
+          <img src="/assets/images/logos/9-stacked-vertical.svg" alt="9-stacked-vertical logo">
+        </div>
+        <h3 class="card-title">Vertical Stacked Lockup</h3>
+        <p class="card-desc">Centered prominent Abstract Nexus icon with bold brand name and descriptor stacked beneath. Perfect for splash screens, app load screens, and event roll-ups.</p>
+        <div class="downloads">
+          <a class="btn-dl btn-svg" href="/assets/images/logos/9-stacked-vertical.svg" download>SVG</a>
+          <a class="btn-dl btn-png" href="/assets/images/logos/9-stacked-vertical.png" download>PNG</a>
+          <a class="btn-dl btn-jpg" href="/assets/images/logos/9-stacked-vertical.jpg" download>JPG</a>
+        </div>
+      </div>
+
+      <!-- 10. Social Profile Avatar -->
+      <div class="logo-card">
+        <div class="card-top">
+          <span class="card-tag">10 • Avatar</span>
+          <span class="theme-badge">1:1 Profile Picture</span>
+        </div>
+        <div class="card-canvas dark">
+          <img src="/assets/images/logos/10-social-avatar.svg" alt="10-social-avatar logo">
+        </div>
+        <h3 class="card-title">Social Profile Avatar (1:1)</h3>
+        <p class="card-desc">1024x1024 high-res profile picture optimized for circular crops on WhatsApp DP, LinkedIn, X/Twitter, Instagram, and GitHub organizations.</p>
+        <div class="downloads">
+          <a class="btn-dl btn-svg" href="/assets/images/logos/10-social-avatar.svg" download>SVG</a>
+          <a class="btn-dl btn-png" href="/assets/images/logos/10-social-avatar.png" download>PNG</a>
+          <a class="btn-dl btn-jpg" href="/assets/images/logos/10-social-avatar.jpg" download>JPG</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Color Palette Guidelines -->
+    <div class="palette-section">
+      <h2 class="palette-title">Official Brand Color System</h2>
+      <div class="color-row">
+        <div class="color-card">
+          <div class="color-swatch" style="background: #00c2ff;"></div>
+          <div class="color-name">Electric Cyan (Primary)</div>
+          <div class="color-code">#00C2FF • rgb(0, 194, 255)</div>
+        </div>
+        <div class="color-card">
+          <div class="color-swatch" style="background: #8b5cf6;"></div>
+          <div class="color-name">Neon Violet (Accent)</div>
+          <div class="color-code">#8B5CF6 • rgb(139, 92, 246)</div>
+        </div>
+        <div class="color-card">
+          <div class="color-swatch" style="background: #ff6b4a;"></div>
+          <div class="color-name">Pulse Coral (Highlight)</div>
+          <div class="color-code">#FF6B4A • rgb(255, 107, 74)</div>
+        </div>
+        <div class="color-card">
+          <div class="color-swatch" style="background: #090d18;"></div>
+          <div class="color-name">Obsidian Navy (Dark Base)</div>
+          <div class="color-code">#090D18 • rgb(9, 13, 24)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
