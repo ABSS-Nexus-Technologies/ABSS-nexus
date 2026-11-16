@@ -7,6 +7,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "lint": "next lint",
     "build:static-legacy": "node scripts/sync-components.js && node scripts/build.js",
     "dev:backend": "node backend/server.js",
     "sync-components": "node scripts/sync-components.js",
