@@ -105,9 +105,9 @@ export default function RootLayout({
     email: 'abssnexus@gmail.com',
     telephone: '+91 7688899205',
     sameAs: [
+      'https://www.linkedin.com/company/abssnexus/',
       'https://instagram.com/abssnexus',
-      'https://twitter.com/abssnexus',
-      'https://facebook.com/abssnexus',
+      'https://x.com/abssnexus',
     ],
     address: {
       '@type': 'PostalAddress',
