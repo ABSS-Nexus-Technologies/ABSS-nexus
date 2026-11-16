@@ -267,7 +267,7 @@ export default function HomePage() {
         <div className="bento-marquee-track">
           <span className="bento-tech-pill"><span className="bento-tech-dot" />Next.js 16 App Router</span>
           <span className="bento-tech-pill"><span className="bento-tech-dot" />React 19 Server Components</span>
-          <span className="bento-tech-pill"><span className="bento-tech-dot" />TypeScript 7 Strict</span>
+          <span className="bento-tech-pill"><span className="bento-tech-dot" />TypeScript Strict Mode</span>
           <span className="bento-tech-pill"><span className="bento-tech-dot" />Zod Schema Validation</span>
           <span className="bento-tech-pill"><span className="bento-tech-dot" />Tailwind CSS</span>
           <span className="bento-tech-pill"><span className="bento-tech-dot" />PostgreSQL &amp; D1 Edge</span>
@@ -281,7 +281,7 @@ export default function HomePage() {
           {/* Marquee Loop Duplicate */}
           <span className="bento-tech-pill"><span className="bento-tech-dot" />Next.js 16 App Router</span>
           <span className="bento-tech-pill"><span className="bento-tech-dot" />React 19 Server Components</span>
-          <span className="bento-tech-pill"><span className="bento-tech-dot" />TypeScript 7 Strict</span>
+          <span className="bento-tech-pill"><span className="bento-tech-dot" />TypeScript Strict Mode</span>
           <span className="bento-tech-pill"><span className="bento-tech-dot" />Zod Schema Validation</span>
           <span className="bento-tech-pill"><span className="bento-tech-dot" />Tailwind CSS</span>
           <span className="bento-tech-pill"><span className="bento-tech-dot" />PostgreSQL &amp; D1 Edge</span>
