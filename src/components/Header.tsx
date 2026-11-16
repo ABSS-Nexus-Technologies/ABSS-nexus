@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import ThemeToggle from './ThemeToggle';
 
 export default function Header() {
   const pathname = usePathname();
@@ -58,6 +59,10 @@ export default function Header() {
           </picture>
           <span className="brand-name">ABSS Nexus</span>
         </Link>
+
+        <div className="header-theme-toggle-mobile" style={{ alignItems: 'center', gap: '8px', marginLeft: 'auto', marginRight: '10px' }}>
+          <ThemeToggle />
+        </div>
 
         <button
           className="nav-toggle"
@@ -308,6 +313,9 @@ export default function Header() {
           <Link href="/contact" className={`nav-link ${pathname === '/contact' ? 'active' : ''}`}>
             Contact
           </Link>
+          <div className="header-theme-toggle-desktop" style={{ alignItems: 'center' }}>
+            <ThemeToggle />
+          </div>
           <Link className="nav-cta" href="/contact#project-inquiry">
             Start Project
           </Link>

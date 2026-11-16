@@ -1,0 +1,473 @@
+/* ==========================================================================
+   ABSS Nexus - Modern Dual Theme System (Dark Bento Grid + Apple Light)
+   ========================================================================== */
+
+/* Theme Toggle Button in Header */
+.theme-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  color: var(--color-near-black, #1d1d1f);
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  padding: 0;
+  flex-shrink: 0;
+}
+
+.theme-toggle-btn:hover {
+  background: rgba(0, 102, 204, 0.08);
+  border-color: rgba(0, 102, 204, 0.3);
+  color: #0066cc;
+  transform: translateY(-1px);
+}
+
+.theme-toggle-btn svg {
+  width: 20px;
+  height: 20px;
+  transition: transform 0.3s ease;
+}
+
+/* ==========================================================================
+   DARK BENTO GRID THEME STYLING
+   Activated via: [data-theme="dark"] on <html> or <body>
+   ========================================================================== */
+
+[data-theme="dark"],
+[data-theme="dark"] body,
+body.dark-theme {
+  --bg-primary: #090a0f;
+  --bg-card: rgba(17, 20, 31, 0.85);
+  --color-near-black: #f8fafc;
+  --color-secondary-text: #94a3b8;
+  --color-text-dim: #94a3b8;
+  --border-subtle: rgba(255, 255, 255, 0.1);
+  --color-blue: #00c2ff;
+  --color-light-gray: #111422;
+  --color-border: rgba(255, 255, 255, 0.12);
+  --surface-light: #111422;
+  
+  background-color: #090a0f !important;
+  color: #f8fafc !important;
+}
+
+/* Dark Theme Toggle Button */
+[data-theme="dark"] .theme-toggle-btn {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.14);
+  color: #f8fafc;
+}
+
+[data-theme="dark"] .theme-toggle-btn:hover {
+  background: rgba(0, 194, 255, 0.15);
+  border-color: rgba(0, 194, 255, 0.4);
+  color: #00c2ff;
+  box-shadow: 0 0 16px rgba(0, 194, 255, 0.25);
+}
+
+/* Dark Header & Navbar */
+[data-theme="dark"] .site-header {
+  background: rgba(9, 10, 15, 0.88) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4) !important;
+}
+
+[data-theme="dark"] .announcement-bar {
+  background: #0d0f1a !important;
+  border-bottom: 1px solid rgba(0, 194, 255, 0.18) !important;
+  color: #cbd5e1 !important;
+}
+
+[data-theme="dark"] .announcement-bar__link {
+  color: #00c2ff !important;
+}
+
+[data-theme="dark"] .brand-name {
+  color: #ffffff !important;
+}
+
+[data-theme="dark"] .nav-link {
+  color: #cbd5e1 !important;
+}
+
+[data-theme="dark"] .nav-link:hover,
+[data-theme="dark"] .nav-link.active {
+  color: #00c2ff !important;
+}
+
+[data-theme="dark"] .nav-dropdown-trigger {
+  color: #cbd5e1 !important;
+}
+
+[data-theme="dark"] .nav-dropdown-trigger:hover {
+  color: #00c2ff !important;
+}
+
+[data-theme="dark"] .dropdown-arrow {
+  stroke: #cbd5e1 !important;
+}
+
+[data-theme="dark"] .hamburger-bar {
+  background-color: #ffffff !important;
+}
+
+/* Dark Mega Menu */
+[data-theme="dark"] .mega-menu {
+  background: #111422 !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.75) !important;
+}
+
+[data-theme="dark"] .mega-col-title {
+  color: #00c2ff !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+[data-theme="dark"] .mega-link-title {
+  color: #f8fafc !important;
+}
+
+[data-theme="dark"] .mega-link-desc {
+  color: #94a3b8 !important;
+}
+
+[data-theme="dark"] .mega-link:hover {
+  background: rgba(255, 255, 255, 0.05) !important;
+}
+
+[data-theme="dark"] .mega-menu-footer-bar {
+  background: #0d0f1a !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+  color: #94a3b8 !important;
+}
+
+[data-theme="dark"] .mega-menu-footer-bar a {
+  color: #00c2ff !important;
+}
+
+/* Dark Hero Section */
+[data-theme="dark"] .site-hero {
+  background: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(0, 194, 255, 0.14), transparent 70%) !important;
+}
+
+[data-theme="dark"] .site-hero__title,
+[data-theme="dark"] .hero-title {
+  color: #ffffff !important;
+}
+
+[data-theme="dark"] .site-hero__description,
+[data-theme="dark"] .hero-subtitle {
+  color: #94a3b8 !important;
+}
+
+[data-theme="dark"] .hero-pill-badge,
+[data-theme="dark"] .site-hero__eyebrow {
+  background: rgba(0, 194, 255, 0.08) !important;
+  border-color: rgba(0, 194, 255, 0.3) !important;
+  color: #00c2ff !important;
+}
+
+[data-theme="dark"] .hero-badge-float {
+  background: rgba(17, 20, 33, 0.85) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  color: #f1f5f9 !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5) !important;
+}
+
+[data-theme="dark"] .hero-laptop__screen-frame {
+  background: #0d0f18 !important;
+  border-color: #232738 !important;
+}
+
+[data-theme="dark"] .hero-laptop__base {
+  background: #161926 !important;
+  border-color: #2a2f42 !important;
+}
+
+[data-theme="dark"] .hero-phone__frame {
+  background: #0d0f18 !important;
+  border-color: #232738 !important;
+}
+
+/* Dark Stats Bar */
+[data-theme="dark"] .agency-stats-section {
+  background: #0d0f1a !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+[data-theme="dark"] .agency-stat-card .stat-num {
+  color: #00c2ff !important;
+  text-shadow: 0 0 20px rgba(0, 194, 255, 0.3) !important;
+}
+
+[data-theme="dark"] .agency-stat-card span {
+  color: #94a3b8 !important;
+}
+
+/* Dark Tech Ticker */
+[data-theme="dark"] .tech-ticker-section {
+  background: #090a0f !important;
+}
+
+[data-theme="dark"] .tech-ticker-heading p {
+  color: #64748b !important;
+}
+
+[data-theme="dark"] .tech-pill {
+  background: rgba(255, 255, 255, 0.04) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  color: #e2e8f0 !important;
+}
+
+/* Dark Bento Grid Services Cards */
+[data-theme="dark"] .cinematic-service-card {
+  background: rgba(17, 20, 33, 0.8) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45) !important;
+  backdrop-filter: blur(14px) !important;
+}
+
+[data-theme="dark"] .cinematic-service-card:hover {
+  border-color: rgba(0, 194, 255, 0.5) !important;
+  box-shadow: 0 16px 40px rgba(0, 194, 255, 0.16) !important;
+  transform: translateY(-4px) !important;
+}
+
+[data-theme="dark"] .cinematic-service-card h3 {
+  color: #f8fafc !important;
+}
+
+[data-theme="dark"] .cinematic-service-card p {
+  color: #94a3b8 !important;
+}
+
+[data-theme="dark"] .cinematic-card-badge {
+  background: rgba(0, 194, 255, 0.1) !important;
+  color: #00c2ff !important;
+  border: 1px solid rgba(0, 194, 255, 0.25) !important;
+}
+
+[data-theme="dark"] .cinematic-features-tags li {
+  background: rgba(255, 255, 255, 0.05) !important;
+  color: #cbd5e1 !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+[data-theme="dark"] .cinematic-card-cta {
+  color: #00c2ff !important;
+}
+
+/* Dark Portfolio Cards */
+[data-theme="dark"] .project-modern-card {
+  background: rgba(17, 20, 33, 0.85) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45) !important;
+}
+
+[data-theme="dark"] .project-modern-card:hover {
+  border-color: rgba(0, 194, 255, 0.5) !important;
+  box-shadow: 0 16px 40px rgba(0, 194, 255, 0.16) !important;
+}
+
+[data-theme="dark"] .browser-mockup-bar {
+  background: #141724 !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+[data-theme="dark"] .browser-mockup-url {
+  background: #090a0f !important;
+  color: #94a3b8 !important;
+}
+
+[data-theme="dark"] .project-card-content h3 {
+  color: #f8fafc !important;
+}
+
+[data-theme="dark"] .project-card-content p {
+  color: #94a3b8 !important;
+}
+
+[data-theme="dark"] .project-tech-chips span {
+  background: rgba(255, 255, 255, 0.06) !important;
+  color: #cbd5e1 !important;
+}
+
+[data-theme="dark"] .filter-btn {
+  background: rgba(255, 255, 255, 0.05) !important;
+  color: #94a3b8 !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+[data-theme="dark"] .filter-btn.active,
+[data-theme="dark"] .filter-btn:hover {
+  background: #00c2ff !important;
+  color: #090a0f !important;
+  font-weight: 700 !important;
+}
+
+/* Dark Testimonials */
+[data-theme="dark"] .testimonial-card {
+  background: rgba(17, 20, 33, 0.85) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4) !important;
+}
+
+[data-theme="dark"] .testimonial-card__quote {
+  color: #e2e8f0 !important;
+}
+
+[data-theme="dark"] .testimonial-card__name {
+  color: #f8fafc !important;
+}
+
+[data-theme="dark"] .testimonial-card__role {
+  color: #94a3b8 !important;
+}
+
+/* Dark Radiant CTA Box */
+[data-theme="dark"] .radiant-cta-box {
+  background: linear-gradient(135deg, rgba(17, 22, 38, 0.95), rgba(9, 10, 15, 0.98)) !important;
+  border: 1px solid rgba(0, 194, 255, 0.3) !important;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.65) !important;
+}
+
+[data-theme="dark"] .radiant-cta-box h2 {
+  color: #ffffff !important;
+}
+
+[data-theme="dark"] .radiant-cta-box p {
+  color: #94a3b8 !important;
+}
+
+[data-theme="dark"] .cta-trust-meta {
+  color: #cbd5e1 !important;
+}
+
+/* Dark FAQ Cards */
+[data-theme="dark"] .agency-faq-card {
+  background: rgba(17, 20, 33, 0.85) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+[data-theme="dark"] .faq-agency-btn {
+  color: #f8fafc !important;
+}
+
+[data-theme="dark"] .faq-agency-answer {
+  color: #94a3b8 !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+[data-theme="dark"] .faq-chevron-icon {
+  stroke: #00c2ff !important;
+}
+
+/* Dark Section Headings */
+[data-theme="dark"] .section-heading h2 {
+  color: #f8fafc !important;
+}
+
+[data-theme="dark"] .section-heading p:not(.eyebrow) {
+  color: #94a3b8 !important;
+}
+
+[data-theme="dark"] .eyebrow {
+  color: #00c2ff !important;
+}
+
+/* Dark Footer */
+[data-theme="dark"] .site-footer {
+  background: #06070a !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+[data-theme="dark"] .site-footer__brand-title {
+  color: #f8fafc !important;
+}
+
+[data-theme="dark"] .site-footer__brand-desc {
+  color: #94a3b8 !important;
+}
+
+[data-theme="dark"] .site-footer__tagline {
+  color: #00c2ff !important;
+}
+
+[data-theme="dark"] .site-footer__col-title {
+  color: #f8fafc !important;
+}
+
+[data-theme="dark"] .site-footer__link {
+  color: #94a3b8 !important;
+}
+
+[data-theme="dark"] .site-footer__link:hover {
+  color: #00c2ff !important;
+}
+
+[data-theme="dark"] .site-footer__contact-item {
+  color: #94a3b8 !important;
+}
+
+[data-theme="dark"] .site-footer__bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+[data-theme="dark"] .site-footer__social-link {
+  color: #94a3b8 !important;
+}
+
+[data-theme="dark"] .site-footer__social-link:hover {
+  color: #00c2ff !important;
+}
+
+[data-theme="dark"] .site-footer__legal a {
+  color: #64748b !important;
+}
+
+[data-theme="dark"] .site-footer__legal a:hover {
+  color: #00c2ff !important;
+}
+
+[data-theme="dark"] .site-footer__copy {
+  color: #64748b !important;
+}
+
+/* Form Controls in Dark Mode */
+[data-theme="dark"] input,
+[data-theme="dark"] select,
+[data-theme="dark"] textarea {
+  background: rgba(13, 16, 26, 0.9) !important;
+  border-color: rgba(255, 255, 255, 0.14) !important;
+  color: #f8fafc !important;
+}
+
+[data-theme="dark"] input:focus,
+[data-theme="dark"] select:focus,
+[data-theme="dark"] textarea:focus {
+  border-color: #00c2ff !important;
+  box-shadow: 0 0 14px rgba(0, 194, 255, 0.25) !important;
+}
+
+/* Responsive Visibility for Header Theme Toggle */
+.header-theme-toggle-desktop {
+  display: inline-flex;
+}
+
+.header-theme-toggle-mobile {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .header-theme-toggle-desktop {
+    display: none;
+  }
+  .header-theme-toggle-mobile {
+    display: inline-flex;
+  }
+}
