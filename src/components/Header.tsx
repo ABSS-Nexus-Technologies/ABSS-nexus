@@ -43,8 +43,8 @@ export default function Header() {
       {/* Top Announcement Bar */}
       <div className="bento-announcement">
         <span className="live-pulse-dot" aria-hidden="true" />
-        <span>Accelerate Growth with Enterprise IT, Next.js 16 &amp; Cloud Automation</span>
-        <span style={{ opacity: 0.4 }}>|</span>
+        <span className="bento-announcement-text">Accelerate Growth with Enterprise IT, Next.js 16 &amp; Cloud Automation</span>
+        <span className="bento-announcement-divider" style={{ opacity: 0.4 }}>|</span>
         <Link className="bento-announcement-link" href="/contact#project-inquiry">
           Book Free Consultation &rarr;
         </Link>
