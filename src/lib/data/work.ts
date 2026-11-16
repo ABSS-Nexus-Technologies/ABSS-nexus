@@ -40,6 +40,7 @@ export const portfolioData: ProjectItem[] = [
     ],
     technologies: ['HTML5', 'CSS3', 'JavaScript', 'Responsive UI', 'Netlify Edge'],
     liveUrl: 'https://shubham-portfolio-abss.netlify.app/',
+    caseStudyUrl: '/work/personal-portfolio',
     overview: 'Engineered a sleek, responsive portfolio platform tailored to demonstrate technical depth and aesthetic precision across desktop and handheld screens.',
     problem: 'Standard developer templates were sluggish, loaded dozens of bloated third-party trackers, and failed to communicate multi-disciplinary engineering skills.',
     solution: 'Designed and coded a bespoke, zero-dependency layout featuring micro-interactions, dark mode elegance, and ultra-fast mobile rendering.',
@@ -67,8 +68,7 @@ export const portfolioData: ProjectItem[] = [
       { label: 'Uptime SLA', value: '99.95%' }
     ],
     technologies: ['TypeScript', 'REST APIs', 'Cloudflare D1', 'Tailwind CSS', 'Chart.js'],
-    liveUrl: '/work/fintech-payment-gateway',
-    caseStudyUrl: '/work/fintech-payment-gateway',
+    caseStudyUrl: '/work/cloud-analytics-dashboard',
     overview: 'Built a consolidated operations control center for SaaS founders needing real-time visibility into revenue, user activations, and queue health.',
     problem: 'Disjointed operational spreadsheets caused data staleness and prevented fast incident identification.',
     solution: 'Architected a modular edge-hosted dashboard integrating relational databases with reactive charting components and granular role access controls.',
@@ -96,7 +96,6 @@ export const portfolioData: ProjectItem[] = [
       { label: 'Mobile Checkout', value: '1-Tap WhatsApp' }
     ],
     technologies: ['Next.js', 'Responsive UI', 'Product Catalog', 'Cart Engine', 'Razorpay'],
-    liveUrl: '/work/ecommerce-headless-storefront',
     caseStudyUrl: '/work/ecommerce-headless-storefront',
     overview: 'Engineered an ultra-fast headless e-commerce experience designed specifically to eliminate cart drop-offs on Indian mobile networks.',
     problem: 'Traditional monolithic storefronts were burdened with hundreds of uncompressed vendor plugins, causing 6-second load delays on mobile.',

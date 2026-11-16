@@ -661,6 +661,11 @@ export default function HomePage() {
               <h2 className="bento-section-title">Frequently Asked Questions</h2>
             </div>
             <FaqAccordion items={faqList} />
+            <div style={{ textAlign: 'center', marginTop: '32px' }}>
+              <Link href="/faq" className="bento-btn-glass" style={{ display: 'inline-flex', padding: '10px 24px', fontSize: '0.9rem' }}>
+                <span>View Full Knowledge Base &amp; All FAQs &rarr;</span>
+              </Link>
+            </div>
           </div>
         </div>
       </section>

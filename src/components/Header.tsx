@@ -355,6 +355,7 @@ export default function Header() {
                 className={`bento-nav-link ${
                   pathname === '/about' ||
                   pathname === '/brand' ||
+                  pathname === '/faq' ||
                   pathname?.startsWith('/blog') ||
                   pathname?.startsWith('/careers') ||
                   pathname === '/contact'
@@ -413,6 +414,10 @@ export default function Header() {
                     <Link className="bento-dropdown-item" href="/blog">
                       <span className="bento-dropdown-item-title">Tech Insights &amp; Blog</span>
                       <span className="bento-dropdown-item-desc">Next.js 16, edge &amp; cloud architecture</span>
+                    </Link>
+                    <Link className="bento-dropdown-item" href="/faq">
+                      <span className="bento-dropdown-item-title">FAQ &amp; Help</span>
+                      <span className="bento-dropdown-item-desc">Timelines, IP ownership &amp; pricing</span>
                     </Link>
                     <Link className="bento-dropdown-item" href="/contact">
                       <span className="bento-dropdown-item-title">Direct Contact</span>
@@ -482,6 +487,7 @@ export default function Header() {
             <Link href="/about" className="bento-nav-link">About ABSS Nexus</Link>
             <Link href="/brand" className="bento-nav-link">Brand Identity &amp; Logos</Link>
             <Link href="/blog" className="bento-nav-link">Tech Blog &amp; Insights</Link>
+            <Link href="/faq" className="bento-nav-link">FAQ &amp; Knowledge Base</Link>
             <Link href="/careers" className="bento-nav-link">Careers</Link>
             <Link href="/contact" className="bento-nav-link">Contact Us</Link>
 

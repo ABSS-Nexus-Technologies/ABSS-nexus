@@ -75,23 +75,19 @@ export default function ProjectFilter({ projects }: ProjectFilterProps) {
                 ))}
               </div>
               <div className="project-action-row">
-                {project.caseStudyUrl ? (
-                  <Link className="project-live-btn" href={project.caseStudyUrl}>
-                    Case Study &rarr;
-                  </Link>
-                ) : project.liveUrl ? (
+                <Link className="project-live-btn" href={project.caseStudyUrl || `/work/${project.slug}`}>
+                  Case Study &rarr;
+                </Link>
+                {project.liveUrl && (
                   <a
                     className="project-live-btn"
                     href={project.liveUrl}
                     target="_blank"
                     rel="noopener noreferrer"
+                    style={{ background: 'transparent', border: '1px solid var(--accent-cyan)', color: 'var(--accent-cyan)' }}
                   >
                     Live Demo &rarr;
                   </a>
-                ) : (
-                  <Link className="project-live-btn" href={`/work/${project.slug}`}>
-                    Details &rarr;
-                  </Link>
                 )}
                 <span className="project-status-label">{project.badge}</span>
               </div>

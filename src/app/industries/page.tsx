@@ -10,6 +10,7 @@ export const metadata: Metadata = {
 
 const industries = [
   {
+    id: 'healthcare',
     title: 'Healthcare & Life Sciences',
     icon: 'activity',
     badge: 'HIPAA & Telehealth',
@@ -18,6 +19,7 @@ const industries = [
     caseStudy: '/work/healthcare-telemedicine-platform',
   },
   {
+    id: 'fintech',
     title: 'FinTech & Digital Payments',
     icon: 'credit-card',
     badge: 'Zero-Loss Ledger',
@@ -26,6 +28,7 @@ const industries = [
     caseStudy: '/work/fintech-payment-gateway',
   },
   {
+    id: 'ecommerce',
     title: 'E-Commerce & Retail Brands',
     icon: 'shopping-bag',
     badge: 'Headless & High Conversion',
@@ -34,22 +37,25 @@ const industries = [
     caseStudy: '/work/ecommerce-headless-storefront',
   },
   {
+    id: 'education',
     title: 'Education & Institutional Academies',
     icon: 'book-open',
     badge: 'High Concurrency',
     description: 'Scalable campus portals, online course delivery architectures, verified digital credential verification engines, and instant notification systems.',
     technologies: ['React', 'Next.js', 'Edge Rendering', 'Analytics'],
-    caseStudy: '/work',
+    caseStudy: '/contact?service=Custom%20Software%20Development#project-inquiry',
   },
   {
+    id: 'real-estate',
     title: 'Real Estate & Property Development',
     icon: 'home',
     badge: 'Interactive & Visual',
     description: 'High-conversion property showcase platforms, interactive unit floorplans, automated inquiry routing to sales agents, and virtual tour embeddings.',
     technologies: ['Figma UI/UX', 'Cloudflare CDN', 'Lead Workflows', 'REST APIs'],
-    caseStudy: '/work',
+    caseStudy: '/contact?service=Website%20Development#project-inquiry',
   },
   {
+    id: 'logistics',
     title: 'Manufacturing & Supply Chain',
     icon: 'truck',
     badge: 'Process Automation',
@@ -98,9 +104,10 @@ export default function IndustriesPage() {
           </div>
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))', gap: '28px', marginTop: '36px' }}>
-            {industries.map((ind, i) => (
+            {industries.map((ind) => (
               <div
-                key={i}
+                id={ind.id}
+                key={ind.id}
                 style={{
                   background: 'var(--bg-card)',
                   border: '1px solid var(--border-subtle)',

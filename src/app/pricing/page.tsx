@@ -218,6 +218,11 @@ export default function PricingPage() {
               <h2 className="bento-section-title">Frequently Asked Questions</h2>
             </div>
             <FaqAccordion items={faqList} />
+            <div style={{ textAlign: 'center', marginTop: '28px' }}>
+              <Link href="/faq" className="bento-btn-glass" style={{ display: 'inline-flex', padding: '10px 22px', fontSize: '0.88rem' }}>
+                <span>Read Full FAQ &amp; Payment Policies &rarr;</span>
+              </Link>
+            </div>
           </div>
         </div>
       </section>

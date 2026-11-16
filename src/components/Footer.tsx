@@ -195,6 +195,7 @@ export default function Footer() {
               <Link className="bento-footer-link" href="/brand">Brand Identity &amp; Logos</Link>
               <Link className="bento-footer-link" href="/blog">Tech Blog &amp; Insights</Link>
               <Link className="bento-footer-link" href="/careers">Careers &amp; Culture</Link>
+              <Link className="bento-footer-link" href="/faq">FAQ &amp; Knowledge Base</Link>
             </div>
           </div>
 
@@ -243,6 +244,7 @@ export default function Footer() {
             <Link href="/privacy-policy">Privacy Policy</Link>
             <Link href="/terms-and-conditions">Terms &amp; Conditions</Link>
             <Link href="/cookie-policy">Cookie Policy</Link>
+            <Link href="/faq">FAQ</Link>
             <Link href="/terms-and-conditions#support-policy">Warranty &amp; Support SLA</Link>
             <Link href="/terms-and-conditions#refund-policy">Refund Policy</Link>
             <Link href="/sitemap.xml">XML Sitemap</Link>

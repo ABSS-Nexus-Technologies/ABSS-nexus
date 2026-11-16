@@ -1,8 +1,10 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
+import { useSearchParams } from 'next/navigation';
 
-export default function ContactForm() {
+function ContactFormInner() {
+  const searchParams = useSearchParams();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -11,6 +13,38 @@ export default function ContactForm() {
     budget: '₹25,000 - ₹50,000',
     message: ''
   });
+
+  useEffect(() => {
+    if (!searchParams) return;
+    const serviceParam = searchParams.get('service');
+    const packageParam = searchParams.get('package');
+    const solutionParam = searchParams.get('solution');
+    const platformParam = searchParams.get('platform');
+    const budgetParam = searchParams.get('budget');
+
+    if (serviceParam) {
+      setFormData((prev) => ({
+        ...prev,
+        service: serviceParam,
+        message: prev.message || `Inquiring regarding ${serviceParam} architecture.`,
+      }));
+    } else if (packageParam) {
+      setFormData((prev) => ({
+        ...prev,
+        message: prev.message || `Interested in the ${packageParam} architecture package.`,
+      }));
+    } else if (solutionParam) {
+      setFormData((prev) => ({
+        ...prev,
+        message: prev.message || `Inquiring regarding the ${solutionParam} framework.`,
+      }));
+    } else if (platformParam) {
+      setFormData((prev) => ({
+        ...prev,
+        message: prev.message || `Project Cost Estimator brief: ${platformParam} architecture (Estimated Budget: ₹${budgetParam || 'N/A'}).`,
+      }));
+    }
+  }, [searchParams]);
 
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
@@ -185,5 +219,13 @@ export default function ContactForm() {
         {status === 'loading' ? 'Submitting Inquiry...' : 'Submit Project Inquiry →'}
       </button>
     </form>
+  );
+}
+
+export default function ContactForm() {
+  return (
+    <Suspense fallback={<div style={{ padding: '24px', textAlign: 'center', color: 'var(--text-muted)' }}>Loading inquiry form...</div>}>
+      <ContactFormInner />
+    </Suspense>
   );
 }
