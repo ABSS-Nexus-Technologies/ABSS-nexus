@@ -1,6 +1,8 @@
 # Dependencies & Builds
 node_modules/
 dist/
+.next/
+out/
 
 # Environment Variables & Secrets (STRICTLY NEVER COMMIT)
 .env
