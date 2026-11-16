@@ -42,16 +42,6 @@ const publicPages = [
   ["refund-policy.html", `${officialDomain}/refund-policy`],
   ["support-policy.html", `${officialDomain}/support-policy`],
   ["sitemap.html", `${officialDomain}/sitemap`],
-  ["internships.html", `${officialDomain}/internships`],
-  ["internships/programs.html", `${officialDomain}/internships/programs`],
-  ["internships/programs/web-development.html", `${officialDomain}/internships/programs/web-development`],
-  ["internships/programs/software-development.html", `${officialDomain}/internships/programs/software-development`],
-  ["internships/programs/ui-ux-design.html", `${officialDomain}/internships/programs/ui-ux-design`],
-  ["internships/programs/ai-machine-learning.html", `${officialDomain}/internships/programs/ai-machine-learning`],
-  ["internships/programs/cloud-devops.html", `${officialDomain}/internships/programs/cloud-devops`],
-  ["internships/how-it-works.html", `${officialDomain}/internships/how-it-works`],
-  ["internships/faq.html", `${officialDomain}/internships/faq`],
-  ["internships/support.html", `${officialDomain}/internships/support`],
 ];
 
 const requiredFiles = [
@@ -62,7 +52,6 @@ const requiredFiles = [
   "robots.txt",
   "sitemap.xml",
   "src/pages/index.html",
-  "internships.html",
 ];
 
 const adminFiles = [

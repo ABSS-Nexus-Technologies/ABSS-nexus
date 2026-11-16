@@ -97,10 +97,11 @@
 /src/pages/blog-msme-digital-verification.html /blog/msme-digital-verification 301
 /blog/msme-digital-verification/ /blog/msme-digital-verification 301
 
-/blog/internship-vs-fulltime-career.html /blog/internship-vs-fulltime-career 301
-/src/pages/blog-internship-vs-fulltime-career /blog/internship-vs-fulltime-career 301
-/src/pages/blog-internship-vs-fulltime-career.html /blog/internship-vs-fulltime-career 301
-/blog/internship-vs-fulltime-career/ /blog/internship-vs-fulltime-career 301
+/blog/internship-vs-fulltime-career.html /blog 301
+/src/pages/blog-internship-vs-fulltime-career /blog 301
+/src/pages/blog-internship-vs-fulltime-career.html /blog 301
+/blog/internship-vs-fulltime-career/ /blog 301
+/blog/internship-vs-fulltime-career /blog 301
 
 /faq.html /faq 301
 /src/pages/faq /faq 301
@@ -240,106 +241,12 @@
 /admin-pricing /admin/pricing 301
 /admin-pricing.html /admin/pricing 301
 
-/internships.html /internships 301
-/src/pages/internships /internships 301
-/src/pages/internships.html /internships 301
-/internships/ /internships 301
-
-/internships-about.html /internships/about 301
-/src/pages/internships-about /internships/about 301
-/src/pages/internships-about.html /internships/about 301
-/internships/about/ /internships/about 301
-
-/internships-details.html /internships/details 301
-/src/pages/internships-details /internships/details 301
-/src/pages/internships-details.html /internships/details 301
-/internships/details/ /internships/details 301
-
-/internships-contact.html /internships/contact 301
-/src/pages/internships-contact /internships/contact 301
-/src/pages/internships-contact.html /internships/contact 301
-/internships/contact/ /internships/contact 301
-
-/internships-privacy-policy.html /internships/privacy-policy 301
-/src/pages/internships-privacy-policy /internships/privacy-policy 301
-/src/pages/internships-privacy-policy.html /internships/privacy-policy 301
-/internships/privacy-policy/ /internships/privacy-policy 301
-
-/internships-terms-conditions.html /internships/terms-and-conditions 301
-/src/pages/internships-terms-conditions /internships/terms-and-conditions 301
-/src/pages/internships-terms-conditions.html /internships/terms-and-conditions 301
-/internships/terms-and-conditions/ /internships/terms-and-conditions 301
-/internships/terms /internships/terms-and-conditions 301
-/internships/terms/ /internships/terms-and-conditions 301
-
-/internships-programs.html /internships/programs 301
-/src/pages/internships-programs /internships/programs 301
-/src/pages/internships-programs.html /internships/programs 301
-/internships/programs/ /internships/programs 301
-
-/internships/programs/web-development/ /internships/programs/web-development 301
-/internships/programs/data-science/ /internships/programs/data-science 301
-/internships/programs/machine-learning/ /internships/programs/machine-learning 301
-/internships/programs/ai-machine-learning/ /internships/programs/ai-machine-learning 301
-/internships/programs/data-analyst/ /internships/programs/data-analyst 301
-/internships/programs/cyber-security/ /internships/programs/cyber-security 301
-/internships/programs/software-development/ /internships/programs/software-development 301
-/internships/programs/prompt-engineering/ /internships/programs/prompt-engineering 301
-/internships/programs/agent-engineering/ /internships/programs/agent-engineering 301
-/internships/programs/ai-engineering/ /internships/programs/ai-engineering 301
-/internships/programs/android-development/ /internships/programs/android-development 301
-/internships/programs/product-management/ /internships/programs/product-management 301
-/internships/programs/ui-ux-design/ /internships/programs/ui-ux-design 301
-/internships/programs/graphics-design/ /internships/programs/graphics-design 301
-/internships/programs/human-resources/ /internships/programs/human-resources 301
-/internships/programs/digital-marketing/ /internships/programs/digital-marketing 301
-/internships/programs/content-writing/ /internships/programs/content-writing 301
-/internships/programs/cloud-devops/ /internships/programs/cloud-devops 301
-
-/internships-how-it-works.html /internships/how-it-works 301
-/src/pages/internships-how-it-works /internships/how-it-works 301
-/src/pages/internships-how-it-works.html /internships/how-it-works 301
-/internships/how-it-works/ /internships/how-it-works 301
-
-/internships-faq.html /internships/faq 301
-/src/pages/internships-faq /internships/faq 301
-/src/pages/internships-faq.html /internships/faq 301
-/internships/faq/ /internships/faq 301
-
-/internships-support.html /internships/support 301
-/src/pages/internships-support /internships/support 301
-/src/pages/internships-support.html /internships/support 301
-/internships/support/ /internships/support 301
-
-/internships-register.html /internships/register 301
-/src/pages/internships-register /internships/register 301
-/src/pages/internships-register.html /internships/register 301
-/internships/register/ /internships/register 301
-
-/internships-login.html /internships/login 301
-/src/pages/internships-login /internships/login 301
-/src/pages/internships-login.html /internships/login 301
-/internships/login/ /internships/login 301
-
-/internships-verify-email.html /internships/verify-email 301
-/src/pages/internships-verify-email /internships/verify-email 301
-/src/pages/internships-verify-email.html /internships/verify-email 301
-/internships/verify-email/ /internships/verify-email 301
-
-/internships-forgot-password.html /internships/forgot-password 301
-/src/pages/internships-forgot-password /internships/forgot-password 301
-/src/pages/internships-forgot-password.html /internships/forgot-password 301
-/internships/forgot-password/ /internships/forgot-password 301
-
-/internships-reset-password.html /internships/reset-password 301
-/src/pages/internships-reset-password /internships/reset-password 301
-/src/pages/internships-reset-password.html /internships/reset-password 301
-/internships/reset-password/ /internships/reset-password 301
-
-/internships-dashboard.html /internships/dashboard 301
-/src/pages/internships-dashboard /internships/dashboard 301
-/src/pages/internships-dashboard.html /internships/dashboard 301
-/internships/dashboard/ /internships/dashboard 301
+/internships.html / 301
+/src/pages/internships / 301
+/src/pages/internships.html / 301
+/internships/ / 301
+/internships / 301
+/internships/* / 301
 
 /work.html /work 301
 /src/pages/work /work 301
@@ -379,70 +286,49 @@
 /services/software-testing /services/software-testing-qa 301
 /services/software-testing/ /services/software-testing-qa 301
 
-/internships/application-status/ /internships/application-status 301
-/src/pages/internships-application-status /internships/application-status 301
-/src/pages/internships-application-status.html /internships/application-status 301
-
-/internships/payment-status/ /internships/payment-status 301
-/src/pages/internships-payment-status /internships/payment-status 301
-/src/pages/internships-payment-status.html /internships/payment-status 301
-
-/internships/payment/ /internships/payment 301
-/internships-payment.html /internships/payment 301
-/src/pages/internships-payment /internships/payment 301
-/src/pages/internships-payment.html /internships/payment 301
-
-/verify-certificate.html /verify-certificate 301
-/src/pages/verify-certificate /verify-certificate 301
-/src/pages/verify-certificate.html /verify-certificate 301
-/verify-certificate/ /verify-certificate 301
-
-/register.html /register 301
-/src/pages/register /register 301
-/src/pages/register.html /register 301
-/register/ /register 301
-
-/login.html /login 301
-/src/pages/login /login 301
-/src/pages/login.html /login 301
-/login/ /login 301
-
-/verify-email.html /verify-email 301
-/src/pages/verify-email /verify-email 301
-/src/pages/verify-email.html /verify-email 301
-/verify-email/ /verify-email 301
-
-/forgot-password.html /forgot-password 301
-/src/pages/forgot-password /forgot-password 301
-/src/pages/forgot-password.html /forgot-password 301
-/forgot-password/ /forgot-password 301
-
-/reset-password.html /reset-password 301
-/src/pages/reset-password /reset-password 301
-/src/pages/reset-password.html /reset-password 301
-/reset-password/ /reset-password 301
-
-/student /student/dashboard 301
-/student/ /student/dashboard 301
-/student/dashboard/ /student/dashboard 301
-/student/profile/ /student/profile 301
-/student/applications/ /student/applications 301
-/student/internship/ /student/internship 301
-/student/tasks/ /student/tasks 301
-/student/submissions/ /student/submissions 301
-/student/submit-work/ /student/submit-work 301
-/student/certificates/ /student/certificates 301
-/student/settings/ /student/settings 301
+/verify-certificate.html / 301
+/src/pages/verify-certificate / 301
+/src/pages/verify-certificate.html / 301
+/verify-certificate/ / 301
+/verify-certificate / 301
+/register.html / 301
+/src/pages/register / 301
+/src/pages/register.html / 301
+/register/ / 301
+/register / 301
+/login.html / 301
+/src/pages/login / 301
+/src/pages/login.html / 301
+/login/ / 301
+/login / 301
+/verify-email.html / 301
+/src/pages/verify-email / 301
+/src/pages/verify-email.html / 301
+/verify-email/ / 301
+/verify-email / 301
+/forgot-password.html / 301
+/src/pages/forgot-password / 301
+/src/pages/forgot-password.html / 301
+/forgot-password/ / 301
+/forgot-password / 301
+/reset-password.html / 301
+/src/pages/reset-password / 301
+/src/pages/reset-password.html / 301
+/reset-password/ / 301
+/reset-password / 301
+/student / 301
+/student/ / 301
+/student/* / 301
 
 /admin/dashboard/ /admin/dashboard 301
-/admin/programs/ /admin/programs 301
-/admin/applications/ /admin/applications 301
-/admin/students/ /admin/students 301
-/admin/tasks/ /admin/tasks 301
-/admin/submissions/ /admin/submissions 301
-/admin/reviews/ /admin/reviews 301
-/admin/payments/ /admin/payments 301
-/admin/certificates/ /admin/certificates 301
+/admin/programs/ /admin/dashboard 301
+/admin/applications/ /admin/dashboard 301
+/admin/students/ /admin/dashboard 301
+/admin/tasks/ /admin/dashboard 301
+/admin/submissions/ /admin/dashboard 301
+/admin/reviews/ /admin/dashboard 301
+/admin/payments/ /admin/dashboard 301
+/admin/certificates/ /admin/dashboard 301
 /admin/users/ /admin/users 301
 /admin/audit-logs/ /admin/audit-logs 301
 /admin/settings/ /admin/settings 301

@@ -164,31 +164,7 @@ async function generateAndSendOtp({ email, phone, type, db, writeDb, sendEmailFn
     dispatchApiTxtSms(cleanPhone, code, type, smsOptions).catch((e) => console.warn("[APITXT] SMS notice:", e.message));
   }
 
-  // 8. Dispatch via Transactional Email
-  if (sendEmailFn && typeof sendEmailFn === "function") {
-    const subject = type === "registration" 
-      ? `🔐 Your Registration OTP: ${code} - ABSS Nexus Academy`
-      : `🔑 Your Password Reset OTP: ${code} - ABSS Nexus Academy`;
-
-    const html = `
-      <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 540px; margin: 0 auto; padding: 24px; border: 1px solid #E5E7EB; border-radius: 12px; background: #ffffff;">
-        <h2 style="color: #0066CC; margin-top: 0;">ABSS Nexus Verification Code</h2>
-        <p style="color: #374151; font-size: 15px;">Your one-time verification code is:</p>
-        <div style="background: #F3F4F6; padding: 18px; border-radius: 8px; text-align: center; margin: 20px 0;">
-          <span style="font-size: 32px; font-weight: 700; letter-spacing: 6px; color: #1D1D1F;">${code}</span>
-        </div>
-        <p style="color: #6B7280; font-size: 13px;">⏱️ This code is valid for <strong>5 minutes</strong>. Do not share this OTP with anyone.</p>
-        <p style="color: #9CA3AF; font-size: 12px; border-top: 1px solid #E5E7EB; padding-top: 12px; margin-top: 20px;">ABSS Nexus Technologies • Secure Student Portal</p>
-      </div>
-    `;
-
-    sendEmailFn({
-      to: normalizedEmail,
-      subject,
-      html,
-      text: `Your ABSS Nexus OTP code is: ${code}. Valid for 5 minutes.`,
-    }).catch((e) => console.warn("[Email OTP notice]:", e.message));
-  }
+  
 
   // Log masked OTP in application console (never full code)
   console.log(`[OTP Generated] To: ${maskEmail(normalizedEmail)} | Phone: ${maskPhone(cleanPhone)} | OTP: ${maskOtp(code)} | Type: ${type} | Expires in: 5m`);

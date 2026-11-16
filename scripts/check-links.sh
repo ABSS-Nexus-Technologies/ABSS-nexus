@@ -64,7 +64,7 @@ while IFS= read -r file; do
       exit 1
     fi
   done < <(if command -v rg >/dev/null 2>&1; then rg -o '(href|src)="[^"]+"' "$file"; else grep -oE '(href|src)="[^"]+"' "$file" || true; fi | sed 's/^[^=]*="//;s/"$//')
-done < <(find . -path './node_modules' -prune -o -path './dist' -prune -o -name '*.html' -type f -print)
+done < <(find . -path './node_modules' -prune -o -path './dist' -prune -o -path './archive' -prune -o -name '*.html' -type f -print)
 
 if [ -f "_redirects" ]; then
   while read -r source target status; do
