@@ -50,6 +50,7 @@ export default function Footer() {
               <Link className="bento-footer-link" href="/industries">Industries</Link>
               <Link className="bento-footer-link" href="/work">Work / Portfolio</Link>
               <Link className="bento-footer-link" href="/pricing">Pricing Plans</Link>
+              <Link className="bento-footer-link" href="/brand">Brand Identity &amp; Logos</Link>
               <Link className="bento-footer-link" href="/careers">Careers</Link>
               <Link className="bento-footer-link" href="/blog">Blog &amp; Insights</Link>
               <Link className="bento-footer-link" href="/contact">Contact</Link>

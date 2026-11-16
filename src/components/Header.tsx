@@ -253,6 +253,9 @@ export default function Header() {
             <Link href="/pricing" className={`bento-nav-link ${pathname === '/pricing' ? 'active' : ''}`}>
               Pricing
             </Link>
+            <Link href="/brand" className={`bento-nav-link ${pathname === '/brand' ? 'active' : ''}`}>
+              Brand
+            </Link>
             <Link href="/blog" className={`bento-nav-link ${pathname?.startsWith('/blog') ? 'active' : ''}`}>
               Blog
             </Link>
@@ -303,6 +306,7 @@ export default function Header() {
             <Link href="/industries" className="bento-nav-link">Industries</Link>
             <Link href="/work" className="bento-nav-link">Work &amp; Case Studies</Link>
             <Link href="/pricing" className="bento-nav-link">Pricing</Link>
+            <Link href="/brand" className="bento-nav-link">Brand Identity &amp; Logos</Link>
             <Link href="/blog" className="bento-nav-link">Blog</Link>
             <Link href="/about" className="bento-nav-link">About</Link>
             <Link href="/contact" className="bento-nav-link">Contact</Link>

@@ -1,17 +1,51 @@
-<svg width="1200" height="400" viewBox="0 0 200 65" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg width="1320" height="420" viewBox="0 0 200 65" fill="none" xmlns="http://www.w3.org/2000/svg">
+
   <defs>
+    <linearGradient id="a-grad-cyan" x1="20" y1="20" x2="80" y2="85" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#00D4FF" />
+      <stop offset="45%" stop-color="#0096C7" />
+      <stop offset="100%" stop-color="#0077B6" />
+    </linearGradient>
+    <linearGradient id="a-grad-dark" x1="15" y1="30" x2="85" y2="90" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0077B6" />
+      <stop offset="50%" stop-color="#023E8A" />
+      <stop offset="100%" stop-color="#03045E" />
+    </linearGradient>
+    <linearGradient id="orbit-grad" x1="5" y1="85" x2="90" y2="40" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0077B6" />
+      <stop offset="30%" stop-color="#0096C7" />
+      <stop offset="70%" stop-color="#00B4D8" />
+      <stop offset="100%" stop-color="#90E0EF" />
+    </linearGradient>
+    <linearGradient id="pixel-grad" x1="60" y1="40" x2="95" y2="18" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#00B4D8" />
+      <stop offset="100%" stop-color="#48CAE4" />
+    </linearGradient>
     <linearGradient id="wm-cyan-grad" x1="72" y1="8" x2="160" y2="38" gradientUnits="userSpaceOnUse">
       <stop offset="0%" stop-color="#00A3FF" />
-      <stop offset="100%" stop-color="#6366F1" />
+      <stop offset="100%" stop-color="#0077B6" />
+    </linearGradient>
+    <linearGradient id="wm-cyan-dark" x1="72" y1="8" x2="160" y2="38" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#00E5FF" />
+      <stop offset="100%" stop-color="#38BDF8" />
+    </linearGradient>
+    <linearGradient id="lm-dark-bg" x1="6" y1="6" x2="74" y2="74" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#141E33" />
+      <stop offset="100%" stop-color="#060913" />
+    </linearGradient>
+    <linearGradient id="em-ring" x1="10" y1="10" x2="90" y2="90" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#00D4FF" />
+      <stop offset="50%" stop-color="#0077B6" />
+      <stop offset="100%" stop-color="#023E8A" />
+    </linearGradient>
+    <linearGradient id="em-core" x1="20" y1="15" x2="80" y2="85" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0F172A" />
+      <stop offset="100%" stop-color="#040711" />
     </linearGradient>
   </defs>
-  <!-- Main Wordmark -->
-  <text x="12" y="36" fill="#0F172A" font-family="'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-weight="800" font-size="28" letter-spacing="-0.5">ABSS <tspan fill="url(#wm-cyan-grad)" font-weight="800">NEXUS</tspan></text>
-  
-  <!-- Subtitle Divider Accent -->
+
+  <text x="12" y="36" fill="#0F172A" font-family="'Space Grotesk', -apple-system, sans-serif" font-weight="800" font-size="28" letter-spacing="-0.5">ABSS <tspan fill="url(#wm-cyan-grad)" font-weight="800">NEXUS</tspan></text>
   <circle cx="16" cy="49" r="3" fill="url(#wm-cyan-grad)" />
   <rect x="23" y="47.8" width="56" height="2.4" rx="1.2" fill="url(#wm-cyan-grad)" />
-  
-  <!-- Descriptor Line -->
-  <text x="86" y="52" fill="#475569" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-weight="700" font-size="8.8" letter-spacing="3.4">TECHNOLOGIES</text>
+  <text x="86" y="52" fill="#475569" font-family="'Inter', -apple-system, sans-serif" font-weight="700" font-size="8.8" letter-spacing="3.4">TECHNOLOGIES</text>
 </svg>
