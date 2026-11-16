@@ -2044,6 +2044,7 @@ body {
   text-transform: uppercase;
   margin-bottom: 16px;
   width: fit-content;
+  white-space: nowrap;
 }
 
 .pillar-services .ecosystem-pillar-tag {
@@ -2113,6 +2114,7 @@ body {
   font-family: var(--font-mono);
   font-size: 0.72rem;
   color: #38BDF8;
+  white-space: nowrap;
 }
 
 .saas-subdomain-pill .dot {

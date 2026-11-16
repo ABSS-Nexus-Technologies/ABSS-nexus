@@ -337,10 +337,11 @@ export default function HomePage() {
                 </div>
               </div>
               <div className="ecosystem-card-footer">
-                <Link href="/services" className="bento-btn-primary" style={{ padding: '8px 18px', fontSize: '0.85rem' }}>
-                  <span>View 16 Services &rarr;</span>
+                <Link href="/services" className="bento-btn-primary" style={{ padding: '8px 18px', fontSize: '0.85rem', whiteSpace: 'nowrap', display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+                  <span>View 16 Services</span>
+                  <span aria-hidden="true">&rarr;</span>
                 </Link>
-                <Link href="/work" style={{ color: 'var(--text-muted)', fontSize: '0.85rem', textDecoration: 'none' }}>
+                <Link href="/work" style={{ color: 'var(--text-muted)', fontSize: '0.85rem', textDecoration: 'none', whiteSpace: 'nowrap' }}>
                   Case Studies &rarr;
                 </Link>
               </div>
@@ -349,9 +350,11 @@ export default function HomePage() {
             {/* PILLAR 2: Business SaaS */}
             <div className="ecosystem-card pillar-saas">
               <div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <span className="ecosystem-pillar-tag">Pillar 02 &bull; Proprietary Cloud</span>
-                  <span className="saas-subdomain-pill">
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '8px', marginBottom: '16px', flexWrap: 'wrap' }}>
+                  <span className="ecosystem-pillar-tag" style={{ margin: 0, fontSize: '0.70rem', padding: '3px 8px' }}>
+                    Pillar 02 &bull; Proprietary Cloud
+                  </span>
+                  <span className="saas-subdomain-pill" style={{ fontSize: '0.68rem', padding: '3px 7px' }}>
                     <span className="dot" />
                     <span>Free Subdomains Active</span>
                   </span>
@@ -393,10 +396,11 @@ export default function HomePage() {
                 </div>
               </div>
               <div className="ecosystem-card-footer">
-                <Link href="/ecosystem#business-saas" className="bento-btn-primary" style={{ padding: '8px 18px', fontSize: '0.85rem' }}>
-                  <span>Explore SaaS Suite &rarr;</span>
+                <Link href="/ecosystem#business-saas" className="bento-btn-primary" style={{ padding: '8px 18px', fontSize: '0.85rem', whiteSpace: 'nowrap', display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+                  <span>Explore SaaS Suite</span>
+                  <span aria-hidden="true">&rarr;</span>
                 </Link>
-                <Link href="/contact#project-inquiry" style={{ color: 'var(--text-muted)', fontSize: '0.85rem', textDecoration: 'none' }}>
+                <Link href="/contact#project-inquiry" style={{ color: 'var(--text-muted)', fontSize: '0.85rem', textDecoration: 'none', whiteSpace: 'nowrap' }}>
                   Book Demo &rarr;
                 </Link>
               </div>
@@ -426,10 +430,11 @@ export default function HomePage() {
                 </div>
               </div>
               <div className="ecosystem-card-footer">
-                <Link href="/ecosystem#intennexus" className="bento-btn-primary" style={{ padding: '8px 18px', fontSize: '0.85rem', background: 'linear-gradient(135deg, #7C3AED, #A855F7)' }}>
-                  <span>Explore IntenNexus &rarr;</span>
+                <Link href="/ecosystem#intennexus" className="bento-btn-primary" style={{ padding: '8px 18px', fontSize: '0.85rem', background: 'linear-gradient(135deg, #7C3AED, #A855F7)', whiteSpace: 'nowrap', display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+                  <span>Explore IntenNexus</span>
+                  <span aria-hidden="true">&rarr;</span>
                 </Link>
-                <Link href="/careers" style={{ color: 'var(--text-muted)', fontSize: '0.85rem', textDecoration: 'none' }}>
+                <Link href="/careers" style={{ color: 'var(--text-muted)', fontSize: '0.85rem', textDecoration: 'none', whiteSpace: 'nowrap' }}>
                   Hiring Hub &rarr;
                 </Link>
               </div>
