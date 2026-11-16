@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Script from 'next/script';
 import '@/src/styles/styles.css';
 import '@/src/styles/theme-toggle.css';
+import '@/src/styles/modern-bento.css';
 import Header from '@/src/components/Header';
 import Footer from '@/src/components/Footer';
 import FloatingWhatsApp from '@/src/components/FloatingWhatsApp';
@@ -127,11 +128,15 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }}
         />
       </head>
-      <body className="apple-homepage agency-light-theme">
-        <Header />
-        {children}
-        <Footer />
-        <FloatingWhatsApp />
+      <body className="abss-bento-app">
+        <div className="ambient-mesh-glow" aria-hidden="true" />
+        <div className="ambient-grid-pattern" aria-hidden="true" />
+        <div className="app-wrapper">
+          <Header />
+          {children}
+          <Footer />
+          <FloatingWhatsApp />
+        </div>
 
         {/* Google Analytics 4 */}
         <Script
