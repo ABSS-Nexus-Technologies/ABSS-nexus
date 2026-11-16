@@ -49,7 +49,7 @@ graph TD
 ## 3. Directory Layout & Layer Responsibilities
 
 ```text
-/Users/shubhamkumar/New-ABSS-Deploy/
+/Users/shubhamkumar/ABSS-Nexus-Technologies/
 ├── src/                               # Canonical Source of Truth
 │   ├── components/                   # Canonical HTML components (header, footer, WhatsApp)
 │   ├── pages/                        # Public HTML pages (Home, About, Services, Contact, etc.)

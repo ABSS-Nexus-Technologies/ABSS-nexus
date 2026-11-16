@@ -16,7 +16,7 @@ from docx.enum.section import WD_ORIENT
 from docx.oxml import OxmlElement, parse_xml
 from docx.oxml.ns import nsdecls, qn
 
-PROJECT_ROOT = "/Users/shubhamkumar/New-ABSS-Deploy"
+PROJECT_ROOT = "/Users/shubhamkumar/ABSS-Nexus-Technologies"
 OUTPUT_DIR = os.path.join(PROJECT_ROOT, "public", "assets", "documents")
 DIST_OUTPUT_DIR = os.path.join(PROJECT_ROOT, "dist", "public", "assets", "documents")
 IMAGES_DIR = os.path.join(PROJECT_ROOT, "public", "assets", "images")

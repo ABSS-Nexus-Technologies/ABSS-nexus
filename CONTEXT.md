@@ -121,7 +121,7 @@ The admin portal provides two modular management experiences:
 ## 6. Directory Map & File Architecture
 
 ```text
-/Users/shubhamkumar/New-ABSS-Deploy/
+/Users/shubhamkumar/ABSS-Nexus-Technologies/
 ├── backend/
 │   ├── server.js                      # Dependency-free Node.js local dev server & REST API
 │   └── data/db.json                   # Local transactional database (leads, students, submissions, reviews)

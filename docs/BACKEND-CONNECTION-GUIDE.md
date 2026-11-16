@@ -68,7 +68,7 @@ In **Settings** -> **Environment variables** (Add under both **Production** and 
 | `AUTH_SECRET` | 64-char random string for session tokens | Run: `openssl rand -hex 32` |
 | `TURNSTILE_SECRET_KEY` | *(Optional)* Cloudflare Turnstile secret key | Found in Cloudflare Turnstile dashboard |
 
-> 💡 See [.env.example](file:///Users/shubhamkumar/New-ABSS-Deploy/.env.example) for a local reference file.
+> 💡 See [.env.example](file:///Users/shubhamkumar/ABSS-Nexus-Technologies/.env.example) for a local reference file.
 
 ### 4. Cloudflare Turnstile Bot Protection (Optional)
 
