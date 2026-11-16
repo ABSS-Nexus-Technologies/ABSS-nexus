@@ -12,6 +12,7 @@ export default function Footer() {
           <div>
             <Link href="/" aria-label="ABSS Nexus Technologies home" style={{ display: 'inline-flex', alignItems: 'center', gap: '12px', textDecoration: 'none', marginBottom: '14px' }}>
               <picture>
+                <source srcSet="/assets/images/apex-prism/apex-prism-symbol.svg" type="image/svg+xml" />
                 <source srcSet="/assets/images/favicon.webp" type="image/webp" />
                 <img
                   src="/assets/images/favicon.png"

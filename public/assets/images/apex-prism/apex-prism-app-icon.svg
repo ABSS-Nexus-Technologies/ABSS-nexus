@@ -1,0 +1,54 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg-grad" x1="100" y1="50" x2="924" y2="974" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0F172A" />
+      <stop offset="50%" stop-color="#080E1C" />
+      <stop offset="100%" stop-color="#020617" />
+    </linearGradient>
+    <radialGradient id="halo-glow" cx="50%" cy="48%" r="45%">
+      <stop offset="0%" stop-color="#00D4FF" stop-opacity="0.35" />
+      <stop offset="60%" stop-color="#0052FF" stop-opacity="0.12" />
+      <stop offset="100%" stop-color="#000000" stop-opacity="0" />
+    </radialGradient>
+    <linearGradient id="border-stroke" x1="0" y1="0" x2="1024" y2="1024" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#38BDF8" stop-opacity="0.6" />
+      <stop offset="30%" stop-color="#0052FF" stop-opacity="0.2" />
+      <stop offset="100%" stop-color="#1E293B" stop-opacity="0.4" />
+    </linearGradient>
+    <linearGradient id="p-left-app" x1="20" y1="80" x2="50" y2="15" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0052FF" />
+      <stop offset="70%" stop-color="#00D4FF" />
+      <stop offset="100%" stop-color="#E0F2FE" />
+    </linearGradient>
+    <linearGradient id="p-right-app" x1="50" y1="15" x2="80" y2="80" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0096C7" />
+      <stop offset="50%" stop-color="#023E8A" />
+      <stop offset="100%" stop-color="#03045E" />
+    </linearGradient>
+    <linearGradient id="p-inner-app" x1="35" y1="52" x2="65" y2="82" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#03045E" />
+      <stop offset="100%" stop-color="#001845" />
+    </linearGradient>
+    <filter id="core-glow-app" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="15" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- iOS Squircle Shape -->
+  <rect x="16" y="16" width="992" height="992" rx="224" fill="url(#bg-grad)" stroke="url(#border-stroke)" stroke-width="8" />
+
+  <!-- Ambient Light Halo -->
+  <circle cx="512" cy="490" r="380" fill="url(#halo-glow)" />
+
+  <!-- Scaled Symbol Centered -->
+  <g transform="translate(172, 150) scale(6.8)">
+    <path d="M50 14 L18 80 L36 80 L50 48 Z" fill="url(#p-left-app)" />
+    <path d="M50 14 L50 48 L64 80 L82 80 Z" fill="url(#p-right-app)" />
+    <path d="M36 80 L50 48 L64 80 L50 68 Z" fill="url(#p-inner-app)" />
+    <path d="M50 42 L55 50 L50 58 L45 50 Z" fill="#00F0FF" filter="url(#core-glow-app)" />
+    <circle cx="50" cy="50" r="2.5" fill="#FFFFFF" />
+    <rect x="22" y="84" width="12" height="2" rx="1" fill="#00D4FF" opacity="0.9" />
+    <rect x="66" y="84" width="12" height="2" rx="1" fill="#0052FF" opacity="0.9" />
+  </g>
+</svg>
