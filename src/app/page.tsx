@@ -7,6 +7,7 @@ import ProjectFilter from '@/src/components/ProjectFilter';
 import FaqAccordion from '@/src/components/FaqAccordion';
 import TrustBar from '@/src/components/TrustBar';
 import ProjectCostEstimator from '@/src/components/ProjectCostEstimator';
+import HeroCanvas from '@/src/components/HeroCanvas';
 
 export default function HomePage() {
   const featuredServices = servicesData.slice(0, 6);
@@ -20,11 +21,15 @@ export default function HomePage() {
         {/* Ambient Hero Cyber Backdrop & Wallpaper */}
         <div className="hero-ambient-backdrop" aria-hidden="true">
           <div className="hero-backdrop-image" />
+          <div className="hero-aurora-mesh" />
           <div className="hero-backdrop-grid" />
           <div className="hero-backdrop-glow-cyan" />
           <div className="hero-backdrop-glow-purple" />
           <div className="hero-backdrop-vignette" />
         </div>
+
+        {/* Interactive 3D Particle Constellation Canvas */}
+        <HeroCanvas />
 
         <div className="bento-container">
           {/* Eyebrow Badge */}
