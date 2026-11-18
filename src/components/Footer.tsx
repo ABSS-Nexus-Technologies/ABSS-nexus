@@ -157,7 +157,7 @@ export default function Footer() {
               </Link>
               <a className="bento-footer-link" href="https://www.intennexus.com" target="_blank" rel="noopener noreferrer">
                 <span style={{ color: '#C084FC' }}>🎓</span>
-                <span>IntenNexus (www.intennexus.com) ↗</span>
+                <span>IntenNexus Talent Hub</span>
               </a>
               <Link className="bento-footer-link" href="/ecosystem" style={{ color: 'var(--accent-cyan)', fontWeight: 600, marginTop: '6px' }}>
                 <span>✦</span>

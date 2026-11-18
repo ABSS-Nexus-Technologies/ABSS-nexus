@@ -235,26 +235,20 @@ export default function EcosystemPage() {
           <div className="ecosystem-master-box pillar-3-box">
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '40px', alignItems: 'center' }}>
               <div>
-                <div style={{ display: 'inline-flex', gap: '10px', alignItems: 'center', marginBottom: '14px', flexWrap: 'wrap' }}>
-                  <span className="ecosystem-pillar-tag" style={{ background: 'rgba(168, 85, 247, 0.15)', color: '#C084FC', border: '1px solid rgba(168, 85, 247, 0.4)' }}>
-                    Pillar 03 &bull; An ABSS Nexus Technologies Venture
-                  </span>
-                  <a
-                    href="https://www.intennexus.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="saas-subdomain-pill"
-                    style={{ borderColor: 'rgba(168, 85, 247, 0.35)', color: '#C084FC', textDecoration: 'none' }}
-                  >
-                    <span className="dot" style={{ background: '#C084FC', boxShadow: '0 0 6px #C084FC' }} />
-                    <span>www.intennexus.com ↗</span>
-                  </a>
-                </div>
+                <a
+                  href="https://www.intennexus.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="ecosystem-pillar-tag"
+                  style={{ display: 'inline-block', background: 'rgba(168, 85, 247, 0.15)', color: '#C084FC', border: '1px solid rgba(168, 85, 247, 0.4)', textDecoration: 'none', marginBottom: '12px' }}
+                >
+                  Pillar 03 &bull; An ABSS Nexus Technologies Venture
+                </a>
                 <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: '2.4rem', fontWeight: 800, color: 'var(--text-main)', margin: '12px 0 16px', letterSpacing: '-0.02em' }}>
                   IntenNexus: The Tech Talent Incubator
                 </h2>
                 <p style={{ color: 'var(--text-muted)', fontSize: '1rem', lineHeight: 1.7, marginBottom: '24px' }}>
-                  <strong>IntenNexus</strong> (hosted at <a href="https://www.intennexus.com" target="_blank" rel="noopener noreferrer" style={{ color: '#C084FC', textDecoration: 'underline' }}>www.intennexus.com</a>) was founded to solve India&apos;s college-to-corporate talent gap. We place engineering students and fresh graduates onto real-world production projects, offering rigorous mentorship, code reviews, and verifiable industry experience credentials.
+                  <strong>IntenNexus</strong> was founded to solve India&apos;s college-to-corporate talent gap. We place engineering students and fresh graduates onto real-world production projects, offering rigorous mentorship, code reviews, and verifiable industry experience credentials.
                 </p>
 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', fontSize: '0.9rem', marginBottom: '32px' }}>
@@ -280,7 +274,7 @@ export default function EcosystemPage() {
                     className="bento-btn-primary"
                     style={{ background: 'linear-gradient(135deg, #7C3AED, #A855F7)' }}
                   >
-                    <span>Visit www.intennexus.com ↗</span>
+                    <span>Explore IntenNexus &rarr;</span>
                   </a>
                   <Link href="/careers" className="bento-btn-glass">
                     <span>Explore Careers &amp; Programs &rarr;</span>

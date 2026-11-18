@@ -409,19 +409,15 @@ export default function HomePage() {
             {/* PILLAR 3: IntenNexus */}
             <div className="ecosystem-card pillar-intennexus">
               <div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '10px', gap: '8px', flexWrap: 'wrap' }}>
-                  <span className="ecosystem-pillar-tag">Pillar 03 &bull; EdTech &amp; Talent</span>
-                  <a
-                    href="https://www.intennexus.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="saas-subdomain-pill"
-                    style={{ borderColor: 'rgba(168, 85, 247, 0.35)', color: '#C084FC', textDecoration: 'none' }}
-                  >
-                    <span className="dot" style={{ background: '#C084FC', boxShadow: '0 0 6px #C084FC' }} />
-                    <span>www.intennexus.com ↗</span>
-                  </a>
-                </div>
+                <a
+                  href="https://www.intennexus.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="ecosystem-pillar-tag"
+                  style={{ display: 'inline-block', textDecoration: 'none' }}
+                >
+                  Pillar 03 &bull; EdTech &amp; Talent
+                </a>
                 <h3 className="ecosystem-title">IntenNexus</h3>
                 <p className="ecosystem-desc">
                   An ABSS Nexus Technologies initiative bridging academic theory and real-world tech engineering through live student internships and career mentorship.
@@ -449,7 +445,7 @@ export default function HomePage() {
                   className="bento-btn-primary"
                   style={{ padding: '8px 18px', fontSize: '0.85rem', background: 'linear-gradient(135deg, #7C3AED, #A855F7)', whiteSpace: 'nowrap', display: 'inline-flex', alignItems: 'center', gap: '6px' }}
                 >
-                  <span>Visit IntenNexus</span>
+                  <span>Explore IntenNexus</span>
                   <span aria-hidden="true">&rarr;</span>
                 </a>
                 <Link href="/ecosystem#intennexus" style={{ color: 'var(--text-muted)', fontSize: '0.85rem', textDecoration: 'none', whiteSpace: 'nowrap' }}>
