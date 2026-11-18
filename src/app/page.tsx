@@ -68,206 +68,26 @@ export default function HomePage() {
             </Link>
           </div>
 
-          {/* ==================================================================
-              INTERLOCKING BENTO GRID (4 BESPOKE HIGH-TECH CARDS)
-              ================================================================== */}
-          <div className="bento-grid-hero">
-            {/* Card 1: Real-Time Telemetry & Traffic Stream (Col 8) */}
-            <div className="bento-card bento-col-8">
-              <div className="bento-card-header">
-                <div>
-                  <h3 className="bento-card-title">Real-Time Telemetry &amp; Traffic Stream</h3>
-                  <p className="bento-card-desc">Live edge analytics across 14 multi-cloud global regions.</p>
-                </div>
-                <span className="bento-badge-live">
-                  <span className="live-pulse-dot" aria-hidden="true" />
-                  <span>All Nodes Operational</span>
-                </span>
-              </div>
-
-              {/* Stats Row */}
-              <div className="analytics-stats-row">
-                <div className="analytics-stat-item">
-                  <span className="val cyan">+184.2%</span>
-                  <span className="lbl">Throughput</span>
-                </div>
-                <div className="analytics-stat-item">
-                  <span className="val">18ms</span>
-                  <span className="lbl">Global Latency</span>
-                </div>
-                <div className="analytics-stat-item">
-                  <span className="val">99.99%</span>
-                  <span className="lbl">Availability</span>
-                </div>
-                <div className="analytics-stat-item">
-                  <span className="val">0</span>
-                  <span className="lbl">Dropped Requests</span>
-                </div>
-              </div>
-
-              {/* SVG Glowing Curve Chart */}
-              <div className="analytics-chart-mock" aria-label="Live telemetry throughput graph">
-                <svg viewBox="0 0 720 140" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-                  <defs>
-                    <linearGradient id="chartGradient" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="0%" stopColor="#00c2ff" stopOpacity="0.35" />
-                      <stop offset="60%" stopColor="#8b5cf6" stopOpacity="0.12" />
-                      <stop offset="100%" stopColor="#00c2ff" stopOpacity="0" />
-                    </linearGradient>
-                    <linearGradient id="chartStroke" x1="0" y1="0" x2="1" y2="0">
-                      <stop offset="0%" stopColor="#00c2ff" />
-                      <stop offset="50%" stopColor="#8b5cf6" />
-                      <stop offset="100%" stopColor="#00c2ff" />
-                    </linearGradient>
-                  </defs>
-
-                  {/* Horizontal grid lines */}
-                  <line x1="0" y1="35" x2="720" y2="35" stroke="rgba(255,255,255,0.05)" strokeDasharray="4 4" />
-                  <line x1="0" y1="70" x2="720" y2="70" stroke="rgba(255,255,255,0.05)" strokeDasharray="4 4" />
-                  <line x1="0" y1="105" x2="720" y2="105" stroke="rgba(255,255,255,0.05)" strokeDasharray="4 4" />
-
-                  {/* Gradient Area Fill */}
-                  <path
-                    d="M0,110 C80,95 140,120 220,60 C300,10 380,85 460,40 C540,15 620,45 720,20 L720,140 L0,140 Z"
-                    fill="url(#chartGradient)"
-                  />
-
-                  {/* Smooth Glowing Top Stroke */}
-                  <path
-                    d="M0,110 C80,95 140,120 220,60 C300,10 380,85 460,40 C540,15 620,45 720,20"
-                    stroke="url(#chartStroke)"
-                    strokeWidth="3"
-                    strokeLinecap="round"
-                  />
-
-                  {/* Highlight Dots */}
-                  <circle cx="220" cy="60" r="4" fill="#00c2ff" />
-                  <circle cx="460" cy="40" r="4" fill="#8b5cf6" />
-                  <circle cx="720" cy="20" r="4" fill="#00c2ff" />
-                </svg>
-              </div>
+          {/* Sleek Enterprise Quick-Metrics Ribbon */}
+          <div className="hero-quick-metrics" style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '28px', marginTop: '38px', padding: '12px 28px', borderRadius: 'var(--radius-pill)', background: 'var(--bg-surface)', border: '1px solid var(--border-subtle)', backdropFilter: 'blur(16px)', flexWrap: 'wrap' }}>
+            <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
+              <span style={{ fontFamily: 'var(--font-heading)', fontSize: '1.2rem', fontWeight: 800, color: 'var(--accent-cyan)' }}>99.98%</span>
+              <span style={{ fontSize: '0.82rem', color: 'var(--text-muted)' }}>Uptime SLA</span>
             </div>
-
-            {/* Card 2: Edge Infrastructure & Global SLA (Col 4) */}
-            <div className="bento-card bento-col-4">
-              <div className="bento-card-header">
-                <div>
-                  <h3 className="bento-card-title">Edge Infrastructure</h3>
-                  <p className="bento-card-desc">Zero-downtime routing across continents.</p>
-                </div>
-                <span className="bento-badge-live">99.9% SLA</span>
-              </div>
-
-              <div className="metric-box-highlight">
-                <span className="metric-big-number">0.38s</span>
-                <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)', fontWeight: 600 }}>
-                  First Contentful Paint (FCP)
-                </span>
-              </div>
-
-              <div className="edge-nodes-list">
-                <div className="edge-node-row">
-                  <span className="edge-node-name">
-                    <span className="live-pulse-dot" style={{ width: '6px', height: '6px' }} />
-                    IN-BOM-1 (Mumbai)
-                  </span>
-                  <span className="edge-node-latency">14ms</span>
-                </div>
-                <div className="edge-node-row">
-                  <span className="edge-node-name">
-                    <span className="live-pulse-dot" style={{ width: '6px', height: '6px' }} />
-                    US-EAST-1 (N. Virginia)
-                  </span>
-                  <span className="edge-node-latency">32ms</span>
-                </div>
-                <div className="edge-node-row">
-                  <span className="edge-node-name">
-                    <span className="live-pulse-dot" style={{ width: '6px', height: '6px' }} />
-                    EU-FRA-1 (Frankfurt)
-                  </span>
-                  <span className="edge-node-latency">28ms</span>
-                </div>
-              </div>
+            <span style={{ width: '4px', height: '4px', borderRadius: '50%', background: 'var(--border-subtle)' }} />
+            <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
+              <span style={{ fontFamily: 'var(--font-heading)', fontSize: '1.2rem', fontWeight: 800, color: '#38BDF8' }}>18ms</span>
+              <span style={{ fontSize: '0.82rem', color: 'var(--text-muted)' }}>Global Edge Latency</span>
             </div>
-
-            {/* Card 3: Production Quality & Core Web Vitals (Col 4) */}
-            <div className="bento-card bento-col-4">
-              <div className="bento-card-header">
-                <div>
-                  <h3 className="bento-card-title">Production Quality</h3>
-                  <p className="bento-card-desc">Lighthouse &amp; Security Audits.</p>
-                </div>
-                <span className="bento-badge-live">Audited</span>
-              </div>
-
-              <div className="metric-box-highlight">
-                <span className="metric-big-number">100/100</span>
-                <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)', fontWeight: 600 }}>
-                  Lighthouse Performance Score
-                </span>
-              </div>
-
-              <div className="metric-pills-list">
-                <div className="metric-pill-item">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                    <polyline points="20 6 9 17 4 12" />
-                  </svg>
-                  <span>50+ Enterprise Systems Shipped</span>
-                </div>
-                <div className="metric-pill-item">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                    <polyline points="20 6 9 17 4 12" />
-                  </svg>
-                  <span>Zero-Trust Security &amp; Data Isolation</span>
-                </div>
-                <div className="metric-pill-item">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                    <polyline points="20 6 9 17 4 12" />
-                  </svg>
-                  <span>TypeScript Strict &amp; Zod Schema Safe</span>
-                </div>
-              </div>
+            <span style={{ width: '4px', height: '4px', borderRadius: '50%', background: 'var(--border-subtle)' }} />
+            <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
+              <span style={{ fontFamily: 'var(--font-heading)', fontSize: '1.2rem', fontWeight: 800, color: '#10B981' }}>50+</span>
+              <span style={{ fontSize: '0.82rem', color: 'var(--text-muted)' }}>Production Systems</span>
             </div>
-
-            {/* Card 4: Type-Safe Edge Runtime Code Sandbox (Col 8) */}
-            <div className="bento-card bento-col-8">
-              <div className="bento-card-header">
-                <div>
-                  <h3 className="bento-card-title">Type-Safe Edge Runtime</h3>
-                  <p className="bento-card-desc">Serverless API compute running within 35ms of your users.</p>
-                </div>
-                <span className="bento-badge-live" style={{ color: 'var(--accent-cyan)', borderColor: 'rgba(0,194,255,0.3)', background: 'rgba(0,194,255,0.08)' }}>
-                  Next.js 16 Edge
-                </span>
-              </div>
-
-              <div className="code-window-frame">
-                <div className="code-window-topbar">
-                  <div className="code-window-dots">
-                    <span className="code-dot-red" />
-                    <span className="code-dot-yellow" />
-                    <span className="code-dot-green" />
-                  </div>
-                  <span className="code-window-filename">src/api/telemetry/route.ts</span>
-                  <span style={{ fontSize: '0.7rem', color: '#64748b' }}>TypeScript</span>
-                </div>
-                <pre className="code-content-body">
-                  <code>
-                    <span className="code-token-kw">import</span> {'{ NextRequest, NextResponse }'} <span className="code-token-kw">from</span> <span className="code-token-str">&apos;next/server&apos;</span>;{'\n'}
-                    <span className="code-token-kw">export const</span> runtime = <span className="code-token-str">&apos;edge&apos;</span>;{'\n\n'}
-                    <span className="code-token-kw">export async function</span> <span className="code-token-fn">POST</span>(req: <span className="code-token-type">NextRequest</span>) {'{'}{'\n'}
-                    {'  '}<span className="code-token-comment">// Sub-millisecond localized edge computation</span>{'\n'}
-                    {'  '}<span className="code-token-kw">const</span> region = req.geo?.city || <span className="code-token-str">&apos;Mumbai&apos;</span>;{'\n'}
-                    {'  '}<span className="code-token-kw">return</span> NextResponse.<span className="code-token-fn">json</span>({'{'}{'\n'}
-                    {'    '}status: <span className="code-token-str">&apos;operational&apos;</span>,{'\n'}
-                    {'    '}latency: <span className="code-token-str">&apos;14ms&apos;</span>,{'\n'}
-                    {'    '}edgeNode: region,{'\n'}
-                    {'    '}timestamp: <span className="code-token-kw">new</span> <span className="code-token-fn">Date</span>().<span className="code-token-fn">toISOString</span>(){'\n'}
-                    {'  '}{'}'});{'\n'}
-                    {'}'}
-                  </code>
-                </pre>
-              </div>
+            <span style={{ width: '4px', height: '4px', borderRadius: '50%', background: 'var(--border-subtle)' }} />
+            <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
+              <span style={{ fontFamily: 'var(--font-heading)', fontSize: '1.2rem', fontWeight: 800, color: '#F59E0B' }}>4.9★</span>
+              <span style={{ fontSize: '0.82rem', color: 'var(--text-muted)' }}>Verified Client Score</span>
             </div>
           </div>
         </div>
@@ -518,6 +338,221 @@ export default function HomePage() {
             <Link className="bento-btn-primary" href="/services">
               View All 16 Services &amp; Packages &rarr;
             </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ====================================================================
+          SECTION 3.5: LIVE ARCHITECTURE & TELEMETRY PROOF
+          ==================================================================== */}
+      <section className="bento-section" id="infrastructure" style={{ paddingTop: '20px' }}>
+        <div className="bento-container">
+          <div className="bento-section-header">
+            <span className="bento-section-eyebrow">Production Telemetry &amp; Architecture</span>
+            <h2 className="bento-section-title">Engineered for Sub-Second Speed &amp; 99.98% Uptime</h2>
+            <p className="bento-section-subtitle">
+              Live multi-cloud edge analytics, zero-downtime Anycast routing, and type-safe serverless runtimes.
+            </p>
+          </div>
+
+          <div className="bento-grid-hero">
+            {/* Card 1: Real-Time Telemetry & Traffic Stream (Col 8) */}
+            <div className="bento-card bento-col-8">
+              <div className="bento-card-header">
+                <div>
+                  <h3 className="bento-card-title">Real-Time Telemetry &amp; Traffic Stream</h3>
+                  <p className="bento-card-desc">Live edge analytics across 14 multi-cloud global regions.</p>
+                </div>
+                <span className="bento-badge-live">
+                  <span className="live-pulse-dot" aria-hidden="true" />
+                  <span>All Nodes Operational</span>
+                </span>
+              </div>
+
+              {/* Stats Row */}
+              <div className="analytics-stats-row">
+                <div className="analytics-stat-item">
+                  <span className="val cyan">+184.2%</span>
+                  <span className="lbl">Throughput</span>
+                </div>
+                <div className="analytics-stat-item">
+                  <span className="val">18ms</span>
+                  <span className="lbl">Global Latency</span>
+                </div>
+                <div className="analytics-stat-item">
+                  <span className="val">99.99%</span>
+                  <span className="lbl">Availability</span>
+                </div>
+                <div className="analytics-stat-item">
+                  <span className="val">0</span>
+                  <span className="lbl">Dropped Requests</span>
+                </div>
+              </div>
+
+              {/* SVG Glowing Curve Chart */}
+              <div className="analytics-chart-mock" aria-label="Live telemetry throughput graph">
+                <svg viewBox="0 0 720 140" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+                  <defs>
+                    <linearGradient id="chartGradient" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stopColor="#00c2ff" stopOpacity="0.35" />
+                      <stop offset="60%" stopColor="#8b5cf6" stopOpacity="0.12" />
+                      <stop offset="100%" stopColor="#00c2ff" stopOpacity="0" />
+                    </linearGradient>
+                    <linearGradient id="chartStroke" x1="0" y1="0" x2="1" y2="0">
+                      <stop offset="0%" stopColor="#00c2ff" />
+                      <stop offset="50%" stopColor="#8b5cf6" />
+                      <stop offset="100%" stopColor="#00c2ff" />
+                    </linearGradient>
+                  </defs>
+
+                  {/* Horizontal grid lines */}
+                  <line x1="0" y1="35" x2="720" y2="35" stroke="rgba(255,255,255,0.05)" strokeDasharray="4 4" />
+                  <line x1="0" y1="70" x2="720" y2="70" stroke="rgba(255,255,255,0.05)" strokeDasharray="4 4" />
+                  <line x1="0" y1="105" x2="720" y2="105" stroke="rgba(255,255,255,0.05)" strokeDasharray="4 4" />
+
+                  {/* Gradient Area Fill */}
+                  <path
+                    d="M0,110 C80,95 140,120 220,60 C300,10 380,85 460,40 C540,15 620,45 720,20 L720,140 L0,140 Z"
+                    fill="url(#chartGradient)"
+                  />
+
+                  {/* Smooth Glowing Top Stroke */}
+                  <path
+                    d="M0,110 C80,95 140,120 220,60 C300,10 380,85 460,40 C540,15 620,45 720,20"
+                    stroke="url(#chartStroke)"
+                    strokeWidth="3"
+                    strokeLinecap="round"
+                  />
+
+                  {/* Highlight Dots */}
+                  <circle cx="220" cy="60" r="4" fill="#00c2ff" />
+                  <circle cx="460" cy="40" r="4" fill="#8b5cf6" />
+                  <circle cx="720" cy="20" r="4" fill="#00c2ff" />
+                </svg>
+              </div>
+            </div>
+
+            {/* Card 2: Edge Infrastructure & Global SLA (Col 4) */}
+            <div className="bento-card bento-col-4">
+              <div className="bento-card-header">
+                <div>
+                  <h3 className="bento-card-title">Edge Infrastructure</h3>
+                  <p className="bento-card-desc">Zero-downtime routing across continents.</p>
+                </div>
+                <span className="bento-badge-live">99.9% SLA</span>
+              </div>
+
+              <div className="metric-box-highlight">
+                <span className="metric-big-number">0.38s</span>
+                <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)', fontWeight: 600 }}>
+                  First Contentful Paint (FCP)
+                </span>
+              </div>
+
+              <div className="edge-nodes-list">
+                <div className="edge-node-row">
+                  <span className="edge-node-name">
+                    <span className="live-pulse-dot" style={{ width: '6px', height: '6px' }} />
+                    IN-BOM-1 (Mumbai)
+                  </span>
+                  <span className="edge-node-latency">14ms</span>
+                </div>
+                <div className="edge-node-row">
+                  <span className="edge-node-name">
+                    <span className="live-pulse-dot" style={{ width: '6px', height: '6px' }} />
+                    US-EAST-1 (N. Virginia)
+                  </span>
+                  <span className="edge-node-latency">32ms</span>
+                </div>
+                <div className="edge-node-row">
+                  <span className="edge-node-name">
+                    <span className="live-pulse-dot" style={{ width: '6px', height: '6px' }} />
+                    EU-FRA-1 (Frankfurt)
+                  </span>
+                  <span className="edge-node-latency">28ms</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Card 3: Production Quality & Core Web Vitals (Col 4) */}
+            <div className="bento-card bento-col-4">
+              <div className="bento-card-header">
+                <div>
+                  <h3 className="bento-card-title">Production Quality</h3>
+                  <p className="bento-card-desc">Lighthouse &amp; Security Audits.</p>
+                </div>
+                <span className="bento-badge-live">Audited</span>
+              </div>
+
+              <div className="metric-box-highlight">
+                <span className="metric-big-number">100/100</span>
+                <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)', fontWeight: 600 }}>
+                  Lighthouse Performance Score
+                </span>
+              </div>
+
+              <div className="metric-pills-list">
+                <div className="metric-pill-item">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                  <span>50+ Enterprise Systems Shipped</span>
+                </div>
+                <div className="metric-pill-item">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                  <span>Zero-Trust Security &amp; Data Isolation</span>
+                </div>
+                <div className="metric-pill-item">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                  <span>TypeScript Strict &amp; Zod Schema Safe</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Card 4: Type-Safe Edge Runtime Code Sandbox (Col 8) */}
+            <div className="bento-card bento-col-8">
+              <div className="bento-card-header">
+                <div>
+                  <h3 className="bento-card-title">Type-Safe Edge Runtime</h3>
+                  <p className="bento-card-desc">Serverless API compute running within 35ms of your users.</p>
+                </div>
+                <span className="bento-badge-live" style={{ color: 'var(--accent-cyan)', borderColor: 'rgba(0,194,255,0.3)', background: 'rgba(0,194,255,0.08)' }}>
+                  Next.js 16 Edge
+                </span>
+              </div>
+
+              <div className="code-window-frame">
+                <div className="code-window-topbar">
+                  <div className="code-window-dots">
+                    <span className="code-dot-red" />
+                    <span className="code-dot-yellow" />
+                    <span className="code-dot-green" />
+                  </div>
+                  <span className="code-window-filename">src/api/telemetry/route.ts</span>
+                  <span style={{ fontSize: '0.7rem', color: '#64748b' }}>TypeScript</span>
+                </div>
+                <pre className="code-content-body">
+                  <code>
+                    <span className="code-token-kw">import</span> {'{ NextRequest, NextResponse }'} <span className="code-token-kw">from</span> <span className="code-token-str">&apos;next/server&apos;</span>;{'\n'}
+                    <span className="code-token-kw">export const</span> runtime = <span className="code-token-str">&apos;edge&apos;</span>;{'\n\n'}
+                    <span className="code-token-kw">export async function</span> <span className="code-token-fn">POST</span>(req: <span className="code-token-type">NextRequest</span>) {'{'}{'\n'}
+                    {'  '}<span className="code-token-comment">// Sub-millisecond localized edge computation</span>{'\n'}
+                    {'  '}<span className="code-token-kw">const</span> region = req.geo?.city || <span className="code-token-str">&apos;Mumbai&apos;</span>;{'\n'}
+                    {'  '}<span className="code-token-kw">return</span> NextResponse.<span className="code-token-fn">json</span>({'{'}{'\n'}
+                    {'    '}status: <span className="code-token-str">&apos;operational&apos;</span>,{'\n'}
+                    {'    '}latency: <span className="code-token-str">&apos;14ms&apos;</span>,{'\n'}
+                    {'    '}edgeNode: region,{'\n'}
+                    {'    '}timestamp: <span className="code-token-kw">new</span> <span className="code-token-fn">Date</span>().<span className="code-token-fn">toISOString</span>(){'\n'}
+                    {'  '}{'}'});{'\n'}
+                    {'}'}
+                  </code>
+                </pre>
+              </div>
+            </div>
           </div>
         </div>
       </section>
