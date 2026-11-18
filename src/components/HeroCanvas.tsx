@@ -463,41 +463,43 @@ export default function HeroCanvas({ variant = 'home' }: HeroCanvasProps) {
             ctx.beginPath();
             ctx.moveTo(p.x, p.y);
             ctx.lineTo(mouse.x, mouse.y);
-            const mouseLineAlpha = (1 - dist / mouse.radius) * (isDark ? 0.35 : 0.25);
+            const mouseLineAlpha = (1 - dist / mouse.radius) * (isDark ? 0.35 : 0.14);
             ctx.strokeStyle = `${palette.mouseLine}${mouseLineAlpha})`;
-            ctx.lineWidth = 1;
+            ctx.lineWidth = isDark ? 1 : 0.6;
             ctx.stroke();
           }
         }
 
         // Draw particle
-        const r = p.baseRadius * (p.z * 0.7);
-        const alpha = Math.min((p.z - 0.4) * (isDark ? 0.65 : 0.52), 0.9);
+        const r = isDark ? p.baseRadius * (p.z * 0.7) : p.baseRadius * (p.z * 0.45);
+        const alpha = isDark
+          ? Math.min((p.z - 0.4) * 0.65, 0.9)
+          : Math.min((p.z - 0.4) * 0.28, 0.38);
         const pColor = p.colorType === 'primary' ? `${palette.primary}${alpha})` : `${palette.secondary}${alpha})`;
 
         ctx.beginPath();
         ctx.arc(p.x, p.y, r, 0, Math.PI * 2);
         ctx.fillStyle = pColor;
         ctx.shadowColor = p.colorType === 'primary' ? palette.shadowPrimary : palette.shadowSecondary;
-        ctx.shadowBlur = isDark ? 8 : 4;
+        ctx.shadowBlur = isDark ? 8 : 0;
         ctx.fill();
         ctx.shadowBlur = 0; // reset
 
         // Draw connections to nearby particles
+        const maxDist = isDark ? 115 : 75;
         for (let j = i + 1; j < particles.length; j++) {
           const p2 = particles[j];
           const cdx = p.x - p2.x;
           const cdy = p.y - p2.y;
           const dist = Math.sqrt(cdx * cdx + cdy * cdy);
-          const maxDist = 115;
 
           if (dist < maxDist) {
-            const lineAlpha = (1 - dist / maxDist) * (isDark ? 0.22 : 0.16) * ((p.z + p2.z) / 4);
+            const lineAlpha = (1 - dist / maxDist) * (isDark ? 0.22 : 0.08) * ((p.z + p2.z) / 4);
             ctx.beginPath();
             ctx.moveTo(p.x, p.y);
             ctx.lineTo(p2.x, p2.y);
             ctx.strokeStyle = `${palette.line}${lineAlpha})`;
-            ctx.lineWidth = 0.85;
+            ctx.lineWidth = isDark ? 0.85 : 0.5;
             ctx.stroke();
           }
         }

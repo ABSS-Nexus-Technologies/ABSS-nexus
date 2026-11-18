@@ -688,10 +688,9 @@ body {
   transition: filter 0.4s ease, opacity 0.4s ease;
 }
 
+/* In Light Mode: completely disable the dark raster wallpaper to eliminate muddy gray smudges */
 [data-theme="light"] .hero-backdrop-image {
-  opacity: 0.32;
-  mix-blend-mode: multiply;
-  filter: contrast(1.3) saturate(1.4);
+  display: none !important;
 }
 
 /* ==========================================================================
@@ -738,49 +737,6 @@ body {
 }
 
 /* ==========================================================================
-   Page-Specific Hero Wallpaper Hue Tints (Light Mode)
-   ========================================================================== */
-[data-theme="light"] .hero-variant-services .hero-backdrop-image {
-  filter: contrast(1.3) saturate(1.4) hue-rotate(15deg);
-}
-[data-theme="light"] .hero-variant-pricing .hero-backdrop-image {
-  filter: contrast(1.25) saturate(1.45) hue-rotate(85deg);
-}
-[data-theme="light"] .hero-variant-about .hero-backdrop-image {
-  filter: contrast(1.28) saturate(1.35) hue-rotate(30deg);
-}
-[data-theme="light"] .hero-variant-contact .hero-backdrop-image {
-  filter: contrast(1.25) saturate(1.4) hue-rotate(310deg);
-}
-[data-theme="light"] .hero-variant-ecosystem .hero-backdrop-image {
-  filter: contrast(1.28) saturate(1.4) hue-rotate(240deg);
-}
-[data-theme="light"] .hero-variant-work .hero-backdrop-image {
-  filter: contrast(1.28) saturate(1.35) hue-rotate(200deg);
-}
-[data-theme="light"] .hero-variant-solutions .hero-backdrop-image {
-  filter: contrast(1.28) saturate(1.35) hue-rotate(185deg);
-}
-[data-theme="light"] .hero-variant-industries .hero-backdrop-image {
-  filter: contrast(1.28) saturate(1.4) hue-rotate(130deg);
-}
-[data-theme="light"] .hero-variant-blog .hero-backdrop-image {
-  filter: contrast(1.28) saturate(1.35) hue-rotate(160deg);
-}
-[data-theme="light"] .hero-variant-careers .hero-backdrop-image {
-  filter: contrast(1.28) saturate(1.45) hue-rotate(265deg);
-}
-[data-theme="light"] .hero-variant-brand .hero-backdrop-image {
-  filter: contrast(1.32) saturate(1.4);
-}
-[data-theme="light"] .hero-variant-legal .hero-backdrop-image {
-  filter: contrast(1.15) saturate(0.7) hue-rotate(180deg);
-}
-[data-theme="light"] .hero-variant-faq .hero-backdrop-image {
-  filter: contrast(1.25) saturate(1.3) hue-rotate(155deg);
-}
-
-/* ==========================================================================
    Primary & Secondary Floating Ambient Glow Orbs
    ========================================================================== */
 .hero-backdrop-glow-cyan {
@@ -795,8 +751,9 @@ body {
 }
 
 [data-theme="light"] .hero-backdrop-glow-cyan {
-  background: radial-gradient(circle, rgba(0, 180, 255, 0.28), transparent 70%);
-  filter: blur(55px);
+  background: radial-gradient(circle, rgba(0, 180, 255, 0.08), transparent 70%) !important;
+  filter: blur(65px);
+  opacity: 0.5;
 }
 
 .hero-backdrop-glow-purple {
@@ -811,8 +768,9 @@ body {
 }
 
 [data-theme="light"] .hero-backdrop-glow-purple {
-  background: radial-gradient(circle, rgba(168, 85, 247, 0.24), transparent 70%);
-  filter: blur(65px);
+  background: radial-gradient(circle, rgba(168, 85, 247, 0.06), transparent 70%) !important;
+  filter: blur(75px);
+  opacity: 0.5;
 }
 
 /* Page-Specific Primary Glows */
@@ -865,10 +823,11 @@ body {
 }
 
 [data-theme="light"] .hero-aurora-mesh {
-  background: radial-gradient(circle at 30% 40%, rgba(0, 180, 255, 0.28) 0%, transparent 60%),
-              radial-gradient(circle at 70% 60%, rgba(168, 85, 247, 0.22) 0%, transparent 60%),
-              radial-gradient(circle at 50% 20%, rgba(56, 189, 248, 0.25) 0%, transparent 70%);
-  filter: blur(65px);
+  width: 850px;
+  height: 440px;
+  background: radial-gradient(circle at 50% 30%, rgba(0, 194, 255, 0.09) 0%, rgba(168, 85, 247, 0.05) 50%, transparent 75%) !important;
+  filter: blur(55px);
+  opacity: 0.75;
 }
 
 /* Variant Aurora Waves (Dark Mode) */
@@ -938,71 +897,45 @@ body {
               radial-gradient(circle at 50% 20%, rgba(52, 211, 153, 0.20) 0%, transparent 70%) !important;
 }
 
-/* Variant Aurora Waves (Light Mode) */
+/* Variant Aurora Waves (Light Mode - Soft Ethereal Halos) */
 [data-theme="light"] .aurora-services {
-  background: radial-gradient(circle at 30% 40%, rgba(2, 132, 199, 0.30) 0%, transparent 60%),
-              radial-gradient(circle at 70% 60%, rgba(56, 189, 248, 0.26) 0%, transparent 60%),
-              radial-gradient(circle at 50% 20%, rgba(14, 165, 233, 0.24) 0%, transparent 70%) !important;
+  background: radial-gradient(circle at 50% 30%, rgba(0, 180, 255, 0.10) 0%, rgba(56, 189, 248, 0.06) 45%, transparent 75%) !important;
 }
 [data-theme="light"] .aurora-pricing {
-  background: radial-gradient(circle at 30% 40%, rgba(5, 150, 105, 0.30) 0%, transparent 60%),
-              radial-gradient(circle at 70% 60%, rgba(16, 185, 129, 0.26) 0%, transparent 60%),
-              radial-gradient(circle at 50% 20%, rgba(13, 148, 136, 0.24) 0%, transparent 70%) !important;
+  background: radial-gradient(circle at 50% 30%, rgba(16, 185, 129, 0.10) 0%, rgba(6, 214, 160, 0.05) 45%, transparent 75%) !important;
 }
 [data-theme="light"] .aurora-about {
-  background: radial-gradient(circle at 30% 40%, rgba(217, 119, 6, 0.28) 0%, transparent 60%),
-              radial-gradient(circle at 70% 60%, rgba(124, 58, 237, 0.24) 0%, transparent 60%),
-              radial-gradient(circle at 50% 20%, rgba(245, 158, 11, 0.22) 0%, transparent 70%) !important;
+  background: radial-gradient(circle at 50% 30%, rgba(245, 158, 11, 0.09) 0%, rgba(168, 85, 247, 0.05) 45%, transparent 75%) !important;
 }
 [data-theme="light"] .aurora-contact {
-  background: radial-gradient(circle at 30% 40%, rgba(225, 29, 72, 0.30) 0%, transparent 60%),
-              radial-gradient(circle at 70% 60%, rgba(2, 132, 199, 0.26) 0%, transparent 60%),
-              radial-gradient(circle at 50% 20%, rgba(251, 113, 133, 0.24) 0%, transparent 70%) !important;
+  background: radial-gradient(circle at 50% 30%, rgba(244, 63, 94, 0.09) 0%, rgba(0, 194, 255, 0.05) 45%, transparent 75%) !important;
 }
 [data-theme="light"] .aurora-ecosystem {
-  background: radial-gradient(circle at 30% 40%, rgba(124, 58, 237, 0.32) 0%, transparent 60%),
-              radial-gradient(circle at 70% 60%, rgba(192, 38, 211, 0.26) 0%, transparent 60%),
-              radial-gradient(circle at 50% 20%, rgba(2, 132, 199, 0.22) 0%, transparent 70%) !important;
+  background: radial-gradient(circle at 50% 30%, rgba(168, 85, 247, 0.10) 0%, rgba(236, 72, 153, 0.05) 45%, transparent 75%) !important;
 }
 [data-theme="light"] .aurora-work {
-  background: radial-gradient(circle at 30% 40%, rgba(67, 56, 202, 0.30) 0%, transparent 60%),
-              radial-gradient(circle at 70% 60%, rgba(13, 148, 136, 0.26) 0%, transparent 60%),
-              radial-gradient(circle at 50% 20%, rgba(37, 99, 235, 0.22) 0%, transparent 70%) !important;
+  background: radial-gradient(circle at 50% 30%, rgba(99, 102, 241, 0.09) 0%, rgba(20, 184, 166, 0.05) 45%, transparent 75%) !important;
 }
 [data-theme="light"] .aurora-solutions {
-  background: radial-gradient(circle at 30% 40%, rgba(37, 99, 235, 0.30) 0%, transparent 60%),
-              radial-gradient(circle at 70% 60%, rgba(124, 58, 237, 0.26) 0%, transparent 60%),
-              radial-gradient(circle at 50% 20%, rgba(2, 132, 199, 0.22) 0%, transparent 70%) !important;
+  background: radial-gradient(circle at 50% 30%, rgba(59, 130, 246, 0.09) 0%, rgba(147, 51, 234, 0.05) 45%, transparent 75%) !important;
 }
 [data-theme="light"] .aurora-industries {
-  background: radial-gradient(circle at 30% 40%, rgba(15, 118, 110, 0.30) 0%, transparent 60%),
-              radial-gradient(circle at 70% 60%, rgba(29, 78, 216, 0.26) 0%, transparent 60%),
-              radial-gradient(circle at 50% 20%, rgba(13, 148, 136, 0.22) 0%, transparent 70%) !important;
+  background: radial-gradient(circle at 50% 30%, rgba(45, 212, 191, 0.09) 0%, rgba(59, 130, 246, 0.05) 45%, transparent 75%) !important;
 }
 [data-theme="light"] .aurora-blog {
-  background: radial-gradient(circle at 30% 40%, rgba(2, 132, 199, 0.30) 0%, transparent 60%),
-              radial-gradient(circle at 70% 60%, rgba(234, 88, 12, 0.24) 0%, transparent 60%),
-              radial-gradient(circle at 50% 20%, rgba(79, 70, 229, 0.22) 0%, transparent 70%) !important;
+  background: radial-gradient(circle at 50% 30%, rgba(56, 189, 248, 0.09) 0%, rgba(251, 146, 60, 0.05) 45%, transparent 75%) !important;
 }
 [data-theme="light"] .aurora-careers {
-  background: radial-gradient(circle at 30% 40%, rgba(124, 58, 237, 0.30) 0%, transparent 60%),
-              radial-gradient(circle at 70% 60%, rgba(5, 150, 105, 0.26) 0%, transparent 60%),
-              radial-gradient(circle at 50% 20%, rgba(2, 132, 199, 0.22) 0%, transparent 70%) !important;
+  background: radial-gradient(circle at 50% 30%, rgba(168, 85, 247, 0.09) 0%, rgba(16, 185, 129, 0.05) 45%, transparent 75%) !important;
 }
 [data-theme="light"] .aurora-brand {
-  background: radial-gradient(circle at 30% 40%, rgba(2, 132, 199, 0.32) 0%, transparent 60%),
-              radial-gradient(circle at 70% 60%, rgba(30, 58, 138, 0.28) 0%, transparent 60%),
-              radial-gradient(circle at 50% 20%, rgba(14, 165, 233, 0.24) 0%, transparent 70%) !important;
+  background: radial-gradient(circle at 50% 30%, rgba(0, 194, 255, 0.10) 0%, rgba(59, 130, 246, 0.05) 45%, transparent 75%) !important;
 }
 [data-theme="light"] .aurora-legal {
-  background: radial-gradient(circle at 30% 40%, rgba(71, 85, 105, 0.28) 0%, transparent 60%),
-              radial-gradient(circle at 70% 60%, rgba(2, 132, 199, 0.22) 0%, transparent 60%),
-              radial-gradient(circle at 50% 20%, rgba(51, 65, 85, 0.20) 0%, transparent 70%) !important;
+  background: radial-gradient(circle at 50% 30%, rgba(148, 163, 184, 0.08) 0%, rgba(56, 189, 248, 0.05) 45%, transparent 75%) !important;
 }
 [data-theme="light"] .aurora-faq {
-  background: radial-gradient(circle at 30% 40%, rgba(2, 132, 199, 0.30) 0%, transparent 60%),
-              radial-gradient(circle at 70% 60%, rgba(79, 70, 229, 0.26) 0%, transparent 60%),
-              radial-gradient(circle at 50% 20%, rgba(13, 148, 136, 0.22) 0%, transparent 70%) !important;
+  background: radial-gradient(circle at 50% 30%, rgba(14, 165, 233, 0.09) 0%, rgba(129, 140, 248, 0.05) 45%, transparent 75%) !important;
 }
 
 @keyframes aurora-mesh-float {
@@ -1038,6 +971,15 @@ body {
   -webkit-mask-image: radial-gradient(ellipse 75% 65% at 50% 25%, #000 35%, transparent 85%);
 }
 
+[data-theme="light"] .hero-backdrop-grid {
+  background-image:
+    linear-gradient(to right, rgba(0, 102, 204, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 102, 204, 0.05) 1px, transparent 1px);
+  background-size: 36px 36px;
+  mask-image: radial-gradient(ellipse 75% 65% at 50% 25%, #000 25%, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse 75% 65% at 50% 25%, #000 25%, transparent 80%);
+}
+
 .hero-backdrop-vignette {
   position: absolute;
   inset: 0;
@@ -1047,6 +989,62 @@ body {
     transparent 65%,
     var(--bg-page) 100%
   );
+}
+
+[data-theme="light"] .hero-backdrop-vignette {
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    transparent 45%,
+    rgba(255, 255, 255, 0.85) 75%,
+    #FFFFFF 100%
+  ) !important;
+}
+
+/* Light Mode Luxury Typography & Glass Cards */
+[data-theme="light"] .bento-hero-headline,
+[data-theme="light"] .site-hero__title {
+  color: #0F172A !important;
+  font-weight: 800 !important;
+}
+
+[data-theme="light"] .bento-hero-subtitle,
+[data-theme="light"] .site-hero__description {
+  color: #475569 !important;
+}
+
+[data-theme="light"] .bento-pill-badge,
+[data-theme="light"] .section-badge-apple {
+  background: rgba(0, 102, 204, 0.06) !important;
+  color: #0066CC !important;
+  border: 1px solid rgba(0, 102, 204, 0.18) !important;
+  box-shadow: 0 2px 8px rgba(0, 102, 204, 0.06) !important;
+}
+
+[data-theme="light"] .bento-btn-glass {
+  background: rgba(255, 255, 255, 0.95) !important;
+  border: 1px solid rgba(0, 0, 0, 0.12) !important;
+  color: #0F172A !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
+}
+
+[data-theme="light"] .bento-btn-glass:hover {
+  background: #FFFFFF !important;
+  border-color: #0066CC !important;
+  color: #0066CC !important;
+  box-shadow: 0 4px 16px rgba(0, 102, 204, 0.12) !important;
+}
+
+[data-theme="light"] .hero-quick-metrics {
+  background: rgba(255, 255, 255, 0.96) !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04) !important;
+}
+
+[data-theme="light"] .bento-card {
+  background: #FFFFFF !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04) !important;
 }
 
 .bento-hero-section > .bento-container {
