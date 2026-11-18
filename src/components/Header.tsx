@@ -136,11 +136,11 @@ export default function Header() {
                     <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', lineHeight: 1.4 }}>ABSS ERP, CRM &amp; HRM on free subdomains.</div>
                   </Link>
 
-                  <Link href="/ecosystem#intennexus" className="bento-dropdown-card">
+                  <a href="https://www.intennexus.com" target="_blank" rel="noopener noreferrer" className="bento-dropdown-card">
                     <div style={{ fontSize: '1.25rem', marginBottom: '6px' }}>🎓</div>
-                    <div style={{ fontSize: '0.88rem', fontWeight: 700, color: '#A855F7', marginBottom: '4px' }}>IntenNexus</div>
-                    <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', lineHeight: 1.4 }}>Talent incubator &amp; live project internships.</div>
-                  </Link>
+                    <div style={{ fontSize: '0.88rem', fontWeight: 700, color: '#A855F7', marginBottom: '4px' }}>IntenNexus ↗</div>
+                    <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', lineHeight: 1.4 }}>Talent incubator &amp; live internships (www.intennexus.com).</div>
+                  </a>
                 </div>
 
                 <div className="bento-dropdown-footer">
@@ -475,7 +475,7 @@ export default function Header() {
             <Link href="/ecosystem" className="bento-nav-link">✦ Ecosystem Overview (3 Pillars)</Link>
             <Link href="/services" className="bento-nav-link">⚡ ABSS IT Services (16 Disciplines)</Link>
             <Link href="/ecosystem#business-saas" className="bento-nav-link">💼 Business SaaS (ERP, CRM, HRM)</Link>
-            <Link href="/ecosystem#intennexus" className="bento-nav-link">🎓 IntenNexus Talent Incubator</Link>
+            <a href="https://www.intennexus.com" target="_blank" rel="noopener noreferrer" className="bento-nav-link">🎓 IntenNexus (www.intennexus.com) ↗</a>
 
             <div className="bento-mobile-group-title">Capabilities &amp; Proof</div>
             <Link href="/solutions" className="bento-nav-link">Solutions Architecture</Link>

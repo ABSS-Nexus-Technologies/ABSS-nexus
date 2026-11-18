@@ -155,10 +155,10 @@ export default function Footer() {
                 <span>👥</span>
                 <span>ABSS HRM (hrm.abssnexus.in)</span>
               </Link>
-              <Link className="bento-footer-link" href="/ecosystem#intennexus">
+              <a className="bento-footer-link" href="https://www.intennexus.com" target="_blank" rel="noopener noreferrer">
                 <span style={{ color: '#C084FC' }}>🎓</span>
-                <span>IntenNexus Talent Hub</span>
-              </Link>
+                <span>IntenNexus (www.intennexus.com) ↗</span>
+              </a>
               <Link className="bento-footer-link" href="/ecosystem" style={{ color: 'var(--accent-cyan)', fontWeight: 600, marginTop: '6px' }}>
                 <span>✦</span>
                 <span>Ecosystem Architecture &rarr;</span>
