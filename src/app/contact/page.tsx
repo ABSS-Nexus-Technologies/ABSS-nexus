@@ -2,6 +2,7 @@ import React from 'react';
 import type { Metadata } from 'next';
 import ContactForm from '@/src/components/ContactForm';
 import TrustBar from '@/src/components/TrustBar';
+import HeroBackdrop from '@/src/components/HeroBackdrop';
 
 export const metadata: Metadata = {
   title: 'Contact Us & Start Your Project | ABSS Nexus Technologies',
@@ -13,6 +14,7 @@ export default function ContactPage() {
   return (
     <main>
       <section className="bento-hero-section" id="hero" style={{ padding: '40px 0 30px' }}>
+        <HeroBackdrop variant="contact" />
         <div className="bento-container" style={{ textAlign: 'center' }}>
           <div className="bento-pill-badge">
             <span className="live-pulse-dot" aria-hidden="true" />

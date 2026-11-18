@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import { portfolioData, getProjectBySlug } from '@/src/lib/data/work';
+import HeroBackdrop from '@/src/components/HeroBackdrop';
 
 interface WorkPageProps {
   params: Promise<{ slug: string }>;
@@ -45,6 +46,7 @@ export default async function CaseStudyDetailPage({ params }: WorkPageProps) {
   return (
     <main>
       <section className="site-hero site-hero--page page-hero section" id="hero">
+        <HeroBackdrop variant="work" />
         <div className="site-hero__container container">
           <nav className="site-hero__breadcrumb breadcrumb-trail" aria-label="Breadcrumb">
             <Link href="/">Home</Link>

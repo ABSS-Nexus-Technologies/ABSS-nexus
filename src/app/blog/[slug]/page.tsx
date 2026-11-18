@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import { blogPosts, getBlogPostBySlug } from '@/src/lib/data/blog';
+import HeroBackdrop from '@/src/components/HeroBackdrop';
 
 interface BlogPageProps {
   params: Promise<{ slug: string }>;
@@ -72,6 +73,7 @@ export default async function BlogPostDetailPage({ params }: BlogPageProps) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
       />
       <section className="site-hero site-hero--page page-hero section" id="hero">
+        <HeroBackdrop variant="blog" />
         <div className="site-hero__container container" style={{ maxWidth: '840px' }}>
           <nav className="site-hero__breadcrumb breadcrumb-trail" aria-label="Breadcrumb">
             <Link href="/">Home</Link>

@@ -3,6 +3,7 @@ import Link from 'next/link';
 import type { Metadata } from 'next';
 import { faqList } from '@/src/lib/data/faq';
 import FaqAccordion from '@/src/components/FaqAccordion';
+import HeroBackdrop from '@/src/components/HeroBackdrop';
 
 export const metadata: Metadata = {
   title: 'Frequently Asked Questions (FAQ)',
@@ -31,6 +32,7 @@ export default function FaqPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
       <section className="site-hero site-hero--page page-hero section" id="hero">
+        <HeroBackdrop variant="faq" />
         <div className="site-hero__container container">
           <span className="site-hero__eyebrow section-badge-apple">
             <span className="site-hero__pulse-dot" aria-hidden="true"></span>

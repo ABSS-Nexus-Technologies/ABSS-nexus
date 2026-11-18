@@ -1,5 +1,6 @@
 import React from 'react';
 import type { Metadata } from 'next';
+import HeroBackdrop from '@/src/components/HeroBackdrop';
 
 export const metadata: Metadata = {
   title: 'Cookie Policy',
@@ -10,6 +11,7 @@ export default function CookiePolicyPage() {
   return (
     <main>
       <section className="site-hero site-hero--page page-hero section">
+        <HeroBackdrop variant="legal" />
         <div className="site-hero__container container">
           <span className="site-hero__eyebrow section-badge-apple">Legal Document &bull; Updated 2026</span>
           <h1 className="site-hero__title">Cookie Policy</h1>

@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import TrustBar from '@/src/components/TrustBar';
+import HeroBackdrop from '@/src/components/HeroBackdrop';
 
 export default function EcosystemPage() {
   return (
@@ -9,6 +10,7 @@ export default function EcosystemPage() {
           HERO SECTION: CONGLOMERATE HOLDING STRUCTURE
           ==================================================================== */}
       <section className="bento-hero-section" id="hero" style={{ padding: '50px 0 30px' }}>
+        <HeroBackdrop variant="ecosystem" />
         <div className="bento-container" style={{ textAlign: 'center' }}>
           <div className="bento-pill-badge">
             <span className="live-pulse-dot" aria-hidden="true" />

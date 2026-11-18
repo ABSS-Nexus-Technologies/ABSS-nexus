@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import { careerRoles } from '@/src/lib/data/careers';
+import HeroBackdrop from '@/src/components/HeroBackdrop';
 
 export const metadata: Metadata = {
   title: 'Careers at ABSS Nexus Technologies | Engineering & Design Roles',
@@ -13,6 +14,7 @@ export default function CareersPage() {
   return (
     <main>
       <section className="site-hero site-hero--page page-hero section" id="hero">
+        <HeroBackdrop variant="careers" />
         <div className="site-hero__container container">
           <span className="site-hero__eyebrow section-badge-apple">
             <span className="site-hero__pulse-dot" aria-hidden="true"></span>

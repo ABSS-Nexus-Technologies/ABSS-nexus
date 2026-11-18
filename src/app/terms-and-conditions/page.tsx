@@ -1,6 +1,7 @@
 import React from 'react';
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import HeroBackdrop from '@/src/components/HeroBackdrop';
 
 export const metadata: Metadata = {
   title: 'Terms & Conditions | ABSS Nexus Technologies',
@@ -12,6 +13,7 @@ export default function TermsPage() {
   return (
     <main>
       <section className="bento-hero-section" style={{ padding: '40px 0 30px' }}>
+        <HeroBackdrop variant="legal" />
         <div className="bento-container" style={{ textAlign: 'center' }}>
           <div className="bento-pill-badge">
             <span className="live-pulse-dot" aria-hidden="true" />

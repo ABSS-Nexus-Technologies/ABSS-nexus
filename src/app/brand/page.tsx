@@ -7,6 +7,7 @@ import {
   SITE_NAME,
   CorporateSealLogo,
 } from "@/src/components/BrandLogos";
+import HeroBackdrop from "@/src/components/HeroBackdrop";
 
 const LOGO_FILES: Record<number, string> = {
   1: "1-lettermark",
@@ -20,8 +21,9 @@ const LOGO_FILES: Record<number, string> = {
 
 export default function BrandLogosPage() {
   return (
-    <div className="bento-page-wrapper" style={{ paddingBlock: "5rem 6rem" }}>
-      <div className="bento-container">
+    <div className="bento-page-wrapper" style={{ paddingBlock: "5rem 6rem", position: "relative", overflow: "hidden" }}>
+      <HeroBackdrop variant="brand" />
+      <div className="bento-container" style={{ position: "relative", zIndex: 2 }}>
         {/* Header Section */}
         <div
           style={{

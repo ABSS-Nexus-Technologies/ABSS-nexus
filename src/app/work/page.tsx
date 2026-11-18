@@ -4,6 +4,7 @@ import type { Metadata } from 'next';
 import { portfolioData } from '@/src/lib/data/work';
 import ProjectFilter from '@/src/components/ProjectFilter';
 import TrustBar from '@/src/components/TrustBar';
+import HeroBackdrop from '@/src/components/HeroBackdrop';
 
 export const metadata: Metadata = {
   title: 'Portfolio & Case Studies | Proven Engineering Work | ABSS Nexus Technologies',
@@ -15,6 +16,7 @@ export default function WorkPage() {
   return (
     <main>
       <section className="bento-hero-section" id="hero" style={{ padding: '40px 0 30px' }}>
+        <HeroBackdrop variant="work" />
         <div className="bento-container" style={{ textAlign: 'center' }}>
           <div className="bento-pill-badge">
             <span className="live-pulse-dot" aria-hidden="true" />

@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import type { Metadata } from 'next';
+import HeroBackdrop from '@/src/components/HeroBackdrop';
 
 export const metadata: Metadata = {
   title: 'Industry-Specific IT Solutions',
@@ -69,6 +70,7 @@ export default function IndustriesPage() {
   return (
     <main>
       <section className="site-hero site-hero--page page-hero section" id="hero">
+        <HeroBackdrop variant="industries" />
         <div className="site-hero__container container">
           <span className="site-hero__eyebrow section-badge-apple">
             <span className="site-hero__pulse-dot" aria-hidden="true"></span>

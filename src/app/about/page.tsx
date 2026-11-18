@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import TrustBar from '@/src/components/TrustBar';
+import HeroBackdrop from '@/src/components/HeroBackdrop';
 
 export const metadata: Metadata = {
   title: 'About Us | Engineering Excellence & Vision | ABSS Nexus Technologies',
@@ -14,6 +15,7 @@ export default function AboutPage() {
     <main>
       {/* Hero */}
       <section className="bento-hero-section" id="hero" style={{ padding: '40px 0 30px' }}>
+        <HeroBackdrop variant="about" />
         <div className="bento-container" style={{ textAlign: 'center' }}>
           <div className="bento-pill-badge">
             <span className="live-pulse-dot" aria-hidden="true" />

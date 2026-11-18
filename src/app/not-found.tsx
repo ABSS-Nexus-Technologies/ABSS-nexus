@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import type { Metadata } from 'next';
+import HeroBackdrop from '@/src/components/HeroBackdrop';
 
 export const metadata: Metadata = {
   title: 'Page Not Found (404)',
@@ -11,6 +12,7 @@ export default function NotFound() {
   return (
     <main>
       <section className="site-hero site-hero--page page-hero section" style={{ minHeight: '60vh', display: 'flex', alignItems: 'center' }}>
+        <HeroBackdrop variant="home" />
         <div className="site-hero__container container" style={{ textAlign: 'center' }}>
           <span className="site-hero__eyebrow section-badge-apple">
             <span>Error 404 &bull; Resource Not Found</span>

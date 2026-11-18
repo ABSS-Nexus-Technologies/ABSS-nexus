@@ -2,6 +2,22 @@
 
 import React, { useEffect, useRef } from 'react';
 
+export type HeroVariant =
+  | 'home'
+  | 'services'
+  | 'pricing'
+  | 'about'
+  | 'contact'
+  | 'ecosystem'
+  | 'work'
+  | 'solutions'
+  | 'industries'
+  | 'blog'
+  | 'careers'
+  | 'brand'
+  | 'legal'
+  | 'faq';
+
 interface Particle {
   x: number;
   y: number;
@@ -10,10 +26,288 @@ interface Particle {
   vy: number;
   vz: number;
   baseRadius: number;
-  colorType: 'cyan' | 'purple';
+  colorType: 'primary' | 'secondary';
 }
 
-export default function HeroCanvas() {
+interface HeroCanvasProps {
+  variant?: HeroVariant;
+}
+
+interface Palette {
+  primary: string;
+  secondary: string;
+  line: string;
+  mouseLine: string;
+  shadowPrimary: string;
+  shadowSecondary: string;
+}
+
+function getVariantPalette(variant: HeroVariant, isDark: boolean): Palette {
+  if (isDark) {
+    switch (variant) {
+      case 'services':
+        return {
+          primary: 'rgba(0, 229, 255, ',
+          secondary: 'rgba(56, 189, 248, ',
+          line: 'rgba(0, 229, 255, ',
+          mouseLine: 'rgba(56, 189, 248, ',
+          shadowPrimary: '#00E5FF',
+          shadowSecondary: '#38BDF8',
+        };
+      case 'pricing':
+        return {
+          primary: 'rgba(16, 185, 129, ',
+          secondary: 'rgba(52, 211, 153, ',
+          line: 'rgba(16, 185, 129, ',
+          mouseLine: 'rgba(52, 211, 153, ',
+          shadowPrimary: '#10B981',
+          shadowSecondary: '#34D399',
+        };
+      case 'about':
+        return {
+          primary: 'rgba(245, 158, 11, ',
+          secondary: 'rgba(168, 85, 247, ',
+          line: 'rgba(245, 158, 11, ',
+          mouseLine: 'rgba(168, 85, 247, ',
+          shadowPrimary: '#F59E0B',
+          shadowSecondary: '#A855F7',
+        };
+      case 'contact':
+        return {
+          primary: 'rgba(244, 63, 94, ',
+          secondary: 'rgba(0, 212, 255, ',
+          line: 'rgba(244, 63, 94, ',
+          mouseLine: 'rgba(0, 212, 255, ',
+          shadowPrimary: '#F43F5E',
+          shadowSecondary: '#00D4FF',
+        };
+      case 'ecosystem':
+        return {
+          primary: 'rgba(168, 85, 247, ',
+          secondary: 'rgba(236, 72, 153, ',
+          line: 'rgba(168, 85, 247, ',
+          mouseLine: 'rgba(236, 72, 153, ',
+          shadowPrimary: '#A855F7',
+          shadowSecondary: '#EC4899',
+        };
+      case 'work':
+        return {
+          primary: 'rgba(99, 102, 241, ',
+          secondary: 'rgba(20, 184, 166, ',
+          line: 'rgba(99, 102, 241, ',
+          mouseLine: 'rgba(20, 184, 166, ',
+          shadowPrimary: '#6366F1',
+          shadowSecondary: '#14B8A6',
+        };
+      case 'solutions':
+        return {
+          primary: 'rgba(59, 130, 246, ',
+          secondary: 'rgba(147, 51, 234, ',
+          line: 'rgba(59, 130, 246, ',
+          mouseLine: 'rgba(147, 51, 234, ',
+          shadowPrimary: '#3B82F6',
+          shadowSecondary: '#9333EA',
+        };
+      case 'industries':
+        return {
+          primary: 'rgba(45, 212, 191, ',
+          secondary: 'rgba(59, 130, 246, ',
+          line: 'rgba(45, 212, 191, ',
+          mouseLine: 'rgba(59, 130, 246, ',
+          shadowPrimary: '#2DD4BF',
+          shadowSecondary: '#3B82F6',
+        };
+      case 'blog':
+        return {
+          primary: 'rgba(56, 189, 248, ',
+          secondary: 'rgba(251, 146, 60, ',
+          line: 'rgba(56, 189, 248, ',
+          mouseLine: 'rgba(251, 146, 60, ',
+          shadowPrimary: '#38BDF8',
+          shadowSecondary: '#FB923C',
+        };
+      case 'careers':
+        return {
+          primary: 'rgba(168, 85, 247, ',
+          secondary: 'rgba(16, 185, 129, ',
+          line: 'rgba(168, 85, 247, ',
+          mouseLine: 'rgba(16, 185, 129, ',
+          shadowPrimary: '#A855F7',
+          shadowSecondary: '#10B981',
+        };
+      case 'brand':
+        return {
+          primary: 'rgba(0, 212, 255, ',
+          secondary: 'rgba(59, 130, 246, ',
+          line: 'rgba(0, 212, 255, ',
+          mouseLine: 'rgba(59, 130, 246, ',
+          shadowPrimary: '#00D4FF',
+          shadowSecondary: '#3B82F6',
+        };
+      case 'legal':
+        return {
+          primary: 'rgba(148, 163, 184, ',
+          secondary: 'rgba(56, 189, 248, ',
+          line: 'rgba(148, 163, 184, ',
+          mouseLine: 'rgba(56, 189, 248, ',
+          shadowPrimary: '#94A3B8',
+          shadowSecondary: '#38BDF8',
+        };
+      case 'faq':
+        return {
+          primary: 'rgba(14, 165, 233, ',
+          secondary: 'rgba(129, 140, 248, ',
+          line: 'rgba(14, 165, 233, ',
+          mouseLine: 'rgba(129, 140, 248, ',
+          shadowPrimary: '#0EA5E9',
+          shadowSecondary: '#818CF8',
+        };
+      case 'home':
+      default:
+        return {
+          primary: 'rgba(0, 212, 255, ',
+          secondary: 'rgba(168, 85, 247, ',
+          line: 'rgba(0, 212, 255, ',
+          mouseLine: 'rgba(168, 85, 247, ',
+          shadowPrimary: '#00D4FF',
+          shadowSecondary: '#A855F7',
+        };
+    }
+  }
+
+  // Light Mode Palettes (Slightly deeper tones for rich contrast on light background)
+  switch (variant) {
+    case 'services':
+      return {
+        primary: 'rgba(2, 132, 199, ',
+        secondary: 'rgba(14, 165, 233, ',
+        line: 'rgba(2, 132, 199, ',
+        mouseLine: 'rgba(14, 165, 233, ',
+        shadowPrimary: '#0284C7',
+        shadowSecondary: '#0EA5E9',
+      };
+    case 'pricing':
+      return {
+        primary: 'rgba(5, 150, 105, ',
+        secondary: 'rgba(13, 148, 136, ',
+        line: 'rgba(5, 150, 105, ',
+        mouseLine: 'rgba(13, 148, 136, ',
+        shadowPrimary: '#059669',
+        shadowSecondary: '#0D9488',
+      };
+    case 'about':
+      return {
+        primary: 'rgba(217, 119, 6, ',
+        secondary: 'rgba(124, 58, 237, ',
+        line: 'rgba(217, 119, 6, ',
+        mouseLine: 'rgba(124, 58, 237, ',
+        shadowPrimary: '#D97706',
+        shadowSecondary: '#7C3AED',
+      };
+    case 'contact':
+      return {
+        primary: 'rgba(225, 29, 72, ',
+        secondary: 'rgba(2, 132, 199, ',
+        line: 'rgba(225, 29, 72, ',
+        mouseLine: 'rgba(2, 132, 199, ',
+        shadowPrimary: '#E11D48',
+        shadowSecondary: '#0284C7',
+      };
+    case 'ecosystem':
+      return {
+        primary: 'rgba(124, 58, 237, ',
+        secondary: 'rgba(192, 38, 211, ',
+        line: 'rgba(124, 58, 237, ',
+        mouseLine: 'rgba(192, 38, 211, ',
+        shadowPrimary: '#7C3AED',
+        shadowSecondary: '#C026D3',
+      };
+    case 'work':
+      return {
+        primary: 'rgba(67, 56, 202, ',
+        secondary: 'rgba(13, 148, 136, ',
+        line: 'rgba(67, 56, 202, ',
+        mouseLine: 'rgba(13, 148, 136, ',
+        shadowPrimary: '#4338CA',
+        shadowSecondary: '#0D9488',
+      };
+    case 'solutions':
+      return {
+        primary: 'rgba(37, 99, 235, ',
+        secondary: 'rgba(124, 58, 237, ',
+        line: 'rgba(37, 99, 235, ',
+        mouseLine: 'rgba(124, 58, 237, ',
+        shadowPrimary: '#2563EB',
+        shadowSecondary: '#7C3AED',
+      };
+    case 'industries':
+      return {
+        primary: 'rgba(15, 118, 110, ',
+        secondary: 'rgba(29, 78, 216, ',
+        line: 'rgba(15, 118, 110, ',
+        mouseLine: 'rgba(29, 78, 216, ',
+        shadowPrimary: '#0F766E',
+        shadowSecondary: '#1D4ED8',
+      };
+    case 'blog':
+      return {
+        primary: 'rgba(2, 132, 199, ',
+        secondary: 'rgba(234, 88, 12, ',
+        line: 'rgba(2, 132, 199, ',
+        mouseLine: 'rgba(234, 88, 12, ',
+        shadowPrimary: '#0284C7',
+        shadowSecondary: '#EA580C',
+      };
+    case 'careers':
+      return {
+        primary: 'rgba(124, 58, 237, ',
+        secondary: 'rgba(5, 150, 105, ',
+        line: 'rgba(124, 58, 237, ',
+        mouseLine: 'rgba(5, 150, 105, ',
+        shadowPrimary: '#7C3AED',
+        shadowSecondary: '#059669',
+      };
+    case 'brand':
+      return {
+        primary: 'rgba(2, 132, 199, ',
+        secondary: 'rgba(30, 58, 138, ',
+        line: 'rgba(2, 132, 199, ',
+        mouseLine: 'rgba(30, 58, 138, ',
+        shadowPrimary: '#0284C7',
+        shadowSecondary: '#1E3A8A',
+      };
+    case 'legal':
+      return {
+        primary: 'rgba(71, 85, 105, ',
+        secondary: 'rgba(2, 132, 199, ',
+        line: 'rgba(71, 85, 105, ',
+        mouseLine: 'rgba(2, 132, 199, ',
+        shadowPrimary: '#475569',
+        shadowSecondary: '#0284C7',
+      };
+    case 'faq':
+      return {
+        primary: 'rgba(2, 132, 199, ',
+        secondary: 'rgba(79, 70, 229, ',
+        line: 'rgba(2, 132, 199, ',
+        mouseLine: 'rgba(79, 70, 229, ',
+        shadowPrimary: '#0284C7',
+        shadowSecondary: '#4F46E5',
+      };
+    case 'home':
+    default:
+      return {
+        primary: 'rgba(2, 132, 199, ',
+        secondary: 'rgba(124, 58, 237, ',
+        line: 'rgba(2, 132, 199, ',
+        mouseLine: 'rgba(124, 58, 237, ',
+        shadowPrimary: '#0284C7',
+        shadowSecondary: '#7C3AED',
+      };
+  }
+}
+
+export default function HeroCanvas({ variant = 'home' }: HeroCanvasProps) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
   useEffect(() => {
@@ -85,7 +379,7 @@ export default function HeroCanvas() {
 
     // Initialize particles
     let particles: Particle[] = [];
-    const count = typeof window !== 'undefined' && window.innerWidth < 768 ? 42 : 75;
+    const count = typeof window !== 'undefined' && window.innerWidth < 768 ? 38 : 65;
 
     const resize = () => {
       const parent = canvas.parentElement;
@@ -107,11 +401,11 @@ export default function HeroCanvas() {
             x: Math.random() * width,
             y: Math.random() * height,
             z: Math.random() * 2 + 0.5,
-            vx: (Math.random() - 0.5) * 0.45,
-            vy: (Math.random() - 0.5) * 0.45,
+            vx: (Math.random() - 0.5) * 0.42,
+            vy: (Math.random() - 0.5) * 0.42,
             vz: (Math.random() - 0.5) * 0.005,
             baseRadius: Math.random() * 1.8 + 1.2,
-            colorType: Math.random() > 0.45 ? 'cyan' : 'purple',
+            colorType: Math.random() > 0.48 ? 'primary' : 'secondary',
           });
         }
       }
@@ -120,29 +414,11 @@ export default function HeroCanvas() {
     resize();
     window.addEventListener('resize', resize);
 
-    // Visibility observer to pause when scrolled out
+    // Visibility observer to pause rendering when offscreen
     const observer = new IntersectionObserver(([entry]) => {
       isVisible = entry.isIntersecting;
     }, { threshold: 0.05 });
     observer.observe(canvas);
-
-    // Color definitions
-    const getColors = () => {
-      if (isDark) {
-        return {
-          cyan: 'rgba(0, 212, 255, ',
-          purple: 'rgba(168, 85, 247, ',
-          line: 'rgba(0, 212, 255, ',
-          mouseLine: 'rgba(168, 85, 247, ',
-        };
-      }
-      return {
-        cyan: 'rgba(2, 132, 199, ',
-        purple: 'rgba(124, 58, 237, ',
-        line: 'rgba(2, 132, 199, ',
-        mouseLine: 'rgba(124, 58, 237, ',
-      };
-    };
 
     // Render loop
     const render = () => {
@@ -152,7 +428,7 @@ export default function HeroCanvas() {
       }
 
       ctx.clearRect(0, 0, width, height);
-      const colors = getColors();
+      const palette = getVariantPalette(variant, isDark);
 
       // Update & Draw Particles
       for (let i = 0; i < particles.length; i++) {
@@ -188,7 +464,7 @@ export default function HeroCanvas() {
             ctx.moveTo(p.x, p.y);
             ctx.lineTo(mouse.x, mouse.y);
             const mouseLineAlpha = (1 - dist / mouse.radius) * (isDark ? 0.35 : 0.25);
-            ctx.strokeStyle = `${colors.mouseLine}${mouseLineAlpha})`;
+            ctx.strokeStyle = `${palette.mouseLine}${mouseLineAlpha})`;
             ctx.lineWidth = 1;
             ctx.stroke();
           }
@@ -196,13 +472,13 @@ export default function HeroCanvas() {
 
         // Draw particle
         const r = p.baseRadius * (p.z * 0.7);
-        const alpha = Math.min((p.z - 0.4) * (isDark ? 0.65 : 0.5), 0.9);
-        const pColor = p.colorType === 'cyan' ? `${colors.cyan}${alpha})` : `${colors.purple}${alpha})`;
+        const alpha = Math.min((p.z - 0.4) * (isDark ? 0.65 : 0.52), 0.9);
+        const pColor = p.colorType === 'primary' ? `${palette.primary}${alpha})` : `${palette.secondary}${alpha})`;
 
         ctx.beginPath();
         ctx.arc(p.x, p.y, r, 0, Math.PI * 2);
         ctx.fillStyle = pColor;
-        ctx.shadowColor = p.colorType === 'cyan' ? '#00D4FF' : '#A855F7';
+        ctx.shadowColor = p.colorType === 'primary' ? palette.shadowPrimary : palette.shadowSecondary;
         ctx.shadowBlur = isDark ? 8 : 4;
         ctx.fill();
         ctx.shadowBlur = 0; // reset
@@ -220,7 +496,7 @@ export default function HeroCanvas() {
             ctx.beginPath();
             ctx.moveTo(p.x, p.y);
             ctx.lineTo(p2.x, p2.y);
-            ctx.strokeStyle = `${colors.line}${lineAlpha})`;
+            ctx.strokeStyle = `${palette.line}${lineAlpha})`;
             ctx.lineWidth = 0.85;
             ctx.stroke();
           }
@@ -242,7 +518,7 @@ export default function HeroCanvas() {
       observer.disconnect();
       themeObserver.disconnect();
     };
-  }, []);
+  }, [variant]);
 
   return (
     <canvas

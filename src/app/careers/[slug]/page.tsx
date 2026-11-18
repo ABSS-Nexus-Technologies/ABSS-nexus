@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import { careerRoles, getCareerBySlug } from '@/src/lib/data/careers';
+import HeroBackdrop from '@/src/components/HeroBackdrop';
 
 interface CareerPageProps {
   params: Promise<{ slug: string }>;
@@ -39,6 +40,7 @@ export default async function CareerRoleDetailPage({ params }: CareerPageProps) 
   return (
     <main>
       <section className="site-hero site-hero--page page-hero section" id="hero">
+        <HeroBackdrop variant="careers" />
         <div className="site-hero__container container">
           <nav className="site-hero__breadcrumb breadcrumb-trail" aria-label="Breadcrumb">
             <Link href="/">Home</Link>

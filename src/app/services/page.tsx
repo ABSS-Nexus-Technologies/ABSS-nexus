@@ -3,6 +3,7 @@ import Link from 'next/link';
 import type { Metadata } from 'next';
 import { servicesData } from '@/src/lib/data/services';
 import TrustBar from '@/src/components/TrustBar';
+import HeroBackdrop from '@/src/components/HeroBackdrop';
 
 export const metadata: Metadata = {
   title: 'All 16 IT Services & Engineering Disciplines | ABSS Nexus Technologies',
@@ -15,6 +16,7 @@ export default function ServicesPage() {
     <main>
       {/* Services Hero */}
       <section className="bento-hero-section" id="hero" style={{ padding: '40px 0 30px' }}>
+        <HeroBackdrop variant="services" />
         <div className="bento-container" style={{ textAlign: 'center' }}>
           <div className="bento-pill-badge">
             <span className="live-pulse-dot" aria-hidden="true" />

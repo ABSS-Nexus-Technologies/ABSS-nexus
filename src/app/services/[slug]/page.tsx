@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import { servicesData, getServiceBySlug } from '@/src/lib/data/services';
+import HeroBackdrop from '@/src/components/HeroBackdrop';
 
 interface ServicePageProps {
   params: Promise<{ slug: string }>;
@@ -65,6 +66,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
       />
       <section className="site-hero site-hero--page page-hero section" id="hero">
+        <HeroBackdrop variant="services" />
         <div className="site-hero__container container">
           <nav className="site-hero__breadcrumb breadcrumb-trail" aria-label="Breadcrumb">
             <Link href="/">Home</Link>

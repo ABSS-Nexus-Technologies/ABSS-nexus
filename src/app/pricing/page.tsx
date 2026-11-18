@@ -4,6 +4,7 @@ import type { Metadata } from 'next';
 import { faqList } from '@/src/lib/data/faq';
 import FaqAccordion from '@/src/components/FaqAccordion';
 import ProjectCostEstimator from '@/src/components/ProjectCostEstimator';
+import HeroBackdrop from '@/src/components/HeroBackdrop';
 
 export const metadata: Metadata = {
   title: 'Transparent Pricing & Engineering Packages | ABSS Nexus Technologies',
@@ -75,6 +76,7 @@ export default function PricingPage() {
     <main>
       {/* Header */}
       <section className="bento-hero-section" id="hero" style={{ padding: '40px 0 30px' }}>
+        <HeroBackdrop variant="pricing" />
         <div className="bento-container" style={{ textAlign: 'center' }}>
           <div className="bento-pill-badge">
             <span className="live-pulse-dot" aria-hidden="true" />
