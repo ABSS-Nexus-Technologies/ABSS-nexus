@@ -608,6 +608,92 @@ body {
   padding: 40px 0 60px;
   text-align: center;
   position: relative;
+  overflow: visible;
+}
+
+/* Ambient Hero Cyber Backdrop & Wallpaper */
+.hero-ambient-backdrop {
+  position: absolute;
+  top: -80px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
+  height: calc(100% + 140px);
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.hero-backdrop-image {
+  position: absolute;
+  inset: 0;
+  background-image: url('/assets/images/hero-cyber-mesh.jpg');
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-size: cover;
+  opacity: 0.38;
+  mix-blend-mode: screen;
+  filter: contrast(1.15) saturate(1.2);
+}
+
+[data-theme="light"] .hero-backdrop-image {
+  opacity: 0.09;
+  mix-blend-mode: multiply;
+  filter: contrast(1.05);
+}
+
+.hero-backdrop-glow-cyan {
+  position: absolute;
+  top: -60px;
+  left: 15%;
+  width: 550px;
+  height: 480px;
+  background: radial-gradient(circle, rgba(0, 212, 255, 0.22), transparent 70%);
+  filter: blur(60px);
+  animation: hero-glow-pulse 8s infinite alternate ease-in-out;
+}
+
+.hero-backdrop-glow-purple {
+  position: absolute;
+  top: 60px;
+  right: 15%;
+  width: 580px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(168, 85, 247, 0.18), transparent 70%);
+  filter: blur(70px);
+  animation: hero-glow-pulse 10s infinite alternate-reverse ease-in-out;
+}
+
+@keyframes hero-glow-pulse {
+  0% { transform: scale(1) translateY(0); opacity: 0.65; }
+  100% { transform: scale(1.18) translateY(-24px); opacity: 0.95; }
+}
+
+.hero-backdrop-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(to right, rgba(0, 212, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(168, 85, 247, 0.05) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse 75% 65% at 50% 25%, #000 35%, transparent 85%);
+  -webkit-mask-image: radial-gradient(ellipse 75% 65% at 50% 25%, #000 35%, transparent 85%);
+}
+
+.hero-backdrop-vignette {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    transparent 65%,
+    var(--bg-page) 100%
+  );
+}
+
+.bento-hero-section > .bento-container {
+  position: relative;
+  z-index: 1;
 }
 
 .bento-pill-badge {
@@ -992,9 +1078,11 @@ body {
    INFINITE TECH MARQUEE
    ========================================================================== */
 .bento-marquee-section {
-  padding: 40px 0 20px;
+  padding: 40px 0 28px;
   overflow: hidden;
   position: relative;
+  mask-image: linear-gradient(to right, transparent 0%, black 7%, black 93%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 7%, black 93%, transparent 100%);
 }
 
 .bento-marquee-title {
@@ -1050,6 +1138,182 @@ body {
   height: 6px;
   border-radius: 50%;
   background: var(--accent-cyan);
+}
+
+/* ==========================================================================
+   ENTERPRISE TRUST BAR & VERIFIED BADGES
+   ========================================================================== */
+.bento-trust-bar-section {
+  padding: 46px 0 42px;
+  position: relative;
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+  background: radial-gradient(ellipse 80% 60% at 50% 50%, rgba(0, 212, 255, 0.04), transparent 75%),
+              linear-gradient(180deg, rgba(255, 255, 255, 0.015) 0%, rgba(255, 255, 255, 0.005) 100%);
+  overflow: hidden;
+}
+
+[data-theme="light"] .bento-trust-bar-section {
+  background: radial-gradient(ellipse 80% 60% at 50% 50%, rgba(0, 194, 255, 0.04), transparent 75%),
+              linear-gradient(180deg, rgba(0, 0, 0, 0.015) 0%, rgba(0, 0, 0, 0.005) 100%);
+}
+
+.trust-bar-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 26px;
+  text-align: center;
+}
+
+.trust-bar-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 14px;
+  border-radius: var(--radius-pill);
+  background: rgba(0, 212, 255, 0.08);
+  border: 1px solid rgba(0, 212, 255, 0.25);
+  color: var(--accent-cyan);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-family: var(--font-mono);
+}
+
+.trust-pulse-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #10B981;
+  box-shadow: 0 0 8px #10B981;
+  animation: pulse-dot-glow 2s infinite ease-in-out;
+}
+
+.trust-bar-divider {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--text-dim);
+}
+
+.trust-bar-subtitle {
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: 0.02em;
+}
+
+.trust-badges-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(215px, 1fr));
+  gap: 16px;
+  align-items: stretch;
+}
+
+.trust-badge-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 18px;
+  border-radius: 14px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.12);
+  cursor: default;
+}
+
+.trust-badge-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+}
+
+/* Specific Brand Hover Accents */
+.trust-badge-card.brand-aws:hover {
+  border-color: rgba(255, 153, 0, 0.5);
+  box-shadow: 0 8px 26px rgba(255, 153, 0, 0.18);
+}
+
+.trust-badge-card.brand-cloudflare:hover {
+  border-color: rgba(243, 128, 32, 0.5);
+  box-shadow: 0 8px 26px rgba(243, 128, 32, 0.18);
+}
+
+.trust-badge-card.brand-nextjs:hover {
+  border-color: rgba(0, 212, 255, 0.5);
+  box-shadow: 0 8px 26px rgba(0, 212, 255, 0.18);
+}
+
+.trust-badge-card.brand-msme:hover {
+  border-color: rgba(234, 179, 8, 0.5);
+  box-shadow: 0 8px 26px rgba(234, 179, 8, 0.18);
+}
+
+.trust-badge-card.brand-security:hover {
+  border-color: rgba(16, 185, 129, 0.5);
+  box-shadow: 0 8px 26px rgba(16, 185, 129, 0.18);
+}
+
+.trust-badge-icon-box {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: 1px solid var(--border-subtle);
+  background: rgba(255, 255, 255, 0.03);
+  transition: transform 0.3s ease;
+}
+
+.trust-badge-card:hover .trust-badge-icon-box {
+  transform: scale(1.08);
+}
+
+.trust-badge-content {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+  flex: 1;
+}
+
+.trust-badge-title {
+  font-family: var(--font-heading);
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--text-main);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  letter-spacing: -0.01em;
+}
+
+.trust-badge-sub {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.trust-badge-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.68rem;
+  font-weight: 600;
+  margin-top: 2px;
 }
 
 /* ==========================================================================

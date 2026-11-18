@@ -17,6 +17,15 @@ export default function HomePage() {
           SECTION 1: HERO & INTERLOCKING BENTO GRID SHOWCASE
           ==================================================================== */}
       <section className="bento-hero-section" id="hero">
+        {/* Ambient Hero Cyber Backdrop & Wallpaper */}
+        <div className="hero-ambient-backdrop" aria-hidden="true">
+          <div className="hero-backdrop-image" />
+          <div className="hero-backdrop-grid" />
+          <div className="hero-backdrop-glow-cyan" />
+          <div className="hero-backdrop-glow-purple" />
+          <div className="hero-backdrop-vignette" />
+        </div>
+
         <div className="bento-container">
           {/* Eyebrow Badge */}
           <div className="bento-pill-badge">
