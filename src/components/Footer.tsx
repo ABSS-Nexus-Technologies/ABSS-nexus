@@ -50,21 +50,22 @@ export default function Footer() {
           <div>
             <Link href="/" aria-label="ABSS Nexus Technologies home" style={{ display: 'inline-flex', alignItems: 'center', gap: '12px', textDecoration: 'none', marginBottom: '14px' }}>
               <picture>
-                <source srcSet="/assets/images/crystalline-apex/crystalline-symbol.svg" type="image/svg+xml" />
-                <source srcSet="/assets/images/favicon.webp" type="image/webp" />
+                <source srcSet="/assets/images/logo/abss-nexus-symbol.webp" type="image/webp" />
                 <img
-                  src="/assets/images/favicon.png"
+                  src="/assets/images/logo/abss-nexus-symbol.png"
                   alt="ABSS Nexus Technologies logo"
-                  width={38}
-                  height={38}
+                  width={46}
+                  height={24}
                   loading="lazy"
                   decoding="async"
-                  style={{ width: '38px', height: '38px', borderRadius: '8px' }}
+                  style={{ width: 'auto', height: '28px', objectFit: 'contain' }}
                 />
               </picture>
               <div className="bento-brand-stacked">
-                <span className="bento-brand-top" style={{ fontSize: '1.2rem' }}>ABSS NEXUS</span>
-                <span className="bento-brand-bottom" style={{ fontSize: '0.62rem' }}>TECHNOLOGIES</span>
+                <span className="bento-brand-top" style={{ fontSize: '1.25rem' }}>
+                  ABSS <span className="brand-coral-nexus">Nexus</span>
+                </span>
+                <span className="bento-brand-bottom" style={{ fontSize: '0.62rem', letterSpacing: '0.18em' }}>TECHNOLOGIES</span>
               </div>
             </Link>
             <p className="bento-footer-brand-desc">

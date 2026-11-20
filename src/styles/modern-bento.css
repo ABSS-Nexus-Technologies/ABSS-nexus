@@ -234,17 +234,25 @@ body {
   font-size: 1.12rem;
   font-weight: 800;
   letter-spacing: -0.01em;
-  background: linear-gradient(135deg, #ffffff 20%, #94a3b8 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: #f8fafc;
   white-space: nowrap;
-  text-transform: uppercase;
 }
 
 [data-theme="light"] .bento-brand-top {
-  background: linear-gradient(135deg, #0f172a 20%, #334155 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: #0f172a;
+}
+
+.brand-coral-nexus {
+  color: #ef4444;
+  -webkit-text-fill-color: #ef4444 !important;
+  font-weight: 800;
+  text-shadow: 0 0 16px rgba(239, 68, 68, 0.4);
+}
+
+[data-theme="light"] .brand-coral-nexus {
+  color: #ef4444;
+  -webkit-text-fill-color: #ef4444 !important;
+  text-shadow: none;
 }
 
 .bento-brand-bottom {
@@ -1022,17 +1030,84 @@ body {
 }
 
 [data-theme="light"] .bento-btn-glass {
-  background: rgba(255, 255, 255, 0.95) !important;
-  border: 1px solid rgba(0, 0, 0, 0.12) !important;
-  color: #0F172A !important;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
+  background: #0F172A !important;
+  border: 1px solid #0F172A !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.15) !important;
 }
 
 [data-theme="light"] .bento-btn-glass:hover {
+  background: #1E293B !important;
+  border-color: #1E293B !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.25) !important;
+  transform: translateY(-2px);
+}
+
+[data-theme="light"] .bento-btn-primary {
+  background: linear-gradient(135deg, #0064E0 0%, #0050B3 100%) !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 6px 20px rgba(0, 100, 224, 0.35) !important;
+}
+
+[data-theme="light"] .bento-btn-primary:hover {
+  background: linear-gradient(135deg, #0070F3 0%, #005CC5 100%) !important;
+  box-shadow: 0 10px 30px rgba(0, 100, 224, 0.45) !important;
+  transform: translateY(-2px);
+}
+
+/* Meta Design System Luxury Overrides */
+.meta-hero-brand-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 22px 8px 16px;
+  border-radius: var(--radius-pill);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  backdrop-filter: blur(20px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  margin-bottom: 24px;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.meta-hero-brand-pill:hover {
+  transform: translateY(-2px);
+  border-color: rgba(0, 212, 255, 0.4);
+  box-shadow: 0 14px 40px rgba(0, 212, 255, 0.2);
+}
+
+[data-theme="light"] .meta-hero-brand-pill {
   background: #FFFFFF !important;
-  border-color: #0066CC !important;
-  color: #0066CC !important;
-  box-shadow: 0 4px 16px rgba(0, 102, 204, 0.12) !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06) !important;
+}
+
+[data-theme="light"] .meta-hero-brand-pill:hover {
+  border-color: rgba(0, 100, 224, 0.3) !important;
+  box-shadow: 0 8px 25px rgba(0, 100, 224, 0.12) !important;
+}
+
+.bento-card,
+.ecosystem-card,
+.meta-screen-card {
+  border-radius: 32px !important;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[data-theme="light"] .bento-card,
+[data-theme="light"] .ecosystem-card,
+[data-theme="light"] .meta-screen-card {
+  background: #FFFFFF !important;
+  border: 1px solid rgba(0, 0, 0, 0.07) !important;
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.04) !important;
+}
+
+[data-theme="light"] .bento-card:hover,
+[data-theme="light"] .ecosystem-card:hover,
+[data-theme="light"] .meta-screen-card:hover {
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(0, 100, 224, 0.25) !important;
+  transform: translateY(-3px);
 }
 
 [data-theme="light"] .hero-quick-metrics {

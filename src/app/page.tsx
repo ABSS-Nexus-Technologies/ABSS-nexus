@@ -8,6 +8,7 @@ import FaqAccordion from '@/src/components/FaqAccordion';
 import TrustBar from '@/src/components/TrustBar';
 import ProjectCostEstimator from '@/src/components/ProjectCostEstimator';
 import HeroBackdrop from '@/src/components/HeroBackdrop';
+import MetaHeroShowcase from '@/src/components/MetaHeroShowcase';
 
 export default function HomePage() {
   const featuredServices = servicesData.slice(0, 6);
@@ -22,10 +23,31 @@ export default function HomePage() {
         <HeroBackdrop variant="home" />
 
         <div className="bento-container">
-          {/* Eyebrow Badge */}
-          <div className="bento-pill-badge">
-            <span className="live-pulse-dot" aria-hidden="true" />
-            <span>Next-Gen Enterprise Engineering &bull; 2026 Ready</span>
+          {/* Official 3D Cyber Infinity Brand Showcase */}
+          <div className="meta-hero-brand-pill">
+            <picture>
+              <source srcSet="/assets/images/logo/abss-nexus-symbol.webp" type="image/webp" />
+              <img
+                src="/assets/images/logo/abss-nexus-symbol.png"
+                alt="ABSS Nexus Official Infinity Symbol"
+                width={48}
+                height={26}
+                style={{ width: 'auto', height: '26px', objectFit: 'contain' }}
+              />
+            </picture>
+            <div className="bento-brand-stacked" style={{ textAlign: 'left' }}>
+              <span className="bento-brand-top" style={{ fontSize: '1rem' }}>
+                ABSS <span className="brand-coral-nexus">Nexus</span>
+              </span>
+              <span className="bento-brand-bottom" style={{ fontSize: '0.52rem', letterSpacing: '0.2em' }}>
+                ENTERPRISE ECOSYSTEM
+              </span>
+            </div>
+            <span style={{ width: '1px', height: '18px', background: 'var(--border-subtle)', marginInline: '4px' }} />
+            <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+              <span className="live-pulse-dot" aria-hidden="true" />
+              <span style={{ fontSize: '0.78rem', fontWeight: 600, color: 'var(--text-muted)' }}>2026 Ready</span>
+            </div>
           </div>
 
           {/* Radiant Hero Headline */}
@@ -80,6 +102,9 @@ export default function HomePage() {
               <span style={{ fontSize: '0.82rem', color: 'var(--text-muted)' }}>Verified Client Score</span>
             </div>
           </div>
+
+          {/* Meta-Style Interactive Product Theater (Hardware/Software Showcase) */}
+          <MetaHeroShowcase />
         </div>
       </section>
 

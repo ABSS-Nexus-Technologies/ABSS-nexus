@@ -56,18 +56,19 @@ export default function Header() {
           {/* Brand Logo & Name (Clicks Home) */}
           <Link className="bento-brand" href="/" aria-label="ABSS Nexus Technologies home">
             <picture>
-              <source srcSet="/assets/images/crystalline-apex/crystalline-symbol.svg" type="image/svg+xml" />
-              <source srcSet="/assets/images/favicon.webp" type="image/webp" />
+              <source srcSet="/assets/images/logo/abss-nexus-symbol.webp" type="image/webp" />
               <img
-                src="/assets/images/favicon.png"
+                src="/assets/images/logo/abss-nexus-symbol.png"
                 alt="ABSS Nexus Technologies logo"
-                width={36}
-                height={36}
-                style={{ width: '36px', height: '36px', borderRadius: '8px' }}
+                width={42}
+                height={22}
+                style={{ width: 'auto', height: '26px', objectFit: 'contain' }}
               />
             </picture>
             <div className="bento-brand-stacked">
-              <span className="bento-brand-top">ABSS NEXUS</span>
+              <span className="bento-brand-top">
+                ABSS <span className="brand-coral-nexus">Nexus</span>
+              </span>
               <span className="bento-brand-bottom">TECHNOLOGIES</span>
             </div>
           </Link>
