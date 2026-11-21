@@ -1,7 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
 import type { Metadata } from 'next';
-import TrustBar from '@/src/components/TrustBar';
 import HeroBackdrop from '@/src/components/HeroBackdrop';
 
 export const metadata: Metadata = {
@@ -41,9 +40,6 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
-
-      {/* Trust Ecosystem Bar */}
-      <TrustBar />
 
       {/* Guiding Pillars */}
       <section className="bento-section" style={{ paddingTop: '50px' }}>

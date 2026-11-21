@@ -5,7 +5,6 @@ import { portfolioData } from '@/src/lib/data/work';
 import { faqList } from '@/src/lib/data/faq';
 import ProjectFilter from '@/src/components/ProjectFilter';
 import FaqAccordion from '@/src/components/FaqAccordion';
-import TrustBar from '@/src/components/TrustBar';
 import ProjectCostEstimator from '@/src/components/ProjectCostEstimator';
 import HeroBackdrop from '@/src/components/HeroBackdrop';
 import MetaHeroShowcase from '@/src/components/MetaHeroShowcase';
@@ -142,9 +141,6 @@ export default function HomePage() {
           <span className="bento-tech-pill"><span className="bento-tech-dot" />REST &amp; WebSockets</span>
         </div>
       </section>
-
-      {/* Verified Partnerships & Ecosystem Trust Bar */}
-      <TrustBar />
 
       {/* ====================================================================
           SECTION 2.5: THE ABSS NEXUS ECOSYSTEM (3 CORE PILLARS)

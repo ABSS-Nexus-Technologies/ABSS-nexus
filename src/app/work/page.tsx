@@ -3,7 +3,6 @@ import Link from 'next/link';
 import type { Metadata } from 'next';
 import { portfolioData } from '@/src/lib/data/work';
 import ProjectFilter from '@/src/components/ProjectFilter';
-import TrustBar from '@/src/components/TrustBar';
 import HeroBackdrop from '@/src/components/HeroBackdrop';
 
 export const metadata: Metadata = {
@@ -44,9 +43,6 @@ export default function WorkPage() {
           </div>
         </div>
       </section>
-
-      {/* Trust Ecosystem Bar */}
-      <TrustBar />
 
       <section className="bento-section" style={{ paddingTop: '50px' }}>
         <div className="bento-container">

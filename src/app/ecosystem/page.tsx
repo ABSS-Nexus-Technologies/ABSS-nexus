@@ -1,6 +1,5 @@
 import React from 'react';
 import Link from 'next/link';
-import TrustBar from '@/src/components/TrustBar';
 import HeroBackdrop from '@/src/components/HeroBackdrop';
 
 export default function EcosystemPage() {
@@ -40,9 +39,6 @@ export default function EcosystemPage() {
           </div>
         </div>
       </section>
-
-      {/* Trust Ecosystem Bar */}
-      <TrustBar />
 
       {/* ====================================================================
           PILLAR 1: ENTERPRISE IT SERVICES

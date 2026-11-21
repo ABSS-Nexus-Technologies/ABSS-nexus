@@ -1,7 +1,6 @@
 import React from 'react';
 import type { Metadata } from 'next';
 import ContactForm from '@/src/components/ContactForm';
-import TrustBar from '@/src/components/TrustBar';
 import HeroBackdrop from '@/src/components/HeroBackdrop';
 
 export const metadata: Metadata = {
@@ -29,9 +28,6 @@ export default function ContactPage() {
           </p>
         </div>
       </section>
-
-      {/* Trust Ecosystem Bar */}
-      <TrustBar />
 
       <section className="bento-section" id="project-inquiry" style={{ paddingTop: '50px' }}>
         <div className="bento-container" style={{ maxWidth: '1100px' }}>

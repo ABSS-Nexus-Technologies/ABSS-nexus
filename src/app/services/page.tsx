@@ -2,7 +2,6 @@ import React from 'react';
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import { servicesData } from '@/src/lib/data/services';
-import TrustBar from '@/src/components/TrustBar';
 import HeroBackdrop from '@/src/components/HeroBackdrop';
 
 export const metadata: Metadata = {
@@ -45,9 +44,6 @@ export default function ServicesPage() {
           </div>
         </div>
       </section>
-
-      {/* Trust Ecosystem Bar */}
-      <TrustBar />
 
       {/* All 16 Services Bento Grid */}
       <section className="bento-section" style={{ paddingTop: '50px' }}>
