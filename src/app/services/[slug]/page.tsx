@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import { servicesData, getServiceBySlug } from '@/src/lib/data/services';
+import { getProjectsByService } from '@/src/lib/data/work';
 import HeroBackdrop from '@/src/components/HeroBackdrop';
 
 interface ServicePageProps {
@@ -201,6 +202,77 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
           </div>
         </div>
       </section>
+
+      {/* Featured Projects for this Service */}
+      {(() => {
+        const serviceProjects = getProjectsByService(service.slug);
+        if (serviceProjects.length === 0) return null;
+        return (
+          <section className="section" style={{ padding: '60px 0', borderTop: '1px solid var(--border-subtle)' }}>
+            <div className="container">
+              <div style={{ textAlign: 'center', marginBottom: '36px' }}>
+                <span className="section-badge-apple" style={{ marginBottom: '8px' }}>
+                  Proven Engineering Case Studies
+                </span>
+                <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: '2rem', fontWeight: 800, margin: '8px 0', color: 'var(--text-main)' }}>
+                  Featured {service.title} Projects
+                </h2>
+                <p style={{ color: 'var(--text-muted)', fontSize: '0.95rem', maxWidth: '640px', margin: '0 auto' }}>
+                  Real-world deployments and verified architectures engineered by our team under this discipline.
+                </p>
+              </div>
+
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))', gap: '24px' }}>
+                {serviceProjects.map((proj) => (
+                  <article className="project-modern-card" key={proj.id}>
+                    <div className="project-preview-wrap">
+                      <div className="browser-mockup-bar" aria-hidden="true">
+                        <div className="browser-mockup-dots">
+                          <span></span><span></span><span></span>
+                        </div>
+                        <span className="browser-mockup-url">{proj.urlPreview}</span>
+                      </div>
+                      <picture>
+                        <img src={proj.image} alt={proj.title} loading="lazy" decoding="async" />
+                      </picture>
+                      <span className="project-badge-tag">{proj.categoryLabel}</span>
+                    </div>
+
+                    <div className="project-card-content">
+                      <h3 style={{ fontSize: '1.2rem', marginBottom: '8px' }}>{proj.title}</h3>
+                      <p style={{ fontSize: '0.88rem', color: 'var(--text-muted)', marginBottom: '14px' }}>{proj.shortDesc}</p>
+
+                      {proj.impactMetrics && (
+                        <div className="project-impact-metrics">
+                          {proj.impactMetrics.map((m, idx) => (
+                            <div className="project-metric-pill" key={idx}>
+                              <span className="metric-val">{m.value}</span>
+                              <span className="metric-lbl">{m.label}</span>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+
+                      <div className="project-action-row" style={{ marginTop: 'auto' }}>
+                        <Link className="project-live-btn" href={`/work/${proj.slug}`}>
+                          <span>View Case Study &rarr;</span>
+                        </Link>
+                        <span className="project-status-label">{proj.badge}</span>
+                      </div>
+                    </div>
+                  </article>
+                ))}
+              </div>
+
+              <div style={{ textAlign: 'center', marginTop: '36px' }}>
+                <Link className="bento-btn-glass" href="/portfolio">
+                  View All 33 Projects in Portfolio &rarr;
+                </Link>
+              </div>
+            </div>
+          </section>
+        );
+      })()}
 
       <section className="section cta-band">
         <div className="container">

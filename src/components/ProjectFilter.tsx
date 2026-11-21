@@ -1,100 +1,321 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import Link from 'next/link';
 import { ProjectItem } from '@/src/lib/data/work';
 
 interface ProjectFilterProps {
   projects: ProjectItem[];
+  maxItems?: number;
+  initialService?: string;
+  showSearch?: boolean;
 }
 
-export default function ProjectFilter({ projects }: ProjectFilterProps) {
-  const [filter, setFilter] = useState<'all' | 'website' | 'webapp' | 'ecommerce'>('all');
+export default function ProjectFilter({
+  projects,
+  maxItems,
+  initialService,
+  showSearch = true,
+}: ProjectFilterProps) {
+  const [categoryFilter, setCategoryFilter] = useState<string>('all');
+  const [serviceFilter, setServiceFilter] = useState<string>(initialService || 'all');
+  const [searchQuery, setSearchQuery] = useState<string>('');
 
-  const filteredProjects = projects.filter((project) => {
-    if (filter === 'all') return true;
-    return project.category === filter;
-  });
+  // Extract unique services from projects for the dropdown
+  const serviceOptions = useMemo(() => {
+    const map = new Map<string, string>();
+    projects.forEach((p) => {
+      if (p.serviceSlug && p.serviceName) {
+        map.set(p.serviceSlug, p.serviceName);
+      }
+    });
+    return Array.from(map.entries()).map(([slug, name]) => ({
+      slug,
+      name,
+      count: projects.filter((p) => p.serviceSlug === slug).length,
+    }));
+  }, [projects]);
+
+  // Combined Filtering: Category + Service Dropdown + Search
+  const filteredProjects = useMemo(() => {
+    return projects.filter((project) => {
+      // 1. Service Filter
+      if (serviceFilter !== 'all' && project.serviceSlug !== serviceFilter) {
+        return false;
+      }
+
+      // 2. Category Filter
+      if (categoryFilter !== 'all') {
+        if (categoryFilter === 'website' && project.category !== 'website') return false;
+        if (categoryFilter === 'webapp' && project.category !== 'webapp') return false;
+        if (categoryFilter === 'ecommerce' && project.category !== 'ecommerce') return false;
+        if (categoryFilter === 'mobile' && project.category !== 'mobile') return false;
+        if (categoryFilter === 'cloud' && project.category !== 'cloud') return false;
+        if (categoryFilter === 'security' && project.category !== 'security') return false;
+        if (categoryFilter === 'ai' && project.category !== 'ai' && project.category !== 'analytics') return false;
+      }
+
+      // 3. Search Query Filter
+      if (searchQuery.trim()) {
+        const q = searchQuery.toLowerCase().trim();
+        const matchesTitle = project.title.toLowerCase().includes(q);
+        const matchesClient = project.client.toLowerCase().includes(q);
+        const matchesService = project.serviceName.toLowerCase().includes(q);
+        const matchesTech = project.technologies.some((t) => t.toLowerCase().includes(q));
+        const matchesDesc = project.shortDesc.toLowerCase().includes(q);
+        if (!matchesTitle && !matchesClient && !matchesService && !matchesTech && !matchesDesc) {
+          return false;
+        }
+      }
+
+      return true;
+    });
+  }, [projects, categoryFilter, serviceFilter, searchQuery]);
+
+  const displayedProjects = maxItems ? filteredProjects.slice(0, maxItems) : filteredProjects;
 
   return (
-    <>
-      <div className="project-filter-container" aria-label="Filter projects by category">
-        <button
-          className={`filter-btn ${filter === 'all' ? 'active' : ''}`}
-          onClick={() => setFilter('all')}
-        >
-          All Projects
-        </button>
-        <button
-          className={`filter-btn ${filter === 'website' ? 'active' : ''}`}
-          onClick={() => setFilter('website')}
-        >
-          Websites
-        </button>
-        <button
-          className={`filter-btn ${filter === 'webapp' ? 'active' : ''}`}
-          onClick={() => setFilter('webapp')}
-        >
-          Web Apps
-        </button>
-        <button
-          className={`filter-btn ${filter === 'ecommerce' ? 'active' : ''}`}
-          onClick={() => setFilter('ecommerce')}
-        >
-          E-Commerce
-        </button>
+    <div className="project-filter-section">
+      {/* Interactive Controls Bar: Categories + Service Dropdown + Search */}
+      <div className="project-filter-controls">
+        {/* Category Pills */}
+        <div className="project-filter-container" aria-label="Filter projects by category">
+          <button
+            type="button"
+            className={`filter-btn ${categoryFilter === 'all' ? 'active' : ''}`}
+            onClick={() => {
+              setCategoryFilter('all');
+            }}
+          >
+            All Disciplines ({projects.length})
+          </button>
+          <button
+            type="button"
+            className={`filter-btn ${categoryFilter === 'website' ? 'active' : ''}`}
+            onClick={() => setCategoryFilter('website')}
+          >
+            Websites
+          </button>
+          <button
+            type="button"
+            className={`filter-btn ${categoryFilter === 'webapp' ? 'active' : ''}`}
+            onClick={() => setCategoryFilter('webapp')}
+          >
+            Web Apps &amp; SaaS
+          </button>
+          <button
+            type="button"
+            className={`filter-btn ${categoryFilter === 'mobile' ? 'active' : ''}`}
+            onClick={() => setCategoryFilter('mobile')}
+          >
+            Mobile Apps
+          </button>
+          <button
+            type="button"
+            className={`filter-btn ${categoryFilter === 'cloud' ? 'active' : ''}`}
+            onClick={() => setCategoryFilter('cloud')}
+          >
+            Cloud &amp; DevOps
+          </button>
+          <button
+            type="button"
+            className={`filter-btn ${categoryFilter === 'ai' ? 'active' : ''}`}
+            onClick={() => setCategoryFilter('ai')}
+          >
+            AI &amp; BI
+          </button>
+          <button
+            type="button"
+            className={`filter-btn ${categoryFilter === 'security' ? 'active' : ''}`}
+            onClick={() => setCategoryFilter('security')}
+          >
+            Cybersecurity
+          </button>
+          <button
+            type="button"
+            className={`filter-btn ${categoryFilter === 'ecommerce' ? 'active' : ''}`}
+            onClick={() => setCategoryFilter('ecommerce')}
+          >
+            E-Commerce
+          </button>
+        </div>
+
+        {/* Secondary Row: Specific Service Select Dropdown + Search */}
+        <div className="project-subfilter-row">
+          {/* Service Dropdown Selector */}
+          <div className="project-service-select-wrapper">
+            <label htmlFor="service-select" className="project-filter-label">
+              Filter by Service:
+            </label>
+            <select
+              id="service-select"
+              className="project-service-select"
+              value={serviceFilter}
+              onChange={(e) => setServiceFilter(e.target.value)}
+              aria-label="Filter by specific service discipline"
+            >
+              <option value="all">⚡ All 16 Service Disciplines ({projects.length} Projects)</option>
+              {serviceOptions.map((opt) => (
+                <option key={opt.slug} value={opt.slug}>
+                  {opt.name} ({opt.count} {opt.count === 1 ? 'project' : 'projects'})
+                </option>
+              ))}
+            </select>
+          </div>
+
+          {/* Search Box */}
+          {showSearch && (
+            <div className="project-search-wrapper">
+              <input
+                type="search"
+                className="project-search-input"
+                placeholder="Search projects, client, tech..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                aria-label="Search projects by keyword"
+              />
+              {searchQuery && (
+                <button
+                  type="button"
+                  className="project-search-clear"
+                  onClick={() => setSearchQuery('')}
+                  aria-label="Clear search query"
+                >
+                  &times;
+                </button>
+              )}
+            </div>
+          )}
+
+          {/* Reset button if filtered */}
+          {(serviceFilter !== 'all' || categoryFilter !== 'all' || searchQuery) && (
+            <button
+              type="button"
+              className="project-reset-btn"
+              onClick={() => {
+                setCategoryFilter('all');
+                setServiceFilter('all');
+                setSearchQuery('');
+              }}
+            >
+              Reset Filters
+            </button>
+          )}
+        </div>
       </div>
 
-      <div className="projects-modern-grid">
-        {filteredProjects.map((project) => (
-          <article className="project-modern-card" key={project.id}>
-            <div className="project-preview-wrap">
-              <div className="browser-mockup-bar" aria-hidden="true">
-                <div className="browser-mockup-dots">
-                  <span></span><span></span><span></span>
+      {/* Active Results Count */}
+      <div className="project-results-count">
+        Showing <strong>{displayedProjects.length}</strong> of {filteredProjects.length} matching {filteredProjects.length === 1 ? 'project' : 'projects'}
+        {serviceFilter !== 'all' && (
+          <span className="project-active-filter-badge">
+            Service: {serviceOptions.find((o) => o.slug === serviceFilter)?.name || serviceFilter}
+          </span>
+        )}
+      </div>
+
+      {/* Project Cards Grid */}
+      {displayedProjects.length === 0 ? (
+        <div className="project-empty-state">
+          <p>No projects match your current filters.</p>
+          <button
+            type="button"
+            className="bento-btn-glass"
+            onClick={() => {
+              setCategoryFilter('all');
+              setServiceFilter('all');
+              setSearchQuery('');
+            }}
+          >
+            Show All Projects
+          </button>
+        </div>
+      ) : (
+        <div className="projects-modern-grid">
+          {displayedProjects.map((project) => (
+            <article className="project-modern-card" key={project.id}>
+              {/* Browser Mockup Top Preview */}
+              <div className="project-preview-wrap">
+                <div className="browser-mockup-bar" aria-hidden="true">
+                  <div className="browser-mockup-dots">
+                    <span></span><span></span><span></span>
+                  </div>
+                  <span className="browser-mockup-url">{project.urlPreview}</span>
                 </div>
-                <span className="browser-mockup-url">{project.urlPreview}</span>
+                <picture>
+                  <img
+                    src={project.image}
+                    alt={`${project.title} preview`}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </picture>
+                <span className="project-badge-tag">{project.categoryLabel}</span>
               </div>
-              <picture>
-                <img
-                  src={project.image}
-                  alt={`${project.title} preview`}
-                  loading="lazy"
-                  decoding="async"
-                />
-              </picture>
-              <span className="project-badge-tag">{project.categoryLabel}</span>
-            </div>
 
-            <div className="project-card-content">
-              <h3>{project.title}</h3>
-              <p>{project.shortDesc}</p>
-              <div className="project-tech-chips">
-                {project.technologies.map((tech) => (
-                  <span key={tech}>{tech}</span>
-                ))}
-              </div>
-              <div className="project-action-row">
-                <Link className="project-live-btn" href={project.caseStudyUrl || `/work/${project.slug}`}>
-                  Case Study &rarr;
-                </Link>
-                {project.liveUrl && (
-                  <a
-                    className="project-live-btn"
-                    href={project.liveUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{ background: 'transparent', border: '1px solid var(--accent-cyan)', color: 'var(--accent-cyan)' }}
-                  >
-                    Live Demo &rarr;
-                  </a>
+              {/* Card Body Content */}
+              <div className="project-card-content">
+                {/* Service Affinity Eyebrow */}
+                <div className="project-service-eyebrow">
+                  <span className="live-pulse-dot" aria-hidden="true" style={{ width: '6px', height: '6px' }} />
+                  <span>{project.serviceName}</span>
+                </div>
+
+                <h3>{project.title}</h3>
+                <p>{project.shortDesc}</p>
+
+                {/* Impact Metrics 3-Item Pill Row */}
+                {project.impactMetrics && project.impactMetrics.length > 0 && (
+                  <div className="project-impact-metrics">
+                    {project.impactMetrics.map((metric, idx) => (
+                      <div className="project-metric-pill" key={idx}>
+                        <span className="metric-val">{metric.value}</span>
+                        <span className="metric-lbl">{metric.label}</span>
+                      </div>
+                    ))}
+                  </div>
                 )}
-                <span className="project-status-label">{project.badge}</span>
+
+                {/* Technology Chips */}
+                <div className="project-tech-chips">
+                  {project.technologies.slice(0, 4).map((tech) => (
+                    <span key={tech}>{tech}</span>
+                  ))}
+                  {project.technologies.length > 4 && (
+                    <span className="tech-chip-more">+{project.technologies.length - 4}</span>
+                  )}
+                </div>
+
+                {/* Action Row */}
+                <div className="project-action-row">
+                  <Link className="project-live-btn" href={project.caseStudyUrl || `/work/${project.slug}`}>
+                    <span>Case Study &rarr;</span>
+                  </Link>
+                  {project.liveUrl && (
+                    <a
+                      className="project-live-btn"
+                      href={project.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{
+                        background: 'transparent',
+                        border: '1px solid var(--accent-cyan)',
+                        color: 'var(--accent-cyan)',
+                        padding: '4px 10px',
+                        borderRadius: '6px',
+                        fontSize: '0.78rem',
+                      }}
+                    >
+                      Live Demo &nearr;
+                    </a>
+                  )}
+                  <span className="project-status-label">{project.badge}</span>
+                </div>
               </div>
-            </div>
-          </article>
-        ))}
-      </div>
-    </>
+            </article>
+          ))}
+        </div>
+      )}
+    </div>
   );
 }

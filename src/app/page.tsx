@@ -582,11 +582,11 @@ export default function HomePage() {
             </p>
           </div>
 
-          <ProjectFilter projects={portfolioData} />
+          <ProjectFilter projects={portfolioData} maxItems={6} />
 
           <div style={{ textAlign: 'center', marginTop: '44px' }}>
-            <Link className="bento-btn-glass" href="/work">
-              Explore Full Portfolio Archive &rarr;
+            <Link className="bento-btn-glass" href="/portfolio">
+              Explore All 33 Projects in Portfolio Archive &rarr;
             </Link>
           </div>
         </div>

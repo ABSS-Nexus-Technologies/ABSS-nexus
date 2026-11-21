@@ -19,14 +19,13 @@ export default function WorkPage() {
         <div className="bento-container" style={{ textAlign: 'center' }}>
           <div className="bento-pill-badge">
             <span className="live-pulse-dot" aria-hidden="true" />
-            <span>Production Portfolio &bull; Verified Impact</span>
+            <span>Production Portfolio &bull; 33 Projects across 16 Disciplines</span>
           </div>
           <h1 className="bento-hero-headline" style={{ fontSize: 'clamp(2rem, 4vw, 3.4rem)' }}>
             Engineered for Reliability, Performance &amp; <span className="gradient-text-hero">Real Impact</span>
           </h1>
-          <p className="bento-hero-subtitle" style={{ maxWidth: '720px' }}>
-            Explore our curated archive of enterprise web platforms, custom SaaS dashboards, high-converting e-commerce
-            storefronts, and mission-critical API integrations.
+          <p className="bento-hero-subtitle" style={{ maxWidth: '780px' }}>
+            Explore our curated archive of 33+ production client and system projects across all 16 engineering services — from bespoke web platforms and multi-tenant SaaS to cross-platform mobile apps, AI engines, cybersecurity hardening, and 24/7 managed cloud support.
           </p>
 
           <div className="bento-hero-actions">
