@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 440" width="800" height="440">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap');
+      text { font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif; }
+      .mono { font-family: 'JetBrains Mono', monospace; }
+    </style>
+    <linearGradient id="mainBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#08181A"/>
+      <stop offset="50%" stop-color="#0C2529"/>
+      <stop offset="100%" stop-color="#040C0D"/>
+    </linearGradient>
+    <linearGradient id="glassCard" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.02"/>
+    </linearGradient>
+    <filter id="glowCyan" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="8" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+    <filter id="glowCoral" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="8" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+    <filter id="cardShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="16" stdDeviation="20" flood-color="#000000" flood-opacity="0.6"/>
+    </filter>
+  </defs>
+
+  <!-- Background Base -->
+  <rect width="800" height="440" fill="url(#mainBg)"/>
+
+  <!-- Subtle Blueprint Tech Grid -->
+  <g opacity="0.12" stroke="#ffffff" stroke-width="1">
+    <line x1="0" y1="80" x2="800" y2="80"/>
+    <line x1="0" y1="160" x2="800" y2="160"/>
+    <line x1="0" y1="240" x2="800" y2="240"/>
+    <line x1="0" y1="320" x2="800" y2="320"/>
+    <line x1="0" y1="400" x2="800" y2="400"/>
+    <line x1="160" y1="0" x2="160" y2="440"/>
+    <line x1="320" y1="0" x2="320" y2="440"/>
+    <line x1="480" y1="0" x2="480" y2="440"/>
+    <line x1="640" y1="0" x2="640" y2="440"/>
+  </g>
+
+  
+    <!-- Executive Revenue BI Dashboard -->
+    <rect x="60" y="50" width="680" height="340" rx="16" fill="url(#glassCard)" stroke="rgba(16,185,129,0.3)" filter="url(#cardShadow)"/>
+    
+    <text x="90" y="92" fill="#F8FAFC" font-size="18" font-weight="800">RevOps 360 - Executive Revenue Intelligence</text>
+    <text x="90" y="112" fill="#10B981" font-size="12" font-weight="600">Apache Superset + PostgreSQL • Stripe, Ads &amp; CRM Unified Live</text>
+
+    <!-- Top KPI Row -->
+    <rect x="90" y="135" width="180" height="80" rx="10" fill="#051012" stroke="rgba(255,255,255,0.08)"/>
+    <text x="105" y="158" fill="#94A3B8" font-size="10">ANNUAL RUN RATE</text>
+    <text x="105" y="185" fill="#10B981" font-size="22" font-weight="800">$4.82M ARR</text>
+    <text x="105" y="202" fill="#00D4FF" font-size="9">↑ 34% YoY Growth</text>
+
+    <rect x="290" y="135" width="180" height="80" rx="10" fill="#051012" stroke="rgba(255,255,255,0.08)"/>
+    <text x="305" y="158" fill="#94A3B8" font-size="10">CUSTOMER LTV</text>
+    <text x="305" y="185" fill="#F8FAFC" font-size="22" font-weight="800">$18,400</text>
+    <text x="305" y="202" fill="#10B981" font-size="9">LTV:CAC Ratio 4.2x</text>
+
+    <rect x="490" y="135" width="220" height="80" rx="10" fill="#051012" stroke="rgba(255,255,255,0.08)"/>
+    <text x="505" y="158" fill="#94A3B8" font-size="10">RECONCILIATION ERROR</text>
+    <text x="505" y="185" fill="#00D4FF" font-size="22" font-weight="800">0.00%</text>
+    <text x="505" y="202" fill="#94A3B8" font-size="9">Automated Daily Sync</text>
+
+    <!-- Monthly Bar Chart -->
+    <rect x="90" y="235" width="620" height="135" rx="10" fill="#051012" stroke="rgba(255,255,255,0.08)"/>
+    <text x="110" y="260" fill="#F8FAFC" font-size="11" font-weight="700">Monthly Recurring Revenue Trajectory</text>
+
+    <!-- Bars -->
+    <g fill="#10B981">
+      <rect x="130" y="310" width="30" height="40" rx="4"/>
+      <rect x="180" y="295" width="30" height="55" rx="4"/>
+      <rect x="230" y="280" width="30" height="70" rx="4"/>
+      <rect x="280" y="265" width="30" height="85" rx="4"/>
+      <rect x="330" y="250" width="30" height="100" rx="4"/>
+      <rect x="380" y="235" width="30" height="115" rx="4" fill="#00D4FF"/>
+      <rect x="430" y="225" width="30" height="125" rx="4" fill="#00D4FF"/>
+      <rect x="480" y="210" width="30" height="140" rx="4" fill="#00D4FF"/>
+      <rect x="530" y="200" width="30" height="150" rx="4" fill="#10B981"/>
+      <rect x="580" y="185" width="30" height="165" rx="4" fill="#10B981"/>
+      <rect x="630" y="170" width="30" height="180" rx="4" fill="#10B981" filter="url(#glowCyan)"/>
+    </g>
+    
+</svg>
