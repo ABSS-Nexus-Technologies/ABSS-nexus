@@ -189,7 +189,7 @@ export default function Footer() {
             <h3 className="bento-footer-col-title">Company &amp; Proof</h3>
             <div className="bento-footer-links">
               <Link className="bento-footer-link" href="/about">About ABSS Nexus</Link>
-              <Link className="bento-footer-link" href="/work">Work / Client Portfolio</Link>
+              <Link className="bento-footer-link" href="/portfolio">Portfolio &amp; Case Studies</Link>
               <Link className="bento-footer-link" href="/solutions">Enterprise Solutions</Link>
               <Link className="bento-footer-link" href="/industries">Industries We Serve</Link>
               <Link className="bento-footer-link" href="/pricing">Pricing &amp; Cost Estimator</Link>

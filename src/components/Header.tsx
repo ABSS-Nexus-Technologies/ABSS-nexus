@@ -340,9 +340,9 @@ export default function Header() {
               </div>
             </div>
 
-            {/* 4. WORK / CASE STUDIES (Direct Link) */}
-            <Link href="/work" className={`bento-nav-link ${pathname?.startsWith('/work') ? 'active' : ''}`}>
-              Work
+            {/* 4. PORTFOLIO / CASE STUDIES (Direct Link) */}
+            <Link href="/portfolio" className={`bento-nav-link ${pathname?.startsWith('/work') || pathname?.startsWith('/portfolio') ? 'active' : ''}`}>
+              Portfolio
             </Link>
 
             {/* 5. PRICING (Direct Link) */}
@@ -481,7 +481,7 @@ export default function Header() {
             <div className="bento-mobile-group-title">Capabilities &amp; Proof</div>
             <Link href="/solutions" className="bento-nav-link">Solutions Architecture</Link>
             <Link href="/industries" className="bento-nav-link">Industries We Serve</Link>
-            <Link href="/work" className="bento-nav-link">Work &amp; Case Studies</Link>
+            <Link href="/portfolio" className="bento-nav-link">Portfolio &amp; Case Studies</Link>
             <Link href="/pricing" className="bento-nav-link">Pricing &amp; Cost Estimator</Link>
 
             <div className="bento-mobile-group-title">Company &amp; Resources</div>
