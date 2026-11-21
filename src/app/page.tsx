@@ -689,9 +689,30 @@ export default function HomePage() {
       </section>
 
       {/* ====================================================================
-          SECTION 7: RADIANT PROJECT INQUIRY CTA BOX
+          SECTION 7: FREQUENTLY ASKED QUESTIONS (FAQ)
           ==================================================================== */}
-      <section className="bento-section" id="project-inquiry">
+      <section className="bento-section" id="faq" style={{ paddingBottom: '30px' }}>
+        <div className="bento-container">
+          <div className="bento-section-header" style={{ textAlign: 'center', maxWidth: '780px', margin: '0 auto 40px' }}>
+            <span className="bento-section-eyebrow">Common Queries</span>
+            <h2 className="bento-section-title">Frequently Asked Questions</h2>
+            <p className="bento-section-subtitle">
+              Clear, transparent answers about our engineering process, pricing models, intellectual property, and SLA guarantees.
+            </p>
+          </div>
+          <FaqAccordion items={faqList} />
+          <div style={{ textAlign: 'center', marginTop: '32px' }}>
+            <Link href="/faq" className="bento-btn-glass" style={{ display: 'inline-flex', padding: '10px 24px', fontSize: '0.9rem' }}>
+              <span>View Full Knowledge Base &amp; All FAQs &rarr;</span>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ====================================================================
+          SECTION 8: RADIANT PROJECT INQUIRY CTA BOX (FINAL CONVERSION FINALE)
+          ==================================================================== */}
+      <section className="bento-section" id="project-inquiry" style={{ paddingTop: '20px' }}>
         <div className="bento-container">
           <div className="bento-cta-box">
             <span className="bento-section-eyebrow">Start Your Project</span>
@@ -727,22 +748,6 @@ export default function HomePage() {
               <span>&#9742; Direct Line: +91 76888 99205</span>
               <span>&#9993; Email: abssnexus@gmail.com</span>
               <span>&#128205; Location: Jaipur, Rajasthan</span>
-            </div>
-          </div>
-
-          {/* ==================================================================
-              SECTION 7: FREQUENTLY ASKED QUESTIONS (FAQ)
-              ================================================================== */}
-          <div style={{ marginTop: '70px' }}>
-            <div className="bento-section-header">
-              <span className="bento-section-eyebrow">Common Queries</span>
-              <h2 className="bento-section-title">Frequently Asked Questions</h2>
-            </div>
-            <FaqAccordion items={faqList} />
-            <div style={{ textAlign: 'center', marginTop: '32px' }}>
-              <Link href="/faq" className="bento-btn-glass" style={{ display: 'inline-flex', padding: '10px 24px', fontSize: '0.9rem' }}>
-                <span>View Full Knowledge Base &amp; All FAQs &rarr;</span>
-              </Link>
             </div>
           </div>
         </div>
