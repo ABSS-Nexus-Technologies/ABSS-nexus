@@ -261,13 +261,13 @@ body {
   font-weight: 700;
   letter-spacing: 0.26em;
   text-transform: uppercase;
-  color: var(--accent-cyan);
+  color: #94a3b8;
   white-space: nowrap;
   margin-top: 1px;
 }
 
 [data-theme="light"] .bento-brand-bottom {
-  color: var(--accent-blue);
+  color: #475569;
 }
 
 @media (max-width: 480px) {
@@ -553,8 +553,10 @@ body {
   }
 
   .bento-brand img {
-    width: 30px !important;
-    height: 30px !important;
+    width: auto !important;
+    height: 24px !important;
+    max-width: 48px !important;
+    object-fit: contain;
   }
 
   .bento-brand-top {

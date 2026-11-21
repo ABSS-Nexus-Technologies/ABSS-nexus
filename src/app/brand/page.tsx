@@ -63,8 +63,107 @@ export default function BrandLogosPage() {
               margin: 0,
             }}
           >
-            Complete 7 logo categories engineered for <strong>{SITE_NAME}</strong> based on the signature <strong>&ldquo;A&rdquo; Orbital Mark</strong>. Variant #6 (Combination Mark) is active as the official master logo across the entire platform.
+            The official master brand mark for <strong>{SITE_NAME}</strong> features the <strong>3D Cyber Infinity Loop</strong> with dual cyan &amp; coral neural traces, paired with the signature corporate lockup. Active across all production platforms, client portals, and official documentation.
           </p>
+        </div>
+
+        {/* Master Official Production Logo Showcase */}
+        <div
+          className="bento-card"
+          style={{
+            marginBottom: "3.5rem",
+            padding: "2.5rem 2rem",
+            background: "linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(6, 9, 19, 0.98))",
+            border: "1px solid rgba(0, 212, 255, 0.35)",
+            borderRadius: "24px",
+            boxShadow: "0 20px 50px rgba(0, 0, 0, 0.4), 0 0 40px rgba(0, 212, 255, 0.15)",
+          }}
+        >
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "12px", marginBottom: "1.75rem" }}>
+            <div>
+              <span style={{ fontFamily: "var(--font-mono)", fontSize: "0.75rem", color: "var(--brand-cyan)", textTransform: "uppercase", letterSpacing: "0.12em", fontWeight: 700 }}>
+                Official Primary Lockup
+              </span>
+              <h2 style={{ fontFamily: "var(--font-heading)", fontSize: "1.75rem", fontWeight: 800, margin: "0.25rem 0 0", color: "#ffffff" }}>
+                Official 3D Cyber Infinity Master Logo
+              </h2>
+            </div>
+            <span style={{ fontSize: "0.75rem", fontWeight: 700, padding: "5px 14px", borderRadius: "9999px", background: "rgba(16, 185, 129, 0.15)", border: "1px solid rgba(16, 185, 129, 0.4)", color: "#10b981", textTransform: "uppercase", letterSpacing: "0.05em" }}>
+              ● Production Active
+            </span>
+          </div>
+
+          {/* Dual Theme Side-by-Side Cards */}
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: "1.5rem", marginBottom: "2rem" }}>
+            {/* Light Mode Preview */}
+            <div style={{ background: "#ffffff", borderRadius: "16px", padding: "2.5rem 1.5rem", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: "12px", border: "1px solid rgba(0,0,0,0.08)", boxShadow: "0 10px 30px rgba(0,0,0,0.06)" }}>
+              <span style={{ fontSize: "0.72rem", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.08em", color: "#64748b" }}>
+                Light Theme Master Lockup
+              </span>
+              <img
+                src="/assets/images/logo/abss-nexus-official-logo.png"
+                alt="ABSS Nexus Technologies Official Logo Light"
+                style={{ width: "100%", maxWidth: "340px", height: "auto", objectFit: "contain" }}
+              />
+              <span style={{ fontSize: "0.78rem", color: "#64748b", fontFamily: "var(--font-mono)" }}>
+                Navy #0F172A • Coral #EF4444 • Slate #475569
+              </span>
+            </div>
+
+            {/* Dark Mode Preview */}
+            <div style={{ background: "#090d16", borderRadius: "16px", padding: "2.5rem 1.5rem", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: "12px", border: "1px solid rgba(255,255,255,0.12)", boxShadow: "0 10px 30px rgba(0,0,0,0.4)" }}>
+              <span style={{ fontSize: "0.72rem", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.08em", color: "#94a3b8" }}>
+                Dark Theme Master Lockup
+              </span>
+              <img
+                src="/assets/images/logo/abss-nexus-official-logo-dark.png"
+                alt="ABSS Nexus Technologies Official Logo Dark"
+                style={{ width: "100%", maxWidth: "340px", height: "auto", objectFit: "contain" }}
+              />
+              <span style={{ fontSize: "0.78rem", color: "#94a3b8", fontFamily: "var(--font-mono)" }}>
+                White #F8FAFC • Coral #EF4444 • Cool Silver #94A3B8
+              </span>
+            </div>
+          </div>
+
+          {/* Quick Asset Download Bar */}
+          <div style={{ display: "flex", flexWrap: "wrap", gap: "10px", alignItems: "center", paddingTop: "1.25rem", borderTop: "1px solid rgba(255,255,255,0.08)" }}>
+            <span style={{ fontSize: "0.8rem", color: "var(--text-muted)", fontWeight: 600, marginRight: "6px" }}>
+              Export Master Assets:
+            </span>
+            <a
+              href="/assets/images/logo/abss-nexus-official-logo.png"
+              download="abss-nexus-official-logo.png"
+              className="bento-btn-glass"
+              style={{ padding: "6px 14px", fontSize: "0.75rem" }}
+            >
+              Full Logo (PNG)
+            </a>
+            <a
+              href="/assets/images/logo/abss-nexus-official-logo-dark.png"
+              download="abss-nexus-official-logo-dark.png"
+              className="bento-btn-glass"
+              style={{ padding: "6px 14px", fontSize: "0.75rem" }}
+            >
+              Full Dark Logo (PNG)
+            </a>
+            <a
+              href="/assets/images/logo/abss-nexus-symbol.png"
+              download="abss-nexus-symbol.png"
+              className="bento-btn-glass"
+              style={{ padding: "6px 14px", fontSize: "0.75rem" }}
+            >
+              3D Symbol Only (PNG)
+            </a>
+            <a
+              href="/favicon.png"
+              download="abss-nexus-favicon.png"
+              className="bento-btn-glass"
+              style={{ padding: "6px 14px", fontSize: "0.75rem" }}
+            >
+              Favicon Icon
+            </a>
+          </div>
         </div>
 
         {/* 3D Mockup Banner */}
