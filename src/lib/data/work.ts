@@ -7,6 +7,7 @@ export interface ProjectItem {
   category: 'website' | 'webapp' | 'ecommerce' | 'mobile' | 'cloud' | 'security' | 'ai' | 'analytics';
   categoryLabel: string;
   badge: string;
+  featured?: boolean;
   urlPreview: string;
   image: string;
   shortDesc: string;
@@ -35,6 +36,7 @@ export const portfolioData: ProjectItem[] = [
     category: 'website',
     categoryLabel: 'Portfolio • Live',
     badge: 'Production Live',
+    featured: true,
     urlPreview: 'shubham-portfolio-abss.netlify.app',
     image: '/assets/images/projects/personal-portfolio.svg',
     shortDesc: 'Modern responsive developer and designer portfolio with interactive project showcases, sleek layouts, and sub-second page transitions.',
@@ -100,6 +102,7 @@ export const portfolioData: ProjectItem[] = [
     category: 'webapp',
     categoryLabel: 'Custom Software • Demo',
     badge: 'Enterprise Platform',
+    featured: true,
     urlPreview: 'abssnexus.in/analytics/dashboard',
     image: '/assets/images/projects/cloud-analytics.svg',
     shortDesc: 'Enterprise administration panel featuring metrics telemetry, user management, interactive chart widgets, and real-time database synchronization.',
@@ -194,6 +197,7 @@ export const portfolioData: ProjectItem[] = [
     category: 'mobile',
     categoryLabel: 'Mobile App • iOS & Android',
     badge: 'Production Live',
+    featured: true,
     urlPreview: 'fitpulse.app.link',
     image: '/assets/images/projects/fitpulse-mobile.svg',
     shortDesc: 'Cross-platform iOS and Android fitness app featuring offline workout video caching, real-time Bluetooth heart rate monitor synchronization, and recurring subscriptions.',
@@ -322,6 +326,7 @@ export const portfolioData: ProjectItem[] = [
     category: 'ai',
     categoryLabel: 'AI Engine • RAG',
     badge: 'AI Production',
+    featured: true,
     urlPreview: 'documind.nexus-ai.internal',
     image: '/assets/images/projects/documind-rag.svg',
     shortDesc: 'Grounded Retrieval-Augmented Generation (RAG) platform indexing 500,000+ contracts, tax filings, and compliance reports with cryptographic citation grounding.',
@@ -450,6 +455,7 @@ export const portfolioData: ProjectItem[] = [
     category: 'security',
     categoryLabel: 'Cybersecurity • Zero Trust',
     badge: 'Security Audited',
+    featured: true,
     urlPreview: 'shield.securecapital-bank.com',
     image: '/assets/images/projects/vaultshield-waf.svg',
     shortDesc: 'Enterprise edge security layer with automated IP reputation scoring, mutual TLS authentication, bot challenge gates, and strict CSP/HSTS header enforcement.',
@@ -578,6 +584,7 @@ export const portfolioData: ProjectItem[] = [
     category: 'ecommerce',
     categoryLabel: 'Storefront • Demonstration',
     badge: 'Case Study',
+    featured: true,
     urlPreview: 'abssnexus.in/storefront/retail',
     image: '/assets/images/projects/heritage-crafts.svg',
     shortDesc: 'Streamlined shopping experience with responsive grid layouts, product showcase modals, intuitive carts, and conversion-optimized checkout.',
@@ -642,6 +649,7 @@ export const portfolioData: ProjectItem[] = [
     category: 'webapp',
     categoryLabel: 'SaaS • Multi-Tenant',
     badge: 'Production SaaS',
+    featured: true,
     urlPreview: 'app.taskmatrix.io',
     image: '/assets/images/projects/taskmatrix-saas.svg',
     shortDesc: 'Turnkey enterprise project management SaaS with isolated organizational tenants, automated tiered Stripe billing, interactive Kanban drag-and-drop boards, and team audit logs.',
@@ -706,6 +714,7 @@ export const portfolioData: ProjectItem[] = [
     category: 'webapp',
     categoryLabel: 'Fintech • Architecture',
     badge: 'Enterprise Case Study',
+    featured: true,
     urlPreview: 'abssnexus.in/work/fintech-payment-gateway',
     image: '/assets/images/projects/fintech-gateway.svg',
     shortDesc: 'Mission-critical payment gateway integration with idempotent webhook processing, automated reconciliation, and instant dispute alerts.',
@@ -1085,4 +1094,9 @@ export const getProjectBySlug = (slug: string): ProjectItem | undefined => {
 
 export const getProjectsByService = (serviceSlug: string): ProjectItem[] => {
   return portfolioData.filter((p) => p.serviceSlug === serviceSlug);
+};
+
+
+export const getFeaturedProjects = (): ProjectItem[] => {
+  return portfolioData.filter((p) => p.featured);
 };

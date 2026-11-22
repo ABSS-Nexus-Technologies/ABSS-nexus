@@ -17,6 +17,8 @@ export default function ProjectFilter({
   initialService,
   showSearch = true,
 }: ProjectFilterProps) {
+  // Option 1 Mode: 'featured' (Top 8 Flagships) by default, or 'all' (All 33)
+  const [viewMode, setViewMode] = useState<'featured' | 'all'>('featured');
   const [categoryFilter, setCategoryFilter] = useState<string>('all');
   const [serviceFilter, setServiceFilter] = useState<string>(initialService || 'all');
   const [searchQuery, setSearchQuery] = useState<string>('');
@@ -36,7 +38,11 @@ export default function ProjectFilter({
     }));
   }, [projects]);
 
-  // Combined Filtering: Category + Service Dropdown + Search
+  // Is user actively searching or filtering by a category/service?
+  const isCustomFiltered =
+    categoryFilter !== 'all' || serviceFilter !== 'all' || searchQuery.trim().length > 0;
+
+  // Filter projects dynamically
   const filteredProjects = useMemo(() => {
     return projects.filter((project) => {
       // 1. Service Filter
@@ -68,23 +74,72 @@ export default function ProjectFilter({
         }
       }
 
+      // 4. Default Featured Mode (Option 1): If no custom filter active and viewMode is 'featured'
+      if (!isCustomFiltered && viewMode === 'featured') {
+        return Boolean(project.featured);
+      }
+
       return true;
     });
-  }, [projects, categoryFilter, serviceFilter, searchQuery]);
+  }, [projects, categoryFilter, serviceFilter, searchQuery, isCustomFiltered, viewMode]);
 
   const displayedProjects = maxItems ? filteredProjects.slice(0, maxItems) : filteredProjects;
 
   return (
     <div className="project-filter-section">
+      {/* Option 1: Top Mode Switcher (Flagship vs Full Archive) */}
+      {!maxItems && (
+        <div style={{ textAlign: 'center', marginBottom: '20px' }}>
+          <div className="portfolio-mode-toggle" role="tablist" aria-label="Portfolio curation modes">
+            <button
+              type="button"
+              className={`portfolio-mode-btn ${viewMode === 'featured' && !isCustomFiltered ? 'active' : ''}`}
+              onClick={() => {
+                setViewMode('featured');
+                setCategoryFilter('all');
+                setServiceFilter('all');
+                setSearchQuery('');
+              }}
+              role="tab"
+              aria-selected={viewMode === 'featured' && !isCustomFiltered}
+            >
+              <span>★ Curated Flagships (8)</span>
+            </button>
+            <button
+              type="button"
+              className={`portfolio-mode-btn ${viewMode === 'all' || isCustomFiltered ? 'active' : ''}`}
+              onClick={() => setViewMode('all')}
+              role="tab"
+              aria-selected={viewMode === 'all' || isCustomFiltered}
+            >
+              <span>Browse All 33 Projects (16 Services)</span>
+            </button>
+          </div>
+        </div>
+      )}
+
       {/* Interactive Controls Bar: Categories + Service Dropdown + Search */}
       <div className="project-filter-controls">
         {/* Category Pills */}
         <div className="project-filter-container" aria-label="Filter projects by category">
           <button
             type="button"
-            className={`filter-btn ${categoryFilter === 'all' ? 'active' : ''}`}
+            className={`filter-btn ${categoryFilter === 'all' && !isCustomFiltered && viewMode === 'featured' ? 'active' : ''}`}
             onClick={() => {
               setCategoryFilter('all');
+              setServiceFilter('all');
+              setSearchQuery('');
+              setViewMode('featured');
+            }}
+          >
+            ★ Flagships (8)
+          </button>
+          <button
+            type="button"
+            className={`filter-btn ${categoryFilter === 'all' && (viewMode === 'all' || isCustomFiltered) ? 'active' : ''}`}
+            onClick={() => {
+              setCategoryFilter('all');
+              setViewMode('all');
             }}
           >
             All Disciplines ({projects.length})
@@ -92,49 +147,70 @@ export default function ProjectFilter({
           <button
             type="button"
             className={`filter-btn ${categoryFilter === 'website' ? 'active' : ''}`}
-            onClick={() => setCategoryFilter('website')}
+            onClick={() => {
+              setCategoryFilter('website');
+              setViewMode('all');
+            }}
           >
             Websites
           </button>
           <button
             type="button"
             className={`filter-btn ${categoryFilter === 'webapp' ? 'active' : ''}`}
-            onClick={() => setCategoryFilter('webapp')}
+            onClick={() => {
+              setCategoryFilter('webapp');
+              setViewMode('all');
+            }}
           >
             Web Apps &amp; SaaS
           </button>
           <button
             type="button"
             className={`filter-btn ${categoryFilter === 'mobile' ? 'active' : ''}`}
-            onClick={() => setCategoryFilter('mobile')}
+            onClick={() => {
+              setCategoryFilter('mobile');
+              setViewMode('all');
+            }}
           >
             Mobile Apps
           </button>
           <button
             type="button"
             className={`filter-btn ${categoryFilter === 'cloud' ? 'active' : ''}`}
-            onClick={() => setCategoryFilter('cloud')}
+            onClick={() => {
+              setCategoryFilter('cloud');
+              setViewMode('all');
+            }}
           >
             Cloud &amp; DevOps
           </button>
           <button
             type="button"
             className={`filter-btn ${categoryFilter === 'ai' ? 'active' : ''}`}
-            onClick={() => setCategoryFilter('ai')}
+            onClick={() => {
+              setCategoryFilter('ai');
+              setViewMode('all');
+            }}
           >
             AI &amp; BI
           </button>
           <button
             type="button"
             className={`filter-btn ${categoryFilter === 'security' ? 'active' : ''}`}
-            onClick={() => setCategoryFilter('security')}
+            onClick={() => {
+              setCategoryFilter('security');
+              setViewMode('all');
+            }}
           >
             Cybersecurity
           </button>
           <button
             type="button"
             className={`filter-btn ${categoryFilter === 'ecommerce' ? 'active' : ''}`}
-            onClick={() => setCategoryFilter('ecommerce')}
+            onClick={() => {
+              setCategoryFilter('ecommerce');
+              setViewMode('all');
+            }}
           >
             E-Commerce
           </button>
@@ -151,7 +227,12 @@ export default function ProjectFilter({
               id="service-select"
               className="project-service-select"
               value={serviceFilter}
-              onChange={(e) => setServiceFilter(e.target.value)}
+              onChange={(e) => {
+                setServiceFilter(e.target.value);
+                if (e.target.value !== 'all') {
+                  setViewMode('all');
+                }
+              }}
               aria-label="Filter by specific service discipline"
             >
               <option value="all">⚡ All 16 Service Disciplines ({projects.length} Projects)</option>
@@ -171,7 +252,12 @@ export default function ProjectFilter({
                 className="project-search-input"
                 placeholder="Search projects, client, tech..."
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                onChange={(e) => {
+                  setSearchQuery(e.target.value);
+                  if (e.target.value.trim()) {
+                    setViewMode('all');
+                  }
+                }}
                 aria-label="Search projects by keyword"
               />
               {searchQuery && (
@@ -196,20 +282,29 @@ export default function ProjectFilter({
                 setCategoryFilter('all');
                 setServiceFilter('all');
                 setSearchQuery('');
+                setViewMode('featured');
               }}
             >
-              Reset Filters
+              Reset to Flagships
             </button>
           )}
         </div>
       </div>
 
-      {/* Active Results Count */}
+      {/* Active Results Count & Context Notice */}
       <div className="project-results-count">
-        Showing <strong>{displayedProjects.length}</strong> of {filteredProjects.length} matching {filteredProjects.length === 1 ? 'project' : 'projects'}
-        {serviceFilter !== 'all' && (
-          <span className="project-active-filter-badge">
-            Service: {serviceOptions.find((o) => o.slug === serviceFilter)?.name || serviceFilter}
+        {!isCustomFiltered && viewMode === 'featured' ? (
+          <span>
+            Showing <strong>8 Curated Flagship Projects</strong> across core disciplines. (Select a service or click below to view all 33).
+          </span>
+        ) : (
+          <span>
+            Showing <strong>{displayedProjects.length}</strong> of {filteredProjects.length} matching {filteredProjects.length === 1 ? 'project' : 'projects'}
+            {serviceFilter !== 'all' && (
+              <span className="project-active-filter-badge">
+                Service: {serviceOptions.find((o) => o.slug === serviceFilter)?.name || serviceFilter}
+              </span>
+            )}
           </span>
         )}
       </div>
@@ -225,9 +320,10 @@ export default function ProjectFilter({
               setCategoryFilter('all');
               setServiceFilter('all');
               setSearchQuery('');
+              setViewMode('featured');
             }}
           >
-            Show All Projects
+            Show Curated Flagships
           </button>
         </div>
       ) : (
@@ -315,6 +411,46 @@ export default function ProjectFilter({
             </article>
           ))}
         </div>
+      )}
+
+      {/* Option 1 Bottom Expand / Return Banner */}
+      {!maxItems && (
+        <>
+          {viewMode === 'featured' && !isCustomFiltered ? (
+            <div className="portfolio-expand-banner">
+              <div className="portfolio-expand-info">
+                <h4>Looking for engineering in another discipline?</h4>
+                <p>
+                  We offer 16 specialized IT disciplines with dedicated case studies for every service — including Cloud, AI, Cybersecurity, E-Commerce, and Managed IT.
+                </p>
+              </div>
+              <button
+                type="button"
+                className="bento-btn-primary"
+                onClick={() => setViewMode('all')}
+                style={{ padding: '12px 24px', fontSize: '0.92rem' }}
+              >
+                <span>Explore All 33 Projects in Archive &darr;</span>
+              </button>
+            </div>
+          ) : (
+            <div className="portfolio-expand-banner" style={{ justifyContent: 'center' }}>
+              <button
+                type="button"
+                className="bento-btn-glass"
+                onClick={() => {
+                  setViewMode('featured');
+                  setCategoryFilter('all');
+                  setServiceFilter('all');
+                  setSearchQuery('');
+                  window.scrollTo({ top: 380, behavior: 'smooth' });
+                }}
+              >
+                <span>&uarr; Return to Curated Flagship Projects (8)</span>
+              </button>
+            </div>
+          )}
+        </>
       )}
     </div>
   );
